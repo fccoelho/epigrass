@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Epigrass.simobj.priorityDictionary</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Epigrass-module.html">Package&nbsp;Epigrass</a> ::
+        <a href="Epigrass.simobj-module.html">Module&nbsp;simobj</a> ::
+        Class&nbsp;priorityDictionary
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Epigrass.simobj.priorityDictionary-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class priorityDictionary</h1><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary">source&nbsp;code</a></span><br /><br />
+<center>
+<center>  <map id="uml_class_diagram_for_epigrass_7" name="uml_class_diagram_for_epigrass_7">
+<area shape="rect" href="javascript: void(0);" title="Returns:  an iterator over the (key, value) items of D" alt="" coords="36,36,161,55" />
+<area shape="rect" href="javascript: void(0);" title="x.__getattribute__(&#39;name&#39;) &lt;==&gt; x.name" alt="" coords="36,55,161,73" />
+<area shape="rect" href="javascript: void(0);" title="If key is not found, d is returned if given, otherwise KeyError is raised" alt="" coords="36,73,161,92" />
+<area shape="rect" href="javascript: void(0);" title="Returns:  True if D has a key k, else False" alt="" coords="36,92,161,111" />
+<area shape="rect" href="javascript: void(0);" title="x&lt;y" alt="" coords="36,111,161,129" />
+<area shape="rect" href="javascript: void(0);" title="Returns:  a new object with type S, a subtype of T" alt="" coords="36,129,161,148" />
+<area shape="rect" href="javascript: void(0);" title="Returns:  True if D has a key k, else False" alt="" coords="36,148,161,167" />
+<area shape="rect" href="javascript: void(0);" title="cmp(x,y)" alt="" coords="36,167,161,185" />
+<area shape="rect" href="javascript: void(0);" title="Returns:  an iterator over the values of D" alt="" coords="36,185,161,204" />
+<area shape="rect" href="javascript: void(0);" title="len(x)" alt="" coords="36,204,161,223" />
+<area shape="rect" href="javascript: void(0);" title="x!=y" alt="" coords="36,223,161,241" />
+<area shape="rect" href="javascript: void(0);" title="x[y]" alt="" coords="36,241,161,260" />
+<area shape="rect" href="javascript: void(0);" title="d defaults to None." alt="" coords="36,260,161,279" />
+<area shape="rect" href="javascript: void(0);" title="x&gt;=y" alt="" coords="36,297,161,316" />
+<area shape="rect" href="javascript: void(0);" title="dict() &#45;&gt; new empty dictionary." alt="" coords="24,5,173,323" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#__init__" title="by David Eppstein." alt="" coords="17,372,180,391" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#smallest" title="Find smallest item after removing deleted items from heap." alt="" coords="17,391,180,409" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#update" title="Update D from E and F: for k in E: D[k] = E[k] (if E has keys else: for (k, v) in E: D[k] = v) then: for k in F: D[k] = F[k]" alt="" coords="17,409,180,428" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#__setitem__" title="Change value stored in dictionary and add corresponding pair to heap." alt="" coords="17,428,180,447" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#setdefault" title="Reimplement setdefault to call our customized __setitem__." alt="" coords="17,447,180,465" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html#__iter__" title="Create destructive sorted iterator of priorityDictionary." alt="" coords="17,465,180,484" />
+<area shape="rect" href="Epigrass.simobj.priorityDictionary&#45;class.html" title="Epigrass.simobj.priorityDictionary" alt="" coords="5,341,192,491" />
+</map>
+  <img src="uml_class_diagram_for_epigrass_7.gif" alt='' usemap="#uml_class_diagram_for_epigrass_7" ismap="ismap" class="graph-without-title" />
+</center></center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.simobj.priorityDictionary-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      by David Eppstein.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="smallest"></a><span class="summary-sig-name">smallest</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Find smallest item after removing deleted items from heap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.smallest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.simobj.priorityDictionary-class.html#__iter__" class="summary-sig-name">__iter__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Create destructive sorted iterator of priorityDictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__iter__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.simobj.priorityDictionary-class.html#__setitem__" class="summary-sig-name">__setitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      Change value stored in dictionary and add corresponding pair to 
+      heap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__setitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.simobj.priorityDictionary-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other</span>)</span><br />
+      Update D from E and F: for k in E: D[k] = E[k] (if E has keys 
+      else: for (k, v) in E: D[k] = v) then: for k in F: D[k] = F[k]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.simobj.priorityDictionary-class.html#setdefault" class="summary-sig-name">setdefault</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      Reimplement setdefault to call our customized __setitem__.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.setdefault">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__cmp__</code>,
+      <code>__contains__</code>,
+      <code>__delitem__</code>,
+      <code>__eq__</code>,
+      <code>__ge__</code>,
+      <code>__getattribute__</code>,
+      <code>__getitem__</code>,
+      <code>__gt__</code>,
+      <code>__hash__</code>,
+      <code>__le__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__ne__</code>,
+      <code>__new__</code>,
+      <code>__repr__</code>,
+      <code>clear</code>,
+      <code>copy</code>,
+      <code>fromkeys</code>,
+      <code>get</code>,
+      <code>has_key</code>,
+      <code>items</code>,
+      <code>iteritems</code>,
+      <code>iterkeys</code>,
+      <code>itervalues</code>,
+      <code>keys</code>,
+      <code>pop</code>,
+      <code>popitem</code>,
+      <code>values</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  by David Eppstein. 
+  &lt;http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117228&gt; 
+  Initialize priorityDictionary by creating binary heap of pairs 
+  (value,key).  Note that changing or removing a dict entry will not remove
+  the old pair from the heap until it is found by smallest() or until the 
+  heap is rebuilt.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd><pre class="literalblock">
+new empty dictionary
+
+</pre></dd>
+    <dt>Overrides:
+      dict.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__iter__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__iter__</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__iter__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  Create destructive sorted iterator of priorityDictionary.
+  <dl class="fields">
+    <dt>Overrides:
+      dict.__iter__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>)</span>
+    <br /><em class="fname">(Index assignment operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.__setitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  Change value stored in dictionary and add corresponding pair to heap.
+  Rebuilds the heap if the number of deleted items grows too large, to 
+  avoid memory leakage.
+  <dl class="fields">
+    <dt>Overrides:
+      dict.__setitem__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  Update D from E and F: for k in E: D[k] = E[k] (if E has keys else: 
+  for (k, v) in E: D[k] = v) then: for k in F: D[k] = F[k]
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd><pre class="literalblock">
+None
+
+</pre></dd>
+    <dt>Overrides:
+      dict.update
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setdefault"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setdefault</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.simobj-pysrc.html#priorityDictionary.setdefault">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  Reimplement setdefault to call our customized __setitem__.
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd><pre class="literalblock">
+D.get(k,d), also set D[k]=d if k not in D
+
+</pre></dd>
+    <dt>Overrides:
+      dict.setdefault
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0beta1 on Tue May 29 09:23:26 2007
+    </td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

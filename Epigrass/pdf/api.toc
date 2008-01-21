@@ -1,0 +1,86 @@
+\contentsline {section}{Contents}{1}{section*.2}
+\contentsline {section}{\numberline {1}Package Epigrass}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Modules}{4}{subsection.1.1}
+\contentsline {section}{\numberline {2}Module Epigrass.CustomModel}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Functions}{5}{subsection.2.1}
+\contentsline {section}{\numberline {3}Module Epigrass.about}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Variables}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Class aboutDialog}{6}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Methods}{6}{subsubsection.3.2.1}
+\contentsline {section}{\numberline {4}Module Epigrass.cpanel}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Variables}{7}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Class MainPanel}{7}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Methods}{7}{subsubsection.4.2.1}
+\contentsline {section}{\numberline {5}Module Epigrass.dataObject}{8}{section.5}
+\contentsline {subsection}{\numberline {5.1}Functions}{8}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Class Site}{8}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Class Variables}{8}{subsubsection.5.2.1}
+\contentsline {subsection}{\numberline {5.3}Class Edge}{8}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Class Variables}{8}{subsubsection.5.3.1}
+\contentsline {section}{\numberline {6}Module Epigrass.data\_io}{9}{section.6}
+\contentsline {subsection}{\numberline {6.1}Functions}{9}{subsection.6.1}
+\contentsline {section}{\numberline {7}Module Epigrass.dgraph}{10}{section.7}
+\contentsline {subsection}{\numberline {7.1}Variables}{10}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Class Node}{10}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {7.2.1}Methods}{10}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2}Class Variables}{10}{subsubsection.7.2.2}
+\contentsline {subsection}{\numberline {7.3}Class RubberEdge}{11}{subsection.7.3}
+\contentsline {subsubsection}{\numberline {7.3.1}Methods}{11}{subsubsection.7.3.1}
+\contentsline {subsection}{\numberline {7.4}Class Graph}{11}{subsection.7.4}
+\contentsline {subsubsection}{\numberline {7.4.1}Methods}{11}{subsubsection.7.4.1}
+\contentsline {subsection}{\numberline {7.5}Class Map}{12}{subsection.7.5}
+\contentsline {subsubsection}{\numberline {7.5.1}Methods}{12}{subsubsection.7.5.1}
+\contentsline {section}{\numberline {8}Module Epigrass.epigrass}{13}{section.8}
+\contentsline {subsection}{\numberline {8.1}Functions}{13}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Class MainPanel\_Impl}{13}{subsection.8.2}
+\contentsline {subsubsection}{\numberline {8.2.1}Methods}{13}{subsubsection.8.2.1}
+\contentsline {subsection}{\numberline {8.3}Class Future}{15}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}Methods}{15}{subsubsection.8.3.1}
+\contentsline {section}{\numberline {9}Module Epigrass.epiplay}{16}{section.9}
+\contentsline {subsection}{\numberline {9.1}Class viewer}{16}{subsection.9.1}
+\contentsline {subsubsection}{\numberline {9.1.1}Methods}{16}{subsubsection.9.1.1}
+\contentsline {section}{\numberline {10}Module Epigrass.manager}{18}{section.10}
+\contentsline {subsection}{\numberline {10.1}Functions}{18}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Class simulate}{18}{subsection.10.2}
+\contentsline {subsubsection}{\numberline {10.2.1}Methods}{18}{subsubsection.10.2.1}
+\contentsline {subsection}{\numberline {10.3}Class Bunch}{20}{subsection.10.3}
+\contentsline {subsubsection}{\numberline {10.3.1}Methods}{20}{subsubsection.10.3.1}
+\contentsline {subsection}{\numberline {10.4}Class Tree}{20}{subsection.10.4}
+\contentsline {subsubsection}{\numberline {10.4.1}Methods}{20}{subsubsection.10.4.1}
+\contentsline {section}{\numberline {11}Module Epigrass.report}{21}{section.11}
+\contentsline {subsection}{\numberline {11.1}Variables}{21}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Class report}{21}{subsection.11.2}
+\contentsline {subsubsection}{\numberline {11.2.1}Methods}{21}{subsubsection.11.2.1}
+\contentsline {section}{\numberline {12}Module Epigrass.rinterface}{23}{section.12}
+\contentsline {subsection}{\numberline {12.1}Functions}{23}{subsection.12.1}
+\contentsline {section}{\numberline {13}Module Epigrass.simobj}{24}{section.13}
+\contentsline {subsection}{\numberline {13.1}Class siteobj}{24}{subsection.13.1}
+\contentsline {subsubsection}{\numberline {13.1.1}Methods}{24}{subsubsection.13.1.1}
+\contentsline {subsection}{\numberline {13.2}Class popmodels}{25}{subsection.13.2}
+\contentsline {subsubsection}{\numberline {13.2.1}Methods}{26}{subsubsection.13.2.1}
+\contentsline {subsection}{\numberline {13.3}Class edge}{29}{subsection.13.3}
+\contentsline {subsubsection}{\numberline {13.3.1}Methods}{29}{subsubsection.13.3.1}
+\contentsline {subsection}{\numberline {13.4}Class graph}{30}{subsection.13.4}
+\contentsline {subsubsection}{\numberline {13.4.1}Methods}{30}{subsubsection.13.4.1}
+\contentsline {subsection}{\numberline {13.5}Class line}{34}{subsection.13.5}
+\contentsline {subsubsection}{\numberline {13.5.1}Methods}{34}{subsubsection.13.5.1}
+\contentsline {subsection}{\numberline {13.6}Class area}{34}{subsection.13.6}
+\contentsline {subsubsection}{\numberline {13.6.1}Methods}{35}{subsubsection.13.6.1}
+\contentsline {subsection}{\numberline {13.7}Class priorityDictionary}{35}{subsection.13.7}
+\contentsline {subsubsection}{\numberline {13.7.1}Methods}{35}{subsubsection.13.7.1}
+\contentsline {subsubsection}{\numberline {13.7.2}Properties}{39}{subsubsection.13.7.2}
+\contentsline {section}{\numberline {14}Module Epigrass.spread}{40}{section.14}
+\contentsline {subsection}{\numberline {14.1}Class Spread}{40}{subsection.14.1}
+\contentsline {subsubsection}{\numberline {14.1.1}Methods}{40}{subsubsection.14.1.1}
+\contentsline {subsection}{\numberline {14.2}Class Consensus}{40}{subsection.14.2}
+\contentsline {subsubsection}{\numberline {14.2.1}Methods}{40}{subsubsection.14.2.1}
+\contentsline {section}{\numberline {15}Module Epigrass.testinst}{41}{section.15}
+\contentsline {subsection}{\numberline {15.1}Class testObjInstantiation}{41}{subsection.15.1}
+\contentsline {subsubsection}{\numberline {15.1.1}Methods}{41}{subsubsection.15.1.1}
+\contentsline {section}{\numberline {16}Module epigrass}{45}{section.16}
+\contentsline {subsection}{\numberline {16.1}Functions}{45}{subsection.16.1}
+\contentsline {subsection}{\numberline {16.2}Class MainPanel\_Impl}{45}{subsection.16.2}
+\contentsline {subsubsection}{\numberline {16.2.1}Methods}{45}{subsubsection.16.2.1}
+\contentsline {subsection}{\numberline {16.3}Class Future}{47}{subsection.16.3}
+\contentsline {subsubsection}{\numberline {16.3.1}Methods}{47}{subsubsection.16.3.1}
+\contentsline {section}{Index}{48}{section*.4}

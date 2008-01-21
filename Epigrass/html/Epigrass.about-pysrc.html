@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Epigrass.about</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Epigrass-module.html">Package&nbsp;Epigrass</a> ::
+        Module&nbsp;about
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Epigrass.about-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="Epigrass.about-module.html">Module Epigrass.about</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Form implementation generated from reading ui file '/home/fccoelho/Documents/Projects_software/epigrass/Epigrass-devel/about.ui'</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># Created: Seg Out 23 21:34:41 2006</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#      by: The PyQt User Interface Compiler (pyuic) 3.15.1</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># WARNING! All changes made in this file will be lost!</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">qt</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable Epigrass.about.image0_data=Epigrass.about-module.html#image0_data,Variable Epigrass.cpanel.image0_data=Epigrass.cpanel-module.html#image0_data"><a title="Epigrass.about.image0_data
+Epigrass.cpanel.image0_data" class="py-name" href="#" onclick="return doclink('link-0', 'image0_data', 'link-0');">image0_data</a></tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-string">"\x89\x50\x4e\x47\x0d\x0a\x1a\x0a\x00\x00\x00\x0d"</tt> \ </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-string">"\x49\x48\x44\x52\x00\x00\x00\x20\x00\x00\x00\x20"</tt> \ </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-string">"\x08\x06\x00\x00\x00\x73\x7a\x7a\xf4\x00\x00\x00"</tt> \ </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-string">"\xdc\x49\x44\x41\x54\x58\x85\xed\x96\x59\x0e\xc3"</tt> \ </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-string">"\x20\x0c\x44\x1f\x55\xef\x55\x1f\x9d\x9b\x39\x1f"</tt> \ </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-string">"\x55\x22\x67\x81\x62\x16\xd1\x56\x19\x29\x5f\x04"</tt> \ </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-string">"\x66\x0c\xc3\x98\x00\x40\x44\x59\x21\x04\x3c\x68"</tt> \ </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-string">"\x99\x0b\x3c\xcf\xeb\x45\xbd\xfa\x31\x05\x41\xbc"</tt> \ </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-string">"\x9c\x79\x01\x82\x78\xab\x70\x09\x4e\xc2\x5b\x79"</tt> \ </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-string">"\x2f\x3c\x66\x90\xde\x02\x6e\x01\x5f\x25\xe0\x7d"</tt> \ </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-string">"\xe7\x4b\xd2\xac\x31\xf1\x52\x28\x4e\xc2\xd6\xc4"</tt> \ </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-string">"\x2b\x16\x90\x49\xc2\xb1\x41\x35\x2b\x09\x4f\x3b"</tt> \ </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-string">"\x60\x91\x39\x8e\x71\x1e\x38\x92\x5f\x91\xd9\x31"</tt> \ </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-string">"\x35\x47\x13\x68\x30\xa7\xad\xb6\xf4\x38\x22\x51"</tt> \ </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-string">"\x15\xb6\xaf\x9a\xdc\x92\x7a\xbd\xd0\x55\xc0\x0c"</tt> \ </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-string">"\x23\xfe\x46\x12\x66\x8d\xd6\xeb\x4d\xa8\x02\x21"</tt> \ </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-string">"\xa6\x3c\x20\x86\x6f\x3f\x2e\xc8\x36\xb7\x06\xd3"</tt> \ </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-string">"\x77\xc0\xac\x53\x6f\xc0\x96\xb9\xd3\x4d\xb8\x43"</tt> \ </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-string">"\x6d\x25\xff\xb3\x03\xe0\xaf\x66\x48\x78\x79\x7a"</tt> \ </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-string">"\x41\x2b\x57\xf2\xda\xac\x8b\xbf\x4c\x06\xac\x57"</tt> \ </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-string">"\x30\xd7\x29\xbb\xe2\xd8\xed\x46\xf4\x8b\x8f\x15"</tt> \ </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-string">"\x74\xeb\xf7\x09\x2c\x49\xf5\x7d\xcb\x80\x93\xf4"</tt> \ </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-string">"\xd9\x00\x00\x00\x00\x49\x45\x4e\x44\xae\x42\x60"</tt> \ </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-string">"\x82"</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="aboutDialog"></a><div id="aboutDialog-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="aboutDialog-toggle" onclick="return toggle('aboutDialog');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.about.aboutDialog-class.html">aboutDialog</a><tt class="py-op">(</tt><tt class="py-base-class">QDialog</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="aboutDialog-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="aboutDialog-expanded"><a name="aboutDialog.__init__"></a><div id="aboutDialog.__init__-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="aboutDialog.__init__-toggle" onclick="return toggle('aboutDialog.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.about.aboutDialog-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt><tt class="py-param">name</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt><tt class="py-param">modal</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt><tt class="py-param">fl</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="aboutDialog.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="aboutDialog.__init__-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">QDialog</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Method Epigrass.about.aboutDialog.__init__()=Epigrass.about.aboutDialog-class.html#__init__,Method Epigrass.cpanel.MainPanel.__init__()=Epigrass.cpanel.MainPanel-class.html#__init__,Method Epigrass.dgraph.Graph.__init__()=Epigrass.dgraph.Graph-class.html#__init__,Method Epigrass.dgraph.Map.__init__()=Epigrass.dgraph.Map-class.html#__init__,Method Epigrass.dgraph.Node.__init__()=Epigrass.dgraph.Node-class.html#__init__,Method Epigrass.dgraph.RubberEdge.__init__()=Epigrass.dgraph.RubberEdge-class.html#__init__,Method Epigrass.epigrass.Future.__init__()=Epigrass.epigrass.Future-class.html#__init__,Method Epigrass.epigrass.MainPanel_Impl.__init__()=Epigrass.epigrass.MainPanel_Impl-class.html#__init__,Method Epigrass.epiplay.viewer.__init__()=Epigrass.epiplay.viewer-class.html#__init__,Method Epigrass.manager.Bunch.__init__()=Epigrass.manager.Bunch-class.html#__init__,Method Epigrass.manager.Tree.__init__()=Epigrass.manager.Tree-class.html#__init__,Method Epigrass.manager.simulate.__init__()=Epigrass.manager.simulate-class.html#__init__,Method Epigrass.report.report.__init__()=Epigrass.report.report-class.html#__init__,Method Epigrass.simobj.area.__init__()=Epigrass.simobj.area-class.html#__init__,Method Epigrass.simobj.edge.__init__()=Epigrass.simobj.edge-class.html#__init__,Method Epigrass.simobj.graph.__init__()=Epigrass.simobj.graph-class.html#__init__,Method Epigrass.simobj.line.__init__()=Epigrass.simobj.line-class.html#__init__,Method Epigrass.simobj.popmodels.__init__()=Epigrass.simobj.popmodels-class.html#__init__,Method Epigrass.simobj.priorityDictionary.__init__()=Epigrass.simobj.priorityDictionary-class.html#__init__,Method Epigrass.simobj.siteobj.__init__()=Epigrass.simobj.siteobj-class.html#__init__,Method Epigrass.spread.Consensus.__init__()=Epigrass.spread.Consensus-class.html#__init__,Method Epigrass.spread.Spread.__init__()=Epigrass.spread.Spread-class.html#__init__,Method epigrass.Future.__init__()=epigrass.Future-class.html#__init__,Method epigrass.MainPanel_Impl.__init__()=epigrass.MainPanel_Impl-class.html#__init__"><a title="Epigrass.about.aboutDialog.__init__
+Epigrass.cpanel.MainPanel.__init__
+Epigrass.dgraph.Graph.__init__
+Epigrass.dgraph.Map.__init__
+Epigrass.dgraph.Node.__init__
+Epigrass.dgraph.RubberEdge.__init__
+Epigrass.epigrass.Future.__init__
+Epigrass.epigrass.MainPanel_Impl.__init__
+Epigrass.epiplay.viewer.__init__
+Epigrass.manager.Bunch.__init__
+Epigrass.manager.Tree.__init__
+Epigrass.manager.simulate.__init__
+Epigrass.report.report.__init__
+Epigrass.simobj.area.__init__
+Epigrass.simobj.edge.__init__
+Epigrass.simobj.graph.__init__
+Epigrass.simobj.line.__init__
+Epigrass.simobj.popmodels.__init__
+Epigrass.simobj.priorityDictionary.__init__
+Epigrass.simobj.siteobj.__init__
+Epigrass.spread.Consensus.__init__
+Epigrass.spread.Spread.__init__
+epigrass.Future.__init__
+epigrass.MainPanel_Impl.__init__" class="py-name" href="#" onclick="return doclink('link-1', '__init__', 'link-1');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-name">parent</tt><tt class="py-op">,</tt><tt id="link-2" class="py-name" targets="Variable Epigrass.dataObject.Edge.sqlmeta.name=Epigrass.dataObject.Edge.sqlmeta-class.html#name,Variable Epigrass.dataObject.Site.name=Epigrass.dataObject.Site-class.html#name,Variable Epigrass.dataObject.Site.sqlmeta.name=Epigrass.dataObject.Site.sqlmeta-class.html#name"><a title="Epigrass.dataObject.Edge.sqlmeta.name
+Epigrass.dataObject.Site.name
+Epigrass.dataObject.Site.sqlmeta.name" class="py-name" href="#" onclick="return doclink('link-2', 'name', 'link-2');">name</a></tt><tt class="py-op">,</tt><tt class="py-name">modal</tt><tt class="py-op">,</tt><tt class="py-name">fl</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">image0</tt> <tt class="py-op">=</tt> <tt class="py-name">QPixmap</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">image0</tt><tt class="py-op">.</tt><tt class="py-name">loadFromData</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="Epigrass.about.image0_data
+Epigrass.cpanel.image0_data" class="py-name" href="#" onclick="return doclink('link-3', 'image0_data', 'link-0');">image0_data</a></tt><tt class="py-op">,</tt><tt class="py-string">"PNG"</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-4" class="py-name"><a title="Epigrass.dataObject.Edge.sqlmeta.name
+Epigrass.dataObject.Site.name
+Epigrass.dataObject.Site.sqlmeta.name" class="py-name" href="#" onclick="return doclink('link-4', 'name', 'link-2');">name</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setName</tt><tt class="py-op">(</tt><tt class="py-string">"aboutDialog"</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setSizeGripEnabled</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setModal</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">aboutDialogLayout</tt> <tt class="py-op">=</tt> <tt class="py-name">QVBoxLayout</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-number">6</tt><tt class="py-op">,</tt><tt class="py-number">6</tt><tt class="py-op">,</tt><tt class="py-string">"aboutDialogLayout"</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt> <tt class="py-op">=</tt> <tt class="py-name">QTabWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-string">"tabWidget"</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt> <tt class="py-op">=</tt> <tt class="py-name">QWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">,</tt><tt class="py-string">"Widget9"</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pixmapLabel1</tt> <tt class="py-op">=</tt> <tt class="py-name">QLabel</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt><tt class="py-op">,</tt><tt class="py-string">"pixmapLabel1"</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pixmapLabel1</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">312</tt><tt class="py-op">,</tt><tt class="py-number">24</tt><tt class="py-op">,</tt><tt class="py-number">50</tt><tt class="py-op">,</tt><tt class="py-number">40</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pixmapLabel1</tt><tt class="py-op">.</tt><tt class="py-name">setPixmap</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">image0</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pixmapLabel1</tt><tt class="py-op">.</tt><tt class="py-name">setScaledContents</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textLabel1</tt> <tt class="py-op">=</tt> <tt class="py-name">QLabel</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt><tt class="py-op">,</tt><tt class="py-string">"textLabel1"</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textLabel1</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">360</tt><tt class="py-op">,</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">130</tt><tt class="py-op">,</tt><tt class="py-number">113</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">aboutBrowser</tt> <tt class="py-op">=</tt> <tt class="py-name">QTextBrowser</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt><tt class="py-op">,</tt><tt class="py-string">"aboutBrowser"</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">aboutBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">,</tt><tt class="py-number">15</tt><tt class="py-op">,</tt><tt class="py-number">271</tt><tt class="py-op">,</tt><tt class="py-number">260</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">insertTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt><tt class="py-op">,</tt><tt class="py-name">QString</tt><tt class="py-op">.</tt><tt class="py-name">fromLatin1</tt><tt class="py-op">(</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget8</tt> <tt class="py-op">=</tt> <tt class="py-name">QWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">,</tt><tt class="py-string">"Widget8"</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">authorsBrowser</tt> <tt class="py-op">=</tt> <tt class="py-name">QTextBrowser</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget8</tt><tt class="py-op">,</tt><tt class="py-string">"authorsBrowser"</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">authorsBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">481</tt><tt class="py-op">,</tt><tt class="py-number">261</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">insertTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget8</tt><tt class="py-op">,</tt><tt class="py-name">QString</tt><tt class="py-op">.</tt><tt class="py-name">fromLatin1</tt><tt class="py-op">(</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage</tt> <tt class="py-op">=</tt> <tt class="py-name">QWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">,</tt><tt class="py-string">"TabPage"</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackBrowser</tt> <tt class="py-op">=</tt> <tt class="py-name">QTextBrowser</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage</tt><tt class="py-op">,</tt><tt class="py-string">"ackBrowser"</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">,</tt><tt class="py-number">14</tt><tt class="py-op">,</tt><tt class="py-number">490</tt><tt class="py-op">,</tt><tt class="py-number">260</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">insertTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage</tt><tt class="py-op">,</tt><tt class="py-name">QString</tt><tt class="py-op">.</tt><tt class="py-name">fromLatin1</tt><tt class="py-op">(</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage_2</tt> <tt class="py-op">=</tt> <tt class="py-name">QWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">,</tt><tt class="py-string">"TabPage_2"</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">licenseBrowser</tt> <tt class="py-op">=</tt> <tt class="py-name">QTextBrowser</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage_2</tt><tt class="py-op">,</tt><tt class="py-string">"licenseBrowser"</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">licenseBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setGeometry</tt><tt class="py-op">(</tt><tt class="py-name">QRect</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">10</tt><tt class="py-op">,</tt><tt class="py-number">491</tt><tt class="py-op">,</tt><tt class="py-number">261</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">licenseBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setTextFormat</tt><tt class="py-op">(</tt><tt class="py-name">QTextBrowser</tt><tt class="py-op">.</tt><tt class="py-name">AutoText</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">insertTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage_2</tt><tt class="py-op">,</tt><tt class="py-name">QString</tt><tt class="py-op">.</tt><tt class="py-name">fromLatin1</tt><tt class="py-op">(</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">aboutDialogLayout</tt><tt class="py-op">.</tt><tt class="py-name">addWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">Layout1</tt> <tt class="py-op">=</tt> <tt class="py-name">QHBoxLayout</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt><tt class="py-number">0</tt><tt class="py-op">,</tt><tt class="py-number">6</tt><tt class="py-op">,</tt><tt class="py-string">"Layout1"</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">Horizontal_Spacing2</tt> <tt class="py-op">=</tt> <tt class="py-name">QSpacerItem</tt><tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt><tt class="py-number">20</tt><tt class="py-op">,</tt><tt class="py-name">QSizePolicy</tt><tt class="py-op">.</tt><tt class="py-name">Expanding</tt><tt class="py-op">,</tt><tt class="py-name">QSizePolicy</tt><tt class="py-op">.</tt><tt class="py-name">Minimum</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">Layout1</tt><tt class="py-op">.</tt><tt class="py-name">addItem</tt><tt class="py-op">(</tt><tt class="py-name">Horizontal_Spacing2</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt> <tt class="py-op">=</tt> <tt class="py-name">QPushButton</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-string">"buttonCancel"</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt><tt class="py-op">.</tt><tt class="py-name">setAutoDefault</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">Layout1</tt><tt class="py-op">.</tt><tt class="py-name">addWidget</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">aboutDialogLayout</tt><tt class="py-op">.</tt><tt class="py-name">addLayout</tt><tt class="py-op">(</tt><tt class="py-name">Layout1</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method Epigrass.about.aboutDialog.languageChange()=Epigrass.about.aboutDialog-class.html#languageChange,Method Epigrass.cpanel.MainPanel.languageChange()=Epigrass.cpanel.MainPanel-class.html#languageChange"><a title="Epigrass.about.aboutDialog.languageChange
+Epigrass.cpanel.MainPanel.languageChange" class="py-name" href="#" onclick="return doclink('link-5', 'languageChange', 'link-5');">languageChange</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">resize</tt><tt class="py-op">(</tt><tt class="py-name">QSize</tt><tt class="py-op">(</tt><tt class="py-number">528</tt><tt class="py-op">,</tt><tt class="py-number">368</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">expandedTo</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumSizeHint</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">clearWState</tt><tt class="py-op">(</tt><tt class="py-name">Qt</tt><tt class="py-op">.</tt><tt class="py-name">WState_Polished</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt><tt class="py-op">,</tt><tt class="py-name">SIGNAL</tt><tt class="py-op">(</tt><tt class="py-string">"clicked()"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">reject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="aboutDialog.languageChange"></a><div id="aboutDialog.languageChange-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="aboutDialog.languageChange-toggle" onclick="return toggle('aboutDialog.languageChange');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.about.aboutDialog-class.html#languageChange">languageChange</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="aboutDialog.languageChange-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="aboutDialog.languageChange-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setCaption</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"About Epigrass"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textLabel1</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;b&gt;Epigrass&lt;/b&gt;:\n"</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-string">"&lt;b&gt;EPI&lt;/b&gt;demiological \n"</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-string">"&lt;b&gt;G&lt;/b&gt;eo-&lt;b&gt;R&lt;/b&gt;eferenced \n"</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-string">"&lt;b&gt;A&lt;/b&gt;nalysis and \n"</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-string">"&lt;b&gt;S&lt;/b&gt;imulation \n"</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-string">"&lt;b&gt;S&lt;/b&gt;ystem"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">aboutBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;span style=\"font-weight: bold;\"&gt;This is Epigrass version\n"</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-string">"1.4.7&lt;br&gt;\n"</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-string">"&lt;br&gt;\n"</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-string">"More information about Epigrass can be found at the epigrass &lt;a\n"</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-string">" href=\"http://epigrass.sourceforge.net\"&gt;website&lt;/a&gt;&lt;/span&gt;\n"</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">changeTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget9</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"About"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">authorsBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;h1&gt;Developers:&lt;/h1&gt;\n"</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-string">"Fl&amp;aacute;vio Code&amp;ccedil;o Coelho&lt;br&gt;\n"</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-string">"Cl&amp;aacute;udia Torres Code&amp;ccedil;o\n"</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">changeTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Widget8</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"Authors"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ackBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;h2&gt;Translations:&lt;/h2&gt;\n"</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-string">"&lt;h3&gt;French:&lt;/h3&gt;\n"</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-string">"Yann Chemin\n"</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">changeTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"Acknowledgements"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">licenseBrowser</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"         GNU GENERAL PUBLIC LICENSE\n"</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-string">"              Version 2, June 1991\n"</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-string">" Copyright (C) 1989, 1991 Free Software Foundation, Inc.\n"</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-string">"                       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n"</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-string">" Everyone is permitted to copy and distribute verbatim copies\n"</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-string">" of this license document, but changing it is not allowed.\n"</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-string">"               Preamble\n"</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-string">"  The licenses for most software are designed to take away your\n"</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-string">"freedom to share and change it.  By contrast, the GNU General Public\n"</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-string">"License is intended to guarantee your freedom to share and change free\n"</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-string">"software--to make sure the software is free for all its users.  This\n"</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-string">"General Public License applies to most of the Free Software\n"</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-string">"Foundation's software and to any other program whose authors commit to\n"</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-string">"using it.  (Some other Free Software Foundation software is covered by\n"</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-string">"the GNU Library General Public License instead.)  You can apply it to\n"</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-string">"your programs, too.\n"</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-string">"  When we speak of free software, we are referring to freedom, not\n"</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-string">"price.  Our General Public Licenses are designed to make sure that you\n"</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-string">"have the freedom to distribute copies of free software (and charge for\n"</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-string">"this service if you wish), that you receive source code or can get it\n"</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-string">"if you want it, that you can change the software or use pieces of it\n"</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-string">"in new free programs; and that you know you can do these things.\n"</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-string">"  To protect your rights, we need to make restrictions that forbid\n"</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-string">"anyone to deny you these rights or to ask you to surrender the rights.\n"</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-string">"These restrictions translate to certain responsibilities for you if you\n"</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-string">"distribute copies of the software, or if you modify it.\n"</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-string">"  For example, if you distribute copies of such a program, whether\n"</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-string">"gratis or for a fee, you must give the recipients all the rights that\n"</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-string">"you have.  You must make sure that they, too, receive or can get the\n"</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-string">"source code.  And you must show them these terms so they know their\n"</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-string">"rights.\n"</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-string">"  We protect your rights with two steps: (1) copyright the software, and\n"</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-string">"(2) offer you this license which gives you legal permission to copy,\n"</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-string">"distribute and/or modify the software.\n"</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-string">"  Also, for each author's protection and ours, we want to make certain\n"</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-string">"that everyone understands that there is no warranty for this free\n"</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-string">"software.  If the software is modified by someone else and passed on, we\n"</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-string">"want its recipients to know that what they have is not the original, so\n"</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-string">"that any problems introduced by others will not reflect on the original\n"</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-string">"authors' reputations.\n"</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-string">"  Finally, any free program is threatened constantly by software\n"</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-string">"patents.  We wish to avoid the danger that redistributors of a free\n"</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-string">"program will individually obtain patent licenses, in effect making the\n"</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-string">"program proprietary.  To prevent this, we have made it clear that any\n"</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-string">"patent must be licensed for everyone's free use or not licensed at all.\n"</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-string">"  The precise terms and conditions for copying, distribution and\n"</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-string">"modification follow.\n"</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-string">"           GNU GENERAL PUBLIC LICENSE\n"</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-string">"   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n"</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-string">"  0. This License applies to any program or other work which contains\n"</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-string">"a notice placed by the copyright holder saying it may be distributed\n"</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-string">"under the terms of this General Public License.  The \"Program\", below,\n"</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-string">"refers to any such program or work, and a \"work based on the Program\"\n"</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-string">"means either the Program or any derivative work under copyright law:\n"</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-string">"that is to say, a work containing the Program or a portion of it,\n"</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-string">"either verbatim or with modifications and/or translated into another\n"</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-string">"language.  (Hereinafter, translation is included without limitation in\n"</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-string">"the term \"modification\".)  Each licensee is addressed as \"you\".\n"</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-string">"Activities other than copying, distribution and modification are not\n"</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-string">"covered by this License; they are outside its scope.  The act of\n"</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-string">"running the Program is not restricted, and the output from the Program\n"</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-string">"is covered only if its contents constitute a work based on the\n"</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-string">"Program (independent of having been made by running the Program).\n"</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-string">"Whether that is true depends on what the Program does.\n"</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-string">"  1. You may copy and distribute verbatim copies of the Program's\n"</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-string">"source code as you receive it, in any medium, provided that you\n"</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-string">"conspicuously and appropriately publish on each copy an appropriate\n"</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-string">"copyright notice and disclaimer of warranty; keep intact all the\n"</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-string">"notices that refer to this License and to the absence of any warranty;\n"</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"><tt class="py-string">"and give any other recipients of the Program a copy of this License\n"</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"><tt class="py-string">"along with the Program.\n"</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"><tt class="py-string">"You may charge a fee for the physical act of transferring a copy, and\n"</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"><tt class="py-string">"you may at your option offer warranty protection in exchange for a fee.\n"</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"><tt class="py-string">"  2. You may modify your copy or copies of the Program or any portion\n"</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"><tt class="py-string">"of it, thus forming a work based on the Program, and copy and\n"</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"><tt class="py-string">"distribute such modifications or work under the terms of Section 1\n"</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"><tt class="py-string">"above, provided that you also meet all of these conditions:\n"</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-string">"    a) You must cause the modified files to carry prominent notices\n"</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-string">"    stating that you changed the files and the date of any change.\n"</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-string">"    b) You must cause any work that you distribute or publish, that in\n"</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-string">"    whole or in part contains or is derived from the Program or any\n"</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"><tt class="py-string">"    part thereof, to be licensed as a whole at no charge to all third\n"</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"><tt class="py-string">"    parties under the terms of this License.\n"</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-string">"    c) If the modified program normally reads commands interactively\n"</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"><tt class="py-string">"    when run, you must cause it, when started running for such\n"</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"><tt class="py-string">"    interactive use in the most ordinary way, to print or display an\n"</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"><tt class="py-string">"    announcement including an appropriate copyright notice and a\n"</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"><tt class="py-string">"    notice that there is no warranty (or else, saying that you provide\n"</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"><tt class="py-string">"    a warranty) and that users may redistribute the program under\n"</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"><tt class="py-string">"    these conditions, and telling the user how to view a copy of this\n"</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"><tt class="py-string">"    License.  (Exception: if the Program itself is interactive but\n"</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"><tt class="py-string">"    does not normally print such an announcement, your work based on\n"</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-string">"    the Program is not required to print an announcement.)\n"</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-string">"These requirements apply to the modified work as a whole.  If\n"</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-string">"identifiable sections of that work are not derived from the Program,\n"</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-string">"and can be reasonably considered independent and separate works in\n"</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-string">"themselves, then this License, and its terms, do not apply to those\n"</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-string">"sections when you distribute them as separate works.  But when you\n"</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-string">"distribute the same sections as part of a whole which is a work based\n"</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"><tt class="py-string">"on the Program, the distribution of the whole must be on the terms of\n"</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"><tt class="py-string">"this License, whose permissions for other licensees extend to the\n"</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-string">"entire whole, and thus to each and every part regardless of who wrote it.\n"</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-string">"Thus, it is not the intent of this section to claim rights or contest\n"</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-string">"your rights to work written entirely by you; rather, the intent is to\n"</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-string">"exercise the right to control the distribution of derivative or\n"</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-string">"collective works based on the Program.\n"</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-string">"In addition, mere aggregation of another work not based on the Program\n"</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-string">"with the Program (or with a work based on the Program) on a volume of\n"</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-string">"a storage or distribution medium does not bring the other work under\n"</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-string">"the scope of this License.\n"</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-string">"  3. You may copy and distribute the Program (or a work based on it,\n"</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"><tt class="py-string">"under Section 2) in object code or executable form under the terms of\n"</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-string">"Sections 1 and 2 above provided that you also do one of the following:\n"</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"><tt class="py-string">"    a) Accompany it with the complete corresponding machine-readable\n"</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"><tt class="py-string">"    source code, which must be distributed under the terms of Sections\n"</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line"><tt class="py-string">"    1 and 2 above on a medium customarily used for software interchange; or,\n"</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-string">"    b) Accompany it with a written offer, valid for at least three\n"</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"><tt class="py-string">"    years, to give any third party, for a charge no more than your\n"</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line"><tt class="py-string">"    cost of physically performing source distribution, a complete\n"</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"><tt class="py-string">"    machine-readable copy of the corresponding source code, to be\n"</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"><tt class="py-string">"    distributed under the terms of Sections 1 and 2 above on a medium\n"</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line"><tt class="py-string">"    customarily used for software interchange; or,\n"</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"><tt class="py-string">"    c) Accompany it with the information you received as to the offer\n"</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"><tt class="py-string">"    to distribute corresponding source code.  (This alternative is\n"</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line"><tt class="py-string">"    allowed only for noncommercial distribution and only if you\n"</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"><tt class="py-string">"    received the program in object code or executable form with such\n"</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line"><tt class="py-string">"    an offer, in accord with Subsection b above.)\n"</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"><tt class="py-string">"The source code for a work means the preferred form of the work for\n"</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"><tt class="py-string">"making modifications to it.  For an executable work, complete source\n"</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"><tt class="py-string">"code means all the source code for all modules it contains, plus any\n"</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"><tt class="py-string">"associated interface definition files, plus the scripts used to\n"</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line"><tt class="py-string">"control compilation and installation of the executable.  However, as a\n"</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"><tt class="py-string">"special exception, the source code distributed need not include\n"</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"><tt class="py-string">"anything that is normally distributed (in either source or binary\n"</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"><tt class="py-string">"form) with the major components (compiler, kernel, and so on) of the\n"</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"><tt class="py-string">"operating system on which the executable runs, unless that component\n"</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"><tt class="py-string">"itself accompanies the executable.\n"</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"><tt class="py-string">"If distribution of executable or object code is made by offering\n"</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line"><tt class="py-string">"access to copy from a designated place, then offering equivalent\n"</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line"><tt class="py-string">"access to copy the source code from the same place counts as\n"</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"><tt class="py-string">"distribution of the source code, even though third parties are not\n"</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"><tt class="py-string">"compelled to copy the source along with the object code.\n"</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line"><tt class="py-string">"  4. You may not copy, modify, sublicense, or distribute the Program\n"</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line"><tt class="py-string">"except as expressly provided under this License.  Any attempt\n"</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line"><tt class="py-string">"otherwise to copy, modify, sublicense or distribute the Program is\n"</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line"><tt class="py-string">"void, and will automatically terminate your rights under this License.\n"</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line"><tt class="py-string">"However, parties who have received copies, or rights, from you under\n"</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line"><tt class="py-string">"this License will not have their licenses terminated so long as such\n"</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line"><tt class="py-string">"parties remain in full compliance.\n"</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line"><tt class="py-string">"  5. You are not required to accept this License, since you have not\n"</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line"><tt class="py-string">"signed it.  However, nothing else grants you permission to modify or\n"</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line"><tt class="py-string">"distribute the Program or its derivative works.  These actions are\n"</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"><tt class="py-string">"prohibited by law if you do not accept this License.  Therefore, by\n"</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line"><tt class="py-string">"modifying or distributing the Program (or any work based on the\n"</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line"><tt class="py-string">"Program), you indicate your acceptance of this License to do so, and\n"</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line"><tt class="py-string">"all its terms and conditions for copying, distributing or modifying\n"</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"><tt class="py-string">"the Program or works based on it.\n"</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line"><tt class="py-string">"  6. Each time you redistribute the Program (or any work based on the\n"</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line"><tt class="py-string">"Program), the recipient automatically receives a license from the\n"</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line"><tt class="py-string">"original licensor to copy, distribute or modify the Program subject to\n"</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"><tt class="py-string">"these terms and conditions.  You may not impose any further\n"</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"><tt class="py-string">"restrictions on the recipients' exercise of the rights granted herein.\n"</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"><tt class="py-string">"You are not responsible for enforcing compliance by third parties to\n"</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"><tt class="py-string">"this License.\n"</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"><tt class="py-string">"  7. If, as a consequence of a court judgment or allegation of patent\n"</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"><tt class="py-string">"infringement or for any other reason (not limited to patent issues),\n"</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line"><tt class="py-string">"conditions are imposed on you (whether by court order, agreement or\n"</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line"><tt class="py-string">"otherwise) that contradict the conditions of this License, they do not\n"</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line"><tt class="py-string">"excuse you from the conditions of this License.  If you cannot\n"</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"><tt class="py-string">"distribute so as to satisfy simultaneously your obligations under this\n"</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line"><tt class="py-string">"License and any other pertinent obligations, then as a consequence you\n"</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line"><tt class="py-string">"may not distribute the Program at all.  For example, if a patent\n"</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line"><tt class="py-string">"license would not permit royalty-free redistribution of the Program by\n"</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line"><tt class="py-string">"all those who receive copies directly or indirectly through you, then\n"</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line"><tt class="py-string">"the only way you could satisfy both it and this License would be to\n"</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"><tt class="py-string">"refrain entirely from distribution of the Program.\n"</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"><tt class="py-string">"If any portion of this section is held invalid or unenforceable under\n"</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line"><tt class="py-string">"any particular circumstance, the balance of the section is intended to\n"</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"><tt class="py-string">"apply and the section as a whole is intended to apply in other\n"</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line"><tt class="py-string">"circumstances.\n"</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"><tt class="py-string">"It is not the purpose of this section to induce you to infringe any\n"</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"><tt class="py-string">"patents or other property right claims or to contest validity of any\n"</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"><tt class="py-string">"such claims; this section has the sole purpose of protecting the\n"</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"><tt class="py-string">"integrity of the free software distribution system, which is\n"</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"><tt class="py-string">"implemented by public license practices.  Many people have made\n"</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"><tt class="py-string">"generous contributions to the wide range of software distributed\n"</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"><tt class="py-string">"through that system in reliance on consistent application of that\n"</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-string">"system; it is up to the author/donor to decide if he or she is willing\n"</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"><tt class="py-string">"to distribute software through any other system and a licensee cannot\n"</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"><tt class="py-string">"impose that choice.\n"</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-string">"This section is intended to make thoroughly clear what is believed to\n"</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line"><tt class="py-string">"be a consequence of the rest of this License.\n"</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-string">"  8. If the distribution and/or use of the Program is restricted in\n"</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-string">"certain countries either by patents or by copyrighted interfaces, the\n"</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-string">"original copyright holder who places the Program under this License\n"</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-string">"may add an explicit geographical distribution limitation excluding\n"</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-string">"those countries, so that distribution is permitted only in or among\n"</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-string">"countries not thus excluded.  In such case, this License incorporates\n"</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-string">"the limitation as if written in the body of this License.\n"</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"><tt class="py-string">"  9. The Free Software Foundation may publish revised and/or new versions\n"</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"><tt class="py-string">"of the General Public License from time to time.  Such new versions will\n"</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line"><tt class="py-string">"be similar in spirit to the present version, but may differ in detail to\n"</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line"><tt class="py-string">"address new problems or concerns.\n"</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line"><tt class="py-string">"Each version is given a distinguishing version number.  If the Program\n"</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line"><tt class="py-string">"specifies a version number of this License which applies to it and \"any\n"</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line"><tt class="py-string">"later version\", you have the option of following the terms and conditions\n"</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line"><tt class="py-string">"either of that version or of any later version published by the Free\n"</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line"><tt class="py-string">"Software Foundation.  If the Program does not specify a version number of\n"</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line"><tt class="py-string">"this License, you may choose any version ever published by the Free Software\n"</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line"><tt class="py-string">"Foundation.\n"</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line"><tt class="py-string">"  10. If you wish to incorporate parts of the Program into other free\n"</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line"><tt class="py-string">"programs whose distribution conditions are different, write to the author\n"</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line"><tt class="py-string">"to ask for permission.  For software which is copyrighted by the Free\n"</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line"><tt class="py-string">"Software Foundation, write to the Free Software Foundation; we sometimes\n"</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line"><tt class="py-string">"make exceptions for this.  Our decision will be guided by the two goals\n"</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line"><tt class="py-string">"of preserving the free status of all derivatives of our free software and\n"</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line"><tt class="py-string">"of promoting the sharing and reuse of software generally.\n"</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line"><tt class="py-string">"               NO WARRANTY\n"</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line"><tt class="py-string">"  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY\n"</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line"><tt class="py-string">"FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN\n"</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line"><tt class="py-string">"OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES\n"</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line"><tt class="py-string">"PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED\n"</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line"><tt class="py-string">"OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\n"</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line"><tt class="py-string">"MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS\n"</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-string">"TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE\n"</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-string">"PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,\n"</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line"><tt class="py-string">"REPAIR OR CORRECTION.\n"</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line"><tt class="py-string">"  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\n"</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line"><tt class="py-string">"WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR\n"</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line"><tt class="py-string">"REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,\n"</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line"><tt class="py-string">"INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING\n"</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line"><tt class="py-string">"OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED\n"</tt> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line"><tt class="py-string">"TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY\n"</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line"><tt class="py-string">"YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER\n"</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line"><tt class="py-string">"PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE\n"</tt> </tt>
+<a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line"><tt class="py-string">"POSSIBILITY OF SUCH DAMAGES.\n"</tt> </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line"><tt class="py-string">"            END OF TERMS AND CONDITIONS\n"</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line"><tt class="py-string">"       How to Apply These Terms to Your New Programs\n"</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line"><tt class="py-string">"  If you develop a new program, and you want it to be of the greatest\n"</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line"><tt class="py-string">"possible use to the public, the best way to achieve this is to make it\n"</tt> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line"><tt class="py-string">"free software which everyone can redistribute and change under these terms.\n"</tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line"><tt class="py-string">"  To do so, attach the following notices to the program.  It is safest\n"</tt> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line"><tt class="py-string">"to attach them to the start of each source file to most effectively\n"</tt> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line"><tt class="py-string">"convey the exclusion of warranty; and each file should have at least\n"</tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line"><tt class="py-string">"the \"copyright\" line and a pointer to where the full notice is found.\n"</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line"><tt class="py-string">"    &lt;one line to give the program's name and a brief idea of what it does.&gt;\n"</tt> </tt>
+<a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line"><tt class="py-string">"    Copyright (C) &lt;year&gt;  &lt;name of author&gt;\n"</tt> </tt>
+<a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L427"></a><tt class="py-lineno">427</tt>  <tt class="py-line"><tt class="py-string">"    This program is free software; you can redistribute it and/or modify\n"</tt> </tt>
+<a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line"><tt class="py-string">"    it under the terms of the GNU General Public License as published by\n"</tt> </tt>
+<a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line"><tt class="py-string">"    the Free Software Foundation; either version 2 of the License, or\n"</tt> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line"><tt class="py-string">"    (at your option) any later version.\n"</tt> </tt>
+<a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L432"></a><tt class="py-lineno">432</tt>  <tt class="py-line"><tt class="py-string">"    This program is distributed in the hope that it will be useful,\n"</tt> </tt>
+<a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line"><tt class="py-string">"    but WITHOUT ANY WARRANTY; without even the implied warranty of\n"</tt> </tt>
+<a name="L434"></a><tt class="py-lineno">434</tt>  <tt class="py-line"><tt class="py-string">"    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"</tt> </tt>
+<a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line"><tt class="py-string">"    GNU General Public License for more details.\n"</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line"><tt class="py-string">"    You should have received a copy of the GNU General Public License\n"</tt> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line"><tt class="py-string">"    along with this program; if not, write to the Free Software\n"</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line"><tt class="py-string">"    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n"</tt> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line"><tt class="py-string">"Also add information on how to contact you by electronic and paper mail.\n"</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line"><tt class="py-string">"If the program is interactive, make it output a short notice like this\n"</tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line"><tt class="py-string">"when it starts in an interactive mode:\n"</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line"><tt class="py-string">"    Gnomovision version 69, Copyright (C) year name of author\n"</tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line"><tt class="py-string">"    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n"</tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line"><tt class="py-string">"    This is free software, and you are welcome to redistribute it\n"</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line"><tt class="py-string">"    under certain conditions; type `show c' for details.\n"</tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line"><tt class="py-string">"The hypothetical commands `show w' and `show c' should show the appropriate\n"</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line"><tt class="py-string">"parts of the General Public License.  Of course, the commands you use may\n"</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line"><tt class="py-string">"be called something other than `show w' and `show c'; they could even be\n"</tt> </tt>
+<a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line"><tt class="py-string">"mouse-clicks or menu items--whatever suits your program.\n"</tt> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line"><tt class="py-string">"You should also get your employer (if you work as a programmer) or your\n"</tt> </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line"><tt class="py-string">"school, if any, to sign a \"copyright disclaimer\" for the program, if\n"</tt> </tt>
+<a name="L459"></a><tt class="py-lineno">459</tt>  <tt class="py-line"><tt class="py-string">"necessary.  Here is a sample; alter the names:\n"</tt> </tt>
+<a name="L460"></a><tt class="py-lineno">460</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L461"></a><tt class="py-lineno">461</tt>  <tt class="py-line"><tt class="py-string">"  Yoyodyne, Inc., hereby disclaims all copyright interest in the program\n"</tt> </tt>
+<a name="L462"></a><tt class="py-lineno">462</tt>  <tt class="py-line"><tt class="py-string">"  `Gnomovision' (which makes passes at compilers) written by James Hacker.\n"</tt> </tt>
+<a name="L463"></a><tt class="py-lineno">463</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L464"></a><tt class="py-lineno">464</tt>  <tt class="py-line"><tt class="py-string">"  &lt;signature of Ty Coon&gt;, 1 April 1989\n"</tt> </tt>
+<a name="L465"></a><tt class="py-lineno">465</tt>  <tt class="py-line"><tt class="py-string">"  Ty Coon, President of Vice\n"</tt> </tt>
+<a name="L466"></a><tt class="py-lineno">466</tt>  <tt class="py-line"><tt class="py-string">"\n"</tt> </tt>
+<a name="L467"></a><tt class="py-lineno">467</tt>  <tt class="py-line"><tt class="py-string">"This General Public License does not permit incorporating your program into\n"</tt> </tt>
+<a name="L468"></a><tt class="py-lineno">468</tt>  <tt class="py-line"><tt class="py-string">"proprietary programs.  If your program is a subroutine library, you may\n"</tt> </tt>
+<a name="L469"></a><tt class="py-lineno">469</tt>  <tt class="py-line"><tt class="py-string">"consider it more useful to permit linking proprietary applications with the\n"</tt> </tt>
+<a name="L470"></a><tt class="py-lineno">470</tt>  <tt class="py-line"><tt class="py-string">"library.  If this is what you want to do, use the GNU Library General\n"</tt> </tt>
+<a name="L471"></a><tt class="py-lineno">471</tt>  <tt class="py-line"><tt class="py-string">"Public License instead of this License.\n"</tt> </tt>
+<a name="L472"></a><tt class="py-lineno">472</tt>  <tt class="py-line"><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L473"></a><tt class="py-lineno">473</tt>  <tt class="py-line">        <tt class="py-name">QToolTip</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">licenseBrowser</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"To use Epigrass you have to agree with this license"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L474"></a><tt class="py-lineno">474</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tabWidget</tt><tt class="py-op">.</tt><tt class="py-name">changeTab</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TabPage_2</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"License"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L475"></a><tt class="py-lineno">475</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt><tt class="py-op">.</tt><tt class="py-name">setText</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"&amp;Close"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L476"></a><tt class="py-lineno">476</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">buttonCancel</tt><tt class="py-op">.</tt><tt class="py-name">setAccel</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__tr</tt><tt class="py-op">(</tt><tt class="py-string">"Alt+C"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L477"></a><tt class="py-lineno">477</tt>  <tt class="py-line"> </tt>
+<a name="L478"></a><tt class="py-lineno">478</tt>  <tt class="py-line"> </tt>
+<a name="aboutDialog.__tr"></a><div id="aboutDialog.__tr-def"><a name="L479"></a><tt class="py-lineno">479</tt> <a class="py-toggle" href="#" id="aboutDialog.__tr-toggle" onclick="return toggle('aboutDialog.__tr');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.about.aboutDialog-class.html#__tr">__tr</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">s</tt><tt class="py-op">,</tt><tt class="py-param">c</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="aboutDialog.__tr-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="aboutDialog.__tr-expanded"><a name="L480"></a><tt class="py-lineno">480</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">qApp</tt><tt class="py-op">.</tt><tt class="py-name">translate</tt><tt class="py-op">(</tt><tt class="py-string">"aboutDialog"</tt><tt class="py-op">,</tt><tt class="py-name">s</tt><tt class="py-op">,</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L481"></a><tt class="py-lineno">481</tt>  <tt class="py-line"> </tt>
+<a name="L482"></a><tt class="py-lineno">482</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L483"></a><tt class="py-lineno">483</tt>  <tt class="py-line">    <tt class="py-name">a</tt> <tt class="py-op">=</tt> <tt class="py-name">QApplication</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> </tt>
+<a name="L484"></a><tt class="py-lineno">484</tt>  <tt class="py-line">    <tt class="py-name">QObject</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt><tt class="py-name">SIGNAL</tt><tt class="py-op">(</tt><tt class="py-string">"lastWindowClosed()"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-name">a</tt><tt class="py-op">,</tt><tt class="py-name">SLOT</tt><tt class="py-op">(</tt><tt class="py-string">"quit()"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L485"></a><tt class="py-lineno">485</tt>  <tt class="py-line">    <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Class Epigrass.about.aboutDialog=Epigrass.about.aboutDialog-class.html"><a title="Epigrass.about.aboutDialog" class="py-name" href="#" onclick="return doclink('link-6', 'aboutDialog', 'link-6');">aboutDialog</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L486"></a><tt class="py-lineno">486</tt>  <tt class="py-line">    <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">setMainWidget</tt><tt class="py-op">(</tt><tt class="py-name">w</tt><tt class="py-op">)</tt> </tt>
+<a name="L487"></a><tt class="py-lineno">487</tt>  <tt class="py-line">    <tt class="py-name">w</tt><tt class="py-op">.</tt><tt class="py-name">show</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L488"></a><tt class="py-lineno">488</tt>  <tt class="py-line">    <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">exec_loop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L489"></a><tt class="py-lineno">489</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0beta1 on Tue May 29 09:23:30 2007
+    </td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

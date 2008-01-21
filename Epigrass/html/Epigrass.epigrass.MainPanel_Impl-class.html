@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Epigrass.epigrass.MainPanel_Impl</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Epigrass-module.html">Package&nbsp;Epigrass</a> ::
+        <a href="Epigrass.epigrass-module.html">Module&nbsp;epigrass</a> ::
+        Class&nbsp;MainPanel_Impl
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Epigrass.epigrass.MainPanel_Impl-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class MainPanel_Impl</h1><span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl">source&nbsp;code</a></span><br /><br />
+<center>
+<center>  <map id="uml_class_diagram_for_epigrass_6" name="uml_class_diagram_for_epigrass_6">
+<area shape="rect" href="Epigrass.cpanel.MainPanel&#45;class.html#Main_layout_destroyed" title="Epigrass.cpanel.MainPanel.Main_layout_destroyed" alt="" coords="59,98,256,116" />
+<area shape="rect" href="Epigrass.cpanel.MainPanel&#45;class.html#languageChange" title="Epigrass.cpanel.MainPanel.languageChange" alt="" coords="59,116,256,135" />
+<area shape="rect" href="Epigrass.cpanel.MainPanel&#45;class.html" title="Epigrass.cpanel.MainPanel" alt="" coords="47,67,268,142" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#loadRcFile" title="Loads epigrassrc." alt="" coords="18,191,298,210" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#__init__" title="Epigrass.epigrass.MainPanel_Impl.__init__" alt="" coords="18,210,298,228" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#onVisual" title="Scan the epigrass database an shows available simulations." alt="" coords="18,228,298,247" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#checkConf" title="Check if the configuration dictionary is complete" alt="" coords="18,247,298,266" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#onConsensus" title="Build the consensus tree" alt="" coords="18,266,298,284" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#setBackend" title="activate/deactivate db spec groupbox" alt="" coords="18,284,298,303" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#onDbInfo" title="Epigrass.epigrass.MainPanel_Impl.onDbInfo" alt="" coords="18,303,298,322" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#initRc" title="Initializes the epigrassrc file." alt="" coords="18,322,298,340" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#repRuns" title="Do repeated runs" alt="" coords="18,340,298,359" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#chooseScript" title="starts the file selction dialog for the script." alt="" coords="18,359,298,378" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#getVariables" title="Fill the variables list whenever a table is selected in the table list" alt="" coords="18,378,298,396" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#onRunFuture" title="Run the simulation on a separate thread" alt="" coords="18,396,298,415" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#onRepOpen" title="Opens the report PDF" alt="" coords="18,415,298,434" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html#readGui" title="Gets the info from the GUI into the configuration dictionary." alt="" coords="18,452,298,471" />
+<area shape="rect" href="Epigrass.epigrass.MainPanel_Impl&#45;class.html" title="Epigrass.epigrass.MainPanel_Impl" alt="" coords="6,160,310,478" />
+<area shape="rect" href="javascript: void(0);" title="??&#45;5" alt="" coords="131,6,184,48" />
+</map>
+  <img src="uml_class_diagram_for_epigrass_6.gif" alt='' usemap="#uml_class_diagram_for_epigrass_6" ismap="ismap" class="graph-without-title" />
+</center></center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.epigrass.MainPanel_Impl-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parent</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">name</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">fl</span>=<span class="summary-sig-default">0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="initRc"></a><span class="summary-sig-name">initRc</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initializes the epigrassrc file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.initRc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="updateRc"></a><span class="summary-sig-name">updateRc</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Updates the epigrassrc file with the contents of the configuration
+      dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.updateRc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Epigrass.epigrass.MainPanel_Impl-class.html#loadRcFile" class="summary-sig-name">loadRcFile</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fname</span>,
+        <span class="summary-sig-arg">config</span>=<span class="summary-sig-default">{}</span>)</span><br />
+      Loads epigrassrc.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.loadRcFile">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fillGui"></a><span class="summary-sig-name">fillGui</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conf</span>)</span><br />
+      Fill the gui fields from configuration dictionary conf.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.fillGui">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="checkConf"></a><span class="summary-sig-name">checkConf</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Check if the configuration dictionary is complete</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.checkConf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="editScript"></a><span class="summary-sig-name">editScript</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Opens the model script with the user's preferred editor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.editScript">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="chooseScript"></a><span class="summary-sig-name">chooseScript</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      starts the file selction dialog for the script.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.chooseScript">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="readGui"></a><span class="summary-sig-name">readGui</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the info from the GUI into the configuration dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.readGui">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onRunFuture"></a><span class="summary-sig-name">onRunFuture</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Run the simulation on a separate thread</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onRunFuture">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onRun"></a><span class="summary-sig-name">onRun</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      starts the simulation when the run button is pressed</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onRun">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="repRuns"></a><span class="summary-sig-name">repRuns</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">S</span>)</span><br />
+      Do repeated runs</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.repRuns">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onDbBackup"></a><span class="summary-sig-name">onDbBackup</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Dumps the epigrass databse to an sql file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onDbBackup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onDbInfo"></a><span class="summary-sig-name">onDbInfo</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onDbInfo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onHelp"></a><span class="summary-sig-name">onHelp</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Opens the userguide</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onHelp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onRepOpen"></a><span class="summary-sig-name">onRepOpen</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Opens the report PDF</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onRepOpen">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onVisual"></a><span class="summary-sig-name">onVisual</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Scan the epigrass database an shows available simulations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onVisual">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVariables"></a><span class="summary-sig-name">getVariables</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Fill the variables list whenever a table is selected in the table 
+      list</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.getVariables">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onPlayButton"></a><span class="summary-sig-name">onPlayButton</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Calls the epiplay module to replay the epidemic from a database 
+      table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onPlayButton">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onConsensus"></a><span class="summary-sig-name">onConsensus</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Build the consensus tree</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onConsensus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setBackend"></a><span class="summary-sig-name">setBackend</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      activate/deactivate db spec groupbox</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.setBackend">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="onExit"></a><span class="summary-sig-name">onExit</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Close the gui</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.onExit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="Epigrass.cpanel.MainPanel-class.html">cpanel.MainPanel</a></code></b>:
+      <code><a href="Epigrass.cpanel.MainPanel-class.html#Main_layout_destroyed">Main_layout_destroyed</a></code>,
+      <code><a href="Epigrass.cpanel.MainPanel-class.html#languageChange">languageChange</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">parent</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">name</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">fl</span>=<span class="sig-default">0</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+      <a href="Epigrass.cpanel.MainPanel-class.html#__init__">cpanel.MainPanel.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="loadRcFile"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">loadRcFile</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fname</span>,
+        <span class="sig-arg">config</span>=<span class="sig-default">{}</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Epigrass.epigrass-pysrc.html#MainPanel_Impl.loadRcFile">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  Loads epigrassrc. Returns a dictionary with keys of the form 
+  &lt;section&gt;.&lt;option&gt; and the corresponding values.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0beta1 on Tue May 29 09:23:25 2007
+    </td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Epigrass.dataObject</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Epigrass-module.html">Package&nbsp;Epigrass</a> ::
+        Module&nbsp;dataObject
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Epigrass.dataObject-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="Epigrass.dataObject-module.html">Module Epigrass.dataObject</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Module for interacting with the database backend through SQLObject </tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># 10/2005 - Flavio Codeco Coelho</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-keyword">from</tt>    <tt class="py-name">sqlobject</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt><tt class="py-name">os</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#initialization data -- to be reset by calling module</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##backend='mysql'</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##user='root'</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##pw='mysql'</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##host='localhost'</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">##db='epigrass'</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="Connect"></a><div id="Connect-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="Connect-toggle" onclick="return toggle('Connect');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.dataObject-module.html#Connect">Connect</a><tt class="py-op">(</tt><tt class="py-param">backend</tt><tt class="py-op">,</tt> <tt class="py-param">user</tt><tt class="py-op">,</tt> <tt class="py-param">pw</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt><tt class="py-op">,</tt> <tt class="py-param">port</tt><tt class="py-op">,</tt> <tt class="py-param">db</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Connect-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Connect-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    Initializes the connection.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-name">db_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">abspath</tt><tt class="py-op">(</tt><tt class="py-string">'Epigrass.db'</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-comment">##if os.path.exists(db_filename):</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment">##    os.unlink(db_filename)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">if</tt> <tt class="py-name">backend</tt> <tt class="py-op">==</tt> <tt class="py-string">'sqlite'</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">connection_string</tt> <tt class="py-op">=</tt> <tt class="py-string">'sqlite:'</tt> <tt class="py-op">+</tt> <tt class="py-name">db_filename</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">backend</tt> <tt class="py-op">==</tt> <tt class="py-string">'mysql'</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">connection_string</tt> <tt class="py-op">=</tt> <tt class="py-string">r'%s://%s:%s@%s:%s/%s'</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">backend</tt><tt class="py-op">,</tt><tt class="py-name">user</tt><tt class="py-op">,</tt><tt class="py-name">pw</tt><tt class="py-op">,</tt><tt class="py-name">host</tt><tt class="py-op">,</tt><tt class="py-name">port</tt><tt class="py-op">,</tt><tt class="py-name">db</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">backend</tt> <tt class="py-op">==</tt> <tt class="py-string">'postgresql'</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-comment"># TODO: check this connection string</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">connection_string</tt> <tt class="py-op">=</tt> <tt class="py-string">r'%s://%s:%s@%s:%s/%s'</tt><tt class="py-op">%</tt><tt class="py-op">(</tt><tt class="py-name">backend</tt><tt class="py-op">,</tt><tt class="py-name">user</tt><tt class="py-op">,</tt><tt class="py-name">pw</tt><tt class="py-op">,</tt><tt class="py-name">host</tt><tt class="py-op">,</tt><tt class="py-name">port</tt><tt class="py-op">,</tt><tt class="py-name">db</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-string">'Invalid Database Backend specified: %s'</tt><tt class="py-op">%</tt><tt class="py-name">backend</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">connection</tt> <tt class="py-op">=</tt> <tt class="py-name">connectionForURI</tt><tt class="py-op">(</tt><tt class="py-name">connection_string</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-name">sqlhub</tt><tt class="py-op">.</tt><tt class="py-name">processConnection</tt> <tt class="py-op">=</tt> <tt class="py-name">connection</tt><tt class="py-op">.</tt><tt class="py-name">transaction</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">     </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="Site"></a><div id="Site-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="Site-toggle" onclick="return toggle('Site');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.dataObject.Site-class.html">Site</a><tt class="py-op">(</tt><tt class="py-base-class">SQLObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Site-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Site-expanded"><a name="Site.sqlmeta"></a><div id="Site.sqlmeta-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="Site.sqlmeta-toggle" onclick="return toggle('Site.sqlmeta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.dataObject.Site.sqlmeta-class.html">sqlmeta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Site.sqlmeta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Site.sqlmeta-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt id="link-0" class="py-name" targets="Variable Epigrass.dataObject.Edge.sqlmeta.name=Epigrass.dataObject.Edge.sqlmeta-class.html#name,Variable Epigrass.dataObject.Site.name=Epigrass.dataObject.Site-class.html#name,Variable Epigrass.dataObject.Site.sqlmeta.name=Epigrass.dataObject.Site.sqlmeta-class.html#name"><a title="Epigrass.dataObject.Edge.sqlmeta.name
+Epigrass.dataObject.Site.name
+Epigrass.dataObject.Site.sqlmeta.name" class="py-name" href="#" onclick="return doclink('link-0', 'name', 'link-0');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'site'</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt id="link-1" class="py-name" targets="Variable Epigrass.dataObject.Edge.sqlmeta.lazyUpdate=Epigrass.dataObject.Edge.sqlmeta-class.html#lazyUpdate,Variable Epigrass.dataObject.Site.sqlmeta.lazyUpdate=Epigrass.dataObject.Site.sqlmeta-class.html#lazyUpdate"><a title="Epigrass.dataObject.Edge.sqlmeta.lazyUpdate
+Epigrass.dataObject.Site.sqlmeta.lazyUpdate" class="py-name" href="#" onclick="return doclink('link-1', 'lazyUpdate', 'link-1');">lazyUpdate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable Epigrass.dataObject.Site.geocode=Epigrass.dataObject.Site-class.html#geocode"><a title="Epigrass.dataObject.Site.geocode" class="py-name" href="#" onclick="return doclink('link-2', 'geocode', 'link-2');">geocode</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable Epigrass.dataObject.Edge.time=Epigrass.dataObject.Edge-class.html#time,Variable Epigrass.dataObject.Site.time=Epigrass.dataObject.Site-class.html#time"><a title="Epigrass.dataObject.Edge.time
+Epigrass.dataObject.Site.time" class="py-name" href="#" onclick="return doclink('link-3', 'time', 'link-3');">time</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable Epigrass.dataObject.Site.totpop=Epigrass.dataObject.Site-class.html#totpop"><a title="Epigrass.dataObject.Site.totpop" class="py-name" href="#" onclick="return doclink('link-4', 'totpop', 'link-4');">totpop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt id="link-5" class="py-name"><a title="Epigrass.dataObject.Edge.sqlmeta.name
+Epigrass.dataObject.Site.name
+Epigrass.dataObject.Site.sqlmeta.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-0');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">UnicodeCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt>  </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable Epigrass.dataObject.Site.lat=Epigrass.dataObject.Site-class.html#lat"><a title="Epigrass.dataObject.Site.lat" class="py-name" href="#" onclick="return doclink('link-6', 'lat', 'link-6');">lat</a></tt> <tt class="py-op">=</tt> <tt class="py-name">FloatCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable Epigrass.dataObject.Site.longit=Epigrass.dataObject.Site-class.html#longit"><a title="Epigrass.dataObject.Site.longit" class="py-name" href="#" onclick="return doclink('link-7', 'longit', 'link-7');">longit</a></tt> <tt class="py-op">=</tt> <tt class="py-name">FloatCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">      </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">     </tt>
+<a name="Edge"></a><div id="Edge-def"><a name="L47"></a><tt class="py-lineno">47</tt> <a class="py-toggle" href="#" id="Edge-toggle" onclick="return toggle('Edge');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.dataObject.Edge-class.html">Edge</a><tt class="py-op">(</tt><tt class="py-base-class">SQLObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Edge-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Edge-expanded"><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-comment">#_table = 'site'+'e'</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt id="link-8" class="py-name" targets="Variable Epigrass.dataObject.Edge.source_code=Epigrass.dataObject.Edge-class.html#source_code"><a title="Epigrass.dataObject.Edge.source_code" class="py-name" href="#" onclick="return doclink('link-8', 'source_code', 'link-8');">source_code</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable Epigrass.dataObject.Edge.dest_code=Epigrass.dataObject.Edge-class.html#dest_code"><a title="Epigrass.dataObject.Edge.dest_code" class="py-name" href="#" onclick="return doclink('link-9', 'dest_code', 'link-9');">dest_code</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt id="link-10" class="py-name"><a title="Epigrass.dataObject.Edge.time
+Epigrass.dataObject.Site.time" class="py-name" href="#" onclick="return doclink('link-10', 'time', 'link-3');">time</a></tt> <tt class="py-op">=</tt> <tt class="py-name">IntCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable Epigrass.dataObject.Edge.ftheta=Epigrass.dataObject.Edge-class.html#ftheta"><a title="Epigrass.dataObject.Edge.ftheta" class="py-name" href="#" onclick="return doclink('link-11', 'ftheta', 'link-11');">ftheta</a></tt> <tt class="py-op">=</tt> <tt class="py-name">FloatCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable Epigrass.dataObject.Edge.btheta=Epigrass.dataObject.Edge-class.html#btheta"><a title="Epigrass.dataObject.Edge.btheta" class="py-name" href="#" onclick="return doclink('link-12', 'btheta', 'link-12');">btheta</a></tt> <tt class="py-op">=</tt><tt class="py-name">FloatCol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="Edge.sqlmeta"></a><div id="Edge.sqlmeta-def"><a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="Edge.sqlmeta-toggle" onclick="return toggle('Edge.sqlmeta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.dataObject.Edge.sqlmeta-class.html">sqlmeta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Edge.sqlmeta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Edge.sqlmeta-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt id="link-13" class="py-name"><a title="Epigrass.dataObject.Edge.sqlmeta.name
+Epigrass.dataObject.Site.name
+Epigrass.dataObject.Site.sqlmeta.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-0');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'site'</tt><tt class="py-op">+</tt><tt class="py-string">'e'</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="Epigrass.dataObject.Edge.sqlmeta.lazyUpdate
+Epigrass.dataObject.Site.sqlmeta.lazyUpdate" class="py-name" href="#" onclick="return doclink('link-14', 'lazyUpdate', 'link-1');">lazyUpdate</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div></div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">     </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt><tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Function Epigrass.dataObject.Connect()=Epigrass.dataObject-module.html#Connect"><a title="Epigrass.dataObject.Connect" class="py-name" href="#" onclick="return doclink('link-15', 'Connect', 'link-15');">Connect</a></tt><tt class="py-op">(</tt><tt class="py-string">'mysql'</tt><tt class="py-op">,</tt><tt class="py-string">'root'</tt><tt class="py-op">,</tt><tt class="py-string">'mysql'</tt><tt class="py-op">,</tt><tt class="py-string">'localhost'</tt><tt class="py-op">,</tt> <tt class="py-number">3306</tt><tt class="py-op">,</tt> <tt class="py-string">'epigrass'</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt id="link-16" class="py-name" targets="Class Epigrass.dataObject.Site=Epigrass.dataObject.Site-class.html"><a title="Epigrass.dataObject.Site" class="py-name" href="#" onclick="return doclink('link-16', 'Site', 'link-16');">Site</a></tt><tt class="py-op">.</tt><tt class="py-name">_table</tt><tt class="py-op">=</tt><tt class="py-string">'testando'</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="Epigrass.dataObject.Site" class="py-name" href="#" onclick="return doclink('link-17', 'Site', 'link-16');">Site</a></tt><tt class="py-op">.</tt><tt class="py-name">createTable</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt id="link-18" class="py-name" targets="Class Epigrass.dataObject.Edge=Epigrass.dataObject.Edge-class.html"><a title="Epigrass.dataObject.Edge" class="py-name" href="#" onclick="return doclink('link-18', 'Edge', 'link-18');">Edge</a></tt><tt class="py-op">.</tt><tt class="py-name">createTable</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">dicin</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-string">'geocode'</tt><tt class="py-op">:</tt><tt class="py-number">0000000</tt><tt class="py-op">,</tt><tt class="py-string">'time'</tt><tt class="py-op">:</tt><tt class="py-number">0</tt><tt class="py-op">,</tt><tt class="py-string">'name'</tt><tt class="py-op">:</tt><tt class="py-string">'euheim'</tt><tt class="py-op">,</tt><tt class="py-string">'totpop'</tt><tt class="py-op">:</tt><tt class="py-number">100</tt><tt class="py-op">,</tt><tt class="py-string">'lat'</tt><tt class="py-op">:</tt><tt class="py-number">10.1</tt><tt class="py-op">,</tt><tt class="py-string">'longit'</tt><tt class="py-op">:</tt><tt class="py-number">20.3</tt><tt class="py-op">}</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">     </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">pid</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">fork</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">pid</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">            <tt id="link-19" class="py-name"><a title="Epigrass.dataObject.Site" class="py-name" href="#" onclick="return doclink('link-19', 'Site', 'link-16');">Site</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">dicin</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">            <tt id="link-20" class="py-name"><a title="Epigrass.dataObject.Site" class="py-name" href="#" onclick="return doclink('link-20', 'Site', 'link-16');">Site</a></tt><tt class="py-op">.</tt><tt class="py-name">_connection</tt><tt class="py-op">.</tt><tt class="py-name">commit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"commit from process %d"</tt><tt class="py-op">%</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getpid</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">            <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0beta1 on Tue May 29 09:23:30 2007
+    </td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

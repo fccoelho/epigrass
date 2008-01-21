@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Epigrass.testinst</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Epigrass-module.html">Package&nbsp;Epigrass</a> ::
+        Module&nbsp;testinst
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Epigrass.testinst-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="Epigrass.testinst-module.html">Module Epigrass.testinst</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Unit testing script</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module Epigrass.manager=Epigrass.manager-module.html"><a title="Epigrass.manager" class="py-name" href="#" onclick="return doclink('link-0', 'manager', 'link-0');">manager</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="testObjInstantiation"></a><div id="testObjInstantiation-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="testObjInstantiation-toggle" onclick="return toggle('testObjInstantiation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="Epigrass.testinst.testObjInstantiation-class.html">testObjInstantiation</a><tt class="py-op">(</tt><tt class="py-base-class">unittest</tt><tt class="py-op">.</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="testObjInstantiation-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="testObjInstantiation-expanded"><a name="testObjInstantiation.setUp"></a><div id="testObjInstantiation.setUp-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="testObjInstantiation.setUp-toggle" onclick="return toggle('testObjInstantiation.setUp');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.testinst.testObjInstantiation-class.html#setUp">setUp</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="testObjInstantiation.setUp-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="testObjInstantiation.setUp-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sitios</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Function Epigrass.data_io.loadData()=Epigrass.data_io-module.html#loadData"><a title="Epigrass.data_io.loadData" class="py-name" href="#" onclick="return doclink('link-1', 'loadData', 'link-1');">loadData</a></tt><tt class="py-op">(</tt><tt class="py-string">'/home/fccoelho/Documents/Projects_software/epigrass/epigrass/simobj/sitios3.csv'</tt><tt class="py-op">,</tt><tt class="py-name">sep</tt><tt class="py-op">=</tt><tt class="py-string">','</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ed</tt><tt class="py-op">=</tt><tt id="link-2" class="py-name"><a title="Epigrass.data_io.loadData" class="py-name" href="#" onclick="return doclink('link-2', 'loadData', 'link-1');">loadData</a></tt><tt class="py-op">(</tt><tt class="py-string">'/home/fccoelho/Documents/Projects_software/epigrass/epigrass/simobj/edgesout.csv'</tt><tt class="py-op">,</tt><tt class="py-name">sep</tt><tt class="py-op">=</tt><tt class="py-string">','</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">=</tt><tt id="link-3" class="py-name" targets="Class Epigrass.manager.simulate=Epigrass.manager.simulate-class.html"><a title="Epigrass.manager.simulate" class="py-name" href="#" onclick="return doclink('link-3', 'simulate', 'link-3');">simulate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="testObjInstantiation.testSites"></a><div id="testObjInstantiation.testSites-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="testObjInstantiation.testSites-toggle" onclick="return toggle('testObjInstantiation.testSites');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.testinst.testObjInstantiation-class.html#testSites">testSites</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="testObjInstantiation.testSites-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="testObjInstantiation.testSites-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method Epigrass.manager.simulate.instSites()=Epigrass.manager.simulate-class.html#instSites"><a title="Epigrass.manager.simulate.instSites" class="py-name" href="#" onclick="return doclink('link-4', 'instSites', 'link-4');">instSites</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sitios</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">sitename</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sitios</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">             </tt>
+<a name="testObjInstantiation.testEdges"></a><div id="testObjInstantiation.testEdges-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="testObjInstantiation.testEdges-toggle" onclick="return toggle('testObjInstantiation.testEdges');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.testinst.testObjInstantiation-class.html#testEdges">testEdges</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="testObjInstantiation.testEdges-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="testObjInstantiation.testEdges-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="Epigrass.manager.simulate.instSites" class="py-name" href="#" onclick="return doclink('link-5', 'instSites', 'link-4');">instSites</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sitios</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method Epigrass.manager.simulate.instEdges()=Epigrass.manager.simulate-class.html#instEdges"><a title="Epigrass.manager.simulate.instEdges" class="py-name" href="#" onclick="return doclink('link-6', 'instEdges', 'link-6');">instEdges</a></tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ed</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">j</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">source</tt><tt class="py-op">.</tt><tt class="py-name">sitename</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">sitename</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ed</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ed</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-name">j</tt><tt class="py-op">+=</tt><tt class="py-number">1</tt> </tt>
+</div><a name="testObjInstantiation.testGraph"></a><div id="testObjInstantiation.testGraph-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="testObjInstantiation.testGraph-toggle" onclick="return toggle('testObjInstantiation.testGraph');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="Epigrass.testinst.testObjInstantiation-class.html#testGraph">testGraph</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="testObjInstantiation.testGraph-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="testObjInstantiation.testGraph-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="Epigrass.manager.simulate.instSites" class="py-name" href="#" onclick="return doclink('link-7', 'instSites', 'link-4');">instSites</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sitios</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="Epigrass.manager.simulate.instEdges" class="py-name" href="#" onclick="return doclink('link-8', 'instEdges', 'link-6');">instEdges</a></tt><tt class="py-op">(</tt><tt class="py-name">l</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ed</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">g</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">S</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method Epigrass.manager.simulate.instGraph()=Epigrass.manager.simulate-class.html#instGraph"><a title="Epigrass.manager.simulate.instGraph" class="py-name" href="#" onclick="return doclink('link-9', 'instGraph', 'link-9');">instGraph</a></tt><tt class="py-op">(</tt><tt class="py-string">'grafo'</tt><tt class="py-op">,</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-name">l</tt><tt class="py-op">,</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">         </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">g</tt><tt class="py-op">,</tt> <tt class="py-name">g</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method Epigrass.simobj.graph.getSiteNames()=Epigrass.simobj.graph-class.html#getSiteNames"><a title="Epigrass.simobj.graph.getSiteNames" class="py-name" href="#" onclick="return doclink('link-10', 'getSiteNames', 'link-10');">getSiteNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Function Epigrass.epigrass.main()=Epigrass.epigrass-module.html#main,Function epigrass.main()=epigrass-module.html#main"><a title="Epigrass.epigrass.main
+epigrass.main" class="py-name" href="#" onclick="return doclink('link-11', 'main', 'link-11');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0beta1 on Tue May 29 09:23:27 2007
+    </td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>
