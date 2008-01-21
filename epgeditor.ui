@@ -1,0 +1,227 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>505</width>
+    <height>732</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>.EPG Editor</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset>egicon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QVBoxLayout" >
+    <item>
+     <widget class="QTabWidget" name="tabWidget" >
+      <property name="currentIndex" >
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab" >
+       <attribute name="title" >
+        <string>Editor</string>
+       </attribute>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QTreeWidget" name="treeWidget" >
+          <property name="mouseTracking" >
+           <bool>true</bool>
+          </property>
+          <property name="alternatingRowColors" >
+           <bool>true</bool>
+          </property>
+          <property name="sortingEnabled" >
+           <bool>true</bool>
+          </property>
+          <property name="animated" >
+           <bool>true</bool>
+          </property>
+          <property name="wordWrap" >
+           <bool>true</bool>
+          </property>
+          <property name="columnCount" >
+           <number>3</number>
+          </property>
+          <column>
+           <property name="text" >
+            <string>Variable</string>
+           </property>
+          </column>
+          <column>
+           <property name="text" >
+            <string>Value</string>
+           </property>
+          </column>
+          <column>
+           <property name="text" >
+            <string>Description</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QPushButton" name="addVButton" >
+            <property name="toolTip" >
+             <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Save file&lt;/p>&lt;/body>&lt;/html></string>
+            </property>
+            <property name="text" >
+             <string>Add variable</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="exitButton" >
+            <property name="toolTip" >
+             <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Leave the editor.&lt;/p>&lt;/body>&lt;/html></string>
+            </property>
+            <property name="text" >
+             <string>Exit</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2" >
+       <attribute name="title" >
+        <string>Viewer</string>
+       </attribute>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QTextBrowser" name="epgView" />
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="help_tab" >
+       <attribute name="title" >
+        <string>Help</string>
+       </attribute>
+       <attribute name="toolTip" >
+        <string>Usage help</string>
+       </attribute>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QTextBrowser" name="helpBrowser" />
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>505</width>
+     <height>38</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile" >
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <addaction name="action_New" />
+    <addaction name="action_Open_epg_File" />
+    <addaction name="action_Save" />
+    <addaction name="separator" />
+    <addaction name="actionE_xit" />
+   </widget>
+   <widget class="QMenu" name="menu_Help" >
+    <property name="title" >
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_Help" />
+    <addaction name="action_About" />
+    <addaction name="separator" />
+    <addaction name="actionAbout_Epigrass" />
+   </widget>
+   <addaction name="menuFile" />
+   <addaction name="menu_Help" />
+  </widget>
+  <widget class="QStatusBar" name="statusbar" />
+  <action name="action_Help" >
+   <property name="text" >
+    <string>&amp;Help</string>
+   </property>
+   <property name="shortcut" >
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="action_About" >
+   <property name="text" >
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Epigrass" >
+   <property name="text" >
+    <string>About &amp;Epigrass</string>
+   </property>
+  </action>
+  <action name="actionAuto_Refresh" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Auto-&amp;Refresh</string>
+   </property>
+  </action>
+  <action name="action_Open_epg_File" >
+   <property name="text" >
+    <string>&amp;Open .epg File</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="action_Save" >
+   <property name="text" >
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionE_xit" >
+   <property name="text" >
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="action_Refresh" >
+   <property name="text" >
+    <string>&amp;Refresh</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action_New" >
+   <property name="text" >
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
