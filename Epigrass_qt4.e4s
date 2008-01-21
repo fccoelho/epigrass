@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Session SYSTEM "Session-4.0.dtd">
+<!-- eric4 session file for project Epigrass_qt4 -->
+<!-- This file was generated automatically, do not edit. -->
+<!-- Saved: 2007-12-30, 14:10:03 -->
+<Session version="4.0">
+  <Filenames>
+    <Filename cline="11" cindex="59">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epigrass.py</Filename>
+    <Filename cline="185" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/epiplay.py</Filename>
+    <Filename cline="10" cindex="15">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epgeditor.py</Filename>
+    <Filename cline="77" cindex="7">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Ui_epgeditor.py</Filename>
+    <Filename cline="677" cindex="20">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/manager.py</Filename>
+    <Filename cline="407" cindex="29">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/simobj.py</Filename>
+  </Filenames>
+  <ActiveWindow cline="10" cindex="15">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epgeditor.py</ActiveWindow>
+  <Breakpoints>
+  </Breakpoints>
+  <Watchpoints>
+  </Watchpoints>
+  <DebugInfo>
+    <CommandLine></CommandLine>
+    <WorkingDirectory></WorkingDirectory>
+    <Environment></Environment>
+    <ReportExceptions value="True" />
+    <Exceptions>
+    </Exceptions>
+    <AutoClearShell value="True" />
+    <TracePython value="False" />
+    <AutoContinue value="True" />
+    <CovexcPattern></CovexcPattern>
+  </DebugInfo>
+  <Bookmarks>
+  </Bookmarks>
+</Session>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
+<!-- eric4 tasks file for project Epigrass_qt4 -->
+<!-- Saved: 2007-12-30, 14:10:03 -->
+<Tasks version="4.1">
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: move this import to the graph level</Summary>
+    <Description></Description>
+    <Created>2007-12-30, 14:08:50</Created>
+    <Resource>
+      <Filename>
+        <Name>simobj.py</Name>
+      </Filename>
+      <Linenumber>380</Linenumber>
+    </Resource>
+  </Task>
+</Tasks>
