@@ -22,7 +22,7 @@ class MainWindow(QtGui.QGraphicsView):
         self.setMinimumSize(400, 400)
         self.setWindowTitle(self.tr("Simulation Display"))
 
-            
+
         # test code
 ##        self.node1 = Node(self.canvas, pos=(10,10,2))
 ##        self.node2 = Node(self.canvas,pos=(100,100,2))
@@ -113,14 +113,14 @@ class MainWindow(QtGui.QGraphicsView):
         if factor < 0.07 or factor > 100:
             return
 
-        self.scale(scaleFactor, scaleFactor)        
-class Canvas(QCanvas):
-    pass
-    
+        self.scale(scaleFactor, scaleFactor)
+#class Canvas(QtGui.QCanvas):
+#    pass
+
 class Node(EN.Node):
     def __init__(self,display,width=50.,height=50., name='Node',pos=(1,1,2),color=(0.,255.,0.)):
         self.parent.__init__(display)
-        
+
     def setLabel(self,canvas,text,pos):
         """
         Set the node label
@@ -140,13 +140,13 @@ class Node(EN.Node):
 class Line(QtCore.QLineF):
     def __init__(self,display, points, painter,color=(0,0,0)):
         self.parent.__init__(points[0],points[1])
-        
+
         if self.length() == 0.0:
             return
         #draw Line
         painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
         painter.drawLine(self)
-        
+
 class Edge(EN.Edge):
     def __init__(self,sourcenode,destnode):
         self.parent.__init__(sourcenode,destnode)
@@ -159,8 +159,8 @@ class Map:
         #self.display = visual.display(title='Brasil', ambient=0.5)
         self.canvas = canvas
         self.Reader(fname)
-        
-        
+
+
     def Reader(self, fname):
         """
         Reads Grass 5.x ascii vector files.
@@ -179,7 +179,7 @@ class Map:
                 Line(self.canvas,(850+10*x1,-10*y1+50,850+10*x2,-10*y2+50))
             #self.dbound(pta) #Draws the polygon
         self.canvas.update()
-            
+
     def dbound(self,pol):
         """
         Draws a polygon
@@ -193,8 +193,8 @@ class Map:
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    QObject.connect(app,SIGNAL("lastWindowClosed()"),app,SLOT("quit()"))
+    app = QtGui.QApplication(sys.argv)
+    QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
     w = MainWindow()
     app.setMainWidget(w)
     w.show()

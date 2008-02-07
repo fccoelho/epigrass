@@ -1,7 +1,7 @@
 """
-This module is a graph visualizing tool. 
-It tries to resolves the graph layout by making an analogy 
-of the nodes and edges to masses and springs. 
+This module is a graph visualizing tool.
+It tries to resolves the graph layout by making an analogy
+of the nodes and edges to masses and springs.
 the nodes repel each other with a force inversely proportional to their
 distance, and the edges do the opposite.
 """
@@ -19,7 +19,7 @@ rho = 23.8732414637845 # for backwardscompatibility
 class Node:
     """
     Physical model and visual representation of a node as a mass.
-    """ 
+    """
     factor = 3. / (4 * math.pi * rho)
 
     def __init__(self, m, pos, r=.1, fixed=0, pickable=1, v=visual.vector(0., 0., 0.), color=(0., 1., 0.), name='', **keywords):
@@ -39,7 +39,7 @@ class Node:
         self.v = visual.vector(v)
         self.F = visual.vector(0., 0., 0.)
         self. graph = None
-        
+
         self.painted = 0
         #print name, type(name)
         name=name.encode('latin-1','replace')
@@ -53,7 +53,7 @@ class Node:
         try:
             self.geocode = keywords['geocode']
         except:pass
-        
+
     def showName(self,t):
         """
         Show the node name for t seconds
@@ -181,7 +181,7 @@ class Graph:
 
         self.display = visual.display(title=name, ambient=0.5, **keywords)
         self.display.select()
-        
+
         self.dragObject = None
         self.click = None
         self.distance = None
@@ -199,7 +199,7 @@ class Graph:
         """
         self.nodes.append(node)
         node.graph = self #pass a reference to self to the node.
-        
+
     def insertMap(self,map):
         """
         Insert map into the system.
@@ -236,8 +236,8 @@ class Graph:
                 if matrix[l,c]:
                     el.append((c,l))
         return el
-        
-    
+
+
     def centerView(self):
         points = array([i.box.pos for i in self.nodes])
         self.netdimension = points.max()
@@ -245,8 +245,8 @@ class Graph:
         self.display.center = cnt
         if self.timelabel:
             self.timelabel.pos = cnt + visual.vector(0.,0.,2.)
-        
-    
+
+
     def advance(self):
         """
         Perform one Iteration of the system by advancing one timestep.
@@ -320,8 +320,8 @@ class Map:
             self.Reader(fname)
         else:
             print "shapefile not found"
-       
-        
+
+
     def Reader(self, fname):
         """
         Reads shapefiles vector files.
@@ -369,9 +369,9 @@ class Map:
         self.dimension = tp.max()
         center = average(tp,axis=0)
         self.display.center =center
-            
 
-    
+
+
     def dbound(self,pol):
         """
         Draws a polygon
@@ -380,17 +380,18 @@ class Map:
 
 if __name__=='__main__':
     G = Graph(0.04)
-    
-##    n1 = Node(2,G.display.center)
-##    n2 = Node(2,G.display.center+(1.,1.,1.))
-##    n3 = Node(2,G.display.center+(1,2,3))
-##    n4 = Node(2,G.display.center+(2,2,3))
-##    G.insertNodeList([n1,n2,n3,n4])
-##    e1 = RubberEdge(n1,n2,1, damping=.8)
-##    e2 = RubberEdge(n2,n3,1, damping=.8)
-##    e3 = RubberEdge(n2,n4,1, damping=.8)
-##    e4 = RubberEdge(n4,n1,1, damping=.8)
-##    G.insertEdgeList([e1,e2,e3,e4])
+#simple graph example
+#    n1 = Node(2,G.display.center)
+#    n2 = Node(2,G.display.center+(1.,1.,1.))
+#    n3 = Node(2,G.display.center+(1,2,3))
+#    n4 = Node(2,G.display.center+(2,2,3))
+#    G.insertNodeList([n1,n2,n3,n4])
+#    e1 = RubberEdge(n1,n2,1, damping=.8)
+#    e2 = RubberEdge(n2,n3,1, damping=.8)
+#    e3 = RubberEdge(n2,n4,1, damping=.8)
+#    e4 = RubberEdge(n4,n1,1, damping=.8)
+#    G.insertEdgeList([e1,e2,e3,e4])
+    #map example
     M = Map('riozonas_LatLong.shp',G.display)
-    
-    #G.mainloop()
+
+    G.mainloop()
