@@ -1,1 +1,0 @@
-/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/CustomModel_example.py

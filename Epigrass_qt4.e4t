@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-02-07, 18:06:48 -->
+<!-- Saved: 2008-02-08, 12:16:26 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: move this import to the graph level</Summary>
     <Description></Description>
-    <Created>2008-02-07, 15:24:42</Created>
+    <Created>2008-02-08, 10:15:35</Created>
     <Resource>
       <Filename>
         <Name>simobj.py</Name>
@@ -17,7 +17,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: fix bug that is making objects rotate in a spiral path instead of a circular one</Summary>
     <Description></Description>
-    <Created>2008-02-07, 15:24:43</Created>
+    <Created>2008-02-08, 10:15:35</Created>
     <Resource>
       <Filename>
         <Name>primitives.py</Name>
