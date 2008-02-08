@@ -1,0 +1,22 @@
+Infolayer: riozonas_region_LongLat
+Infolayer Identifier: 13
+
+Initial Coordinate(X): -4.379563e+01
+Initial Coordinate(Y): -2.307676e+01
+Final Coordinate(X): -4.310208e+01
+Final Coordinate(Y): -2.274882e+01
+
+Projection: LatLong
+Projection Identifier: 34
+Datum: WGS84
+Unit: DecimalDegrees
+Origin Longitude: 0.000000e+00
+Origin Latitude: 0.000000e+00
+Offset X: 0.000000e+00
+Offset Y: 0.000000e+00
+Standard Parallel 1: 0.000000e+00
+Standard Parallel 2: 0.000000e+00
+Scale: 1.000000e+00
+Hemisphere: South
+
+Polygons number: 355
