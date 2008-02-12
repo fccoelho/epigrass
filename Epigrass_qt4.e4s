@@ -2,20 +2,17 @@
 <!DOCTYPE Session SYSTEM "Session-4.0.dtd">
 <!-- eric4 session file for project Epigrass_qt4 -->
 <!-- This file was generated automatically, do not edit. -->
-<!-- Saved: 2008-02-08, 12:16:26 -->
+<!-- Saved: 2008-02-08, 12:29:16 -->
 <Session version="4.0">
   <Filenames>
     <Filename cline="24" cindex="23">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epigrass.py</Filename>
     <Filename cline="166" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/epiplay.py</Filename>
-    <Filename cline="10" cindex="15">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epgeditor.py</Filename>
     <Filename cline="677" cindex="20">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/manager.py</Filename>
-    <Filename cline="407" cindex="29">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/simobj.py</Filename>
     <Filename cline="392" cindex="36">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/dgraph.py</Filename>
     <Filename cline="5" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/qtgraph.py</Filename>
-    <Filename cline="0" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/primitives.py</Filename>
     <Filename cline="0" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/pylabQtcanvas.py</Filename>
   </Filenames>
-  <ActiveWindow cline="0" cindex="0">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/Epigrass/pylabQtcanvas.py</ActiveWindow>
+  <ActiveWindow cline="24" cindex="23">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epigrass.py</ActiveWindow>
   <Breakpoints>
   </Breakpoints>
   <Watchpoints>

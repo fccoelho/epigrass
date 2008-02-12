@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.0.dtd">
+<!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2007-11-05, 14:39:33 -->
-<!-- Copyright (C) 2007 ,  -->
-<Project version="4.0">
+<!-- Saved: 2008-02-08, 12:29:16 -->
+<!-- Copyright (C) 2008 ,  -->
+<Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
-  <UIType>Qt4</UIType>
+  <ProjectType>Qt4</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
   <Author></Author>
@@ -31,10 +31,6 @@
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>manager.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
       <Name>report.py</Name>
     </Source>
     <Source>
@@ -47,19 +43,11 @@
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>epigrass.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
       <Name>dgraph.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
       <Name>data_io.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>CustomModel.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
@@ -78,130 +66,13 @@
       <Name>rinterface.py</Name>
     </Source>
     <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Dir>tests</Dir>
-      <Name>test_controllers.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Dir>tests</Dir>
-      <Name>test_model.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Dir>tests</Dir>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Dir>config</Dir>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Dir>templates</Dir>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Name>json.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Name>release.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Name>model.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Name>controllers.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Dir>egbrowser</Dir>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Name>start-egbrowser.py</Name>
-    </Source>
-    <Source>
-      <Dir>EGBrowser</Dir>
-      <Name>setup.py</Name>
-    </Source>
-    <Source>
-      <Name>testinst.py</Name>
-    </Source>
-    <Source>
-      <Name>epiplay.py</Name>
-    </Source>
-    <Source>
-      <Name>cpanel.py</Name>
-    </Source>
-    <Source>
-      <Name>elasticnodes.py</Name>
-    </Source>
-    <Source>
       <Name>manager.py</Name>
-    </Source>
-    <Source>
-      <Name>report.py</Name>
     </Source>
     <Source>
       <Name>CustomModel_example.py</Name>
     </Source>
     <Source>
-      <Name>qtgraph.py</Name>
-    </Source>
-    <Source>
-      <Name>about.py</Name>
-    </Source>
-    <Source>
-      <Name>dataObject.py</Name>
-    </Source>
-    <Source>
-      <Name>pylabQtcanvas.py</Name>
-    </Source>
-    <Source>
-      <Name>dgraph.py</Name>
-    </Source>
-    <Source>
-      <Name>data_io.py</Name>
-    </Source>
-    <Source>
       <Name>CustomModel.py</Name>
-    </Source>
-    <Source>
-      <Name>spread.py</Name>
-    </Source>
-    <Source>
-      <Name>epigdal.py</Name>
-    </Source>
-    <Source>
-      <Name>simobj.py</Name>
-    </Source>
-    <Source>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Name>rinterface.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_about.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_cpanel.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
@@ -229,33 +100,33 @@
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>CustomModel_example.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_about4.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_cpanel4.py</Name>
-    </Source>
-    <Source>
       <Name>epiRTplay.py</Name>
     </Source>
     <Source>
-      <Name>primitives.py</Name>
-    </Source>
-    <Source>
+      <Dir>Epigrass</Dir>
       <Name>Ui_epgeditor.py</Name>
     </Source>
     <Source>
+      <Name>ez_setup.py</Name>
+    </Source>
+    <Source>
+      <Name>setup.py</Name>
+    </Source>
+    <Source>
+      <Dir>Epigrass</Dir>
       <Name>epgeditor.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>epiRTplay.py</Name>
+      <Name>primitives.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>Ui_epgeditor.py</Name>
+      <Name>Ui_about4.py</Name>
+    </Source>
+    <Source>
+      <Dir>Epigrass</Dir>
+      <Name>Ui_cpanel4.py</Name>
     </Source>
   </Sources>
   <Forms>
