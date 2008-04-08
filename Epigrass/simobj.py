@@ -63,7 +63,7 @@ class siteobj:
         self.migInf = [] #infectious individuals able to migrate (time series)
         
 
-    def createModel(self,init,modtype='SEIR',name='model1',v=[],bi=None,bp=None):
+    def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total 
@@ -309,7 +309,7 @@ class popmodels:
     """
     Defines a library of discrete time population models
     """
-    def __init__(self,parentsite,type='SIR',v=[],bi=None,bp=None):
+    def __init__(self,parentsite,type='',v=[],bi=None,bp=None):
         """
         defines which models a given site will use
         and set variable names accordingly.
@@ -1157,7 +1157,7 @@ class edge:
         
         bmig -- backward migration rate in number of indiv./day.
         
-        Leng -- Length in kilometers of this route
+        Length -- Length in kilometers of this route
         """
         if not isinstance(source, siteobj):
             raise TypeError, 'source received a non siteobj class object'

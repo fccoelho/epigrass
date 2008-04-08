@@ -174,7 +174,7 @@ class simulate:
         """
         Checks the type of the variables on the script
         """
-        self.Say("Checking syntax of model script...")
+        self.Say("Checking syntax of model script... NOW")
         
         if not os.access(self.sites,os.F_OK):
             self.Say('Sites file %s does not exist, please check your script.'%self.sites)
@@ -188,7 +188,7 @@ class simulate:
         
         
         
-        self.Say('Script %s passed syntax check.'%self.modelName)
+        self.Say('Script %s passed syntax check NOW.'%self.modelName)
     def deg2dec(self,coord):
         """
         converts lat/long to decimal
@@ -936,7 +936,7 @@ class simulate:
                 for i in sites:
                     i.runModel()
 ##                self.outToODb(self.modelName,mode='p')
-                viewer.show(n)
+                #viewer.show(n)
                 g.simstep += 1
                 if self.gui:
                     self.gui.stepLCD.display(g.simstep)
