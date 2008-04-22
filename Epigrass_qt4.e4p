@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-02-08, 12:29:16 -->
+<!-- Saved: 2008-02-12, 09:48:09 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -66,9 +66,6 @@
       <Name>rinterface.py</Name>
     </Source>
     <Source>
-      <Name>manager.py</Name>
-    </Source>
-    <Source>
       <Name>CustomModel_example.py</Name>
     </Source>
     <Source>
@@ -127,6 +124,10 @@
     <Source>
       <Dir>Epigrass</Dir>
       <Name>Ui_cpanel4.py</Name>
+    </Source>
+    <Source>
+      <Dir>Epigrass</Dir>
+      <Name>manager.py</Name>
     </Source>
   </Sources>
   <Forms>
