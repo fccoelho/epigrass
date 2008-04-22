@@ -11,7 +11,7 @@ from types import MethodType
 from Epigrass.data_io import *
 
 
-class siteobj:
+class siteobj(object):
     """
     Basic site object containing attributes and methods common to all
     site objects.
@@ -63,7 +63,7 @@ class siteobj:
         self.migInf = [] #infectious individuals able to migrate (time series)
         
 
-    def createModel(self,init,modtype='SEIR',name='model1',v=[],bi=None,bp=None):
+    def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total 
@@ -305,11 +305,11 @@ class siteobj:
         return B
         
 
-class popmodels:
+class popmodels(object):
     """
     Defines a library of discrete time population models
     """
-    def __init__(self,parentsite,type='SIR',v=[],bi=None,bp=None):
+    def __init__(self,parentsite,type='',v=[],bi=None,bp=None):
         """
         defines which models a given site will use
         and set variable names accordingly.
@@ -1139,7 +1139,7 @@ class popmodels:
         
         return [0,Ipos,Spos]
         
-class edge:
+class edge(object):
     """
     Defines an edge connecting two nodes (node source to node dest).
     with attributes given by value.
@@ -1157,7 +1157,7 @@ class edge:
         
         bmig -- backward migration rate in number of indiv./day.
         
-        Leng -- Length in kilometers of this route
+        Length -- Length in kilometers of this route
         """
         if not isinstance(source, siteobj):
             raise TypeError, 'source received a non siteobj class object'
@@ -1201,7 +1201,7 @@ class edge:
 
     
     
-class graph:
+class graph(object):
     """
     Defines a graph with sites and edges
     """
@@ -1935,67 +1935,8 @@ class graph:
         self.alphaidx = None
         self.gammaidx = None
 
-class line:
-    """
-    Basic line object containing attributes and methods common to all
-    line objects.
-    """
-    def __init__(self,nodes):
-        """
-        define a line based on sequence of nodes.
-        """
-        pass
-    def intersect(self):
-        """
-        finds out if this line intersects another
-        """
-        pass
-    def xarea(self):
-        """
-        finds out if this line extends to more than one area.
-        """
-        pass
 
-class area:
-    """
-    Basic area object containing attributes and methods common to all
-    area objects.
-    """
-    def __init__(self,nodes):
-        self.nodes = nodes
 
-    def centroid(self):
-        """
-        calculates the centroid of the area.
-        """
-        pass
-    def area(self):
-        """
-        calculates the area
-        """
-        pass
-
-    def neighbors(self):
-        """
-        return neighbors
-        """
-        pass
-
-    def isIsland(self):
-        """
-        return true if the area is an island, i.e. has only one nejghboor and is not on a border.
-        """
-        pass
-    def borderSizeWith(self, area):
-        """
-        returns the size of the border with a given area.
-        """
-        pass
-    def perimeter(self):
-        """
-        returns the perimeter of the area
-        """
-        pass
 
 
 class priorityDictionary(dict):

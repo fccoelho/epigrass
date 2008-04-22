@@ -665,6 +665,7 @@ def loadLang(app,tr,lang):
         
 def main():
     global app
+    print 'Oi'
     app = QtGui.QApplication(sys.argv)
     QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
     #MainP = QtGui.QWidget()
@@ -674,6 +675,7 @@ def main():
     w.show()
     sys.exit(app.exec_())
     #app.exec_loop()
+    
 
 if __name__ == "__main__":
     main()
