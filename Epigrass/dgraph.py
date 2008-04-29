@@ -6,13 +6,18 @@ the nodes repel each other with a force inversely proportional to their
 distance, and the edges do the opposite.
 """
 import math, ogr
-from numpy import *
-import visual, time, os
+#from numpy import *
+#import visual 
+import time, os,  sys
+from PyQt4 import QtCore, QtGui, QtOpenGL
+from numpy import  array, sqrt,  average
+from numpy.random import randint, uniform
 #from pylab import *
 ##import psyco
 ##psyco.full()
 
 graphic_backend = "visual"
+graphic_backend = "qt"
 
 #FIXME: check numpy functions for vector arithmetics:
 
@@ -33,6 +38,99 @@ def array_dot(a,b):
     return sum([a[i] * b[i]  for i in xrange(len(a))])
 
 
+class GraphWidget(QtGui.QGraphicsView):
+    def __init__(self,poslist,elist):
+        """
+        Graph display widget on which everything will be drawn
+        """
+        QtGui.QGraphicsView.__init__(self)
+        self.timerId = 0
+        #Setup the graph
+        G = Graph(0.04)
+        self.M = Map('riozonas_LatLong.shp',self)
+        
+        xmin,ymin = self.M.xmin, self.M.ymin
+        xmax,ymax = self.M.xmax, self.M.ymax
+        xxs = (xmax-xmin)*1.1 #percentage of extra space
+        yxs = (ymax-ymin)*1.1 #percentage of extra space
+        #calculating center of scene
+        xc = (xmax+xmin)/2. 
+        yc = (ymax+ymin)/2.
+        #creating the scene
+        scene = QtGui.QGraphicsScene(self)
+        scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        scene.setSceneRect(xmin, ymin, xxs, yxs)
+        print scene.width(), scene.height()
+        self.fitInView(xmin, ymin, xxs, yxs)
+        self.setScene(scene)
+        self.updateSceneRect(scene.sceneRect())
+        self.centerOn(xc, yc)
+        
+        #self.setViewport(QtOpenGL.QGLWidget())
+        self.setCacheMode(QtGui.QGraphicsView.CacheBackground)
+        self.setRenderHint(QtGui.QPainter.Antialiasing)
+        self.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
+        self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
+        #scene.addItem(QtCore.QRectF(QtCore.QPointF(0., 0.), QtCore.QPointF(10., 10.)))
+        for p in self.M.polyList:
+            scene.addItem(p)
+        #scene.addText("%s,%s,%s,%s"%(xmin, xxs, ymin, yxs))
+        scale_factor = self.width()/xxs
+        self.scale(scale_factor, scale_factor)
+        self.setMinimumSize(400, 400)
+        self.setWindowTitle(self.tr("Network View"))
+        self.polys = [item for item in self.scene().items() if isinstance(item, Polygon)]
+        #print self.polys
+    def keyPressEvent(self, event):
+        key = event.key()
+
+        if key == QtCore.Qt.Key_Up:
+            self.translate(0, -20)
+        elif key == QtCore.Qt.Key_Down:
+            self.translate(0, 20)
+        elif key == QtCore.Qt.Key_Left:
+            self.translate(-20, 0)
+        elif key == QtCore.Qt.Key_Right:
+            [i.moveBy(20, 0) for i in self.scene.items() if isinstance(i, Polygon)]
+            #self.translate(20, 0)
+        elif key == QtCore.Qt.Key_Plus:
+            self.scaleView(1.2)
+        elif key == QtCore.Qt.Key_Minus:
+            self.scaleView(1 / 1.2)
+        elif key == QtCore.Qt.Key_Space or key == QtCore.Qt.Key_Enter:
+            for item in self.scene().items():
+                if isinstance(item, Polygon):
+                    item.setPos(-150 + QtCore.qrand() % 300, -150 + QtCore.qrand() % 300)
+        else:
+            QtGui.QGraphicsView.keyPressEvent(self, event)
+
+    def timerEvent(self, event):
+        pass
+#        nodes = self.nodes#[item for item in self.scene().items() if isinstance(item, Node)]
+#
+#        for node in nodes:
+#            node.calculateForces()
+#
+#        itemsMoved = False
+#        for node in nodes:
+#            if node.advance():
+#                itemsMoved = True
+#
+#        if not itemsMoved:
+#            self.killTimer(self.timerId)
+#            self.timerId = 0
+
+    def wheelEvent(self, event):
+        print  -event.delta()
+        self.scaleView(math.pow(2.0, -event.delta() / 240.0))
+        
+    def scaleView(self, scaleFactor):
+        factor = self.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
+
+#        if factor < 0.07 or factor > 1000000:
+#            return
+
+        self.scale(scaleFactor, scaleFactor)
 #BlackBox  :-)
 class BaseBox(object):
     def __init__(self, *args, **kwargs):
@@ -108,7 +206,7 @@ class BaseNode(object):
         except KeyError:
             self.geocode = None
         #this "array" comes from numpy
-        #these proeperties  have to be defined in each subclass.
+        #these properties  have to be defined in each subclass.
         # FIXME: maybe just "visual"  will need to redefine these in teh end.
         if self.__class__ == BaseNode:
             self.box = BaseBox(pos=array(pos),length=float(r),
@@ -330,9 +428,6 @@ class BaseGraph(object):
 
         self.display = BaseBox()
 
-        #self.display = visual.display(title=name, ambient=0.5, **keywords)
-        #self.display.select()
-
 
     def addTimelabel(self):
         """
@@ -526,6 +621,7 @@ class VisualGraph(BaseGraph):
 
 class BaseMap(object):
     def __init__(self, fname):
+        self.polyList = []
         if os.path.exists(fname):
             self.Reader(fname)
         else:
@@ -546,17 +642,17 @@ class BaseMap(object):
             geo = feat.GetGeometryRef()
             if geo.GetGeometryCount()<2:
                 g1 = geo.GetGeometryRef( 0 )
-                x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
-                y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
+                x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
+                y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                 lp = zip(x,y)#list of points
                 tp += lp
                 self.dbound(lp)
-            for c in range( geo.GetGeometryCount()):
+            for c in xrange( geo.GetGeometryCount()):
                 ring = geo.GetGeometryRef ( c )
-                for cnt in range( ring.GetGeometryCount()):
+                for cnt in xrange( ring.GetGeometryCount()):
                     g1 = ring.GetGeometryRef( cnt )
-                    x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
-                    y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
+                    x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
+                    y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                     lp = zip(x,y)#list of points
                     tp += lp
                     self.dbound(lp)
@@ -591,8 +687,110 @@ class VisualMap(BaseMap):
         """
         visual.curve(pos=pol,radius = 0)
 
+class QtMap(BaseMap):
+    def __init__(self, fname, display=None):
+        self.display = display
+        self.xmin, self.ymin, self.xmax,self.ymax = 180, 90, -180, -90
+        BaseMap.__init__(self, fname)
+        
+    def dbound(self, pol):
+        p = Polygon(pol, self.display)
+        self.xmin = p.xmin if p.xmin<self.xmin else self.xmin
+        self.ymin = p.ymin if p.ymin<self.ymin else self.ymin
+        self.xmax = p.xmax if p.xmax>self.xmax else self.xmax
+        self.ymax = p.ymax if p.ymax>self.ymax else self.ymax
+        #print self.xmin,  self.ymin,  self.xmax, self.ymax
+        self.polyList.append(p)
+
+class Polygon(QtGui.QGraphicsItem):
+    '''
+    Polygons that compose the map on Qt
+    '''
+    Type = QtGui.QGraphicsItem.UserType + 1
+    def __init__(self,plist,  graphWidget):
+        QtGui.QGraphicsItem.__init__(self)
+        self.graph = graphWidget
+        self.xmin,self.ymin = (array(plist)).min(axis=0)
+        self.xmax,self.ymax = (array(plist)).max(axis=0)
+        self.width = self.xmax-self.xmin
+        self.height = self.ymax-self.ymin
+        self.plist = plist
+        self.pointList = [QtCore.QPointF(x, y) for x, y in plist]
+        self.polyg = QtGui.QPolygonF(self.pointList)
+        self.newPos = QtCore.QPointF()
+        self.setZValue(1)
+    
+    def type(self):
+        return Polygon.Type
+        
+    def shape(self):
+        path = QtGui.QPainterPath()
+        path.addRectF(self.xmin, self.ymin,
+                             self.width, self.height)
+        #path.addPolygon(self.polyg)
+        return path
+
+    def paint(self, painter, option, widget):
+        painter.setBrush(QtCore.Qt.yellow)
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
+        painter.drawPolygon(self.polyg)
+        
+    def mousePressEvent(self, event):
+        self.update()
+        QtGui.QGraphicsItem.mousePressEvent(self, event)
+
+    def mouseReleaseEvent(self, event):
+        self.update()
+        QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
+        
+    def boundingRect(self):
+        adjust = 2.0
+        return QtCore.QRectF(self.xmin, self.ymin,
+                             self.width, self.height)
+    
+
+class QtGraph(BaseGraph):
+    def __init__(self, timestep, oversample=1, gravity=1, viscosity=None, name='EpiGrass Viewer', **keywords):
+        """
+        Construct a Graph.  to be displayed with Python Visual
+        """
+        BaseGraph.__init__(self,timestep, oversample, gravity,
+                            viscosity, name, **keywords)
+
+class QtNode(BaseNode):
+    """
+    Physical model and visual representation of a node as a mass using Qt
+    """
+    def __init__(self, m, pos, r=.1, fixed=0, pickable=1, v=(0., 0., 0.), color=(0., 1., 0.), name='', **keywords):
+        """
+        Construct a mass.
+        """
+        BaseNode.__init__(self,  m, pos, r,
+                          fixed, pickable, v,
+                          color, name, **keywords)
+
+class QtRubberEdge(BaseRubberEdge):
+    """
+    Visual representation of a spring using a single cylinder with variable radius.
+    """
+
+    def __init__(self, n0, n1, k, l0=None, damping=None,
+                 radius=None, color=(0.5,0.5,0.5), **keywords):
+        """
+        Construct a rubber spring.
+        """
+        BaseRubberEdge.__init__(self, n0, n1, k, l0, damping,
+                                radius, color, **keywords)
+
 if __name__=='__main__':
-    G = Graph(0.04)
+    app = QtGui.QApplication(sys.argv)
+    QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
+    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
+    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
+    widget = GraphWidget(poslist,elist)
+    widget.show()
+    sys.exit(app.exec_())
+    
 
 ##    n1 = Node(2,G.display.center)
 ##    n2 = Node(2,G.display.center+(1.,1.,1.))
@@ -604,6 +802,6 @@ if __name__=='__main__':
 ##    e3 = RubberEdge(n2,n4,1, damping=.8)
 ##    e4 = RubberEdge(n4,n1,1, damping=.8)
 ##    G.insertEdgeList([e1,e2,e3,e4])
-    M = Map('riozonas_LatLong.shp',G.display)
+    
 
     #G.mainloop()

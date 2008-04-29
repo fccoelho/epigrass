@@ -1,78 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
+<!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-03-07, 16:12:14 -->
-<Tasks version="4.2">
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-02-08, 10:15:35</Created>
-    <Resource>
-      <Filename>simobj.py</Filename>
-      <Linenumber>380</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: fix bug that is making objects rotate in a spiral path instead of a circular one</Summary>
-    <Description></Description>
-    <Created>2008-02-08, 10:15:35</Created>
-    <Resource>
-      <Filename>primitives.py</Filename>
-      <Linenumber>80</Linenumber>
-    </Resource>
-  </Task>
+<!-- Saved: 2008-04-29, 11:04:46 -->
+<Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: check numpy functions for vector arithmetics:</Summary>
     <Description></Description>
-    <Created>2008-03-07, 15:43:40</Created>
+    <Created>2008-04-29, 10:02:46</Created>
     <Resource>
-      <Filename>Epigrass/dgraph.py</Filename>
-      <Linenumber>17</Linenumber>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>22</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
     <Description></Description>
-    <Created>2008-03-07, 15:43:40</Created>
+    <Created>2008-04-29, 10:02:46</Created>
     <Resource>
-      <Filename>Epigrass/dgraph.py</Filename>
-      <Linenumber>112</Linenumber>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>208</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
     <Description></Description>
-    <Created>2008-03-07, 15:43:40</Created>
+    <Created>2008-04-29, 10:02:46</Created>
     <Resource>
-      <Filename>Epigrass/dgraph.py</Filename>
-      <Linenumber>263</Linenumber>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>359</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-03-07, 15:43:40</Created>
+    <Created>2008-04-29, 10:02:46</Created>
     <Resource>
-      <Filename>Epigrass/dgraph.py</Filename>
-      <Linenumber>350</Linenumber>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>443</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-03-07, 15:43:40</Created>
+    <Created>2008-04-29, 10:02:46</Created>
     <Resource>
-      <Filename>Epigrass/dgraph.py</Filename>
-      <Linenumber>386</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-03-07, 15:43:47</Created>
-    <Resource>
-      <Filename>Epigrass/simobj.py</Filename>
-      <Linenumber>380</Linenumber>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>479</Linenumber>
     </Resource>
   </Task>
 </Tasks>

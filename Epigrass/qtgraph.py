@@ -1,7 +1,8 @@
 
 import sys
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, QtOpenGL
 import elasticnodes as EN
+import math
 
 class MainWindow(QtGui.QGraphicsView):
     def __init__(self,parent = None,name = None,fl = 0):
@@ -16,8 +17,7 @@ class MainWindow(QtGui.QGraphicsView):
         self.setRenderHint(QtGui.QPainter.Antialiasing)
         self.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
         self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
-##        self.image0 = QPixmap()
-##        self.image0.loadFromData(image0_data,"PNG")
+
         self.scale(0.8, 0.8)
         self.setMinimumSize(400, 400)
         self.setWindowTitle(self.tr("Simulation Display"))
@@ -27,9 +27,9 @@ class MainWindow(QtGui.QGraphicsView):
 ##        self.node1 = Node(self.canvas, pos=(10,10,2))
 ##        self.node2 = Node(self.canvas,pos=(100,100,2))
 ##        self.edge = Edge(self.canvas,(10,10,100,100))
-        self.map = Map('limites.map',self.canvas)
-        self.canvas.update()
-        self.view.resize(self.view.sizeHint())
+#        self.map = Map('limites.map',self.canvas)
+#        self.canvas.update()
+#        self.view.resize(self.view.sizeHint())
     def itemMoved(self):
         if not self.timerId:
             self.timerId = self.startTimer(1000 / 25)
@@ -196,6 +196,7 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
     w = MainWindow()
-    app.setMainWidget(w)
+#    app.setMainWidget(w)
     w.show()
-    app.exec_loop()
+    sys.exit(app.exec_())
+    
