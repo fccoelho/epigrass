@@ -39,15 +39,15 @@ def array_dot(a,b):
 
 
 class GraphWidget(QtGui.QGraphicsView):
-    def __init__(self,poslist,elist):
+    def __init__(self, filename):
         """
         Graph display widget on which everything will be drawn
         """
         QtGui.QGraphicsView.__init__(self)
         self.timerId = 0
-        #Setup the graph
-        G = Graph(0.04)
-        self.M = Map('riozonas_LatLong.shp',self)
+        #Setup the Map
+        
+        self.M = Map(filename,self)
         
         xmin,ymin = self.M.xmin, self.M.ymin
         xmax,ymax = self.M.xmax, self.M.ymax
@@ -57,13 +57,13 @@ class GraphWidget(QtGui.QGraphicsView):
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         #creating the scene
-        scene = QtGui.QGraphicsScene(self)
-        scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
-        scene.setSceneRect(xmin, ymin, xxs, yxs)
-        print scene.width(), scene.height()
+        self.scene = QtGui.QGraphicsScene(self)
+        self.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        self.scene.setSceneRect(xmin, ymin, xxs, yxs)
+        #print self.scene.width(), self.scene.height()
         self.fitInView(xmin, ymin, xxs, yxs)
-        self.setScene(scene)
-        self.updateSceneRect(scene.sceneRect())
+        self.setScene(self.scene)
+        self.updateSceneRect(self.scene.sceneRect())
         self.centerOn(xc, yc)
         
         #self.setViewport(QtOpenGL.QGLWidget())
@@ -73,14 +73,29 @@ class GraphWidget(QtGui.QGraphicsView):
         self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
         #scene.addItem(QtCore.QRectF(QtCore.QPointF(0., 0.), QtCore.QPointF(10., 10.)))
         for p in self.M.polyList:
-            scene.addItem(p)
-        #scene.addText("%s,%s,%s,%s"%(xmin, xxs, ymin, yxs))
-        scale_factor = self.width()/xxs
-        self.scale(scale_factor, scale_factor)
+            self.scene.addItem(p)
+        #self.scene.addText("%s,%s,%s,%s"%(xmin, xxs, ymin, yxs))
+        self.polys = [item for item in self.scene.items() if isinstance(item, Polygon)]
+        self.addGraph(self.polys)
         self.setMinimumSize(400, 400)
         self.setWindowTitle(self.tr("Network View"))
-        self.polys = [item for item in self.scene().items() if isinstance(item, Polygon)]
+        
+        scale_factor = self.width()/xxs
+        self.scale(scale_factor, scale_factor)
         #print self.polys
+    
+    def addGraph(self, nlist, elist=[] ):
+        G = Graph(self)
+        for n in nlist:
+            #print n.center
+            node = QtNode(1, n.center, display = self)
+            #node.setPos(node.mapFromScene(QtCore.QPointF(node.x(), node.y())))
+            self.scene.addItem(node)
+            G.insertNode(node)
+            #print node.x(), node.y(), n.center[0], n.center[1]
+        self.scene.update()
+        #self.scene.addText("hello!")
+    
     def keyPressEvent(self, event):
         key = event.key()
 
@@ -121,7 +136,6 @@ class GraphWidget(QtGui.QGraphicsView):
 #            self.timerId = 0
 
     def wheelEvent(self, event):
-        print  -event.delta()
         self.scaleView(math.pow(2.0, -event.delta() / 240.0))
         
     def scaleView(self, scaleFactor):
@@ -404,7 +418,7 @@ class BaseGraph(object):
     """
     The Graph.self.data(start)[5]
     """
-    def __init__(self, timestep, oversample=1, gravity=1, viscosity=None, name='EpiGrass Viewer', **keywords):
+    def __init__(self, timestep=0.04, oversample=1, gravity=1, viscosity=None, name='EpiGrass Viewer', **keywords):
         """
         Construct a Graph.
         """
@@ -481,8 +495,8 @@ class BaseGraph(object):
         #FIXME: eitehr integrate this into the graph object, or make it a separate function
         siz = matrix.shape[0]
         el = []
-        for c in range(siz):
-            for l in range(c+1): #scans only the lower triangle
+        for c in xrange(siz):
+            for l in xrange(c+1): #scans only the lower triangle
                 if matrix[l,c]:
                     el.append((c,l))
         return el
@@ -709,9 +723,10 @@ class Polygon(QtGui.QGraphicsItem):
     Type = QtGui.QGraphicsItem.UserType + 1
     def __init__(self,plist,  graphWidget):
         QtGui.QGraphicsItem.__init__(self)
-        self.graph = graphWidget
+        self.display = graphWidget
         self.xmin,self.ymin = (array(plist)).min(axis=0)
         self.xmax,self.ymax = (array(plist)).max(axis=0)
+        self.center = ((self.xmax+self.xmin)/2., (self.ymax+self.ymin)/2.)
         self.width = self.xmax-self.xmin
         self.height = self.ymax-self.ymin
         self.plist = plist
@@ -725,9 +740,8 @@ class Polygon(QtGui.QGraphicsItem):
         
     def shape(self):
         path = QtGui.QPainterPath()
-        path.addRectF(self.xmin, self.ymin,
-                             self.width, self.height)
-        #path.addPolygon(self.polyg)
+        #path.addRectF(self.xmin, self.ymin,self.width, self.height)
+        path.addPolygon(self.polyg)
         return path
 
     def paint(self, painter, option, widget):
@@ -744,50 +758,86 @@ class Polygon(QtGui.QGraphicsItem):
         QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
         
     def boundingRect(self):
-        adjust = 2.0
         return QtCore.QRectF(self.xmin, self.ymin,
                              self.width, self.height)
     
 
 class QtGraph(BaseGraph):
-    def __init__(self, timestep, oversample=1, gravity=1, viscosity=None, name='EpiGrass Viewer', **keywords):
+    def __init__(self, display, **keywords):
         """
         Construct a Graph.  to be displayed with Python Visual
         """
-        BaseGraph.__init__(self,timestep, oversample, gravity,
-                            viscosity, name, **keywords)
+        BaseGraph.__init__(self)
+        self.display = display
+        self.rect = None#xmin,ymin,xmax0,ymax
+    
+    def getRect(self):
+        '''
+        Returns the bounding rectangle for the graph
+        '''
+        if self.rect != None:
+            for n in self.nodes:
+                self.rect[0] = n.pos[0] if n.pos[0]<self.rect[0] else self.rect[0]
+                self.rect[1] = n.pos[1] if n.pos[1]<self.rect[1] else self.rect[1]
+                self.rect[2] = n.pos[0] if n.pos[0]>self.rect[2] else self.rect[2]
+                self.rect[3] = n.pos[1] if n.pos[1]>self.rect[3] else self.rect[3]
+        return self.rect
 
-class QtNode(BaseNode):
+class QtNode(BaseNode,QtGui.QGraphicsItem):
     """
     Physical model and visual representation of a node as a mass using Qt
     """
-    def __init__(self, m, pos, r=.1, fixed=0, pickable=1, v=(0., 0., 0.), color=(0., 1., 0.), name='', **keywords):
+    Type = QtGui.QGraphicsItem.UserType + 2
+    def __init__(self, m, pos, r=1, display = None,  name='', **keywords):
         """
         Construct a mass.
         """
-        BaseNode.__init__(self,  m, pos, r,
-                          fixed, pickable, v,
-                          color, name, **keywords)
+        BaseNode.__init__(self,  m, pos, r, **keywords)
+        QtGui.QGraphicsItem.__init__(self)
+        self.graph = display
+        self.pos = pos
+        self.r = r
+        self.edgeList = []
+        self.setZValue(3)
+        #self.setPos(pos[0], pos[1])
+        
+    def type(self):
+        return QtNode.Type
+        
+    def addEdge(self, edge):
+        self.edgeList.append(edge)
+        edge.adjust()
+
+    def edges(self):
+        return self.edgeList
+        
+    def boundingRect(self):
+        return QtCore.QRectF(self.pos[0], self.pos[1],  self.r*2,  self.r*2)
+
+    def shape(self):
+        path = QtGui.QPainterPath()
+        path.addEllipse(self.pos[0], self.pos[1], self.r*2,  self.r*2)
+        return path
+
+    def paint(self, painter, option, widget):
+        painter.setBrush(QtCore.Qt.red)
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
+        painter.drawEllipse(self.pos[0], self.pos[1],  self.r*2,  self.r*2)
 
 class QtRubberEdge(BaseRubberEdge):
-    """
-    Visual representation of a spring using a single cylinder with variable radius.
-    """
-
     def __init__(self, n0, n1, k, l0=None, damping=None,
                  radius=None, color=(0.5,0.5,0.5), **keywords):
         """
         Construct a rubber spring.
         """
-        BaseRubberEdge.__init__(self, n0, n1, k, l0, damping,
-                                radius, color, **keywords)
+        BaseRubberEdge.__init__(self, n0, n1, k, l0, damping, radius, color, **keywords)
 
 if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
     elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
-    widget = GraphWidget(poslist,elist)
+    widget = GraphWidget('riozonas_LatLong.shp')
     widget.show()
     sys.exit(app.exec_())
     

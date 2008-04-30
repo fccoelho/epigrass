@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-04-29, 11:04:46 -->
+<!-- Saved: 2008-04-29, 21:07:33 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: check numpy functions for vector arithmetics:</Summary>
     <Description></Description>
-    <Created>2008-04-29, 10:02:46</Created>
+    <Created>2008-04-29, 19:15:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -18,49 +18,49 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
     <Description></Description>
-    <Created>2008-04-29, 10:02:46</Created>
+    <Created>2008-04-29, 19:15:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>208</Linenumber>
+      <Linenumber>224</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
     <Description></Description>
-    <Created>2008-04-29, 10:02:46</Created>
+    <Created>2008-04-29, 19:15:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>359</Linenumber>
+      <Linenumber>375</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-04-29, 10:02:46</Created>
+    <Created>2008-04-29, 19:15:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>443</Linenumber>
+      <Linenumber>459</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-04-29, 10:02:46</Created>
+    <Created>2008-04-29, 19:15:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>479</Linenumber>
+      <Linenumber>495</Linenumber>
     </Resource>
   </Task>
 </Tasks>
