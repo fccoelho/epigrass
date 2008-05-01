@@ -350,26 +350,27 @@ an editor and your model's script."""),
         """
         Do repeated runs
         """
-        if S.randomize_seeds:
-            randseed = 1
-        else:
-            randseed = 0
-        seeds = S.randomizeSeed()
-        for i in range(S.replicas):
+        randseed=S.randomize_seeds  
+        print "replicas type", randseed
+        if randseed: 
+            seeds = S.randomizeSeed(randseed)
+        reps = S.replicas
+        for i in xrange(reps):
             print "Starting replica number %s"%i
             self.textEdit1.insertPlainText("Starting replica number %s"%i)
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
-                db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText().lower()))
+                db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(str(self.dbType.currentText()).lower()))
             if randseed:
                 S.setSeed(seeds[i])
             S.round = i
+            S.shpout = False
             S.start()
             
             if S.Rep: #Generate report if necessary
                 rep = Rp.report(S)
                 self.textEdit1.insertPlainText('Report generation started.')
-                
                 rep.Assemble(S.Rep)
+            del S
     
     def onDbBackup(self):
         """

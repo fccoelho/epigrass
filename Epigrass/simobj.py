@@ -6,12 +6,12 @@ matplotlib.use("Agg")
 from pylab import *
 #import dgraph
 from numpy import *
-from numpy.random import *
+from numpy.random import uniform, binomial, poisson
 from types import MethodType
 from Epigrass.data_io import *
 
 
-class siteobj(object):
+class siteobj:
     """
     Basic site object containing attributes and methods common to all
     site objects.
@@ -61,6 +61,10 @@ class siteobj(object):
         self.painted = 0 # Flag for the graph display
         self.modtype = None
         self.migInf = [] #infectious individuals able to migrate (time series)
+        self.inedges = [] #Inbound edges
+        self.outedges = [] #outbound edges
+        self.pdest=[] 
+        self.infectedvisiting=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         
 
     def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
@@ -72,13 +76,13 @@ class siteobj(object):
         v -- List of extra variables passed in the sites files
         bi, bp -- dictionaries containing all the inits and parms defined in the .epg model
         """
-        Init = init
+        Init = init  # deprecated
         N = self.totpop
         self.modtype = modtype
         self.values = v
         self.bi = bi
         self.bp = bp
-        self.ts.append(list(array(Init,float)))
+        self.ts =[[0, 0, 0]]
         self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
         
 
@@ -96,10 +100,11 @@ class siteobj(object):
             theta = 0
             self.infector = {}
         
-      
+
         npass = sum(self.passlist)
         self.thetahist.append(theta) #keep a record of infected passenger arriving
         self.ts.append(self.model.step(self.ts[-1],theta,npass))
+
         self.thetalist = []   # reset self.thetalist (for the new timestep)
 ##        if self.parentGraph.gr: #updatn.box.length =es the visual graph display.
 ##            i = self.parentGraph.site_list.index(self)
@@ -198,6 +203,27 @@ class siteobj(object):
         else:
             return 0
     
+    def getOutEdges(self):
+        '''
+        return a list of outbound edges
+        '''
+        if self.outedges:
+            return self.outedges
+        oe = [e for e in self.edges if self==e.source]
+        self.outedges = oe
+        return oe
+        
+    def getInEdges(self):
+        '''
+        return a list of outbound edges
+        '''
+        if self.inedges:
+            return self.inedges
+        ie = [e for e in self.edges if self==e.dest]
+        self.inedges = ie
+        return ie
+        
+    
     def getNeighbors(self):
         """
         Returns a dictionary of neighbooring sites as keys,
@@ -210,13 +236,11 @@ class siteobj(object):
         
         n=[[i.source,i.dest,i.length] for i in self.edges]
         neigh = {}
-        for i in n:
-            #print len(i[0]),i[0][0].sitename,self.sitename
-            #if len(i[0])==1: print self.edges[j].sites,self.edges[j].source.sitename,self.edges[j].dest.sitename
-            idx = i.index(self)
-            m = i.pop(idx)
-            k = i[0]
-            neigh[k] = i[-1]
+        for i in self.edges:
+            n=[i.source,i.dest,i.length] 
+            idx = n.index(self)
+            m = n.pop(idx)
+            neigh[n[0]] = n[-1]
             
         self.neighbors = neigh
         return neigh
@@ -305,7 +329,7 @@ class siteobj(object):
         return B
         
 
-class popmodels(object):
+class popmodels:
     """
     Defines a library of discrete time population models
     """
@@ -1139,7 +1163,7 @@ class popmodels(object):
         
         return [0,Ipos,Spos]
         
-class edge(object):
+class edge:
     """
     Defines an edge connecting two nodes (node source to node dest).
     with attributes given by value.
@@ -1201,7 +1225,7 @@ class edge(object):
 
     
     
-class graph(object):
+class graph:
     """
     Defines a graph with sites and edges
     """
@@ -1935,8 +1959,67 @@ class graph(object):
         self.alphaidx = None
         self.gammaidx = None
 
+class line:
+    """
+    Basic line object containing attributes and methods common to all
+    line objects.
+    """
+    def __init__(self,nodes):
+        """
+        define a line based on sequence of nodes.
+        """
+        pass
+    def intersect(self):
+        """
+        finds out if this line intersects another
+        """
+        pass
+    def xarea(self):
+        """
+        finds out if this line extends to more than one area.
+        """
+        pass
 
+class area:
+    """
+    Basic area object containing attributes and methods common to all
+    area objects.
+    """
+    def __init__(self,nodes):
+        self.nodes = nodes
 
+    def centroid(self):
+        """
+        calculates the centroid of the area.
+        """
+        pass
+    def area(self):
+        """
+        calculates the area
+        """
+        pass
+
+    def neighbors(self):
+        """
+        return neighbors
+        """
+        pass
+
+    def isIsland(self):
+        """
+        return true if the area is an island, i.e. has only one nejghboor and is not on a border.
+        """
+        pass
+    def borderSizeWith(self, area):
+        """
+        returns the size of the border with a given area.
+        """
+        pass
+    def perimeter(self):
+        """
+        returns the perimeter of the area
+        """
+        pass
 
 
 class priorityDictionary(dict):

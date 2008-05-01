@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.2.dtd">
+<!DOCTYPE Project SYSTEM "Project-4.3.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
+<<<<<<< /home/codeco/downloads/epigrassqt4/Epigrass_qt4.e4p
+<!-- Saved: 2008-04-29, 21:26:50 -->
+=======
 <!-- Saved: 2008-04-28, 11:19:15 -->
+>>>>>>> /tmp/Epigrass_qt4.e4p~other.w4Zbtt
 <!-- Copyright (C) 2008 ,  -->
-<Project version="4.2">
+<Project version="4.3">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <ProjectType>Qt4</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
   <Author></Author>
   <Email></Email>
-  <TranslationPrefix>
-    <Name>epigrass</Name>
-  </TranslationPrefix>
+  <TranslationPrefix>epigrass</TranslationPrefix>
   <Sources>
+<<<<<<< /home/codeco/downloads/epigrassqt4/Epigrass_qt4.e4p
+    <Source>epigrass.py</Source>
+    <Source>Epigrass/testinst.py</Source>
+    <Source>Epigrass/epiplay.py</Source>
+    <Source>Epigrass/cpanel.py</Source>
+    <Source>Epigrass/report.py</Source>
+    <Source>Epigrass/about.py</Source>
+    <Source>Epigrass/dataObject.py</Source>
+    <Source>Epigrass/dgraph.py</Source>
+    <Source>Epigrass/data_io.py</Source>
+    <Source>Epigrass/spread.py</Source>
+    <Source>Epigrass/simobj.py</Source>
+    <Source>Epigrass/__init__.py</Source>
+    <Source>Epigrass/rinterface.py</Source>
+    <Source>CustomModel_example.py</Source>
+    <Source>CustomModel.py</Source>
+    <Source>Epigrass/Ui_cpanel.py</Source>
+    <Source>Epigrass/Ui_about.py</Source>
+    <Source>Epigrass/qtgraph.py</Source>
+    <Source>Epigrass/pylabQtcanvas.py</Source>
+    <Source>Epigrass/epigdal.py</Source>
+    <Source>Epigrass/elasticnodes.py</Source>
+    <Source>Epigrass/epiRTplay.py</Source>
+    <Source>Epigrass/Ui_epgeditor.py</Source>
+    <Source>ez_setup.py</Source>
+    <Source>setup.py</Source>
+    <Source>Epigrass/epgeditor.py</Source>
+    <Source>Epigrass/primitives.py</Source>
+    <Source>Epigrass/Ui_about4.py</Source>
+    <Source>Epigrass/Ui_cpanel4.py</Source>
+    <Source>Epigrass/manager.py</Source>
+=======
     <Source>
       <Name>epigrass.py</Name>
     </Source>
@@ -136,37 +170,20 @@
       <Dir>demos</Dir>
       <Name>CustomModel_example.py</Name>
     </Source>
+>>>>>>> /tmp/Epigrass_qt4.e4p~other.w4Zbtt
   </Sources>
   <Forms>
-    <Form>
-      <Name>cpanel.ui</Name>
-    </Form>
-    <Form>
-      <Name>about.ui</Name>
-    </Form>
-    <Form>
-      <Name>about4.ui</Name>
-    </Form>
-    <Form>
-      <Name>cpanel4.ui</Name>
-    </Form>
-    <Form>
-      <Name>epgeditor.ui</Name>
-    </Form>
+    <Form>cpanel.ui</Form>
+    <Form>about.ui</Form>
+    <Form>about4.ui</Form>
+    <Form>cpanel4.ui</Form>
+    <Form>epgeditor.ui</Form>
   </Forms>
   <Translations>
-    <Translation>
-      <Name>epigrass_fr.qm</Name>
-    </Translation>
-    <Translation>
-      <Name>epigrass_fr.ts</Name>
-    </Translation>
-    <Translation>
-      <Name>manager_pt_BR.qm</Name>
-    </Translation>
-    <Translation>
-      <Name>manager_pt_BR.ts</Name>
-    </Translation>
+    <Translation>epigrass_fr.qm</Translation>
+    <Translation>epigrass_fr.ts</Translation>
+    <Translation>manager_pt_BR.qm</Translation>
+    <Translation>manager_pt_BR.ts</Translation>
   </Translations>
   <Resources>
   </Resources>
@@ -174,9 +191,7 @@
   </Interfaces>
   <Others>
   </Others>
-  <MainScript>
-    <Name>epigrass.py</Name>
-  </MainScript>
+  <MainScript>epigrass.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>

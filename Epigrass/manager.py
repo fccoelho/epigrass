@@ -7,7 +7,7 @@ import os, codecs
 from copy import deepcopy
 from simobj import graph, edge, siteobj
 from numpy import *
-from numpy.random import uniform
+from numpy.random import uniform, poisson
 from sqlobject import *
 from math import *
 from Epigrass.data_io import *
@@ -59,6 +59,7 @@ class simulate:
         self.repname = None
         self.shapefile = None
         self.World = None
+        self.shpout = True
         self.dir = os.getcwd()
         sys.path.insert(0,self.dir) #add current path to sys.path
         self.gui = 0 # True if this object was created by the gui
@@ -217,7 +218,7 @@ class simulate:
             else:
                 lat = float(site[0])
                 long = float(site[1])
-            objlist.append(siteobj(site[2],site[3],(lat,long),int(strip(site[4])),tuple([float(strip(i)) for i in site[4:]])))
+            objlist.append(siteobj(site[2],site[3],(lat,long),int(strip(site[4])),tuple([float(strip(i)) for i in site[5:]])))
         for o in objlist:
             if self.stochTransp: o.stochtransp = 1
             N = o.totpop #local copy for reference on model creation
@@ -262,7 +263,7 @@ class simulate:
                     inits[self.seed[0][1].lower()] += 1
                 for j in self.seed:
                     if int(o.geocode) == j[0]:
-                        self.Say("%s infected case(s) arrived at %s"%(j[2],o.sitename))
+                        self.Say("%s infected person(s) arrived at %s"%(j[2],o.sitename))
                         I += j[2]
                         inits[j[1].lower()] +=j[2]
                         o.createModel((E,I,S),self.modtype,self.modelName,v=values,bi=inits,bp=parms)
@@ -326,24 +327,28 @@ class simulate:
             
         return g
         
-    def randomizeSeed(self):
+    def randomizeSeed(self, option):
         """
         Generate and return a list of randomized seed sites 
         to be used in a repeated runs scenario.
         Seed sites are sampled with a probability proportional to the
         log of their population size.
+        option: if 1 randomize; if 2, return unrundomized sequence
         """
-        poplist = [log10(site.totpop) for site in self.g.site_list]
-        lpl = len(poplist)
-        popprob = array(poplist)/sum(poplist) #acceptance probability
-        u = floor(uniform(0,lpl, self.replicas))
-        sites=[]
-        i=0
-        while i < self.replicas:
-            p = uniform(0,1)
-            if p <= popprob[int(u[i])]:
-                sites.append(self.g.site_list[int(u[i])])
-                i += 1
+        if option==1:
+            poplist = [log10(site.totpop) for site in self.g.site_list]
+            lpl = len(poplist)
+            popprob = array(poplist)/sum(poplist) #acceptance probability
+            u = floor(uniform(0,lpl, self.replicas))
+            sites=[]
+            i=0
+            while i < self.replicas:
+                p = uniform(0,1)
+                if p <= popprob[int(u[i])]:
+                    sites.append(self.g.site_list[int(u[i])])
+                    i += 1
+        elif option ==2:
+            sites = self.g.site_list
         return sites
         
     def setSeed(self,seed,n=1):
@@ -352,14 +357,20 @@ class simulate:
         which get n infected cases.
         seed must be a siteobj object.
         '''
-        self.seed =[(seed.geocode,n)]
+        #inits[self.seed[0][1].lower()] += 1
+        seedvar = self.seed[0][1].lower() #retrieve the name of the variable containing the seeds
+        print 'seedvar=', seedvar
+        
+        self.seed =[(seed.geocode, seedvar,n)]
         for site in self.g.site_list:
             if site.geocode == seed.geocode:
-                site.ts[0][1] = n
+                site.bi[seedvar] = n
+#                site.ts[0][seedpos] = n
                 
                 self.Say("%s infected case(s) arrived at %s"%(n,seed.sitename))
             else:
-                site.ts[0][1] = 0
+                site.bi[seedvar] = 0
+#                site.ts[0][seedpos] = 0
     
     def start(self):
         """
@@ -379,8 +390,8 @@ class simulate:
                 self.outToCsv(self.modelName)
             else:
                 self.outToDb(self.modelName)
-            
-        self.outToShp()
+        if self.shpout:
+            self.outToShp()
         #self.dumpData()
         #self.saveModel(self.modelName)
         #pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
@@ -476,7 +487,7 @@ class simulate:
                 for n,v in enumerate(site.values):
                     head.append('values%s'%n)
                     regb.append(str(v))
-            
+            #print site.sitename, site.ts
             ts = array(site.ts[1:]) #remove init conds so that ts and inc are the same size
             head.extend(['incidence','arrivals'])
             for n,v in enumerate(site.vnames):
