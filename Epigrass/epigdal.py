@@ -237,13 +237,13 @@ class World:
         map.
         """
         f = open(fname,"w")
-        for f in self.nlist:
-            gc = f.GetFieldAsInteger(self.geocfield)
+        for fe in self.nlist:
+            gc = fe.GetFieldAsInteger(self.geocfield)
             x = self.centdict[gc][0]
             y = self.centdict[gc][1]
-            name = f.GetField(self.namefield)
+            name = fe.GetField(self.namefield)
             line = "%s,%s,%s,%s\n"%(x,y,name,gc)
-            fe.SetField('name',f.GetField(self.namefield))
+            #fe.SetField('name',f.GetField(self.namefield))
             f.write(line)
         f.close()
 

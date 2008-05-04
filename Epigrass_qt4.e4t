@@ -1,92 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
+<!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<<<<<<< /home/codeco/downloads/epigrassqt4/Epigrass_qt4.e4t
-<!-- Saved: 2008-05-01, 11:13:58 -->
-<Tasks version="4.2">
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-=======
-<!-- Saved: 2008-04-29, 21:07:33 -->
+<!-- Saved: 2008-05-03, 17:03:09 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: check numpy functions for vector arithmetics:</Summary>
->>>>>>> /tmp/Epigrass_qt4.e4t~other.dOOfrJ
     <Description></Description>
-    <Created>2008-04-29, 19:15:29</Created>
+    <Created>2008-05-03, 09:09:19</Created>
     <Resource>
-<<<<<<< /home/codeco/downloads/epigrassqt4/Epigrass_qt4.e4t
-      <Filename>simobj.py</Filename>
-      <Linenumber>380</Linenumber>
-=======
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>22</Linenumber>
->>>>>>> /tmp/Epigrass_qt4.e4t~other.dOOfrJ
+      <Linenumber>23</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
     <Description></Description>
-    <Created>2008-04-29, 19:15:29</Created>
+    <Created>2008-05-03, 09:09:19</Created>
     <Resource>
-<<<<<<< /home/codeco/downloads/epigrassqt4/Epigrass_qt4.e4t
-      <Filename>primitives.py</Filename>
-      <Linenumber>80</Linenumber>
-=======
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>224</Linenumber>
+      <Linenumber>327</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
     <Description></Description>
-    <Created>2008-04-29, 19:15:29</Created>
+    <Created>2008-05-03, 09:09:19</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>375</Linenumber>
+      <Linenumber>478</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-04-29, 19:15:29</Created>
+    <Created>2008-05-03, 09:09:19</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>459</Linenumber>
+      <Linenumber>562</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-04-29, 19:15:29</Created>
+    <Created>2008-05-03, 09:09:19</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>495</Linenumber>
->>>>>>> /tmp/Epigrass_qt4.e4t~other.dOOfrJ
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-04-30, 09:35:58</Created>
-    <Resource>
-      <Filename>Epigrass/simobj.py</Filename>
-      <Linenumber>404</Linenumber>
+      <Linenumber>598</Linenumber>
     </Resource>
   </Task>
 </Tasks>
