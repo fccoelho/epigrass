@@ -14,6 +14,8 @@ from numpy import  array, sqrt,  average
 from numpy.random import randint, uniform
 from Ui_display import Ui_Form 
 #from pylab import *
+from matplotlib import cm
+from types import MethodType
 ##import psyco
 ##psyco.full()
 
@@ -21,6 +23,37 @@ graphic_backend = "visual"
 graphic_backend = "qt"
 
 #FIXME: check numpy functions for vector arithmetics:
+
+def keyPressEvent(self, event):
+    key = event.key()
+    if key == QtCore.Qt.Key_Up:
+        self.translate(0, -20)
+    elif key == QtCore.Qt.Key_Down:
+        self.translate(0, 20)
+    elif key == QtCore.Qt.Key_Left:
+        self.translate(-20, 0)
+    elif key == QtCore.Qt.Key_Right:
+        self.translate(20, 0)
+    elif key == QtCore.Qt.Key_Plus:
+        self.scaleView(1.2)
+    elif key == QtCore.Qt.Key_Minus:
+        self.scaleView(1 / 1.2)
+    elif key == QtCore.Qt.Key_Space or key == QtCore.Qt.Key_Enter:
+        for item in self.scene().items():
+            if isinstance(item, Polygon):
+                item.setPos(-150 + QtCore.qrand() % 300, -150 + QtCore.qrand() % 300)
+    else:
+        QtGui.QGraphicsView.keyPressEvent(self, event)
+
+
+def wheelEvent(self, event):
+    self.scaleView(math.pow(2.0, -event.delta() / 240.0))
+    
+def scaleView(self, scaleFactor):
+    factor = self.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
+#        if factor < 0.07 or factor > 1000000:
+#            return
+    self.scale(scaleFactor, scaleFactor)
 
 def array_mag(a):
     acc = 0
@@ -45,6 +78,11 @@ class MapWindow(Ui_Form):
     def __init__(self, filename=None, G=None):
         self.Form =  QtGui.QWidget()
         self.setupUi(self.Form)
+        self.jet  = cm.get_cmap("jet",50) #colormap
+        # Overloading event-handling methods for self.mapView
+        self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
+        self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
+        self.mapView.scaleView = MethodType(scaleView, self.mapView)
         #Setup the Map
         self.M = Map(filename,self)
         xmin,ymin = self.M.xmin, self.M.ymin
@@ -80,7 +118,7 @@ class MapWindow(Ui_Form):
         scale_factor = self.mapView.width()/xxs
         self.mapView.scale(scale_factor, scale_factor)
         #print self.polys
-        QtCore.QObject.connect(self.mapView,QtCore.SIGNAL("released()"),self.editScript)
+        
     def addGraph(self, nlist, elist=[] ):
         G = Graph(self)
         for n in nlist:
@@ -91,163 +129,19 @@ class MapWindow(Ui_Form):
             #print node.x(), node.y(), n.center[0], n.center[1]
         self.scene.update()
     
-    def keyPressEvent(self, event):
-        key = event.key()
-        if key == QtCore.Qt.Key_Up:
-            self.mapView.translate(0, -20)
-        elif key == QtCore.Qt.Key_Down:
-            self.mapView.translate(0, 20)
-        elif key == QtCore.Qt.Key_Left:
-            self.mapView.translate(-20, 0)
-        elif key == QtCore.Qt.Key_Right:
-            [i.moveBy(20, 0) for i in self.mapView.scene.items() if isinstance(i, Polygon)]
-            #self.translate(20, 0)
-        elif key == QtCore.Qt.Key_Plus:
-            self.mapView.scaleView(1.2)
-        elif key == QtCore.Qt.Key_Minus:
-            self.mapView.scaleView(1 / 1.2)
-        elif key == QtCore.Qt.Key_Space or key == QtCore.Qt.Key_Enter:
-            for item in self.mapView.scene().items():
-                if isinstance(item, Polygon):
-                    item.setPos(-150 + QtCore.qrand() % 300, -150 + QtCore.qrand() % 300)
-        else:
-            QtGui.QGraphicsView.keyPressEvent(self, event)
-
-    def timerEvent(self, event):
-        pass
-#        nodes = self.nodes#[item for item in self.scene().items() if isinstance(item, Node)]
-#
-#        for node in nodes:
-#            node.calculateForces()
-#
-#        itemsMoved = False
-#        for node in nodes:
-#            if node.advance():
-#                itemsMoved = True
-#
-#        if not itemsMoved:
-#            self.killTimer(self.timerId)
-#            self.timerId = 0
-
-    def wheelEvent(self, event):
-        self.mapView.scaleView(math.pow(2.0, -event.delta() / 240.0))
+    def paintPols(self, datadict):
+        """
+        Paint the polygons with the data from data dict
+        datadict is a dictionary of the form {geocode:value,...}
+        """
+        for gc, col in datadict.iteritems():
+            self.M.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
+            self.M.polyDict[gc].update()
         
-    def scaleView(self, scaleFactor):
-        factor = self.mapView.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
-#        if factor < 0.07 or factor > 1000000:
-#            return
-        self.mapView.scale(scaleFactor, scaleFactor)
-    
     def show(self):
         self.Form.show()
         
-class GraphWidget(QtGui.QGraphicsView):
-    def __init__(self, filename):
-        """
-        Graph display widget on which everything will be drawn
-        """
-        QtGui.QGraphicsView.__init__(self)
-        self.timerId = 0
-        #Setup the Map
-        
-        self.M = Map(filename,self)
-        
-        xmin,ymin = self.M.xmin, self.M.ymin
-        xmax,ymax = self.M.xmax, self.M.ymax
-        xxs = (xmax-xmin)*1.1 #percentage of extra space
-        yxs = (ymax-ymin)*1.1 #percentage of extra space
-        #calculating center of scene
-        xc = (xmax+xmin)/2. 
-        yc = (ymax+ymin)/2.
-        #creating the scene
-        self.scene = QtGui.QGraphicsScene(self)
-        self.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
-        self.scene.setSceneRect(xmin, ymin, xxs, yxs)
-        #print self.scene.width(), self.scene.height()
-        self.fitInView(xmin, ymin, xxs, yxs)
-        self.setScene(self.scene)
-        self.updateSceneRect(self.scene.sceneRect())
-        self.centerOn(xc, yc)
-        
-        #self.setViewport(QtOpenGL.QGLWidget())
-        self.setCacheMode(QtGui.QGraphicsView.CacheBackground)
-        self.setRenderHint(QtGui.QPainter.Antialiasing)
-        self.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
-        self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
-        #scene.addItem(QtCore.QRectF(QtCore.QPointF(0., 0.), QtCore.QPointF(10., 10.)))
-        for p in self.M.polyList:
-            self.scene.addItem(p)
-        #self.scene.addText("%s,%s,%s,%s"%(xmin, xxs, ymin, yxs))
-        self.polys = [item for item in self.scene.items() if isinstance(item, Polygon)]
-        self.addGraph(self.polys)
-        self.setMinimumSize(400, 400)
-        self.setWindowTitle(self.tr("Network View"))
-        
-        scale_factor = self.width()/xxs
-        self.scale(scale_factor, scale_factor)
-        #print self.polys
-    
-    def addGraph(self, nlist, elist=[] ):
-        G = Graph(self)
-        for n in nlist:
-            #print n.center
-            node = QtNode(1, n.center, display = self)
-            #node.setPos(node.mapFromScene(QtCore.QPointF(node.x(), node.y())))
-            self.scene.addItem(node)
-            G.insertNode(node)
-            #print node.x(), node.y(), n.center[0], n.center[1]
-        self.scene.update()
-        #self.scene.addText("hello!")
-    
-    def keyPressEvent(self, event):
-        key = event.key()
 
-        if key == QtCore.Qt.Key_Up:
-            self.translate(0, -20)
-        elif key == QtCore.Qt.Key_Down:
-            self.translate(0, 20)
-        elif key == QtCore.Qt.Key_Left:
-            self.translate(-20, 0)
-        elif key == QtCore.Qt.Key_Right:
-            [i.moveBy(20, 0) for i in self.scene.items() if isinstance(i, Polygon)]
-            #self.translate(20, 0)
-        elif key == QtCore.Qt.Key_Plus:
-            self.scaleView(1.2)
-        elif key == QtCore.Qt.Key_Minus:
-            self.scaleView(1 / 1.2)
-        elif key == QtCore.Qt.Key_Space or key == QtCore.Qt.Key_Enter:
-            for item in self.scene().items():
-                if isinstance(item, Polygon):
-                    item.setPos(-150 + QtCore.qrand() % 300, -150 + QtCore.qrand() % 300)
-        else:
-            QtGui.QGraphicsView.keyPressEvent(self, event)
-
-    def timerEvent(self, event):
-        pass
-#        nodes = self.nodes#[item for item in self.scene().items() if isinstance(item, Node)]
-#
-#        for node in nodes:
-#            node.calculateForces()
-#
-#        itemsMoved = False
-#        for node in nodes:
-#            if node.advance():
-#                itemsMoved = True
-#
-#        if not itemsMoved:
-#            self.killTimer(self.timerId)
-#            self.timerId = 0
-
-    def wheelEvent(self, event):
-        self.scaleView(math.pow(2.0, -event.delta() / 240.0))
-        
-    def scaleView(self, scaleFactor):
-        factor = self.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
-
-#        if factor < 0.07 or factor > 1000000:
-#            return
-
-        self.scale(scaleFactor, scaleFactor)
 #BlackBox  :-)
 class BaseBox(object):
     def __init__(self, *args, **kwargs):
@@ -764,7 +658,6 @@ class BaseMap(object):
             geo = feat.GetGeometryRef()
             if geo.GetGeometryCount()<2:
                 g1 = geo.GetGeometryRef( 0 )
-                
                 x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
                 y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                 lp = zip(x,y)#list of points
@@ -774,11 +667,12 @@ class BaseMap(object):
                 ring = geo.GetGeometryRef ( c )
                 for cnt in xrange( ring.GetGeometryCount()):
                     g1 = ring.GetGeometryRef( cnt )
-                    if g.GetGeometryType() == 3:
-                        self.geomdict[feat.GetFieldAsInteger(self.geocfield)] = g1
+                    if g.GetGeometryType() == 3: #If it is a polygon
+                        geocode = feat.GetFieldAsInteger(self.geocfield)
+                        self.geomdict[geocode] = g1
                         cen = g.Centroid()
                         self.nlist.append(f)
-                        self.centdict[f.GetFieldAsInteger(self.geocfield)] = (cen.GetX(),cen.GetY(),cen.GetZ())
+                        self.centdict[geocode] = (cen.GetX(),cen.GetY(),cen.GetZ())
                     x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
                     y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                     lp = zip(x,y)#list of points
@@ -816,12 +710,12 @@ class VisualMap(BaseMap):
         visual.curve(pos=pol,radius = 0)
 
 class QtMap(BaseMap):
-    def __init__(self, fname, display=None):
+    def __init__(self, fname, display=None, namefield='name',geocfield='geocode'):
         self.display = display
         self.xmin, self.ymin, self.xmax,self.ymax = 180, 90, -180, -90
-        BaseMap.__init__(self, fname)
+        BaseMap.__init__(self, fname,namefield,geocfield)
         
-    def dbound(self, pol):
+    def dbound(self, pol, geocode = None ):
         p = Polygon(pol, self.display)
         self.xmin = p.xmin if p.xmin<self.xmin else self.xmin
         self.ymin = p.ymin if p.ymin<self.ymin else self.ymin
@@ -829,6 +723,8 @@ class QtMap(BaseMap):
         self.ymax = p.ymax if p.ymax>self.ymax else self.ymax
         #print self.xmin,  self.ymin,  self.xmax, self.ymax
         self.polyList.append(p)
+        p.geocode = geocode
+        self.polyDict[geocode] = p
         return p
 
 class Polygon(QtGui.QGraphicsItem):
@@ -848,6 +744,12 @@ class Polygon(QtGui.QGraphicsItem):
         self.pointList = [QtCore.QPointF(x, y) for x, y in plist]
         self.polyg = QtGui.QPolygonF(self.pointList)
         self.newPos = QtCore.QPointF()
+        self.lineColor = QtCore.Qt.black
+        self.fillColor = QtCore.Qt.yellow
+        self.geocode = None
+        self.setToolTip(str(self.geocode))
+        self.GraphicsItemFlag(QtGui.QGraphicsItem.ItemIsSelectable)
+        # TODO: make item selectable (the above line is not working)
         self.setZValue(1)
     
     def type(self):
@@ -860,8 +762,8 @@ class Polygon(QtGui.QGraphicsItem):
         return path
 
     def paint(self, painter, option, widget):
-        painter.setBrush(QtCore.Qt.yellow)
-        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
+        painter.setBrush(self.fillColor)
+        painter.setPen(QtGui.QPen(self.lineColor, 0))
         painter.drawPolygon(self.polyg)
         
     def mousePressEvent(self, event):
@@ -869,6 +771,14 @@ class Polygon(QtGui.QGraphicsItem):
         QtGui.QGraphicsItem.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
+        if self.isSelected():
+            print "entrou"
+            self.setSelected(False)
+            self.fillColor = QtCore.Qt.yellow
+        else: 
+            self.setSelected(True)
+            print self.isSelected()
+            self.fillColor = QtCore.Qt.green
         self.update()
         QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
         

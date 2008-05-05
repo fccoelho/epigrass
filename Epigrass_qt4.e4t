@@ -1,66 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-05-03, 17:03:09 -->
+<!-- Saved: 2008-05-04, 21:01:24 -->
 <Tasks version="4.1">
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: move this import to the graph level</Summary>
+    <Description></Description>
+    <Created>2008-05-04, 19:24:20</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>simobj.py</Name>
+      </Filename>
+      <Linenumber>404</Linenumber>
+    </Resource>
+  </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: check numpy functions for vector arithmetics:</Summary>
     <Description></Description>
-    <Created>2008-05-03, 09:09:19</Created>
+    <Created>2008-05-04, 21:01:15</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>23</Linenumber>
+      <Linenumber>25</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
     <Description></Description>
-    <Created>2008-05-03, 09:09:19</Created>
+    <Created>2008-05-04, 21:01:15</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>327</Linenumber>
+      <Linenumber>221</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
     <Description></Description>
-    <Created>2008-05-03, 09:09:19</Created>
+    <Created>2008-05-04, 21:01:15</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>478</Linenumber>
+      <Linenumber>372</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-05-03, 09:09:19</Created>
+    <Created>2008-05-04, 21:01:15</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>562</Linenumber>
+      <Linenumber>456</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-05-03, 09:09:19</Created>
+    <Created>2008-05-04, 21:01:15</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>598</Linenumber>
+      <Linenumber>492</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: make item selectable (the above line is not working)</Summary>
+    <Description></Description>
+    <Created>2008-05-04, 21:01:15</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>752</Linenumber>
     </Resource>
   </Task>
 </Tasks>
