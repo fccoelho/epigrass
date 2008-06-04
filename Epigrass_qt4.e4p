@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-05-02, 17:41:47 -->
+<!-- Saved: 2008-06-04, 09:17:03 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -140,9 +140,6 @@
       <Dir>Epigrass</Dir>
       <Name>Ui_display.py</Name>
     </Source>
-    <Source>
-      <Name>Ui_display.py</Name>
-    </Source>
   </Sources>
   <Forms>
     <Form>
@@ -176,6 +173,9 @@
     </Translation>
     <Translation>
       <Name>manager_pt_BR.ts</Name>
+    </Translation>
+    <Translation>
+      <Name>epigrass_es.ts</Name>
     </Translation>
   </Translations>
   <Resources>
