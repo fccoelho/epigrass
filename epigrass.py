@@ -297,8 +297,8 @@ an editor and your model's script."""),
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
-            # Setup timer to update GUI every second, while model is running
-
+            #Open map display
+            
             if not S.replicas:
                 S.start()
                 

@@ -2,8 +2,8 @@
 
 #program to play simulations from database
 import dgraph, cPickle, glob, os, ogr
-import visual as V
-import visual.graph as VG
+#import visual as V
+#import visual.graph as VG
 from math import *
 try:
     from PyQt4.QtGui import *

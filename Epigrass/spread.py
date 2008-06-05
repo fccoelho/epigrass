@@ -8,7 +8,7 @@ except ImportError:
 #from qt import *
 from xml.dom import minidom, Node
 import dgraph, crypt, os, string
-import visual as V
+#import visual as V
 from math import *
 from numpy import *
 import codecs

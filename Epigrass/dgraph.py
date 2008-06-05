@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 """
 This module is a graph visualizing tool.
 It tries to resolves the graph layout by making an analogy
@@ -6,6 +7,7 @@ the nodes repel each other with a force inversely proportional to their
 distance, and the edges do the opposite.
 """
 import math, ogr
+import threading
 #from numpy import *
 #import visual 
 import time, os,  sys
@@ -16,6 +18,7 @@ from Ui_display import Ui_Form
 #from pylab import *
 from matplotlib import cm
 from types import MethodType
+from SimpleXMLRPCServer import SimpleXMLRPCServer
 ##import psyco
 ##psyco.full()
 
@@ -75,7 +78,7 @@ class MapWindow(Ui_Form):
     '''
     Map and Time-series window
     '''
-    def __init__(self, filename=None, G=None):
+    def __init__(self, G=None):
         self.Form =  QtGui.QWidget()
         self.setupUi(self.Form)
         self.jet  = cm.get_cmap("jet",50) #colormap
@@ -83,6 +86,15 @@ class MapWindow(Ui_Form):
         self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
         self.mapView.scaleView = MethodType(scaleView, self.mapView)
+        self.server = MapServer()
+        st = threading.Thread(target=self.server.start)
+        st.start()
+        
+        
+    def drawMap(self, filename):
+        """
+        Draws the map store in the shapefile fname.
+        """
         #Setup the Map
         self.M = Map(filename,self)
         xmin,ymin = self.M.xmin, self.M.ymin
@@ -114,11 +126,11 @@ class MapWindow(Ui_Form):
         #self.mapView.addGraph(self.polys)
         self.mapView.setMinimumSize(400, 400)
         #self.mapView.setWindowTitle(self.tr("Network View"))
-        
         scale_factor = self.mapView.width()/xxs
         self.mapView.scale(scale_factor, scale_factor)
+        self.server.setPols(self.M.polyDict)
         #print self.polys
-        
+    
     def addGraph(self, nlist, elist=[] ):
         G = Graph(self)
         for n in nlist:
@@ -267,50 +279,6 @@ class BaseNode(object):
         self.F = array((0., 0., 0.))
 
 
-class VisualNode(BaseNode):
-    """
-    Physical model and visual representation of a node as a mass using Visual Python
-    """
-    def __init__(self, m, pos, r=.1, fixed=0, pickable=1, v=(0., 0., 0.), color=(0., 1., 0.), name='', **keywords):
-        """
-        Construct a mass.
-        """
-        BaseNode.__init__(self,  m, pos, r,
-                          fixed, pickable, v,
-                          color, name, **keywords)
-
-        self.box = visual.box(pos=visual.vector(pos),
-                              length=float(self.r),height=self.r,
-                              width=self.r,color=color,
-                              name='',**keywords)
-
-        self.box.Name = visual.label(pos=visual.vector(pos),
-                                     text=self.name, xoffset=20,
-                                     yoffset=20, space=0, height=10,
-                                     box=0, border=6, line=1,visible=0)
-
-        self.box.sn = self.showName
-        self.box.paren = self #the node instance owning this box.
-
-    def showName(self,t):
-        """
-        Show the node name for t seconds
-        """
-        self.box.Name.visible=1
-        time.sleep(t)
-        self.box.Name.visible=0
-
-    def calcNewLocation(self, dt):
-        """
-        Calculate the new location of the mass.
-        """
-        # F = m * a = m * dv / dt  =>  dv = F * dt / m
-        dv = self.F * dt / self.m
-        self.v += dv
-        # v = dx / dt  =>  dx = v * dt
-        self.pos += self.v * dt
-        self.box.pos += visual.vector(self.v) * dt
-
 class _BaseEdge(object):
     """
     Physical model of an edge as a spring.
@@ -384,31 +352,6 @@ class BaseRubberEdge(_BaseEdge):
         self.cylinder.axis = self.n1.pos - self.n0.pos
 
 
-class VisualRubberEdge(BaseRubberEdge):
-    """
-    Visual representation of a spring using a single cylinder with variable radius.
-    """
-
-    def __init__(self, n0, n1, k, l0=None, damping=None,
-                 radius=None, color=(0.5,0.5,0.5), **keywords):
-        """
-        Construct a rubber spring.
-        """
-        BaseRubberEdge.__init__(self, n0, n1, k, l0, damping,
-                                radius, color, **keywords)
-
-        self.cylinder = visual.cylinder(pos=visual.vector(self.n0.pos),
-                                        axis=visual.vector(self.n1.pos -
-                                                           self.n0.pos),
-                                        radius=self.r0, color=color,
-                                        **keywords)
-
-    def update(self):
-        """
-        Update the visual representation of the spring.
-        """
-        self.cylinder.pos = visual.vector(self.n0.pos)
-        self.cylinder.axis = visual.vector(self.n1.pos - self.n0.pos)
 
 
 class BaseGraph(object):
@@ -548,87 +491,6 @@ class BaseGraph(object):
         while 1:
             self.step()
 
-class VisualGraph(BaseGraph):
-    """
-    The Graph.self.data(start)[5]
-    """
-    def __init__(self, timestep, oversample=1, gravity=1,
-                 viscosity=None, name='EpiGrass Viewer',
-               **keywords):
-        """
-        Construct a Graph.  to be displayed with Python Visual
-        """
-        BaseGraph.__init__(self,timestep, oversample, gravity,
-                            viscosity, name, **keywords)
-
-        self.display = visual.display(title=name, ambient=0.5, **keywords)
-        self.display.select()
-
-
-    def addTimelabel(self):
-        """
-        Adds the time label at the center of the display
-        """
-        self.timelabel = visual.label(pos=self.display.center,
-                                      text='0', xoffset=0, yoffset=0,
-                                      space=5, height=10, border=6, line=0)
-
-    def centerView(self):
-        points = array([i.box.pos for i in self.nodes])
-        self.netdimension = points.max()
-        cnt = average(points,0)
-        self.display.center = cnt
-        if self.timelabel:
-            self.timelabel.pos = cnt + visual.vector(0.,0.,2.)
-
-
-    def advance(self):
-        """
-        Perform one Iteration of the system by advancing one timestep.
-        """
-        BaseGraph.advance(self)
-        self.display.center = self.center
-
-    def dispatchDnD(self):
-        """Process the drag and drop interaction from the mouse.
-        """
-        if self.display.mouse.clicked:
-            self.click = self.display.mouse.getclick()
-            if self.dragObject: # drop the selected object
-                # restore original attributes
-                self.dragObject.node.fixed = self.rememberFixed
-                self.dragObject.color = self.rememberColor
-                # no initial velocity after dragging
-                self.dragObject.node.v = visual.vector(0., 0., 0.)
-                self.dragObject = None
-            elif self.click.pick and self.click.pick.__class__ == 'sphere' and self.click.pick.node.pickable: # pick up the object (but only masses)
-                self.dragObject = self.click.pick
-                self.distance = visual.dot(self.display.forward, self.dragObject.pos)
-                # save original attributes and overwrite them
-                self.rememberFixed = self.dragObject.node.fixed
-                self.dragObject.node.fixed = 1
-                self.rememberColor = self.dragObject.color
-                self.dragObject.color = (self.rememberColor[0] * 1.5,
-                                         self.rememberColor[1] * 1.5,
-                                         self.rememberColor[2] * 1.5)
-        if self.dragObject:
-            self.dragObject.pos = self.display.mouse.project(normal=self.display.forward, d=self.distance)
-
-    def step(self):
-        """Perform one step.  This is a convenience method.
-        It actually calls dispatchDnD() and advance().
-        """
-        self.dispatchDnD()
-        self.advance()
-        visual.rate(self.rate) # best when placed after advance() and before dispatchDnD()
-
-    def mainloop(self):
-        """Start the mainloop, which means that step() is
-        called in an infinite loop.
-        """
-        #self.display.autoscale=0
-        while 1:
-            self.step()
 
 class BaseMap(object):
     def __init__(self, fname,namefield='name',geocfield='geocode'):
@@ -689,25 +551,7 @@ class BaseMap(object):
     def dbound(self, *args):
         pass
 
-class VisualMap(BaseMap):
-    def __init__(self, fname, display=None):
-        self.display = display
-        BaseMap.__init__(self, fname)
 
-
-    def Reader(self, fname):
-        """
-        Reads shapefiles vector files.
-        """
-        BaseMap.Reader(self, fname)
-        self.display.center = self.center
-
-
-    def dbound(self,pol):
-        """
-        Draws a polygon
-        """
-        visual.curve(pos=pol,radius = 0)
 
 class QtMap(BaseMap):
     def __init__(self, fname, display=None, namefield='name',geocfield='geocode'):
@@ -748,7 +592,7 @@ class Polygon(QtGui.QGraphicsItem):
         self.fillColor = QtCore.Qt.yellow
         self.geocode = None
         self.setToolTip(str(self.geocode))
-        self.GraphicsItemFlag(QtGui.QGraphicsItem.ItemIsSelectable)
+        self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
         # TODO: make item selectable (the above line is not working)
         self.setZValue(1)
     
@@ -767,18 +611,19 @@ class Polygon(QtGui.QGraphicsItem):
         painter.drawPolygon(self.polyg)
         
     def mousePressEvent(self, event):
+        if self.isSelected():
+            print "unselect"
+            self.setSelected(False)
+            self.fillColor = QtCore.Qt.yellow
+        else: 
+            print "select"
+            self.setSelected(True)
+            print self.isSelected()
+            self.fillColor = QtCore.Qt.green
         self.update()
         QtGui.QGraphicsItem.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
-        if self.isSelected():
-            print "entrou"
-            self.setSelected(False)
-            self.fillColor = QtCore.Qt.yellow
-        else: 
-            self.setSelected(True)
-            print self.isSelected()
-            self.fillColor = QtCore.Qt.green
         self.update()
         QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
         
@@ -857,11 +702,43 @@ class QtRubberEdge(BaseRubberEdge):
         """
         BaseRubberEdge.__init__(self, n0, n1, k, l0, damping, radius, color, **keywords)
 
+class MapServer:
+    """
+    xmlrpc server
+    """
+    def __init__(self, porta=50000):
+        self.server = SimpleXMLRPCServer(("", porta))
+        self.map = None
+        self.jet  = cm.get_cmap("jet",50)
+    def drawStep(self, datadict={}):
+        """
+        Draws one timestep on the map
+        """
+        if not self.map:
+            return
+        self.paintPols(datadict)
+        
+    def paintPols(self, datadict):
+        """
+        Paint the polygons with the data from data dict
+        datadict is a dictionary of the form {geocode:value,...}
+        value is a float between 0 and 1.
+        """
+        for gc, val in datadict.iteritems():
+            col = self.jet(val)#rgba list
+            self.map.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
+            self.map.polyDict[gc].update()
+    
+    def start(self):
+        self.server.register_function(self.drawStep)
+        self.server.serve_forever()
+
+        
 if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
-    #widget = GraphWidget('riozonas_LatLong.shp')
-    widget = MapWindow('riozonas_LatLong.shp')
+    widget = MapWindow()
+    widget.drawMap('riozonas_LatLong.shp')
     widget.show()
     sys.exit(app.exec_())
     
