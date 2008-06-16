@@ -82,11 +82,13 @@ class MapWindow(Ui_Form):
         self.Form =  QtGui.QWidget()
         self.setupUi(self.Form)
         self.jet  = cm.get_cmap("jet",50) #colormap
+        self.M = None #initialize map
         # Overloading event-handling methods for self.mapView
         self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
         self.mapView.scaleView = MethodType(scaleView, self.mapView)
         self.server = MapServer()
+        self.server.map = self.M
         st = threading.Thread(target=self.server.start)
         st.start()
         
@@ -128,7 +130,7 @@ class MapWindow(Ui_Form):
         #self.mapView.setWindowTitle(self.tr("Network View"))
         scale_factor = self.mapView.width()/xxs
         self.mapView.scale(scale_factor, scale_factor)
-        self.server.setPols(self.M.polyDict)
+        
         #print self.polys
     
     def addGraph(self, nlist, elist=[] ):

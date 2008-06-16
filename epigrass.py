@@ -12,7 +12,7 @@ from Epigrass.Ui_cpanel import Ui_MainPanel #as MainPanel
 from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
 import Epigrass.epiplay as epi
-from Epigrass import spread
+from Epigrass import spread,  dgraph
 try:
     import psyco
     psyco.full()
@@ -298,7 +298,10 @@ an editor and your model's script."""),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
             #Open map display
-            
+            disp = dgraph.MapWindow()
+            disp.drawMap(self.shapefile)
+            dispthread = threading.Thread(target = disp.show)
+            dispthread.start()
             if not S.replicas:
                 S.start()
                 
