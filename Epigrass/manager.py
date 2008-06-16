@@ -3,8 +3,9 @@
 Model Management and simulation objects.
 """
 import cPickle, time
-import os, codecs
+import os, codecs,  subprocess
 from copy import deepcopy
+from xmlrpclib import ServerProxy, Error
 from simobj import graph, edge, siteobj
 from numpy import *
 from numpy.random import uniform, poisson
@@ -376,15 +377,20 @@ class simulate:
         """
         Start the simulation
         """
-        
         if '/' in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
+#        print "====>", self.gui
+        if self.gui and not self.round: #open the display window only on the first round of a reprun
+            subprocess.Popen(['python','Epigrass/dgraph.py'])
+            self.dserver = ServerProxy("http://localhost:50000", allow_none = True) # local display server
+        time.sleep(10)
+        self.Say('Simulation starting.')
         start = time.time()
         self.runGraph(self.g,self.steps,transp=self.doTransp)
         elapsed = time.time()-start
-        print 'Simulation lasted ',elapsed, ' seconds'
+        print 'Simulation lasted ',elapsed, ' seconds\n'
         if self.gui:
-            self.gui.textEdit1.insertPlainText('Simulation lasted %s seconds.'%elapsed)
+            self.gui.textEdit1.insertPlainText('Simulation lasted %s seconds.\n'%elapsed)
         if self.MySQLout:
             if self.backend == 'csv':
                 self.outToCsv(self.modelName)
@@ -935,7 +941,11 @@ class simulate:
                     j.transportStoD()
                     j.transportDtoS()
 ##                self.outToODb(self.modelName,mode='p')
-                #viewer.show(n)
+#                try:
+                print "======>", self.gui
+                self.dserver.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+#                except:
+#                    pass
                 g.simstep += 1
                 if self.gui:
                     self.gui.stepLCD.display(g.simstep)
@@ -959,7 +969,8 @@ class simulate:
         Exits outputs messages to the console or the gui accordingly 
         """
         if self.gui:
-            self.gui.textEdit1.insertPlainText(string)
+            self.gui.textEdit1.insertPlainText(string+'\n')
+            print '==>'+string+'\n'
         else:
             print string
 def storeSimulation(s,db='epigrass', host='localhost',port=3306):

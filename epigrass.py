@@ -7,7 +7,7 @@ except ImportError:
     print "Please install PyQT 4"
 #from qt import *
 from Epigrass.manager import *
-import threading
+import threading,  subprocess
 from Epigrass.Ui_cpanel import Ui_MainPanel #as MainPanel
 from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
@@ -297,11 +297,9 @@ an editor and your model's script."""),
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
-            #Open map display
-            disp = dgraph.MapWindow()
-            disp.drawMap(self.shapefile)
-            dispthread = threading.Thread(target = disp.show)
-            dispthread.start()
+
+            
+
             if not S.replicas:
                 S.start()
                 
@@ -363,6 +361,7 @@ an editor and your model's script."""),
             self.textEdit1.insertPlainText("Starting replica number %s"%i)
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                 db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(str(self.dbType.currentText()).lower()))
+            S.gui = self
             if randseed:
                 S.setSeed(seeds[i])
             S.round = i

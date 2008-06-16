@@ -22,7 +22,6 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 ##import psyco
 ##psyco.full()
 
-graphic_backend = "visual"
 graphic_backend = "qt"
 
 #FIXME: check numpy functions for vector arithmetics:
@@ -88,7 +87,7 @@ class MapWindow(Ui_Form):
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
         self.mapView.scaleView = MethodType(scaleView, self.mapView)
         self.server = MapServer()
-        self.server.map = self.M
+#        self.server.map = self.M
         st = threading.Thread(target=self.server.start)
         st.start()
         
@@ -99,6 +98,7 @@ class MapWindow(Ui_Form):
         """
         #Setup the Map
         self.M = Map(filename,self)
+        self.server.map = self.M
         xmin,ymin = self.M.xmin, self.M.ymin
         xmax,ymax = self.M.xmax, self.M.ymax
         xxs = (xmax-xmin)*1.1 #percentage of extra space
@@ -711,14 +711,19 @@ class MapServer:
     def __init__(self, porta=50000):
         self.server = SimpleXMLRPCServer(("", porta))
         self.map = None
+        self.step = 0
         self.jet  = cm.get_cmap("jet",50)
-    def drawStep(self, datadict={}):
+    def drawStep(self,step,  datadict={}):
         """
         Draws one timestep on the map
+        step: timestep number
+        datadict: dictionary geocode:value
         """
+        print "===> Entrou"
         if not self.map:
-            return
+            return ""
         self.paintPols(datadict)
+        self.lcdNumber.display(step)
         
     def paintPols(self, datadict):
         """
@@ -726,6 +731,7 @@ class MapServer:
         datadict is a dictionary of the form {geocode:value,...}
         value is a float between 0 and 1.
         """
+        print "===> painting..."
         for gc, val in datadict.iteritems():
             col = self.jet(val)#rgba list
             self.map.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
