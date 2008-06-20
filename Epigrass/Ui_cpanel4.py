@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/cpanel4.ui'
 #
-# Created: Mon Nov  5 14:33:10 2007
-#      by: PyQt4 UI code generator 4.3
+# Created: Fri Jun 20 10:23:38 2008
+#      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
 

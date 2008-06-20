@@ -380,17 +380,15 @@ class simulate:
         if '/' in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
 #        print "====>", self.gui
-        if self.gui and not self.round: #open the display window only on the first round of a reprun
-            subprocess.Popen(['python','Epigrass/dgraph.py'])
-            self.dserver = ServerProxy("http://localhost:50000", allow_none = True) # local display server
+#        if self.gui and not self.round: #open the display window only on the first round of a reprun
+#            subprocess.Popen(['python','Epigrass/dgraph.py'])
+#            self.dserver = ServerProxy("http://localhost:50000", allow_none = True) # local display server
         time.sleep(10)
         self.Say('Simulation starting.')
         start = time.time()
         self.runGraph(self.g,self.steps,transp=self.doTransp)
         elapsed = time.time()-start
-        print 'Simulation lasted ',elapsed, ' seconds\n'
-        if self.gui:
-            self.gui.textEdit1.insertPlainText('Simulation lasted %s seconds.\n'%elapsed)
+        self.Say('Simulation lasted %s seconds.'%elapsed)
         if self.MySQLout:
             if self.backend == 'csv':
                 self.outToCsv(self.modelName)
@@ -800,7 +798,7 @@ class simulate:
         self.Say("Starting simulation Analysis")
         curdir = os.getcwd()
         if not self.outdir == curdir:
-            os.chdir(outdir)
+            os.chdir(self.outdir)
         
         codeslist = [str(i.geocode) for i in self.g.site_list]
         self.criaAdjMatrix()
@@ -943,7 +941,7 @@ class simulate:
 ##                self.outToODb(self.modelName,mode='p')
 #                try:
                 print "======>", self.gui
-                self.dserver.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
 #                except:
 #                    pass
                 g.simstep += 1
@@ -969,10 +967,8 @@ class simulate:
         Exits outputs messages to the console or the gui accordingly 
         """
         if self.gui:
-            self.gui.textEdit1.insertPlainText(string+'\n')
-            print '==>'+string+'\n'
-        else:
-            print string
+            self.gui.textEdit1.insertPlainText(string+'\n''')
+        print string+'\n'
 def storeSimulation(s,db='epigrass', host='localhost',port=3306):
     """
     store the Simulate object *s* in the epigrass database

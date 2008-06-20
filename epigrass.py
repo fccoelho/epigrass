@@ -5,25 +5,27 @@ try:
     from PyQt4.QtGui import *
 except ImportError: 
     print "Please install PyQT 4"
-#from qt import *
+
 from Epigrass.manager import *
 import threading,  subprocess
-from Epigrass.Ui_cpanel import Ui_MainPanel #as MainPanel
+#from Epigrass.Ui_cpanel import Ui_MainPanel #as MainPanel
+from Epigrass.Ui_cpanel4new import Ui_MainWindow
 from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
 import Epigrass.epiplay as epi
 from Epigrass import spread,  dgraph
-try:
-    import psyco
-    psyco.full()
-except:
-    pass
+#try:
+#    import psyco
+#    psyco.full()
+#except:
+#    pass
 
 
-class MainPanel_Impl(QtGui.QWidget, Ui_MainPanel):
-
+class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
+    sequenceNumber = 1
+    windowList = []
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtGui.QMainWindow.__init__(self, None)
         self.app=app
         self.setupUi(self)
         #determining the user's home directory
@@ -42,6 +44,7 @@ class MainPanel_Impl(QtGui.QWidget, Ui_MainPanel):
         self.epigrassrc = os.path.join(home, ".epigrassrc")
         # set Translation
         self.curdir = os.getcwd()
+        self.rootdir = os.getcwd()
         if os.access(self.epigrassrc,os.F_OK):
             try:
                 self.conf = self.loadRcFile(self.epigrassrc)
@@ -55,23 +58,23 @@ class MainPanel_Impl(QtGui.QWidget, Ui_MainPanel):
         #MainPanel.setupUi(self)
         #MainPanel.__init__(self,parent,name,fl)
         # Overload connections
-        QtCore.QObject.connect(self.editButton,QtCore.SIGNAL("released()"),self.editScript)
-        QtCore.QObject.connect(self.chooseButton,QtCore.SIGNAL("released()"),self.chooseScript)
-        QtCore.QObject.connect(self.buttonExit,QtCore.SIGNAL("released()"),self.onExit)
-        QtCore.QObject.connect(self.buttonRun,QtCore.SIGNAL("released()"),self.onRun)#Thread)
-        QtCore.QObject.connect(self.buttonHelp,QtCore.SIGNAL("released()"),self.onHelp)
-        QtCore.QObject.connect(self.dbBackup,QtCore.SIGNAL("released()"),self.onDbBackup)
-        QtCore.QObject.connect(self.dbInfo,QtCore.SIGNAL("released()"),self.onDbInfo)
-        QtCore.QObject.connect(self.repOpen,QtCore.SIGNAL("released()"),self.onRepOpen)
-        QtCore.QObject.connect(self.playButton,QtCore.SIGNAL("released()"),self.onPlayButton)
-        QtCore.QObject.connect(self.playButton_2D,QtCore.SIGNAL("released()"),self.onPlayButton_2D)
-        QtCore.QObject.connect(self.dbscanButton,QtCore.SIGNAL("released()"),self.onVisual)
-        QtCore.QObject.connect(self.consensusButton,QtCore.SIGNAL("released()"),self.onConsensus)
-        QtCore.QObject.connect(self.tableList,QtCore.SIGNAL("activated(int)"),self.getVariables)
-        QtCore.QObject.connect(self.dbType,QtCore.SIGNAL("activated(int)"),self.setBackend)
+        self.connect(self.editButton,QtCore.SIGNAL("released()"),self.editScript)
+        self.connect(self.chooseButton,QtCore.SIGNAL("released()"),self.chooseScript)
+        self.connect(self.buttonExit,QtCore.SIGNAL("released()"),self.onExit)
+        self.connect(self.buttonRun,QtCore.SIGNAL("released()"),self.onRun)#Thread)
+        self.connect(self.buttonHelp,QtCore.SIGNAL("released()"),self.onHelp)
+        self.connect(self.dbBackup,QtCore.SIGNAL("released()"),self.onDbBackup)
+        self.connect(self.dbInfo,QtCore.SIGNAL("released()"),self.onDbInfo)
+        self.connect(self.repOpen,QtCore.SIGNAL("released()"),self.onRepOpen)
+        self.connect(self.playButton,QtCore.SIGNAL("released()"),self.onPlayButton)
+        self.connect(self.playButton_2D,QtCore.SIGNAL("released()"),self.onPlayButton_2D)
+        self.connect(self.dbscanButton,QtCore.SIGNAL("released()"),self.onVisual)
+        self.connect(self.consensusButton,QtCore.SIGNAL("released()"),self.onConsensus)
+        self.connect(self.tableList,QtCore.SIGNAL("activated(int)"),self.getVariables)
+        self.connect(self.dbType,QtCore.SIGNAL("activated(int)"),self.setBackend)
         QtCore.QMetaObject.connectSlotsByName(self)
         self.upGUITimer = QtCore.QTimer()
-        QtCore.QObject.connect(self.upGUITimer, QtCore.SIGNAL("timeout()"), app.processEvents)
+        self.connect(self.upGUITimer, QtCore.SIGNAL("timeout()"), app.processEvents)
         self.upGUITimer.start(100)
         
         usern = getpass.getuser() #Get the user name
@@ -84,6 +87,18 @@ class MainPanel_Impl(QtGui.QWidget, Ui_MainPanel):
             self.fillGui(self.conf)
         self.sim = None
             
+    def openGraphDisplay(self, shp=''):
+        """
+        Starts the Qt map display
+        shp: shapefile fname
+        """
+        self.graphDisplay = dgraph.MapWindow()
+        self.windowList.append(self.graphDisplay)
+        #self.graphDisplay.move(self.x()+40, self.y()+40)
+        if shp:
+            self.graphDisplay.drawMap(shp)
+        self.graphDisplay.show()
+    
     def initRc(self):
         """
         Initializes the epigrassrc file.
@@ -297,7 +312,8 @@ an editor and your model's script."""),
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
-
+            self.openGraphDisplay(S.shapefile[0])
+            #TODO: implementar a atualização em tempo real do display de saída; talvez usando uma QThread acionada por um sinal.
             
 
             if not S.replicas:
@@ -444,7 +460,7 @@ Make sure you have generated it."""),
                     self.trUtf8("""Please enter the password for the MySQL database in the first tab."""))
                 return
         self.Display=epi.viewer(host=str(self.hostnEdit.text()),port=int(str(self.portEdit.text())),
-                        db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'])
+                        db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
         for s in self.Display.tables:
             if not s.startswith('adj_'):
                 self.tableList.insertItem(0, s)
@@ -490,11 +506,12 @@ Please select another table from the menu."""))
         numbnodes = len(nodes)
         data = self.Display.readData(table)
         edata = self.Display.readEdges(table)
+        os.chdir(self.rootdir)
         numbsteps = len(data)/numbnodes
         self.Display.viewGraph(nodes,am,var,mapa)
         self.Display.anim(data,edata,numbsteps,pos,r)
         #Future(self.Display.keyin,data,edata,numbsteps,pos,r)
-        self.Display.keyin(data,edata,numbsteps,pos,r)
+        #self.Display.keyin(data,edata,numbsteps,pos,r)
     
     def onPlayButton_2D(self):
         """
@@ -506,7 +523,7 @@ Please select another table from the menu."""))
         r = self.rateSpinBox.value() 
         table = str(self.tableList.currentText())
         mapa = str(self.mapList.currentText())
-        if mapa in ['No map','Nenhum mapa','Pas de carte']:
+        if mapa in ['No map','Nenhum mapa','Pas de carte', 'No hay mapas']:
             QMessageBox.critical(None,
                 self.trUtf8("No Map!"),
                 self.trUtf8("""You must select a map for a 2D animation!"""),
@@ -668,23 +685,22 @@ def loadLang(app,tr,lang):
         
 def main():
     global app
-    print 'Oi'
+    #print 'Oi'
     app = QtGui.QApplication(sys.argv)
-    QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
+    #QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
     #MainP = QtGui.QWidget()
-    w = MainPanel_Impl()
+    w = MainWindow_Impl()
     #w.setupUi(MainP)
     #app.setMainWidget(w)
     w.show()
     sys.exit(app.exec_())
-    #app.exec_loop()
     
 
 if __name__ == "__main__":
-    main()
-##    app = QApplication(sys.argv)
-##    QObject.connect(app,SIGNAL("lastWindowClosed()"),app,SLOT("quit()"))
-##    w = MainPanel_Impl()
-##    app.setMainWidget(w)
-##    w.show()
-##    app.exec_loop()
+#    main()
+    global app
+    app = QtGui.QApplication(sys.argv)
+    w = MainWindow_Impl()
+    w.show()
+    sys.exit(app.exec_())
+    

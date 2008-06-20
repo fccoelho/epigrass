@@ -104,6 +104,7 @@ class MapWindow(Ui_Form):
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
         #calculating center of scene
+#        FIXME: descobrir o que há de diferente com a a centralização quando chamado do Epigrass 
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
@@ -148,10 +149,43 @@ class MapWindow(Ui_Form):
         Paint the polygons with the data from data dict
         datadict is a dictionary of the form {geocode:value,...}
         """
-        for gc, col in datadict.iteritems():
-            self.M.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
-            self.M.polyDict[gc].update()
+        if max(datadict.values()) > 1:
+            normw = max(datadict.values())
+        else:
+            normw = 1
+        for gc, val in datadict.iteritems():
+            val /= normw #normalize values if necessary
+            col = self.jet(val)#rgba list
+            gc = int(gc)
+#            print gc, type(gc)
+            if self.M.polyDict.has_key(gc):
+                self.M.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
+                self.M.polyDict[gc].update()
+#            else:
+#                print self.M.polyDict.values()
         
+    def drawStep(self,step,  datadict={}):
+        """
+        Draws one timestep on the map
+        step: timestep number
+        datadict: dictionary geocode:value
+        """
+        self.paintPols(datadict)
+        self.lcdNumber.display(step)
+#        TODO: atualizar horizontal slider, e criar um sinal e um slot para quando o slider for movido pelo usuário
+        #self.horizontalSlider.setTickPosition(step)
+# TODO: Guardar as series ou puxa-las diretamente de epiplay
+    def flashBorders(self,  gclist=[]):
+        """
+        Flash the borders to bright green to signal events
+        gclist: list of geocodes to be flashed
+        """
+        for gc in gclist:
+            gc = int(gc)
+            self.M.polyDict[gc].lineColor = QtCore.Qt.green
+            self.M.polyDict[gc].update()
+        self.M.polyDict[gc].lineColor = QtCore.Qt.black
+    
     def show(self):
         self.Form.show()
         
@@ -495,7 +529,9 @@ class BaseGraph(object):
 
 
 class BaseMap(object):
-    def __init__(self, fname,namefield='name',geocfield='geocode'):
+    def __init__(self, fname,namefield='NOME_ZONAS',geocfield='ZONA_TRAFE'):
+        self.namefield = namefield
+        self.geocfield = geocfield
         self.centroids = []#centroid list (x,y,z) tuples
         self.centdict = {} #keys are geocode, values are (x,y,z) tuples
         self.geomdict = {} #keys are geocode, values are geometries
@@ -505,7 +541,7 @@ class BaseMap(object):
         if os.path.exists(fname):
             self.Reader(fname)
         else:
-            print "shapefile not found"
+            print "shapefile %s not found in %s"%(fname, os.getcwd())
 
 
     def Reader(self, fname):
@@ -522,26 +558,34 @@ class BaseMap(object):
             geo = feat.GetGeometryRef()
             if geo.GetGeometryCount()<2:
                 g1 = geo.GetGeometryRef( 0 )
+                geocode = feat.GetFieldAsInteger(self.geocfield)
+                self.geomdict[geocode] = g1
+                if g1.GetGeometryType() == 3: #If it is a polygon
+                    cen = g1.Centroid()
+                    self.nlist.append(feat)
+                    self.centdict[geocode] = (cen.GetX(),cen.GetY(),cen.GetZ())
                 x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
-                y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
+                y =[-g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                 lp = zip(x,y)#list of points
                 tp += lp
-                self.dbound(lp)
+                #print geocode
+                self.dbound(lp, geocode)
             for c in xrange( geo.GetGeometryCount()):
                 ring = geo.GetGeometryRef ( c )
-                for cnt in xrange( ring.GetGeometryCount()):
+                for cnt in xrange(ring.GetGeometryCount()):
                     g1 = ring.GetGeometryRef( cnt )
-                    if g.GetGeometryType() == 3: #If it is a polygon
+                    if g1.GetGeometryType() == 3: #If it is a polygon
                         geocode = feat.GetFieldAsInteger(self.geocfield)
                         self.geomdict[geocode] = g1
-                        cen = g.Centroid()
-                        self.nlist.append(f)
+                        cen = g1.Centroid()
+                        self.nlist.append(feat)
                         self.centdict[geocode] = (cen.GetX(),cen.GetY(),cen.GetZ())
                     x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
-                    y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
+                    y =[-g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
                     lp = zip(x,y)#list of points
                     tp += lp
-                    self.dbound(lp)
+#                    print geocode
+                    self.dbound(lp, geocode)
             feat = L.GetNextFeature()
 
         g.Destroy()
@@ -556,12 +600,13 @@ class BaseMap(object):
 
 
 class QtMap(BaseMap):
-    def __init__(self, fname, display=None, namefield='name',geocfield='geocode'):
+    def __init__(self, fname, display=None, namefield='NOME_ZONAS',geocfield='ZONA_TRAFE'):
         self.display = display
         self.xmin, self.ymin, self.xmax,self.ymax = 180, 90, -180, -90
         BaseMap.__init__(self, fname,namefield,geocfield)
         
     def dbound(self, pol, geocode = None ):
+        #FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas
         p = Polygon(pol, self.display)
         self.xmin = p.xmin if p.xmin<self.xmin else self.xmin
         self.ymin = p.ymin if p.ymin<self.ymin else self.ymin
@@ -569,6 +614,7 @@ class QtMap(BaseMap):
         self.ymax = p.ymax if p.ymax>self.ymax else self.ymax
         #print self.xmin,  self.ymin,  self.xmax, self.ymax
         self.polyList.append(p)
+        #print geocode
         p.geocode = geocode
         self.polyDict[geocode] = p
         return p
@@ -624,6 +670,7 @@ class Polygon(QtGui.QGraphicsItem):
             self.fillColor = QtCore.Qt.green
         self.update()
         QtGui.QGraphicsItem.mousePressEvent(self, event)
+        #TODO plotar a serie temporal neste evento
 
     def mouseReleaseEvent(self, event):
         self.update()
@@ -713,32 +760,9 @@ class MapServer:
         self.map = None
         self.step = 0
         self.jet  = cm.get_cmap("jet",50)
-    def drawStep(self,step,  datadict={}):
-        """
-        Draws one timestep on the map
-        step: timestep number
-        datadict: dictionary geocode:value
-        """
-        print "===> Entrou"
-        if not self.map:
-            return ""
-        self.paintPols(datadict)
-        self.lcdNumber.display(step)
-        
-    def paintPols(self, datadict):
-        """
-        Paint the polygons with the data from data dict
-        datadict is a dictionary of the form {geocode:value,...}
-        value is a float between 0 and 1.
-        """
-        print "===> painting..."
-        for gc, val in datadict.iteritems():
-            col = self.jet(val)#rgba list
-            self.map.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
-            self.map.polyDict[gc].update()
     
     def start(self):
-        self.server.register_function(self.drawStep)
+        #self.server.register_function(self.map.drawStep)
         self.server.serve_forever()
 
         

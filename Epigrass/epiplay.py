@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #program to play simulations from database
-import dgraph, cPickle, glob, os, ogr
+import dgraph, cPickle, glob, os, ogr,  time
 #import visual as V
 #import visual.graph as VG
 from math import *
@@ -21,7 +21,7 @@ from matplotlib import cm
 class viewer:
     """
     """
-    def __init__(self, host='localhost', port=3306, user='epigrass', pw='epigrass', db='epigrass',backend='mysql',encoding='latin-1'):
+    def __init__(self, host='localhost', port=3306, user='epigrass', pw='epigrass', db='epigrass',backend='mysql',encoding='latin-1', gui=None):
         self.host = host
         self.port = port
         self.user = user
@@ -29,6 +29,7 @@ class viewer:
         self.db = db
         self.backend = backend
         self.encoding = encoding
+        self.gui = gui
         
         if backend == 'sqlite':
             db_filename = os.path.abspath('Epigrass.db')
@@ -97,10 +98,10 @@ class viewer:
                 d[l[names.index('geocode')]]=[l[names.index('geocode')],l[names.index('lat')],l[names.index('longit')],l[names.index('name')]]
             r= d.values()
             f.close()
-                
+            self.numbnodes = len(r)
         else:
             r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
-
+            self.numbnodes = len(r)
         # get adjacency matrix
 #        if not os.getcwd() == self.
         file = open('adj_'+name)
@@ -123,8 +124,6 @@ class viewer:
             f.close()
         else:
             r = self.connection.queryAll('SELECT * FROM %s'%table)
-        
-
         return r
 
     def readEdges(self,table):
@@ -137,36 +136,41 @@ class viewer:
             f.readline()#remove header
             r = [l.strip().split(',') for l in f]
             f.close()
+            self.numbedges = len(r)
         else:
             tab = table+'e'
             r = self.connection.queryAll('SELECT * FROM %s'%tab)
+            self.numbedges = len(r)
 
         return r
         
     def viewGraph(self, nodes, am, var,mapa=''):
         """
-        Starts the Vpython display of the graph.
+        Starts the Qt display of the map or graph.
         """
-        self.gr = dgraph.Graph(0.04, name='Epigrass Display - %s'%var)
-        #self.gr.display.visible=0
-        Nlist = [dgraph.Node(3,(float(i[2]),float(i[1]),0),name=unicode(i[3].strip(),self.encoding),geocode=i[0]) for i in nodes]
-        self.gr.insertNodeList(Nlist)
-        el = self.gr.getEdgeFromMatrix(am)
-        #print am,el
-        El = [dgraph.RubberEdge(self.gr.nodes[c],self.gr.nodes[l],1,damping=0.8) for c,l in el]
-        #print El
-        self.gr.insertEdgeList(El)
-        self.gr.addTimelabel()
-        self.gr.centerView()
-        if mapa not in ['No map','Nenhum mapa','Pas de carte']:
-            m = dgraph.Map(mapa,self.gr.display)
-            self.gr.insertMap(m)
-        else: m=None
-        self.gr.centerView()
-        if m:
-            self.node_sizefactor = m.dimension/10000.
-        else:
-            self.node_sizefactor = self.gr.netdimension/10000.
+        self.gui.openGraphDisplay(mapa)
+        self.gr = self.gui.graphDisplay
+        if mapa not in ['No map','Nenhum mapa','Pas de carte',  'No hay mapas']:
+            self.gr.drawMap(mapa)
+
+#        Nlist = [dgraph.Node(3,(float(i[2]),float(i[1]),0),name=unicode(i[3].strip(),self.encoding),geocode=i[0]) for i in nodes]
+#        self.gr.insertNodeList(Nlist)
+#        el = self.gr.getEdgeFromMatrix(am)
+#        #print am,el
+#        El = [dgraph.RubberEdge(self.gr.nodes[c],self.gr.nodes[l],1,damping=0.8) for c,l in el]
+#        #print El
+#        self.gr.insertEdgeList(El)
+#        self.gr.addTimelabel()
+#        self.gr.centerView()
+#        if mapa not in ['No map','Nenhum mapa','Pas de carte',  'No hay mapas']:
+#            m = dgraph.Map(mapa,self.gr.display)
+#            self.gr.insertMap(m)
+#        else: m=None
+#        self.gr.centerView()
+#        if m:
+#            self.node_sizefactor = m.dimension/10000.
+#        else:
+#            self.node_sizefactor = self.gr.netdimension/10000.
         #self.gr.display.visible=1
             
     def anim(self,data,edata, numbsteps,pos, rate=20):
@@ -177,43 +181,22 @@ class viewer:
         - pos: column number of variable to animate
         """
         for t in xrange(numbsteps):
-            V.rate(rate)
-            self.gr.timelabel.text=str(t) 
-            for i,n in enumerate(self.gr.nodes):
+            stepdict = {}
+            for i in xrange(self.numbnodes):
                 start = i*numbsteps+t
-                try:
-                    #print data[start][pos]
-                    n.box.width = n.box.height = n.box.length = self.node_sizefactor *(log10(float(data[start][pos])+10))**1/3.
-                    #print n.box.width
-                except OverflowError:#handle the case of log(0)
-                    n.box.width = n.box.height = n.box.length = 0.0001
-                n.ts.append(float(data[start][pos]))
-                if float(data[start][pos]) > 1:
-                    self.paintNode(t,n,numbsteps)
-                else:
-                    self.paintNode(t,n,numbsteps,col='g')
+                stepdict[data[start][0]] = data[start][pos] #{geocode: value}
+            self.gr.drawStep(t, stepdict)
             #paint Edges when there are infectious coming or going 
             if not edata:
                 continue
-            for i,e in enumerate(self.gr.edges):
+            elist = []
+            for i in xrange(self.numbedges):
                 start = i*numbsteps+t
                 if edata[start][-1]+edata[start][-2]:
-                    e.cylinder.color = (255,0,0)#bright red
-                else:
-                    e.cylinder.color = (0.5,0.5,0.5)#dark gray
+                    elist.append(edata[start][1])
+            self.gr.flashBorders(elist)
+            time.sleep(1/rate)
     
-    def paintNode(self,t,node,numbsteps,col='r'):
-        """
-        Paints red the box corresponding to the node in the visual display
-        """
-        if col =='r':
-            if not node.painted: 
-                red = (int(numbsteps)-t)/float(numbsteps)
-                blue = 1-red**6
-                node.box.color = (red,0.,blue)
-                node.painted = 1
-        elif col =='g':
-            node.box.color=V.color.green
 
     def plotTs(self,ts,name):
         """
