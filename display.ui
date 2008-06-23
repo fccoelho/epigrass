@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>778</width>
+    <width>797</width>
     <height>739</height>
    </rect>
   </property>
@@ -18,125 +18,140 @@
   <property name="windowTitle" >
    <string>Simulation Display</string>
   </property>
-  <widget class="QWidget" name="" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>2</y>
-     <width>761</width>
-     <height>731</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" >
-    <item>
-     <widget class="QLabel" name="label" >
-      <property name="text" >
-       <string>Geographical View</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" >
-      <item>
-       <widget class="QSplitter" name="splitter" >
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
-        </property>
-        <widget class="QGraphicsView" name="mapView" >
-         <property name="cursor" stdset="0" >
-          <cursorShape>PointingHandCursor</cursorShape>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <layout class="QVBoxLayout" >
+     <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Geographical View</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QSplitter" name="splitter" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="toolTip" >
-          <string>Select a polygon to see its local time series.</string>
-         </property>
-         <property name="autoFillBackground" >
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QWidget" name="layoutWidget" >
-         <layout class="QVBoxLayout" >
-          <item>
-           <widget class="QSlider" name="horizontalSlider" >
-            <property name="orientation" >
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" >
-            <item>
-             <widget class="QLabel" name="label_2" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Time Series</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" >
-               <size>
-                <width>461</width>
-                <height>23</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLCDNumber" name="lcdNumber" />
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QwtPlot" name="qwtPlot" />
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QPushButton" name="pushButton" >
-          <property name="text" >
-           <string>Play</string>
+         <widget class="QGraphicsView" name="mapView" >
+          <property name="cursor" stdset="0" >
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip" >
+           <string/>
+          </property>
+          <property name="autoFillBackground" >
+           <bool>true</bool>
           </property>
          </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2" >
-          <property name="text" >
-           <string>Stop</string>
-          </property>
+         <widget class="QWidget" name="layoutWidget" >
+          <layout class="QVBoxLayout" >
+           <item>
+            <widget class="QSlider" name="horizontalSlider" >
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition" >
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval" >
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="label_2" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text" >
+                <string>Time Series</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>461</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumber" />
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QwtPlot" name="qwtPlot" />
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" >
-           <size>
-            <width>20</width>
-            <height>521</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" >
+         <property name="sizeConstraint" >
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <item>
+          <widget class="QPushButton" name="pushButton" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>Replay</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>20</width>
+             <height>521</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <customwidgets>
   <customwidget>

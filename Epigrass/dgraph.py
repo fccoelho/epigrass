@@ -11,7 +11,7 @@ import threading
 #from numpy import *
 #import visual 
 import time, os,  sys
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from PyQt4 import Qt, QtCore, QtGui, QtOpenGL, Qwt5 as Qwt
 from numpy import  array, sqrt,  average
 from numpy.random import randint, uniform
 from Ui_display import Ui_Form 
@@ -24,7 +24,7 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer
 
 graphic_backend = "qt"
 
-#FIXME: check numpy functions for vector arithmetics:
+
 
 def keyPressEvent(self, event):
     key = event.key()
@@ -72,7 +72,7 @@ def array_norm(a):
     return b
 def array_dot(a,b):
     return sum([a[i] * b[i]  for i in xrange(len(a))])
-
+#TODO: implement the replay button
 class MapWindow(Ui_Form):
     '''
     Map and Time-series window
@@ -81,30 +81,68 @@ class MapWindow(Ui_Form):
         self.Form =  QtGui.QWidget()
         self.setupUi(self.Form)
         self.jet  = cm.get_cmap("jet",50) #colormap
+        self.timeseries = {}
+        self.setupQwtPlot()
+        self.step = 0
         self.M = None #initialize map
         # Overloading event-handling methods for self.mapView
         self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
         self.mapView.scaleView = MethodType(scaleView, self.mapView)
+        # connections
+        QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
+        QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
         self.server = MapServer()
 #        self.server.map = self.M
         st = threading.Thread(target=self.server.start)
         st.start()
         
+    def setupQwtPlot(self):
+        """
+        sets up the time series plot
+        """
+        #TODO: Adjust font size for the whole plot
+        #TODO: change colors for each plot
         
-    def drawMap(self, filename):
+        self.qwtPlot.setTitle('Simulation Time Series')
+        self.qwtPlot.setAxisTitle(Qwt.QwtPlot.xBottom, 'time')
+        self.qwtPlot.setAxisTitle(Qwt.QwtPlot.yLeft,  'count')
+        self.qwtPlot.insertLegend(Qwt.QwtLegend(), Qwt.QwtPlot.RightLegend)
+        # Time marker
+        self.mX = Qwt.QwtPlotMarker()
+        self.mX.setLabel(Qwt.QwtText('current time'))
+        self.mX.setLabelAlignment(Qt.Qt.AlignRight | Qt.Qt.AlignTop)
+        self.mX.setLineStyle(Qwt.QwtPlotMarker.VLine)
+        self.mX.setXValue(0)
+        self.mX.attach(self.qwtPlot)
+        self.qwtPlot.replot()
+    def addTsCurve(self, gc, name):
+        """
+        plots a time series curve to the plot window
+        """
+        data = [0]*len(self.timeseries)
+        for k, v in self.timeseries.items():
+            data[k] = v[gc]
+        t = self.timeseries.keys()
+        t.sort()
+        curve = Qwt.QwtPlotCurve(name)
+        curve.setPen(Qt.QPen(Qt.Qt.blue))
+        curve.attach(self.qwtPlot)
+        curve.setData(t, data)
+        
+    def drawMap(self, filename, namefield, geocfield):
         """
         Draws the map store in the shapefile fname.
         """
         #Setup the Map
-        self.M = Map(filename,self)
+        self.M = Map(fname=filename,display=self, namefield=namefield, geocfield=geocfield)
         self.server.map = self.M
         xmin,ymin = self.M.xmin, self.M.ymin
         xmax,ymax = self.M.xmax, self.M.ymax
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
         #calculating center of scene
-#        FIXME: descobrir o que há de diferente com a a centralização quando chamado do Epigrass 
+#        FIXME: descobrir o que ha de diferente com a a centralizacao quando chamado do Epigrass 
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
@@ -159,7 +197,7 @@ class MapWindow(Ui_Form):
             gc = int(gc)
 #            print gc, type(gc)
             if self.M.polyDict.has_key(gc):
-                self.M.polyDict[gc].fillColor = QtGui.QColor(col[0], col[1], col[2], col[3])
+                self.M.polyDict[gc].fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
                 self.M.polyDict[gc].update()
 #            else:
 #                print self.M.polyDict.values()
@@ -170,11 +208,12 @@ class MapWindow(Ui_Form):
         step: timestep number
         datadict: dictionary geocode:value
         """
+        self.step = step
         self.paintPols(datadict)
         self.lcdNumber.display(step)
-#        TODO: atualizar horizontal slider, e criar um sinal e um slot para quando o slider for movido pelo usuário
-        #self.horizontalSlider.setTickPosition(step)
-# TODO: Guardar as series ou puxa-las diretamente de epiplay
+        self.horizontalSlider.setValue(step)
+        self.timeseries[step] = datadict
+
     def flashBorders(self,  gclist=[]):
         """
         Flash the borders to bright green to signal events
@@ -188,8 +227,21 @@ class MapWindow(Ui_Form):
     
     def show(self):
         self.Form.show()
-        
 
+    def on_horizontalSlider_valueChanged(self):
+        if self.horizontalSlider.isEnabled():
+            self.on_horizontalSlider_sliderMoved()
+    def on_horizontalSlider_sliderMoved(self):
+        """
+        Handles updating the display on a slider move
+        """
+        val = self.horizontalSlider.value()
+        self.lcdNumber.display(val)
+        self.step = val
+        self.drawStep(val, self.timeseries[val])
+        self.mX.setXValue(self.step)
+        self.qwtPlot.replot()
+        
 #BlackBox  :-)
 class BaseBox(object):
     def __init__(self, *args, **kwargs):
@@ -559,6 +611,7 @@ class BaseMap(object):
             if geo.GetGeometryCount()<2:
                 g1 = geo.GetGeometryRef( 0 )
                 geocode = feat.GetFieldAsInteger(self.geocfield)
+                name = feat.GetFieldAsString(self.namefield)
                 self.geomdict[geocode] = g1
                 if g1.GetGeometryType() == 3: #If it is a polygon
                     cen = g1.Centroid()
@@ -569,13 +622,14 @@ class BaseMap(object):
                 lp = zip(x,y)#list of points
                 tp += lp
                 #print geocode
-                self.dbound(lp, geocode)
+                self.dbound(lp, geocode, name)
             for c in xrange( geo.GetGeometryCount()):
                 ring = geo.GetGeometryRef ( c )
                 for cnt in xrange(ring.GetGeometryCount()):
                     g1 = ring.GetGeometryRef( cnt )
                     if g1.GetGeometryType() == 3: #If it is a polygon
                         geocode = feat.GetFieldAsInteger(self.geocfield)
+                        name = feat.GetFieldAsString(self.namefield)
                         self.geomdict[geocode] = g1
                         cen = g1.Centroid()
                         self.nlist.append(feat)
@@ -585,7 +639,7 @@ class BaseMap(object):
                     lp = zip(x,y)#list of points
                     tp += lp
 #                    print geocode
-                    self.dbound(lp, geocode)
+                    self.dbound(lp, geocode,  name)
             feat = L.GetNextFeature()
 
         g.Destroy()
@@ -605,9 +659,9 @@ class QtMap(BaseMap):
         self.xmin, self.ymin, self.xmax,self.ymax = 180, 90, -180, -90
         BaseMap.__init__(self, fname,namefield,geocfield)
         
-    def dbound(self, pol, geocode = None ):
+    def dbound(self, pol, geocode = None , name=""):
         #FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas
-        p = Polygon(pol, self.display)
+        p = Polygon(pol, geocode,name,  self.display)
         self.xmin = p.xmin if p.xmin<self.xmin else self.xmin
         self.ymin = p.ymin if p.ymin<self.ymin else self.ymin
         self.xmax = p.xmax if p.xmax>self.xmax else self.xmax
@@ -615,7 +669,6 @@ class QtMap(BaseMap):
         #print self.xmin,  self.ymin,  self.xmax, self.ymax
         self.polyList.append(p)
         #print geocode
-        p.geocode = geocode
         self.polyDict[geocode] = p
         return p
 
@@ -624,7 +677,7 @@ class Polygon(QtGui.QGraphicsItem):
     Polygons that compose the map on Qt
     '''
     Type = QtGui.QGraphicsItem.UserType + 1
-    def __init__(self,plist,  graphWidget):
+    def __init__(self,plist, geocode, name,   graphWidget):
         QtGui.QGraphicsItem.__init__(self)
         self.display = graphWidget
         self.xmin,self.ymin = (array(plist)).min(axis=0)
@@ -638,8 +691,9 @@ class Polygon(QtGui.QGraphicsItem):
         self.newPos = QtCore.QPointF()
         self.lineColor = QtCore.Qt.black
         self.fillColor = QtCore.Qt.yellow
-        self.geocode = None
-        self.setToolTip(str(self.geocode))
+        self.geocode = geocode
+        self.name = name
+        self.setToolTip(str(self.geocode)+ " - "+name)
         self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
         # TODO: make item selectable (the above line is not working)
         self.setZValue(1)
@@ -659,15 +713,24 @@ class Polygon(QtGui.QGraphicsItem):
         painter.drawPolygon(self.polyg)
         
     def mousePressEvent(self, event):
+        button = event.button()
+        print button
+        scenepos = event.scenePos()
+        pos = event.pos()
+        if button ==2:
+            pass
         if self.isSelected():
             print "unselect"
             self.setSelected(False)
-            self.fillColor = QtCore.Qt.yellow
+            col = self.display.jet(self.display.timeseries[self.display.step][self.geocode])
+            self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
         else: 
             print "select"
             self.setSelected(True)
             print self.isSelected()
             self.fillColor = QtCore.Qt.green
+            self.display.addTsCurve(self.geocode, self.name)
+            self.display.qwtPlot.replot()
         self.update()
         QtGui.QGraphicsItem.mousePressEvent(self, event)
         #TODO plotar a serie temporal neste evento
@@ -676,6 +739,15 @@ class Polygon(QtGui.QGraphicsItem):
         self.update()
         QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
         
+    def mouseDoubleClickEvent(self, event):
+        """
+        Center the display on the coordinates of the double click
+        """
+        button = event.button()
+        scenepos = event.scenePos()
+        pos = event.pos()
+        self.display.mapView.centerOn(scenepos)
+    
     def boundingRect(self):
         return QtCore.QRectF(self.xmin, self.ymin,
                              self.width, self.height)
@@ -770,7 +842,7 @@ if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     widget = MapWindow()
-    widget.drawMap('riozonas_LatLong.shp')
+    widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
     widget.show()
     sys.exit(app.exec_())
     

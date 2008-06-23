@@ -15,7 +15,7 @@ def Connect(backend, user, pw, host, port, db):
     Initializes the connection.
     """
 
-    db_filename = os.path.abspath('Epigrass.db')
+    db_filename = os.path.abspath('Epigrass.sqlite')
     ##if os.path.exists(db_filename):
     ##    os.unlink(db_filename)
     if backend == 'sqlite':

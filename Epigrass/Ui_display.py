@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/fccoelho/Documents/Projects_software/epigrass/epigrassqt4/display.ui'
+# Form implementation generated from reading ui file '/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/display.ui'
 #
-# Created: Sun May  4 20:11:54 2008
+# Created: Mon Jun 23 12:11:02 2008
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(QtCore.QSize(QtCore.QRect(0,0,778,739).size()).expandedTo(Form.minimumSizeHint()))
+        Form.resize(QtCore.QSize(QtCore.QRect(0,0,797,739).size()).expandedTo(Form.minimumSizeHint()))
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -20,21 +20,20 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
 
-        self.widget = QtGui.QWidget(Form)
-        self.widget.setGeometry(QtCore.QRect(10,2,761,731))
-        self.widget.setObjectName("widget")
+        self.gridlayout = QtGui.QGridLayout(Form)
+        self.gridlayout.setObjectName("gridlayout")
 
-        self.vboxlayout = QtGui.QVBoxLayout(self.widget)
+        self.vboxlayout = QtGui.QVBoxLayout()
         self.vboxlayout.setObjectName("vboxlayout")
 
-        self.label = QtGui.QLabel(self.widget)
+        self.label = QtGui.QLabel(Form)
         self.label.setObjectName("label")
         self.vboxlayout.addWidget(self.label)
 
         self.hboxlayout = QtGui.QHBoxLayout()
         self.hboxlayout.setObjectName("hboxlayout")
 
-        self.splitter = QtGui.QSplitter(self.widget)
+        self.splitter = QtGui.QSplitter(Form)
         self.splitter.setOrientation(QtCore.Qt.Vertical)
         self.splitter.setObjectName("splitter")
 
@@ -51,6 +50,8 @@ class Ui_Form(object):
 
         self.horizontalSlider = QtGui.QSlider(self.layoutWidget)
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setTickPosition(QtGui.QSlider.TicksBelow)
+        self.horizontalSlider.setTickInterval(0)
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.vboxlayout1.addWidget(self.horizontalSlider)
 
@@ -81,13 +82,26 @@ class Ui_Form(object):
         self.hboxlayout.addWidget(self.splitter)
 
         self.vboxlayout2 = QtGui.QVBoxLayout()
+        self.vboxlayout2.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
         self.vboxlayout2.setObjectName("vboxlayout2")
 
-        self.pushButton = QtGui.QPushButton(self.widget)
+        self.pushButton = QtGui.QPushButton(Form)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
         self.pushButton.setObjectName("pushButton")
         self.vboxlayout2.addWidget(self.pushButton)
 
-        self.pushButton_2 = QtGui.QPushButton(self.widget)
+        self.pushButton_2 = QtGui.QPushButton(Form)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
+        self.pushButton_2.setSizePolicy(sizePolicy)
         self.pushButton_2.setObjectName("pushButton_2")
         self.vboxlayout2.addWidget(self.pushButton_2)
 
@@ -95,6 +109,7 @@ class Ui_Form(object):
         self.vboxlayout2.addItem(spacerItem1)
         self.hboxlayout.addLayout(self.vboxlayout2)
         self.vboxlayout.addLayout(self.hboxlayout)
+        self.gridlayout.addLayout(self.vboxlayout,0,0,1,1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -102,9 +117,8 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Simulation Display", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "Geographical View", None, QtGui.QApplication.UnicodeUTF8))
-        self.mapView.setToolTip(QtGui.QApplication.translate("Form", "Select a polygon to see its local time series.", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Time Series", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("Form", "Play", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("Form", "Replay", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2.setText(QtGui.QApplication.translate("Form", "Stop", None, QtGui.QApplication.UnicodeUTF8))
 
 from PyQt4.Qwt5 import QwtPlot

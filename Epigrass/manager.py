@@ -256,7 +256,6 @@ class simulate:
                     if int(o.geocode) == i[0]:
                         o.quarantine == i[1:]
                             
-             
             if self.seed:
                 #print type(o.geocode), type(self.seed[0])
                 if self.seed[0][0] == "all":
@@ -470,6 +469,18 @@ class simulate:
         #close files
         self.World.closeSources()
 
+    
+    def writeMetaCSV(self, table):
+        """
+        Writes a meta CSV table
+        """
+        f = open(table+'_meta', 'w')
+        cfgitems = self.config.items()
+        h = ';'.join([k.strip().replace(' ','_').replace('.', '$') for k,v in cfgitems])
+        l = ';'.join([v.split('#')[0] for k, v in cfgitems])
+        f.write(h+'\n')
+        f.write(l+'\n')
+        f.close()
         
     def outToCsv(self,table):
         """
@@ -663,28 +674,64 @@ class simulate:
                 edicin['btheta'] = e.btheta[t]
                 DO.Edge(**edicin)
             DO.Edge._connection.commit()
-##            if self.gui:
-##                self.gui.stepLCD.display(g.simstep)
-##            if g.gr:
-##                g.gr.timelabel.text = 'time = %s'%g.simstep
             sys.exit("commit successful")
+    
+    def writeMetaTable(self, table):
+        """
+        Creates a Meta-Info Table on the database with the contents of the .epg file 
+        """
+        try:
+            table = table+'_meta'
+            if self.backend.lower() == "mysql":
+                con = MySQLdb.connect(host=self.host, port=self.port,
+                                    user=self.usr,passwd=self.passw, db=self.db)
+            elif self.backend.lower() == "sqlite":
+                con = sqlite3.connect("Epigrass.sqlite")
+            # Create table
+            sqlstr1 = "CREATE TABLE %s("%table 
+            vars = []
+            cfgitems = self.config.items()
+            for k, v in cfgitems:
+                vars.append(k.strip().replace(' ','_').replace('.', '$'))
+            sqlstr2 = ', '.join(["%s text"%i for i in vars])
+            Cursor = con.cursor()
+            Cursor.execute(sqlstr1+sqlstr2+');')
+            #doing inserts
+            values = [v.split('#')[0] for k, v in cfgitems]
+#            for k, v in cfgitems:
+#                v = v.split('#')[0]
+#                if not v:
+#                    v = ' '
+#                values.append()
+            str3 = ','.join(['"%s"'%i for i in values])+')'
+            sqlstr3 = '''INSERT INTO %s VALUES(%s''' % (table, str3)
+            #print sqlstr3
+            Cursor.execute(sqlstr3)
+        finally:
+            if con:
+                con.commit()
+                con.close()
+
     def outToDb(self,table):
         """
         Insert simulation results on a mysql or SQLite table
         """
+        
         if self.backend.lower() == "mysql":
             self.Say('Saving data on MySQL...')
         elif self.backend.lower() == "sqlite":
             self.Say('Saving data on SQLite...')
+        
         con=None
         try:
             table = table+'_'+self.now
+            self.writeMetaTable(table)
             self.outtable = table
             if self.backend.lower() == "mysql":
                 con = MySQLdb.connect(host=self.host, port=self.port,
                                     user=self.usr,passwd=self.passw, db=self.db)
             elif self.backend.lower() == "sqlite":
-                con = sqlite3.connect("Epigrass.db")
+                con = sqlite3.connect("Epigrass.sqlite")
             # Define number of variables to be stored                         
             nvar = len(self.g.site_list[0].ts[-1]) +4 #state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),'*nvar #nvar variables in the table

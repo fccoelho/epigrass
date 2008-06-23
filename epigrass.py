@@ -67,7 +67,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.dbInfo,QtCore.SIGNAL("released()"),self.onDbInfo)
         self.connect(self.repOpen,QtCore.SIGNAL("released()"),self.onRepOpen)
         self.connect(self.playButton,QtCore.SIGNAL("released()"),self.onPlayButton)
-        self.connect(self.playButton_2D,QtCore.SIGNAL("released()"),self.onPlayButton_2D)
+#        self.connect(self.playButton_2D,QtCore.SIGNAL("released()"),self.onPlayButton_2D)
         self.connect(self.dbscanButton,QtCore.SIGNAL("released()"),self.onVisual)
         self.connect(self.consensusButton,QtCore.SIGNAL("released()"),self.onConsensus)
         self.connect(self.tableList,QtCore.SIGNAL("activated(int)"),self.getVariables)
@@ -87,7 +87,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
             self.fillGui(self.conf)
         self.sim = None
             
-    def openGraphDisplay(self, shp=''):
+    def openGraphDisplay(self, shp='', namefield='', geocfield=''):
         """
         Starts the Qt map display
         shp: shapefile fname
@@ -96,7 +96,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         self.windowList.append(self.graphDisplay)
         #self.graphDisplay.move(self.x()+40, self.y()+40)
         if shp:
-            self.graphDisplay.drawMap(shp)
+            self.graphDisplay.drawMap(shp, namefield, geocfield)
         self.graphDisplay.show()
     
     def initRc(self):
@@ -449,6 +449,7 @@ Make sure you have generated it."""),
                 self.trUtf8("&OK"))
             
     
+    
     def onVisual(self):
         """
         Scan the epigrass database an shows available simulations.
@@ -462,8 +463,8 @@ Make sure you have generated it."""),
         self.Display=epi.viewer(host=str(self.hostnEdit.text()),port=int(str(self.portEdit.text())),
                         db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
         for s in self.Display.tables:
-            if not s.startswith('adj_'):
-                self.tableList.insertItem(0, s)
+            if s.endswith('_meta'):
+                self.tableList.insertItem(0, s[:-5])
         #check for available maps
         maplist = [i for i in os.listdir(os.getcwd()) if i.endswith('.shp')]
         for m in maplist:
@@ -479,6 +480,8 @@ Make sure you have generated it."""),
         for s in self.vars:
             if s not in ['id','name','geocode','lat','longit','time']:
                 self.variableList.insertItem(0, s)
+        #TODO: read meta-info from table and show in the tooltip
+        self.variableList.setTooltip('')
     
     def onPlayButton(self):
         """
@@ -490,7 +493,7 @@ Make sure you have generated it."""),
         pos = self.vars.index(var)
         r = self.rateSpinBox.value() 
         table = str(self.tableList.currentText())
-        mapa = str(self.mapList.currentText())
+        mapa = self.Display.shapefile[0]
         modname = table.split('_')[0] #self.sim.modelName.split('/')[-1]
         #change the the outdata directory
         if not os.path.split(os.getcwd())[1].startswith("outdata"):
@@ -599,7 +602,7 @@ Please select another table from the menu."""))
         """
         if self.sim:
             if self.sim.g.gr:
-                self.sim.g.clearVisual()
+                self.sim.g.gr.close()
         self.close()
         
 class Future:

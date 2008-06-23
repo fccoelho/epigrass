@@ -166,7 +166,7 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
         self.tabWidget.setCurrentIndex(2)
 
     @QtCore.pyqtSignature("")
-    def on_actionE_xit_activated(self):
+    def on_action_Exit_activated(self):
         self.close()
 
     @QtCore.pyqtSignature("")

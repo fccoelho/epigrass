@@ -32,7 +32,7 @@ class viewer:
         self.gui = gui
         
         if backend == 'sqlite':
-            db_filename = os.path.abspath('Epigrass.db')
+            db_filename = os.path.abspath('Epigrass.sqlite')
             connection_string = 'sqlite:' + db_filename
         elif backend == 'mysql':
             connection_string = r'%s://%s:%s@%s/%s'%(backend,user,pw,host,db)
@@ -71,8 +71,10 @@ class viewer:
         """
         if self.backend == 'sqlite':
             r = [i[1] for i in self.connection.queryAll('PRAGMA table_info(%s)'%table)]
+            self.shapefile = eval(self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))[0][0])
         elif self.backend == 'mysql':
             r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
+            self.shapefile = eval(self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))[0][0])
         elif self.backend == 'csv':
             f = open(table,'r')
             r = f.read().strip().split(',')
@@ -102,6 +104,8 @@ class viewer:
         else:
             r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
             self.numbnodes = len(r)
+            
+            
         # get adjacency matrix
 #        if not os.getcwd() == self.
         file = open('adj_'+name)
@@ -151,7 +155,7 @@ class viewer:
         self.gui.openGraphDisplay(mapa)
         self.gr = self.gui.graphDisplay
         if mapa not in ['No map','Nenhum mapa','Pas de carte',  'No hay mapas']:
-            self.gr.drawMap(mapa)
+            self.gr.drawMap(mapa, self.shapefile[1],self.shapefile[2] )
 
 #        Nlist = [dgraph.Node(3,(float(i[2]),float(i[1]),0),name=unicode(i[3].strip(),self.encoding),geocode=i[0]) for i in nodes]
 #        self.gr.insertNodeList(Nlist)
@@ -180,6 +184,9 @@ class viewer:
         - edata: infectious traveling for edge painting
         - pos: column number of variable to animate
         """
+        #FIXME: the animation rate is not working....
+        self.gr.horizontalSlider.setEnabled(0)
+        self.gr.horizontalSlider.setMaximum(numbsteps)
         for t in xrange(numbsteps):
             stepdict = {}
             for i in xrange(self.numbnodes):
@@ -196,6 +203,7 @@ class viewer:
                     elist.append(edata[start][1])
             self.gr.flashBorders(elist)
             time.sleep(1/rate)
+        self.gr.horizontalSlider.setEnabled(1)
     
 
     def plotTs(self,ts,name):
