@@ -2,7 +2,7 @@
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
 import sys, matplotlib
-matplotlib.use("Agg")
+#matplotlib.use("Agg")
 from pylab import *
 #import dgraph
 from numpy import *

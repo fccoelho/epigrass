@@ -1,90 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-06-20, 10:33:54 -->
+<!-- Saved: 2008-06-24, 11:25:57 -->
 <Tasks version="4.1">
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: check numpy functions for vector arithmetics:</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>27</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>235</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>342</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: verify time overhead of this check</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>401</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>437</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: make item selectable (the above line is not working)</Summary>
-    <Description></Description>
-    <Created>2008-06-16, 17:38:37</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>598</Linenumber>
-    </Resource>
-  </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: move this import to the graph level</Summary>
     <Description></Description>
-    <Created>2008-06-20, 09:22:40</Created>
+    <Created>2008-06-20, 14:17:14</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>simobj.py</Name>
       </Filename>
       <Linenumber>404</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: check this connection string</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 14:22:24</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dataObject.py</Name>
+      </Filename>
+      <Linenumber>26</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implement the replay button</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>75</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Adjust font size for the whole plot</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>104</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: change colors for each plot</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>105</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: descobrir o que ha de diferente com a a centralizacao quando chamado do Epigrass</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>145</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>321</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>428</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: verify time overhead of this check</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>487</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>523</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>663</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: make item selectable (the above line is not working)</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:11</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>698</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: the animation rate is not working....</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:57:52</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>epiplay.py</Name>
+      </Filename>
+      <Linenumber>187</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: implementar a atualização em tempo real do display de saída; talvez usando uma QThread acionada por um sinal.</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:58:39</Created>
+    <Resource>
+      <Filename>
+        <Name>epigrass.py</Name>
+      </Filename>
+      <Linenumber>316</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
+    <Description></Description>
+    <Created>2008-06-23, 17:58:39</Created>
+    <Resource>
+      <Filename>
+        <Name>epigrass.py</Name>
+      </Filename>
+      <Linenumber>483</Linenumber>
     </Resource>
   </Task>
 </Tasks>

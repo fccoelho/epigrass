@@ -3,7 +3,7 @@ This module generates a report of the network simulation model
 using LaTeX.
 """
 import os, sys, commands, string, time, matplotlib, codecs
-matplotlib.use("Agg")
+#matplotlib.use("Agg")
 
 from pylab import *
 from matplotlib.mlab import *

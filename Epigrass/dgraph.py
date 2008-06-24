@@ -8,6 +8,7 @@ distance, and the edges do the opposite.
 """
 import math, ogr
 import threading
+import itertools
 #from numpy import *
 #import visual 
 import time, os,  sys
@@ -72,7 +73,7 @@ def array_norm(a):
     return b
 def array_dot(a,b):
     return sum([a[i] * b[i]  for i in xrange(len(a))])
-#TODO: implement the replay button
+
 class MapWindow(Ui_Form):
     '''
     Map and Time-series window
@@ -82,6 +83,8 @@ class MapWindow(Ui_Form):
         self.setupUi(self.Form)
         self.jet  = cm.get_cmap("jet",50) #colormap
         self.timeseries = {}
+        self.arrivals = {}
+        self.colors = itertools.cycle([Qt.Qt.red,Qt.Qt.green,Qt.Qt.blue,Qt.Qt.cyan, Qt.Qt.magenta,Qt.Qt.yellow,Qt.Qt.black])
         self.setupQwtPlot()
         self.step = 0
         self.M = None #initialize map
@@ -92,6 +95,7 @@ class MapWindow(Ui_Form):
         # connections
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
+        QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("released()"), self.replay)
         self.server = MapServer()
 #        self.server.map = self.M
         st = threading.Thread(target=self.server.start)
@@ -101,12 +105,9 @@ class MapWindow(Ui_Form):
         """
         sets up the time series plot
         """
-        #TODO: Adjust font size for the whole plot
-        #TODO: change colors for each plot
-        
-        self.qwtPlot.setTitle('Simulation Time Series')
+#        self.qwtPlot.setTitle('Simulation Time Series')
         self.qwtPlot.setAxisTitle(Qwt.QwtPlot.xBottom, 'time')
-        self.qwtPlot.setAxisTitle(Qwt.QwtPlot.yLeft,  'count')
+#        self.qwtPlot.setAxisTitle(Qwt.QwtPlot.yLeft,  'count')
         self.qwtPlot.insertLegend(Qwt.QwtLegend(), Qwt.QwtPlot.RightLegend)
         # Time marker
         self.mX = Qwt.QwtPlotMarker()
@@ -120,15 +121,17 @@ class MapWindow(Ui_Form):
         """
         plots a time series curve to the plot window
         """
+        
         data = [0]*len(self.timeseries)
         for k, v in self.timeseries.items():
             data[k] = v[gc]
         t = self.timeseries.keys()
         t.sort()
         curve = Qwt.QwtPlotCurve(name)
-        curve.setPen(Qt.QPen(Qt.Qt.blue))
+        curve.setPen(Qt.QPen(self.colors.next()))
         curve.attach(self.qwtPlot)
         curve.setData(t, data)
+        self.M.polyDict[gc].curve = curve
         
     def drawMap(self, filename, namefield, geocfield):
         """
@@ -202,6 +205,16 @@ class MapWindow(Ui_Form):
 #            else:
 #                print self.M.polyDict.values()
         
+    def replay(self):
+        """
+        Replay the time series from beggining to end.
+        """
+        rw = ReplayWorker(self.timeseries, self.arrivals )
+        QtCore.QObject.connect(rw,QtCore.SIGNAL("drawStep"), self.drawStep)
+        QtCore.QObject.connect(rw,QtCore.SIGNAL("flash"), self.flashBorders)
+        rw.render()
+
+            
     def drawStep(self,step,  datadict={}):
         """
         Draws one timestep on the map
@@ -214,11 +227,12 @@ class MapWindow(Ui_Form):
         self.horizontalSlider.setValue(step)
         self.timeseries[step] = datadict
 
-    def flashBorders(self,  gclist=[]):
+    def flashBorders(self,  step, gclist=[]):
         """
         Flash the borders to bright green to signal events
         gclist: list of geocodes to be flashed
         """
+        self.arrivals[step] = gclist
         for gc in gclist:
             gc = int(gc)
             self.M.polyDict[gc].lineColor = QtCore.Qt.green
@@ -695,7 +709,6 @@ class Polygon(QtGui.QGraphicsItem):
         self.name = name
         self.setToolTip(str(self.geocode)+ " - "+name)
         self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        # TODO: make item selectable (the above line is not working)
         self.setZValue(1)
     
     def type(self):
@@ -714,30 +727,30 @@ class Polygon(QtGui.QGraphicsItem):
         
     def mousePressEvent(self, event):
         button = event.button()
-        print button
+#        print button
         scenepos = event.scenePos()
         pos = event.pos()
-        if button ==2:
-            pass
         if self.isSelected():
-            print "unselect"
+#            print "unselect"
             self.setSelected(False)
             col = self.display.jet(self.display.timeseries[self.display.step][self.geocode])
             self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
+            self.curve.detach()
+            self.display.qwtPlot.replot()
         else: 
-            print "select"
+#            print "select"
             self.setSelected(True)
-            print self.isSelected()
+#            print self.isSelected()
             self.fillColor = QtCore.Qt.green
             self.display.addTsCurve(self.geocode, self.name)
             self.display.qwtPlot.replot()
         self.update()
-        QtGui.QGraphicsItem.mousePressEvent(self, event)
-        #TODO plotar a serie temporal neste evento
+        #QtGui.QGraphicsItem.mousePressEvent(self, event)
+        
 
     def mouseReleaseEvent(self, event):
         self.update()
-        QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
+        #QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
         
     def mouseDoubleClickEvent(self, event):
         """
@@ -837,7 +850,34 @@ class MapServer:
         #self.server.register_function(self.map.drawStep)
         self.server.serve_forever()
 
-        
+class ReplayWorker(QtCore.QThread):        
+    def __init__(self,ts, arr,  parent=None):
+        QtCore.QThread.__init__(self, parent)
+        self.mutex = QtCore.QMutex()
+        self.condition = QtCore.QWaitCondition()
+        self.timeseries = ts
+        self.arrivals = arr
+    def __del__(self):
+        self.mutex.lock()
+        self.condition.wakeOne()
+        self.mutex.unlock()
+        self.wait()
+    def render(self):
+        locker = QtCore.QMutexLocker(self.mutex)
+        self.start()
+    def run(self):
+        for t in xrange(len(self.timeseries)):
+            self.mutex.lock()
+            self.emit(QtCore.SIGNAL("drawStep"), t, self.timeseries[t])
+            self.mutex.unlock()
+            if self.arrivals.has_key(t):
+                self.emit(QtCore.SIGNAL("flash"), t, self.arrivals[t])
+#                self.flashBorders(t, self.arrivals[t])
+            time.sleep(.200)
+        self.mutex.lock()
+        self.condition.wait(self.mutex)
+        self.mutex.unlock()
+
 if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
@@ -845,18 +885,4 @@ if __name__=='__main__':
     widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
     widget.show()
     sys.exit(app.exec_())
-    
 
-##    n1 = Node(2,G.display.center)
-##    n2 = Node(2,G.display.center+(1.,1.,1.))
-##    n3 = Node(2,G.display.center+(1,2,3))
-##    n4 = Node(2,G.display.center+(2,2,3))
-##    G.insertNodeList([n1,n2,n3,n4])
-##    e1 = RubberEdge(n1,n2,1, damping=.8)
-##    e2 = RubberEdge(n2,n3,1, damping=.8)
-##    e3 = RubberEdge(n2,n4,1, damping=.8)
-##    e4 = RubberEdge(n4,n1,1, damping=.8)
-##    G.insertEdgeList([e1,e2,e3,e4])
-    
-
-    #G.mainloop()

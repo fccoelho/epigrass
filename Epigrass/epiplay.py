@@ -2,19 +2,15 @@
 
 #program to play simulations from database
 import dgraph, cPickle, glob, os, ogr,  time
-#import visual as V
-#import visual.graph as VG
 from math import *
 try:
     from PyQt4.QtGui import *
 except ImportError: 
     print "Please install PyQT 4"
-#from qt import *
+#
 from numpy import *
 import sqlobject as SO
-#from pylab import *
-import pylab as P
-from matplotlib.patches import Polygon
+
 from matplotlib import cm
 
 
@@ -202,7 +198,7 @@ class viewer:
                 if edata[start][-1]+edata[start][-2]:
                     elist.append(edata[start][1])
             self.gr.flashBorders(elist)
-            time.sleep(1/rate)
+            time.sleep(1./rate)
         self.gr.horizontalSlider.setEnabled(1)
     
 
@@ -244,70 +240,7 @@ class viewer:
                     self.anim(data,edata,numbsteps,pos,rate)
                 else:
                     pass
-    
-    def viewGraph2D(self, fname, geocfield, canvas):
-        """
-        Starts the pylab display of the graph.
-        fname: shapefile with the polygons
-        """
-        self.can = canvas
-
-        ax = self.can.axes
-        ax.set_title("Epidemic Dynamics")
-        #Get the polygons
-        g = ogr.Open (fname)
-        L = g.GetLayer(0)
-        N = 0
-        pl = {}#polygon patch dictionary (by geocode)
-        feat = L.GetNextFeature()
-        while feat is not None:
-            gc = feat.GetFieldAsInteger(geocfield)
-            field_count = L.GetLayerDefn().GetFieldCount()
-            geo = feat.GetGeometryRef()
-            if geo.GetGeometryCount()<2:
-                g1 = geo.GetGeometryRef( 0 )
-                x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
-                y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
-                m=transpose(r_[[x],[y]]) #polygonvertices
-                poligono = Polygon( m ,animated=True) #Define polygon
-                #Add the polygon to the figure axes
-                pl[gc]=poligono
-                ax.add_patch ( poligono )
-            for c in range( geo.GetGeometryCount()):
-                ring = geo.GetGeometryRef ( c )
-                for cnt in range( ring.GetGeometryCount()):
-                    g1 = ring.GetGeometryRef( cnt )
-                    x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
-                    y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
-                    m=transpose(r_[[x],[y]]) #Polygon vertices
-                    poligono = Polygon( m ,animated=True) #Define polygon
-                    #Add the polygon to the figure axes
-                    pl[gc]=poligono
-                    ax.add_patch ( poligono )
-            feat = L.GetNextFeature()
-        return ax, pl
             
-    def anim2D(self,data,nodes, numbsteps,pos,ax,pl):
-        """
-        Starts the animation
-        - data: time series from database
-        - pos: column number of variable to animate
-        - ax: is the axis containing the polygons
-        - pl is the polygon dictionary
-        """
-        jet  = cm.get_cmap("jet",100)
-        for t in range(numbsteps):
-            for i in xrange(len(nodes)):
-                start = i*numbsteps+t
-                colmax = max([float(i[pos]) for i in data])
-                colorind = float(data[start][pos])/colmax
-                #print colorind
-                color = jet(colorind)
-                gc = int(data[start][0])
-                try:
-                    pl[gc].set_facecolor (color)
-                except: pass
-            self.can.draw()
     
 if __name__ == "__main__":
     Display=viewer(user='root',pw='mysql')

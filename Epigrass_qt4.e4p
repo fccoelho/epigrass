@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-06-20, 10:33:48 -->
+<!-- Saved: 2008-06-24, 11:25:57 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -141,25 +141,14 @@
       <Name>Ui_display.py</Name>
     </Source>
     <Source>
-      <Name>Ui_cpanel.py</Name>
+      <Name>Ui_cpanel4new.py</Name>
     </Source>
     <Source>
-      <Name>Ui_about.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_about4.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_cpanel4.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_epgeditor.py</Name>
+      <Dir>Epigrass</Dir>
+      <Name>Ui_cpanel4new.py</Name>
     </Source>
     <Source>
       <Name>Ui_display.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_cpanel4new.py</Name>
     </Source>
   </Sources>
   <Forms>

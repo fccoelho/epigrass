@@ -481,7 +481,7 @@ Make sure you have generated it."""),
             if s not in ['id','name','geocode','lat','longit','time']:
                 self.variableList.insertItem(0, s)
         #TODO: read meta-info from table and show in the tooltip
-        self.variableList.setTooltip('')
+#        self.tableList.setToolTip('')
     
     def onPlayButton(self):
         """
@@ -600,9 +600,6 @@ Please select another table from the menu."""))
         """
         Close the gui
         """
-        if self.sim:
-            if self.sim.g.gr:
-                self.sim.g.gr.close()
         self.close()
         
 class Future:
