@@ -27,6 +27,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self, None)
         self.app=app
+        self.QtCore = QtCore
         self.setupUi(self)
         #determining the user's home directory
         home = os.curdir                        # Default
@@ -282,14 +283,6 @@ an editor and your model's script."""),
             self.conf['settings.language'] = 'fr'
         else:
             self.conf['settings.language'] = 'en'
-
-    def onRunThread(self):
-        """
-        Run the simulation on a separate thread
-        """
-        t = threading.Thread(target = self.onRun)
-        t.start()
-        t.join()
     
         
     
@@ -312,14 +305,14 @@ an editor and your model's script."""),
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
-            self.openGraphDisplay(S.shapefile[0])
-            #TODO: implementar a atualização em tempo real do display de saída; talvez usando uma QThread acionada por um sinal.
+            self.openGraphDisplay(S.shapefile[0], S.shapefile[1],S.shapefile[2] )
             
-
+            self.RT = RunThread(S)
+            QtCore.QObject.connect(self.RT,QtCore.SIGNAL("drawStep"), self.graphDisplay.drawStep)
             if not S.replicas:
-                S.start()
-                
-                dot = spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
+                self.RT.start()
+                #FIXME: find out why replay function does not runright after regular run
+#                dot = spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
                 
                 if S.Rep:
                     rep = Rp.report(S)
@@ -356,7 +349,7 @@ an editor and your model's script."""),
             self.textEdit1.insertPlainText('Done!')
             self.buttonRun.setEnabled(1)
             #print 'Agora...'
-            #spdisp = spread.Spread(self.sim.g)
+            spdisp = spread.Spread(self.sim.g)
             #spdisp.display()
         else:
             self.buttonRun.setEnabled(1)
@@ -516,52 +509,7 @@ Please select another table from the menu."""))
         #Future(self.Display.keyin,data,edata,numbsteps,pos,r)
         #self.Display.keyin(data,edata,numbsteps,pos,r)
     
-    def onPlayButton_2D(self):
-        """
-        Calls the epiplay module to replay the epidemic from a database table.
-        """
-        #get variable to animate and its position in the database
-        var = str(self.variableList.currentText())
-        pos = self.vars.index(var)
-        r = self.rateSpinBox.value() 
-        table = str(self.tableList.currentText())
-        mapa = str(self.mapList.currentText())
-        if mapa in ['No map','Nenhum mapa','Pas de carte', 'No hay mapas']:
-            QMessageBox.critical(None,
-                self.trUtf8("No Map!"),
-                self.trUtf8("""You must select a map for a 2D animation!"""),
-                self.trUtf8("&Retry"))
-            return
-
-        modname = table.split('_')[0] #self.sim.modelName.split('/')[-1]
-        nodes,am = self.Display.readNodes(modname, table)
-        ans = QInputDialog.getText(\
-            self.trUtf8("Geocode Variable"),
-            self.trUtf8("Enter the variable name containing the geocode."),
-            QLineEdit.Normal)
-        geocfield = str(ans[0])
-        if not ans[1]:
-            return
-        if not nodes:
-            QMessageBox.warning(None,
-                self.trUtf8("Empty Table"),
-                self.trUtf8("""You have selected an empty table.
-Please select another table from the menu."""))
-            return
-
-        numbnodes = len(nodes)
-        data = self.Display.readData(table)
-        edata = self.Display.readEdges(table)
-        numbsteps = len(data)/numbnodes
-        plotwindow = QMainWindow(None,"Plot window", Qt.WType_TopLevel | Qt.WDestructiveClose)
-        plot_widget = QWidget(plotwindow, "plot widget")
-        l = QVBoxLayout(plot_widget)
-        can = canvas(plot_widget,width=5,height=4,dpi=300)
-        l.addWidget(can)
-        plot_widget.setFocus()
-        plotwindow.show()
-        ax,pl = self.Display.viewGraph2D(mapa, geocfield,can)
-        self.Display.anim2D(data,nodes,numbsteps,pos,ax,pl)
+    
         
     def onConsensus(self):
         """
@@ -680,6 +628,9 @@ def loadLang(app,tr,lang):
     if lang == 'fr':
         tr.load('epigrass_fr','.')
         app.installTranslator(tr)
+    if lang == 'es':
+        tr.load('epigrass_es','.')
+        app.installTranslator(tr)
     else:
         pass
         
@@ -694,7 +645,28 @@ def main():
     #app.setMainWidget(w)
     w.show()
     sys.exit(app.exec_())
-    
+class RunThread(QtCore.QThread):
+    """
+    Worker Thread to run the simulation in a separate thread in order to allow the updating of the GUI to take place
+    """
+    def __init__(self,sim,  parent=None):
+        QtCore.QThread.__init__(self, parent)
+        self.mutex = QtCore.QMutex()
+        self.condition = QtCore.QWaitCondition()
+        self.sim = sim
+    def __del__(self):
+        self.mutex.lock()
+        self.condition.wakeOne()
+        self.mutex.unlock()
+        self.wait()
+    def go(self):
+        locker = QtCore.QMutexLocker(self.mutex)
+        self.start()
+    def run(self):
+        self.sim.start()
+        self.mutex.lock()
+        self.condition.wait(self.mutex)
+        self.mutex.unlock()
 
 if __name__ == "__main__":
 #    main()

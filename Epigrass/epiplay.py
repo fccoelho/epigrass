@@ -148,10 +148,10 @@ class viewer:
         """
         Starts the Qt display of the map or graph.
         """
-        self.gui.openGraphDisplay(mapa)
+        self.gui.openGraphDisplay(mapa,self.shapefile[1],self.shapefile[2]  )
         self.gr = self.gui.graphDisplay
-        if mapa not in ['No map','Nenhum mapa','Pas de carte',  'No hay mapas']:
-            self.gr.drawMap(mapa, self.shapefile[1],self.shapefile[2] )
+        self.gr.qwtPlot.setTitle(var)
+#        self.gr.drawMap(mapa, self.shapefile[1],self.shapefile[2] )
 
 #        Nlist = [dgraph.Node(3,(float(i[2]),float(i[1]),0),name=unicode(i[3].strip(),self.encoding),geocode=i[0]) for i in nodes]
 #        self.gr.insertNodeList(Nlist)
@@ -198,7 +198,7 @@ class viewer:
                 if edata[start][-1]+edata[start][-2]:
                     elist.append(edata[start][1])
             self.gr.flashBorders(elist)
-            time.sleep(1./rate)
+#            time.sleep(1./rate)
         self.gr.horizontalSlider.setEnabled(1)
     
 

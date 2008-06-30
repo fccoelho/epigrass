@@ -8,7 +8,7 @@ from pylab import *
 from numpy import *
 from numpy.random import uniform, binomial, poisson
 from types import MethodType
-from Epigrass.data_io import *
+from data_io import *
 
 
 class siteobj:
@@ -171,11 +171,11 @@ class siteobj:
         self.thidx = thidx = sum([(i.fmig+i.bmig)/2. for i in self.edges])/len(self.parentGraph.site_list)
         return thidx
     
-    def receiveTheta(self,thetai, npass, sname):
+    def receiveTheta(self,thetai, npass, site):
         """
         Number of infectious individuals arriving from site i
         """
-        self.thetalist.append((sname,thetai))
+        self.thetalist.append((site,thetai))
         self.passlist.append(npass)
     
     def plotItself(self):
@@ -1214,14 +1214,14 @@ class edge:
         """
         theta,npass = self.source.getTheta(self.fmig,self.delay)
         self.ftheta.append(theta)
-        self.dest.receiveTheta(theta,npass,self.source.sitename)
+        self.dest.receiveTheta(theta,npass,self.source)
     def transportDtoS(self):
         """
         Get infectious individuals commuting from destination node and inform them to source
         """
         theta,npass = self.dest.getTheta(self.bmig,self.delay)
         self.btheta.append(theta)
-        self.source.receiveTheta(theta,npass,self.dest.sitename)
+        self.source.receiveTheta(theta,npass,self.dest)
 
     
     

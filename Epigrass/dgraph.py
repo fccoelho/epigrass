@@ -105,13 +105,13 @@ class MapWindow(Ui_Form):
         """
         sets up the time series plot
         """
-#        self.qwtPlot.setTitle('Simulation Time Series')
+#        self.qwtPlot.setTitle('%s'%self.variable)
         self.qwtPlot.setAxisTitle(Qwt.QwtPlot.xBottom, 'time')
 #        self.qwtPlot.setAxisTitle(Qwt.QwtPlot.yLeft,  'count')
         self.qwtPlot.insertLegend(Qwt.QwtLegend(), Qwt.QwtPlot.RightLegend)
         # Time marker
         self.mX = Qwt.QwtPlotMarker()
-        self.mX.setLabel(Qwt.QwtText('current time'))
+        self.mX.setLabel(Qwt.QwtText('t = '))
         self.mX.setLabelAlignment(Qt.Qt.AlignRight | Qt.Qt.AlignTop)
         self.mX.setLineStyle(Qwt.QwtPlotMarker.VLine)
         self.mX.setXValue(0)
@@ -123,7 +123,7 @@ class MapWindow(Ui_Form):
         """
         
         data = [0]*len(self.timeseries)
-        for k, v in self.timeseries.items():
+        for k, v in self.timeseries.iteritems():
             data[k] = v[gc]
         t = self.timeseries.keys()
         t.sort()
@@ -145,7 +145,7 @@ class MapWindow(Ui_Form):
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
         #calculating center of scene
-#        FIXME: descobrir o que ha de diferente com a a centralizacao quando chamado do Epigrass 
+
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
@@ -210,17 +210,23 @@ class MapWindow(Ui_Form):
         Replay the time series from beggining to end.
         """
         rw = ReplayWorker(self.timeseries, self.arrivals )
+        def stop_replay():
+            rw.quit()
         QtCore.QObject.connect(rw,QtCore.SIGNAL("drawStep"), self.drawStep)
         QtCore.QObject.connect(rw,QtCore.SIGNAL("flash"), self.flashBorders)
+        QtCore.QObject.connect(self.pushButton_2,QtCore.SIGNAL("released()"), stop_replay)
         rw.render()
+        
 
             
+    
     def drawStep(self,step,  datadict={}):
         """
         Draws one timestep on the map
         step: timestep number
         datadict: dictionary geocode:value
         """
+        
         self.step = step
         self.paintPols(datadict)
         self.lcdNumber.display(step)
@@ -254,6 +260,7 @@ class MapWindow(Ui_Form):
         self.step = val
         self.drawStep(val, self.timeseries[val])
         self.mX.setXValue(self.step)
+        self.mX.setLabel(Qwt.QwtText("t = %s"%self.step))
         self.qwtPlot.replot()
         
 #BlackBox  :-)
@@ -735,6 +742,7 @@ class Polygon(QtGui.QGraphicsItem):
             self.setSelected(False)
             col = self.display.jet(self.display.timeseries[self.display.step][self.geocode])
             self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
+            self.lineColor = QtCore.Qt.black
             self.curve.detach()
             self.display.qwtPlot.replot()
         else: 
@@ -742,6 +750,7 @@ class Polygon(QtGui.QGraphicsItem):
             self.setSelected(True)
 #            print self.isSelected()
             self.fillColor = QtCore.Qt.green
+            self.lineColor = QtCore.Qt.white
             self.display.addTsCurve(self.geocode, self.name)
             self.display.qwtPlot.replot()
         self.update()
@@ -851,12 +860,13 @@ class MapServer:
         self.server.serve_forever()
 
 class ReplayWorker(QtCore.QThread):        
-    def __init__(self,ts, arr,  parent=None):
+    def __init__(self,ts, arr,period=.100,   parent=None):
         QtCore.QThread.__init__(self, parent)
         self.mutex = QtCore.QMutex()
         self.condition = QtCore.QWaitCondition()
         self.timeseries = ts
         self.arrivals = arr
+        self.period = period
     def __del__(self):
         self.mutex.lock()
         self.condition.wakeOne()
@@ -873,7 +883,7 @@ class ReplayWorker(QtCore.QThread):
             if self.arrivals.has_key(t):
                 self.emit(QtCore.SIGNAL("flash"), t, self.arrivals[t])
 #                self.flashBorders(t, self.arrivals[t])
-            time.sleep(.200)
+            time.sleep(self.period)
         self.mutex.lock()
         self.condition.wait(self.mutex)
         self.mutex.unlock()

@@ -8,14 +8,17 @@ from copy import deepcopy
 from xmlrpclib import ServerProxy, Error
 from simobj import graph, edge, siteobj
 from numpy import *
+import spread
 from numpy.random import uniform, poisson
 from sqlobject import *
 from math import *
-from Epigrass.data_io import *
+from data_io import *
+from optparse import OptionParser
 import ConfigParser
 import string, sys, getpass
-import Epigrass.report as Rp
+import report as Rp
 import epigdal 
+import __version__
 from epiRTplay import  Viewer
 import encodings.utf_8
 import encodings.latin_1
@@ -24,37 +27,24 @@ import sqlite3, MySQLdb
 #import pycallgraph
 
 # Import Psyco if available
-try:
-    import psyco
-#    from psyco.classes import __metaclass__
-#    psyco.profile()
-    psyco.full()
-except ImportError:
-    pass
+#try:
+#    import psyco
+#
+#    psyco.full()
+#except ImportError:
+#    pass
 
 class simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results 
     """
     def __init__(self, fname=None, host='localhost',port=3306,db='epigrass',user='epigrass', password='epigrass',backend = 'mysql'):
-        nargs = len(sys.argv)
-        if nargs > 2:
-            print "Usage: manager.py <model file>\nSpecify only one model."
-            sys.exit(2)
-        elif nargs < 2 and not fname:
-            print "Usage: manager.py <model file>"
-            sys.exit(2)
-        elif nargs < 2 and fname:
-            self.fname = fname
-        elif nargs == 2 and fname:
-            self.fname = fname
-        else:
-            self.fname = sys.argv[1]
         #pycallgraph.start_trace()
         self.host = host
         self.port = port
         self.usr = user
         self.db = db
+        self.fname = fname
         self.backend = backend
         self.passw = password
         self.repname = None
@@ -462,12 +452,15 @@ class simulate:
         self.World.createDataLayer(varlist,sitestats)
         self.Say("Done creating Data shapefile!")
         #Generate the kml too.
+        self.Say("Creating KML output file...")
         lr = self.World.datasource.GetLayer(0)
         k = epigdal.KmlGenerator()
         k.addNodes(lr,names)
         k.writeToFile(self.outdir)
+        self.Say("Done creating KML file!")
         #close files
         self.World.closeSources()
+        
 
     
     def writeMetaCSV(self, table):
@@ -986,29 +979,28 @@ class simulate:
                     j.transportStoD()
                     j.transportDtoS()
 ##                self.outToODb(self.modelName,mode='p')
-#                try:
-                print "======>", self.gui
-                self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
-#                except:
-#                    pass
-                g.simstep += 1
                 if self.gui:
+                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
-                if g.gr:
-                    g.gr.timelabel.text = 'time = %s'%g.simstep
+                    self.gui.RT.mutex.lock()
+                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                    self.gui.RT.mutex.unlock()
+                g.simstep += 1
         else:
             for n in xrange(iterations):
                 for i in sites:
                     i.runModel()
 ##                self.outToODb(self.modelName,mode='p')
                 #viewer.show(n)
-                g.simstep += 1
                 if self.gui:
+                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
-                if g.gr:
-                    g.gr.timelabel.text = 'time = %s'%g.simstep
+                    self.gui.RT.mutex.lock()
+                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                    self.gui.RT.mutex.unlock()
+                g.simstep += 1
     def Say(self,string):
         """
         Exits outputs messages to the console or the gui accordingly 
@@ -1087,27 +1079,85 @@ class Tree:
         """
         pass
         
-        
-if __name__ == '__main__':
-    S = simulate()
-    usr = raw_input('Enter MySQL user name:')
-    passw = getpass.getpass()
-    S.usr = usr
-    S.passw = passw
-    #storeSimulation(S.g)
-    if S.Batch:
-        for i in S.Batch:
-            T = simulate(i)
-            T.start()
-            if S.Rep:
-                rep = Rp.report(T)
-                rep.Assemble(S.Rep)
-
+def onStraightRun(options, args):
+    """
+    Runs the model from the commandline
+    """
+    if options.backend =="mysql":
+        S = simulate(fname=args[0],host=options.dbhost, user=options.dbuser, password=options.dbpass,  backend=options.backend)
     else:
+        S = simulate(fname=args[0],backend=options.backend)
+    if not S.replicas:
         S.start()
-        if S.Rep:
-            rep = Rp.report(S)
-            rep.Assemble(S.Rep)
+        spread.Spread(S.g)
+    else:
+        repRuns(S)
+        
+    if S.Batch:
+        print 'Simulation Started.'
+        
+        # run the batch list
+        for i in S.Batch:
+            #Makes sure it comes back to original directory before opening models in the batch list
+            os.chdir(S.dir)
+            #delete the old graph object to save memory
+            S.graph = None
+            # Generates the simulation object        
+            T = simulate(fname=i,host=S.host, user=S.usr, password=S.passw, backend=S.backend)
+            
+            print 'starting model %s'%i
+            T.start()  # Start the simulation 
+#            spread.Spread(T.g)
+
+def repRuns(S):
+        """
+        Do repeated runs
+        """
+        randseed=S.randomize_seeds  
+        print "Replication type: ", randseed
+        if randseed: 
+            seeds = S.randomizeSeed(randseed)
+        reps = S.replicas
+        for i in xrange(reps):
+            s.graph = None
+            print "Starting replicate number %s"%i
+            S = simulate(fname=S.fname,host=S.host, user=S.usr, password=S.passw, backend=S.backend)
+            if randseed:
+                S.setSeed(seeds[i])
+            S.round = i
+            S.shpout = False
+            S.start()
+            
+            
+
+if __name__ == '__main__':
+    # Options and Argument parsing for running model from the command line, without the GUI.
+    usage = "usage: %prog [options] your_model.epg"
+    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
+    parser.add_option("-b", "--backend",type="string",  dest="backend",
+                  help="Define which datastorage backend to use", metavar="<mysql|sqlite|csv>",  default="sqlite")
+    parser.add_option("-u", "--dbusername", type="string", 
+                  dest="dbuser", help="MySQL user name")
+    parser.add_option("-p", "--password", type="string", 
+                  dest="dbpass", help="MySQL password for user")
+    parser.add_option("-H", "--dbhost", type="string", 
+                  dest="dbhost",default="localhost",  help="MySQL hostname or IP address")
+
+    (options, args) = parser.parse_args() 
+    if options.backend == "mysql" and not (options.dbuser and options.dbpass):
+        parser.error("You must specify a user and password when using MySQL.")
+    if options.backend not in ['mysql', 'sqlite', 'csv']:
+        parser.error('"%s" is an invalid backend type.'%options.backend)
+    onStraightRun(options, args)
+    if args:
+        if len(args)<1:
+            parser.error("You must provide an EPG file to run.")
+        elif len(args)<1:
+            parser.error("Only a single EPG file can be specified.")
+        else:
+            if not os.path.exists(args[0]):
+                parser.error("The file '%s' does not exist."%args[0])
+
 
 
 

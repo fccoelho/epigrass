@@ -18,9 +18,11 @@ class Spread:
         self.g = graphobj
         self.outdir = outdir
         self.encoding = encoding
-        ct = self.cleanTree()
+#        ct = self.cleanTree()
         #self.dotDraw(ct)
-        self.writeGML(ct,outdir,encoding)
+#        self.writeGML(ct,outdir,encoding)
+        graphml = GraphML(self.g, outdir, encoding)
+        graphml.write()
     
     def cleanTree(self):
         """
@@ -34,7 +36,7 @@ class Spread:
             if len(infectors):
                 reverse_infectors = [ [v[1],v[0]] for v in infectors.items()]
                 reverse_infectors.sort()
-                mli = [reverse_infectors[j][1] for j in range(0,len(reverse_infectors))][-1]#Most likely infector
+                mli = [reverse_infectors[j][1] for j in xrange(0,len(reverse_infectors))][-1]#Most likely infector
             else:
                 mli = 'NA'
             sptree.append((i[0],i[1].sitename,mli))
@@ -86,8 +88,8 @@ class Spread:
         self.grd.insertNodeList(nodes)
         self.grd.insertEdgeList(edges)
         self.grd.centerView()
-
-
+        
+        
     def writeGML(self,tree, outdir,encoding,fname="spreadtree.gml"):
         """
         Save the tree in the GML format
@@ -141,6 +143,82 @@ class Spread:
             f.writelines(['\t\t\tfill\t"#000000"\n','\t\t\ttargetArrow\t"standard"\n','\t\t]\n','\t]\n'])
     writeENGML = classmethod(writeENGML)
 
+class GraphML:
+    def __init__(self,graphobj,  outdir, encoding,fname="spread.graphml" ):
+        """
+        Generates a valid GraphML document from the spread tree.
+        """
+        self.g = graphobj
+        self.encoding = encoding
+        self.outdir = outdir
+        self.fname = fname
+        self.doc = minidom.Document()
+        # Creating Root element
+        gml = self.doc.createElement("graphml")
+        gml.setAttribute("xmlns","http://graphml.graphdrawing.org/xmlns")
+        gml.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
+        gml.setAttribute("xsi:schemaLocation", "http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd")
+        self.addAttrKeys(gml)
+        
+        # Creating graph Element
+        self.gr = self.doc.createElement("graph")
+        self.gr.setAttribute("id", "graphname")
+        self.gr.setAttribute("edgedefault", "directed")
+        
+        #Creating nodes and edges
+        self.nodes = []
+        for n in self.g.epipath:
+            infectors = n[-1]
+            self.addNodeEl(n[1].geocode, n[1].sitename)
+            self.nodes.append(n[1].geocode)
+            for  i, c in infectors.iteritems():
+                self.addNodeEl(i.geocode, i.sitename)
+                self.addEdgeEl(i.geocode, n[1].geocode, n[0], c)
+        gml.appendChild(self.gr)
+        self.doc.appendChild(gml)
+                
+    def addNodeEl(self, gc , name):
+        """
+        Adds a Node element to the Graphml object
+        """
+        if gc in self.nodes:
+            return
+        else:
+            print gc, name
+            nd = self.doc.createElement("node")
+            nd.setAttribute("id", str(gc))
+            data = self.doc.createElement("data")
+            data.setAttribute("key", "d0")
+            data.appendChild(self.doc.createTextNode(name))
+            nd.appendChild(data)
+            self.gr.appendChild(nd)
+            
+    def addEdgeEl(self, s, d , t, ino):
+        print s, d , t , ino
+        ed = self.doc.createElement("edge")
+        ed.setAttribute("source", str(s))
+        ed.setAttribute("target", str(d))
+        ed.setAttribute("time", str(t))
+        ed.setAttribute("Innoculum", str(ino))
+        self.gr.appendChild(ed)
+    
+    def addAttrKeys(self, gml):
+        k1 = self.doc.createElement("key")
+        k1.setAttribute("id", "d0")
+        k1.setAttribute("for", "node")
+        k1.setAttribute("attr.name", "name")
+        k1.setAttribute("attr.type", "string")
+        gml.appendChild(k1)
+    def write(self):
+        """
+        Writes the graphml file to disk
+        """
+        fullpath = os.path.join(self.outdir,self.fname)
+        f=open(fullpath,"w")
+#        f.write('<?xml version="1.0" encoding="%s"?>'%self.encoding)
+        f.write(self.doc.toprettyxml(encoding=self.encoding))
+        f.close()
+        
 class Consensus:
     def __init__(self,path,cutoff=0.0):
         tl = self.readTress(path)
