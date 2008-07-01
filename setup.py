@@ -23,11 +23,11 @@ setup(name='epigrass',
     #entry_points = {'gui_scripts':['epigrass = epigrass:main',]},
     entry_points = {
         'console_scripts': [
-            'epirunner = Epigrass.manager',
+            'epirunner = Epigrass.manager:main',
         ],
         'gui_scripts': [
-            'epigrass = epigrass',
-            'epgeditor= epgeditor.py'
+            'epigrass = Epigrass.epigrass:main',
+            'epgeditor= Epigrass.epgeditor:main'
         ]
     }, 
 

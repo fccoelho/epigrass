@@ -206,10 +206,12 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
             self.treeWidget.closePersistentEditor(*self.editing)
             self.editing = None
             self.updateViewer(self.cp)
-
-if __name__ == "__main__":
+def main():
     import sys
     app = QtGui.QApplication(sys.argv)
     Form = Editor(sys.argv[1])
     Form.show()
     sys.exit(app.exec_())
+    
+if __name__ == "__main__":
+    main()

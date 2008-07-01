@@ -638,13 +638,8 @@ def loadLang(app,tr,lang):
         
 def main():
     global app
-    #print 'Oi'
     app = QtGui.QApplication(sys.argv)
-    #QtCore.QObject.connect(app,QtCore.SIGNAL("lastWindowClosed()"),app,QtCore.SLOT("quit()"))
-    #MainP = QtGui.QWidget()
     w = MainWindow_Impl()
-    #w.setupUi(MainP)
-    #app.setMainWidget(w)
     w.show()
     sys.exit(app.exec_())
 class RunThread(QtCore.QThread):
@@ -671,10 +666,6 @@ class RunThread(QtCore.QThread):
         self.mutex.unlock()
 
 if __name__ == "__main__":
-#    main()
-    global app
-    app = QtGui.QApplication(sys.argv)
-    w = MainWindow_Impl()
-    w.show()
-    sys.exit(app.exec_())
+    main()
+    
     

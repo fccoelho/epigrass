@@ -1145,8 +1145,7 @@ def repRuns(S):
             del S
 
 
-
-if __name__ == '__main__':
+def main():
     # Options and Argument parsing for running model from the command line, without the GUI.
     usage = "usage: %prog [options] your_model.epg"
     parser = OptionParser(usage=usage, version="%prog "+__version__.version)
@@ -1164,7 +1163,7 @@ if __name__ == '__main__':
         parser.error("You must specify a user and password when using MySQL.")
     if options.backend not in ['mysql', 'sqlite', 'csv']:
         parser.error('"%s" is an invalid backend type.'%options.backend)
-    onStraightRun(options, args)
+
     if args:
         if len(args)<1:
             parser.error("You must provide an EPG file to run.")
@@ -1173,6 +1172,12 @@ if __name__ == '__main__':
         else:
             if not os.path.exists(args[0]):
                 parser.error("The file '%s' does not exist."%args[0])
+    else:
+        parser.error("Wrong number of arguments.")
+    onStraightRun(options, args)
+if __name__ == '__main__':
+    main()
+    
 
 
 
