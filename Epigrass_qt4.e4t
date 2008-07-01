@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-06-28, 16:55:28 -->
+<!-- Saved: 2008-07-01, 10:07:41 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: check this connection string</Summary>
@@ -13,18 +13,6 @@
         <Name>dataObject.py</Name>
       </Filename>
       <Linenumber>26</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-06-24, 16:21:51</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>simobj.py</Name>
-      </Filename>
-      <Linenumber>404</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
@@ -42,7 +30,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:10:44</Created>
+    <Created>2008-06-30, 11:08:21</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -54,7 +42,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:10:44</Created>
+    <Created>2008-06-30, 11:08:21</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -66,7 +54,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:10:44</Created>
+    <Created>2008-06-30, 11:08:21</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -78,7 +66,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:10:44</Created>
+    <Created>2008-06-30, 11:08:21</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -90,7 +78,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:10:44</Created>
+    <Created>2008-06-30, 11:08:21</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -99,10 +87,22 @@
       <Linenumber>684</Linenumber>
     </Resource>
   </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: move this import to the graph level</Summary>
+    <Description></Description>
+    <Created>2008-06-30, 15:40:32</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>simobj.py</Name>
+      </Filename>
+      <Linenumber>404</Linenumber>
+    </Resource>
+  </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: find out why replay function does not runright after regular run</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:12:05</Created>
+    <Created>2008-07-01, 10:06:26</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>
@@ -113,7 +113,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
     <Description></Description>
-    <Created>2008-06-27, 14:12:05</Created>
+    <Created>2008-07-01, 10:06:26</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>

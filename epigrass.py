@@ -360,6 +360,7 @@ an editor and your model's script."""),
         """
         Do repeated runs
         """
+        nseeds= S.seed[0][2] #number o individual to be used as seeds
         randseed=S.randomize_seeds  
         print "replicas type", randseed
         if randseed: 
@@ -372,16 +373,17 @@ an editor and your model's script."""),
                 db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(str(self.dbType.currentText()).lower()))
             S.gui = self
             if randseed:
-                S.setSeed(seeds[i])
+                S.setSeed(seeds[i], nseeds)
             S.round = i
             S.shpout = False
             S.start()
+            del S,  self.sim
             
-            if S.Rep: #Generate report if necessary
-                rep = Rp.report(S)
-                self.textEdit1.insertPlainText('Report generation started.')
-                rep.Assemble(S.Rep)
-            del S
+#            if S.Rep: #Generate report if necessary
+#                rep = Rp.report(S)
+#                self.textEdit1.insertPlainText('Report generation started.')
+#                rep.Assemble(S.Rep)
+#            del S
     
     def onDbBackup(self):
         """
