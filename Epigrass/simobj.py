@@ -223,7 +223,6 @@ class siteobj:
         self.inedges = ie
         return ie
 
-
     def getNeighbors(self):
         """
         Returns a dictionary of neighbooring sites as keys,
@@ -233,13 +232,11 @@ class siteobj:
             return []
         if self.neighbors:
             return self.neighbors
-
-        n=[[i.source,i.dest,i.length] for i in self.edges]
         neigh = {}
         for i in self.edges:
             n=[i.source,i.dest,i.length]
             idx = n.index(self)
-            m = n.pop(idx)
+            n.pop(idx)
             neigh[n[0]] = n[-1]
 
         self.neighbors = neigh
@@ -273,7 +270,7 @@ class siteobj:
     def getDegree(self):
         """
         Returns the degrees of this site if it is part of a graph.
-        The order (degree) of a node is the number of its attached links
+        The order (degree) of a node is the number of nodes attached to it
         and is a simple, but effective measure of nodal importance.
 
         The higher its value, the more a node is important in a graph
@@ -287,7 +284,7 @@ class siteobj:
         if not self.isNode():
             return 0
         else:
-            return len(self.edges)
+            return self.getNeighbors()
 
     def doStats(self):
         """

@@ -907,8 +907,8 @@ class simulate:
             stf = codecs.open('epistats.csv','a',self.encoding)#append to file
         else:
             stf = codecs.open('epistats.csv','w',self.encoding)#create a new file
-            stf.write('seed,name,size,infected_cities,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
-##            stf.write('seed,name,size,infected_cities,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
+            stf.write('seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
+##            stf.write('seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
         #scent = str(seed.getCentrality())
         #sbetw = str(seed.getBetweeness())
         #sthidx = str(seed.getThetaindex())

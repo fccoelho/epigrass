@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-01, 10:07:41 -->
+<!-- Saved: 2008-07-01, 12:29:01 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: check this connection string</Summary>
@@ -102,7 +102,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: find out why replay function does not runright after regular run</Summary>
     <Description></Description>
-    <Created>2008-07-01, 10:06:26</Created>
+    <Created>2008-07-01, 11:22:27</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>
@@ -113,12 +113,12 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
     <Description></Description>
-    <Created>2008-07-01, 10:06:26</Created>
+    <Created>2008-07-01, 11:22:27</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>
       </Filename>
-      <Linenumber>476</Linenumber>
+      <Linenumber>478</Linenumber>
     </Resource>
   </Task>
 </Tasks>
