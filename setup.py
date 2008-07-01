@@ -9,7 +9,7 @@ demos = glob('demos/*')
 demos.remove('demos/CVS')
 
 setup(name='epigrass',
-    version='1.5.1',
+    version='2.0a1',
     author = 'Flavio Codeco Coelho, Claudia Torres Codeco',
     author_email = 'fccoelho@fiocruz.br',
     maintainer = 'Flavio Codeco Coelho',
@@ -32,7 +32,7 @@ setup(name='epigrass',
     }, 
 
     
-    scripts = ['epigrass.py','epgeditor.py'],
+    #scripts = ['epigrass.py','epgeditor.py'],
     include_package_data = True,
     package_data = {'':['INSTALL','README','COPYING','epigrass.desktop']},
     data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/userguide.pdf']),('/usr/share/applications',['epigrass.desktop'])]

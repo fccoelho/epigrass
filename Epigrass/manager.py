@@ -19,7 +19,6 @@ import string, sys, getpass
 import report as Rp
 import epigdal
 import __version__
-from epiRTplay import  Viewer
 import encodings.utf_8
 import encodings.latin_1
 import dataObject as DO

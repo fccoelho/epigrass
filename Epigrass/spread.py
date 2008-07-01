@@ -1,13 +1,13 @@
 #
 #spread display and analisys
 #
-try:
-    from PyQt4.QtGui import *
-except ImportError: 
-    print "Please install PyQT 4"
+#try:
+#    from PyQt4.QtGui import *
+#except ImportError: 
+#    print "Please install PyQT 4"
 #from qt import *
 from xml.dom import minidom, Node
-import dgraph, crypt, os, string
+import os, string
 #import visual as V
 from math import *
 from numpy import *
@@ -60,34 +60,7 @@ class Spread:
         """
         display the epidemic tree
         """
-        self.grd = dgraph.Graph(0.04, name= 'Epidemic Spread Display')
-        #add time label
-        V.label(pos=(0,20,3), text='Time', xoffset=0, yoffset=0, space=5, height=10, border=3, line=0)
-        #add seed
-        seed = dgraph.Node(2,(0,-10,0),r=5)
-        seed.name = self.g.epipath[0][1].sitename
-        nodes=[seed]
-        edges=[]
-        vpos = -10
-
-        for n,i in enumerate(self.g.epipath):
-            x= n*10
-            y = vpos
-            V.label(pos=(x,15,10), text=str(i[0]), xoffset=0, yoffset=0, space=5, height=10, border=3, line=1)
-            nodes.append(dgraph.Node(2,(x,y,0),r=5))
-            nodes[-1].name = i[1].sitename
-            V.label(pos=(x,y,0), text=str(nodes[-1].name), xoffset=5, yoffset=5, space=0, height=10, border=3, line=1)
-            nodes[-1].name = i[1].sitename
-            vpos -= 10
-            if i[2]:
-                for j in i[2].keys():
-                    #print j,i[2],nodes[-1].name
-                    n2 = [k for k in nodes if crypt.crypt(k.name,'ab') == crypt.crypt(j,'ab')][0]
-                    edges.append(dgraph.RubberEdge(nodes[-1],n2,1, damping=.8))
-                    #edges[-1].cylinder.radius = log10(j[0])
-        self.grd.insertNodeList(nodes)
-        self.grd.insertEdgeList(edges)
-        self.grd.centerView()
+        pass
         
         
     def writeGML(self,tree, outdir,encoding,fname="spreadtree.gml"):
