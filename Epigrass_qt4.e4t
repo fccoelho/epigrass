@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-01, 12:29:01 -->
+<!-- Saved: 2008-07-04, 16:06:39 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: check this connection string</Summary>
@@ -15,94 +15,22 @@
       <Linenumber>26</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: the animation rate is not working....</Summary>
-    <Description></Description>
-    <Created>2008-06-27, 13:56:05</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>epiplay.py</Name>
-      </Filename>
-      <Linenumber>183</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: maybe just "visual"  will need to redefine these in teh end.</Summary>
-    <Description></Description>
-    <Created>2008-06-30, 11:08:21</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>342</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: maybe just "visual"  will need to redefine these in the end.</Summary>
-    <Description></Description>
-    <Created>2008-06-30, 11:08:21</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>449</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: verify time overhead of this check</Summary>
-    <Description></Description>
-    <Created>2008-06-30, 11:08:21</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>508</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
-    <Description></Description>
-    <Created>2008-06-30, 11:08:21</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>544</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
-    <Description></Description>
-    <Created>2008-06-30, 11:08:21</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>684</Linenumber>
-    </Resource>
-  </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: move this import to the graph level</Summary>
     <Description></Description>
-    <Created>2008-06-30, 15:40:32</Created>
+    <Created>2008-07-01, 15:34:40</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>simobj.py</Name>
       </Filename>
-      <Linenumber>404</Linenumber>
+      <Linenumber>401</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: find out why replay function does not runright after regular run</Summary>
     <Description></Description>
-    <Created>2008-07-01, 11:22:27</Created>
+    <Created>2008-07-01, 17:09:53</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>
@@ -113,12 +41,60 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
     <Description></Description>
-    <Created>2008-07-01, 11:22:27</Created>
+    <Created>2008-07-01, 17:09:53</Created>
     <Resource>
       <Filename>
         <Name>epigrass.py</Name>
       </Filename>
       <Linenumber>478</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: verify time overhead of this check</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:01:46</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>511</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:01:46</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>547</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:01:46</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>687</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: the animation rate is not working....</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:04:05</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>epiplay.py</Name>
+      </Filename>
+      <Linenumber>163</Linenumber>
     </Resource>
   </Task>
 </Tasks>

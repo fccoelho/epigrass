@@ -20,7 +20,6 @@ setup(name='epigrass',
     download_url = 'http://sourceforge.net/project/showfiles.php?group_id=128000',
     license = 'GPL',
     packages = ['Epigrass'],
-    #entry_points = {'gui_scripts':['epigrass = epigrass:main',]},
     entry_points = {
         'console_scripts': [
             'epirunner = Epigrass.manager:main',
@@ -31,8 +30,6 @@ setup(name='epigrass',
         ]
     }, 
 
-    
-    #scripts = ['epigrass.py','epgeditor.py'],
     include_package_data = True,
     package_data = {'':['INSTALL','README','COPYING','epigrass.desktop']},
     data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/userguide.pdf']),('/usr/share/applications',['epigrass.desktop'])]

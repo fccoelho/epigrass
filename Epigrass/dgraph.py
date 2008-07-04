@@ -57,6 +57,25 @@ def scaleView(self, scaleFactor):
 #        if factor < 0.07 or factor > 1000000:
 #            return
     self.scale(scaleFactor, scaleFactor)
+    
+def timerEvent(self, event):
+    nodes = [item for item in self.scene.items() if isinstance(item, QtNode)]
+
+    for node in nodes:
+        node.calculateForces()
+
+    itemsMoved = False
+    for node in nodes:
+        if node.advance():
+            itemsMoved = True
+
+    if not itemsMoved:
+        self.killTimer(self.timerId)
+        self.timerId = 0
+
+def itemMoved(self):
+    if not self.timerId:
+        self.timerId = self.startTimer(1000 / 25)
 
 def array_mag(a):
     acc = 0
@@ -87,7 +106,8 @@ class MapWindow(Ui_Form):
         self.colors = itertools.cycle([Qt.Qt.red,Qt.Qt.green,Qt.Qt.blue,Qt.Qt.cyan, Qt.Qt.magenta,Qt.Qt.yellow,Qt.Qt.black])
         self.setupQwtPlot()
         self.step = 0
-        self.M = None #initialize map
+        self.M = None #initialize map widget
+        
         # Overloading event-handling methods for self.mapView
         self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
@@ -133,6 +153,7 @@ class MapWindow(Ui_Form):
         curve.setData(t, data)
         self.M.polyDict[gc].curve = curve
         
+    
     def drawMap(self, filename, namefield, geocfield):
         """
         Draws the map store in the shapefile fname.
@@ -175,15 +196,42 @@ class MapWindow(Ui_Form):
         
         #print self.polys
     
-    def addGraph(self, nlist, elist=[] ):
-        G = Graph(self)
+    def drawGraph(self, nlist, elist=[] ):
+        self.M = Graph(self)
+        self.mapView.timerId = 0
+        #Adding graph event handlers
+        self.mapView.itemMoved = MethodType(itemMoved, self.mapView)
+        self.mapView.timerEvent = MethodType(timerEvent, self.mapView)
+        self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
         for n in nlist:
-            node = QtNode(1, n.center, display = self)
-            #node.setPos(node.mapFromScene(QtCore.QPointF(node.x(), node.y())))
+            node = Node(self.M)
+            node.setPos(*n)
             self.mapView.scene.addItem(node)
-            G.insertNode(node)
+            self.M.insertNode(node)
             #print node.x(), node.y(), n.center[0], n.center[1]
-        self.scene.update()
+        for e in elist:
+            ed = Edge(self.M.nodes[e[0]], self.M.nodes[e[1]])
+            self.mapView.scene.addItem(ed)
+            self.M.insertEdge(ed)
+        xmin,ymin = array(nlist).min(axis=0)
+        xmax,ymax = array(nlist).max(axis=0)
+    
+        xxs = (xmax-xmin)*1.1 #percentage of extra space
+        yxs = (ymax-ymin)*1.1 #percentage of extra space
+        #calculating center of scene
+
+        xc = (xmax+xmin)/2. 
+        yc = (ymax+ymin)/2.
+        
+        #self.mapView.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        self.mapView.scene.setSceneRect(xmin, ymin, xxs, yxs)
+        #print self.mapView.scene.width(), self.mapView.scene.height()
+        self.mapView.fitInView(xmin, ymin, xxs, yxs)
+        self.mapView.setScene(self.mapView.scene)
+        self.mapView.updateSceneRect(self.mapView.scene.sceneRect())
+        self.mapView.centerOn(xc, yc)
+        
+        
     
     def paintPols(self, datadict):
         """
@@ -281,11 +329,11 @@ def Node(*args, **kwargs):
     else:
         return BaseNode(*args, **kwargs)
 
-def RubberEdge(*args, **kwargs):
+def Edge(*args, **kwargs):
     if graphic_backend == "visual":
-        return VisualRubberEdge(*args, **kwargs)
+        return VisualEdge(*args, **kwargs)
     elif graphic_backend == "qt":
-        return QtRubberEdge(*args, **kwargs)
+        return QtEdge(*args, **kwargs)
     else:
         return BaseRubberEdge(*args, **kwargs)
 
@@ -307,159 +355,114 @@ def Map(*args, **kwargs):
 rho = 23.8732414637845 # for backwardscompatibility
 
 
-class BaseNode(object):
-    """
-    Physical model of a node as a mass.
-    """
-    factor = 3. / (4 * math.pi * rho)
+class BaseNode(QtGui.QGraphicsItem):
+    Type = QtGui.QGraphicsItem.UserType + 1
 
-    def __init__(self, m, pos, r=.1, fixed=0, pickable=1, v=(0., 0., 0.), color=(0., 1., 0.), name='', **keywords):
-        """
-        Construct a mass.
-        """
-        if not r:
-            # rho = m / V; V = 4 * PI * r^3 / 3
-            r = math.pow(Node.factor * m, 1./3)
-        self.r = r
+    def __init__(self, graphWidget):
+        QtGui.QGraphicsItem.__init__(self)
 
-        self.m = float(m)
-        self.fixed = fixed
-        self.pickable = pickable
+        self.graph = graphWidget
+        self.edgeList = []
+        self.newPos = QtCore.QPointF()
+        self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
+        self.setZValue(1)
 
-        self.graph = None
+    def type(self):
+        return Node.Type
 
-        self.painted = 0
-        self.name = name.encode('latin-1','replace')
-        self.ts = []
-        self.tsdone = 0 #true if time series has been plot
+    def addEdge(self, edge):
+        self.edgeList.append(edge)
+        edge.adjust()
 
-        try:
-            self.geocode = keywords['geocode']
-        except KeyError:
-            self.geocode = None
-        #this "array" comes from numpy
-        #these properties  have to be defined in each subclass.
-        # FIXME: maybe just "visual"  will need to redefine these in teh end.
-        if self.__class__ == BaseNode:
-            self.box = BaseBox(pos=array(pos),length=float(r),
-                               height=r,width=r,color=color,
-                               name='',**keywords)
-        self.v = array(v)
-        self.F = array((0., 0., 0.))
-        self.pos = array(pos)
+    def edges(self):
+        return self.edgeList
 
-    def showName(self,t):
-        """
-        Show the node name for t seconds
-        """
-        pass
+    def calculateForces(self):
+        if not self.scene() or self.scene().mouseGrabberItem() is self:
+            self.newPos = self.pos()
+            return
+    
+        # Sum up all forces pushing this item away.
+        xvel = 0.0
+        yvel = 0.0
+        for item in self.graph.nodes:
+            line = QtCore.QLineF(self.mapFromItem(item, 0, 0), QtCore.QPointF(0, 0))
+            dx = line.dx()
+            dy = line.dy()
+            l = 2.0 * (dx * dx + dy * dy)
+            if l > 0:
+                xvel += (dx * 150.0) / l
+                yvel += (dy * 150.0) / l
 
-    def calcGravityForce(self, g):
-        """
-        Calculate the gravity force.
-        """
-        for n in self.graph.nodes:
-            if not self==n:
-                self.F -= (self.pos - n.pos)
+        # Now subtract all forces pulling items together.
+        weight = (len(self.edgeList) + 1) * 10.0
+        for edge in self.edgeList:
+            if edge.sourceNode() is self:
+                pos = self.mapFromItem(edge.destNode(), 0, 0)
+            else:
+                pos = self.mapFromItem(edge.sourceNode(), 0, 0)
+            xvel += pos.x() / weight
+            yvel += pos.y() / weight
+    
+        if QtCore.qAbs(xvel) < 0.1 and QtCore.qAbs(yvel) < 0.1:
+            xvel = yvel = 0.0
 
+        sceneRect = self.scene().sceneRect()
+        self.newPos = self.pos() + QtCore.QPointF(xvel, yvel)
+        self.newPos.setX(min(max(self.newPos.x(), sceneRect.left() + 10), sceneRect.right() - 10))
+        self.newPos.setY(min(max(self.newPos.y(), sceneRect.top() + 10), sceneRect.bottom() - 10))
 
-    def calcViscosityForce(self, viscosity):
-        """
-        Calculate the viscosity force.
-        """
-        # Fviscosity = - v * viscosityFactor
-        self.F -= self.v * viscosity
+    def advance(self):
+        if self.newPos == self.pos():
+            return False
 
-    def calcNewLocation(self, dt):
-        """
-        Calculate the new location of the mass.
-        """
-        # F = m * a = m * dv / dt  =>  dv = F * dt / m
-        dv = self.F * dt / self.m
-        self.v += dv
-        # v = dx / dt  =>  dx = v * dt
-        self.pos += self.v * dt
-        self.box.pos += self.v * dt
+        self.setPos(self.newPos)
+        return True
 
-    def clearForce(self):
-        """
-        Clear the Force.
-        """
-        self.F = array((0., 0., 0.))
+    def boundingRect(self):
+        adjust = 2.0
+        return QtCore.QRectF(-10 - adjust, -10 - adjust,
+                             23 + adjust, 23 + adjust)
 
+    def shape(self):
+        path = QtGui.QPainterPath()
+        path.addEllipse(-10, -10, 20, 20)
+        return path
 
-class _BaseEdge(object):
-    """
-    Physical model of an edge as a spring.
-    """
+    def paint(self, painter, option, widget):
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.setBrush(QtCore.Qt.darkGray)
+        painter.drawEllipse(-7, -7, 20, 20)
 
-    def __init__(self, n0, n1, k, l0=None, damping=None):
-        """
-        Construct a spring edge.
-        """
-        self.n0 = n0
-        self.n1 = n1
-        self.k = k
-        if l0:
-            self.l0 = l0
+        gradient = QtGui.QRadialGradient(-3, -3, 10)
+        if option.state & QtGui.QStyle.State_Sunken:
+            gradient.setCenter(3, 3)
+            gradient.setFocalPoint(3, 3)
+            gradient.setColorAt(1, QtGui.QColor(QtCore.Qt.yellow).light(120))
+            gradient.setColorAt(0, QtGui.QColor(QtCore.Qt.darkYellow).light(120))
         else:
-            self.l0 = array_mag(self.n1.pos - self.n0.pos)
-        self.damping = damping
-        self.e = array((0., 0., 0.))
+            gradient.setColorAt(0, QtCore.Qt.yellow)
+            gradient.setColorAt(1, QtCore.Qt.darkYellow)
 
-    def calcSpringForce(self):
-        """
-        Calculate the spring force.
-        """
-        delta = self.n1.box.pos - self.n0.box.pos
-        l = array_mag(delta)
-        self.e = array_norm(delta)
-        # Fspring = (l - l0) * k
-        Fspring = (l - self.l0) * self.k * self.e
-        self.n0.F += Fspring
-        self.n1.F -= Fspring
+        painter.setBrush(QtGui.QBrush(gradient))
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
+        painter.drawEllipse(-10, -10, 20, 20)
 
-    def calcDampingForce(self):
-        """
-        Calculate the damping force.
-        """
-        # Fdamping = v in e * dampingFactor
-        Fdamping = (array_dot((self.n1.v - self.n0.v), self.e) *
-                    self.damping * self.e)
-        self.n0.F += Fdamping
-        self.n1.F -= Fdamping
+    def itemChange(self, change, value):
+        if change == QtGui.QGraphicsItem.ItemPositionChange:
+            for edge in self.edgeList:
+                edge.adjust()
+            self.graph.display.mapView.itemMoved()
 
+        return QtGui.QGraphicsItem.itemChange(self, change, value)
 
+    def mousePressEvent(self, event):
+        self.update()
+        QtGui.QGraphicsItem.mousePressEvent(self, event)
 
-class BaseRubberEdge(_BaseEdge):
-    """
-    Visual representation of a spring using a single cylinder with variable radius.
-    """
-
-    def __init__(self, n0, n1, k, l0=None, damping=None,
-                 radius=None, color=(0.5,0.5,0.5), **keywords):
-        """
-        Construct a rubber spring.
-        """
-        _BaseEdge.__init__(self, n0, n1, k, l0, damping)
-        if radius is None:
-            radius = (self.n0.box.length + self.n1.box.length) * 0.1
-        self.r0 = radius
-        #these proeperties  have to be defined in each subclass.
-        # FIXME: maybe just "visual"  will need to redefine these in the end.
-        if self.__class__ == BaseNode:
-            self.cylinder = BaseCylinder(pos=self.n0.box.pos,
-                                         axis=self.n1.pos - self.n0.pos,
-                                         radius=radius, color=color,
-                                         **keywords)
-
-    def update(self):
-        """
-        Update the visual representation of the spring.
-        """
-        self.cylinder.pos = self.n0.pos
-        self.cylinder.axis = self.n1.pos - self.n0.pos
-
+    def mouseReleaseEvent(self, event):
+        self.update()
+        QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
 
 
 
@@ -782,37 +785,32 @@ class QtGraph(BaseGraph):
         """
         BaseGraph.__init__(self)
         self.display = display
-        self.rect = None#xmin,ymin,xmax0,ymax
+        self.nodes = []
+        self.rect = [0,0,0,0]#xmin,ymin,xmax,ymax
     
     def getRect(self):
         '''
         Returns the bounding rectangle for the graph
         '''
-        if self.rect != None:
-            for n in self.nodes:
-                self.rect[0] = n.pos[0] if n.pos[0]<self.rect[0] else self.rect[0]
-                self.rect[1] = n.pos[1] if n.pos[1]<self.rect[1] else self.rect[1]
-                self.rect[2] = n.pos[0] if n.pos[0]>self.rect[2] else self.rect[2]
-                self.rect[3] = n.pos[1] if n.pos[1]>self.rect[3] else self.rect[3]
+        for n in self.nodes:
+            self.rect[0] = n.pos.x() if n.pos.x()<self.rect[0] else self.rect[0]
+            self.rect[1] = n.pos.y() if n.pos.y()<self.rect[1] else self.rect[1]
+            self.rect[2] = n.pos.x() if n.pos.x()>self.rect[2] else self.rect[2]
+            self.rect[3] = n.pos.y() if n.pos.y()>self.rect[3] else self.rect[3]
         return self.rect
+    
 
-class QtNode(BaseNode,QtGui.QGraphicsItem):
+class QtNode(BaseNode):
     """
     Physical model and visual representation of a node as a mass using Qt
     """
-    Type = QtGui.QGraphicsItem.UserType + 2
-    def __init__(self, m, pos, r=1, display = None,  name='', **keywords):
+    def __init__(self, graphw):
         """
         Construct a mass.
         """
-        BaseNode.__init__(self,  m, pos, r, **keywords)
-        QtGui.QGraphicsItem.__init__(self)
-        self.graph = display
-        self.pos = pos
-        self.r = r
+        BaseNode.__init__(self, graphw)
         self.edgeList = []
-        self.setZValue(3)
-        #self.setPos(pos[0], pos[1])
+        
         
     def type(self):
         return QtNode.Type
@@ -824,26 +822,99 @@ class QtNode(BaseNode,QtGui.QGraphicsItem):
     def edges(self):
         return self.edgeList
         
-    def boundingRect(self):
-        return QtCore.QRectF(self.pos[0], self.pos[1],  self.r*2,  self.r*2)
+    
 
-    def shape(self):
-        path = QtGui.QPainterPath()
-        path.addEllipse(self.pos[0], self.pos[1], self.r*2,  self.r*2)
-        return path
+class QtEdge(QtGui.QGraphicsItem):
+    Pi = math.pi
+    TwoPi = 2.0 * Pi
+    Type = QtGui.QGraphicsItem.UserType + 2
+
+    def __init__(self, sourceNode, destNode):
+        QtGui.QGraphicsItem.__init__(self)
+        self.arrowSize = 10.0
+        self.sourcePoint = QtCore.QPointF()
+        self.destPoint = QtCore.QPointF()
+        self.setAcceptedMouseButtons(QtCore.Qt.NoButton)
+        self.source = sourceNode
+        self.dest = destNode
+        self.source.addEdge(self)
+        self.dest.addEdge(self)
+        self.adjust()
+
+    def type(self):
+        return QtEdge.Type
+
+    def sourceNode(self):
+        return self.source
+
+    def setSourceNode(self, node):
+        self.source = node
+        self.adjust()
+
+    def destNode(self):
+        return self.dest
+
+    def setDestNode(self, node):
+        self.dest = node
+        self.adjust()
+
+    def adjust(self):
+        if not self.source or not self.dest:
+            return
+
+        line = QtCore.QLineF(self.mapFromItem(self.source, 0, 0), self.mapFromItem(self.dest, 0, 0))
+        length = line.length()
+
+        if length == 0.0:
+            return
+
+        edgeOffset = QtCore.QPointF((line.dx() * 10) / length, (line.dy() * 10) / length)
+
+        self.prepareGeometryChange()
+        self.sourcePoint = line.p1() + edgeOffset
+        self.destPoint = line.p2() - edgeOffset
+
+    def boundingRect(self):
+        if not self.source or not self.dest:
+            return QtCore.QRectF()
+
+        penWidth = 1
+        extra = (penWidth + self.arrowSize) / 2.0
+
+        return QtCore.QRectF(self.sourcePoint,
+                             QtCore.QSizeF(self.destPoint.x() - self.sourcePoint.x(),
+                                           self.destPoint.y() - self.sourcePoint.y())).normalized().adjusted(-extra, -extra, extra, extra)
 
     def paint(self, painter, option, widget):
-        painter.setBrush(QtCore.Qt.red)
-        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
-        painter.drawEllipse(self.pos[0], self.pos[1],  self.r*2,  self.r*2)
+        if not self.source or not self.dest:
+            return
 
-class QtRubberEdge(BaseRubberEdge):
-    def __init__(self, n0, n1, k, l0=None, damping=None,
-                 radius=None, color=(0.5,0.5,0.5), **keywords):
-        """
-        Construct a rubber spring.
-        """
-        BaseRubberEdge.__init__(self, n0, n1, k, l0, damping, radius, color, **keywords)
+        # Draw the line itself.
+        line = QtCore.QLineF(self.sourcePoint, self.destPoint)
+
+        if line.length() == 0.0:
+            return
+
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
+        painter.drawLine(line)
+
+        # Draw the arrows if there's enough room.
+        angle = math.acos(line.dx() / line.length())
+        if line.dy() >= 0:
+            angle = QtEdge.TwoPi - angle
+
+        sourceArrowP1 = self.sourcePoint + QtCore.QPointF(math.sin(angle + QtEdge.Pi / 3) * self.arrowSize,
+                                                          math.cos(angle + QtEdge.Pi / 3) * self.arrowSize)
+        sourceArrowP2 = self.sourcePoint + QtCore.QPointF(math.sin(angle + QtEdge.Pi - QtEdge.Pi / 3) * self.arrowSize,
+                                                          math.cos(angle + QtEdge.Pi - QtEdge.Pi / 3) * self.arrowSize);   
+        destArrowP1 = self.destPoint + QtCore.QPointF(math.sin(angle - QtEdge.Pi / 3) * self.arrowSize,
+                                                      math.cos(angle - QtEdge.Pi / 3) * self.arrowSize)
+        destArrowP2 = self.destPoint + QtCore.QPointF(math.sin(angle - QtEdge.Pi + QtEdge.Pi / 3) * self.arrowSize,
+                                                      math.cos(angle - QtEdge.Pi + QtEdge.Pi / 3) * self.arrowSize)
+
+        painter.setBrush(QtCore.Qt.black)
+        painter.drawPolygon(QtGui.QPolygonF([line.p1(), sourceArrowP1, sourceArrowP2]))
+        painter.drawPolygon(QtGui.QPolygonF([line.p2(), destArrowP1, destArrowP2]))
 
 class MapServer:
     """
@@ -892,7 +963,10 @@ if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     widget = MapWindow()
-    widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
+    #widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
+    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
+    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
+    widget.drawGraph(poslist, elist)
     widget.show()
     sys.exit(app.exec_())
 

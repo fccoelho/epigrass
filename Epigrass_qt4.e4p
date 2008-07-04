@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-06-26, 10:46:01 -->
+<!-- Saved: 2008-07-04, 16:06:39 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -14,9 +14,6 @@
     <Name>epigrass</Name>
   </TranslationPrefix>
   <Sources>
-    <Source>
-      <Name>epigrass.py</Name>
-    </Source>
     <Source>
       <Dir>Epigrass</Dir>
       <Name>testinst.py</Name>
@@ -124,9 +121,6 @@
     <Source>
       <Dir>Epigrass</Dir>
       <Name>manager.py</Name>
-    </Source>
-    <Source>
-      <Name>epgeditor.py</Name>
     </Source>
     <Source>
       <Dir>demos</Dir>

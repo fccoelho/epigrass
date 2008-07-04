@@ -101,8 +101,10 @@ class simulate:
         try:
             #WORLD
             #load Shapefile if specified
-            if 'the world.shapefile' in config:
+            if config['the world.shapefile']:
                 self.shapefile = eval(config['the world.shapefile'])
+            else:
+                self.shapefile = []
 
             #self.layer = config['the world.vector layer']
             self.sites = config['the world.sites'] #file containing site info
@@ -292,7 +294,7 @@ class simulate:
                     #print 'next edge!'
                     break
             if not (source and dest):
-                print source ,dest
+                #print source ,dest
                 sys.exit('One of the vertices on edge '+edg[0]+'-'+edg[1]+' could not be found on the site list')
 
             objlist.append(edge(source,dest,edg[2],edg[3],float(edg[4])))
@@ -348,7 +350,7 @@ class simulate:
         '''
         #inits[self.seed[0][1].lower()] += 1
         seedvar = self.seed[0][1].lower() #retrieve the name of the variable containing the seeds
-        print 'seedvar= ', seedvar
+        self.Say('seedvar= %s'%seedvar)
 
         self.seed =[(seed.geocode, seedvar,n)]
         for site in self.g.site_list:
@@ -889,10 +891,10 @@ class simulate:
             if len(infectors):
                 reverse_infectors = [ [v[1],v[0]] for v in infectors.items()]
                 reverse_infectors.sort()
-                mli = [reverse_infectors[j][1] for j in range(0,len(reverse_infectors))][-1]#Most likely infector
+                mli = [reverse_infectors[j][1] for j in xrange(0,len(reverse_infectors))][-1].sitename#Most likely infector
             else:
                 mli = 'NA'
-            #print i[1].sitename, type(i[1].sitename)
+            #print i[1].sitename, type(i[1].sitename), mli
             epp.write(str(i[0])+','+i[1].sitename+','+mli+'\n')
         epp.close()
         self.Say('Done!')
@@ -1104,7 +1106,7 @@ def onStraightRun(options, args):
         repRuns(S)
 
     if S.Batch:
-        print 'Simulation Started.'
+        self.Say('Simulation Started.')
 
         # run the batch list
         for i in S.Batch:
@@ -1115,7 +1117,7 @@ def onStraightRun(options, args):
             # Generates the simulation object
             T = simulate(fname=i,host=S.host, user=S.usr, password=S.passw, backend=S.backend)
 
-            print 'starting model %s'%i
+            self.Say('starting model %s'%i)
             T.start()  # Start the simulation
 #            spread.Spread(T.g)
 
@@ -1130,12 +1132,12 @@ def repRuns(S):
         password=S.passw
         backend=S.backend
         nseeds= S.seed[0][2] #number o individual to be used as seeds
-        print "Replication type: ", randseed
+        self.Say("Replication type: ", randseed)
         if randseed:
             seeds = S.randomizeSeed(randseed)
         reps = S.replicas
         for i in xrange(reps):
-            print "Starting replicate number %s"%i
+            self.Say("Starting replicate number %s"%i)
             S = simulate(fname=fname,host=host, user=user, password=password, backend=backend)
             if randseed:
                 S.setSeed(seeds[i],nseeds)

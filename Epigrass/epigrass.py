@@ -8,7 +8,6 @@ except ImportError:
 
 from Epigrass.manager import *
 import threading,  subprocess
-#from Epigrass.Ui_cpanel import Ui_MainPanel #as MainPanel
 from Epigrass.Ui_cpanel4new import Ui_MainWindow
 from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
@@ -88,7 +87,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
             self.fillGui(self.conf)
         self.sim = None
             
-    def openGraphDisplay(self, shp='', namefield='', geocfield=''):
+    def openGraphDisplay(self, shp='', namefield='', geocfield='', nlist=[], elist=[]):
         """
         Starts the Qt map display
         shp: shapefile fname
@@ -98,6 +97,8 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         #self.graphDisplay.move(self.x()+40, self.y()+40)
         if shp:
             self.graphDisplay.drawMap(shp, namefield, geocfield)
+        else:
+            self.graphDisplay.drawGraph(nlist, elist)
         self.graphDisplay.show()
     
     def initRc(self):
@@ -488,7 +489,10 @@ Make sure you have generated it."""),
         pos = self.vars.index(var)
         r = self.rateSpinBox.value() 
         table = str(self.tableList.currentText())
-        mapa = self.Display.shapefile[0]
+        if self.Display.shapefile:
+            mapa = self.Display.shapefile[0]
+        else:
+            mapa =None
         modname = table.split('_')[0] #self.sim.modelName.split('/')[-1]
         #change the the outdata directory
         if not os.path.split(os.getcwd())[1].startswith("outdata"):

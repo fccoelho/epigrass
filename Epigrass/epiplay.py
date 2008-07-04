@@ -67,10 +67,14 @@ class viewer:
         """
         if self.backend == 'sqlite':
             r = [i[1] for i in self.connection.queryAll('PRAGMA table_info(%s)'%table)]
-            self.shapefile = eval(self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))[0][0])
+            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
+            print shp
+            self.shapefile = eval(shp)
+            print self.shapefile
         elif self.backend == 'mysql':
             r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
-            self.shapefile = eval(self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))[0][0])
+            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
+            self.shapefile = eval(shp)
         elif self.backend == 'csv':
             f = open(table,'r')
             r = f.read().strip().split(',')
@@ -100,7 +104,8 @@ class viewer:
         else:
             r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
             self.numbnodes = len(r)
-            
+        self.nodes_pos = [(i[1], i[2])for i in r]
+        self.nodes_gc = [i[0] for i in r]
             
         # get adjacency matrix
 #        if not os.getcwd() == self.
@@ -141,37 +146,20 @@ class viewer:
             tab = table+'e'
             r = self.connection.queryAll('SELECT * FROM %s'%tab)
             self.numbedges = len(r)
-
+        self.elist = [(self.nodes_gc.index(e[0]), self.nodes_gc.index(e[1])) for e in r]
         return r
         
     def viewGraph(self, nodes, am, var,mapa=''):
         """
         Starts the Qt display of the map or graph.
         """
-        self.gui.openGraphDisplay(mapa,self.shapefile[1],self.shapefile[2]  )
+        if self.shapefile:
+            self.gui.openGraphDisplay(mapa,self.shapefile[1],self.shapefile[2], self.nodes_pos, self.elist  )
+        else:
+            self.gui.openGraphDisplay(mapa,nlist=self.nodes_pos, elist=self.elist  )
         self.gr = self.gui.graphDisplay
         self.gr.qwtPlot.setTitle(var)
-#        self.gr.drawMap(mapa, self.shapefile[1],self.shapefile[2] )
 
-#        Nlist = [dgraph.Node(3,(float(i[2]),float(i[1]),0),name=unicode(i[3].strip(),self.encoding),geocode=i[0]) for i in nodes]
-#        self.gr.insertNodeList(Nlist)
-#        el = self.gr.getEdgeFromMatrix(am)
-#        #print am,el
-#        El = [dgraph.RubberEdge(self.gr.nodes[c],self.gr.nodes[l],1,damping=0.8) for c,l in el]
-#        #print El
-#        self.gr.insertEdgeList(El)
-#        self.gr.addTimelabel()
-#        self.gr.centerView()
-#        if mapa not in ['No map','Nenhum mapa','Pas de carte',  'No hay mapas']:
-#            m = dgraph.Map(mapa,self.gr.display)
-#            self.gr.insertMap(m)
-#        else: m=None
-#        self.gr.centerView()
-#        if m:
-#            self.node_sizefactor = m.dimension/10000.
-#        else:
-#            self.node_sizefactor = self.gr.netdimension/10000.
-        #self.gr.display.visible=1
             
     def anim(self,data,edata, numbsteps,pos, rate=20):
         """
