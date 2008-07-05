@@ -59,19 +59,19 @@ def scaleView(self, scaleFactor):
     self.scale(scaleFactor, scaleFactor)
     
 def timerEvent(self, event):
-    nodes = [item for item in self.scene.items() if isinstance(item, QtNode)]
+    pass
 
-    for node in nodes:
-        node.calculateForces()
-
-    itemsMoved = False
-    for node in nodes:
-        if node.advance():
-            itemsMoved = True
-
-    if not itemsMoved:
-        self.killTimer(self.timerId)
-        self.timerId = 0
+#    for node in self.nodes:
+#        node.calculateForces()
+#
+#    itemsMoved = False
+#    for node in self.nodes:
+#        if node.advance():
+#            itemsMoved = True
+#
+#    if not itemsMoved:
+#        self.killTimer(self.timerId)
+#        self.timerId = 0
 
 def itemMoved(self):
     if not self.timerId:
@@ -116,10 +116,10 @@ class MapWindow(Ui_Form):
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
         QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("released()"), self.replay)
-        self.server = MapServer()
+#        self.server = MapServer()
 #        self.server.map = self.M
-        st = threading.Thread(target=self.server.start)
-        st.start()
+#        st = threading.Thread(target=self.server.start)
+#        st.start()
         
     def setupQwtPlot(self):
         """
@@ -197,24 +197,34 @@ class MapWindow(Ui_Form):
         #print self.polys
     
     def drawGraph(self, nlist, elist=[] ):
+        """
+        Draws a graph in the scene
+        nlist: is a lis of nodes in the format(x,y,geocode,name)
+        elist: is a list of edges described by tuples of indices to the first list.
+        """
+        self.label.setText('Network View')
         self.M = Graph(self)
         self.mapView.timerId = 0
         #Adding graph event handlers
         self.mapView.itemMoved = MethodType(itemMoved, self.mapView)
         self.mapView.timerEvent = MethodType(timerEvent, self.mapView)
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
+        npos= [(n[0], -n[1]) for n in nlist]
+        xmin,ymin = array(npos).min(axis=0)
+        xmax,ymax = array(npos).max(axis=0)
         for n in nlist:
-            node = Node(self.M)
-            node.setPos(*n)
+            node = Node(self.M, n[2], n[3])
+            node.setPos(*(n[0], -n[1]))
+            node.size = max(xmax-xmin, ymax-ymin)/math.sqrt(len(nlist))*0.5
             self.mapView.scene.addItem(node)
             self.M.insertNode(node)
             #print node.x(), node.y(), n.center[0], n.center[1]
+        self.mapView.nodes = self.M.nodes
         for e in elist:
             ed = Edge(self.M.nodes[e[0]], self.M.nodes[e[1]])
             self.mapView.scene.addItem(ed)
             self.M.insertEdge(ed)
-        xmin,ymin = array(nlist).min(axis=0)
-        xmax,ymax = array(nlist).max(axis=0)
+        
     
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
@@ -223,7 +233,7 @@ class MapWindow(Ui_Form):
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         
-        #self.mapView.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+#        self.mapView.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
         self.mapView.scene.setSceneRect(xmin, ymin, xxs, yxs)
         #print self.mapView.scene.width(), self.mapView.scene.height()
         self.mapView.fitInView(xmin, ymin, xxs, yxs)
@@ -360,7 +370,6 @@ class BaseNode(QtGui.QGraphicsItem):
 
     def __init__(self, graphWidget):
         QtGui.QGraphicsItem.__init__(self)
-
         self.graph = graphWidget
         self.edgeList = []
         self.newPos = QtCore.QPointF()
@@ -419,53 +428,6 @@ class BaseNode(QtGui.QGraphicsItem):
         self.setPos(self.newPos)
         return True
 
-    def boundingRect(self):
-        adjust = 2.0
-        return QtCore.QRectF(-10 - adjust, -10 - adjust,
-                             23 + adjust, 23 + adjust)
-
-    def shape(self):
-        path = QtGui.QPainterPath()
-        path.addEllipse(-10, -10, 20, 20)
-        return path
-
-    def paint(self, painter, option, widget):
-        painter.setPen(QtCore.Qt.NoPen)
-        painter.setBrush(QtCore.Qt.darkGray)
-        painter.drawEllipse(-7, -7, 20, 20)
-
-        gradient = QtGui.QRadialGradient(-3, -3, 10)
-        if option.state & QtGui.QStyle.State_Sunken:
-            gradient.setCenter(3, 3)
-            gradient.setFocalPoint(3, 3)
-            gradient.setColorAt(1, QtGui.QColor(QtCore.Qt.yellow).light(120))
-            gradient.setColorAt(0, QtGui.QColor(QtCore.Qt.darkYellow).light(120))
-        else:
-            gradient.setColorAt(0, QtCore.Qt.yellow)
-            gradient.setColorAt(1, QtCore.Qt.darkYellow)
-
-        painter.setBrush(QtGui.QBrush(gradient))
-        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
-        painter.drawEllipse(-10, -10, 20, 20)
-
-    def itemChange(self, change, value):
-        if change == QtGui.QGraphicsItem.ItemPositionChange:
-            for edge in self.edgeList:
-                edge.adjust()
-            self.graph.display.mapView.itemMoved()
-
-        return QtGui.QGraphicsItem.itemChange(self, change, value)
-
-    def mousePressEvent(self, event):
-        self.update()
-        QtGui.QGraphicsItem.mousePressEvent(self, event)
-
-    def mouseReleaseEvent(self, event):
-        self.update()
-        QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
-
-
-
 class BaseGraph(object):
     """
     The Graph.self.data(start)[5]
@@ -484,7 +446,7 @@ class BaseGraph(object):
 
         self.nodes = []
         self.edges = []
-
+        self.polyDict = {}
         self.dragObject = None
         self.click = None
         self.distance = None
@@ -511,6 +473,7 @@ class BaseGraph(object):
         #FIXME: verify time overhead of this check
         if not node in self.nodes:
             self.nodes.append(node)
+            self.polyDict[node.geocode] = node
             node.graph = self #pass a reference of self to the node.
 
     def insertMap(self,map_):
@@ -786,6 +749,7 @@ class QtGraph(BaseGraph):
         BaseGraph.__init__(self)
         self.display = display
         self.nodes = []
+        self.polyDict = {}#dictionary of nodes by geocode
         self.rect = [0,0,0,0]#xmin,ymin,xmax,ymax
     
     def getRect(self):
@@ -804,14 +768,44 @@ class QtNode(BaseNode):
     """
     Physical model and visual representation of a node as a mass using Qt
     """
-    def __init__(self, graphw):
+    def __init__(self, graphw,  geocode, name):
         """
         Construct a mass.
         """
         BaseNode.__init__(self, graphw)
         self.edgeList = []
+        self.geocode = geocode
+        self.name = name
+        self.fillColor = QtGui.QColor(255, 255, 0)
+        self.size = 20
+        self.setToolTip(str(self.geocode)+ " - "+name)
+        self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
         
         
+    def mousePressEvent(self, event):
+        if self.isSelected():
+#            print "unselect"
+            self.setSelected(False)
+            col = self.graph.display.jet(self.graph.display.timeseries[self.graph.display.step][self.geocode])
+            self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
+            self.lineColor = QtCore.Qt.black
+            self.curve.detach()
+            self.display.qwtPlot.replot()
+        else: 
+#            print "select"
+            self.setSelected(True)
+#            print self.isSelected()
+            self.fillColor = QtGui.QColor(0, 255, 0)
+            self.lineColor = QtCore.Qt.white
+            self.graph.display.addTsCurve(self.geocode, self.name)
+            self.graph.display.qwtPlot.replot()
+        self.update()
+#        QtGui.QGraphicsItem.mousePressEvent(self, event)
+
+    def mouseReleaseEvent(self, event):
+        self.update()
+        #QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
+    
     def type(self):
         return QtNode.Type
         
@@ -822,7 +816,42 @@ class QtNode(BaseNode):
     def edges(self):
         return self.edgeList
         
-    
+    def boundingRect(self):
+        adjust = 2.0
+        return QtCore.QRectF(-10 - adjust, -10 - adjust,
+                             23 + adjust, 23 + adjust)
+
+    def shape(self):
+        path = QtGui.QPainterPath()
+        path.addEllipse(-10, -10, self.size, self.size)
+        return path
+
+    def paint(self, painter, option, widget):
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.setBrush(QtCore.Qt.darkGray)
+        painter.drawEllipse(-7, -7, self.size, self.size)
+
+        gradient = QtGui.QRadialGradient(-3, -3, 10)
+        if option.state & QtGui.QStyle.State_Sunken:
+            gradient.setCenter(3, 3)
+            gradient.setFocalPoint(3, 3)
+            gradient.setColorAt(1, QtGui.QColor(self.fillColor).light(120))
+            gradient.setColorAt(0, QtGui.QColor(self.fillColor.darker(150)).light(120))
+        else:
+            gradient.setColorAt(0, self.fillColor)
+            gradient.setColorAt(1, self.fillColor.darker(150))
+
+        painter.setBrush(QtGui.QBrush(gradient))
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
+        painter.drawEllipse(-10, -10,self.size,self.size)
+
+    def itemChange(self, change, value):
+        if change == QtGui.QGraphicsItem.ItemPositionChange:
+            for edge in self.edgeList:
+                edge.adjust()
+            self.graph.display.mapView.itemMoved()
+
+        return QtGui.QGraphicsItem.itemChange(self, change, value)
 
 class QtEdge(QtGui.QGraphicsItem):
     Pi = math.pi
@@ -843,7 +872,7 @@ class QtEdge(QtGui.QGraphicsItem):
 
     def type(self):
         return QtEdge.Type
-
+    
     def sourceNode(self):
         return self.source
 
@@ -964,7 +993,7 @@ if __name__=='__main__':
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     widget = MapWindow()
     #widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
-    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
+    poslist = [(-50, -50, 1, 'a'),(0, -50, 2, 'b'),(50, -50, 3, 'c'),(-50, 0, 4,'d'),(0, 0, 5, 'e'),(50, 0, 6, 'f'),(-50, 50, 7, 'g'),(0, 50, 8, 'h'),(50, 50, 9, 'i')]
     elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
     widget.drawGraph(poslist, elist)
     widget.show()

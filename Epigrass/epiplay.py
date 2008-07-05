@@ -69,12 +69,12 @@ class viewer:
             r = [i[1] for i in self.connection.queryAll('PRAGMA table_info(%s)'%table)]
             shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
             print shp
-            self.shapefile = eval(shp)
+            self.shapefile = eval(shp[0][0])
             print self.shapefile
         elif self.backend == 'mysql':
             r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
             shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
-            self.shapefile = eval(shp)
+            self.shapefile = eval(shp[0][0])
         elif self.backend == 'csv':
             f = open(table,'r')
             r = f.read().strip().split(',')
@@ -104,7 +104,7 @@ class viewer:
         else:
             r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
             self.numbnodes = len(r)
-        self.nodes_pos = [(i[1], i[2])for i in r]
+        self.nodes_pos = [(i[1], i[2], i[0], i[3])for i in r]
         self.nodes_gc = [i[0] for i in r]
             
         # get adjacency matrix

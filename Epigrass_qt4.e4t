@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-04, 16:06:39 -->
+<!-- Saved: 2008-07-04, 17:54:19 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: check this connection string</Summary>
@@ -13,18 +13,6 @@
         <Name>dataObject.py</Name>
       </Filename>
       <Linenumber>26</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-07-01, 15:34:40</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>simobj.py</Name>
-      </Filename>
-      <Linenumber>401</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
@@ -52,7 +40,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:01:46</Created>
+    <Created>2008-07-04, 16:19:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -64,7 +52,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:01:46</Created>
+    <Created>2008-07-04, 16:19:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -76,7 +64,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:01:46</Created>
+    <Created>2008-07-04, 16:19:29</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -86,15 +74,51 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: find out why replay function does not runright after regular run</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:41:31</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>epigrass.py</Name>
+      </Filename>
+      <Linenumber>315</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:41:31</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>epigrass.py</Name>
+      </Filename>
+      <Linenumber>479</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: move this import to the graph level</Summary>
+    <Description></Description>
+    <Created>2008-07-04, 16:55:55</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>simobj.py</Name>
+      </Filename>
+      <Linenumber>401</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: the animation rate is not working....</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:04:05</Created>
+    <Created>2008-07-04, 17:50:46</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>epiplay.py</Name>
       </Filename>
-      <Linenumber>163</Linenumber>
+      <Linenumber>171</Linenumber>
     </Resource>
   </Task>
 </Tasks>
