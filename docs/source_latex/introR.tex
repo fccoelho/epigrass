@@ -1,0 +1,66 @@
+\chapter{Using R to Analyze EpiGrass' Data}\label{cap:introR} 
+Depending on the size of your network or the number of scenarions being simulated on a given network within EpiGrass, A large ammount of data is generated as output. This data is stored, by default on a MySQL database named epigrass.
+
+On this appendix, we illustrate how to access this data on the MySQL server an do sme simple analysis using the statistical package R. The R statistical package (\url{http://www.r-project.org}) is an incredibly resourceful environment for data management and analysis. 
+
+\section{Accessing The MySQL server}
+Before we can access the database and retrieve our data there are some preliminary steps that must be performed. First and foremost, we need to learn how to start the R system. Just open a console window and type \texttt{R} as shown on listing \ref{lst:startR}.
+\begin{lstlisting}[language=Ksh,basicstyle=\footnotesize,frame=trBL, caption=Starting R ,label=lst:startR]
+$ R
+R : Copyright 2004, The R Foundation for Statistical Computing
+Version 2.0.1  (2004-11-15), ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for a HTML browser interface to help.
+Type 'q()' to quit R.
+
+>                       
+\end{lstlisting}
+
+Very well, Now you are running R. R has a modular architecture that allows the user to specify the tools he/she desires to use on a given session. In order to access the MySQL database server and retrieve our data, we will need some special tools from R's vast colection of modules (also called packages). Listing \ref{lst:Rlib}, shows how to load the packages needed.
+\begin{lstlisting}[language=R,basicstyle=\footnotesize,frame=trBL, caption=Loading required packages.,label=lst:Rlib]
+> library(DBI)
+> library(RMySQL)
+\end{lstlisting}
+
+To connect to a database server we need to tell R the type of server we will be connecting to, and open a connection to it (listing \ref{lst:Rsql}). 
+\begin{lstlisting}[language=R,basicstyle=\footnotesize,frame=trBL, caption=Specifying the type of server and opening a connection.,label=lst:Rsql]
+> drv <- dbDriver("MySQL")
+> con <- dbConnect(drv, username='epigrass',password='epigrass', host='localhost',dbname='epigrass')
+\end{lstlisting}
+
+Once we have a connection to the database it works as a two-way communications pipeline between R and the MySQL server. Through this connection we can send SQL commands to the Server and retrieve the results of these commands. 
+
+Fortunately, the RMySQL package has many common SQL statements packed into easy to remember commands. Listing \ref{lst:Rlisttbl} shows us how to find out the tables available at the epigrass database. This is a very useful command for us because the results of each simulation completed in EpiGrass is stored in a separate table whose title is contains a reference to when it was ran. So, after running a few simulations with the demo model mesh, we will end up with a list of tables similar to the one shown on listing  \ref{lst:Rlisttbl}.
+\begin{lstlisting}[language=R,basicstyle=\footnotesize,frame=trBL, caption=Listing existing tables. ,label=lst:Rlisttbl]
+> tables<-dbListTables(con)
+> tables
+[1] "localidades"                   "mesh_Mon_Feb_14_111026_2005"
+[3] "mesh_Tue_Feb_15_144139_2005"   "mesh_Tue_Feb_15_171743_2005"
+[5] "mesh_Tue_Feb_15_172037_2005"   "mesh_Tue_Feb_15_172134_2005"
+\end{lstlisting}
+
+After we identify which set of data(table) we want to work with, we can read the into a data frame, a very versatile data structure of R.
+
+\begin{lstlisting}[language=R,basicstyle=\footnotesize,frame=trBL, caption= ,label=lst:Rrdtbl]
+> results<- dbReadTable(con,tables[2])
+> names (results)
+[1] "geocode" "time"    "E"       "I"       "S"
+\end{lstlisting}
+
+On line 1 of listing \ref{lst:Rrdtbl}, we read the second table of our database into a data frame object called \texttt{results}. The \texttt{names} command, lists the names of the variables contained in that data frame.
+
+\section{Visualizing the Data}
+Once we have have the data inside R there countless ways in which we can manipulate and visualize it. For the first plot we will need to load another package called \texttt{lattice}. 
+\begin{lstlisting}[language=R,basicstyle=\footnotesize,frame=trBL, caption= ,label=]
+> library(lattice)
+> xyplot(I+E+S~time|geocode,type="l",data=results)
+\end{lstlisting}

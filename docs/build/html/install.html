@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Building and Installing &mdash; Epigrass v2.0a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:   '',
+          VERSION:    '2.0a1',
+          COLLAPSE_MODINDEX: false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/interface.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="contents" title="Global table of contents" href="contents.html" />
+    <link rel="index" title="Global index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Epigrass v2.0a1 documentation" href="index.html" />
+    <link rel="prev" title="Overview of Epigrass" href="overview.html" />
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview of Epigrass"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section">
+<h1 id="building-and-installing"><span id="install"></span>Building and Installing<a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h1>
+<p>This chapter will walk through all aspects of Epigrass installation. From obtaining, building and installing  the prerequisites to the installation of Epigrass itself.</p>
+<p>Most of the steps will be quite simple and similar since they will make use of standard tools for package installation on Debian GNU/Linux and derivatives. If you use a different distribution, you should check its documentation for package installation instructions.</p>
+<p>If, on your distribution, a package is not available for the required version, you can try to obtain an updated version of the package at the web-sites provided. On the rare cases where pre-built packages are not available, instructions on how to build the software from source should also be available from its web-site.</p>
+<div class="section">
+<h2 id="required-packages">Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h2>
+<div class="section">
+<h3 id="python">Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://www.python.org">http://www.python.org</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;=2.5</dd>
+</dl>
+<p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.</p>
+<p>Python is probably installed automatically by your GNU/Linux distribution (it is on Debian). If not, it is best to use your distribution&#8217;s standard tools for package installation. On Debian for example:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python python-dev
+</pre></div>
+</div>
+<div class="section">
+<h3 id="numeric-python">Numeric Python<a class="headerlink" href="#numeric-python" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;= 1.0</dd>
+</dl>
+<p>Numeric Python is a module for fast numeric computations in Python.</p>
+<p>Example installation:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-numpy
+</pre></div>
+</div>
+<div class="section">
+<h3 id="matplotlib">Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;0.9</dd>
+</dl>
+<p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
+</pre></div>
+</div>
+<div class="section">
+<h3 id="pyqt">PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;4.0</dd>
+</dl>
+<p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the simplicity of Python.</p>
+<p>PyQt depends on the Qt libraries to run. This dependency will be taken care by the package installation tools of most distributions, which will automatically install the required version of Qt.</p>
+<p>Example installation:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qt4
+</pre></div>
+</div>
+<div class="section">
+<h3 id="pyqwt">PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;5.0</dd>
+</dl>
+<p>PyQwt is a Python binding for the Qwt5 technical widget library. It is necessary for some os Epigrass&#8217; visualizations capabilities.</p>
+<p>Example installation:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qwt5-qt4
+</pre></div>
+</div>
+<div class="section">
+<h3 id="mysql">MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://www.mysql.com">http://www.mysql.com</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>&gt;5.0</dd>
+</dl>
+<p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL server available in your LAN, you may skip this step after making sure you have permission to access and use it to store your data.</p>
+<p>Example installation:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mysql-server mysql-client python-mysqldb
+</pre></div>
+<div class="section">
+<h4 id="post-install-configuration">Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
+<p>After installing MySQL, you will need to create a new database in the server, called <em>epigrass</em> and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.</p>
+</div>
+</div>
+<div class="section">
+<h3 id="r">R<a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><em>Web-site:</em></dt>
+<dd><a class="reference" href="http://www.r-project.org">http://www.r-project.org</a></dd>
+<dt><em>Version required:</em></dt>
+<dd>The most recent.</dd>
+</dl>
+<p><strong>R</strong> is a statistical computing platform whis is very useful to analyze the output of Epirass&#8217;s models. The Epigrass source distribution includes some example <strong>R</strong> scripts to interact with Epigrass-generated data.</p>
+<p>Example installations:</p>
+<div class="highlight"><pre><span class="nv">$ </span>apt-get install r-base
+</pre></div>
+<p>After installing R, start an interactive session, and install a few extra packages.</p>
+<div class="highlight"><pre><span class="nv">$ </span>R
+&gt; update.packages<span class="o">()</span>
+&gt; install.packages<span class="o">(</span><span class="s1">&#39;RMySQL&#39;</span><span class="o">)</span>
+&gt; install.packages<span class="o">(</span><span class="s1">&#39;DBI&#39;</span><span class="o">)</span>
+&gt; install.packages<span class="o">(</span><span class="s1">&#39;lattice&#39;</span><span class="o">)</span>
+</pre></div>
+<p>section{Installing Epigrass}
+If you got through all the steps above, it will be an easy task to install Epigrass. There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maitained by the developers of Epigrass, It may very well be outdated.  So please download Epigrass&#8217;s source tarball (something named <tt class="docutils literal"><span class="pre">Epigrass_someversion.tar.gz</span></tt>) from Sourceforge and, after unpacking it to some temporary directory, install it by typing:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo python setup.py install
+</pre></div>
+<p>If the installation proceeds without errors, you will have three new executables available on your system:</p>
+<dl class="docutils">
+<dt><em>epigrass</em></dt>
+<dd>This starts Epigrass graphical user interface (GUI).</dd>
+<dt><em>epirunner</em></dt>
+<dd>This is a command line version of Epigrass. With it you can run models without invoking the GUI. It&#8217;s great for batch simulations and for remote use. for a quick help, try &#8220;epirunner -h&#8221;.</dd>
+<dt><em>epgeditor</em></dt>
+<dd><p class="first">A graphical editor of .epg models. A easy way to edit already existing models. Contains detailed explanations of every section of the EPG file. <a href="#id1" name="id2"><span class="problematic" id="id2">:math:`x_3+y`</span></a></p>
+<div class="last system-message" id="id1">
+<p class="system-message-title">System Message: <a name="id1">ERROR/3</a> (<tt class="docutils">/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/docs/source/install.rst</tt>, line 170); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &#8220;math&#8221;.</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/></p>
+            <h3>Table Of Contents</h3>
+            <ul>
+<li><a class="reference" href="">Building and Installing</a><ul>
+<li><a class="reference" href="#required-packages">Required Packages</a><ul>
+<li><a class="reference" href="#python">Python</a></li>
+<li><a class="reference" href="#numeric-python">Numeric Python</a></li>
+<li><a class="reference" href="#matplotlib">Matplotlib</a></li>
+<li><a class="reference" href="#pyqt">PyQt</a></li>
+<li><a class="reference" href="#pyqwt">PyQwt</a></li>
+<li><a class="reference" href="#mysql">MySQL</a><ul>
+<li><a class="reference" href="#post-install-configuration">Post-install configuration</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#r">R</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="overview.html" title="previous chapter">Overview of Epigrass</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/install.txt">Show Source</a></li>
+            </ul>
+            <h3>Quick search</h3>
+            <form class="search" action="search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview of Epigrass"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2008, Flávio Codeço Coelho.
+      Last updated on Jul 07, 2008.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>

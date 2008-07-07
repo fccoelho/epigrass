@@ -1,0 +1,81 @@
+
+\documentclass[a4paper,12pt]{book}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{apalike}
+%\usepackage[brazil]{babel}
+\usepackage{graphicx, subfigure} 
+\usepackage{listings}  
+\usepackage{lettrine} 
+\usepackage{url}
+%Traduzindo o listings
+%\renewcommand{\lstlistingname}{Listagem}
+%\renewcommand{\lstlistlistingname}{Listagens}
+\author{Cláudia Torres Codeço \and Flávio Codeço Coelho}
+\title{EpiGrass User Guide}
+\date{Draft}
+
+
+\makeindex
+
+\begin{document}
+
+
+
+\maketitle
+
+
+
+{\large
+\textbf{EpiGrass is a CNPq funded Project. Participants of this project are:}
+\begin{flushright}
+Maria Goreti Freitas Rosas (Fiocruz - IOC)\\
+Alexios Zavras (Univ of Athenas)\\ 
+Pantelis Tsouris (Univ of Athenas)\\
+Igor Cabral Correa (Fiocruz - PROCC)\\
+Oswaldo Gonçalves Cruz (Fiocruz - PROCC)\\
+Flavio Codeço Coelho (Fiocruz - PROCC)\\
+Cláudia Torres Codeço (Fiocruz-PROCC)\\
+\end{flushright} 
+}
+
+
+
+\frontmatter
+\lstset{language=csh, numbers=left, numberstyle=\tiny, numbersep=7pt, showstringspaces=false, breaklines}
+\include{preface}
+
+\tableofcontents
+
+\listoffigures
+\listoftables
+\lstlistoflistings
+
+\mainmatter
+\include{
+overviewepigrass}
+\include{intromodeling}
+
+\include{install}  % install
+\include{usingepigrass}
+
+\include{analysis}
+
+
+
+
+\appendix
+\include{script}
+%\include{shortintroGRASS}
+%\include{shortintroSQL}
+\include{introR}
+\bibliographystyle{amsalpha}
+\bibliography{userguide}
+
+\backmatter
+\printindex
+
+\end{document}

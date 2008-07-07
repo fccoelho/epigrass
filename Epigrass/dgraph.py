@@ -61,17 +61,17 @@ def scaleView(self, scaleFactor):
 def timerEvent(self, event):
     pass
 
-#    for node in self.nodes:
-#        node.calculateForces()
-#
-#    itemsMoved = False
-#    for node in self.nodes:
-#        if node.advance():
-#            itemsMoved = True
-#
-#    if not itemsMoved:
-#        self.killTimer(self.timerId)
-#        self.timerId = 0
+    for node in self.nodes:
+        node.calculateForces()
+
+    itemsMoved = False
+    for node in self.nodes:
+        if node.advance():
+            itemsMoved = True
+
+    if not itemsMoved:
+        self.killTimer(self.timerId)
+        self.timerId = 0
 
 def itemMoved(self):
     if not self.timerId:
@@ -375,6 +375,7 @@ class BaseNode(QtGui.QGraphicsItem):
         self.newPos = QtCore.QPointF()
         self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
         self.setZValue(1)
+        self.neighbors = []
 
     def type(self):
         return Node.Type
@@ -394,27 +395,27 @@ class BaseNode(QtGui.QGraphicsItem):
         # Sum up all forces pushing this item away.
         xvel = 0.0
         yvel = 0.0
-        for item in self.graph.nodes:
-            line = QtCore.QLineF(self.mapFromItem(item, 0, 0), QtCore.QPointF(0, 0))
-            dx = line.dx()
-            dy = line.dy()
-            l = 2.0 * (dx * dx + dy * dy)
-            if l > 0:
-                xvel += (dx * 150.0) / l
-                yvel += (dy * 150.0) / l
-
-        # Now subtract all forces pulling items together.
-        weight = (len(self.edgeList) + 1) * 10.0
-        for edge in self.edgeList:
-            if edge.sourceNode() is self:
-                pos = self.mapFromItem(edge.destNode(), 0, 0)
-            else:
-                pos = self.mapFromItem(edge.sourceNode(), 0, 0)
-            xvel += pos.x() / weight
-            yvel += pos.y() / weight
-    
-        if QtCore.qAbs(xvel) < 0.1 and QtCore.qAbs(yvel) < 0.1:
-            xvel = yvel = 0.0
+#        for item in self.graph.nodes:
+#            line = QtCore.QLineF(self.mapFromItem(item, 0, 0), QtCore.QPointF(0, 0))
+#            dx = line.dx()
+#            dy = line.dy()
+#            l = 2.0 * (dx * dx + dy * dy)
+#            if l > 0:
+#                xvel += (dx * 150.0) / l
+#                yvel += (dy * 150.0) / l
+#
+#        # Now subtract all forces pulling items together.
+#        weight = (len(self.edgeList) + 1) * 10.0
+#        for edge in self.edgeList:
+#            if edge.sourceNode() is self:
+#                pos = self.mapFromItem(edge.destNode(), 0, 0)
+#            else:
+#                pos = self.mapFromItem(edge.sourceNode(), 0, 0)
+#            xvel += pos.x() / weight
+#            yvel += pos.y() / weight
+#    
+#        if QtCore.qAbs(xvel) < 0.1 and QtCore.qAbs(yvel) < 0.1:
+#            xvel = yvel = 0.0
 
         sceneRect = self.scene().sceneRect()
         self.newPos = self.pos() + QtCore.QPointF(xvel, yvel)
@@ -779,21 +780,25 @@ class QtNode(BaseNode):
         self.fillColor = QtGui.QColor(255, 255, 0)
         self.size = 20
         self.setToolTip(str(self.geocode)+ " - "+name)
-        self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
+        self.selected = False #using our own selection flag to avoid conflicts with other stuff
+        #self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
         
         
     def mousePressEvent(self, event):
-        if self.isSelected():
-#            print "unselect"
-            self.setSelected(False)
-            col = self.graph.display.jet(self.graph.display.timeseries[self.graph.display.step][self.geocode])
-            self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
+        if self.selected:
+            print "unselect"
+            self.selected = False
+            if self.graph.display.timeseries:
+                col = self.graph.display.jet(self.graph.display.timeseries[self.graph.display.step][self.geocode])
+                self.fillColor = QtGui.QColor(int(col[0]*255), int(col[1]*255), int(col[2]*255), int(col[3]*255))
+            else:
+                self.fillColor = QtGui.QColor(255, 255, 0)
             self.lineColor = QtCore.Qt.black
             self.curve.detach()
-            self.display.qwtPlot.replot()
+            self.graph.display.qwtPlot.replot()
         else: 
-#            print "select"
-            self.setSelected(True)
+            print "select"
+            self.selected = True
 #            print self.isSelected()
             self.fillColor = QtGui.QColor(0, 255, 0)
             self.lineColor = QtCore.Qt.white
@@ -867,7 +872,9 @@ class QtEdge(QtGui.QGraphicsItem):
         self.source = sourceNode
         self.dest = destNode
         self.source.addEdge(self)
+        self.source.neighbors.append(self.dest)
         self.dest.addEdge(self)
+        self.dest.neighbors.append(self.source)
         self.adjust()
 
     def type(self):

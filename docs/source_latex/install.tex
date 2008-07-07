@@ -1,0 +1,261 @@
+\chapter{Building and Installing}
+\label{install} 
+\lettrine{T}{his} chapter will walk through all aspects of EpiGrass installation. From obtaining, building and installing  the prerequisites to the installation of EpiGrass itself.
+
+Most of the steps will be quite simple and similar since they will make use of standard tools for package installation on two very popular GNU/Linux distributions: Debian (and derivatives), and Gentoo. If you use a different distribution, you should check its documentation for package installation instructions.
+
+If, on your distribution, a package is not available for the required version, you can try to obtain an updated version of the package at the web-sites provided. On the rare cases where pre-built packages are not available, instructions on how to build the software from source should also be available from its web-site.
+\section{Required Packages}
+\subsection{Python}
+\begin{description}
+\item[Web-site:] \url{http://www.python.org}
+\item[Version required:] $\geq2.3$
+\end{description}
+Python is a simple but powerful object-orientated language. Its simplicity makes it easy to learn, but its power means that large and complex applications can be created. Its interpreted nature means that Python programmers are every productive because there is no edit/compile/link/run development cycle.
+
+Python is probably installed automatically by your GNU/Linux distribution (it is on Gentoo). If not, it is best to use your distribution's standard tools for package installation. On Debian for example:
+\begin{lstlisting}[frame=trBL, caption=Installation of Python in a Debian-based Gnu/Linux distribution. ,label=lst:pyinst]
+$ apt-get install python
+\end{lstlisting}
+
+\subsection{Numeric Python}
+\begin{description}
+\item[Web-site:] \url{http://www.numpy.org}
+\item[Version required:] $\geq23.0$
+\end{description}
+Numeric Python is a module for fast numeric computations in Python.
+
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing Numeric python on Gentoo GNU/Linux ,label=lst:instnumpyg]
+$ emerge numeric
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing Numeric python on Debian GNU/Linux ,label=lst:instnumpyd]
+$ apt-get install numeric
+\end{lstlisting}
+
+\subsection{Matplotlib}
+\begin{description}
+\item[Web-site:] \url{http://matplotlib.sourceforge.net}
+\item[Version required:] $\geq0.70.0$
+\end{description}
+Matplotlib is a Module that provides plotting capabilities to Python.
+\begin{lstlisting}[frame=trBL, caption=Installing Matplotlib on Gentoo GNU/Linux ,label=lst:instmplg]
+$ emerge matplotlib
+\end{lstlisting}
+Before using \texttt{apt-get} to install matplotlib, add these lines to your  \texttt{/etc/apt/sources.list}:
+\begin{lstlisting}[frame=trBL, caption=Adding specific sources to apt-get. ,label=]
+deb http://anakonda.altervista.org/debian packages/
+deb-src http://anakonda.altervista.org/debian sources/
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing Matplotlib on Debian GNU/Linux ,label=lst:instmpld]
+$ apt-get update
+$ apt-get install python-matplotlib python-matplotlib-doc
+\end{lstlisting}
+
+
+\subsection{Pygame}
+\begin{description}
+\item[Web-site:] \url{http://www.pygame.org}
+\item[Version required:] $\geq1.6$
+\end{description}
+Pygame is a set of Python modules that wrap the excellent SDL library. Its the base of the EpiGrass OpenGL display.
+
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing Pygame python on Gentoo GNU/Linux ,label=lst:instpygameg]
+$ emerge pygame
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing Pygame python on Debian GNU/Linux ,label=lst:instpygamed]
+$ apt-get install pygame
+\end{lstlisting}
+
+\subsection{PyQt}
+\begin{description}
+\item[Web-site:] \url{http://www.riverbankcomputing.co.uk/pyqt/index.php}
+\item[Version required:] $\geq3.13$
+\end{description}
+PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the simplicity of Python.
+
+PyQt depends on the Qt libraries to run. This dependency will be taken care by the package installation tools of most distributions, which will automatically install the required version of Qt.
+
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing PyQt python on Gentoo GNU/Linux ,label=lst:instpyqtg]
+$ emerge pyqt
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing PyQt python on Debian GNU/Linux ,label=lst:instpyqtd]
+$ apt-get install python2.3-qt3
+\end{lstlisting}
+\subsection{MySQL}
+\begin{description}
+\item[Web-site:] \url{http://www.mysql.com}
+\item[Version required:] $\geq4.0$
+\end{description}
+MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL server available in your LAN, you may skip this step after making sure you have permission to access and use it to store your data.
+
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing MySQL on Gentoo GNU/Linux ,label=lst:instmysqlg]
+$ emerge mysql
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing MySQL on Debian GNU/Linux ,label=lst:instmysqld]
+$ apt-get install mysql-server
+$ apt-get install mysql-client
+\end{lstlisting}
+
+\paragraph*{Post-install configuration:}
+MySQL requires a few extra configuration steps that must be completed after the installation described above. These steps must be performed by the root user.
+\begin{lstlisting}[frame=trBL, caption=Post-install configuration of mysql on Gentoo ,label=lst:mysqlconfg]
+$ /etc/init.d/mysql start
+$ mysql_install_db
+$ mysqladmin -u root password new-password
+$ rc-update add mysql default
+\end{lstlisting}
+In the mysqladmin line, replace new-password with a password of your own. 
+
+\begin{lstlisting}[frame=trBL, caption=Post-install configuration of mysql on Debian ,label=lst:mysqlconfd]
+$ mysql_install_db
+$ safe_mysqld &
+$ /etc/init.d/mysql start
+$ mysqladmin -u root password new-password
+\end{lstlisting}
+
+\subsection{MySQL-python}
+\begin{description}
+\item[Web-site:] \url{http://sourceforge.net/projects/mysql-python/}
+\item[Version required:] $\geq0.9.2$
+\end{description}
+This package is a MySQL module for Python.
+
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing MySQL-python on Gentoo GNU/Linux ,label=lst:instmysqlpyg]
+$ emerge mysql-python
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing MySQL-python  on Debian GNU/Linux ,label=lst:instmysqlpyd]
+$ apt-get install python2.3-mysqldb
+\end{lstlisting}
+\subsection{R}
+\begin{description}
+\item[Web-site:] \url{http://www.r-project.org}
+\item[Version required:] $\geq2.0$
+\end{description}
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing R on Gentoo GNU/Linux ,label=lst:instRg]
+$ emerge R
+\end{lstlisting}
+\begin{lstlisting}[frame=trBL, caption=Installing R on Debian GNU/Linux ,label=lst:instRd]
+$ apt-get install r-base
+\end{lstlisting}
+\paragraph*{Post-install configuration:}
+You have to install a few packages from within R afterward.
+\begin{lstlisting}[frame=trBL, caption=Installing aditional packages from within R ,label=lst:instRpkgs]
+> install.packages('RMySQL')
+> install.packages('DBI')
+> install.packages('lattice')
+\end{lstlisting}
+
+\subsection{RPy}
+\begin{description}
+\item[Web-site:] \url{http://rpy.sourceforge.net/}
+\item[Version required:] $\geq0.4.0$
+\end{description}
+RPy is a very simple, yet robust, Python interface to the R Programming Language. It can manage all kinds of R objects and can execute arbitrary R functions (including the graphic functions). 
+Example installations:
+\begin{lstlisting}[frame=trBL, caption=Installing RPy on Gentoo GNU/Linux ,label=lst:instRPyg]
+$ emerge rpy
+\end{lstlisting}
+If the \texttt{rpy} package on Gentoo is masked\footnote{Meaning that it can't be installed normally.}, use the method described for installing on Debian, below. 
+
+On Debian download the RPy source tarball, unpack it, \texttt{cd} to the directory to which you unpacked it and type:
+\begin{lstlisting}[frame=trBL, caption=Installing RPy on Debian GNU/Linux ,label=lst:instRPyd]
+$ python setup.py install
+\end{lstlisting}
+RPy depends on R having been compiled with the option \texttt{--enable-R-shlib}. This is the default on Gentoo. If this installation fails on your system, you may have to get the latest version from rpy from its website and install from source by following these steps:
+\begin{enumerate}
+\item First of all, you \textbf{must} check that you have built R with the configure
+    option '--enable-R-shlib', in order to make R as a shared library.  If
+    not, the following steps should be enough:
+\begin{lstlisting}[frame=trBL, caption=Building R from source ,label=lst:rfs]
+ <go to the R source directory>
+$ make distclean
+$ ./configure --enable-R-shlib
+$ make
+$ sudo make install
+\end{lstlisting}
+ 
+
+
+\item Then, configure the path to the R library. For this, make a link to RHOME/bin/libR.so in /usr/local/lib or /usr/lib, then run \texttt{ldconfig},  (substitute RHOME with the path where R is installed, usually
+    \/usr\/local\/lib\/R):
+\begin{lstlisting}[basicstyle=\footnotesize,frame=trBL, caption= ,label=]
+$ sudo ln -s /usr/local/lib/R/lib/libR.so /usr/lib/libR.so
+\end{lstlisting}
+
+\item Ensure that you have the necessary header files for the version of R you are 
+    compiling against.  You can check the version of R by running:
+\begin{lstlisting}[frame=trBL, caption= ,label=]
+$ R --version
+R 2.0.1 (2004-11-15).
+Copyright (C) 2004 R Development Core Team
+
+R is free software and comes with
+ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under 
+the terms of the GNU General Public License.  
+For more information about these matters,
+see http://www.gnu.org/copyleft/gpl.html.
+\end{lstlisting}
+
+
+    There should be a subdirectory of the Rpy package with the name
+\texttt{R-<version>}.For the example above, \texttt{R-2.0.1}
+
+    If the correct version directory does not exist, you may have to go back to a version of \texttt{R} supported by rpy.
+
+
+\item Now, just type:
+\begin{lstlisting}[frame=trBL, caption= ,label=]
+$ python setup.py install
+\end{lstlisting}
+       
+
+    and that's all!
+
+\end{enumerate}
+
+
+
+\subsection{Grass GIS}
+\begin{description}
+\item[Web-site:] \url{http://grass.itc.it/}
+\item[Version required:] $\geq5.0.3$
+\end{description}
+\begin{lstlisting}[frame=trBL, caption=Installing GRASS on Gentoo GNU/Linux ,label=lst:instgrassg]
+$ emerge grass
+\end{lstlisting}
+
+\begin{lstlisting}[frame=trBL, caption=Installing GRASS on Debian GNU/Linux ,label=lst:instgrassd]
+$ apt-get install grass
+\end{lstlisting}
+
+\subsection{\LaTeX}
+\begin{description}
+\item[Web-site:] \url{http://www.tug.org/teTeX/}
+\item[Version required:] $\geq2.0$
+\end{description}
+EpiGrass uses \LaTeX  or PDF\LaTeX  to generate a report with a summary analysis of your network and simulation model. Thus, it is necessary to have the Tetex package installed.
+\begin{lstlisting}[frame=trBL, caption=Installing \LaTeX and PDF\LaTeX on Gentoo GNU/Linux ,label=lst:insttexg]
+$ emerge tetex
+\end{lstlisting}
+
+\begin{lstlisting}[frame=trBL, caption=Installing \LaTeX and PDF\LaTeX on Debian GNU/Linux ,label=lst:insttexd]
+$ apt-get install tetex-base
+\end{lstlisting}
+
+\section{Installing EpiGrass}
+If you got through all the steps above, it will be an easy task to install EpiGrass:
+\begin{lstlisting}[frame=trBL, caption=Intalling EpiGrass ,label=lst:instepg]
+$ python setup.py install
+\end{lstlisting}
+
+We have written an ebuild for installing epigrass on Gentoo. If it is unmasked at the time you decide to install epigrass, you don't need to worry about the dependencies above and only need to type the following command:
+\begin{lstlisting}[frame=trBL, caption=Installing EpiGrass on Gentoo GNU/Linux ,label=lst:instepgg]
+$ emerge epigrass
+\end{lstlisting}

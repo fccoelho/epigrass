@@ -1,0 +1,101 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{natbib}
+\usepackage{graphicx, subfigure}
+%opening
+\title{EPIGRASS: Epidemiological Models}
+\author{EPIGRASS Development Group}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This chapter presents a brief, and hopefully gentile, introduction to epidemiological modeling in the context of EPIGRASS. This text is directed to users who are learning epidemiological modelling and also to those users with more experience, who want to grasp the approach used by Epigrass. The former may want to read it more carefully while the later may just take a look to get the feeling.
+\end{abstract}
+
+\section{Introduction}
+Epidemiological models are implemented in the Epigrass environment as a tool to predict, understand and develop strategies to control the spread of infectious diseases at different time/spatial scales. In this context, we see two direct potential applications. One is to model the spread of new diseases into a entirely susceptible population (ecological invasion). Retrospectively, this was the case of Dengue Fever and cholera in Brazil. Prospectively, this may also be the case of a future pandemic flu. The velocity of spread of new diseases in a network of susceptible populations depends on their distribution, size, susceptibility and patterns of contact within and between populations. In a large scale, climate (seasonality) may also impact the dynamics of geographical spread as it introduces temporal and spatial heterogeneity. Understanding and predicting the direction and velocity of an invasion wave is key for emergency preparedness. 
+
+Besides invasion, network epidemiological models can also be used to understand patterns of geographical spread of endemic diseases. Many infectious diseases can only be maintained in a endemic state in cities with population size above a threshold, or with appropriate environmental conditions (climate, availability of a reservoir, vectors, etc). The variables and the magnitudes associated with endemicity threshold depends on the natural history of the disease. For measles, for example, only communities above 300,000 habitants can sustain an endemic disease. This magnitude may vary from place to place as it depends on the contact structure of the individuals. Predicting which cities are responsible for the endemicity and understanding the path of recurrent travelling waves may help us to design optimal surveillance and control strategies. For measles, for example, models suggest that geographical spread tend to follow a hierarchical pattern, starting in big cities (core) and then spreading to smaller neighborhood cities (satellites) (Grenfell et al, 2001. nature paper). 
+
+Epigrass implements a series of epidemiological models which, integrated with a set of analytical and visualization tools,  may give us clues about the overal pattern of diseases spread in the geographical space (Brazil). Besides, it can be used for scenario analysis to compare alternative intervention scenarios. 
+
+
+
+\section{Notation}
+
+\section{Epidemiological models}
+
+Epidemiological models in EPIGRASS are defined as spatially explicit, multi-state, discrete time models, either deterministic or stochastic. The multi-state model describes the main disease/health states associated with a specific host-disease system, as well as the transitions between these states. For example, to model the dynamics of a childhood diseases in a population we could use a three states model:
+
+\subsection{Directly-transmitted diseases with full/none immunity}
+The models implemented are based on the time series SIR model proposed by Bjornstad and all grenfell (refs), but relaxing the assumption of constant infection duration (i.e., allowing the user to define the time step). They are implemented in a generic form so that some special cases can be derived easily by setting some constants to 1 or 0. They assume, however, a single class of susceptibles and infectives. Models can be simulated either deterministically or stochastically. 
+
+\begin{eqnarray}
+\lambda(t+1) &=& \beta(t)S(t)(I(t)+\theta(t)]^\alpha\\
+E(t+1) &=& (1-e)E(t) +\lambda\\
+I_j(t+1)&=& e E(t) + (1-r)I(t)\\
+S(t+1,s) &=& S(t,s) + B - I(t+1,s) + (1-\delta) rI(t)
+\end{eqnarray} 
+
+where
+\begin{description}
+\item[$\lambda$]  is the expected number of new cases at time $t+1$, place $s$; 
+\item[$\beta$]  is the time and spatilly varying transmission parameter 
+\item[$S(t)$]  is the number of susceptibles at time $t$, place $s$
+\item[$I(t)$]  is the number of infecteds (infectious) individuals at time $t$, place $s$ 
+\item[$\theta$]  is the number of migrants arriving in $s$, at time $t$ (see next section)
+\item[$\alpha$]  is the mixing rate ($\alpha=1$ implies homogeneous mixing)
+\item[$r$]  is the probability of recovery
+\item[$e$]  is the probability of an exposed individual move to the infectious class, per day
+\item[$\delta$]  is the probability of acquiring immunity after infection. In this framework, an individual either becomes fully immune ($\delta = 1$) or totally susceptible ($\delta=0$). 
+\item[$B$]  is the birth rate
+\end{description}
+
+\subsubsection{Special cases}
+From this framework, we can derive some special cases:
+
+\begin{description}
+\item[SEIR model ($\delta = 1$)] All infected individuals become fully immune and never return to the susceptible class
+\item[SEIS model ($\delta = 0$)] All infected individuals return immediately to the susceptible class, after recovery
+\item[SEIpartialR model ($0 \leq \delta \leq 1$)] This is an intermediate case between SIS and SIR where only a fraction $\delta$ of the infected individuals acquire (lifelong) immunity, while the remaining $(1-\delta)$ returns to the susceptible class.   
+\item[SIR model ($e=1$)]  All individuals move directly to the infectious class (equivalent of removing the Exposed class) 
+\end{description}
+
+\subsection{Directly transmitted diseases with immunity wane}
+
+In this model, individuals acquire immunity but this immunity is lost through time until they become susceptible again. Loss of immunity is modelled by moving individuals, after infection, from a state of minimum susceptibility to states of progressively higher susceptibility, until they return to the susceptible class. This approach emulates a loss of immunity that follows a gamma distribution with attributes XX and YY. 
+Individuals partially immune may get infected with a certain probability (lower than the susceptible class).
+
+To implement this, the user must provide the number of recovery compartments.
+
+\section{Spatial coupling}
+
+The parameter $\theta$ in the epidemiological models described above represent the infected individuals from the neighborhood of a site $X$ to which susceptibles from $X$, $S_X$, are exposed to, due to the commutation of individuals (either susceptibles or infected) between $X$ and its neighborhood (Grenfel).
+
+Spatial coupling can be modelled in different ways. Grenfell et al, for example, use a simple approach were:
+$$
+\theta(t) = m \sum_{s \in N_s} I_s
+$$
+
+where for a given locality, $s$, $\theta(t)$ is the commutation rate, $m$, times the number of infecteds in the neighborhood of $s$, $N_s$. In Epigrass, we can define neighborhood using different methods: based on euclidean distance between cities, based on the existence of boundaries between municipalities, based on travelling distance or existence of roads. The commutation rate can be either constant for all places or different for each pair of sites.   
+
+
+\section{Stochastic epidemiological models}
+In the stochastic version, the equation $I(t+1,s)$ is replaced by
+$$
+I(t+1) = (1-r) I(t) + i(t+1)\\
+$$
+
+where $i(t+1)$ is a random variable (observed number of new cases). The default is to assume that $i(t,s)$  follows a Negative Binomial distribution with mean equal to $\lambda(t+1)$ and clumping parameter $=I(t,s)$. This means that small $I_t$ results in clustered transmission (Grenfell et al, 2001).  
+$$
+i(t) \sim NB(\lambda(t+1),I(t,s)) 
+$$
+ 
+\end{document}

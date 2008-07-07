@@ -1,0 +1,150 @@
+\chapter{Example of Model Definition Script} 
+\label{script}
+
+\begin{lstlisting}[basicstyle=\footnotesize,language=Python, frame=trBL, caption= ,label=]
+
+################################################################
+#
+#  EPIGRASS -Model Definition
+#  This script describes model and parameters specified
+#  by the user.
+#  It can be edited by the user directly, by means of a text editor.
+#  WARNING: No variables may be removed, even if not used by the chosen model . 
+#  Any comments added by the user must be preceeded  by the symbol #
+#
+################################################################
+################################################################
+
+#==============================================================#
+[THE WORLD]
+#==============================================================#
+# Here you add iformation about the files that described the world the model is enclosed
+# "Location" is the GRASS location with the maps describing the area.
+# "vector layer" is the map layer that will be used as a background for the network display
+# "sites" and "edges" are the files that describe the topology of the network (see Documtntation)
+
+location = BRASIL
+vector layer = Limite_politico_administrativo
+sites = sitios2.csv
+edges = edgesout.csv
+
+#==============================================================#
+[EPIDEMIOLOGICAL MODEL]
+#==============================================================#
+#model types available: SIS, SIS_s ,SIR, SIR_s, SEIS, SEIS_s, SEIR, SEIR_s, 
+# SIpRpS, SIpRpS_s,SIpR,SIpR_s(see documentation for description)
+modtype = SIR
+
+#==============================================================#
+[MODEL PARAMETERS]
+#==============================================================#
+
+#  They can be specified as constants or as functions of global or 
+#  site-specific variables. these site-specific variables, are provided
+#  in the sites file. All the numbers given after the geocode (4th column)
+#  are collected into the values tuple.
+# Examples:
+# beta = 0.001
+# beta=values[0] #assigns the first element of values to beta 
+# beta=0.001*values[1]
+
+beta = 0.4   #transmission coefficient (contact rate * transmissibility)
+alpha = 1  # clumping parameter
+e = 1   # inverse of incubation period
+r = 0.1   # inverse of infectious period
+delta = 1  # probability of acquiring full immunity [0,1]
+B = 0           # Birth rate
+w = 0           # probability of immunity waning [0,1]
+p = 0           # Probability of a recovered become infected per time step [0,1]
+
+
+#==============================================================#
+[INITIAL CONDITIONS]
+#==============================================================#
+# Here, the number of individuals in each epidemiological
+# state (SEI) is specified. They can be specified in absolute
+# or relative numbers.
+# N is the population size of each site.
+# The rule defined here will be applied equally to all sites.
+# For site-specific definitions, use EVENTS (below)
+# Examples:
+# S,E,I = 0.8*N, 10, 0.5*E
+# S,E,I = 0.5*N, 0.01*N, 0.05*N
+# S,E,I = N-1, 1, 0
+S = N
+E = 0
+I = 0
+
+#=============================================================#
+[EPIDEMIC EVENTS]
+#=============================================================#
+# Specify isolated events.
+#  Localities where the events are to take place should be Identified by the geocode, which 
+#  comes after population size on the sites data file.
+#  All coverages must be a number between 0 and 1.
+#  Seed : [('locality1's geocode', n),('locality2's geocode', n)]. 
+#  N infected cases will be added to locality at time 0.
+#  Vaccinate: [('locality1's geocode', time, coverage),('locality2's geocode', time, coverage)] 
+#  Quarantine: [(locality1's geocode,time,coverage), (locality2's geocode,time,coverage)]
+seed = [(230440005,1)] #Fortaleza
+Vaccinate = [(355030800, 31, 0)] #Sao Paulo
+Quarantine = [(355030800,20,0)]
+#Screening = (locality, time, coverage)#screening for sick people on aiports bus stations
+#Vector_control = (locality, time, coverage)
+#Treatment = (locality, time, coverage)
+#Prophylaxis = (locality, time, coverage)
+
+#==============================================================#
+[TRANSPORTATION MODEL]
+#==============================================================#
+# If doTransp = 1 the transportation dinamics will be included. Use 0 here only for debugging purposes.
+doTransp = 1
+
+# NEIGHBORHOOD DEFINITION
+
+
+# SPATIAL COUPLING
+
+
+#==============================================================#
+[SIMULATION AND OUTPUT]
+#==============================================================#
+
+# Number of steps
+steps = 200
+
+# Output dir
+outdir = ~/data
+
+# Output file
+outfile = simul.dat
+
+# Database Output
+# MySQLout can be 0 (no database output) or 1
+MySQLout = 1 
+
+# Graphical outputs
+draw map = 1
+
+# Report Generation
+# The variable report can take the following values:
+# 0 - No report is generated.
+# 1 - A network analysis report is generated in PDF Format.
+# 2 - An epidemiological report is generated in PDF Format.
+# 3 - A full report is generated in PDF Format.
+# siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
+report = 0
+siteRep = [230440005,355030800]
+
+#Batch Run
+#  list other scripts to be run in after this one. don't forget the extension .epg
+#  model scripts must be in the same directory as this file or provide full path.
+#  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
+Batch = []
+
+################################################################
+################################################################
+
+
+
+\end{lstlisting}
