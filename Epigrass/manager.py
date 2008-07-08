@@ -948,7 +948,7 @@ class simulate:
                 it = 'NA'
 
 #            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+central+','+bet+','+thidx+','+distseed+','+seedgc+','+seedname+'\n')
-            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+','+seedgc+','+seedname+'\n')
+            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+seedgc+','+seedname+'\n')
 
         os.chdir(curdir)
 

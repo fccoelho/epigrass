@@ -15,7 +15,7 @@ Site data file
 
 See below an example of the content of a site file for a network of 10 cities. Each line corresponds to a site (except the first line which is the title). For each site, it is declared, in this order: its *spatial location* in the form of a pair of coordinates ([X,Y]); a site $name$ to be used in the output; the site's population; the site geocode (an arbitrary unique number which is used internally by Epigrass).
 
-.. tabularcolumns:: |l|l|l|l|l|
+.. tabularcolumns:: |l|c|c|c|c|
 
 = = =====  ======= =======
 X Y City   Pop     Geocode
@@ -293,232 +293,123 @@ The events currently implemented are:
 Part 6: TRANSPORTATION MODEL
 ----------------------------
 
-Here, there are two options regarding the movement of infected individuals from site to site (through the edges). If $stochastic = 0$, the process is simulated deterministically. The number of infected passengers commuting through an edge is a fraction $p$ of the infected population that is traveling. $p$ is calculated as $\frac{total passengers}{total population}$ .
+Here, there are two options regarding the movement of infected individuals from site to site (through the edges). If *stochastic = 0*, the process is simulated deterministically. The number of infected passengers commuting through an edge is a fraction *p* of the infected population that is traveling. *p* is calculated as $\frac{total passengers}{total population}$ .
 
-If $stochastic = 1$, the number of passengers is sampled from a Poisson distribution with parameter given by the expected number of travelling infectives (calculated as above).
+If *stochastic = 1*, the number of passengers is sampled from a Poisson distribution with parameter given by the expected number of travelling infectives (calculated as above)::
 
-\begin{lstlisting}[basicstyle=\footnotesize,language=Python, frame=trBL, caption= ,label=]
-#=========================================================#
-[TRANSPORTATION MODEL]
-#=========================================================#
-# If doTransp = 1 the transportation dynamics will be
-# included. Use 0 here only for debugging purposes.
-doTransp = 1
 
-# Mechanism can be stochatic (1) or deterministic(0).
-stochastic = 1
+    #=========================================================#
+    # If doTransp = 1 the transportation dynamics will be
+    # included. Use 0 here only for debugging purposes.
+    doTransp = 1
 
-\end{lstlisting}
+    # Mechanism can be stochatic (1) or deterministic(0).
+    stochastic = 1
+
+
 
 That ends the definition of the model.
-\subsection{SIMULATION AND OUTPUT}
-Now it is time to define some final operational variables for the simulation:
 
-\begin{lstlisting}[basicstyle=\footnotesize,language=Python, frame=trBL, caption= ,label=]
-#=========================================================#
-[SIMULATION AND OUTPUT]
-#=========================================================#
+Part 7: SIMULATION AND OUTPUT
+-----------------------------
 
-# Number of steps
-steps = 200
+Now it is time to define some final operational variables for the simulation::
 
-# Output dir
-outdir = ~/data
+    #==============================================================#
+    # Number of steps
+    steps = 50
 
-# Output file
-outfile = simul.dat
+    # Output dir. Must be a full path. If empty the output will be generated on the
+    # same path as the model script.
+    outdir =
 
-# Database Output
-# MySQLout can be 0 (no database output) or 1
-MySQLout = 1
+    # Output file
+    outfile = simul.dat
 
-# Graphical outputs
-draw map = 1
+    # Database Output
+    # MySQLout can be 0 (no database output) or 1
+    MySQLout = 1
 
-# Report Generation
-# The variable report can take the following values:
-# 0 - No report is generated.
-# 1 - A network analysis report is generated in PDF Format.
-# 2 - An epidemiological report is generated in PDF Format.
-# 3 - A full report is generated in PDF Format.
-# siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
-report = 0
-siteRep = [230440005,355030800]
+    # Graphical outputs
+    draw map = 0
 
-#Batch Run
-#  list other scripts to be run in after this one. don't forget the extension   :file:`.epg`
-#  model scripts must be in the same directory as this file or provide full path.
-#  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
-Batch = []
-\end{lstlisting}
+    # Report Generation
+    # The variable report can take the following values:
+    # 0 - No report is generated.
+    # 1 - A network analysis report is generated in PDF Format.
+    # 2 - An epidemiological report is generated in PDF Format.
+    # 3 - A full report is generated in PDF Format.
+    # siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
+    report = 0
+    siteRep = []
 
-where
-\begin{description}
-\item[step] Number of time steps for the simulation.
-\item[outdir] Directory for data output (currently not in use)
-\item[outfile] .csv filename that can be imported into R as a dataframe. This .csv file contains the simulated timeseries for all nodes.
-\item[MySQLout] Use MySQLout $= 1$ if simulated time series are to be stored in MySQL database. Time series of $L$,$S$,$E$,and $I$, from simulations, are stored in a MySQL database named \emph{epigrass}. The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named \texttt{script.epg}, then at the end of the simulation, a new table in the epigrass database will be created with the following name: \texttt{script\_Wed\_Jan\_26\_154411\_2005}. Thus, the results of multiple runs from the same model get stored independently.
-\item[draw map]
-\item[report]Three types of report are currently available: $Report = 1$ returns a set of descriptors of the network, described in \ref{cap:analysis}; $Report = 2$ returns a set of basic epidemiological measures and plots of the time series; $Report = 3$ is $Report 1 + Report 2$. Report Generation is an optional, though recommended, step done at the end of the simulation. For the report, descriptive statistics are generated for the network. These have to do with network topology and properties. Additional sections can be added to the report with basic statistical analyses of the output of pre-selected nodes, listed  in the $siteRep$ variable at the script.
-\item[siteRep=[]] List of nodes for which network and epidemiological measures are to be calculated and included in the report.
-\item[Batch=[]] script files included in this list are executed after the currently file is finished.
-\end{description}
-\section{User defined models}
-In future releases Epigrass will allow the user to define epidemiological models to be included into the sites.
+    #Replicate runs
+    #If replicas is set to an integer(n) larger than zero, the model will be run n times and the results will be con-
+    #solidated before storing.
+    #Replicate mode automatically turn off report and batch options.
+    Replicas = 10
+    RandSeed = 2
+    #Batch Run
+    #  list other scripts to be run in after this one. don't forget the extension .epg
+    #  model scripts must be in the same directory as this file or provide full path.
+    #  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
+    Batch = []#['sarsDF.epg','sarsPA.epg','sarsRS.epg']
 
 
-\section{Using Epigrass for specific tasks}
 
-Here we describe some things you could do with epigrass and some specific hints:
+where,
 
-\subsection{Describing a network}
-A user wants to obtain the topological properties of a network. Reasons for this could be: 1) learn how to interpret these measures, 2) describe a air transportation or a road transportation network. To do that, you need:
-
-\begin{description}
-\item[Set steps = 1]. If no model of disease is needed, then most of the   :file:`.epg` script can be ignored. Don't remove anything, however, from the script.  Note that Epigrass requires a model in order to work properly, even if the user does not want it. One solution to reduce the run time, in this case, is to set \textbf{steps} to 1 (steps = number of steps in the simulation).
-\item[Set MySQLout = 0]. Network measures are not sent to database.
-\item[Set report = 1]. Report 1 calculates network measures and save them in a .pdf file.
-\item[Especify siteRep]. If siteRep = [], only global network measures are included in the report. If site-specific measures are needed, include their geocodes in the list siteRep. For example, to calculate site stats for all nodes, mesh1.epg has:
-\begin{verbatim}
-report = 1
-siteRep = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-\end{verbatim}
-\end{description}
-
-Script mesh1.epg is configured this way. Run it and take a look at the report.
+**step**
+    Number of time steps for the simulation.
+**outdir**
+    Directory for data output (currently not in use)
+**outfile**
+    .csv filename that can be imported into R as a dataframe. This .csv file contains the simulated timeseries for all nodes.
+**MySQLout**
+    Use *MySQLout = 1* if simulated time series are to be stored in MySQL database. Time series of *L*, *S*, *E*, and *I*, from simulations, are stored in a MySQL database named \emph{epigrass}. The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of multiple runs from the same model get stored independently.
+**Batch=[]**
+    Script files included in this list are executed after the currently file is finished.
 
 
-\subsection{Comparing networks}
-A user wants to compare the properties of a set of networks. Reasons for this could be: 1) learn how to interpret these measures, 2) describe/compare a air transportation to a road transportation network, 3) analyse how network topology changes by adding/removing specific nodes or edges.
+The Graphical User Interface(GUI)
+=================================
 
-If there are four graphs, then four   :file:`.epg` files must be created. They all must set $report=1$ and $siteRep$ to the desired specification (as above). Each file must be executed and each one will provide a report.
-
-To quick thinks a little bit, the script allows the user to choose one of the files as a master file. In the option $BatchRun$, one may list the other scripts to be run after this one. They all must be in the same directory as the master file (or you may provide full path).
-
-For example, suppose you want to compare the topologies of the four networks displayed in \ref{fig:artgraphs}.
-
- \begin{center}
-\includegraphics[scale=0.5]{artgraphs.png}
-%\caption{SIR-like models}
-\label{fig:artgraphs}
-\end{center}
-
-
-We created four files (mesh2.epg, star2.epg, lin2.epg, tree2.epg) and used one of them as master (mesh2.epg). The four files are exactly the same, except for the name of the edge file and the \textbf{Batch} specification. I.e., in mesh2.epg we specify:
-\begin{verbatim}
-Batch = ['star2.epg','lin2.epg','tree2.epg']
-\end{verbatim}
-Now, mesh2.epg is run. One report will be delivered for each script (In future version of Epigrass, a more integrated result is planned). From the reports, we get network measures for the four graphs. These network measures are explained in chapter \ref{cap:analysis}).
-
-
-\subsection{Simulate disease spread from a single site}
-The user specifies a network (let's say, a tree network) and wishes to simulate disease spread in this network. The graph is disease-free at time 0. At time 1, an infected person arrives at site $N1$. No control measures are introduced. The model chosen is SipRpS.
-The script file tree3.epg was built following these guidelines:
-\begin{description}
-\item[Initial conditions] All individuals are initially susceptible, i.e.,  $S=N$.
-\item[Epidemic events] An infected individual arrives at time 1 in N1.
-\item[steps=200] This may be increased or reduced, depending on the parameters.
-\item[Report = 2]. Report 2 returns only the epidemiological results.
-\item[Specify siteRep]. If site-specific measures are needed, include their geocodes in the list siteRep. For example, to calculate site stats for three nodes, tree3.epg has:
-\begin{verbatim}
-report = 2
-siteRep = [1,12,14]
-\end{verbatim}
-Run this script and take a look at the report. A sugestion: change the script and seed the disease in a more central node. See how this affect the velocity of disease propagation.
-\end{description}
-
-\subsection{Simulating vaccination campaigns}
-Vaccination may be simulated in different ways, using the section Epidemic Events in the script. These are some examples:
-\begin{description}
-\item[A single, local campaign].  In site N1, exactly at time 10, with coverage 0.5
-\begin{verbatim}
-Vaccinate = [(1,10,0.5)]
-\end{verbatim}
-\item[Simultaneous campaigns in three sites].  In sites N1, N4 and N6, exactly at time 10, with coverage 0.5
-\begin{verbatim}
-Vaccinate = [(1,10,0.5),(4,10,0.5),(6,10,0.5)]
-\end{verbatim}
-\item[Campaign with a time span].  In site N1, a campaign that occurs from day 10 to day 15, with daily coverage of 0.1.
-\begin{verbatim}
-Vaccinate = [(1,10,0.1),(1,11,0.1),(1,12,0.1),(1,13,0.1),
-(1,14,0.1),(1,15,0.1)]
-\end{verbatim}
-\end{description}
-
-
-\subsection{Simulating quarantines}
-Quarantines are simulated similarly to vaccinations, but once they are initiated, they last until the end of the simulation:
-\begin{description}
-\item[Quarantine in a single place].  In site N1, starting at time 10, with coverage 0.2
-\begin{verbatim}
-Quarantine = [(1,10,0.2)]
-\end{verbatim}
-\item[Quarantine in two places].  In sites N1 and N3, at times 10 and 12, respectively, with coverage 0.5
-\begin{verbatim}
-Quarantine = [(1,10,0.5),(3,12,0.5)]
-\end{verbatim}
-\item[Quarantine with a time span].  In site N1, a quarantine that starts at day 10 and ends at time 30, with daily coverage of 0.75.
-\begin{verbatim}
-Quarantine = [(1,10,0.75),(1,30,0)]
-\end{verbatim}
-\end{description}
-
-\subsection{Comparing strategies}
-One goal of modeling diseases is to compare alternative control measures in terms of number of cases prevented. A set of scripts may be prepared to compare six alternative strategies for controlling the spread of an epidemic in the star graph, that was initiated at time 4 in site N1. For example:
-\begin{description}
-\item[Strategy vac1]  Vaccinate site $N1$, at time $7$, with coverage $0.8$ .
-\item[Strategy vac2]  Vaccinate sites $N1$, $N12$ and $N14$, at time $7$, with coverage $0.8$. $N12$ and $N14$ are central nodes of the star network and are natural candidates for vaccination.
-\item[Strategy mixed] Strategy vac1 $+$ quarantine in sites $N12$ and $N14$, coverage of $0.7$.
-\item[Strategy quar] Quarantine in sites $N1$, $N12$ and $N14$, coverage of $0.7$.
-\end{description}
-
-
-\section{The Graphical User Interface(GUI)}
-Epigrass comes with a simple but effective GUI(figure \ref{fig:gui}), that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing \texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (.csv and   :file:`.epg` files).
+Epigrass comes with a simple but effective GUI(figure \ref{fig:gui}), that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing \texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (:file:`.csv` and   :file:`.epg` files).
 
 All the information that is entered via the GUI gets  stored in a hidden file called \texttt{.epigrassrc} stored in the home folder of the user. Every time the GUI is invoked, the data stored in the \texttt{.epigrassrc} file is used to fill the forms in the GUI. The gui is designed as a tabbed notebook with four tabs (Run Options, Settings, Utilities, and Visualization).
 
 At the bottom of the Gui there are three buttons \texttt{Help}, \texttt{Start} and \texttt{Exit}. Their functions will be explained below. Immediately above the \texttt{Run} and \texttt{Exit} buttons, there is a small numeric display that will display the simulation progress after it has been started.
-\begin{figure}
-    \centering
-%   \includegraphics[scale=0.7]{gui.jpg}
-% gui.jpg: 72dpi, width=18.84cm, height=17.71cm, bb=0 0 534 502
-    \caption{First tab of the Epigrass GUI.}
-    \label{fig:gui}
-\end{figure}
 
-\subsection{Run Options}
+.. image:: epigrass1.png
+
+Run Options
+-----------
 The first tab of the GUI(figure \ref{fig:gui}), contains a number of variables that, with the exception of the model script filename, should remain the same for most simulations you are going to run.
 
-On the top of the first tab is a text box to enter the file name of the model script (\texttt{something.epg}). By clicking on the \texttt{Choose} button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the \texttt{Edit} button below to edit the script file with your favorite text editor.
+On the top of the first tab is a text box to enter the file name of the model script (\texttt{something.epg}). By clicking on the :guilabel:`Choose` button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the \texttt{Edit} button below to edit the script file with your favorite text editor.
 
 Below, you can enter details about the MySQL database that will store the output of your simulations. Here you can enter the server IP, port, user and password. On the first time you run the GUI these input boxes will be filled with the default values for these variables (server on localhost, port 3306, user epigrass and password epigrass)
 
-\subsection{Settings}
+Settings
+--------
+
 On the settings page, you can enter personal details such as user name (To be used in the simulation report), preferred text editor and preferred PDF reader. The preferred text editor will be used to open your script from the GUI, when you click on the edit button in the first tab. The PDF reader specified, will be used to open the report file, when requested (Utilities tab) and the user manual, when the user clicks on the help button on the bottom-left corner of the GUI.
 
 On this tab, the language of the GUI can also be selected from a list of available translations. The effects of language changes will only take place when the next time the GUI is started.
-\begin{figure}
-    \centering
-%   \includegraphics[scale=0.7]{guiset.jpg}
-% guiset.jpg: 72dpi, width=19.68cm, height=17.64cm, bb=0 0 558 500
-    \caption{Second tab of the GUI.}
-    \label{fig:guiset}
-\end{figure}
 
-\subsection{Utilities}
+.. image:: epigrass2.png
+
+Utilities
+---------
+
 In the Utilities tab, you can get feed back from the simulator. Especially during long simulation runs, it is good to know how it is progressing. During the simulation, text messages regarding the status of the simulation are written to the text box on the left.
-\begin{figure}
-    \centering
-%   \includegraphics[scale=0.7]{guiout.jpg}
-% guiout.jpg: 72dpi, width=19.72cm, height=17.64cm, bb=0 0 559 500
-    \caption{Third tab of the GUI}
-    \label{fig:guiout}
-\end{figure}
+
 
 On the right, there is a button for backing up the data base and another for opening the report generated by the last simulation. Since report PDFs ar stored in folder directly below the ones on which the simulation is started, older reports should still be accessible and can be opened directly by selecting the desired report using the operating system's file manager.
 
-\subsection{Visualization}
+Visualization
+-------------
+
 The fourth tab of the GUI is the visualization Tab. This tab was designed for playing animations of any simulation data that is stored in the database. Pressin the \texttt{Scan DB} button, causes the available tables in the  epigrass database to be listed in the \texttt{Simulations stored} combo box. The user can then select one of these simulations to visualize.
 
 Once the \texttt{Start animation} button is pressed, a graphical display window pops up, and the simulation is replayed at a speed given by the frame rate set by the user  or the maximum speed of the computer (whichever is smaller). In the animation, the nodes of the network are represented by boxes whose volume is given by the number of infected at each node. The node colors are as following: Green for uninfected nodes, and red to blue for infected nodes. bright red for for first infected node with the nodes becoming infected later assuming a color with progressively more blue.
@@ -526,7 +417,11 @@ Once the \texttt{Start animation} button is pressed, a graphical display window 
 
 Maps can also be selected from the \texttt{Maps availabled combo box} to be used as background for the network display. The maps must be in the GRASS ascii vectorial format and have coordinates compatible with those given to the nodes of the simulation.
 
-\subsection{Operation}
-After all the information has been entered and checked on the GUI, you can press the \texttt{Run} button to start the simulation or the \texttt{Exit} button. When the \texttt{Run} button is pressed, the \texttt{.epigrassrc} file is updated with all the information entered in the gui. If the \texttt{Exit} button is pressed, all information entered since the last time the \texttt{Run} button was pressed is lost.
+.. image:: epigrass4.png
+
+Operation
+---------
+
+After all the information has been entered and checked on the GUI, you can press the :guilabel:`Run` button to start the simulation or the :guilabel`Exit` button. When the :guilabel:`Run` button is pressed, the :file:`.epigrassrc` file is updated with all the information entered in the gui. If the :guilabel:`Exit` button is pressed, all information entered since the last time the :guilabel:`Run` button was pressed is lost.
 
 

@@ -280,11 +280,13 @@ class siteobj:
         A perfect hub would have its order equal to the summation of
         all the orders of the other nodes in the graph and a perfect
         spoke would have an order of 1.
+        
+        Returns an integer.
         """
         if not self.isNode():
             return 0
         else:
-            return self.getNeighbors()
+            return len(self.getNeighbors())
 
     def doStats(self):
         """
@@ -1256,7 +1258,7 @@ class graph:
         self.epispeed = [] # new cities pre unit of time
         self.infectedcities = 0 #total number of cities infected.
         self.spreadtime = 0
-        self. mediansurvival = None
+        self.mediansurvival = None
         self.totVaccinated = 0
         self.totQuarantined = 0
         self.gr = None #This will be th visual graph representation object (DEPRECATED)
@@ -1956,67 +1958,6 @@ class graph:
         self.alphaidx = None
         self.gammaidx = None
 
-class line:
-    """
-    Basic line object containing attributes and methods common to all
-    line objects.
-    """
-    def __init__(self,nodes):
-        """
-        define a line based on sequence of nodes.
-        """
-        pass
-    def intersect(self):
-        """
-        finds out if this line intersects another
-        """
-        pass
-    def xarea(self):
-        """
-        finds out if this line extends to more than one area.
-        """
-        pass
-
-class area:
-    """
-    Basic area object containing attributes and methods common to all
-    area objects.
-    """
-    def __init__(self,nodes):
-        self.nodes = nodes
-
-    def centroid(self):
-        """
-        calculates the centroid of the area.
-        """
-        pass
-    def area(self):
-        """
-        calculates the area
-        """
-        pass
-
-    def neighbors(self):
-        """
-        return neighbors
-        """
-        pass
-
-    def isIsland(self):
-        """
-        return true if the area is an island, i.e. has only one nejghboor and is not on a border.
-        """
-        pass
-    def borderSizeWith(self, area):
-        """
-        returns the size of the border with a given area.
-        """
-        pass
-    def perimeter(self):
-        """
-        returns the perimeter of the area
-        """
-        pass
 
 
 class priorityDictionary(dict):
