@@ -1894,7 +1894,7 @@ class graph:
         self.episize =self.getEpisize()
         self.epispeed = self.getEpispeed()
         self.infectedcities = self.getInfectedCities()
-        self.spreadtime= self.getSpreadTime()
+        self.spreadtime= 0 #self.getSpreadTime()
         self.mediansurvival = self.getMedianSurvival()
         self.totVaccinated = self.getTotVaccinated()
         self.totQuarantined = self.getTotQuarantined()
