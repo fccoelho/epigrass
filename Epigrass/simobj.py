@@ -118,7 +118,6 @@ class siteobj:
         """
         At time t the population will be vaccinated with coverage cov.
         """
-
         self.nVaccinated = self.ts[-1][2]*cov
         self.ts[-1][2] = self.ts[-1][2]*(1-cov)
 

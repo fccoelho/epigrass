@@ -86,6 +86,8 @@
 
 
 
+Epigrass is a framework for the construction and simulation of complex network epidemiology models. At least this is its main vocation. However, Epigrass can be used to simulate any dynamical system on a set of nodes (connected into a network or not!). Epigrass is written in pure Python and is scriptable in Python, for your enjoyment!.
+
 Contents:
 
 \resetcurrentobjects
@@ -96,20 +98,15 @@ Contents:
 Epigrass is a platform for network epidemiological simulation and analysis. It enables researchers to perform comprehensive spatio-temporal simulations incorporating epidemiological data and models for disease transmission and control in order to create sophisticated scenario analyses.
 
 
-\section{Components}
-
-The Epigrass system is composed of 4 components, The Epigrass simulator, the Epigrass database, Epigrass visualization module, and the report generator. They can all be used separately but should be invoked through Epigrass' user interface.
-
-
 \section{Modeling Approach}
 
 The geographical networks  over which epidemiological processes take place can be very straightforwardly represented in a object-oriented framework. In such a framework, the nodes and edges of the geographical networks are objects with their attributes and methods.
 
 Once the archetypal node and edge objects are defined with appropriate attributes and methods, then a code representation of the real system can be constructed, where cities (or other geographical localities) and transportation routes are instances of the node and edge objects, respectively. The whole network is also an object with a whole collection of attributes and methods.
 
-This framework leads to a compact and hierarchical computational modelconsisting of a network object containing a variable number of node and edge objects. This framework also do not pose limitations to encapsulation, potentially allowing for networks within networks if desirable (not yet implemented).
+This framework leads to a compact and hierarchical computational model consisting of a network object containing a variable number of node and edge objects. This framework also do not pose limitations to encapsulation, potentially allowing for networks within networks if desirable.
 
-For the end user this framework is transparent since it mimics the natural structure of the real system. Even after the model is converted into a code object all of its component objects remain accessible to the user.
+For the end user perspective, this framework is transparent since it mimics the natural structure of the real system. Even after the model is converted into a code object all of its component objects remain accessible to the user's  models.
 
 
 \section{Geographical Network Models}
@@ -126,7 +123,7 @@ shapefile @PYGbe[=]  @lb[]@PYGad[']@PYGad[riozonas_LatLong.shp]@PYGad['],@PYGad[
 \end{Verbatim}
 
 If the user does not have a map in shapefile format, he can still use Epigrass. In this case, the georeferred data is read only from two .csv files (more on that ahead).
-
+\index{node}\index{site}
 
 \subsection{Defining Nodes}
 
@@ -147,7 +144,7 @@ Since the simulation models will all be of a populational nature. Population siz
 A Unique Geocode (a number) is required. It will be used as a label/index to facilitate  reference to specific nodes.
 
 \end{description}
-
+\index{edge}
 
 \subsection{Defining Edges}
 
@@ -175,17 +172,17 @@ This is the unique numerical identifier used in the sites file.
 This is the unique numerical identifier used in the sites file.
 
 \end{description}
-
+\index{models}
 
 \subsection{Defining models}
 
 The word model in Epigrass can mean two distinct objects: The network model and the node's epidemic model.
 
-Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard epidemiological modelsindex\{Models!epidemiological models\} to choose from when setting up your network. Currently, The same model type is applied to every node although their parameterization is node-specific. Besides the built-in model types, users can define their own, as shown on chapter ref\{ch:usingepg\}.
+Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard epidemiological modelsindex\{Models!epidemiological models\} to choose from when setting up your network. Currently, The same model type is applied to every node although their parameterization is node-specific. Besides the built-in model types, users can define their own, as shown in the chapter \emph{Using Epigrass}.
+\index{models!epidemiological models}\index{simgle: models!network models}
+Network models are specified in a ASCII-text script file (Called a \code{.epg} file). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.
 
-Network modelsindex\{Models!network model\} are specified in a ASCII-text script file (see appendix ref\{script\}). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.
-
-The script on the appendix ref\{script\} specifies a network model with an stochastic SEIR (see ref\{cap:modeling\}) epidemic model in its nodes. The user should study this model and play with its parameters to understand the features of Epigrass. A step-by-step tutorial on how to edit the model script can be found on chapter ref\{ch:usingepg\}.
+The script on the appendix  specifies a network model with an stochastic SEIR (see chapter on epidemiological modeling) epidemic model in its nodes. The user should study this model and play with its parameters to understand the features of Epigrass. A step-by-step tutorial on how to edit the model script can be found in the chapter \emph{Using Epigrass}.
 
 
 \section{The Simulation}
@@ -236,6 +233,8 @@ Report Generation is an optional, though recommended, step done at the end of th
 \subsubsection{Database output}
 \index{Database!results table}\index{Database!epigrass database}
 Time series of \textbf{L}, \textbf{S}, \textbf{E}, and \textbf{I}, from simulations, are stored in a MySQL database named \emph{epigrass} . The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named \code{script.epg}, then at the end of the simulation, a new table in the epigrass database will be created with the following name: \emph{script\_Wed\_Jan\_26\_154411\_2005}. Thus, the results of multiple runs from the same model get stored independently.
+
+Epigrass also supports the SQLite database and CSV files as output for the time-series. The naming convention also applies to these other formats.
 \footnotetext[1]{
 The number of time steps is defined in the model script
 }\footnotetext[2]{
@@ -433,7 +432,7 @@ Unknown interpreted text role ``math''.
 
 \hypertarget{using}{}\chapter{Using Epigrass}
 
-To simulate an epidemic process in Epigrass, the user needs to have in hand three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).
+To simulate an epidemic process in Epigrass, the user needs to have in hand at least three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).
 
 
 \section{Data}
@@ -582,7 +581,7 @@ Geocode
 \end{tabulary}
 
 
-In this example, the first site is located at \${[}X,Y{]}={[}1,4{]}\$, it is named N1, its population is 1000000 and its geocode is 1. This is minimum configuration of a site data file and it must contains this information in exactly this order.
+In this example, the first site is located at \emph{{[}X,Y{]}={[}1,4{]}}, it is named N1, its population is 1000000 and its geocode is 1. This is minimum configuration of a site data file and it must contains this information in exactly this order.
 
 In some situations, the user may want to add other attributes to the sites (different transmission parameters, or vaccine coverage or initial conditions for simulations). This information is provided by adding new columns to the minimum file. For example, if one wishes to add information on the vaccine coverage in cities N1 to N10 (\$vac\$) as well as information about average temperature (which hypothetically affects the transmission of the disease), the file becomes:
 
@@ -758,7 +757,7 @@ Temp
 \end{tabulary}
 
 
-During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  \emph{N}; while the extra columns (those beyond the geocode) are stored in a tuple named textit\{values\}. For example, for the city  \emph{N1}, we have  \emph{N = 1000000} and  \emph{values={[}0.9,32{]} *. During model specification, we may use  *N} to indicate the population size and/or we can use \textbf{values{[}0{]}} to indicate the level of vaccination of that city and \emph{values{[}1{]}} to indicate the temperature.
+During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  \emph{N}; while the extra columns (those beyond the geocode) are stored in a tuple named \emph{\{values}. For example, for the city  \emph{N1}, we have  \emph{N = 1000000} and  \emph{values={[}0.9,32{]} *. During model specification, we may use  *N} to indicate the population size and/or we can use \textbf{values{[}0{]}} to indicate the level of vaccination of that city and \emph{values{[}1{]}} to indicate the temperature.
 
 It is up to the user, to know what means the elements of the tuple \emph{values}. Note that the first element of the tuple has index 0,the second one has index 1 and so on.
 
@@ -886,7 +885,7 @@ In this file, the coordinates are the actual geographical latitude and longitude
 
 \subsection{Edge data file}
 
-The edge data file contains all the direct links between sites. Each line in the file (except for the first, which is the header) corresponds to an edge. For each edge (or link) one must specify (in this order): the \emph{names of the sites} connected by that edge; the \emph{number of individuals traveling from source to destination}; the \emph{number of individuals travelling from destination to source} per time step; the \emph{distance or length} of the edge. At last, the file must contain, in the fifth and sixth columns, the \emph{geocodes of the source and destination sites}. This is very important as the graph is built internally connecting sites through edges and this is done based on geocode info.
+The edge data file contains all the direct links between sites. Each line in the file (except for the first, which is the header) corresponds to an edge. For each edge (or link) one must specify (in this order): the \emph{names of the sites} connected by that edge; the \emph{number of individuals traveling from source to destination}; the \emph{number of individuals travelling from destination to source} per time step; the \emph{distance or length} of the edge. At last, the file must contain, in the fifth and sixth columns, the \emph{geocodes} of the source and destination sites*. This is very important as the graph is built internally connecting sites through edges and this is done based on geocode info.
 
 \begin{notice}[warning]
 It is required that the order of columns is kept the same.
@@ -1048,7 +1047,7 @@ Once the user has specified the two data files, the next step is to define the m
 The best way to write down your own .epg is to edit an already existing .epg file. So, open Epigrass, choose an .epg file and click on the \textbf{Edit} button. Your favorite editor will open and you can start editing. Don't forget to save it as a new file in your working directory. Of course, there is an infinite number of possibilities regarding the elaboration of the script. It all depends on the goals of the user.
 
 \begin{notice}[note]
-Another way to edit an .epg file is to open it whith the graphical editor provided with Eigrass. just type \samp{epgeditor yourmodel.epg}.
+Another way to edit an .epg file is to open it whith the graphical editor provided with Epigrass. Just type \samp{epgeditor yourmodel.epg}.
 \end{notice}
 
 For the beginner, we suggest him/her to take a look at the .epg files in the demo directory. They are all commented and may help the user in getting used with Epigrass language and capabilities.
@@ -1068,14 +1067,16 @@ Don't remove any line that is \emph{not} a comment. See below how to appropriate
 
 Let's take a look now at each part of a script (this is the script  \code{.epg} demo file):
 
+\begin{notice}[warning]
+All variables defined in a \code{.epg} are \textbf{case-insensitive}. Consider this fact when naming your model's variables.
+\end{notice}
+
 
 \subsection{Part 1: THE WORLD}
 
 The first section of the script is titled: THE WORLD. An example of its content is shown:
 
 \begin{Verbatim}[commandchars=@\[\]]
-#=========================================================#
-@lb[]THE WORLD@rb[]
 #=========================================================#
 shapefile = @lb[]'riozonas_LatLong.shp','nome_zonas','zona_trafe'@rb[]
 edges = edges.csv
@@ -1093,6 +1094,9 @@ This is the name of the .CSV file containing the list of edges and their attribu
 
 \item[\textbf{sites}]
 This is the name of the .CSV file containing the list of sites and their attributes.
+
+\item[\textbf{encoding}]
+This is the encoding used in your sites and edges files. This is very important when you use location names which include non-ascii characters. The default encoding is \emph{latin-1}. If you use any other encoding, please specify it here. Example: \emph{utf-8}.
 
 \end{description}
 
@@ -1191,7 +1195,7 @@ SIR with immunity wane
 \end{tabulary}
 
 
-A description of these models can be found in section ref\{cap:modeling\}. The stochastic models use Poisson distribution as default for the the number of new cases (\emph{L\_\{t+1\}}). Besides these, the user may define his/her own model and access by the protect word Custom.
+A description of these models can be found in the chapter \emph{Epidemiological modeling}. The stochastic models use \emph{Poisson} distribution as default for the number of new cases (\emph{L\_\{t+1\}}). Besides these, the user may define his/her own model and access by the protect word Custom.
 
 
 \subsection{Part 3: MODEL PARAMETERS}
@@ -1222,7 +1226,7 @@ p @PYGbe[=] @PYGaw[0]           @PYGaD[#]
 These are the model parameters, as described in ref\{Table:symbols\}. Not all parameters are necessary for all models. For example, \emph{e} is only required for SEIR-like models. Don't
 remove the line, however because that will cause an error. We recommend that, if the parameter is not necessary, just add a comment after it as a reminder that it is not being used by the model.
 
-In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named \emph{values} and can be referenced as shown in listing ref\{lst:pars\}. I.e., the first element of the tuple is values{[}0{]}, the second element is values{[}1{]}, the third element is values{[}2{]} and so on.
+In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named \emph{values} and can be referenced in the order they appear. I.e., the first element of the tuple is values{[}0{]}, the second element is values{[}1{]}, the third element is values{[}2{]} and so on.
 
 Part 4: INITIAL CONDITIONS
 
@@ -1247,7 +1251,7 @@ I @PYGbe[=] @PYGaw[0]
 
 Here, \emph{N} is the total population in a site (as in the datafile for sites). In this example, we set all localities to the same initial conditions (all individuals susceptible) and use an event (see below) to introduce an infectious individual in a locality. The number of recovered individuals is implicit, as \emph{R = N-(S+E+I)}
 
-Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site datafile and these columns are referrenced to using the \emph{values} tuple explained above.
+Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site datafile and these columns are referenced to using the \emph{values} tuple explained above.
 
 
 \subsection{Part 5: EPIDEMIC EVENTS}
@@ -1442,7 +1446,7 @@ any distributed dynamical system taking place on a set of nodes
 
 \section{Getting Started}
 
-The best way to get started in writing custom models is to look at
+The best way to get started in writing custom models is to look at the
 example distributed with Epigrass. It can be found in
 \code{demos/CustomModel\_example.py}:
 
@@ -1461,35 +1465,45 @@ example distributed with Epigrass. It can be found in
 @PYGas[        * theta = infectious individuals from neighbor sites]
 @PYGas[        * npass = Total number of people arriving at this node]
 @PYGas[        """]
-        @PYGaD[#Initializing]
-        @PYGay[if] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]simstep @PYGbe[==] @PYGaw[1]:
-                @PYGaD[#Defining variable names]
-                @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]vnames @PYGbe[=] (@PYGad[']@PYGad[Exposed]@PYGad['],@PYGad[']@PYGad[Infeccious]@PYGad['],@PYGad[']@PYGad[Susceptible]@PYGad['])
-                @PYGaD[#get initial values]
+        @PYGaD[# Get state variables' current values]
+
+        @PYGay[if] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]simstep @PYGbe[==] @PYGaw[1]:  @PYGaD[# if first step]
+                @PYGaD[# Define variable names to appear in the output]
+                @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]vnames @PYGbe[=] (@PYGad[']@PYGad[Exposed]@PYGad['],@PYGad[']@PYGad[Infectious]@PYGad['],@PYGad[']@PYGad[Susceptible]@PYGad['])
+                @PYGaD[# And get state variables's initial values (stored in dict self.bi)]
+
                 E,I,S @PYGbe[=] (@PYGaA[self]@PYGbe[.]bi@lb[]@PYGad[']@PYGad[e]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bi@lb[]@PYGad[']@PYGad[i]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bi@lb[]@PYGad[']@PYGad[s]@PYGad[']@rb[])
-        @PYGay[else]:
+        @PYGay[else]:   @PYGaD[# if nor first step]
                 E,I,S @PYGbe[=] @PYGaX[vars]
+
+        @PYGaD[# Get parameter values]
         N @PYGbe[=] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]totpop
-        beta,alpha,e,r,delta,B,w,p @PYGbe[=] par
+        beta,alpha,e,r,delta,B,w,p @PYGbe[=] (@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[beta]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[alpha]@PYGad[']@rb[],
+        @PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[e]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[r]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[delta]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[b]@PYGad[']@rb[],
+        @PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[w]@PYGad[']@rb[],@PYGaA[self]@PYGbe[.]bp@lb[]@PYGad[']@PYGad[p]@PYGad[']@rb[])
+
         @PYGaD[#Vacination event (optional)]
         @PYGay[if] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]vaccineNow:
                 S @PYGbe[-]@PYGbe[=] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]vaccov@PYGbe[*]S
 
-        Lpos @PYGbe[=] beta@PYGbe[*]S@PYGbe[*]((I@PYGbe[+]theta)@PYGbe[/](N@PYGbe[+]npass))@PYGbe[*]@PYGbe[*]alpha @PYGaD[#Number of new cases]
-        @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]totalcases @PYGbe[+]@PYGbe[=] Lpos @PYGaD[#update number of cases]
         @PYGaD[# Model]
+        Lpos @PYGbe[=] beta@PYGbe[*]S@PYGbe[*]((I@PYGbe[+]theta)@PYGbe[/](N@PYGbe[+]npass))@PYGbe[*]@PYGbe[*]alpha @PYGaD[#Number of new cases]
         Ipos @PYGbe[=] (@PYGaw[1]@PYGbe[-]r)@PYGbe[*]I @PYGbe[+] Lpos
         Spos @PYGbe[=] S @PYGbe[+] B @PYGbe[-] Lpos
         Rpos @PYGbe[=] N@PYGbe[-](Spos@PYGbe[+]Ipos)
-        @PYGaD[# Updating stats]
+
+        @PYGaD[# Update stats]
+        @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]totalcases @PYGbe[+]@PYGbe[=] Lpos @PYGaD[#update number of cases]
         @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]incidence@PYGbe[.]append(Lpos)
-        @PYGaD[# Raises site infected flag and adds parent site to the epidemic history list.]
+
+        @PYGaD[# Raise site infected flag and add parent site to the epidemic history list.]
         @PYGay[if] @PYGan[not] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]infected:
                 @PYGay[if] Lpos @PYGbe[>] @PYGaw[0]:
                         @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]infected @PYGbe[=] @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]simstep
-                        @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]epipath@PYGbe[.]append((@PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]simstep,
+                        @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]epipath@PYGbe[.]append(
+                        (@PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]parentGraph@PYGbe[.]simstep,
                         @PYGaA[self]@PYGbe[.]parentSite,@PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]infector))
-        @PYGaD[#Migrating infecctious]
+
         @PYGaA[self]@PYGbe[.]parentSite@PYGbe[.]migInf@PYGbe[.]append(Ipos)
 
         @PYGay[return] @lb[]@PYGaw[0],Ipos,Spos@rb[]
@@ -1521,7 +1535,7 @@ Let's analyze the above code. The first thing to notice is that an Epigrass cust
 \end{description}
 
 \item {} 
-In the beginning of the function you define a list of strings (self.parentSite.vnames) which will be the names used when storing the resulting time-series in the database. Choose strings that are not very long and are meaningful. You only need to do this once, ate the beggining of the simulation so put it inside an \emph{if} statement, which will be executed only at time-step 1 (see code above).
+In the beginning of the function you define a list of strings (self.parentSite.vnames) which will be the names used when storing the resulting time-series in the database. Choose strings that are not very long and are meaningful. You only need to do this once, ate the beginning of the simulation so put it inside an \emph{if} statement, which will be executed only at time-step 1 (see code above).
 
 \item {} 
 After defining variable names, set their initial values in the same \emph{if} clause. An \emph{else} clause linked to this one will set variables values for the rest of the simulation.
@@ -1544,7 +1558,7 @@ Proceed to implement your model anyway you see fit.
 \emph{epipath}: This variable is at the graph level and contains the path of spread of the simulation.
 
 \item {} 
-\emph{migInf}: Number of infectious in this site per time-step.
+\emph{migInf}: Number of infectious individuals in this site per time-step.
 
 \end{itemize}
 
@@ -1583,7 +1597,7 @@ The name CustomModel.py is case-sensitive and cannot be changed. The same is tru
 \includegraphics{Diagrama1.png}
 \caption{Nesting of the objects inside a Simulate object.}\end{figure}
 
-From quickly going through the exaple Custom model above it problably became clear, to the Python-initiated, that Yous can access variables at the node and graph levels.  This is possible because \emph{Model} becomes a method in a node object which in is turn is contained into a graph object (see figure).
+From quickly going through the example Custom model above it probably became clear, to the Python-initiated, that Yous can access variables at the node and graph levels.  This is possible because \emph{Model} becomes a method in a node object which in is turn is contained into a graph object (see figure).
 
 Besides being nested within the \emph{graph} object, \emph{node} and \emph{edge} contain references to their containers. This means that using the introspective abilities of Python the user can access any information at any level of the full \emph{graph} model and use it in the custom model. In order to help you do this, Let's establish an API for developing custom models.
 
@@ -1705,6 +1719,36 @@ Flag indicating that it is vaccine day (0 or 1)
 \hypertarget{Site.vaccov}{}\begin{memberdesc}{vaccov}
 Current vaccination coverage
 \end{memberdesc}
+
+
+\hypertarget{Site.vaccinate}{}\begin{methoddesc}{vaccinate}{cov}
+At time t, the population is vaccinated with coverage cov
+\end{methoddesc}
+
+
+\hypertarget{Site.getOutEdges}{}\begin{methoddesc}{getOutEdges}{}
+Returns list of outbound edges
+\end{methoddesc}
+
+
+\hypertarget{Site.getInEdges}{}\begin{methoddesc}{getInEdges}{}
+Returns list of inbound edges
+\end{methoddesc}
+
+
+\hypertarget{Site.getNeighbors}{}\begin{methoddesc}{getNeighbors}{}
+Returns a dictionary of neighbor sites as keys and distances as values
+\end{methoddesc}
+
+
+\hypertarget{Site.getDistanceFromNeighbor}{}\begin{methoddesc}{getDistanceFromNeighbor}{site}
+Returns the distance in km from a given neighbor
+\end{methoddesc}
+
+
+\hypertarget{Site.getDegree}{}\begin{methoddesc}{getDegree}{site}
+Returns degree of this site, that is, the number of sites connected to it
+\end{methoddesc}
 \end{classdesc}
 
 

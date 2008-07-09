@@ -5,7 +5,7 @@ Using Epigrass
 **************
 
 
-To simulate an epidemic process in Epigrass, the user needs to have in hand three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).
+To simulate an epidemic process in Epigrass, the user needs to have in hand at least three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).
 
 Data
 ====
@@ -34,7 +34,7 @@ X Y City   Pop     Geocode
 = = =====  ======= =======
 
 
-In this example, the first site is located at $[X,Y]=[1,4]$, it is named N1, its population is 1000000 and its geocode is 1. This is minimum configuration of a site data file and it must contains this information in exactly this order.
+In this example, the first site is located at *[X,Y]=[1,4]*, it is named N1, its population is 1000000 and its geocode is 1. This is minimum configuration of a site data file and it must contains this information in exactly this order.
 
 In some situations, the user may want to add other attributes to the sites (different transmission parameters, or vaccine coverage or initial conditions for simulations). This information is provided by adding new columns to the minimum file. For example, if one wishes to add information on the vaccine coverage in cities N1 to N10 ($vac$) as well as information about average temperature (which hypothetically affects the transmission of the disease), the file becomes:
 
@@ -54,7 +54,7 @@ X Y City   Pop     Geocode Vac  Temp
 = = =====  ======= ======= ==== ====
 
 
-During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  *N*; while the extra columns (those beyond the geocode) are stored in a tuple named \textit{values}. For example, for the city  *N1*, we have  *N = 1000000* and  *values=[0.9,32] *. During model specification, we may use  *N* to indicate the population size and/or we can use **values[0]** to indicate the level of vaccination of that city and *values[1]* to indicate the temperature.
+During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  *N*; while the extra columns (those beyond the geocode) are stored in a tuple named *{values*. For example, for the city  *N1*, we have  *N = 1000000* and  *values=[0.9,32] *. During model specification, we may use  *N* to indicate the population size and/or we can use **values[0]** to indicate the level of vaccination of that city and *values[1]* to indicate the temperature.
 
 It is up to the user, to know what means the elements of the tuple *values*. Note that the first element of the tuple has index 0,the second one has index 1 and so on.
 
@@ -84,7 +84,7 @@ In this file, the coordinates are the actual geographical latitude and longitude
 Edge data file
 --------------
 
-The edge data file contains all the direct links between sites. Each line in the file (except for the first, which is the header) corresponds to an edge. For each edge (or link) one must specify (in this order): the *names of the sites* connected by that edge; the *number of individuals traveling from source to destination*; the *number of individuals travelling from destination to source* per time step; the *distance or length* of the edge. At last, the file must contain, in the fifth and sixth columns, the *geocodes of the source and destination sites*. This is very important as the graph is built internally connecting sites through edges and this is done based on geocode info.
+The edge data file contains all the direct links between sites. Each line in the file (except for the first, which is the header) corresponds to an edge. For each edge (or link) one must specify (in this order): the *names of the sites* connected by that edge; the *number of individuals traveling from source to destination*; the *number of individuals travelling from destination to source* per time step; the *distance or length* of the edge. At last, the file must contain, in the fifth and sixth columns, the *geocodes* of the source and destination sites*. This is very important as the graph is built internally connecting sites through edges and this is done based on geocode info.
 
 .. warning::
 
@@ -122,7 +122,7 @@ The best way to write down your own .epg is to edit an already existing .epg fil
 
 .. note::
 
-    Another way to edit an .epg file is to open it whith the graphical editor provided with Eigrass. just type :file:`epgeditor yourmodel.epg`.
+    Another way to edit an .epg file is to open it whith the graphical editor provided with Epigrass. Just type :file:`epgeditor yourmodel.epg`.
 
 For the beginner, we suggest him/her to take a look at the .epg files in the demo directory. They are all commented and may help the user in getting used with Epigrass language and capabilities.
 
@@ -136,6 +136,10 @@ Some hints to be successful when editing your   :file:`.epg`:
 
 Let's take a look now at each part of a script (this is the script  :file:`.epg` demo file):
 
+.. warning::
+
+	All variables defined in a :file:`.epg` are **case-insensitive**. Consider this fact when naming your model's variables.
+
 Part 1: THE WORLD
 -----------------
 .. highlight:: python
@@ -143,8 +147,6 @@ Part 1: THE WORLD
 The first section of the script is titled: THE WORLD. An example of its content is shown::
 
 
-    #=========================================================#
-    [THE WORLD]
     #=========================================================#
     shapefile = ['riozonas_LatLong.shp','nome_zonas','zona_trafe']
     edges = edges.csv
@@ -162,6 +164,8 @@ where,
     This is the name of the .CSV file containing the list of edges and their attributes.
 **sites**
     This is the name of the .CSV file containing the list of sites and their attributes.
+**encoding**
+	This is the encoding used in your sites and edges files. This is very important when you use location names which include non-ascii characters. The default encoding is *latin-1*. If you use any other encoding, please specify it here. Example: *utf-8*.
 
 .. note::
 
@@ -197,7 +201,7 @@ SEIR with partial immunity for all       *SEIpR*   *SEIpR_s*
 SIR with immunity wane                   *SIRS*    *SIRS_s*
 ======================================== ========= ===========
 
-A description of these models can be found in section \ref{cap:modeling}. The stochastic models use Poisson distribution as default for the the number of new cases (*L_{t+1}*). Besides these, the user may define his/her own model and access by the protect word Custom.
+A description of these models can be found in the chapter *Epidemiological modeling*. The stochastic models use *Poisson* distribution as default for the number of new cases (*L_{t+1}*). Besides these, the user may define his/her own model and access by the protect word Custom.
 
 Part 3: MODEL PARAMETERS
 ------------------------
@@ -231,7 +235,7 @@ The epidemic model is defined by variables and parameter which require initializ
 These are the model parameters, as described in \ref{Table:symbols}. Not all parameters are necessary for all models. For example, *e* is only required for SEIR-like models. Don't
 remove the line, however because that will cause an error. We recommend that, if the parameter is not necessary, just add a comment after it as a reminder that it is not being used by the model.
 
-In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named *values* and can be referenced as shown in listing \ref{lst:pars}. I.e., the first element of the tuple is values[0], the second element is values[1], the third element is values[2] and so on.
+In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named *values* and can be referenced in the order they appear. I.e., the first element of the tuple is values[0], the second element is values[1], the third element is values[2] and so on.
 
 Part 4: INITIAL CONDITIONS
 
@@ -256,7 +260,7 @@ In this part of the script, the initial conditions are defined. Here, the number
 
 Here, *N* is the total population in a site (as in the datafile for sites). In this example, we set all localities to the same initial conditions (all individuals susceptible) and use an event (see below) to introduce an infectious individual in a locality. The number of recovered individuals is implicit, as *R = N-(S+E+I)*
 
-Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site datafile and these columns are referrenced to using the *values* tuple explained above.
+Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site datafile and these columns are referenced to using the *values* tuple explained above.
 
 Part 5: EPIDEMIC EVENTS
 -----------------------

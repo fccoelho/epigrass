@@ -130,7 +130,7 @@ class simulate:
             #EPIDEMIC EVENTS
             self.seed = eval(config['epidemic events.seed'])
             self.vaccinate = eval(config['epidemic events.vaccinate'])
-            self.quarantine = eval(config['epidemic events.quarantine'])
+            #self.quarantine = eval(config['epidemic events.quarantine'])
 
             #[TRANSPORTATION MODEL]
             self.doTransp = eval(config['transportation model.dotransp'])

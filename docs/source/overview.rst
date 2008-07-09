@@ -4,11 +4,6 @@ Overview of Epigrass
 Epigrass is a platform for network epidemiological simulation and analysis. It enables researchers to perform comprehensive spatio-temporal simulations incorporating epidemiological data and models for disease transmission and control in order to create sophisticated scenario analyses.
 
 
-Components
-==========
-
-The Epigrass system is composed of 4 components, The Epigrass simulator, the Epigrass database, Epigrass visualization module, and the report generator. They can all be used separately but should be invoked through Epigrass' user interface.
-
 
 Modeling Approach
 =================
@@ -17,9 +12,9 @@ The geographical networks  over which epidemiological processes take place can b
 
 Once the archetypal node and edge objects are defined with appropriate attributes and methods, then a code representation of the real system can be constructed, where cities (or other geographical localities) and transportation routes are instances of the node and edge objects, respectively. The whole network is also an object with a whole collection of attributes and methods.
 
-This framework leads to a compact and hierarchical computational modelconsisting of a network object containing a variable number of node and edge objects. This framework also do not pose limitations to encapsulation, potentially allowing for networks within networks if desirable (not yet implemented).
+This framework leads to a compact and hierarchical computational model consisting of a network object containing a variable number of node and edge objects. This framework also do not pose limitations to encapsulation, potentially allowing for networks within networks if desirable.
 
-For the end user this framework is transparent since it mimics the natural structure of the real system. Even after the model is converted into a code object all of its component objects remain accessible to the user.
+For the end user perspective, this framework is transparent since it mimics the natural structure of the real system. Even after the model is converted into a code object all of its component objects remain accessible to the user's  models.
 
 Geographical Network Models
 ===========================
@@ -37,6 +32,8 @@ If the user has a map for the georeferred data, this can be passed to Epigrass. 
 
 If the user does not have a map in shapefile format, he can still use Epigrass. In this case, the georeferred data is read only from two .csv files (more on that ahead).
 
+.. index:: node, site
+
 Defining Nodes
 --------------
 
@@ -53,6 +50,7 @@ The data necessary at build time to create nodes come from a CSV (comma-separate
 *Geocode*
     A Unique Geocode (a number) is required. It will be used as a label/index to facilitate  reference to specific nodes.
 
+.. index:: edge
 
 Defining Edges
 --------------
@@ -76,18 +74,22 @@ In Epigrass' graphs, edges represent transportation routes. Similarly to nodes, 
     This is the unique numerical identifier used in the sites file.
 
 
-
+.. index:: models
 
 Defining models
 ---------------
 
 The word model in Epigrass can mean two distinct objects: The network model and the node's epidemic model.
 
-Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard epidemiological models\index{Models!epidemiological models} to choose from when setting up your network. Currently, The same model type is applied to every node although their parameterization is node-specific. Besides the built-in model types, users can define their own, as shown on chapter \ref{ch:usingepg}.
+Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard epidemiological models\index{Models!epidemiological models} to choose from when setting up your network. Currently, The same model type is applied to every node although their parameterization is node-specific. Besides the built-in model types, users can define their own, as shown in the chapter *Using Epigrass*.
 
-Network models\index{Models!network model} are specified in a ASCII-text script file (see appendix \ref{script}). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.
+.. index::
+    single: models;epidemiological models
+	simgle: models;network models
 
-The script on the appendix \ref{script} specifies a network model with an stochastic SEIR (see \ref{cap:modeling}) epidemic model in its nodes. The user should study this model and play with its parameters to understand the features of Epigrass. A step-by-step tutorial on how to edit the model script can be found on chapter \ref{ch:usingepg}.
+Network models are specified in a ASCII-text script file (Called a :file:`.epg` file). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.
+
+The script on the appendix  specifies a network model with an stochastic SEIR (see chapter on epidemiological modeling) epidemic model in its nodes. The user should study this model and play with its parameters to understand the features of Epigrass. A step-by-step tutorial on how to edit the model script can be found in the chapter *Using Epigrass*.
 
 The Simulation
 ==============
@@ -136,6 +138,8 @@ Database output
     single: Database;epigrass database
 
 Time series of **L**, **S**, **E**, and **I**, from simulations, are stored in a MySQL database named *epigrass* . The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of multiple runs from the same model get stored independently.
+
+Epigrass also supports the SQLite database and CSV files as output for the time-series. The naming convention also applies to these other formats.
 
 
 .. rubric:: Footnotes

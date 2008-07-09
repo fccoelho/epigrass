@@ -21,7 +21,7 @@ any distributed dynamical system taking place on a set of nodes
 Getting Started
 ===============
 
-The best way to get started in writing custom models is to look at
+The best way to get started in writing custom models is to look at the
 example distributed with Epigrass. It can be found in 
 :file:`demos/CustomModel_example.py`::
 
@@ -39,35 +39,45 @@ example distributed with Epigrass. It can be found in
 		* theta = infectious individuals from neighbor sites
 		* npass = Total number of people arriving at this node
 		"""
-		#Initializing
-		if self.parentSite.parentGraph.simstep == 1: 
-			#Defining variable names
-			self.parentSite.vnames = ('Exposed','Infeccious','Susceptible')
-			#get initial values
+		# Get state variables' current values
+
+		if self.parentSite.parentGraph.simstep == 1:  # if first step
+			# Define variable names to appear in the output
+			self.parentSite.vnames = ('Exposed','Infectious','Susceptible')
+			# And get state variables's initial values (stored in dict self.bi)
+			
 			E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
-		else:
+		else:   # if nor first step
 			E,I,S = vars
+
+		# Get parameter values	
 		N = self.parentSite.totpop
-		beta,alpha,e,r,delta,B,w,p = par
+		beta,alpha,e,r,delta,B,w,p = (self.bp['beta'],self.bp['alpha'],
+		self.bp['e'],self.bp['r'],self.bp['delta'],self.bp['b'],
+		self.bp['w'],self.bp['p'])
+
 		#Vacination event (optional)
 		if self.parentSite.vaccineNow:
 			S -= self.parentSite.vaccov*S
 		
-		Lpos = beta*S*((I+theta)/(N+npass))**alpha #Number of new cases
-		self.parentSite.totalcases += Lpos #update number of cases
 		# Model
+		Lpos = beta*S*((I+theta)/(N+npass))**alpha #Number of new cases
 		Ipos = (1-r)*I + Lpos
 		Spos = S + B - Lpos
 		Rpos = N-(Spos+Ipos)
-		# Updating stats
+		
+		# Update stats
+		self.parentSite.totalcases += Lpos #update number of cases
 		self.parentSite.incidence.append(Lpos)
-		# Raises site infected flag and adds parent site to the epidemic history list.
+
+		# Raise site infected flag and add parent site to the epidemic history list.
 		if not self.parentSite.infected: 
 			if Lpos > 0:
 				self.parentSite.infected = self.parentSite.parentGraph.simstep
-				self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,
+				self.parentSite.parentGraph.epipath.append(
+				(self.parentSite.parentGraph.simstep,
 				self.parentSite,self.parentSite.infector))
-		#Migrating infecctious
+		
 		self.parentSite.migInf.append(Ipos)
 			
 		return [0,Ipos,Spos]
@@ -81,7 +91,7 @@ Let's analyze the above code. The first thing to notice is that an Epigrass cust
 		* *par*: The parameters of the model. Listed in the same order as defined in the :file:`.epg` file.
 		* *theta*: Number of infectious individuals arriving from neighboring sites. For disconnected models, it is 0.
 		* *npass*: The total number of passengers arriving from neighboring sites. For disconnected models, it is 0.
-	#. In the beginning of the function you define a list of strings (self.parentSite.vnames) which will be the names used when storing the resulting time-series in the database. Choose strings that are not very long and are meaningful. You only need to do this once, ate the beggining of the simulation so put it inside an *if* statement, which will be executed only at time-step 1 (see code above).
+	#. In the beginning of the function you define a list of strings (self.parentSite.vnames) which will be the names used when storing the resulting time-series in the database. Choose strings that are not very long and are meaningful. You only need to do this once, ate the beginning of the simulation so put it inside an *if* statement, which will be executed only at time-step 1 (see code above).
 	#. After defining variable names, set their initial values in the same *if* clause. An *else* clause linked to this one will set variables values for the rest of the simulation.
 	#. Define local names for the total population *N* and fixed parameters.
 	#. Proceed to implement your model anyway you see fit.
@@ -89,7 +99,7 @@ Let's analyze the above code. The first thing to notice is that an Epigrass cust
 		* *incidence*: list of new cases per time step.
 		* *infected*: Boolean stating if the site has been infected, i.e., it has had an autoctonous case.
 		* *epipath*: This variable is at the graph level and contains the path of spread of the simulation.
-		* *migInf*: Number of infectious in this site per time-step.
+		* *migInf*: Number of infectious individuals in this site per time-step.
 	#. Finally, this function must return a list/tuple with the values of the state variables in the same order as received in vars.
 
   .. warning::
@@ -113,7 +123,7 @@ The Environment
 	
 	Nesting of the objects inside a Simulate object.
 
-From quickly going through the exaple Custom model above it problably became clear, to the Python-initiated, that Yous can access variables at the node and graph levels.  This is possible because *Model* becomes a method in a node object which in is turn is contained into a graph object (see figure).
+From quickly going through the example Custom model above it probably became clear, to the Python-initiated, that Yous can access variables at the node and graph levels.  This is possible because *Model* becomes a method in a node object which in is turn is contained into a graph object (see figure).
 
 Besides being nested within the *graph* object, *node* and *edge* contain references to their containers. This means that using the introspective abilities of Python the user can access any information at any level of the full *graph* model and use it in the custom model. In order to help you do this, Let's establish an API for developing custom models.
 
@@ -208,7 +218,29 @@ Not all attributes and methods are listed, only the most useful. For a complete 
 
 		Current vaccination coverage
 
-	
+	.. method:: vaccinate(cov)
+
+		At time t, the population is vaccinated with coverage cov
+
+	.. method:: getOutEdges()
+
+		Returns list of outbound edges
+
+	.. method:: getInEdges()
+
+		Returns list of inbound edges
+
+	.. method:: getNeighbors()
+
+		Returns a dictionary of neighbor sites as keys and distances as values
+
+	.. method:: getDistanceFromNeighbor(site)
+
+		Returns the distance in km from a given neighbor
+
+	.. method:: getDegree(site)
+
+		Returns degree of this site, that is, the number of sites connected to it
 
 	
 
