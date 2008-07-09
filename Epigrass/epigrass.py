@@ -9,7 +9,7 @@ except ImportError:
 from Epigrass.manager import *
 import threading,  subprocess
 from Epigrass.Ui_cpanel4new import Ui_MainWindow
-from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
+from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
 import Epigrass.epiplay as epi
 from Epigrass import spread,  dgraph
