@@ -13,16 +13,18 @@
 #==============================================================#
 [THE WORLD]
 #==============================================================#
-# Here you add information about the files that described the world the model is enclosed
+# Here you add information about the files that describe the network
 
 # "shapefile" is the map layer that will be used as a background for 
-# the network display. It is defined as a list with file name and the 
-# name of two variables: the first containing  locality names,
-# and the other containing unique integers to be used as geocodes.
+# the simulation display. It is defined as a list with three elements:
+# the .shp filename, the variable containing the site's names,
+# and the variable containing unique integers to be used as geocodes.
+# ex: shapefile =  ['shape.shp','sitename','sitecode']
 
-# "sites" and "edges" are the files that describe the topology of the network (see Documentation)
-# The encoding variable can be set to a string stating the encoding of your
-# sites and edges files. If left empty iso-8859-1 (latin-1) is assumed.
+# "sites" and "edges" are the files that describe the topology of the
+# network (see Documentation)
+# The encoding variable can be set to a string stating the encoding of your 
+# sites and edges files. If left empty, iso-8859-1 (latin-1) is assumed.
 # See Usermanual for acceptable encoding strings.
 
 shapefile = []
@@ -40,15 +42,22 @@ modtype = Custom
 #==============================================================#
 [MODEL PARAMETERS]
 #==============================================================#
-
 #  They can be specified as constants or as functions of global or 
-#    site-specific variables. these site-specific variables, are provided
-#  in the sites file. All the numbers given after the geocode (4th column)
-#  are collected into the values tuple.
+#  site-specific variables. Site-specific variables are provided
+#  in the sites .csv file. In this file, all columns after the 4th
+#  are collected into a values tuple, which can be referenced here 
+#  as values[0], values[1], values[2], etc.
 #   Examples:
 #   beta = 0.001
 #   beta=values[0] #assigns the first element of values to beta 
 #   beta=0.001*values[1]
+#   beta=0.001*N  # N is a global name for total site population
+
+# Currently, Epigrass requires that parameters beta, alpha, e, r, delta, B, w, p
+# be present in the .epg even if they will not be used. Do not erase these lines. 
+# Just disregard them if they are not useful to you.
+
+# Required parameters
 
 beta = 0.6   #transmission coefficient Lipsitch 2003 for R0 = 3
 alpha = 1   # clumping parameter
@@ -64,15 +73,18 @@ p = 0           # Probability of a recovered become infected per time step [0,1]
 [INITIAL CONDITIONS]
 #==============================================================#
 #   Here, the number of individuals in each epidemiological
-#   state (SEI) is specified. They can be specified in absolute
+#   state (SEI), at time 0, is specified. They can be specified in absolute
 #   or relative numbers.
 #   N is the population size of each site.
 #   The rule defined here will be applied equally to all sites.
 #   For site-specific definitions, use EVENTS (below)
+
 #   Examples:
 #   S,E,I = 0.8*N, 10, 0.5*E
 #   S,E,I = 0.5*N, 0.01*N, 0.05*N
 #   S,E,I = N-1, 1, 0
+#   Note. Epigrass expects to find S,E,I here. If not, an error will occur
+
 S = N
 E = 0
 I = 0
@@ -91,31 +103,30 @@ I = 0
 #  Quarantine: [(locality1's geocode,time,coverage), (locality2's geocode,time,coverage)]
 #  Keywords may be used instead of the geocode in the vacinate  variable:
 #  all: Apply the same values to all sites
+
 seed = [(355030800,'I',1)] #Sao Paulo
 Vaccinate = []
 Quarantine = []
 
 # The following events have not yet been implemented
-#Screening = (locality, time, coverage) #screening for sick people on aiports bus stations
-#Vector_control = (locality, time, coverage)
-#Prophylaxis = (locality, time, target, coverage, eficacy)
-
+# Quarantine
+# Screening = (locality, time, coverage) #screening for sick people on aiports bus stations
+# Vector_control = (locality, time, coverage)
+# Prophylaxis = (locality, time, target, coverage, eficacy)
 # Intervention acts reducing progression between epidemiological states
 # target is the name of the modified parameter
 # One may specify as many treatments as necessary
-# 
-#Intervention = (locality, time, target, coverage, eficacy)
-#Intervention = [('all', 0, 'pp1', 0.3, 0.5),('all', 0, 'pp2', 0.3, 0.5)]
-
+# Intervention = (locality, time, target, coverage, eficacy)
+# Intervention = [('all', 0, 'pp1', 0.3, 0.5),('all', 0, 'pp2', 0.3, 0.5)]
 
 
 #==============================================================#
 [TRANSPORTATION MODEL]
 #==============================================================#
-# If doTransp = 1 the transportation dinamics will be included. Use 0 here only for debugging purposes.
+# If doTransp = 1 the transportation dynamics will be simulated; doTransp=0, otherwise
 doTransp = 1
 
-# Mechanism can be stochatic (1) or deterministic(0). 
+# Transportation Simulation can be stochatic (1) or deterministic(0). 
 stochastic = 1
 
 #Average speed of transportation system in km per time step. Enter 0 for instantaneous travel.
@@ -149,13 +160,15 @@ MySQLout = 1
 report = 0
 siteRep = [230440005,355030800]
 
-#Replicate runs
-#If replicas is set to an integer(n) larger than zero, the model will be run n times and the results will be con-
-#solidated before storing.
-# if RandSeed is set to 1 the seed will be randomized on each replicate
-#Replicate mode automatically turn off report and batch options. 
+# Replicate runs
+# If replicas is set to an integer(n) larger than zero, the model will be run
+# n times and the results will be consolidated before storing.
+# RandSeed = 1: the seed will be randomized on each replicate
+# RandSeed = 2: seeds are taken sequentially from the site's file
+# Note: Replicate mode automatically turn off report and batch options. 
 Replicas = 0
 RandSeed = 0
+
 #Batch Run
 #  list other scripts to be run in after this one. don't forget the extension .epg
 #  model scripts must be in the same directory as this file or provide full path.

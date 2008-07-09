@@ -233,7 +233,7 @@ def Model(self,vars,par,theta=0, npass=0):
         Ipos = Ip0pos+Is0pos+Ip2pos+Is2pos+Ip10pos+Is10pos+Ip15pos+Is15pos+Ip20pos+Is20pos+Ip40pos+Is40pos
         self.parentSite.migInf.append(Ipos)
         
-        # send infected to others! Neste caso, todos estao saindo!!!!!!!!!!!!!
+        # send infected to others! 
         if (Ipos>0):
             tot0 = (S0pos+Ep0pos+Es0pos+Ip0pos+ Is0pos+Rmax0pos+Rmed0pos+Rmin0pos+Vmax0pos+Vmed0pos+Vmin0pos)
             tot2 = (S2pos+Ep2pos+Es2pos+Ip2pos+ Is2pos+Rmax2pos+Rmed2pos+Rmin2pos+Vmax2pos+Vmed2pos+Vmin2pos)
@@ -258,73 +258,6 @@ def Model(self,vars,par,theta=0, npass=0):
                 Vmed0pos,Vmed2pos,Vmed10pos,Vmed15pos,Vmed20pos,Vmed40pos,
                 Vmin0pos,Vmin2pos,Vmin10pos,Vmin15pos,Vmin20pos,Vmin40pos]
                 
-def getPass(self):
-    '''
-    FORA DE USO
-    This function substitutes the built-in transport model.
-    It access the neighbors of self and get the number of persons and infected persons arriving by age group
-    '''                    
-    # pessoas infectadas viajando
-    Mp0,Mp2,Mp10,Mp15,Mp20,Mp40,Ms0,Ms2,Ms10,Ms15,Ms20,Ms40 = 0,0,0,0,0,0,0,0,0,0,0,0
-    # pessoas viajando
-    npass0,npass2,npass10,npass15,npass20,npass40= 0,0,0,0,0,0
-        
-    for e in self.parentSite.getInEdges():
-        
-        S0,S2,S10,S15,S20,S40,Ip0,Ip2,Ip10,Ip15,Ip20,Ip40,Is0,Is2,Is10,Is15,Is20,Is40,Rmax0,Rmax2,Rmax10,Rmax15,Rmax20,Rmax40,Rmed0,Rmed2,Rmed10,Rmed15,Rmed20,Rmed40,Rmin0,Rmin2,Rmin10,Rmin15,Rmin20,Rmin40,Vmax0,Vmax2,Vmax10,Vmax15,Vmax20,Vmax40,Vmed0,Vmed2,Vmed10,Vmed15,Vmed20,Vmed40,Vmin0,Vmin2,Vmin10,Vmin15,Vmin20,Vmin40= e.source.ts[-1]
-            
-        fe = e.length # estou usando o length como indicador de idade
-        com  = e.fmig
-        
-        if fe==0: 
-            npass0 += com
-            tot = S0+Ip0+Is0+Rmax0+Rmed0+Rmin0+Vmax0+Vmed0+Vmin0
-            Mp0 += com*Ip0/tot
-            Ms0 += com*Is0/tot
-            #Mp0 += com*poisson(Ip0/tot, 1)
-            #Ms0 += com*poisson(Is0/tot, 1)
-            
-        if fe==2: 
-            npass2 += com
-            tot = S2+Ip2+Is2+Rmax2+Rmed2+Rmin2+Vmax2+Vmed2+Vmin2
-            Mp2 += com*Ip2/tot
-            Ms2 += com*Is2/tot    
-            #Mp2 += com*poisson(Ip2/tot, 1)
-            #Ms2 += com*poisson(Is2/tot, 1)    
-            
-        if fe==10: 
-            npass10 += com
-            tot = S10+Ip10+Is10+Rmax10+Rmed10+Rmin10+Vmax10+Vmed10+Vmin10
-            Mp10 += com*Ip10/tot
-            Ms10 += com*Is10/tot
-            #Mp10 += com*poisson(Ip10/tot, 1)
-            #Ms10 += com*poisson(Is10/tot, 1)
-            
-        if fe==15: 
-            npass15 += com
-            tot = S15+Ip15+Is15+Rmax15+Rmed15+Rmin15+Vmax15+Vmed15+Vmin15
-            Mp15 += com*Ip15/tot
-            Ms15 += com*Is15/tot
-            #Mp15 += com*poisson(Ip15/tot, 1)
-            #Ms15 += com*poisson(Is15/tot, 1)
-    
-        if fe==20: 
-            npass20 += com
-            tot = S20+Ip20+Is20+Rmax20+Rmed20+Rmin20+Vmax20+Vmed20+Vmin20
-            Mp20 += com*Ip20/tot
-            Ms20 += com*Is20/tot    
-            #Mp20 += com*poisson(Ip20/tot, 1)
-            #Ms20 += com*poisson(Is20/tot, 1)    
-    
-        if fe==40: 
-            npass40 += com
-            tot = S40+Ip40+Is40+Rmax40+Rmed40+Rmin40+Vmax40+Vmed40+Vmin40
-            Mp40 += com*Ip40/tot
-            Ms40 += com*Is40/tot    
-            #Mp40 += com*poisson(Ip40/tot, 1)
-            #Ms40 += com*poisson(Is40/tot, 1)    
-            
-    return [Mp0,Mp2,Mp10,Mp15,Mp20,Mp40,Ms0,Ms2,Ms10,Ms15,Ms20,Ms40,npass0,npass2,npass10,npass15,npass20,npass40]
 
 def getNPass(self):
     '''
@@ -340,7 +273,7 @@ def getNPass(self):
     
 def setPassDest(self):
     '''
-    define, para cada ZT, os destinos possiveis e a probabilidade de cada um deles por faixa etaria
+    Define, para cada ZT, os destinos possiveis e a probabilidade de cada um deles por faixa etaria
     '''
     
     # criando uma lista de dicts, um para cada FE, contendo os outedges e of fluxos
