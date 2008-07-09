@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/cpanel4new.ui'
 #
-# Created: Mon Jun 23 09:50:36 2008
+# Created: Wed Jul  9 13:12:46 2008
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setMaximumSize(QtCore.QSize(16777215,479))
 
         self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setGeometry(QtCore.QRect(0,32,807,419))
+        self.centralwidget.setGeometry(QtCore.QRect(0,31,807,420))
         self.centralwidget.setObjectName("centralwidget")
 
         self.vboxlayout = QtGui.QVBoxLayout(self.centralwidget)
@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName("tabWidget")
 
         self.Widget8 = QtGui.QWidget()
-        self.Widget8.setGeometry(QtCore.QRect(0,0,785,299))
+        self.Widget8.setGeometry(QtCore.QRect(0,0,787,298))
         self.Widget8.setObjectName("Widget8")
 
         self.vboxlayout1 = QtGui.QVBoxLayout(self.Widget8)
@@ -197,11 +197,11 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.Widget8,"")
 
         self.Widget9 = QtGui.QWidget()
-        self.Widget9.setGeometry(QtCore.QRect(0,0,785,299))
+        self.Widget9.setGeometry(QtCore.QRect(0,0,787,298))
         self.Widget9.setObjectName("Widget9")
 
         self.layout9 = QtGui.QWidget(self.Widget9)
-        self.layout9.setGeometry(QtCore.QRect(9,19,304,135))
+        self.layout9.setGeometry(QtCore.QRect(9,19,304,153))
         self.layout9.setObjectName("layout9")
 
         self.gridlayout4 = QtGui.QGridLayout(self.layout9)
@@ -245,7 +245,7 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.Widget9,"")
 
         self.TabPage = QtGui.QWidget()
-        self.TabPage.setGeometry(QtCore.QRect(0,0,785,299))
+        self.TabPage.setGeometry(QtCore.QRect(0,0,787,298))
         self.TabPage.setObjectName("TabPage")
 
         self.hboxlayout = QtGui.QHBoxLayout(self.TabPage)
@@ -332,7 +332,7 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.TabPage,"")
 
         self.visPage = QtGui.QWidget()
-        self.visPage.setGeometry(QtCore.QRect(0,0,785,299))
+        self.visPage.setGeometry(QtCore.QRect(0,0,787,298))
         self.visPage.setObjectName("visPage")
 
         self.gridlayout5 = QtGui.QGridLayout(self.visPage)
@@ -511,7 +511,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0,0,807,32))
+        self.menubar.setGeometry(QtCore.QRect(0,0,807,31))
         self.menubar.setObjectName("menubar")
 
         self.menuFile = QtGui.QMenu(self.menubar)
@@ -529,7 +529,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         self.dbType.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -563,6 +563,7 @@ class Ui_MainWindow(object):
         self.langCombo.addItem(QtGui.QApplication.translate("MainWindow", "English", None, QtGui.QApplication.UnicodeUTF8))
         self.langCombo.addItem(QtGui.QApplication.translate("MainWindow", "Brazilian portuguese", None, QtGui.QApplication.UnicodeUTF8))
         self.langCombo.addItem(QtGui.QApplication.translate("MainWindow", "French", None, QtGui.QApplication.UnicodeUTF8))
+        self.langCombo.addItem(QtGui.QApplication.translate("MainWindow", "Spanish", None, QtGui.QApplication.UnicodeUTF8))
         self.textLabel5.setText(QtGui.QApplication.translate("MainWindow", "Editor", None, QtGui.QApplication.UnicodeUTF8))
         self.textLabel2_3.setText(QtGui.QApplication.translate("MainWindow", "PDF Viewer", None, QtGui.QApplication.UnicodeUTF8))
         self.textLabel2_2.setText(QtGui.QApplication.translate("MainWindow", "Name", None, QtGui.QApplication.UnicodeUTF8))

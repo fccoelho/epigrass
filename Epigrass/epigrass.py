@@ -421,15 +421,15 @@ epigrass.sql > mysql"""),
         ab.setupUi(aboutD)
         aboutD.show()
         aboutD.exec_()
-        if os.path.exists('/usr/share/epigrass/docs/userguide.pdf'):
-            try:
-                os.system('%s /usr/share/epigrass/docs/userguide.pdf'%str(self.pdfEdit.text()))
-            except:
-                QMessageBox.warning(None,
-                    self.trUtf8("Help not available"),
-                    self.trUtf8("""Could not open user guide.
-    Please make sure your chosen PDF viewer is installed."""),
-                    self.trUtf8("&OK"))
+#        if os.path.exists('/usr/share/epigrass/docs/Epigrass.pdf'):
+#            try:
+#                os.system('%s /usr/share/epigrass/docs/Epigrass.pdf'%str(self.pdfEdit.text()))
+#            except:
+#                QMessageBox.warning(None,
+#                    self.trUtf8("Help not available"),
+#                    self.trUtf8("""Could not open user guide.
+#    Please make sure your chosen PDF viewer is installed."""),
+#                    self.trUtf8("&OK"))
 
     def onRepOpen(self):
         """

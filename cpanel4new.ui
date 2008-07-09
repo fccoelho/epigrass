@@ -22,9 +22,9 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>32</y>
+     <y>31</y>
      <width>807</width>
-     <height>419</height>
+     <height>420</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2" >
@@ -49,15 +49,15 @@
        <string/>
       </property>
       <property name="currentIndex" >
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Widget8" >
        <property name="geometry" >
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>785</width>
-         <height>299</height>
+         <width>787</width>
+         <height>298</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -348,8 +348,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>785</width>
-         <height>299</height>
+         <width>787</width>
+         <height>298</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -361,7 +361,7 @@
           <x>9</x>
           <y>19</y>
           <width>304</width>
-          <height>135</height>
+          <height>153</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="_6" >
@@ -400,6 +400,11 @@
            <item>
             <property name="text" >
              <string>French</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Spanish</string>
             </property>
            </item>
           </widget>
@@ -459,8 +464,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>785</width>
-         <height>299</height>
+         <width>787</width>
+         <height>298</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -617,8 +622,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>785</width>
-         <height>299</height>
+         <width>787</width>
+         <height>298</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -954,7 +959,7 @@
      <x>0</x>
      <y>0</y>
      <width>807</width>
-     <height>32</height>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >

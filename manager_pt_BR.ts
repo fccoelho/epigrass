@@ -1,38 +1,121 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="pt">
+<defaultcodec></defaultcodec>
 <context>
     <name>Editor</name>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="42"/>
         <source>Required variable missing</source>
         <translation>Variável obrigatória faltando</translation>
     </message>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="43"/>
         <source>Variable %s was missing. Variable created and value set to default</source>
         <translation>Variável %s estava faltando. Foi criada automáticamente e recebeu seu valor default</translation>
     </message>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="47"/>
         <source>Required section missing</source>
         <translation>Seção obrigatória faltando</translation>
     </message>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="48"/>
         <source>Section %s was missing. It was added to your file with default values for its variables.</source>
         <translation>Seção %s estava faltando. Foi adicionada ao seu arquivo com valores default para suas variáveis.</translation>
     </message>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="110"/>
         <source>Open .epg File</source>
         <translation>Abrir arquivo .epg</translation>
     </message>
     <message>
+        <location filename="Epigrass/epgeditor.py" line="178"/>
         <source>*.epg</source>
         <translation>*.epg</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="94"/>
+        <source>About .EPG Editor</source>
+        <translation>Sobre o Editor de .EPG </translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="95"/>
+        <source>This editor is for creating or modifying .epg files.</source>
+        <translation>Este editor é para criar ou modificar arquivos .epg.</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="121"/>
+        <source>File Name</source>
+        <translation>Nome do arquivo</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="122"/>
+        <source>Enter a name for you new .epg file:</source>
+        <translation>Forneça um nome para o novo arquivo .epg:</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="139"/>
+        <source>Choose Section</source>
+        <translation>Escolha a Seção</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="140"/>
+        <source>Select a section to which you want to add a variable:</source>
+        <translation>Selecione uma seção na qual deseja adicionar uma variável:</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="147"/>
+        <source>Variable Name</source>
+        <translation>Nome da variável</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="148"/>
+        <source>Enter the name of the variable to be created</source>
+        <translation>Forneça o nome da variável a ser criada</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epgeditor.py" line="176"/>
+        <source>Save File as</source>
+        <translation>Salvar arquivo como</translation>
+    </message>
+</context>
+<context>
+    <name>Form</name>
+    <message>
+        <location filename="Epigrass/Ui_display.py" line="118"/>
+        <source>Simulation Display</source>
+        <translation>Visualização da Simulação</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_display.py" line="119"/>
+        <source>Geographical View</source>
+        <translation>Vista Geográfica</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_display.py" line="120"/>
+        <source>Time Series</source>
+        <translation>Serie(s) Temporal(is)</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_display.py" line="121"/>
+        <source>Replay</source>
+        <translation>Reiniciar</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_display.py" line="122"/>
+        <source>Stop</source>
+        <translation>Parar</translation>
     </message>
 </context>
 <context>
     <name>GraphWidget</name>
     <message>
+        <location filename="Epigrass/elasticnodes.py" line="265"/>
         <source>Network View</source>
         <translation>Visão da Rede</translation>
     </message>
     <message>
+        <location filename="Epigrass/elasticnodes.py" line="336"/>
         <source>Click and drag the nodes around, and zoom with the mouse wheel or the &apos;+&apos; and &apos;-&apos; keys</source>
         <translation>Clique e arraste para mover os nós, e faça zoom com a roda do mouse ou as teclas &apos;+&apos; e &apos;-&apos;</translation>
     </message>
@@ -40,341 +123,930 @@
 <context>
     <name>MainPanel</name>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="518"/>
         <source>Epigrass Control Panel</source>
         <translation>Painel de controle do Epigrass</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="522"/>
         <source>&amp;Help</source>
         <translation>&amp;Ajuda</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="523"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="521"/>
         <source>Click here to open the userguide in the web browser</source>
         <translation>Clique aqui para abrir o guia do usuário no navegador</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="525"/>
         <source>&amp;Run</source>
         <translation>&amp;Iniciar</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="526"/>
         <source>Alt+R</source>
         <translation>Alt+I</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="524"/>
         <source>Click here to start your simulation</source>
         <translation>Clique aqui para iniciar a simulação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="528"/>
         <source>&amp;Exit</source>
         <translation>&amp;Sair</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="529"/>
         <source>Alt+E</source>
         <translation>Alt+S</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="527"/>
         <source>Click here to leave Epigrass</source>
         <translation>Clique aqui para sair do EpiGrass</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="530"/>
         <source>Model Specification</source>
         <translation>Especificação do Modelo</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="532"/>
         <source>Script Name:</source>
         <translation>Nome do Script:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="534"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="533"/>
         <source>write the name of the your script or press the choose button on the right to select one.</source>
         <translation>Escreva o nome do seu script ou pressione o botão escolher à direita para selecionar um.</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="531"/>
         <source>Choose</source>
         <translation>Escolher</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="535"/>
         <source>Database Specification</source>
         <translation>Especificação do Banco de Dados</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="545"/>
         <source>This is the userid for accessing the database server</source>
         <translation>Este é o usuário usado para acessar o banco de dados</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="544"/>
         <source>localhost</source>
         <translation>localhost</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="543"/>
         <source>This is the url of your database server.</source>
         <translation>Esta é a url do seu servidor de banco de dados.</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="540"/>
         <source>Database password for the userid entered</source>
         <translation>Senha do banco de dados para o usuário indicado</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="538"/>
         <source>3306</source>
         <translation>3306</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="537"/>
         <source>Enter the port  the server listens to.</source>
         <translation>Entre a porta à qual servidor responde.</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="551"/>
         <source>Run Options</source>
         <translation>Opções de Simulação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="558"/>
         <source>Editor</source>
         <translation>Editor</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="560"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="552"/>
         <source>Enter your full name. This will be added to the report.</source>
         <translation>Escreva o seu nome completo. Ele será usado no relatório.</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="561"/>
         <source>Enter your preferred text editor</source>
         <translation>Indique seu editor de texto preferido</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="563"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="565"/>
         <source>Database</source>
         <translation>Banco de dados</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="569"/>
         <source>Info</source>
         <translation>Informação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="568"/>
         <source>Click here for a short description of the epigrass database</source>
         <translation>Clique aqui para uma breve descrição do banco epigrass</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="567"/>
         <source>Backup</source>
         <translation>Backup</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="566"/>
         <source>Click here to backup the epigrass database </source>
         <translation>Clique aqui para fazer backup do banco epigrass</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="572"/>
         <source>Utilities</source>
         <translation>Utilitários</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="559"/>
         <source>PDF Viewer</source>
         <translation>Leitor de PDFs</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="562"/>
         <source>Enter the name of your preferred PDF viewer</source>
         <translation>Entre com o nome do seu visualizador de PDFs preferencial</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="564"/>
         <source>Simulation Status</source>
         <translation>Status da Simulação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="570"/>
         <source>Report</source>
         <translation>Relatório</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="571"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="553"/>
         <source>Language</source>
         <translation>Linguagem</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="556"/>
         <source>Brazilian portuguese</source>
         <translation>Brazilian portuguese</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="554"/>
         <source>Select the language for the GUI</source>
         <translation>Selecione a linguagem da interface gráfica</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="587"/>
         <source>Visualization</source>
         <translation>Visualização</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="520"/>
         <source>Simulation step</source>
         <translation>Passo da simulação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="519"/>
         <source>Progress:</source>
         <translation>Progresso:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="576"/>
         <source>Simulations stored:</source>
         <translation>Simulações armazenadas:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="577"/>
         <source>Select a database stored simulation</source>
         <translation>Selecione uma simulação armazenada no banco de dados</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="582"/>
         <source>No map</source>
         <translation>Nenhum mapa</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="581"/>
         <source>Select a map</source>
         <translation>Selecione um mapa</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="583"/>
         <source>Scan DB</source>
         <translation>Ler BD</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="580"/>
         <source>Maps available:</source>
         <translation>Mapas disponíveis:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="573"/>
         <source>Spread Trees</source>
         <translation>Árvores de espalhamento</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="575"/>
         <source>Consensus Tree</source>
         <translation>Árvores de Consenso</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="574"/>
         <source>Select a directory with tree-files to build consensus on.</source>
         <translation>Selecione um diretório com arquivos de árvore para ser utilizados no consenso.</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="578"/>
         <source>Variable to display:</source>
         <translation>Variável a ser mostrada:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="579"/>
         <source>Select a variable to display in the animation</source>
         <translation>Selecione uma variável para a animação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="546"/>
         <source>Database type:</source>
         <translation>Tipo do Banco de dados:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="536"/>
         <source>Host:</source>
         <translation>Servidor:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="539"/>
         <source>Port:</source>
         <translation>Porta:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="541"/>
         <source>Password:</source>
         <translation>Senha:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="542"/>
         <source>Userid:</source>
         <translation>Usuário:</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="548"/>
         <source>MySQL</source>
         <translation>MySQL</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="549"/>
         <source>SQLite</source>
         <translation>SQLite</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="547"/>
         <source>Select your database type</source>
         <translation>Selecione o tipo do banco de dados</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="555"/>
         <source>English</source>
         <translation>Inglês</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="557"/>
         <source>French</source>
         <translation>Françês</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="550"/>
         <source>CSV</source>
         <translation>CSV</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="584"/>
         <source>Animation rate</source>
         <translation>Vel Animação</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="585"/>
         <source>Start 2D animation</source>
         <translation>Iniciar animação 2D</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_cpanel4.py" line="586"/>
         <source>Start 3D animation</source>
         <translation>Iniciar animação 3D</translation>
     </message>
 </context>
 <context>
-    <name>MainPanel_Impl</name>
+    <name>MainWindow</name>
     <message>
+        <location filename="Epigrass/qtgraph.py" line="22"/>
+        <source>Simulation Display</source>
+        <translation>Simulação</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/qtgraph.py" line="100"/>
+        <source>Click and drag the nodes around, and zoom with the mouse wheel or the &apos;+&apos; and &apos;-&apos; keys</source>
+        <translation>Clique e arraste para mover os nós, e faça zoom com a roda do mouse ou as teclas &apos;+&apos; e &apos;-&apos;</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="139"/>
+        <source>.EPG Editor</source>
+        <translation>Editor de arquivos .EPG</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="566"/>
+        <source>Editor</source>
+        <translation>Editor</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="140"/>
+        <source>Variable</source>
+        <translation>Variável</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="141"/>
+        <source>Value</source>
+        <translation>Valor</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="142"/>
+        <source>Description</source>
+        <translation>Descrição</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="579"/>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="146"/>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Save file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="151"/>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Leave the editor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="152"/>
+        <source>Exit</source>
+        <translation>Sair</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="154"/>
+        <source>Viewer</source>
+        <translation>Visualizador</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="608"/>
+        <source>Help</source>
+        <translation>Ajuda</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="156"/>
+        <source>Usage help</source>
+        <translation>Dicas de uso</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="607"/>
+        <source>File</source>
+        <translation>Arquivo</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="599"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Ajuda</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="600"/>
+        <source>F1</source>
+        <translation>F1</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="161"/>
+        <source>&amp;About</source>
+        <translation>&amp;Sobre</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="162"/>
+        <source>About &amp;Epigrass</source>
+        <translation>Sobre o &amp;Epigrass</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="163"/>
+        <source>Auto-&amp;Refresh</source>
+        <translation>Auto-atualiza&amp;r</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="164"/>
+        <source>&amp;Open .epg File</source>
+        <translation>&amp;Abrir arquivo .epg</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="165"/>
+        <source>Ctrl+O</source>
+        <translation>Ctrl+O</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="166"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Salvar</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="167"/>
+        <source>Ctrl+S</source>
+        <translation>Ctrl+S</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="168"/>
+        <source>E&amp;xit</source>
+        <translation>Sai&amp;r</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="170"/>
+        <source>&amp;Refresh</source>
+        <translation>&amp;Atualizar</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="171"/>
+        <source>Ctrl+R</source>
+        <translation>Ctrl+R</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="147"/>
+        <source>Add variable</source>
+        <translation>Adicionar variável</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="169"/>
+        <source>Ctrl+X</source>
+        <translation>Ctrl+X</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="172"/>
+        <source>&amp;New</source>
+        <translation>&amp;Novo</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_epgeditor.py" line="173"/>
+        <source>Ctrl+N</source>
+        <translation>Ctrl+N</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="537"/>
+        <source>Epigrass</source>
+        <translation>Epigrass</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="559"/>
+        <source>Run Options</source>
+        <translation>Opções de Simulação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="538"/>
+        <source>Model Specification</source>
+        <translation>Especificação do Modelo</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="539"/>
+        <source>Choose</source>
+        <translation>Escolher</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="540"/>
+        <source>Script Name:</source>
+        <translation>Nome do Script:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="541"/>
+        <source>write the name of the your script or press the choose button on the right to select one.</source>
+        <translation>Escreva o nome do seu script ou pressione o botão escolher à direita para selecionar um.</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="542"/>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="543"/>
+        <source>Database Specification</source>
+        <translation>Especificação do Banco de Dados</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="544"/>
+        <source>Host:</source>
+        <translation>Servidor:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="545"/>
+        <source>Enter the port  the server listens to.</source>
+        <translation>Entre a porta à qual servidor responde.</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="546"/>
+        <source>3306</source>
+        <translation>3306</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="547"/>
+        <source>Port:</source>
+        <translation>Porta:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="548"/>
+        <source>Database password for the userid entered</source>
+        <translation>Senha do banco de dados para o usuário indicado</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="549"/>
+        <source>Password:</source>
+        <translation>Senha:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="550"/>
+        <source>Userid:</source>
+        <translation>Usuário:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="551"/>
+        <source>This is the url of your database server.</source>
+        <translation>Esta é a url do seu servidor de banco de dados.</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="552"/>
+        <source>localhost</source>
+        <translation>localhost</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="553"/>
+        <source>This is the userid for accessing the database server</source>
+        <translation>Este é o usuário usado para acessar o banco de dados</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="554"/>
+        <source>Database type:</source>
+        <translation>Tipo do Banco de dados:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="555"/>
+        <source>Select your database type</source>
+        <translation>Selecione o tipo do banco de dados</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="556"/>
+        <source>MySQL</source>
+        <translation>MySQL</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="557"/>
+        <source>SQLite</source>
+        <translation>SQLite</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="558"/>
+        <source>CSV</source>
+        <translation>CSV</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="571"/>
+        <source>Settings</source>
+        <translation>Configurações</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="560"/>
+        <source>Enter your full name. This will be added to the report.</source>
+        <translation>Escreva o seu nome completo. Ele será usado no relatório.</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="561"/>
+        <source>Language</source>
+        <translation>Linguagem</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="562"/>
+        <source>Select the language for the GUI</source>
+        <translation>Selecione a linguagem da interface gráfica</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="563"/>
+        <source>English</source>
+        <translation>Inglês</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="564"/>
+        <source>Brazilian portuguese</source>
+        <translation>Brazilian portuguese</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="565"/>
+        <source>French</source>
+        <translation>Françês</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="567"/>
+        <source>PDF Viewer</source>
+        <translation>Leitor de PDFs</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="568"/>
+        <source>Name</source>
+        <translation>Nome</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="569"/>
+        <source>Enter your preferred text editor</source>
+        <translation>Indique seu editor de texto preferido</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="570"/>
+        <source>Enter the name of your preferred PDF viewer</source>
+        <translation>Entre com o nome do seu visualizador de PDFs preferencial</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="580"/>
+        <source>Utilities</source>
+        <translation>Utilitários</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="572"/>
+        <source>Simulation Status</source>
+        <translation>Status da Simulação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="573"/>
+        <source>Database</source>
+        <translation>Banco de dados</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="574"/>
+        <source>Click here to backup the epigrass database </source>
+        <translation>Clique aqui para fazer backup do banco epigrass</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="575"/>
+        <source>Backup</source>
+        <translation>Backup</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="576"/>
+        <source>Click here for a short description of the epigrass database</source>
+        <translation>Clique aqui para uma breve descrição do banco epigrass</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="577"/>
+        <source>Info</source>
+        <translation>Informação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="578"/>
+        <source>Report</source>
+        <translation>Relatório</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="595"/>
+        <source>Visualization</source>
+        <translation>Visualização</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="581"/>
+        <source>Spread Trees</source>
+        <translation>Árvores de espalhamento</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="582"/>
+        <source>Select a directory with tree-files to build consensus on.</source>
+        <translation>Selecione um diretório com arquivos de árvore para ser utilizados no consenso.</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="583"/>
+        <source>Consensus Tree</source>
+        <translation>Árvores de Consenso</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="584"/>
+        <source>Simulations stored:</source>
+        <translation>Simulações armazenadas:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="585"/>
+        <source>Select a database stored simulation</source>
+        <translation>Selecione uma simulação armazenada no banco de dados</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="586"/>
+        <source>Variable to display:</source>
+        <translation>Variável a ser mostrada:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="587"/>
+        <source>Select a variable to display in the animation</source>
+        <translation>Selecione uma variável para a animação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="588"/>
+        <source>Maps available:</source>
+        <translation>Mapas disponíveis:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="589"/>
+        <source>Select a map</source>
+        <translation>Selecione um mapa</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="590"/>
+        <source>No map</source>
+        <translation>Nenhum mapa</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="591"/>
+        <source>Scan DB</source>
+        <translation>Ler BD</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="592"/>
+        <source>Animation rate</source>
+        <translation>Vel Animação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="593"/>
+        <source>Time steps per second</source>
+        <translation>Passos por segundo</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="594"/>
+        <source>Start animation</source>
+        <translation>Iniciar animação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="596"/>
+        <source>Progress:</source>
+        <translation>Progresso:</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="597"/>
+        <source>Simulation step</source>
+        <translation>Passo da simulação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="598"/>
+        <source>Click here to open the userguide in the web browser</source>
+        <translation>Clique aqui para abrir o guia do usuário no navegador</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="601"/>
+        <source>Click here to start your simulation</source>
+        <translation>Clique aqui para iniciar a simulação</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="602"/>
+        <source>&amp;Run</source>
+        <translation>&amp;Iniciar</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="603"/>
+        <source>Alt+R</source>
+        <translation>Alt+I</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="604"/>
+        <source>Click here to leave Epigrass</source>
+        <translation>Clique aqui para sair do EpiGrass</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="605"/>
+        <source>&amp;Exit</source>
+        <translation>&amp;Sair</translation>
+    </message>
+    <message>
+        <location filename="Ui_cpanel4new.py" line="606"/>
+        <source>Alt+E</source>
+        <translation>Alt+S</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow_Impl</name>
+    <message>
+        <location filename="Epigrass/epigrass.py" line="204"/>
         <source>Syntax Error</source>
         <translation>Erro de Sintaxe</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="206"/>
+        <source>Please check file .epigrassrc for missing %s keyword
+                from section %s </source>
+        <translation>Favor verificar o arquivo .epigrassrc quanto à falta da variável %s
+na Seção %s</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epigrass.py" line="220"/>
         <source>Incomplete Configuration</source>
         <translation>Configuração Incompleta</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="221"/>
+        <source>Please enter a value for %s.</source>
+        <translation>Favor entrar com um valor para %s.</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epigrass.py" line="445"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="237"/>
         <source>Editor or Script not selected</source>
         <translation>Editor ou Script não selecionados</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="239"/>
         <source>Please make sure you have selected both
 an editor and your model&apos;s script.</source>
         <translation>Por favor certifique-se de haver selecionado
 um editor e o script do modelo.</translation>
     </message>
     <message>
-        <source>*.epg</source>
-        <translation>*.epg</translation>
-    </message>
-    <message>
+        <location filename="Epigrass/epigrass.py" line="250"/>
         <source>Select your Model&apos;s Script</source>
         <translation>Selecione o script do seu modelo</translation>
     </message>
     <message>
-        <source>Restore Instructions:</source>
-        <translation>Instruções de Recuperação:</translation>
+        <location filename="Epigrass/epigrass.py" line="252"/>
+        <source>*.epg</source>
+        <translation>*.epg</translation>
     </message>
     <message>
-        <source>Help not available</source>
-        <translation>Ajuda não disponível</translation>
+        <location filename="Epigrass/epigrass.py" line="456"/>
+        <source>Missing Database Password</source>
+        <translation>Falta a senha do banco de dados</translation>
     </message>
     <message>
-        <source>No Report</source>
-        <translation>Relatório não disponível</translation>
+        <location filename="Epigrass/epigrass.py" line="303"/>
+        <source>Please enter password for MySQL database.</source>
+        <translation>Favor entrar com a senha do BD MySQL.</translation>
     </message>
     <message>
-        <source>Could not open the report.
-Make sure you have generated it.</source>
-        <translation>Não foi possível abrir o relatório.
-Certifique-se de tê-lo gerado.</translation>
-    </message>
-    <message>
+        <location filename="Epigrass/epigrass.py" line="395"/>
         <source>Non-local Database Server</source>
         <translation>Banco de Dados Remoto</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="397"/>
+        <source>Currently, the database backup function only
+                works on local database servers.</source>
+        <translation>Atualmente, a função de backup do banco de dados somente funciona em
+                bancos de dados locais.</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epigrass.py" line="404"/>
+        <source>Restore Instructions:</source>
+        <translation>Instruções de Recuperação:</translation>
+    </message>
+    <message>
+        <location filename="Epigrass/epigrass.py" line="409"/>
         <source>The epigrass database has been Backed up
 to a file named &quot;epigrass.sql&quot;.
 This file is in you current working directory.
@@ -388,221 +1060,59 @@ epigrass.sql &gt; mysql
 </translation>
     </message>
     <message>
-        <source>Currently, the database backup function only
-                works on local database servers.</source>
-        <translation>Atualmente, a função de backup do banco de dados somente funciona em
-                bancos de dados locais.</translation>
+        <location filename="Epigrass/epigrass.py" line="442"/>
+        <source>No Report</source>
+        <translation>Relatório não disponível</translation>
     </message>
     <message>
-        <source>Select Directory with Tree Files (epipath*.csv)</source>
-        <translation>Selecione Diretório com Arquivos de árvores (epipath*.csv)</translation>
+        <location filename="Epigrass/epigrass.py" line="444"/>
+        <source>Could not open the report.
+Make sure you have generated it.</source>
+        <translation>Não foi possível abrir o relatório.
+Certifique-se de tê-lo gerado.</translation>
     </message>
     <message>
-        <source>Branch Support</source>
-        <translation>Suporte do ramo</translation>
+        <location filename="Epigrass/epigrass.py" line="457"/>
+        <source>Please enter the password for the MySQL database in the first tab.</source>
+        <translation>Favor entrar com a senha do BD MySQL na primeira tab.</translation>
     </message>
     <message>
-        <source>Enter minimum branch support level to display:</source>
-        <translation>Enter com o nível de suporte mínimo a ser mostrado:</translation>
-    </message>
-    <message>
-        <source>Missing Database Password</source>
-        <translation>Falta a senha do banco de dados</translation>
-    </message>
-    <message>
+        <location filename="Epigrass/epigrass.py" line="503"/>
         <source>Empty Table</source>
         <translation>Tabela vazia</translation>
     </message>
     <message>
+        <location filename="Epigrass/epigrass.py" line="505"/>
         <source>You have selected an empty table.
 Please select another table from the menu.</source>
         <translation>Você selecionou uma tabela vazia.
 Por favor selecione outra tabela.</translation>
     </message>
     <message>
-        <source>Could not open user guide.
-    Please make sure your chosen PDF viewer is installed.</source>
-        <translation>Não foi possível abrir o Guia do usuário.(new line)
-(sp)(sp)(sp)(sp)Por favor certifique-se que o visualizador de PDFs escolhido está instalado.</translation>
+        <location filename="Epigrass/epigrass.py" line="531"/>
+        <source>Select Directory with Tree Files (epipath*.csv)</source>
+        <translation>Selecione Diretório com Arquivos de árvores (epipath*.csv)</translation>
     </message>
     <message>
-        <source>No Map!</source>
-        <translation>Não há Mapa!</translation>
+        <location filename="Epigrass/epigrass.py" line="534"/>
+        <source>Branch Support</source>
+        <translation>Suporte do ramo</translation>
     </message>
     <message>
-        <source>You must select a map for a 2D animation!</source>
-        <translation>Você precisa selecionar um mapa para a animação 2D!</translation>
-    </message>
-    <message>
-        <source>&amp;Retry</source>
-        <translation>Tenta&amp;r de novo</translation>
-    </message>
-    <message>
-        <source>Geocode Variable</source>
-        <translation>Variável Geocódigo</translation>
-    </message>
-    <message>
-        <source>Enter the variable name containing the geocode.</source>
-        <translation>Entre o nome da variável que contém o geocódigo.</translation>
-    </message>
-    <message>
-        <source>Please check file .epigrassrc for missing %s keyword
-                from section %s </source>
-        <translation>Favor verificar o arquivo .epigrassrc quanto à falta da variável %s
-na Seção %s</translation>
-    </message>
-    <message>
-        <source>Please enter a value for %s.</source>
-        <translation>Favor entrar com um valor para %s.</translation>
-    </message>
-    <message>
-        <source>Please enter password for MySQL database.</source>
-        <translation>Favor entrar com a senha do BD MySQL.</translation>
-    </message>
-    <message>
-        <source>Please enter the password for the MySQL database in the first tab.</source>
-        <translation>Favor entrar com a senha do BD MySQL na primeira tab.</translation>
-    </message>
-</context>
-<context>
-    <name>MainWindow</name>
-    <message>
-        <source>Simulation Display</source>
-        <translation>Simulação</translation>
-    </message>
-    <message>
-        <source>Click and drag the nodes around, and zoom with the mouse wheel or the &apos;+&apos; and &apos;-&apos; keys</source>
-        <translation>Clique e arraste para mover os nós, e faça zoom com a roda do mouse ou as teclas &apos;+&apos; e &apos;-&apos;</translation>
-    </message>
-    <message>
-        <source>.EPG Editor</source>
-        <translation>Editor de arquivos .EPG</translation>
-    </message>
-    <message>
-        <source>Editor</source>
-        <translation>Editor</translation>
-    </message>
-    <message>
-        <source>Variable</source>
-        <translation>Variável</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation>Valor</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation>Descrição</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Open a new .epg file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Save file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Texto fonte</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Leave the editor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation>Sair</translation>
-    </message>
-    <message>
-        <source>Viewer</source>
-        <translation>Visualizador</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Ajuda</translation>
-    </message>
-    <message>
-        <source>Usage help</source>
-        <translation>Dicas de uso</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation>Arquivo</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Opções</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Ajuda</translation>
-    </message>
-    <message>
-        <source>F1</source>
-        <translation>F1</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;Sobre</translation>
-    </message>
-    <message>
-        <source>About &amp;Epigrass</source>
-        <translation>Sobre o &amp;Epigrass</translation>
-    </message>
-    <message>
-        <source>Auto-&amp;Refresh</source>
-        <translation>Auto-atualiza&amp;r</translation>
-    </message>
-    <message>
-        <source>&amp;Open .epg File</source>
-        <translation>&amp;Abrir arquivo .epg</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation>Ctrl+O</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Salvar</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation>Ctrl+S</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation>Sai&amp;r</translation>
-    </message>
-    <message>
-        <source>&amp;Refresh</source>
-        <translation>&amp;Atualizar</translation>
-    </message>
-    <message>
-        <source>Ctrl+R</source>
-        <translation>Ctrl+R</translation>
+        <location filename="Epigrass/epigrass.py" line="535"/>
+        <source>Enter minimum branch support level to display:</source>
+        <translation>Enter com o nível de suporte mínimo a ser mostrado:</translation>
     </message>
 </context>
 <context>
     <name>aboutDialog</name>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="92"/>
         <source>About Epigrass</source>
         <translation>Sobre o Epigrass</translation>
     </message>
     <message>
+        <location filename="Epigrass/about.py" line="114"/>
         <source>&lt;b&gt;Epigrass&lt;/b&gt;:
 &lt;b&gt;EPI&lt;/b&gt;demiological 
 &lt;b&gt;G&lt;/b&gt;eo-&lt;b&gt;R&lt;/b&gt;eferenced 
@@ -612,10 +1122,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="107"/>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="111"/>
         <source>&lt;h1&gt;Developers:&lt;/h1&gt;
 Fl&amp;aacute;vio Code&amp;ccedil;o Coelho&lt;br&gt;
 Cl&amp;aacute;udia Torres Code&amp;ccedil;o
@@ -625,10 +1137,12 @@ Fl&amp;aacute;vio Code&amp;ccedil;o Coelho&lt;br&gt;(new line)
 Cl&amp;aacute;udia Torres Code&amp;ccedil;o(new line)</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="112"/>
         <source>Authors</source>
         <translation>Autores</translation>
     </message>
     <message>
+        <location filename="Epigrass/about.py" line="129"/>
         <source>&lt;h2&gt;Translations:&lt;/h2&gt;
 &lt;h3&gt;French:&lt;/h3&gt;
 Yann Chemin
@@ -638,26 +1152,32 @@ Yann Chemin
 Yann Chemin(new line)</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="119"/>
         <source>Acknowledgements</source>
         <translation>Agradecimentos</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="120"/>
         <source>To use Epigrass you have to agree with this license</source>
         <translation>Para utilizar o Epigrass você tem que aceitar esta licença</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="462"/>
         <source>License</source>
         <translation>Licença</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="463"/>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="464"/>
         <source>Alt+C</source>
         <translation>Alt+F</translation>
     </message>
     <message>
+        <location filename="Epigrass/about.py" line="471"/>
         <source>         GNU GENERAL PUBLIC LICENSE
               Version 2, June 1991
 
@@ -1002,6 +1522,7 @@ Public License instead of this License.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about.py" line="107"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1009,6 +1530,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="101"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1021,6 +1543,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
+        <location filename="Epigrass/Ui_about.py" line="122"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1029,6 +1552,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about.py" line="129"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1038,6 +1562,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about.py" line="135"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1045,6 +1570,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="106"/>
         <source>&lt;span style=&quot;font-weight: bold;&quot;&gt;This is Epigrass version
 1.5.0&lt;br&gt;
 &lt;br&gt;
@@ -1053,6 +1579,7 @@ More information about Epigrass can be found at the epigrass &lt;a
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="about4.ui" line="169"/>
         <source><byte value="x9"/><byte value="x9"/>    GNU GENERAL PUBLIC LICENSE
 <byte value="x9"/><byte value="x9"/>       Version 2, June 1991
 
@@ -1397,6 +1924,7 @@ Public License instead of this License.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Epigrass/Ui_about4.py" line="461"/>
         <source>            GNU GENERAL PUBLIC LICENSE
                Version 2, June 1991
 
@@ -1739,6 +2267,21 @@ library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 </source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Epigrass/Ui_about4.py" line="118"/>
+        <source>&lt;h2&gt;Translations:&lt;/h2&gt;
+&lt;h3&gt;French:&lt;/h3&gt;
+Yann Chemin
+&lt;h3&gt;Spanish:&lt;/h3&gt;
+Naco Serrano
+</source>
+        <translation>&lt;h2&gt;Traduções:&lt;/h2&gt;￼
+&lt;h3&gt;Francês:&lt;/h3&gt;￼
+Yann Chemin￼
+&lt;h3&gt;Espanhol:&lt;/h3&gt;￼
+Naco Serrano
+</translation>
     </message>
 </context>
 </TS>

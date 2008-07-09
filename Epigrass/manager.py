@@ -992,12 +992,12 @@ class simulate:
                     j.transportDtoS()
 ##                self.outToODb(self.modelName,mode='p')
                 if self.gui:
-                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+#                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
-                    self.gui.RT.mutex.lock()
-                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
-                    self.gui.RT.mutex.unlock()
+#                    self.gui.RT.mutex.lock()
+#                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+#                    self.gui.RT.mutex.unlock()
                 g.simstep += 1
         else:
             for n in xrange(iterations):

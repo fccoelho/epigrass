@@ -4,7 +4,6 @@
 Using Epigrass
 **************
 
-
 To simulate an epidemic process in Epigrass, the user needs to have in hand at least three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).
 
 Data
@@ -54,7 +53,7 @@ X Y City   Pop     Geocode Vac  Temp
 = = =====  ======= ======= ==== ====
 
 
-During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  *N*; while the extra columns (those beyond the geocode) are stored in a tuple named *{values*. For example, for the city  *N1*, we have  *N = 1000000* and  *values=[0.9,32] *. During model specification, we may use  *N* to indicate the population size and/or we can use **values[0]** to indicate the level of vaccination of that city and *values[1]* to indicate the temperature.
+During the simulation, each site object receives these informations and store them in appropriate variables that can be used later during model specification. Population is stored in the variable  *N*; while the extra columns (those beyond the geocode) are stored in a tuple named *{values*. For example, for the city  *N1*, we have  *N = 1000000* and  *values=[0.9,32]*. During model specification, we may use  *N* to indicate the population size and/or we can use *values[0]* to indicate the level of vaccination of that city and *values[1]* to indicate the temperature.
 
 It is up to the user, to know what means the elements of the tuple *values*. Note that the first element of the tuple has index 0,the second one has index 1 and so on.
 
@@ -129,7 +128,7 @@ For the beginner, we suggest him/her to take a look at the .epg files in the dem
 Some hints to be successful when editing your   :file:`.epg`:
 
 
-* All comments in the script are preceeded by the symbol \#. These comments may be edited by the user as he/she wishes and new lines may be added at will. Don't forget, however, to place the symbol \# in every line corresponding to a comment.
+* All comments in the script are preceded by the symbol \#. These comments may be edited by the user as he/she wishes and new lines may be added at will. Don't forget, however, to place the symbol \# in every line corresponding to a comment.
 * The script is divided into a few parts. These parts have capital letter titles within brackets. Don't touch them!
 * Don't remove any line that is *not* a comment. See below how to appropriately edit these command lines.
 
@@ -142,12 +141,11 @@ Let's take a look now at each part of a script (this is the script  :file:`.epg`
 
 Part 1: THE WORLD
 -----------------
-.. highlight:: python
+
 
 The first section of the script is titled: THE WORLD. An example of its content is shown::
 
 
-    #=========================================================#
     shapefile = ['riozonas_LatLong.shp','nome_zonas','zona_trafe']
     edges = edges.csv
     sites = sites.csv
@@ -161,7 +159,7 @@ where,
 **shapefile**
     Is a list with 3 elements: the first is  the path, relative to the working directory, of the shapefile file; the second  is the variable, in the shapefile, which contains the names of the localities (polygons of the map); the third and last is the variable, in the shapefile, which contains the geocode of the localities. If you don't have a map for you simulation, leave the list empty: *location = []* ).
 **edges**
-    This is the name of the .CSV file containing the list of edges and their attributes.
+    This is the name of the .CSV (comma-separated-values) file containing the list of edges and their attributes.
 **sites**
     This is the name of the .CSV file containing the list of sites and their attributes.
 **encoding**
@@ -178,8 +176,7 @@ Part 2: EPIDEMIOLOGICAL MODEL
 This is the main part of the script. It defines the epidemiological model to be run.
 The script reads::
 
-
-    #=========================================================#
+ 
 
     modtype = SIR
 
@@ -201,7 +198,7 @@ SEIR with partial immunity for all       *SEIpR*   *SEIpR_s*
 SIR with immunity wane                   *SIRS*    *SIRS_s*
 ======================================== ========= ===========
 
-A description of these models can be found in the chapter *Epidemiological modeling*. The stochastic models use *Poisson* distribution as default for the number of new cases (*L_{t+1}*). Besides these, the user may define his/her own model and access by the protect word Custom.
+A description of these models can be found in the chapter *Epidemiological modeling*. The stochastic models use *Poisson* distribution as default for the number of new cases (*L(t+1)*). Besides these, the user may define his/her own model and access by the protect word Custom.
 
 Part 3: MODEL PARAMETERS
 ------------------------
@@ -212,14 +209,19 @@ The epidemic model is defined by variables and parameter which require initializ
 
 
     #==============================================================#
-    #  They can be specified as constants or as functions of global or
-    #  site-specific variables. these site-specific variables, are provided
-    #  in the sites file. All the numbers given after the geocode (4th column)
-    #  are collected into the values tuple.
-    # Examples:
-    # beta = 0.001
-    # beta=values[0] #assigns the first element of values to beta
-    # beta=0.001*values[1]
+	#  They can be specified as constants or as functions of global or 
+	#  site-specific variables. Site-specific variables are provided
+	#  in the sites .csv file. In this file, all columns after the 4th
+	#  are collected into a values tuple, which can be referenced here 
+	#  as values[0], values[1], values[2], etc.
+	#   Examples:
+	#   beta = 0.001
+	#   beta=values[0] #assigns the first element of values to beta 
+	#   beta=0.001*values[1]
+	#   beta=0.001*N  # N is a global name for total site population
+	# Currently, Epigrass requires that parameters beta, alpha, e, r, delta, B, w, p
+	# be present in the .epg even if they will not be used. Do not erase these lines. 
+	# Just disregard them if they are not useful to you. 
 
     beta = 0.4   #transmission coefficient (contact rate * transmissibility)
     alpha = 1  # clumping parameter
@@ -232,10 +234,10 @@ The epidemic model is defined by variables and parameter which require initializ
 
 
 
-These are the model parameters, as described in \ref{Table:symbols}. Not all parameters are necessary for all models. For example, *e* is only required for SEIR-like models. Don't
+These are the model parameters. Not all parameters are necessary for all models. For example, *e* is only required for SEIR-like models. Don't
 remove the line, however because that will cause an error. We recommend that, if the parameter is not necessary, just add a comment after it as a reminder that it is not being used by the model.
 
-In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named *values* and can be referenced in the order they appear. I.e., the first element of the tuple is values[0], the second element is values[1], the third element is values[2] and so on.
+In some cases, one may wish to assign site-specific parameters. For example, transmission rate may be different between localities that are very distant and are exposed to different climate. In this case site specific variables can be added as new columns to the site file. All columns after the geocode are packed into a tuple named *values* and can be referenced in the order they appear. I.e., the first element of the tuple is *values[0]*, the second element is *values[1]*, the third element is *values[2]* and so on.
 
 Part 4: INITIAL CONDITIONS
 
@@ -260,7 +262,7 @@ In this part of the script, the initial conditions are defined. Here, the number
 
 Here, *N* is the total population in a site (as in the datafile for sites). In this example, we set all localities to the same initial conditions (all individuals susceptible) and use an event (see below) to introduce an infectious individual in a locality. The number of recovered individuals is implicit, as *R = N-(S+E+I)*
 
-Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site datafile and these columns are referenced to using the *values* tuple explained above.
+Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site data file and these columns are referenced to using the *values* tuple explained above.
 
 Part 5: EPIDEMIC EVENTS
 -----------------------
@@ -297,18 +299,21 @@ The events currently implemented are:
 Part 6: TRANSPORTATION MODEL
 ----------------------------
 
-Here, there are two options regarding the movement of infected individuals from site to site (through the edges). If *stochastic = 0*, the process is simulated deterministically. The number of infected passengers commuting through an edge is a fraction *p* of the infected population that is traveling. *p* is calculated as $\frac{total passengers}{total population}$ .
+Here, there are two options regarding the movement of infected individuals from site to site (through the edges). If *stochastic = 0*, the process is simulated deterministically. The number of infected passengers commuting through an edge is a fraction *p* of the infected population that is traveling. *p* is calculated as *total passengers/total population*.
 
 If *stochastic = 1*, the number of passengers is sampled from a Poisson distribution with parameter given by the expected number of travelling infectives (calculated as above)::
 
 
-    #=========================================================#
-    # If doTransp = 1 the transportation dynamics will be
-    # included. Use 0 here only for debugging purposes.
-    doTransp = 1
+	#=========================================================#
+	# If doTransp = 1 the transportation dynamics will be
+	# included. Use 0 here only for debugging purposes.
+	doTransp = 1
 
-    # Mechanism can be stochatic (1) or deterministic(0).
-    stochastic = 1
+	# Mechanism can be stochatic (1) or deterministic(0).
+	stochastic = 1
+	#Average speed of transportation system in km per time step. Enter 0 for instantaneous travel.
+	#Distance unit must be the same specified in edges files
+	speed =0 #1440  km/day -- equivalent to 60 km/h
 
 
 
@@ -319,45 +324,45 @@ Part 7: SIMULATION AND OUTPUT
 
 Now it is time to define some final operational variables for the simulation::
 
-    #==============================================================#
-    # Number of steps
-    steps = 50
+	#==============================================================#
+	# Number of steps
+	steps = 50
 
-    # Output dir. Must be a full path. If empty the output will be generated on the
-    # same path as the model script.
-    outdir =
+	# Output dir. Must be a full path. If empty the output will be generated on the
+	# same path as the model script.
+	outdir =
 
-    # Output file
-    outfile = simul.dat
+	# Output file
+	outfile = simul.dat
 
-    # Database Output
-    # MySQLout can be 0 (no database output) or 1
-    MySQLout = 1
+	# Database Output
+	# MySQLout can be 0 (no database output) or 1
+	MySQLout = 1
 
-    # Graphical outputs
-    draw map = 0
 
-    # Report Generation
-    # The variable report can take the following values:
-    # 0 - No report is generated.
-    # 1 - A network analysis report is generated in PDF Format.
-    # 2 - An epidemiological report is generated in PDF Format.
-    # 3 - A full report is generated in PDF Format.
-    # siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
-    report = 0
-    siteRep = []
+	# Report Generation
+	# The variable report can take the following values:
+	# 0 - No report is generated.
+	# 1 - A network analysis report is generated in PDF Format.
+	# 2 - An epidemiological report is generated in PDF Format.
+	# 3 - A full report is generated in PDF Format.
+	# siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
+	report = 0
+	siteRep = []
 
-    #Replicate runs
-    #If replicas is set to an integer(n) larger than zero, the model will be run n times and the results will be con-
-    #solidated before storing.
-    #Replicate mode automatically turn off report and batch options.
-    Replicas = 10
-    RandSeed = 2
-    #Batch Run
-    #  list other scripts to be run in after this one. don't forget the extension .epg
-    #  model scripts must be in the same directory as this file or provide full path.
-    #  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
-    Batch = []#['sarsDF.epg','sarsPA.epg','sarsRS.epg']
+	# Replicate runs
+	# If replicas is set to an integer(n) larger than zero, the model will be run
+	# n times and the results will be consolidated before storing.
+	# RandSeed = 1: the seed will be randomized on each replicate
+	# RandSeed = 2: seeds are taken sequentially from the site's file
+	# Note: Replicate mode automatically turn off report and batch options. 
+	Replicas = 10
+	RandSeed = 2
+	#Batch Run
+	#  list other scripts to be run in after this one. don't forget the extension .epg
+	#  model scripts must be in the same directory as this file or provide full path.
+	#  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
+	Batch = []#['sarsDF.epg','sarsPA.epg','sarsRS.epg']
 
 
 
@@ -370,7 +375,7 @@ where,
 **outfile**
     .csv filename that can be imported into R as a dataframe. This .csv file contains the simulated timeseries for all nodes.
 **MySQLout**
-    Use *MySQLout = 1* if simulated time series are to be stored in MySQL database. Time series of *L*, *S*, *E*, and *I*, from simulations, are stored in a MySQL database named \emph{epigrass}. The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of multiple runs from the same model get stored independently.
+    Use *MySQLout = 1* if simulated time series are to be stored in MySQL database. Time series of *L*, *S*, *E*, and *I*, from simulations, are stored in a MySQL database named *epigrass*. The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of multiple runs from the same model get stored independently.
 **Batch=[]**
     Script files included in this list are executed after the currently file is finished.
 
@@ -378,19 +383,21 @@ where,
 The Graphical User Interface(GUI)
 =================================
 
-Epigrass comes with a simple but effective GUI(figure \ref{fig:gui}), that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing \texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (:file:`.csv` and   :file:`.epg` files).
+Epigrass comes with a simple but effective GUI, that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing \texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (:file:`.csv` and   :file:`.epg` files).
 
 All the information that is entered via the GUI gets  stored in a hidden file called \texttt{.epigrassrc} stored in the home folder of the user. Every time the GUI is invoked, the data stored in the \texttt{.epigrassrc} file is used to fill the forms in the GUI. The gui is designed as a tabbed notebook with four tabs (Run Options, Settings, Utilities, and Visualization).
 
-At the bottom of the Gui there are three buttons \texttt{Help}, \texttt{Start} and \texttt{Exit}. Their functions will be explained below. Immediately above the \texttt{Run} and \texttt{Exit} buttons, there is a small numeric display that will display the simulation progress after it has been started.
+At the bottom of the Gui there are three buttons :guilabel:`Help`, :guilabel:`Start` and :guilabel:`Exit`. Their functions will be explained below. Immediately above the :guilabel:`Run` and :guilabel:`Exit` buttons, there is a small numeric display that will display the simulation progress after it has been started.
 
-.. image:: epigrass1.png
+.. figure:: epigrass1.png
+
+	First tab of Epigrass GUI. This is where you setup your database output settings and the model to be run.
 
 Run Options
 -----------
-The first tab of the GUI(figure \ref{fig:gui}), contains a number of variables that, with the exception of the model script filename, should remain the same for most simulations you are going to run.
+The first tab of the GUI, contains a number of variables that, with the exception of the model script filename, should remain the same for most simulations you are going to run.
 
-On the top of the first tab is a text box to enter the file name of the model script (\texttt{something.epg}). By clicking on the :guilabel:`Choose` button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the \texttt{Edit} button below to edit the script file with your favorite text editor.
+On the top of the first tab is a text box to enter the file name of the model script (:file:`something.epg`). By clicking on the :guilabel:`Choose` button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the :guilabel:`Edit` button below to edit the script file with your favorite text editor.
 
 Below, you can enter details about the MySQL database that will store the output of your simulations. Here you can enter the server IP, port, user and password. On the first time you run the GUI these input boxes will be filled with the default values for these variables (server on localhost, port 3306, user epigrass and password epigrass)
 
@@ -401,7 +408,9 @@ On the settings page, you can enter personal details such as user name (To be us
 
 On this tab, the language of the GUI can also be selected from a list of available translations. The effects of language changes will only take place when the next time the GUI is started.
 
-.. image:: epigrass2.png
+.. figure:: epigrass2.png
+
+	Settings tab of the Epigrass GUI. This is wher you configure the behavior os the GUI. Values set here will be remembered on future runs.
 
 Utilities
 ---------
@@ -414,18 +423,41 @@ On the right, there is a button for backing up the data base and another for ope
 Visualization
 -------------
 
-The fourth tab of the GUI is the visualization Tab. This tab was designed for playing animations of any simulation data that is stored in the database. Pressin the \texttt{Scan DB} button, causes the available tables in the  epigrass database to be listed in the \texttt{Simulations stored} combo box. The user can then select one of these simulations to visualize.
+The fourth tab of the GUI is the visualization Tab. This tab was designed for playing animations of any simulation data that is stored in the database. Pressin the :guilabel:`Scan DB` button, causes the available tables in the  epigrass database to be listed in the *Simulations stored* combo box. The user can then select one of these simulations to visualize. Once the simulation is selected the *Variable to display* combo-box will fill-up with the variables in the table devoted to the simulation. Select a variable.
 
-Once the \texttt{Start animation} button is pressed, a graphical display window pops up, and the simulation is replayed at a speed given by the frame rate set by the user  or the maximum speed of the computer (whichever is smaller). In the animation, the nodes of the network are represented by boxes whose volume is given by the number of infected at each node. The node colors are as following: Green for uninfected nodes, and red to blue for infected nodes. bright red for for first infected node with the nodes becoming infected later assuming a color with progressively more blue.
+.. figure:: epigrass4.png
+
+	Visualization tab of the Epigrass GUI. The simulations and varibales to inspect are chosen here.
+
+Once the :guilabel:`Start animation` button is pressed, a graphical display window pops up, and the simulation results will be displayed as a map or a graph (if no map was specified at the :file:`.epg`). The animation can be replayed or moved to any timestep by dragging on the slider under the display widget. When the user moved the mouse over a polygon in the map(or node in the graph) its name and geocode appears as a tooltip. Polygons (nodes) can be selected with the mouse to display their full time series in the plot below the top display widget.
+
+.. figure:: simuview.png
 
 
-Maps can also be selected from the \texttt{Maps availabled combo box} to be used as background for the network display. The maps must be in the GRASS ascii vectorial format and have coordinates compatible with those given to the nodes of the simulation.
-
-.. image:: epigrass4.png
 
 Operation
 ---------
 
-After all the information has been entered and checked on the GUI, you can press the :guilabel:`Run` button to start the simulation or the :guilabel`Exit` button. When the :guilabel:`Run` button is pressed, the :file:`.epigrassrc` file is updated with all the information entered in the gui. If the :guilabel:`Exit` button is pressed, all information entered since the last time the :guilabel:`Run` button was pressed is lost.
+For running simulations, after all the information has been entered and checked on the first tab of the GUI, you can press the :guilabel:`Run` button to start the simulation or the :guilabel`Exit` button. When the :guilabel:`Run` button is pressed, the :file:`~/.epigrassrc` file is updated with all the information entered in the GUI. If the :guilabel:`Exit` button is pressed, all information entered since the last time the :guilabel:`Run` button was pressed is lost.
 
+Epigrass also allows running simulation straight from the command line, with the **epirunner** executable. all you have to do is::
+
+	$ epirunner mymodel.epg
+
+and the model will executed with the settings specified in the :file:`~/.epigrassrc` file. for help with *epirunner*, type::
+
+	$ epirunner -h
+	Usage: epirunner [options] your_model.epg
+
+	Options:
+	  --version             show program's version number and exit
+	  -h, --help            show this help message and exit
+	  -b <mysql|sqlite|csv>, --backend=<mysql|sqlite|csv>
+							Define which datastorage backend to use
+	  -u DBUSER, --dbusername=DBUSER
+							MySQL user name
+	  -p DBPASS, --password=DBPASS
+							MySQL password for user
+	  -H DBHOST, --dbhost=DBHOST
+							MySQL hostname or IP address
 

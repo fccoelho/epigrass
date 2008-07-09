@@ -85,7 +85,7 @@ Node objects, in an Epigrass model, contain well-mixed population dynamic models
 
 .. index::
     single: models;epidemiological models
-	simgle: models;network models
+	single: models;network models
 
 Network models are specified in a ASCII-text script file (Called a :file:`.epg` file). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.
 

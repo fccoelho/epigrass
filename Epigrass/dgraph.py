@@ -583,6 +583,8 @@ class BaseMap(object):
         else:
             print "shapefile %s not found in %s"%(fname, os.getcwd())
 
+    
+
 
     def Reader(self, fname):
         """
@@ -786,7 +788,7 @@ class QtNode(BaseNode):
         
     def mousePressEvent(self, event):
         if self.selected:
-            print "unselect"
+            #print "unselect"
             self.selected = False
             if self.graph.display.timeseries:
                 col = self.graph.display.jet(self.graph.display.timeseries[self.graph.display.step][self.geocode])
@@ -797,7 +799,7 @@ class QtNode(BaseNode):
             self.curve.detach()
             self.graph.display.qwtPlot.replot()
         else: 
-            print "select"
+            #print "select"
             self.selected = True
 #            print self.isSelected()
             self.fillColor = QtGui.QColor(0, 255, 0)

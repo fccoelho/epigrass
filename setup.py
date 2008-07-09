@@ -6,14 +6,16 @@ from glob import glob
 #from distutils.core import setup
 
 demos = glob('demos/*')
-demos.remove('demos/CVS')
+try:
+    demos.remove('demos/CVS')
+except: pass
 
 setup(name='epigrass',
     version='2.0a1',
     author = 'Flavio Codeco Coelho, Claudia Torres Codeco',
-    author_email = 'fccoelho@fiocruz.br',
+    author_email = 'fccoelho@gmail.com',
     maintainer = 'Flavio Codeco Coelho',
-    maintainer_email = 'fccoelho@fiocruz.br',
+    maintainer_email = 'fccoelho@gmail.com',
     url = 'http://epigrass.sourceforge.net',
     description = 'Epidemiological Geo-Referenced Analysis and Simulation System',
     long_description = 'EpiGrass is a simulator of epidemics over networks.  Its is a scientific tool created for simulations and scenario analysis in Network epidemiology.',
@@ -32,5 +34,5 @@ setup(name='epigrass',
 
     include_package_data = True,
     package_data = {'':['INSTALL','README','COPYING','epigrass.desktop']},
-    data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/userguide.pdf']),('/usr/share/applications',['epigrass.desktop'])]
+    data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/build/latex/Epigrass.pdf']),('/usr/share/applications',['epigrass.desktop'])]
     )
