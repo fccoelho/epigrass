@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-04, 17:54:19 -->
+<!-- Saved: 2008-07-11, 15:36:16 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -29,10 +29,6 @@
     <Source>
       <Dir>Epigrass</Dir>
       <Name>report.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>about.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
@@ -67,14 +63,6 @@
     </Source>
     <Source>
       <Name>CustomModel.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_cpanel.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_about.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
@@ -116,10 +104,6 @@
     </Source>
     <Source>
       <Dir>Epigrass</Dir>
-      <Name>Ui_cpanel4.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
       <Name>manager.py</Name>
     </Source>
     <Source>
@@ -153,16 +137,7 @@
   </Sources>
   <Forms>
     <Form>
-      <Name>cpanel.ui</Name>
-    </Form>
-    <Form>
-      <Name>about.ui</Name>
-    </Form>
-    <Form>
       <Name>about4.ui</Name>
-    </Form>
-    <Form>
-      <Name>cpanel4.ui</Name>
     </Form>
     <Form>
       <Name>epgeditor.ui</Name>
@@ -176,22 +151,28 @@
   </Forms>
   <Translations>
     <Translation>
-      <Name>epigrass_fr.qm</Name>
+      <Dir>Epigrass</Dir>
+      <Name>epigrass_es.qm</Name>
     </Translation>
     <Translation>
-      <Name>epigrass_fr.ts</Name>
-    </Translation>
-    <Translation>
-      <Name>manager_pt_BR.qm</Name>
-    </Translation>
-    <Translation>
-      <Name>manager_pt_BR.ts</Name>
-    </Translation>
-    <Translation>
+      <Dir>Epigrass</Dir>
       <Name>epigrass_es.ts</Name>
     </Translation>
     <Translation>
-      <Name>epigrass_es.qm</Name>
+      <Dir>Epigrass</Dir>
+      <Name>epigrass_fr.qm</Name>
+    </Translation>
+    <Translation>
+      <Dir>Epigrass</Dir>
+      <Name>epigrass_fr.ts</Name>
+    </Translation>
+    <Translation>
+      <Dir>Epigrass</Dir>
+      <Name>manager_pt_BR.qm</Name>
+    </Translation>
+    <Translation>
+      <Dir>Epigrass</Dir>
+      <Name>manager_pt_BR.ts</Name>
     </Translation>
   </Translations>
   <Resources>

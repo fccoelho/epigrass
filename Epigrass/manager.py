@@ -242,10 +242,10 @@ class simulate:
                     for i in self.vaccinate:
                         if int(o.geocode) == i[0]:
                             o.vaccination = [i[1],float(i[2])]
-            if self.quarantine:
-                for i in self.quarantine:
-                    if int(o.geocode) == i[0]:
-                        o.quarantine == i[1:]
+#            if self.quarantine:
+#                for i in self.quarantine:
+#                    if int(o.geocode) == i[0]:
+#                        o.quarantine == i[1:]
 
             if self.seed:
                 #print type(o.geocode), type(self.seed[0])

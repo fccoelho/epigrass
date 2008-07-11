@@ -160,7 +160,7 @@ class MapWindow(Ui_Form):
         """
         #Setup the Map
         self.M = Map(fname=filename,display=self, namefield=namefield, geocfield=geocfield)
-        self.server.map = self.M
+#        self.server.map = self.M
         xmin,ymin = self.M.xmin, self.M.ymin
         xmax,ymax = self.M.xmax, self.M.ymax
         xxs = (xmax-xmin)*1.1 #percentage of extra space

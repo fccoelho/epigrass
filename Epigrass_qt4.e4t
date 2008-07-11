@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.1.dtd">
 <!-- eric4 tasks file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-04, 17:54:19 -->
+<!-- Saved: 2008-07-11, 15:31:47 -->
 <Tasks version="4.1">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: check this connection string</Summary>
@@ -38,9 +38,45 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: the animation rate is not working....</Summary>
+    <Description></Description>
+    <Created>2008-07-05, 17:46:23</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>epiplay.py</Name>
+      </Filename>
+      <Linenumber>171</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: move this import to the graph level</Summary>
+    <Description></Description>
+    <Created>2008-07-09, 11:49:40</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>simobj.py</Name>
+      </Filename>
+      <Linenumber>402</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:19:29</Created>
+    <Created>2008-07-11, 09:47:39</Created>
+    <Resource>
+      <Filename>
+        <Dir>Epigrass</Dir>
+        <Name>dgraph.py</Name>
+      </Filename>
+      <Linenumber>474</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
+    <Description></Description>
+    <Created>2008-07-11, 09:47:39</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
@@ -50,75 +86,39 @@
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
-    <Description></Description>
-    <Created>2008-07-04, 16:19:29</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>dgraph.py</Name>
-      </Filename>
-      <Linenumber>547</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:19:29</Created>
+    <Created>2008-07-11, 09:47:39</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>dgraph.py</Name>
       </Filename>
-      <Linenumber>687</Linenumber>
+      <Linenumber>653</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: find out why replay function does not runright after regular run</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:41:31</Created>
+    <Created>2008-07-11, 15:31:42</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>epigrass.py</Name>
       </Filename>
-      <Linenumber>315</Linenumber>
+      <Linenumber>320</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
     <Description></Description>
-    <Created>2008-07-04, 16:41:31</Created>
+    <Created>2008-07-11, 15:31:42</Created>
     <Resource>
       <Filename>
         <Dir>Epigrass</Dir>
         <Name>epigrass.py</Name>
       </Filename>
-      <Linenumber>479</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: move this import to the graph level</Summary>
-    <Description></Description>
-    <Created>2008-07-04, 16:55:55</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>simobj.py</Name>
-      </Filename>
-      <Linenumber>401</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: the animation rate is not working....</Summary>
-    <Description></Description>
-    <Created>2008-07-04, 17:50:46</Created>
-    <Resource>
-      <Filename>
-        <Dir>Epigrass</Dir>
-        <Name>epiplay.py</Name>
-      </Filename>
-      <Linenumber>171</Linenumber>
+      <Linenumber>484</Linenumber>
     </Resource>
   </Task>
 </Tasks>

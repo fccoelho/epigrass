@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file '/home/flavio/Documents/Projetos/Epigrass/Epigrass-devel-qt4/epgeditor.ui'
 #
-# Created: Tue Nov  6 15:50:08 2007
-#      by: PyQt4 UI code generator 4.3
+# Created: Fri Jul 11 17:40:29 2008
+#      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,9 +13,10 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,505,732).size()).expandedTo(MainWindow.minimumSizeHint()))
-        MainWindow.setWindowIcon(QtGui.QIcon("egicon.png"))
+        MainWindow.setWindowIcon(QtGui.QIcon(":/egicon.png"))
 
         self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setGeometry(QtCore.QRect(0,31,505,673))
         self.centralwidget.setObjectName("centralwidget")
 
         self.vboxlayout = QtGui.QVBoxLayout(self.centralwidget)
@@ -25,6 +26,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName("tabWidget")
 
         self.tab = QtGui.QWidget()
+        self.tab.setGeometry(QtCore.QRect(0,0,485,621))
         self.tab.setObjectName("tab")
 
         self.vboxlayout1 = QtGui.QVBoxLayout(self.tab)
@@ -54,6 +56,7 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab,"")
 
         self.tab_2 = QtGui.QWidget()
+        self.tab_2.setGeometry(QtCore.QRect(0,0,485,621))
         self.tab_2.setObjectName("tab_2")
 
         self.vboxlayout2 = QtGui.QVBoxLayout(self.tab_2)
@@ -65,12 +68,14 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_2,"")
 
         self.help_tab = QtGui.QWidget()
+        self.help_tab.setGeometry(QtCore.QRect(0,0,485,621))
         self.help_tab.setObjectName("help_tab")
 
         self.vboxlayout3 = QtGui.QVBoxLayout(self.help_tab)
         self.vboxlayout3.setObjectName("vboxlayout3")
 
         self.helpBrowser = QtGui.QTextBrowser(self.help_tab)
+#        self.helpBrowser.setSource(QtCore.QUrl("file:///"))
         self.helpBrowser.setObjectName("helpBrowser")
         self.vboxlayout3.addWidget(self.helpBrowser)
         self.tabWidget.addTab(self.help_tab,"")
@@ -78,7 +83,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0,0,505,38))
+        self.menubar.setGeometry(QtCore.QRect(0,0,505,31))
         self.menubar.setObjectName("menubar")
 
         self.menuFile = QtGui.QMenu(self.menubar)
@@ -89,6 +94,7 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menubar)
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setGeometry(QtCore.QRect(0,704,505,28))
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
@@ -132,7 +138,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Help.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -172,6 +178,7 @@ class Ui_MainWindow(object):
         self.action_New.setText(QtGui.QApplication.translate("MainWindow", "&New", None, QtGui.QApplication.UnicodeUTF8))
         self.action_New.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+N", None, QtGui.QApplication.UnicodeUTF8))
 
+import epigrass_rc
 
 
 if __name__ == "__main__":

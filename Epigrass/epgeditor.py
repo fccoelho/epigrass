@@ -9,15 +9,15 @@ from Epigrass.Ui_epgeditor import Ui_MainWindow
 from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
 import ConfigParser
 import StringIO
+import epigrass_rc
 
 class Editor(QtGui.QMainWindow,Ui_MainWindow):
     def __init__(self, epgfile):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
         QtCore.QObject.connect(self.exitButton,QtCore.SIGNAL("clicked()"),self.close)
-
         self.editing = None
-        self.helpBrowser.setSource(QtCore.QUrl("HelpEpg.html"))
+        self.helpBrowser.setSource(QtCore.QUrl(":/HelpEpg.html"))
         self.cp = self.fillTree(epgfile)
 
     def checkScript(self,  cp):

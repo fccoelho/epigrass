@@ -55,8 +55,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         else: lang = ''
         tr = QtCore.QTranslator(app)
         loadLang(app,tr,lang)
-        #MainPanel.setupUi(self)
-        #MainPanel.__init__(self,parent,name,fl)
+       
         # Overload connections
         self.connect(self.editButton,QtCore.SIGNAL("released()"),self.editScript)
         self.connect(self.chooseButton,QtCore.SIGNAL("released()"),self.chooseScript)
@@ -188,6 +187,8 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
             self.langCombo.setCurrentIndex(1)
         elif self.conf['settings.language'] == 'fr':
             self.langCombo.setCurrentIndex(2)
+        elif self.conf['settings.language'] == 'es':
+            self.langCombo.setCurrentIndex(3)
         else:
             self.langCombo.setCurrentIndex(0)
         try:
@@ -282,6 +283,8 @@ an editor and your model's script."""),
             self.conf['settings.language'] = 'pt_BR'
         elif int(self.langCombo.currentIndex()) == 2:
             self.conf['settings.language'] = 'fr'
+        elif int(self.langCombo.currentIndex()) == 3:
+            self.conf['settings.language'] = 'es'
         else:
             self.conf['settings.language'] = 'en'
     
@@ -306,10 +309,11 @@ an editor and your model's script."""),
             self.sim = S = simulate(fname=self.conf['model.script'],host=self.conf['database.host'],port=int(self.conf['database.port']),
                         db='epigrass',user=self.conf['database.user'], password=str(self.pwEdit.text()),backend=str(self.dbType.currentText()).lower())
             S.gui = self
-            self.openGraphDisplay(S.shapefile[0], S.shapefile[1],S.shapefile[2] )
+#            if S.shapefile:
+#                self.openGraphDisplay(S.shapefile[0], S.shapefile[1],S.shapefile[2] )
             
             self.RT = RunThread(S)
-            QtCore.QObject.connect(self.RT,QtCore.SIGNAL("drawStep"), self.graphDisplay.drawStep)
+#            QtCore.QObject.connect(self.RT,QtCore.SIGNAL("drawStep"), self.graphDisplay.drawStep)
             if not S.replicas:
                 self.RT.start()
                 #FIXME: find out why replay function does not runright after regular run

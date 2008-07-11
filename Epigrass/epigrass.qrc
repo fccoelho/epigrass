@@ -1,0 +1,6 @@
+ <!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>egicon.png</file>
+     <file>HelpEpg.html</file>
+ </qresource>
+ </RCC>

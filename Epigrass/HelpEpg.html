@@ -1,0 +1,177 @@
+<h1>
+  EPIGRASS -.epg file Definition
+</h1>
+The .epg file defines the epidemic model and the parameters to be used by EPIGRASS.
+It can be edited by the user directly, by means of a text editor, or using the .epg editor.
+<br><br>
+<h2>
+  Basic structure of a .epg file:
+</h2>
+The .epg is divided into seven sections: 
+<br>
+<ol>
+   <li> <A href="#world">THE WORLD</A> </li>
+   <li> <A href="#epim">EPIDEMIOLOGICAL MODEL</A> </li>
+   <li> <A href="#param">MODEL PARAMETERS</A> </li>
+   <li> <A href="#inits">INITIAL CONDITIONS</A> </li>
+   <li> <A href="#even">EPIDEMIC EVENTS</A> </li>
+   <li> <A href="#transp">TRANSPORTATION MODEL</A> </li>
+   <li> <A href="#simu">SIMULATION AND OUTPUT</A> </li>
+ </ol>
+<br>
+<strong>WARNING:</strong> Sections cannot be removed or created. 
+<br>
+  
+<br>
+Each section has a set of variables that specifies your model. 
+<br>
+<br>
+<strong>NOTE:</strong> No variable can be removed, even if not used by your model. If a variable is not used by your model, just leave it there that will do no harm. 
+<br>
+<br>
+<hr>
+<A name="world">THE WORLD</A> 
+<hr>
+<br>
+ Here you define the files that describe your virtual world. 
+<br>
+<ul>
+ <li> <strong>shapefile -></strong> is the map layer that will be used as a background for the graph display. It is defined as a list, containing a file name and the name of two variables: the first is the locality names, and the other is a sequence of unique integers to be used as geocodes. <u>If no shapefile is available, leave this variable empty. </u>
+
+<br>Example:['riozonas_LatLong.shp','nome_zonas','zona_trafe']<br><p></p>
+  <li> <strong>sites -></strong>  text file with list of sites (see Documentation).
+
+ <br>Example:sites.csv<br><p></p>  </li>
+   <li> <strong>edges -></strong>  text file with list of edges (see Documentation). Example:edges.csv<br><p></p>  </li>
+   <li> <strong>encoding -></strong> encoding variable can be set to a string stating the encoding of your sites and edges files. If left empty iso-8859-1 (latin-1) is assumed (see Documentation for acceptable encoding strings).<br>Example: encoding=
+</ul>
+
+<br>
+
+<hr>
+<A name="epim">EPIDEMIOLOGICAL MODEL</A>
+<hr>
+<br>
+
+Epigrass has a set of built-in models (<em>SIS, SIS_s ,SIR, SIR_s, SEIS, SEIS_s, SEIR, SEIR_s,SIpRpS, SIpRpS_s,SIpR,SIpR_s,Influenza</em>). Besides these, the user may define his/her own model and access by the protect word <em>Custom</em>.
+
+The epidemic model is defined by the variable:
+
+<ul>
+   <li> <strong>modtype</strong> -> Here, the epidemic model is defined.<br> Example: modtype='SIR' <br>modtype='Custom'</li>
+ </ul>
+
+<br>
+
+<hr>
+<A name="param">MODEL PARAMETERS</A>
+<hr>
+<br>
+
+They can be specified as constants or as functions of global or site-specific variables. These site-specific variables, are provided in the <em>sites</em> file. <p></p>
+In this section, there is a set of variables that cannot be removed from the .epg file (if your model does not require them, just ignore them). These are: 
+
+<ul>
+   <li> <strong>beta  -></strong> transmission coefficient (contact rate * transmissibility). <br>Examples:<br>beta = 10<br> beta = 0.01 + 0.01 * sin(2*pi*t)<br> beta = 0.01 * 3 <br> beta = 0.01 * values[0] (where values[0] is a variable defined in the edges file) <p></p></li>
+   <li><strong> alpha -></strong> clumping parameter. Control for departures form random mixing. <br> Example: alpha = 1 (no clumping effect, that is, assume random mixing) <p></p></li>
+   <li> <strong>e -></strong> inverse of incubation period.<br> Example: e = 0.5 (incubation period of 2 days)<p></p></li>
+   <li> <strong>r -></strong> inverse of infectious period <br> Example: r = 0.2 (infectious period of 5 days)<p></p></li>
+   <li> <strong>delta -></strong> probability of acquiring full immunity after infection [0,1]. Only useful for models with partial immunity. <br> Examples:
+    delta = 0 (no disease induced immunity; after infection, individuals return directly to the susceptible class) <br> delta = 1 (disease induce complete immunity; after infection, individuals move to the removed class)<br>
+    delta = 0.5 (after infection, 50% of the individuals return to the susceptible class)<p></p></li>
+   <li><strong> w -></strong> rate of of immunity wane per time step [0,1]. In other words, it is the inverse of the average duration of immunity. This variable is only useful in models with immunity wane <br> Examples:<br> w = 0 (no immunity wane. Recovered individuals never return to the susceptible class)<br> w = 0.01 (1% of recovered individuals move to the susceptible class, per time step) <p></p></li>
+   <li> <strong>B</strong> -> susceptible renewal rate, per time step. <br> Example: B = 0 (no renewal (default)) <br> B = 3 (3 new susceptibles enter the population each time step) <br> B = values[3] (renewal rate is site specific and given in the third extra column of the site definition file.)
+	<p></p></li>
+
+   <li> <strong>p -></strong> level of suscpetibility of individuals in the recovered class [0,1]. This variable is useful in models where individuals in the recovered class are not fully protected against infection.<br> Examples: <br> p = 0.3 (individuals in the recovered class has 0.3 relative risk of getting infected when compared to the fully susceptible)  <br> p = 0 (full protection) <br> p =1 (no protection) </li>
+ </ul>
+
+Besides these required parameters, the user may add any number of extra parameters to the epg file. To do this, just click the button NEW VARIABLE and choose section MODEL PARAMETERS. A new line will be added to the editor, allowing you to set the value for this variable and add comments.
+<br>
+
+<hr>
+<A name="inits">INITIAL CONDITIONS</A>
+<hr>
+<br>
+
+Here, the number of individuals in each epidemiological state is specified. They can be specified in absolute
+or relative numbers (adding to 1). <p></p>
+The protected letter <em>N</em> is the population size of each site. It can be used when defining the population in each state. See examples.<p></p>
+Note that the rule defined here will be applied equally to all sites. For site-specific definitions, go to section EVENTS (below). <p></p>
+
+Here, there are three mandatory parameters: (they cannot be removed from the file. If the variable is not present in the your model, it will be ignored). 
+
+<ul>
+   <li> <strong>S -></strong> number (or density or relative frequency) of susceptibles </li>
+   <li> <strong>E -> </strong>number (or density or relative frequency) of exposed individuals (infected but not infectious </li>
+   <li><strong> I -></strong> number (or density or relative frequency) of infectious individuals </li>
+ </ul>
+<p></p>
+Examples:<br>
+ S = 0.99*N, E = 0, I = 0.01*N  (the same fraction of susceptibles is applied to all sites) <br>
+ S = N, E = 0, I = 0  (all individuals are susceptibles. Arrival of index case will be set in the EVENT section) <br>
+ S = N-1, E = 0, I = 1 (simulation starts with one infected individual per site)<p></p>
+
+
+Besides these mandatory variables, the user may add as many new variables as his/her model requires. To do this, just click on the ADD VARIABLE button and choose a name for this variable (careful not to duplicate names). Then, a new line will be created in the .epg editor. Add the parameter value and comments.
+
+
+<br>
+
+<hr>
+<A name="even">EPIDEMIC EVENTS</A>
+<hr>
+<br>
+
+In this section, time-specific and/or site-specific events are defined.
+Localities where the events are to take place should be identified by their code (which is the column after population size in the sites datafile). All variables here are defined as Python lists (see examples).
+
+<ul>
+   <li> <strong>Seed -> </strong> Inserts infected individuals (type I) in a set of sites at start time. This command is useful if ones want to specify the location where the index case(s) are.<p></p> Format: [('locality1's geocode',epid state, n),('locality2's geocode', epid state, n),...], where <em>n</em> is the number of infected individuals in the corresponding locality, at time 0. <p></p>Examples: <br>Seed = [(45,'I',1)] (1 infected person arrives in locality 45 at time 0) <br> Seed = [(45,'E',1),(12,'E',5)]   (1 exposed person arrives in locality 45  and 3 other arrive in locality 12 at time 0)
+</li>
+   <li><strong> Vaccinate -> </strong> At a set of time steps, remove a fraction of individuals cov from the suscpetible class to the recovered class at given localities. <p></p> 
+   Format: [('locality1's geocode', [t1,t2,...], [cov1,cov2,...]),('locality2's geocode', [t1,t2,...], [cov1,cov2,...])] <p>
+   Examples: <br>  Vaccinate = [] (default: no vaccination events) <br> 
+                   Vaccinate = [(45, [1,2], [0.2,0.3])]  (in the locality 45, vaccinate 20% of susceptibles at time 1 and 30% of susceptibles at time 2)<br>
+		   Vaccinate = [(45, [1,2], [0.2,0.3]),(40, [10], [0.3])] (besides the campaign above, vaccinate 30% of the population of site 40, at day 10)<br>
+                   Vaccinate = [('all', [1,2,3,4,5], [0.1,0.1,0.1,0.1,0.1])] (vaccinate all sites, from day 1 to 5, with 10% coverage per day)
+<p></p></li>
+   <li> <strong>Quarantine -></strong> not implemented yet </li>
+ </ul>
+
+
+<br>
+
+<hr>
+<A name="transp">TRANSPORTATION MODEL</A>
+<hr>
+<br>
+
+In this section, some aspects of the movement of individuals between sites are defined.
+
+<ul>
+   <li><strong> doTransp -> </strong> Boolean variable. If set to 0, no transport occurs. If set to 1, the commutation dynamics is simulated (useful for debugging purposes) <p></p></li>
+   <li> <strong>stochastic -> </strong> Boolean variable. If set to 1, commutation is modeled as a stochastic process (Poisson distributed). If set to 0, commutation is modeled deterministically (see Documentation for details)  <p></p></li>
+   <li> <strong>speed -> </strong> Average speed of transportation system in km per time step. Enter 0 for instantaneous travel. Distance unit must be the same specified in edges files </li>
+ </ul>
+
+<br>
+
+<hr>
+<A name="simu">SIMULATION AND OUTPUT</A>
+<hr>
+<br>
+
+Here, you specify extra parameters for the simulation, and what you want as output (and where).
+
+<ul>
+   <li> <strong>steps -> </strong> number of time steps. Example: steps = 50 <p></p></li>
+   <li> <strong>outdir -></strong> Output directory. Must be a full path. If empty the output will be generated on the sub-directory of same path as the model script.<p></p></li>
+   <li><strong> DBout -></strong> Database Output. Set to 0 (no database output) or 1 <p></p></li>
+   <li> <strong>report -></strong>  controls report generation. The variable report can take the following values: 0 - No report is generated; 1 - A network analysis report is generated in PDF Format; 2 - An epidemiological report is generated in PDF Format; 4 - A full report is generated in PDF Format. <p></p></li>
+   <li> <strong>siteRep -> </strong>  is a list with site codes. For each site in this list, a detailed report is appended to the main report defined above. Example: [34,54,23]<p></p></li>
+   <li> <strong>Replicas -> </strong> if set to an integer larger than zero, the model will be run n times and the results will be consolidated before storing. Replicate mode automatically turn off report and batch options. <p></p></li>
+   <li> <strong>RandSeed -></strong>if RandSeed is set to 1 the seed will be randomized on each replicate <p></p> </li>
+   <li> <strong>Batch -></strong> Batch Run list other scripts to be run in after this one. Don't forget the extension .epg. Model scripts must be in the same directory as this file or provide full path. <br>
+   Examples: <br>Batch = ['model2.epg','model3.epg','/home/jose/model4.epg'] <br> Batch = [] (default)<p></p></li>
+ </ul> 

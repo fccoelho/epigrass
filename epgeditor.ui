@@ -13,16 +13,33 @@
    <string>.EPG Editor</string>
   </property>
   <property name="windowIcon" >
-   <iconset>egicon.png</iconset>
+   <iconset>
+    <normaloff>:/egicon.png</normaloff>:/egicon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>31</y>
+     <width>505</width>
+     <height>673</height>
+    </rect>
+   </property>
    <layout class="QVBoxLayout" >
     <item>
      <widget class="QTabWidget" name="tabWidget" >
       <property name="currentIndex" >
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab" >
+       <property name="geometry" >
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>485</width>
+         <height>621</height>
+        </rect>
+       </property>
        <attribute name="title" >
         <string>Editor</string>
        </attribute>
@@ -97,6 +114,14 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2" >
+       <property name="geometry" >
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>485</width>
+         <height>621</height>
+        </rect>
+       </property>
        <attribute name="title" >
         <string>Viewer</string>
        </attribute>
@@ -107,6 +132,14 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="help_tab" >
+       <property name="geometry" >
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>485</width>
+         <height>621</height>
+        </rect>
+       </property>
        <attribute name="title" >
         <string>Help</string>
        </attribute>
@@ -115,7 +148,13 @@ p, li { white-space: pre-wrap; }
        </attribute>
        <layout class="QVBoxLayout" >
         <item>
-         <widget class="QTextBrowser" name="helpBrowser" />
+         <widget class="QTextBrowser" name="helpBrowser" >
+          <property name="source" >
+           <url>
+            <string>file:///</string>
+           </url>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -129,7 +168,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>505</width>
-     <height>38</height>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
@@ -154,7 +193,16 @@ p, li { white-space: pre-wrap; }
    <addaction name="menuFile" />
    <addaction name="menu_Help" />
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
+  <widget class="QStatusBar" name="statusbar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>704</y>
+     <width>505</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
   <action name="action_Help" >
    <property name="text" >
     <string>&amp;Help</string>
@@ -222,6 +270,8 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Epigrass/Resources/epigrass.qrc" />
+ </resources>
  <connections/>
 </ui>
