@@ -163,10 +163,10 @@ class viewer:
             
     def anim(self,data,edata, numbsteps,pos, rate=20):
         """
-        Starts the animation
-        - data: time series from database
-        - edata: infectious traveling for edge painting
-        - pos: column number of variable to animate
+        Starts the animation.
+        * data: time series from database
+        * edata: infectious traveling for edge painting
+        * pos: column number of variable to animate
         """
         #FIXME: the animation rate is not working....
         self.gr.horizontalSlider.setEnabled(0)

@@ -116,6 +116,7 @@ class MapWindow(Ui_Form):
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
         QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("released()"), self.replay)
+        QtCore.QObject.connect(self.splitter,QtCore.SIGNAL("splitterMoved()"), self.centerScene)
 #        self.server = MapServer()
 #        self.server.map = self.M
 #        st = threading.Thread(target=self.server.start)
@@ -224,25 +225,39 @@ class MapWindow(Ui_Form):
             ed = Edge(self.M.nodes[e[0]], self.M.nodes[e[1]])
             self.mapView.scene.addItem(ed)
             self.M.insertEdge(ed)
+        self.xmax, self.xmin = xmax, xmin
+        self.ymax, self.ymin = ymax, ymin
+        self.centerScene()
         
-    
+        
+    def centerScene(self):
+        """
+        centers the scene and fits the specified rectangle to it
+        """
+        ymax, ymin = self.ymax, self.ymin
+        xmax, xmin = self.xmax, self.xmin
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
         #calculating center of scene
 
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
-        
-#        self.mapView.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        self.mapView.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
         self.mapView.scene.setSceneRect(xmin, ymin, xxs, yxs)
-        #print self.mapView.scene.width(), self.mapView.scene.height()
+#        print self.mapView.scene.width(), self.mapView.scene.height()
         self.mapView.fitInView(xmin, ymin, xxs, yxs)
         self.mapView.setScene(self.mapView.scene)
         self.mapView.updateSceneRect(self.mapView.scene.sceneRect())
         self.mapView.centerOn(xc, yc)
+        scale_factor = self.mapView.width()/xxs
+        self.mapView.scale(scale_factor, scale_factor)
         
-        
-    
+        self.mapView.setCacheMode(QtGui.QGraphicsView.CacheBackground)
+        self.mapView.setRenderHint(QtGui.QPainter.Antialiasing)
+        self.mapView.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
+        self.mapView.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
+
+
     def paintPols(self, datadict):
         """
         Paint the polygons with the data from data dict
@@ -373,7 +388,7 @@ class BaseNode(QtGui.QGraphicsItem):
         self.graph = graphWidget
         self.edgeList = []
         self.newPos = QtCore.QPointF()
-        self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
+#        self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
         self.setZValue(1)
         self.neighbors = []
 
@@ -417,17 +432,18 @@ class BaseNode(QtGui.QGraphicsItem):
 #        if QtCore.qAbs(xvel) < 0.1 and QtCore.qAbs(yvel) < 0.1:
 #            xvel = yvel = 0.0
 
-        sceneRect = self.scene().sceneRect()
-        self.newPos = self.pos() + QtCore.QPointF(xvel, yvel)
-        self.newPos.setX(min(max(self.newPos.x(), sceneRect.left() + 10), sceneRect.right() - 10))
-        self.newPos.setY(min(max(self.newPos.y(), sceneRect.top() + 10), sceneRect.bottom() - 10))
+#        sceneRect = self.scene().sceneRect()
+#        self.newPos = self.pos() + QtCore.QPointF(xvel, yvel)
+#        self.newPos.setX(min(max(self.newPos.x(), sceneRect.left() + 10), sceneRect.right() - 10))
+#        self.newPos.setY(min(max(self.newPos.y(), sceneRect.top() + 10), sceneRect.bottom() - 10))
 
     def advance(self):
-        if self.newPos == self.pos():
-            return False
-
-        self.setPos(self.newPos)
-        return True
+        pass
+#        if self.newPos == self.pos():
+#            return False
+#
+#        self.setPos(self.newPos)
+#        return True
 
 class BaseGraph(object):
     """
@@ -969,7 +985,7 @@ class MapServer:
         self.server.serve_forever()
 
 class ReplayWorker(QtCore.QThread):        
-    def __init__(self,ts, arr,period=.100,   parent=None):
+    def __init__(self,ts, arr,period=.20,   parent=None):
         QtCore.QThread.__init__(self, parent)
         self.mutex = QtCore.QMutex()
         self.condition = QtCore.QWaitCondition()

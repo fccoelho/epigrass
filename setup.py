@@ -11,7 +11,7 @@ try:
 except: pass
 
 setup(name='epigrass',
-    version='2.0a2',
+    version='2.0a3',
     author = 'Flavio Codeco Coelho, Claudia Torres Codeco',
     author_email = 'fccoelho@gmail.com',
     maintainer = 'Flavio Codeco Coelho',
