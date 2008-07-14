@@ -157,7 +157,7 @@ class GraphML:
         if gc in self.nodes:
             return
         else:
-            print gc, name
+#            print gc, name
             nd = self.doc.createElement("node")
             nd.setAttribute("id", str(gc))
             data = self.doc.createElement("data")
@@ -167,12 +167,18 @@ class GraphML:
             self.gr.appendChild(nd)
             
     def addEdgeEl(self, s, d , t, ino):
-        print s, d , t , ino
+#        print s, d , t , ino
         ed = self.doc.createElement("edge")
         ed.setAttribute("source", str(s))
         ed.setAttribute("target", str(d))
-        ed.setAttribute("time", str(t))
-        ed.setAttribute("Innoculum", str(ino))
+        data = self.doc.createElement("data")
+        data.setAttribute("key", "d1")
+        data.appendChild(self.doc.createTextNode(str(ino)))
+        ed.appendChild(data)
+        data = self.doc.createElement("data")
+        data.setAttribute("key", "d2")
+        data.appendChild(self.doc.createTextNode(str(t)))
+        ed.appendChild(data)
         self.gr.appendChild(ed)
     
     def addAttrKeys(self, gml):
@@ -182,6 +188,18 @@ class GraphML:
         k1.setAttribute("attr.name", "name")
         k1.setAttribute("attr.type", "string")
         gml.appendChild(k1)
+        k2 = self.doc.createElement("key")
+        k2.setAttribute("id", "d1")
+        k2.setAttribute("for", "edge")
+        k2.setAttribute("attr.name", "Innoculum")
+        k2.setAttribute("attr.type", "integer")
+        gml.appendChild(k2)
+        k3 = self.doc.createElement("key")
+        k3.setAttribute("id", "d2")
+        k3.setAttribute("for", "edge")
+        k3.setAttribute("attr.name", "time")
+        k3.setAttribute("attr.type", "integer")
+        gml.appendChild(k3)
     def write(self):
         """
         Writes the graphml file to disk

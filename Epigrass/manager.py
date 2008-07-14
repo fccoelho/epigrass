@@ -387,6 +387,7 @@ class simulate:
         if self.shpout:
             self.outToShp()
         self.dumpData()
+        spread.Spread(self.g,  self.outdir, self.encoding)
         #self.saveModel(self.modelName)
         #pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
         #print len(self.g.site_list[-1].ts)

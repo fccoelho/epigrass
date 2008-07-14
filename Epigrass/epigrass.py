@@ -316,8 +316,7 @@ an editor and your model's script."""),
 #            QtCore.QObject.connect(self.RT,QtCore.SIGNAL("drawStep"), self.graphDisplay.drawStep)
             if not S.replicas:
                 self.RT.start()
-                #FIXME: find out why replay function does not runright after regular run
-#                dot = spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
+                
                 
                 self.buttonRun.setEnabled(1)
             else: #Repeated runs 
@@ -343,7 +342,8 @@ an editor and your model's script."""),
             self.textEdit1.insertPlainText('Done!')
             self.buttonRun.setEnabled(1)
             #print 'Agora...'
-            spdisp = spread.Spread(self.sim.g)
+            spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
+            
             #spdisp.display()
         else:
             self.buttonRun.setEnabled(1)
