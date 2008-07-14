@@ -141,8 +141,8 @@ class simulate:
             self.steps = eval(config['simulation and output.steps'])
             self.outdir = config['simulation and output.outdir']
             self.MySQLout = eval(config['simulation and output.mysqlout'])
-            self.Rep = eval(config['simulation and output.report'])
-            self.siteRep = eval(config['simulation and output.siterep'])
+#            self.Rep = eval(config['simulation and output.report'])
+#            self.siteRep = eval(config['simulation and output.siterep'])
             self.replicas = eval(config['simulation and output.replicas'])
             self.randomize_seeds = eval(config['simulation and output.randseed'])
             self.Batch = eval(config['simulation and output.batch'])
@@ -150,7 +150,7 @@ class simulate:
             V = v.__str__().split('.')
             sys.exit("Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified."%(V[1],V[0]))
         if self.replicas:
-            self.Rep = 0 #Turns off reports
+#            self.Rep = 0 #Turns off reports
             self.Batch = []#Turns off Batch mode
             self.round = 0# Initialize replicate counter
     # generate dictionaries for parameters and inits

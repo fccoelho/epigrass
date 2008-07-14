@@ -64,7 +64,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.buttonHelp,QtCore.SIGNAL("released()"),self.onHelp)
         self.connect(self.dbBackup,QtCore.SIGNAL("released()"),self.onDbBackup)
         self.connect(self.dbInfo,QtCore.SIGNAL("released()"),self.onDbInfo)
-        self.connect(self.repOpen,QtCore.SIGNAL("released()"),self.onRepOpen)
+#        self.connect(self.repOpen,QtCore.SIGNAL("released()"),self.onRepOpen)
         self.connect(self.playButton,QtCore.SIGNAL("released()"),self.onPlayButton)
 #        self.connect(self.playButton_2D,QtCore.SIGNAL("released()"),self.onPlayButton_2D)
         self.connect(self.dbscanButton,QtCore.SIGNAL("released()"),self.onVisual)
@@ -319,11 +319,6 @@ an editor and your model's script."""),
                 #FIXME: find out why replay function does not runright after regular run
 #                dot = spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
                 
-                if S.Rep:
-                    rep = Rp.report(S)
-                    self.textEdit1.insertPlainText('Report generation started.')
-                    
-                    rep.Assemble(S.Rep)
                 self.buttonRun.setEnabled(1)
             else: #Repeated runs 
                 self.repRuns(S)
@@ -344,12 +339,6 @@ an editor and your model's script."""),
                     T.gui = self
                     print 'starting model %s'%i
                     T.start()  # Start the simulation 
-                    
-                    if S.Rep: #Start report generation
-                        rep = Rp.report(T)
-                        self.textEdit1.insertPlainText('Report generation started.')
-                        
-                        rep.Assemble(S.Rep)
 
             self.textEdit1.insertPlainText('Done!')
             self.buttonRun.setEnabled(1)
