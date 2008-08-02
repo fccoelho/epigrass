@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.2.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-13, 14:06:49 -->
+<!-- Saved: 2008-07-14, 14:53:52 -->
 <!-- Copyright (C) 2008 ,  -->
 <Project version="4.2">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -133,9 +133,6 @@
     <Source>
       <Dir>Epigrass</Dir>
       <Name>epgeditor.py</Name>
-    </Source>
-    <Source>
-      <Name>Ui_epgeditor.py</Name>
     </Source>
     <Source>
       <Dir>Epigrass</Dir>

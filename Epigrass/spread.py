@@ -159,7 +159,7 @@ class GraphML:
         else:
 #            print gc, name
             nd = self.doc.createElement("node")
-            nd.setAttribute("id", str(gc))
+            nd.setAttribute("id", "n"+str(gc))
             data = self.doc.createElement("data")
             data.setAttribute("key", "d0")
             data.appendChild(self.doc.createTextNode(name))
@@ -185,20 +185,20 @@ class GraphML:
         k1 = self.doc.createElement("key")
         k1.setAttribute("id", "d0")
         k1.setAttribute("for", "node")
-        k1.setAttribute("attr.name", "name")
+        k1.setAttribute("attr.name", "label")
         k1.setAttribute("attr.type", "string")
         gml.appendChild(k1)
         k2 = self.doc.createElement("key")
         k2.setAttribute("id", "d1")
         k2.setAttribute("for", "edge")
         k2.setAttribute("attr.name", "Innoculum")
-        k2.setAttribute("attr.type", "integer")
+        k2.setAttribute("attr.type", "int")
         gml.appendChild(k2)
         k3 = self.doc.createElement("key")
         k3.setAttribute("id", "d2")
         k3.setAttribute("for", "edge")
-        k3.setAttribute("attr.name", "time")
-        k3.setAttribute("attr.type", "integer")
+        k3.setAttribute("attr.name", "timestep")
+        k3.setAttribute("attr.type", "int")
         gml.appendChild(k3)
     def write(self):
         """
