@@ -52,7 +52,12 @@ def Model(self,vars,par,theta=0, npass=0):
             
             
         else:
-            S0,S2,S10,S15,S20,S40,Ep0,Ep2,Ep10,Ep15,Ep20,Ep40,Ip0,Ip2,Ip10,Ip15,Ip20,Ip40,Es0,Es2,Es10,Es15,Es20,Es40,Is0,Is2,Is10,Is15,Is20,Is40,Rmax0,Rmax2,Rmax10,Rmax15,Rmax20,Rmax40,Rmed0,Rmed2,Rmed10,Rmed15,Rmed20,Rmed40,Rmin0,Rmin2,Rmin10,Rmin15,Rmin20,Rmin40,Vmax0,Vmax2,Vmax10,Vmax15,Vmax20,Vmax40,Vmed0,Vmed2,Vmed10,Vmed15,Vmed20,Vmed40,Vmin0,Vmin2,Vmin10,Vmin15,Vmin20,Vmin40= vars
+            S0,S2,S10,S15,S20,S40,Ep0,Ep2,Ep10,Ep15,Ep20,Ep40,Ip0,
+Ip2,Ip10,Ip15,Ip20,Ip40,Es0,Es2,Es10,Es15,Es20,Es40,Is0,Is2,Is10,
+Is15,Is20,Is40,Rmax0,Rmax2,Rmax10,Rmax15,Rmax20,Rmax40,Rmed0,Rmed2,
+Rmed10,Rmed15,Rmed20,Rmed40,Rmin0,Rmin2,Rmin10,Rmin15,Rmin20,Rmin40,
+Vmax0,Vmax2,Vmax10,Vmax15,Vmax20,Vmax40,Vmed0,Vmed2,Vmed10,Vmed15,
+Vmed20,Vmed40,Vmin0,Vmin2,Vmin10,Vmin15,Vmin20,Vmin40= vars
             
             # obtendo os visitantes
             Mp0,Mp2,Mp10,Mp15,Mp20,Mp40,Ms0,Ms2,Ms10,Ms15,Ms20,Ms40= self.parentSite.infectedvisiting

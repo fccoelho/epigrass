@@ -104,13 +104,14 @@ class viewer:
         else:
             r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
             self.numbnodes = len(r)
-        self.nodes_pos = [(i[1], i[2], i[0], i[3])for i in r]
+        self.nodes_pos = r#[(i[1], i[2], i[0], i[3])for i in r]
         self.nodes_gc = [i[0] for i in r]
             
         # get adjacency matrix
 #        if not os.getcwd() == self.
         file = open('adj_'+name)
         m = cPickle.load(file)
+        self.adjacency = m
         file.close()
         return r,m
     
@@ -147,6 +148,8 @@ class viewer:
             r = self.connection.queryAll('SELECT * FROM %s'%tab)
             self.numbedges = len(r)
         self.elist = [(self.nodes_gc.index(e[0]), self.nodes_gc.index(e[1])) for e in r]
+        if not self.elist:
+            self.elist = transpose(self.adjacency.nonzero()).tolist()
         return r
         
     def viewGraph(self, nodes, am, var,mapa=''):

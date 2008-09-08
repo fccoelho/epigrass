@@ -25,7 +25,7 @@
 # sites and edges files. If left empty iso-8859-1 (latin-1) is assumed.
 # See Usermanual for acceptable encoding strings.
 #['riozonas_LatLong.shp','nome_zonas','zona_trafe']
-shapefile =[]
+shapefile =['riozonas_LatLong.shp','nome_zonas','zona_trafe']
 sites = sites.csv
 edges = edges.csv
 encoding = 
@@ -129,7 +129,7 @@ speed = 0 #1440  # km/day -- equivalent to 60 km/h
 #==============================================================#
 
 # Number of steps
-steps = 100
+steps = 150
 
 # Output dir. Must be a full path. If empty the output will be generated on the
 # outdata-<date> sub-directory of same path as the model script.

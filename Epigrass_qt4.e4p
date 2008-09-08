@@ -1,197 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.2.dtd">
+<!DOCTYPE Project SYSTEM "Project-4.4.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-07-14, 14:53:52 -->
+<!-- Saved: 2008-09-08, 11:43:38 -->
 <!-- Copyright (C) 2008 ,  -->
-<Project version="4.2">
+<Project version="4.4">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <ProjectType>Qt4</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
   <Author></Author>
   <Email></Email>
-  <TranslationPrefix>
-    <Name>epigrass</Name>
-  </TranslationPrefix>
+  <TranslationPrefix>epigrass</TranslationPrefix>
   <Sources>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>testinst.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epiplay.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>cpanel.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>report.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>dataObject.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>dgraph.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>data_io.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>spread.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>simobj.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>__init__.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>rinterface.py</Name>
-    </Source>
-    <Source>
-      <Name>CustomModel_example.py</Name>
-    </Source>
-    <Source>
-      <Name>CustomModel.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>qtgraph.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>pylabQtcanvas.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epigdal.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>elasticnodes.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epiRTplay.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_epgeditor.py</Name>
-    </Source>
-    <Source>
-      <Name>ez_setup.py</Name>
-    </Source>
-    <Source>
-      <Name>setup.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>primitives.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_about4.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>manager.py</Name>
-    </Source>
-    <Source>
-      <Dir>demos</Dir>
-      <Name>CustomModel.py</Name>
-    </Source>
-    <Source>
-      <Dir>demos</Dir>
-      <Name>CustomModel_example.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_display.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>Ui_cpanel4new.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>__version__.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epgeditor.py</Name>
-    </Source>
-    <Source>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass_rc.py</Name>
-    </Source>
+    <Source>Epigrass/testinst.py</Source>
+    <Source>Epigrass/epiplay.py</Source>
+    <Source>Epigrass/cpanel.py</Source>
+    <Source>Epigrass/report.py</Source>
+    <Source>Epigrass/about.py</Source>
+    <Source>Epigrass/dataObject.py</Source>
+    <Source>Epigrass/dgraph.py</Source>
+    <Source>Epigrass/data_io.py</Source>
+    <Source>Epigrass/spread.py</Source>
+    <Source>Epigrass/simobj.py</Source>
+    <Source>Epigrass/__init__.py</Source>
+    <Source>Epigrass/rinterface.py</Source>
+    <Source>CustomModel_example.py</Source>
+    <Source>CustomModel.py</Source>
+    <Source>Epigrass/qtgraph.py</Source>
+    <Source>Epigrass/pylabQtcanvas.py</Source>
+    <Source>Epigrass/epigdal.py</Source>
+    <Source>Epigrass/elasticnodes.py</Source>
+    <Source>Epigrass/epiRTplay.py</Source>
+    <Source>Epigrass/Ui_epgeditor.py</Source>
+    <Source>ez_setup.py</Source>
+    <Source>setup.py</Source>
+    <Source>Epigrass/primitives.py</Source>
+    <Source>Epigrass/Ui_about4.py</Source>
+    <Source>Epigrass/manager.py</Source>
+    <Source>demos/CustomModel.py</Source>
+    <Source>demos/CustomModel_example.py</Source>
+    <Source>Epigrass/Ui_display.py</Source>
+    <Source>Epigrass/epigrass_rc.py</Source>
+    <Source>Epigrass/epgeditor.py</Source>
+    <Source>Epigrass/__version__.py</Source>
+    <Source>Epigrass/epigrass.py</Source>
+    <Source>Epigrass/Ui_cpanel4new.py</Source>
+    <Source>docs/source/conf.py</Source>
   </Sources>
   <Forms>
-    <Form>
-      <Name>about4.ui</Name>
-    </Form>
-    <Form>
-      <Name>epgeditor.ui</Name>
-    </Form>
-    <Form>
-      <Name>display.ui</Name>
-    </Form>
-    <Form>
-      <Name>cpanel4new.ui</Name>
-    </Form>
+    <Form>about4.ui</Form>
+    <Form>epgeditor.ui</Form>
+    <Form>display.ui</Form>
+    <Form>cpanel4new.ui</Form>
   </Forms>
   <Translations>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass_es.qm</Name>
-    </Translation>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass_es.ts</Name>
-    </Translation>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass_fr.qm</Name>
-    </Translation>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass_fr.ts</Name>
-    </Translation>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>manager_pt_BR.qm</Name>
-    </Translation>
-    <Translation>
-      <Dir>Epigrass</Dir>
-      <Name>manager_pt_BR.ts</Name>
-    </Translation>
   </Translations>
   <Resources>
-    <Resource>
-      <Dir>Epigrass</Dir>
-      <Name>epigrass.qrc</Name>
-    </Resource>
+    <Resource>Epigrass/epigrass.qrc</Resource>
   </Resources>
   <Interfaces>
   </Interfaces>
   <Others>
   </Others>
-  <MainScript>
-    <Name>epigrass.py</Name>
-  </MainScript>
+  <MainScript>epigrass.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>

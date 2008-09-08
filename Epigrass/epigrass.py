@@ -7,7 +7,7 @@ except ImportError:
     print "Please install PyQT 4"
 
 from Epigrass.manager import *
-import threading,  subprocess
+import threading,  subprocess,  glob
 from Epigrass.Ui_cpanel4new import Ui_MainWindow
 from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
@@ -449,8 +449,23 @@ Make sure you have generated it."""),
                     self.trUtf8("Missing Database Password"),
                     self.trUtf8("""Please enter the password for the MySQL database in the first tab."""))
                 return
+        # for SQLite databases check for the existence os the database file.
+        if self.dbType.currentIndex() == 1: 
+            if not os.path.exists('Epigrass.sqlite'):
+                basedir = str(QFileDialog.getExistingDirectory(\
+                    None,
+                    self.trUtf8("No SQLite database found. Please select a new directory."),
+                    QtCore.QString(),
+                    QFileDialog.Options(QFileDialog.ShowDirsOnly)))
+            if not glob.glob(basedir+'*.sqlite'):
+                return self.onVisual()
+            else:
+                os.chdir(basedir)
+                
         self.Display=epi.viewer(host=str(self.hostnEdit.text()),port=int(str(self.portEdit.text())),
-                        db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
+                            db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
+        os.chdir(self.curdir)
+
         for s in self.Display.tables:
             if s.endswith('_meta'):
                 self.tableList.insertItem(0, s[:-5])

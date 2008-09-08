@@ -210,19 +210,20 @@ class MapWindow(Ui_Form):
         self.mapView.itemMoved = MethodType(itemMoved, self.mapView)
         self.mapView.timerEvent = MethodType(timerEvent, self.mapView)
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
-        npos= [(n[0], -n[1]) for n in nlist]
+        npos= [(n[1], -n[2]) for n in nlist]
         xmin,ymin = array(npos).min(axis=0)
         xmax,ymax = array(npos).max(axis=0)
         for n in nlist:
-            node = Node(self.M, n[2], n[3])
-            node.setPos(*(n[0], -n[1]))
+            node = Node(self.M, n[0], n[3])
+            node.setPos(*(n[1], -n[2]))
             node.size = max(xmax-xmin, ymax-ymin)/math.sqrt(len(nlist))*0.5
             self.mapView.scene.addItem(node)
             self.M.insertNode(node)
             #print node.x(), node.y(), n.center[0], n.center[1]
         self.mapView.nodes = self.M.nodes
         for e in elist:
-            ed = Edge(self.M.nodes[e[0]], self.M.nodes[e[1]])
+            ed = Edge(self.M.nodes[int(e[0])], self.M.nodes[int(e[1])])
+            ed.arrowSize = max(xmax-xmin, ymax-ymin)/math.sqrt(len(nlist))*0.2
             self.mapView.scene.addItem(ed)
             self.M.insertEdge(ed)
         self.xmax, self.xmin = xmax, xmin
@@ -1018,7 +1019,7 @@ if __name__=='__main__':
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     widget = MapWindow()
     #widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
-    poslist = [(-50, -50, 1, 'a'),(0, -50, 2, 'b'),(50, -50, 3, 'c'),(-50, 0, 4,'d'),(0, 0, 5, 'e'),(50, 0, 6, 'f'),(-50, 50, 7, 'g'),(0, 50, 8, 'h'),(50, 50, 9, 'i')]
+    poslist = [(1, -50, -50, 'a'),(2, 0, -50, 'b'),(3, 50, -50, 'c'),(4, -50, 0,'d'),(5, 0, 0, 'e'),(6, 50, 0, 'f'),(7, -50, 50, 'g'),(8, 0, 50, 'h'),(9, 50, 50, 'i')]
     elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
     widget.drawGraph(poslist, elist)
     widget.show()
