@@ -458,7 +458,13 @@ Make sure you have generated it."""),
                     QtCore.QString(),
                     QFileDialog.Options(QFileDialog.ShowDirsOnly)))
             if not glob.glob(basedir+'*.sqlite'):
-                return self.onVisual()
+                QMessageBox.information(None,
+                    self.trUtf8("No Database found"),
+                    self.trUtf8("""No file ending with ".sqlite" was found. 
+Please try a different  directory."""),
+                    QMessageBox.StandardButtons(\
+                        QMessageBox.Ok),
+                    QMessageBox.Ok)
             else:
                 os.chdir(basedir)
                 
