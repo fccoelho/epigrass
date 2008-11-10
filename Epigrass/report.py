@@ -5,8 +5,8 @@ using LaTeX.
 import os, sys, commands, string, time, matplotlib, codecs
 #matplotlib.use("Agg")
 
-from pylab import *
-from matplotlib.mlab import *
+#from pylab import *
+#from matplotlib.mlab import *
 
 header =r"""
 \documentclass[a4paper,10pt]{report}

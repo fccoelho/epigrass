@@ -443,6 +443,7 @@ Make sure you have generated it."""),
         """
         Scan the epigrass database an shows available simulations.
         """
+        basedir = self.rootdir
         if not self.dbType.currentIndex():
             if not self.pwEdit.text():
                 QMessageBox.warning(None,

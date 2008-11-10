@@ -3,7 +3,7 @@ This Module contains the definitions of objects for spatial simulation on geo re
 """
 import sys, matplotlib
 #matplotlib.use("Agg")
-from pylab import *
+#from pylab import *
 #import dgraph
 from numpy import *
 from numpy.random import uniform, binomial, poisson

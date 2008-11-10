@@ -5,7 +5,7 @@ export the results of Epigrass simulations to the formats supported by these lib
 copyright 2007 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
-import gdal,locale, ogr, os, pylab
+import gdal,locale, ogr, os#, pylab
 from xml.dom import minidom, Node
 from matplotlib.colors import  rgb2hex, LogNorm
 from matplotlib import cm
