@@ -1,22 +1,17 @@
 #! /usr/bin/env python
 """
-This module is a graph visualizing tool.
-It tries to resolves the graph layout by making an analogy
-of the nodes and edges to masses and springs.
-the nodes repel each other with a force inversely proportional to their
-distance, and the edges do the opposite.
+This module is a graph and map visualizing tool.
+
 """
-import math, ogr
+import math
+from osgeo import ogr
 import threading
 import itertools
-#from numpy import *
-#import visual 
 import time, os,  sys
 from PyQt4 import Qt, QtCore, QtGui, QtOpenGL, Qwt5 as Qwt
 from numpy import  array, sqrt,  average
 from numpy.random import randint, uniform
 from Ui_display import Ui_Form 
-#from pylab import *
 from matplotlib import cm
 from types import MethodType
 from SimpleXMLRPCServer import SimpleXMLRPCServer
@@ -474,14 +469,6 @@ class BaseGraph(object):
 
         self.display = BaseBox()
 
-
-    def addTimelabel(self):
-        """
-        Adds the time label at the center of the display
-        """
-        self.timelabel = "0"
-        pass
-
     def insertNode(self, node):
         """
         Insert node into the system.
@@ -871,9 +858,10 @@ class QtNode(BaseNode):
 
     def itemChange(self, change, value):
         if change == QtGui.QGraphicsItem.ItemPositionChange:
-            for edge in self.edgeList:
-                edge.adjust()
-            self.graph.display.mapView.itemMoved()
+            pass
+#            for edge in self.edgeList:
+#                edge.adjust()
+            #self.graph.display.mapView.itemMoved()
 
         return QtGui.QGraphicsItem.itemChange(self, change, value)
 

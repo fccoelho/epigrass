@@ -355,11 +355,11 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     # Original PyQt graph example
-    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
-    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
+#    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
+#    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
     # larger random graph
-#    poslist = uniform(-80,80,size=(50,2)).tolist()
-#    elist = list(set([tuple(randint(0,50,2)) for i in xrange(50)]))
+    poslist = uniform(-180,180,size=(50,2)).tolist()
+    elist = list(set([tuple(randint(0,50,2)) for i in xrange(50)]))
     widget = GraphWidget(poslist,elist)
     widget.show()
 

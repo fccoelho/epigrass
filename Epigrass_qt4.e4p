@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.4.dtd">
+<!DOCTYPE Project SYSTEM "Project-4.5.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-09-08, 11:43:38 -->
-<!-- Copyright (C) 2008 ,  -->
-<Project version="4.4">
+<!-- Saved: 2008-11-11, 17:32:49 -->
+<!-- Copyright (C) 2008 Flávio Codeço Coelho, fccoelho@gmail.com -->
+<Project version="4.5">
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <ProjectType>Qt4</ProjectType>
   <Description></Description>
-  <Version>0.1</Version>
-  <Author></Author>
-  <Email></Email>
-  <TranslationPrefix>epigrass</TranslationPrefix>
+  <Version>2.0</Version>
+  <Author>Flávio Codeço Coelho</Author>
+  <Email>fccoelho@gmail.com</Email>
+  <TranslationPattern>epigrass_%language%.ts</TranslationPattern>
   <Sources>
     <Source>Epigrass/testinst.py</Source>
     <Source>Epigrass/epiplay.py</Source>
@@ -46,12 +46,15 @@
     <Source>Epigrass/epigrass.py</Source>
     <Source>Epigrass/Ui_cpanel4new.py</Source>
     <Source>docs/source/conf.py</Source>
+    <Source>Epigrass/Ui_neteditor.py</Source>
+    <Source>Epigrass/neteditor.py</Source>
   </Sources>
   <Forms>
     <Form>about4.ui</Form>
     <Form>epgeditor.ui</Form>
     <Form>display.ui</Form>
     <Form>cpanel4new.ui</Form>
+    <Form>Epigrass/neteditor.ui</Form>
   </Forms>
   <Translations>
   </Translations>
@@ -62,16 +65,18 @@
   </Interfaces>
   <Others>
   </Others>
-  <MainScript>epigrass.py</MainScript>
+  <MainScript>Epigrass/epigrass.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.pyw" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ts" type="TRANSLATIONS" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.qrc" type="RESOURCES" />
   </FiletypeAssociations>

@@ -53,7 +53,7 @@ def load(fname, sep=None):
         X.shape = max([r,c]),
     return X
     
-def loadData(fname,sep = None, encoding='latin-1'):
+def loadData(fname,sep = ',', encoding='utf-8'):
     """
     Loads from ascii files with separated values
     and returns a list of lists.
@@ -114,7 +114,7 @@ def loadEdgeData(fname):
     dicCity = queryDb('root','mysql','epigrass','localidades')
     dados[0].append('codigo1')
     dados[0].append('codigo2')
-    for i in range(1,len(dados)):
+    for i in xrange(1,len(dados)):
         cidade1 = dados[i][1].lower() #word
         UF1 = dados[i][2]
         cidade2 = dados[i][3].lower() #word2
