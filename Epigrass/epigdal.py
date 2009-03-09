@@ -5,8 +5,8 @@ export the results of Epigrass simulations to the formats supported by these lib
 copyright 2007 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
-import gdal,locale, os#, pylab
-from osgeo  import ogr
+import locale, os#, pylab
+from osgeo  import ogr,  gdal
 from xml.dom import minidom, Node
 from matplotlib.colors import  rgb2hex, LogNorm
 from matplotlib import cm
@@ -80,11 +80,11 @@ class World:
         while f is not None:
             g = f.GetGeometryRef()
             self.geomdict[f.GetFieldAsInteger(self.geocfield)] = g
-            if g.GetGeometryType() == 3:
+            try:
                 c = g.Centroid()
                 self.nlist.append(f)
                 self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(),c.GetY(),c.GetZ())
-            else: #in case feature is not a polygon
+            except: #in case feature is not a polygon
                 print  f.GetFID(),g.GetGeometryType()
             f = l.GetNextFeature()
         #print (2600501 in self.centdict)

@@ -222,7 +222,7 @@ class simulate:
                 inits[k] = eval(v)
             for k,v in self.parms.items():
                 parms[k] = eval(v)
-            #Linhas abaixo estao obsoletas (remover qundo tiver tempo para testar)
+            #Linhas abaixo estao obsoletas (remover quando tiver tempo para testar)
             I = eval(self.I)
             E = eval(self.E)
             S = eval(self.S)
@@ -1007,7 +1007,7 @@ class simulate:
 ##                self.outToODb(self.modelName,mode='p')
                 #viewer.show(n)
                 if self.gui:
-                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                    #self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
                     self.gui.RT.mutex.lock()

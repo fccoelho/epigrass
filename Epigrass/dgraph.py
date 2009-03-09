@@ -152,7 +152,7 @@ class MapWindow(Ui_Form):
     
     def drawMap(self, filename, namefield, geocfield):
         """
-        Draws the map store in the shapefile fname.
+        Draws the map stored in the shapefile fname.
         """
         #Setup the Map
         self.M = Map(fname=filename,display=self, namefield=namefield, geocfield=geocfield)
