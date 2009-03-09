@@ -1,0 +1,11 @@
+include ez_setup.py
+include egicon.png
+include epigrass.desktop
+include INSTALL
+include README
+include COPYING
+recursive-include demos *
+recursive-include Epigrass *
+include docs/build/latex/Epigrass.pdf
+
+

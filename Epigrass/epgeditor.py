@@ -6,21 +6,28 @@ try:
 except ImportError:
     print "Please install PyQT 4"
 from Epigrass.Ui_epgeditor import Ui_MainWindow
-from Epigrass.Ui_about import Ui_aboutDialog as aboutDialog
+from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
 import ConfigParser
 import StringIO
 import epigrass_rc
 
 class Editor(QtGui.QMainWindow,Ui_MainWindow):
-    def __init__(self, epgfile):
+    def __init__(self, argv):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
+        self.cp = ConfigParser.SafeConfigParser()
+        if len(argv) <2:
+            self.fname = ''
+        else:
+            self.fname = argv[1]
+            self.fillTree(self.fname)
         QtCore.QObject.connect(self.exitButton,QtCore.SIGNAL("clicked()"),self.close)
         self.editing = None
-        self.helpBrowser.setSource(QtCore.QUrl(":/HelpEpg.html"))
-        self.cp = self.fillTree(epgfile)
+        self.helpBrowser.setSource(QtCore.QUrl("qrc:/HelpEpg.html"))
+       
+        
 
-    def checkScript(self,  cp):
+    def checkScript(self):
         """
         Checks the loaded script for required headers and variables
         """
@@ -33,58 +40,56 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
         'EPIDEMIC EVENTS':{'vaccinate':[], 'seed':[], 'quarantine':[]}}
         for i in sections.items():
             try:
-                assert (cp.has_section(i[0]))
+                assert (self.cp.has_section(i[0]))
                 for v in i[1].items():
                     try:
-                        cp.get(i[0], v[0])
+                        self.cp.get(i[0], v[0])
                     except:
                         QtGui.QMessageBox.information(None,
                             self.trUtf8("Required variable missing"),
                             self.trUtf8("""Variable %s was missing. Variable created and value set to default"""%v))
-                        cp.set(i[0], v[0],str(v[1]))
+                        self.cp.set(i[0], v[0],str(v[1]))
             except AssertionError:
                     QtGui.QMessageBox.information(None,
                     self.trUtf8("Required section missing"),
                     self.trUtf8("""Section %s was missing. It was added to your file with default values for its variables."""%i[0]))
-                    cp.add_section(i[0])
+                    self.cp.add_section(i[0])
                     for j in i[1].items():
-                        cp.set (i[0],j[0] , str(j[1]))
-        return cp
+                        self.cp.set (i[0],j[0] , str(j[1]))
+        
 
     def fillTree(self, fname):
         """
-        fills the tree from the configuration file's
-        contents.
+        Fills the tree from the configuration file's
+        contents. 
+        Returns a ConfigParser object
         """
-        self.fname = fname
         self.treeWidget.clear()
-        cp =ConfigParser.SafeConfigParser()
-        cp.read(fname)
-        cp = self.checkScript(cp)
-        self.updateViewer(cp)
-        for sec in cp.sections():
+        self.cp.read(fname)
+        self.checkScript()
+        self.updateViewer()
+        for sec in self.cp.sections():
             topitem = QtGui.QTreeWidgetItem(self.treeWidget)
             topitem.setText(0, sec)
             topitem.setText(1, "---")
             topitem.setText(2, "Section Header")
             self.treeWidget.addTopLevelItem(topitem)
-            for opt in cp.options(sec):
+            for opt in self.cp.options(sec):
                 chitem = QtGui.QTreeWidgetItem(topitem)
                 chitem.setText(0, opt)
-                pos = cp.get(sec,opt).find('#')
+                pos = self.cp.get(sec,opt).find('#')
                 if pos >=0:
-                    value = cp.get(sec,opt)[:pos]
-                    comment = cp.get(sec,opt)[pos:]
+                    value = self.cp.get(sec,opt)[:pos]
+                    comment = self.cp.get(sec,opt)[pos:]
                 else:
-                    value = cp.get(sec,opt)
+                    value = self.cp.get(sec,opt)
                     comment = "variable"
                 chitem.setText(1, value)
                 chitem.setText(2, comment)
-        return cp
 
-    def updateViewer(self, cp):
+    def updateViewer(self):
         vf = StringIO.StringIO()
-        cp.write(vf)
+        self.cp.write(vf)
         self.epgView.setPlainText(vf.getvalue())
         vf.close()
 
@@ -113,6 +118,7 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
             None))
         if fname:
             self.fillTree(fname)
+        self.fname = fname
 
     @QtCore.pyqtSignature("")
     def on_action_New_activated(self):
@@ -150,7 +156,7 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
             if resp[1]:
                 nam = str(resp[0])
                 self.cp.set(sec, nam, '')
-                self.updateViewer(self.cp)
+                self.updateViewer()
 #                print sec, type(sec)
                 secit = self.treeWidget.findItems(sec, QtCore.Qt.MatchExactly, 0)[0]
                 child = QtGui.QTreeWidgetItem(secit)
@@ -171,17 +177,18 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
 
     @QtCore.pyqtSignature("")
     def on_action_Save_activated(self):
-        fname = str(QtGui.QFileDialog.getSaveFileName(\
-            None,
-            self.trUtf8("Save File as"),
-            self.fname,
-            self.trUtf8("*.epg"),
-            None)
+        if not self.fname:
+            self.fname = str(QtGui.QFileDialog.getSaveFileName(\
+                None,
+                self.trUtf8("Save File as"),
+                self.fname,
+                self.trUtf8("*.epg"),
+                None)
 )
-        if fname:
-            fo = open(fname, 'w')
-            self.cp.write(fo)
-            fo.close()
+
+        fo = open(self.fname, 'w')
+        self.cp.write(fo)
+        fo.close()
 
 
 
@@ -205,11 +212,12 @@ class Editor(QtGui.QMainWindow,Ui_MainWindow):
                 self.cp.set(str(self.editing[0].parent().text(0)),str(self.editing[0].text(0)) , str(self.editing[0].text(1)))
             self.treeWidget.closePersistentEditor(*self.editing)
             self.editing = None
-            self.updateViewer(self.cp)
+            self.on_action_Save_activated()
+            self.updateViewer()
 def main():
     import sys
     app = QtGui.QApplication(sys.argv)
-    Form = Editor(sys.argv[1])
+    Form = Editor(sys.argv)
     Form.show()
     sys.exit(app.exec_())
     

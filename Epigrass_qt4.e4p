@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-4.5.dtd">
+<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2008-11-11, 17:32:49 -->
-<!-- Copyright (C) 2008 Flávio Codeço Coelho, fccoelho@gmail.com -->
-<Project version="4.5">
+<!-- Saved: 2009-02-15, 08:36:37 -->
+<!-- Copyright (C) 2009 Flávio Codeço Coelho, fccoelho@gmail.com -->
+<Project version="4.6">
+  <Language>en</Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
   <ProjectType>Qt4</ProjectType>
   <Description></Description>
@@ -57,6 +58,12 @@
     <Form>Epigrass/neteditor.ui</Form>
   </Forms>
   <Translations>
+    <Translation>Epigrass/epigrass_es.qm</Translation>
+    <Translation>Epigrass/epigrass_fr.qm</Translation>
+    <Translation>Epigrass/epigrass_fr.ts</Translation>
+    <Translation>Epigrass/epigrass_es.ts</Translation>
+    <Translation>Epigrass/manager_pt_BR.ts</Translation>
+    <Translation>Epigrass/manager_pt_BR.qm</Translation>
   </Translations>
   <Resources>
     <Resource>Epigrass/epigrass.qrc</Resource>
