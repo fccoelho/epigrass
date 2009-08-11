@@ -13,11 +13,11 @@ from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
 import os,sys,ConfigParser, string, copy, commands,getpass
 import Epigrass.epiplay as epi
 from Epigrass import spread,  dgraph
-#try:
-#    import psyco
-#    psyco.full()
-#except:
-#    pass
+try:
+    import psyco
+    psyco.full()
+except:
+    pass
 
 
 class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
@@ -646,11 +646,14 @@ def loadLang(app,tr,lang):
     if lang == 'pt_BR':
         tr.load('manager_pt_BR','.')
         app.installTranslator(tr)
-    if lang == 'fr':
+    elif lang == 'fr':
         tr.load('epigrass_fr','.')
         app.installTranslator(tr)
-    if lang == 'es':
+    elif lang == 'es':
         tr.load('epigrass_es','.')
+        app.installTranslator(tr)
+    elif lang == 'ru':
+        tr.load('epigrass_ru_RU','.')
         app.installTranslator(tr)
     else:
         pass
