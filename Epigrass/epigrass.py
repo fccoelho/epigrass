@@ -1,22 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import logging, os
+import logging.handlers
+LOG_FILENAME = os.path.join(os.environ['HOME'],'epigrass_errors.out')
+epigrassLogger = logging.getLogger('epigrassLogger')
+epigrassLogger.setLevel(logging.ERROR)
+handler = logging.handlers.RotatingFileHandler(LOG_FILENAME, maxBytes=20000, backupCount=1)
+epigrassLogger.addHandler(handler)
+
 try:
     from PyQt4 import QtCore, QtGui
     from PyQt4.QtGui import *
 except ImportError: 
+    epigrassLogger.error("Please install PyQT 4")
     print "Please install PyQT 4"
 
 from Epigrass.manager import *
 import threading,  subprocess,  glob
 from Epigrass.Ui_cpanel4new import Ui_MainWindow
 from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
-import os,sys,ConfigParser, string, copy, commands,getpass
+import sys,ConfigParser, string, copy, commands,getpass
 import Epigrass.epiplay as epi
 from Epigrass import spread,  dgraph
 try:
     import psyco
     psyco.full()
 except:
+    epigrassLogger.info("Install Psyco for better performance." )
     pass
 
 
@@ -187,8 +197,10 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
             self.langCombo.setCurrentIndex(1)
         elif self.conf['settings.language'] == 'fr':
             self.langCombo.setCurrentIndex(2)
-        elif self.conf['settings.language'] == 'es':
+        elif self.conf['settings.language'] == 'ru':
             self.langCombo.setCurrentIndex(3)
+        elif self.conf['settings.language'] == 'es':
+            self.langCombo.setCurrentIndex(4)
         else:
             self.langCombo.setCurrentIndex(0)
         try:
@@ -284,6 +296,8 @@ an editor and your model's script."""),
         elif int(self.langCombo.currentIndex()) == 2:
             self.conf['settings.language'] = 'fr'
         elif int(self.langCombo.currentIndex()) == 3:
+            self.conf['settings.language'] = 'ru'
+        elif int(self.langCombo.currentIndex()) == 4:
             self.conf['settings.language'] = 'es'
         else:
             self.conf['settings.language'] = 'en'
