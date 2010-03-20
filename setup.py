@@ -11,7 +11,7 @@ try:
 except: pass
 
 setup(name='epigrass',
-    version='2.0',
+    version='2.0.1',
     author = 'Flavio Codeco Coelho, Claudia Torres Codeco',
     author_email = 'fccoelho@gmail.com',
     maintainer = 'Flavio Codeco Coelho',
@@ -22,6 +22,7 @@ setup(name='epigrass',
     download_url = 'http://sourceforge.net/project/showfiles.php?group_id=128000',
     license = 'GPL',
     packages = ['Epigrass'],
+    install_requires = ["numpy >= 1.2", "SQLObject >= 0.12"], 
     entry_points = {
         'console_scripts': [
             'epirunner = Epigrass.manager:main',
