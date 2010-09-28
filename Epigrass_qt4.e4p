@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2009-11-27, 12:23:58 -->
-<!-- Copyright (C) 2009 Flávio Codeço Coelho, fccoelho@gmail.com -->
+<!-- Saved: 2010-03-21, 17:17:25 -->
+<!-- Copyright (C) 2010 Flávio Codeço Coelho, fccoelho@gmail.com -->
 <Project version="4.6">
   <Language>en</Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -89,4 +89,35 @@
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.qrc" type="RESOURCES" />
   </FiletypeAssociations>
+  <Packagers>
+    <PackagersParams>
+      <dict>
+        <key>
+          <string>CXFREEZE</string>
+        </key>
+        <value>
+          <dict>
+            <key>
+              <string>baseName</string>
+            </key>
+            <value>
+              <unicode>ConsoleKeepPath.py</unicode>
+            </value>
+            <key>
+              <string>targetDirectory</string>
+            </key>
+            <value>
+              <unicode>dist</unicode>
+            </value>
+            <key>
+              <string>targetName</string>
+            </key>
+            <value>
+              <unicode>epigrass</unicode>
+            </value>
+          </dict>
+        </value>
+      </dict>
+    </PackagersParams>
+  </Packagers>
 </Project>

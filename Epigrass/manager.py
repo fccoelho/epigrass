@@ -782,7 +782,7 @@ class simulate:
                 t = 0
                 for i in ts:
                     tstep = str(t)
-                    nvalues.append(tuple([geoc,tstep,name]+[lat,long]+list(i)+[inc[t]]+[thist[t]]))
+                    nvalues.append(tuple([geoc,tstep,name]+[lat,long]+list(i)+[inc[t]]+[float(thist[t])]))
                     t += 1
             Cursor.executemany(sql2,nvalues)
             #Creating a table for edge data

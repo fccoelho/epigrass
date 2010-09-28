@@ -7,5 +7,6 @@ include COPYING
 recursive-include demos *
 recursive-include Epigrass *
 include docs/build/latex/Epigrass.pdf
+include docs/source/*
 
 
