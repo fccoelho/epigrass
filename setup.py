@@ -3,6 +3,7 @@ import ez_setup
 ez_setup.use_setuptools()
 from setuptools import setup
 from glob import glob
+from Epigrass.__version__ import version
 #from distutils.core import setup
 
 demos = glob('demos/*')
@@ -11,7 +12,7 @@ try:
 except: pass
 
 setup(name='epigrass',
-    version='2.0.3',
+    version=version,
     author = 'Flavio Codeco Coelho, Claudia Torres Codeco',
     author_email = 'fccoelho@gmail.com',
     maintainer = 'Flavio Codeco Coelho',
