@@ -115,7 +115,7 @@ class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
         Initializes the epigrassrc file.
         """
         usern = getpass.getuser() #Get the user name
-        os.mknod(self.epigrassrc)
+        #os.mknod(self.epigrassrc)
         f = open(self.epigrassrc,'w')
         
         rcskel = ['#EpiGrass Configuration File',
