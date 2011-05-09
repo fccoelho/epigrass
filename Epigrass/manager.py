@@ -454,15 +454,35 @@ class simulate:
         self.World.createDataLayer(varlist,sitestats)
         self.Say("Done creating Data shapefile!")
         #Generate the kml too.
-        self.Say("Creating KML output file...")
+        self.out_to_kml(names)
+#        self.Say("Creating KML output files...")
+#        lr = self.World.datasource.GetLayer(0)
+#        k = epigdal.KmlGenerator()
+#        k.addNodes(lr,names)
+#        k.writeToFile(self.outdir)
+#        ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
+#        data = [(site.geocode, t, p[1]) for site in self.g.site_list for t, p in enumerate(site.ts)]
+#        ka.add_data(data)
+#        ka.save()
+        self.Say("Done creating KML files!")
+        #close files
+        self.World.closeSources()
+    
+    def out_to_kml(self, names):
+        """
+        Generates output to kml files
+        """
+        self.Say("Creating KML output files...")
         lr = self.World.datasource.GetLayer(0)
         k = epigdal.KmlGenerator()
         k.addNodes(lr,names)
         k.writeToFile(self.outdir)
-        self.Say("Done creating KML file!")
-        #close files
-        self.World.closeSources()
-
+        for i, v in enumerate(self.g.site_list[0].vnames):
+            ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
+            data = [(site.geocode, t, p[i]) for site in self.g.site_list for t, p in enumerate(site.ts)]
+            ka.add_data(data)
+            ka.save(v+'_animation.kml')
+        self.Say("Done creating KML files!")
 
 
     def writeMetaCSV(self, table):

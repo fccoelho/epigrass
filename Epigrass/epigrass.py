@@ -678,6 +678,7 @@ def main():
     w = MainWindow_Impl()
     w.show()
     sys.exit(app.exec_())
+
 class RunThread(QtCore.QThread):
     """
     Worker Thread to run the simulation in a separate thread in order to allow the updating of the GUI to take place
