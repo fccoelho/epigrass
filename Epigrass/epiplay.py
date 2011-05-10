@@ -9,7 +9,9 @@ except ImportError:
     print "Please install PyQT 4"
 #
 from numpy import *
-import sqlobject as SO
+#import sqlobject as SO
+#TODO: remove dependency on SQLObject
+from sqlalchemy.ext.sqlsoup import SqlSoup
 
 from matplotlib import cm
 
@@ -29,7 +31,7 @@ class viewer:
         
         if backend == 'sqlite':
             db_filename = os.path.abspath('Epigrass.sqlite')
-            connection_string = 'sqlite:' + db_filename
+            connection_string = 'sqlite:///' + db_filename
         elif backend == 'mysql':
             connection_string = r'%s://%s:%s@%s/%s'%(backend,user,pw,host,db)
         elif backend == 'csv':
@@ -37,7 +39,8 @@ class viewer:
         else:
             sys.exit('Invalid Database Backend specified: %s'%backend)
         if not backend == 'csv':
-            self.connection = SO.connectionForURI(connection_string)
+            #self.connection = SO.connectionForURI(connection_string)
+            self.connection = SqlSoup(connection_string)
         
         self.dmap = 0#int(input('Draw Map?(0,1) '))
         self.tables = self.getTables()
@@ -53,35 +56,36 @@ class viewer:
         Returns list of table names from current database connection
         """
         if self.backend == 'sqlite':
-            r = [i[0] for i in self.connection.queryAll("select name from sqlite_master where type='table';")]
+            r = self.connection.bind.table_names()
+#            r = [i[0] for i in self.connection.queryAll("select name from sqlite_master where type='table';")]
         elif self.backend == 'mysql':
-            r = [i[0] for i in self.connection.queryAll('SHOW TABLES')]
+            r = self.connection.bind.table_names()
+#            r = [i[0] for i in self.connection.queryAll('SHOW TABLES')]
         elif self.backend =='csv':
             r = glob.glob('*.tab')
-        
         return r
+
     def getFields(self,table):
         """
         Returns a list of fields (column names) for a given table.
         table is a string with table name
         """
         if self.backend == 'sqlite':
-            r = [i[1] for i in self.connection.queryAll('PRAGMA table_info(%s)'%table)]
-            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
-            print shp
+#            r = [i[1] for i in self.connection.queryAll('PRAGMA table_info(%s)'%table)]
+#            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
+            r = [i[1] for i in self.connection.bind.execute('PRAGMA table_info(%s)'%table).fetchall()]
+            shp =self.connection.bind.execute('SELECT the_world$shapefile FROM %s'%(table+'_meta')).fetchall()
             self.shapefile = eval(shp[0][0])
             print self.shapefile
         elif self.backend == 'mysql':
-            r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
-            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
+#            r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
+#            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
+            r = [i[0] for i in self.connection.bind.execute('SHOW FIELDS FROM %s'%table).fetchall()]
+            shp =self.connection.bind.execute('SELECT the_world$shapefile FROM %s'%(table+'_meta')).fetchall()
             self.shapefile = eval(shp[0][0])
         elif self.backend == 'csv':
-            f = open(table,'r')
-            r = f.read().strip().split(',')
-            f.close()
-
-        #select only the key names (each element in r is a tuple, containing
-        # name and field descriptors )
+            with open(table,'r') as f:
+                r = f.read().strip().split(',')
         
         return r
     
@@ -102,7 +106,8 @@ class viewer:
             f.close()
             self.numbnodes = len(r)
         else:
-            r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
+#            r = self.connection.queryAll('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table)
+            r = self.connection.bind.execute('SELECT geocode,lat,longit,name FROM %s WHERE time = 0'%table).fetchall()
             self.numbnodes = len(r)
         self.nodes_pos = r#[(i[1], i[2], i[0], i[3])for i in r]
         self.nodes_gc = [i[0] for i in r]
@@ -118,7 +123,7 @@ class viewer:
     
     def readData(self,table):
         """
-        read node time series data
+        Read node time series data
         """
         if self.backend =="csv":
             f=open(table,"r")
@@ -129,7 +134,8 @@ class viewer:
                 r.append(l)
             f.close()
         else:
-            r = self.connection.queryAll('SELECT * FROM %s'%table)
+#            r = self.connection.queryAll('SELECT * FROM %s'%table)
+            r = self.connection.bind.execute('SELECT * FROM %s'%table).fetchall()
         return r
 
     def readEdges(self,table):
@@ -145,7 +151,8 @@ class viewer:
             self.numbedges = len(r)
         else:
             tab = table+'e'
-            r = self.connection.queryAll('SELECT * FROM %s'%tab)
+#            r = self.connection.queryAll('SELECT * FROM %s'%tab)
+            r = self.connection.bind.execute('SELECT * FROM %s'%tab).fetchall()
             self.numbedges = len(r)
         self.elist = [(self.nodes_gc.index(e[0]), self.nodes_gc.index(e[1])) for e in r]
         if not self.elist:

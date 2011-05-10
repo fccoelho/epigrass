@@ -12,6 +12,8 @@ from xml.dom.ext import PrettyPrint
 from matplotlib.colors import  rgb2hex, LogNorm
 from matplotlib.colors import normalize
 from matplotlib import cm
+from numpy import array
+from zipfile import ZipFile
 
 
 class World:
@@ -279,13 +281,13 @@ class AnimatedKML(object):
         """
         self.extrude = extrude
         self.fname = kmlfile
-        self.kmlDoc = xml.dom.minidom.parse(kmlfile)
-        self.folder = self.kmlDoc.getElementsByTagName("Folder")[0]
+        self.kmlDoc = minidom.parse(kmlfile)
+        self.doc = self.kmlDoc.getElementsByTagName("Document")[0]
         ufElems = self.kmlDoc.getElementsByTagName("Placemark")
         self.pmdict = {}
         for e in ufElems:
             nel = e.getElementsByTagName("name")[0]
-            name = self._get_text(nel.childNodes)
+            name = self._get_text(nel.childNodes).split('-')[0]
             self.pmdict[name] = e
     
     def _get_text(self, nodelist):
@@ -305,7 +307,7 @@ class AnimatedKML(object):
         vals = array([i[2] for i in data])
         norm = normalize(vals.min(), vals.max()) 
         for i, d in enumerate(data):
-            print i
+#            print i, " of ",  len(data)
             pm = self.pmdict[d[0]]
             #clone placemark to receive new data
             pm_newtime = pm.cloneNode(1)
@@ -333,7 +335,7 @@ class AnimatedKML(object):
             ob.removeChild(lr)
             ob.appendChild(nlr)
             #set polygon style
-            col = rgb2hex(cm.Oranges(norm(d[2]))[:3])+'ff'
+            col = rgb2hex(cm.jet(norm(d[2]))[:3])+'ff'
             st = pm_newtime.getElementsByTagName('Style')[0] #style
             nst = self.set_polygon_style(st, col)
             pm_newtime.removeChild(st)
@@ -345,9 +347,10 @@ class AnimatedKML(object):
             w.appendChild(self.kmlDoc.createTextNode(str(d[1])))
             ts.appendChild(w)
             pm_newtime.appendChild(ts)
-            self.folder.appendChild(pm_newtime)
+            self.doc.appendChild(pm_newtime)
         for pm in self.pmdict.itervalues():
-            self.folder.removeChild(pm)
+            self.doc.removeChild(pm)
+        self.pmdict={}
     
     def extrude_polygon(self, lr, alt):
         """
@@ -392,11 +395,19 @@ class AnimatedKML(object):
         """
         saves the new document
         """
+        dir = os.path.split(self.fname)[0]
+        
         if not fname:
-            fname = self.fname.split('.')[0]+'_animation.kml'
-        with open(fname, 'w') as f:
+            fname = self.fname.split('.')[0]+'_animation'
+        else: 
+            fname = os.path.join(dir, fname)
+#        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
+        with open(fname+'.kml', 'w') as f:
             PrettyPrint(self.kmlDoc, stream=f, indent='  ', encoding='utf-8')
-#            f.write(self.kmlDoc.toprettyxml(' ', newl = '\n', encoding = 'utf-8'))
+        # Now zip the kml to generate the kmz
+        with ZipFile(fname+'.kmz', 'w', 9, True) as kmz:
+            kmz.write(fname+'.kml')
+        os.unlink(fname+'.kml')
 
 class KmlGenerator:
     """
@@ -441,19 +452,20 @@ class KmlGenerator:
             if not f:#exit after the last feature
                 break
             prevalence = float(f.GetField("prevalence"))
-            rgba = jet(prevalence)
+            rgba = jet(prevalence*50)
             bgrcol = list(rgba[:-1]) #rgb(list)
             bgrcol.reverse() #turn it into bgr
             hexcol = "#80"+rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
             g = f.GetGeometryRef()
             if g.GetGeometryType() == 3:
+                geoc = f.GetFieldAsInteger("geocode")
                 if not names:
                     name = ""
                 else:
                     try:
-                        name = names[f.GetFieldAsInteger("geocode")]
+                        name = str(geoc)+"-"+names[geoc]
                     except KeyError:
-                        print f.GetFieldAsInteger("geocode")
+                        print geoc
                         name = ""
                 description = "Prevalence: %s;\nTotal cases: %s;\nImported Cases: %s;"%(prevalence,f.GetField("totalcases"),f.GetField("arrivals"))
                 locale.setlocale(locale.LC_ALL,"C") #avoids conversion of decimal points

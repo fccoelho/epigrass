@@ -338,7 +338,7 @@ an editor and your model's script."""),
             
             # In case of a batch
             if S.Batch:
-                self.textEdit1.insertPlainText('Simulation Started.')
+                self.textEdit1.insertPlainText(self.trUtf8('Simulation Started.'))
                 
                 # run the batch list
                 for i in S.Batch:
@@ -351,7 +351,7 @@ an editor and your model's script."""),
                     print 'starting model %s'%i
                     T.start()  # Start the simulation 
 
-            self.textEdit1.insertPlainText('Done!')
+            self.textEdit1.insertPlainText(self.trUtf8('Done setting up the model.\n'))
             self.buttonRun.setEnabled(1)
             #print 'Agora...'
             spread.Spread(self.sim.g, self.sim.outdir,self.sim.encoding)
@@ -464,17 +464,24 @@ Make sure you have generated it."""),
                 return
         # for SQLite databases check for the existence os the database file.
         if self.dbType.currentIndex() == 1: 
-            if not os.path.exists('Epigrass.sqlite'):
-                basedir = str(QFileDialog.getExistingDirectory(\
+            while not os.path.exists('Epigrass.sqlite'):
+                dir = str(QFileDialog.getExistingDirectory(\
                     None,
-                    self.trUtf8("No SQLite database found. Please select a new directory."),
+                    self.trUtf8("No SQLite database found in %s. Please select a new directory."%basedir),
                     QtCore.QString(),
                     QFileDialog.Options(QFileDialog.ShowDirsOnly)))
-            if not glob.glob(basedir+'*.sqlite'):
+                if dir:
+                    os.chdir(dir)
+                else:
+                    break
+            else:
+                basedir = dir
+
+            if not os.path.exists('Epigrass.sqlite'):
                 QMessageBox.information(None,
                     self.trUtf8("No Database found"),
-                    self.trUtf8("""No file ending with ".sqlite" was found. 
-Please try a different  directory."""),
+                    self.trUtf8("""No file ending with ".sqlite" was found. on %s
+Please try a different  directory."""%basedir),
                     QMessageBox.StandardButtons(\
                         QMessageBox.Ok),
                     QMessageBox.Ok)
