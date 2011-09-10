@@ -455,8 +455,10 @@ Make sure you have generated it."""),
         """
         Scan the epigrass database an shows available simulations.
         """
+        print "scanning"
         basedir = self.rootdir
-        if not self.dbType.currentIndex():
+        datadirs = [d for d in glob.glob("outdata-*") if os.path.isdir(d)] #list of  outdata directories
+        if self.dbType.currentIndex() == 0:
             if not self.pwEdit.text():
                 QMessageBox.warning(None,
                     self.trUtf8("Missing Database Password"),
@@ -464,22 +466,26 @@ Make sure you have generated it."""),
                 return
         # for SQLite databases check for the existence os the database file.
         if self.dbType.currentIndex() == 1: 
-            if not os.path.exists('Epigrass.sqlite'):
-                basedir = str(QFileDialog.getExistingDirectory(\
+            print "sqlite"
+            if len(datadirs) > 1:
+                datadir = QtGui.QInputDialog.getItem(\
                     None,
-                    self.trUtf8("No SQLite database found. Please select a new directory."),
-                    QtCore.QString(),
-                    QFileDialog.Options(QFileDialog.ShowDirsOnly)))
-            if not glob.glob(basedir+'*.sqlite'):
-                QMessageBox.information(None,
-                    self.trUtf8("No Database found"),
-                    self.trUtf8("""No file ending with ".sqlite" was found. 
-Please try a different  directory."""),
-                    QMessageBox.StandardButtons(\
-                        QMessageBox.Ok),
-                    QMessageBox.Ok)
+                    self.trUtf8("Please Select Database to Open"),
+                    self.trUtf8("Database"),
+                    datadirs,
+                    0, False)
             else:
+                datadir = datadirs[0]
+            os.chdir(datadir)
+            print os.getcwd()
+            if not os.path.exists('Epigrass.sqlite'):
+                QtGui.QMessageBox.warning(None,
+                    self.trUtf8("No Database found"),
+                    self.trUtf8("""Please try again"""),
+                    QtGui.QMessageBox.StandardButtons(\
+                        QtGui.QMessageBox.Ok))
                 os.chdir(basedir)
+                print os.getcwd()
                 
         self.Display=epi.viewer(host=str(self.hostnEdit.text()),port=int(str(self.portEdit.text())),
                             db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
