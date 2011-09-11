@@ -729,7 +729,6 @@ class Polygon(QtGui.QGraphicsItem):
 #        print button
         scenepos = event.scenePos()
         pos = event.pos()
-        print scenepos,  pos,  self.center
         self.select()
         #QtGui.QGraphicsItem.mousePressEvent(self, event)
         
