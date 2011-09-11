@@ -8,8 +8,14 @@ Licensed under the GPL.
 import locale, os#, pylab
 from osgeo  import ogr,  gdal
 from xml.dom import minidom, Node
+from xml.dom.ext import PrettyPrint
 from matplotlib.colors import  rgb2hex, LogNorm
+from matplotlib.colors import normalize
 from matplotlib import cm
+from numpy import array
+from zipfile import ZipFile
+
+
 class World:
     def __init__(self,filename,namefield='name',geocfield='geocode',outdir = '.'):
         '''
@@ -264,6 +270,145 @@ class World:
             #print "closed data files"
 
 
+class AnimatedKML(object):
+    """
+    Creates animated KML based on layer given
+    """
+    def __init__(self, kmlfile, extrude=1):
+        """
+        kmlfile: File containing the layer over which the animation will be built. it must contain polygons. Placemarks should contain a tag <name> geocode</name>
+        extrude: if True the polygons will be extruded according to values in the timeseries data.
+        """
+        self.extrude = extrude
+        self.fname = kmlfile
+        self.kmlDoc = minidom.parse(kmlfile)
+        self.doc = self.kmlDoc.getElementsByTagName("Document")[0]
+        ufElems = self.kmlDoc.getElementsByTagName("Placemark")
+        self.pmdict = {}
+        for e in ufElems:
+            nel = e.getElementsByTagName("name")[0]
+            name = self._get_text(nel.childNodes).split('-')[0]
+            self.pmdict[name] = e
+    
+    def _get_text(self, nodelist):
+        """
+        Returns  the text of a xml text node
+        """
+        rc = []
+        for node in nodelist:
+            if node.nodeType == node.TEXT_NODE:
+                rc.append(node.data)
+        return ''.join(rc)
+    
+    def add_data(self, data):
+        """
+        Add time-series data for the localities: [(geocode,time,value),...]
+        """
+        vals = array([i[2] for i in data])
+        norm = normalize(vals.min(), vals.max()) 
+        for i, d in enumerate(data):
+#            print i, " of ",  len(data)
+            pm = self.pmdict[d[0]]
+            #clone placemark to receive new data
+            pm_newtime = pm.cloneNode(1)
+            # Renaming placemark
+            on = pm_newtime.getElementsByTagName('name')[0]
+            nn = self.kmlDoc.createElement('name')
+            nn.appendChild(self.kmlDoc.createTextNode(d[0]+'-'+str(d[1])))
+            pm_newtime.replaceChild(nn, on)
+            nl = pm_newtime.childNodes
+            #extrude polygon
+            pol = pm_newtime.getElementsByTagName('Polygon')[0]
+            alt = self.kmlDoc.createElement('altitudeMode')
+            alt.appendChild(self.kmlDoc.createTextNode('relativeToGround'))
+            ex = self.kmlDoc.createElement('extrude')
+            ex.appendChild(self.kmlDoc.createTextNode('1'))
+            ts = self.kmlDoc.createElement('tessellate')
+            ts.appendChild(self.kmlDoc.createTextNode('1'))
+            pol.appendChild(alt)
+            pol.appendChild(ex)
+            pol.appendChild(ts)
+            lr = pm_newtime.getElementsByTagName('LinearRing')[0]
+            nlr = self.extrude_polygon(lr, d[2])
+            ob = pm_newtime.getElementsByTagName('outerBoundaryIs')[0]
+#            ob.replaceChild(nlr, lr)
+            ob.removeChild(lr)
+            ob.appendChild(nlr)
+            #set polygon style
+            col = rgb2hex(cm.jet(norm(d[2]))[:3])+'ff'
+            st = pm_newtime.getElementsByTagName('Style')[0] #style
+            nst = self.set_polygon_style(st, col)
+            pm_newtime.removeChild(st)
+            pm_newtime.appendChild(nst)
+            
+            #add timestamp
+            ts = self.kmlDoc.createElement('TimeStamp')
+            w = self.kmlDoc.createElement('when')
+            w.appendChild(self.kmlDoc.createTextNode(str(d[1])))
+            ts.appendChild(w)
+            pm_newtime.appendChild(ts)
+            self.doc.appendChild(pm_newtime)
+        for pm in self.pmdict.itervalues():
+            self.doc.removeChild(pm)
+        self.pmdict={}
+    
+    def extrude_polygon(self, lr, alt):
+        """
+        Adds altitude to the coordinates of the linear ring.
+        """
+        c = lr.getElementsByTagName('coordinates')[0]
+        nc = self.kmlDoc.createElement('coordinates')
+        ctext = self._get_text(c.childNodes)
+        nctext = ' '.join([p+','+str(alt*100) for p in ctext.split(' ')])
+        nc.appendChild(self.kmlDoc.createTextNode(nctext))
+        alt = self.kmlDoc.createElement('altitudeMode')
+        alt.appendChild(self.kmlDoc.createTextNode('relativeToGround'))
+#        altoff = self.kmlDoc.createElement('altitudeOffset')
+#        altoff.appendChild(self.kmlDoc.createTextNode(str(d[2]*1000)))
+        ex = self.kmlDoc.createElement('extrude')
+        ex.appendChild(self.kmlDoc.createTextNode('1'))
+        ts = self.kmlDoc.createElement('tessellate')
+        ts.appendChild(self.kmlDoc.createTextNode('1'))
+        lr.replaceChild(nc, c)
+        lr.appendChild(alt)
+        if self.extrude:
+            lr.appendChild(ex)
+            lr.appendChild(ts)
+#        lr.appendChild(altoff)
+        return lr
+        
+    
+    def set_polygon_style(self,style, color):
+        st = style
+        pst = st.getElementsByTagName('PolyStyle')[0] #polygon style
+        pst1 = self.kmlDoc.createElement('PolyStyle')
+        pfill = self.kmlDoc.createElement('fill')
+        pcol = self.kmlDoc.createElement('color')
+        pfill.appendChild(self.kmlDoc.createTextNode('1'))
+        pcol.appendChild(self.kmlDoc.createTextNode(color))
+        pst1.appendChild(pfill)
+        pst1.appendChild(pcol)
+        st.replaceChild(pst1, pst)
+        return st
+        
+    def save(self, fname=''):
+        """
+        saves the new document
+        """
+        dir = os.path.split(self.fname)[0]
+        
+        if not fname:
+            fname = self.fname.split('.')[0]+'_animation'
+        else: 
+            fname = os.path.join(dir, fname)
+#        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
+        with open(fname+'.kml', 'w') as f:
+            PrettyPrint(self.kmlDoc, stream=f, indent='  ', encoding='utf-8')
+        # Now zip the kml to generate the kmz
+        with ZipFile(fname+'.kmz', 'w', 9, True) as kmz:
+            kmz.write(fname+'.kml')
+        os.unlink(fname+'.kml')
+
 class KmlGenerator:
     """
         Generate a KML file for displaying data on 
@@ -307,19 +452,20 @@ class KmlGenerator:
             if not f:#exit after the last feature
                 break
             prevalence = float(f.GetField("prevalence"))
-            rgba = jet(prevalence)
+            rgba = jet(prevalence*50)
             bgrcol = list(rgba[:-1]) #rgb(list)
             bgrcol.reverse() #turn it into bgr
             hexcol = "#80"+rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
             g = f.GetGeometryRef()
             if g.GetGeometryType() == 3:
+                geoc = f.GetFieldAsInteger("geocode")
                 if not names:
                     name = ""
                 else:
                     try:
-                        name = names[f.GetFieldAsInteger("geocode")]
+                        name = str(geoc)+"-"+names[geoc]
                     except KeyError:
-                        print f.GetFieldAsInteger("geocode")
+                        print geoc
                         name = ""
                 description = "Prevalence: %s;\nTotal cases: %s;\nImported Cases: %s;"%(prevalence,f.GetField("totalcases"),f.GetField("arrivals"))
                 locale.setlocale(locale.LC_ALL,"C") #avoids conversion of decimal points

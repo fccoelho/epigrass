@@ -338,7 +338,7 @@ an editor and your model's script."""),
             
             # In case of a batch
             if S.Batch:
-                self.textEdit1.insertPlainText('Simulation Started.')
+                self.textEdit1.insertPlainText(self.trUtf8('Simulation Started.'))
                 
                 # run the batch list
                 for i in S.Batch:

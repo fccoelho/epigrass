@@ -23,7 +23,7 @@ setup(name='epigrass',
     download_url = 'http://sourceforge.net/project/showfiles.php?group_id=128000',
     license = 'GPL',
     packages = ['Epigrass'],
-    install_requires = ["numpy >= 1.2",  "networkx >= 1.1", "SQLObject >= 0.12"], 
+    install_requires = ["numpy >= 1.2",  "networkx >= 1.1", "SQLAlchemy >= 0.6"], 
     entry_points = {
         'console_scripts': [
             'epirunner = Epigrass.manager:main',

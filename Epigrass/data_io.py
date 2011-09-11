@@ -3,7 +3,7 @@ This module contains functions to read and write from ascii files, as well as to
 """
 from numpy import *
 from string import *
-from sqlobject import *
+#from sqlobject import *
 
 from difflib import *
 import sys
