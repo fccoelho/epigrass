@@ -1,0 +1,170 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file '/home/fccoelho/Documents/Projects_software/EpigrassQt4/epgeditor.ui'
+#
+# Created: Sun Sep 11 14:44:46 2011
+#      by: PyQt4 UI code generator 4.8.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.resize(505, 732)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/egicon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setGeometry(QtCore.QRect(0, 31, 505, 673))
+        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.vboxlayout = QtGui.QVBoxLayout(self.centralwidget)
+        self.vboxlayout.setObjectName(_fromUtf8("vboxlayout"))
+        self.tabWidget = QtGui.QTabWidget(self.centralwidget)
+        self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
+        self.tab = QtGui.QWidget()
+        self.tab.setGeometry(QtCore.QRect(0, 0, 485, 621))
+        self.tab.setObjectName(_fromUtf8("tab"))
+        self.vboxlayout1 = QtGui.QVBoxLayout(self.tab)
+        self.vboxlayout1.setObjectName(_fromUtf8("vboxlayout1"))
+        self.treeWidget = QtGui.QTreeWidget(self.tab)
+        self.treeWidget.setMouseTracking(True)
+        self.treeWidget.setAlternatingRowColors(True)
+        self.treeWidget.setAnimated(True)
+        self.treeWidget.setWordWrap(True)
+        self.treeWidget.setColumnCount(3)
+        self.treeWidget.setObjectName(_fromUtf8("treeWidget"))
+        self.vboxlayout1.addWidget(self.treeWidget)
+        self.hboxlayout = QtGui.QHBoxLayout()
+        self.hboxlayout.setObjectName(_fromUtf8("hboxlayout"))
+        self.addVButton = QtGui.QPushButton(self.tab)
+        self.addVButton.setObjectName(_fromUtf8("addVButton"))
+        self.hboxlayout.addWidget(self.addVButton)
+        self.exitButton = QtGui.QPushButton(self.tab)
+        self.exitButton.setObjectName(_fromUtf8("exitButton"))
+        self.hboxlayout.addWidget(self.exitButton)
+        self.vboxlayout1.addLayout(self.hboxlayout)
+        self.tabWidget.addTab(self.tab, _fromUtf8(""))
+        self.tab_2 = QtGui.QWidget()
+        self.tab_2.setGeometry(QtCore.QRect(0, 0, 485, 621))
+        self.tab_2.setObjectName(_fromUtf8("tab_2"))
+        self.vboxlayout2 = QtGui.QVBoxLayout(self.tab_2)
+        self.vboxlayout2.setObjectName(_fromUtf8("vboxlayout2"))
+        self.epgView = QtGui.QTextBrowser(self.tab_2)
+        self.epgView.setObjectName(_fromUtf8("epgView"))
+        self.vboxlayout2.addWidget(self.epgView)
+        self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
+        self.help_tab = QtGui.QWidget()
+        self.help_tab.setGeometry(QtCore.QRect(0, 0, 485, 621))
+        self.help_tab.setObjectName(_fromUtf8("help_tab"))
+        self.vboxlayout3 = QtGui.QVBoxLayout(self.help_tab)
+        self.vboxlayout3.setObjectName(_fromUtf8("vboxlayout3"))
+        self.helpBrowser = QtGui.QTextBrowser(self.help_tab)
+        self.helpBrowser.setSource(QtCore.QUrl(_fromUtf8("file:///")))
+        self.helpBrowser.setObjectName(_fromUtf8("helpBrowser"))
+        self.vboxlayout3.addWidget(self.helpBrowser)
+        self.tabWidget.addTab(self.help_tab, _fromUtf8(""))
+        self.vboxlayout.addWidget(self.tabWidget)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 505, 31))
+        self.menubar.setObjectName(_fromUtf8("menubar"))
+        self.menuFile = QtGui.QMenu(self.menubar)
+        self.menuFile.setObjectName(_fromUtf8("menuFile"))
+        self.menu_Help = QtGui.QMenu(self.menubar)
+        self.menu_Help.setObjectName(_fromUtf8("menu_Help"))
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setGeometry(QtCore.QRect(0, 704, 505, 28))
+        self.statusbar.setObjectName(_fromUtf8("statusbar"))
+        MainWindow.setStatusBar(self.statusbar)
+        self.action_Help = QtGui.QAction(MainWindow)
+        self.action_Help.setObjectName(_fromUtf8("action_Help"))
+        self.action_About = QtGui.QAction(MainWindow)
+        self.action_About.setObjectName(_fromUtf8("action_About"))
+        self.actionAbout_Epigrass = QtGui.QAction(MainWindow)
+        self.actionAbout_Epigrass.setObjectName(_fromUtf8("actionAbout_Epigrass"))
+        self.actionAuto_Refresh = QtGui.QAction(MainWindow)
+        self.actionAuto_Refresh.setCheckable(True)
+        self.actionAuto_Refresh.setObjectName(_fromUtf8("actionAuto_Refresh"))
+        self.action_Open_epg_File = QtGui.QAction(MainWindow)
+        self.action_Open_epg_File.setObjectName(_fromUtf8("action_Open_epg_File"))
+        self.action_Save = QtGui.QAction(MainWindow)
+        self.action_Save.setObjectName(_fromUtf8("action_Save"))
+        self.actionE_xit = QtGui.QAction(MainWindow)
+        self.actionE_xit.setObjectName(_fromUtf8("actionE_xit"))
+        self.action_Refresh = QtGui.QAction(MainWindow)
+        self.action_Refresh.setObjectName(_fromUtf8("action_Refresh"))
+        self.action_New = QtGui.QAction(MainWindow)
+        self.action_New.setObjectName(_fromUtf8("action_New"))
+        self.menuFile.addAction(self.action_New)
+        self.menuFile.addAction(self.action_Open_epg_File)
+        self.menuFile.addAction(self.action_Save)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionE_xit)
+        self.menu_Help.addAction(self.action_Help)
+        self.menu_Help.addAction(self.action_About)
+        self.menu_Help.addSeparator()
+        self.menu_Help.addAction(self.actionAbout_Epigrass)
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menu_Help.menuAction())
+
+        self.retranslateUi(MainWindow)
+        self.tabWidget.setCurrentIndex(2)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", ".EPG Editor", None, QtGui.QApplication.UnicodeUTF8))
+        self.treeWidget.setSortingEnabled(True)
+        self.treeWidget.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Variable", None, QtGui.QApplication.UnicodeUTF8))
+        self.treeWidget.headerItem().setText(1, QtGui.QApplication.translate("MainWindow", "Value", None, QtGui.QApplication.UnicodeUTF8))
+        self.treeWidget.headerItem().setText(2, QtGui.QApplication.translate("MainWindow", "Description", None, QtGui.QApplication.UnicodeUTF8))
+        self.addVButton.setToolTip(QtGui.QApplication.translate("MainWindow", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Sans Serif\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Save file</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.addVButton.setText(QtGui.QApplication.translate("MainWindow", "Add variable", None, QtGui.QApplication.UnicodeUTF8))
+        self.exitButton.setToolTip(QtGui.QApplication.translate("MainWindow", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Sans Serif\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Leave the editor.</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.exitButton.setText(QtGui.QApplication.translate("MainWindow", "Exit", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("MainWindow", "Editor", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtGui.QApplication.translate("MainWindow", "Viewer", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.help_tab), QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.help_tab), QtGui.QApplication.translate("MainWindow", "Usage help", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
+        self.menu_Help.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Help.setText(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Help.setShortcut(QtGui.QApplication.translate("MainWindow", "F1", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_About.setText(QtGui.QApplication.translate("MainWindow", "&About", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAbout_Epigrass.setText(QtGui.QApplication.translate("MainWindow", "About &Epigrass", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAuto_Refresh.setText(QtGui.QApplication.translate("MainWindow", "Auto-&Refresh", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Open_epg_File.setText(QtGui.QApplication.translate("MainWindow", "&Open .epg File", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Open_epg_File.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+O", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Save.setText(QtGui.QApplication.translate("MainWindow", "&Save", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Save.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+S", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionE_xit.setText(QtGui.QApplication.translate("MainWindow", "E&xit", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionE_xit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+X", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Refresh.setText(QtGui.QApplication.translate("MainWindow", "&Refresh", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Refresh.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+R", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_New.setText(QtGui.QApplication.translate("MainWindow", "&New", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_New.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+N", None, QtGui.QApplication.UnicodeUTF8))
+
+import epigrass_rc
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    MainWindow = QtGui.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+

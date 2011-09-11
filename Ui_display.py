@@ -1,0 +1,142 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file '/home/fccoelho/Documents/Projects_software/EpigrassQt4/display.ui'
+#
+# Created: Sun Sep 11 16:48:26 2011
+#      by: PyQt4 UI code generator 4.8.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName(_fromUtf8("Form"))
+        Form.resize(820, 739)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
+        Form.setMinimumSize(QtCore.QSize(100, 600))
+        self.verticalLayout = QtGui.QVBoxLayout(Form)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.label = QtGui.QLabel(Form)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.verticalLayout.addWidget(self.label)
+        self.splitter_2 = QtGui.QSplitter(Form)
+        self.splitter_2.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter_2.setObjectName(_fromUtf8("splitter_2"))
+        self.splitter = QtGui.QSplitter(self.splitter_2)
+        self.splitter.setOrientation(QtCore.Qt.Vertical)
+        self.splitter.setObjectName(_fromUtf8("splitter"))
+        self.mapView = QtGui.QGraphicsView(self.splitter)
+        self.mapView.setProperty(_fromUtf8("cursor"), QtCore.Qt.CrossCursor)
+        self.mapView.setToolTip(_fromUtf8(""))
+        self.mapView.setAutoFillBackground(True)
+        self.mapView.setObjectName(_fromUtf8("mapView"))
+        self.layoutWidget = QtGui.QWidget(self.splitter)
+        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
+        self.vboxlayout = QtGui.QVBoxLayout(self.layoutWidget)
+        self.vboxlayout.setMargin(0)
+        self.vboxlayout.setObjectName(_fromUtf8("vboxlayout"))
+        self.horizontalSlider = QtGui.QSlider(self.layoutWidget)
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setTickPosition(QtGui.QSlider.TicksBelow)
+        self.horizontalSlider.setTickInterval(0)
+        self.horizontalSlider.setObjectName(_fromUtf8("horizontalSlider"))
+        self.vboxlayout.addWidget(self.horizontalSlider)
+        self.hboxlayout = QtGui.QHBoxLayout()
+        self.hboxlayout.setObjectName(_fromUtf8("hboxlayout"))
+        self.label_2 = QtGui.QLabel(self.layoutWidget)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.hboxlayout.addWidget(self.label_2)
+        spacerItem = QtGui.QSpacerItem(461, 23, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.hboxlayout.addItem(spacerItem)
+        self.lcdNumber = QtGui.QLCDNumber(self.layoutWidget)
+        self.lcdNumber.setObjectName(_fromUtf8("lcdNumber"))
+        self.hboxlayout.addWidget(self.lcdNumber)
+        self.vboxlayout.addLayout(self.hboxlayout)
+        self.qwtPlot = QwtPlot(self.layoutWidget)
+        self.qwtPlot.setObjectName(_fromUtf8("qwtPlot"))
+        self.vboxlayout.addWidget(self.qwtPlot)
+        self.layoutWidget1 = QtGui.QWidget(self.splitter_2)
+        self.layoutWidget1.setObjectName(_fromUtf8("layoutWidget1"))
+        self.vboxlayout1 = QtGui.QVBoxLayout(self.layoutWidget1)
+        self.vboxlayout1.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
+        self.vboxlayout1.setMargin(0)
+        self.vboxlayout1.setObjectName(_fromUtf8("vboxlayout1"))
+        self.pushButton = QtGui.QPushButton(self.layoutWidget1)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.vboxlayout1.addWidget(self.pushButton)
+        self.pushButton_2 = QtGui.QPushButton(self.layoutWidget1)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
+        self.pushButton_2.setSizePolicy(sizePolicy)
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.vboxlayout1.addWidget(self.pushButton_2)
+        self.scrollArea = QtGui.QScrollArea(self.layoutWidget1)
+        self.scrollArea.setMinimumSize(QtCore.QSize(0, 400))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
+        self.scrollAreaWidgetContents = QtGui.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 109, 394))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
+        self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 0))
+        self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
+        self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+        self.nodeGroupBox = QtGui.QGroupBox(self.scrollAreaWidgetContents)
+        self.nodeGroupBox.setMinimumSize(QtCore.QSize(0, 200))
+        self.nodeGroupBox.setObjectName(_fromUtf8("nodeGroupBox"))
+        self.verticalLayout_3.addWidget(self.nodeGroupBox)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.vboxlayout1.addWidget(self.scrollArea)
+        spacerItem1 = QtGui.QSpacerItem(20, 521, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.vboxlayout1.addItem(spacerItem1)
+        self.verticalLayout.addWidget(self.splitter_2)
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Simulation Display", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("Form", "Geographical View", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("Form", "Time Series", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("Form", "Replay", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2.setText(QtGui.QApplication.translate("Form", "Stop", None, QtGui.QApplication.UnicodeUTF8))
+        self.scrollArea.setToolTip(QtGui.QApplication.translate("Form", "Check Nodes to plot their time-series", None, QtGui.QApplication.UnicodeUTF8))
+        self.nodeGroupBox.setTitle(QtGui.QApplication.translate("Form", "Node List", None, QtGui.QApplication.UnicodeUTF8))
+
+from qwt_plot import QwtPlot
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Form = QtGui.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+
