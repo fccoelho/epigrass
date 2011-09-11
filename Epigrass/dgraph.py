@@ -102,6 +102,8 @@ class MapWindow(Ui_Form):
         self.setupQwtPlot()
         self.step = 0
         self.M = None #initialize map widget
+        # Configuring View
+        self.mapView.setViewportUpdateMode(QtGui.QGraphicsView.SmartViewportUpdate)
         
         # Overloading event-handling methods for self.mapView
         self.mapView.keyPressEvent = MethodType(keyPressEvent, self.mapView)
@@ -133,6 +135,21 @@ class MapWindow(Ui_Form):
         self.mX.setXValue(0)
         self.mX.attach(self.qwtPlot)
         self.qwtPlot.replot()
+        
+    def fill_nodel_list(self, pl):
+        """
+        creates check boxes on the node list group box
+        pl is a list of polygons
+        """
+        lo = self.nodeListLayout
+        for n in pl:
+            cb = QtGui.QCheckBox(self.scrollArea)
+            cb.setText(n.name)
+            QtCore.QObject.connect(cb,QtCore.SIGNAL("stateChanged(int)"), n.select)
+            cb.setToolTip(str(n.geocode))
+            lo.addWidget(cb)
+#        self.nodeGroupBox.setLayout(lo)
+            
     def addTsCurve(self, gc, name):
         """
         plots a time series curve to the plot window
@@ -161,8 +178,8 @@ class MapWindow(Ui_Form):
         xmax,ymax = self.M.xmax, self.M.ymax
         xxs = (xmax-xmin)*1.1 #percentage of extra space
         yxs = (ymax-ymin)*1.1 #percentage of extra space
+        
         #calculating center of scene
-
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
         self.mapView.scene = QtGui.QGraphicsScene(self.mapView)
@@ -182,10 +199,11 @@ class MapWindow(Ui_Form):
         
         for p in self.M.polyList:
             self.mapView.scene.addItem(p)
+        self.fill_nodel_list(self.M.polyList)
         #self.scene.addText("%s,%s,%s,%s"%(xmin, xxs, ymin, yxs))
-        self.polys = [item for item in self.mapView.scene.items() if isinstance(item, Polygon)]
+#        self.polys = [item for item in self.mapView.scene.items() if isinstance(item, Polygon)]
         #self.mapView.addGraph(self.polys)
-        self.mapView.setMinimumSize(400, 400)
+        self.mapView.setMinimumSize(300, 300)
         #self.mapView.setWindowTitle(self.tr("Network View"))
         scale_factor = self.mapView.width()/xxs
         self.mapView.scale(scale_factor, scale_factor)
@@ -228,7 +246,7 @@ class MapWindow(Ui_Form):
         
     def centerScene(self):
         """
-        centers the scene and fits the specified rectangle to it
+        Centers the scene and fits the specified rectangle to it
         """
         ymax, ymin = self.ymax, self.ymin
         xmax, xmin = self.xmax, self.xmin
@@ -587,9 +605,6 @@ class BaseMap(object):
         else:
             print "shapefile %s not found in %s"%(fname, os.getcwd())
 
-    
-
-
     def Reader(self, fname):
         """
         Reads shapefiles vector files.
@@ -654,6 +669,9 @@ class QtMap(BaseMap):
         BaseMap.__init__(self, fname,namefield,geocfield)
         
     def dbound(self, pol, geocode = None , name=""):
+        """
+        Draws a polygon.
+        """
         #FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas
         p = Polygon(pol, geocode,name,  self.display)
         self.xmin = p.xmin if p.xmin<self.xmin else self.xmin
@@ -688,6 +706,7 @@ class Polygon(QtGui.QGraphicsItem):
         self.geocode = geocode
         self.name = name
         self.setToolTip(str(self.geocode)+ " - "+name)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
         self.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
         self.setZValue(1)
     
@@ -710,6 +729,14 @@ class Polygon(QtGui.QGraphicsItem):
 #        print button
         scenepos = event.scenePos()
         pos = event.pos()
+        print scenepos,  pos,  self.center
+        self.select()
+        #QtGui.QGraphicsItem.mousePressEvent(self, event)
+        
+    def select(self):
+        """
+        Toggle selection of polygon
+        """
         if self.isSelected():
 #            print "unselect"
             self.setSelected(False)
@@ -727,9 +754,7 @@ class Polygon(QtGui.QGraphicsItem):
             self.display.addTsCurve(self.geocode, self.name)
             self.display.qwtPlot.replot()
         self.update()
-        #QtGui.QGraphicsItem.mousePressEvent(self, event)
         
-
     def mouseReleaseEvent(self, event):
         self.update()
         #QtGui.QGraphicsItem.mouseReleaseEvent(self, event)

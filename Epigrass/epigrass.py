@@ -474,6 +474,13 @@ Make sure you have generated it."""),
                     self.trUtf8("Database"),
                     datadirs,
                     0, False)
+            elif len(datadirs) == 0:
+                QtGui.QMessageBox.critical(None,
+                    self.trUtf8("Invalid Folder"),
+                    self.trUtf8("""This directory does not contain a model outdata subdirectory. """),
+                    QtGui.QMessageBox.StandardButtons(\
+                        QtGui.QMessageBox.Abort))
+
             else:
                 datadir = datadirs[0]
             os.chdir(datadir)

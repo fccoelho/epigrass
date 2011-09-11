@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project Epigrass_qt4 -->
-<!-- Saved: 2011-02-19, 16:14:35 -->
-<!-- Copyright (C) 2011 Flávio Codeço Coelho, fccoelho@gmail.com -->
 <Project version="4.6">
   <Language>en</Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -47,6 +45,12 @@
     <Source>Epigrass/Ui_cpanel4new.py</Source>
     <Source>docs/source/conf.py</Source>
     <Source>Epigrass/neteditor.py</Source>
+    <Source>Ui_display.py</Source>
+    <Source>Ui_about4.py</Source>
+    <Source>Ui_epgeditor.py</Source>
+    <Source>Ui_cpanel4new.py</Source>
+    <Source>Epigrass/Ui_neteditor.py</Source>
+    <Source>about4.py</Source>
   </Sources>
   <Forms>
     <Form>about4.ui</Form>

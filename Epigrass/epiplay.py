@@ -192,45 +192,45 @@ class viewer:
 #            time.sleep(1./rate)
         self.gr.horizontalSlider.setEnabled(1)
     
-
-    def plotTs(self,ts,name):
-        """
-        Uses gcurve to plot the time-series of a given city object
-        """
-##        try:
-##            self.gg.display.visible=0
-##        except:pass
-        self.gg = VG.gdisplay(title='%s'%name,xtitle='time',ytitle='count')
-        g=VG.gcurve(color=VG.color.green)
-        for t,n in enumerate(ts):
-            g.plot(pos=(t,n))
+#
+#    def plotTs(self,ts,name):
+#        """
+#        Uses gcurve to plot the time-series of a given city object
+#        """
+###        try:
+###            self.gg.display.visible=0
+###        except:pass
+#        self.gg = VG.gdisplay(title='%s'%name,xtitle='time',ytitle='count')
+#        g=VG.gcurve(color=VG.color.green)
+#        for t,n in enumerate(ts):
+#            g.plot(pos=(t,n))
     
-    def keyin(self,data,edata,numbsteps,pos,rate):
-        """
-        Implements keyboard and mouse interactions
-        """
-        while 1:
-            ob = self.gr.display.mouse.pick
-            try:
-                ob.sn(2)
-                if self.gr.display.mouse.alt and not ob.paren.tsdone:
-                    self.plotTs(ob.paren.ts,ob.paren.name)
-                    ob.paren.tsdone = 1
-            except:pass
-            if self.gr.display.mouse.clicked:
-                m = self.gr.display.mouse.getclick()
-                #print m.click
-                loc = m.pos
-                self.gr.display.center = loc
-            if self.gr.display.kb.keys: # is there an event waiting to be processed?
-                s = self.gr.display.kb.getkey() # obtain keyboard information
-                if s == 'r': #Replay animation
-                    for i in self.gr.nodes:
-                        self.paintNode(0,i,numbsteps,col='g')
-                        i.painted=0
-                    self.anim(data,edata,numbsteps,pos,rate)
-                else:
-                    pass
+#    def keyin(self,data,edata,numbsteps,pos,rate):
+#        """
+#        Implements keyboard and mouse interactions
+#        """
+#        while 1:
+#            ob = self.gr.display.mouse.pick
+#            try:
+#                ob.sn(2)
+#                if self.gr.display.mouse.alt and not ob.paren.tsdone:
+#                    self.plotTs(ob.paren.ts,ob.paren.name)
+#                    ob.paren.tsdone = 1
+#            except:pass
+#            if self.gr.display.mouse.clicked:
+#                m = self.gr.display.mouse.getclick()
+#                #print m.click
+#                loc = m.pos
+#                self.gr.display.center = loc
+#            if self.gr.display.kb.keys: # is there an event waiting to be processed?
+#                s = self.gr.display.kb.getkey() # obtain keyboard information
+#                if s == 'r': #Replay animation
+#                    for i in self.gr.nodes:
+#                        self.paintNode(0,i,numbsteps,col='g')
+#                        i.painted=0
+#                    self.anim(data,edata,numbsteps,pos,rate)
+#                else:
+#                    pass
             
     
 if __name__ == "__main__":
