@@ -8,7 +8,6 @@ Licensed under the GPL.
 import locale, os#, pylab
 from osgeo  import ogr,  gdal
 from xml.dom import minidom, Node
-from xml.dom.ext import PrettyPrint
 from matplotlib.colors import  rgb2hex, LogNorm
 from matplotlib.colors import normalize
 from matplotlib import cm
@@ -403,7 +402,8 @@ class AnimatedKML(object):
             fname = os.path.join(dir, fname)
 #        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
         with open(fname+'.kml', 'w') as f:
-            PrettyPrint(self.kmlDoc, stream=f, indent='  ', encoding='utf-8')
+#            PrettyPrint(self.kmlDoc, stream=f, indent='  ', encoding='utf-8')
+            f.write(self.kmlDoc.toprettyxml(indent='  ', encoding='utf-8'))
         # Now zip the kml to generate the kmz
         with ZipFile(fname+'.kmz', 'w', 9, True) as kmz:
             kmz.write(fname+'.kml')

@@ -202,15 +202,18 @@ class simulate:
         Here the site specific events are passed to each site, and the site models are created.
         """
         header = sitelist.pop(0)
+        ncols = len(header)
         objlist=[]
         for site in sitelist:
+            if len(site) != ncols:
+                raise ValueError("This line in your sites file has a different number elements:\n%s"%str(site))
             if ':' in site[0]:
                 lat = self.deg2dec(site[0])
                 long = self.deg2dec(site[1])
             else:
                 lat = float(site[0])
                 long = float(site[1])
-            objlist.append(siteobj(site[2],site[3],(lat,long),int(strip(site[4])),tuple([float(strip(i)) for i in site[5:]])))
+            objlist.append(siteobj(site[2],site[3],(lat,long),int(strip(site[4])),tuple([float(i.strip()) for i in site[5:]])))
         for o in objlist:
             if self.stochTransp: o.stochtransp = 1
             N = o.totpop #local copy for reference on model creation
