@@ -104,6 +104,16 @@
         <item>
          <widget class="QwtPlot" name="qwtPlot"/>
         </item>
+        <item>
+         <widget class="QCheckBox" name="showSumBox">
+          <property name="text">
+           <string>Show global series</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -157,7 +167,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>109</width>
+            <width>81</width>
             <height>394</height>
            </rect>
           </property>

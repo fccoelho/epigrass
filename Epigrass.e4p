@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
+<!-- eric4 project file for project Epigrass -->
+<Project version="4.6">
+  <Language>en</Language>
+  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <ProjectType>Qt4</ProjectType>
+  <Description></Description>
+  <Version>0.1</Version>
+  <Author></Author>
+  <Email></Email>
+  <TranslationPattern>Projects_software/EpigrassQt4/Epigrass/epigrass_%language%.ts</TranslationPattern>
+  <Sources>
+    <Source>CustomModel.py</Source>
+    <Source>Ui_cpanel4new.py</Source>
+    <Source>about4.py</Source>
+    <Source>Ui_epgeditor.py</Source>
+    <Source>Ui_display.py</Source>
+    <Source>setup.py</Source>
+    <Source>Ui_about4.py</Source>
+    <Source>CustomModel_example.py</Source>
+    <Source>ez_setup.py</Source>
+    <Source>demos/CustomModel.py</Source>
+    <Source>demos/CustomModel_example.py</Source>
+    <Source>Epigrass/about.py</Source>
+    <Source>Epigrass/dataObject.py</Source>
+    <Source>Epigrass/__version__.py</Source>
+    <Source>Epigrass/epigrass_rc.py</Source>
+    <Source>Epigrass/__init__.py</Source>
+    <Source>Epigrass/Ui_cpanel4new.py</Source>
+    <Source>Epigrass/spread.py</Source>
+    <Source>Epigrass/Ui_epgeditor.py</Source>
+    <Source>Epigrass/epgeditor.py</Source>
+    <Source>Epigrass/elasticnodes.py</Source>
+    <Source>Epigrass/Ui_display.py</Source>
+    <Source>Epigrass/epiRTplay.py</Source>
+    <Source>Epigrass/neteditor.py</Source>
+    <Source>Epigrass/epiplay.py</Source>
+    <Source>Epigrass/simobj.py</Source>
+    <Source>Epigrass/dgraph.py</Source>
+    <Source>Epigrass/cpanel.py</Source>
+    <Source>Epigrass/epigrass.py</Source>
+    <Source>Epigrass/qtgraph.py</Source>
+    <Source>Epigrass/rinterface.py</Source>
+    <Source>Epigrass/report.py</Source>
+    <Source>Epigrass/Ui_about4.py</Source>
+    <Source>Epigrass/manager.py</Source>
+    <Source>Epigrass/primitives.py</Source>
+    <Source>Epigrass/pylabQtcanvas.py</Source>
+    <Source>Epigrass/data_io.py</Source>
+    <Source>Epigrass/epigdal.py</Source>
+    <Source>Epigrass/testinst.py</Source>
+    <Source>Epigrass/Ui_neteditor.py</Source>
+    <Source>docs/source/conf.py</Source>
+  </Sources>
+  <Forms>
+    <Form>about4.ui</Form>
+    <Form>cpanel4new.ui</Form>
+    <Form>epgeditor.ui</Form>
+    <Form>Epigrass/neteditor.ui</Form>
+    <Form>Epigrass/display.ui</Form>
+  </Forms>
+  <Translations>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_es.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_fr.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_ru_RU.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/manager_pt_BR.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_es.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_fr.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_ru_RU.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/manager_pt_BR.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_es.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_fr.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_ru_RU.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/manager_pt_BR.qm</Translation>
+    <Translation>Projects_software/Model_Builder_Qt/modelbuilder/model-builder_pt_BR.qm</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_fr.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_es.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/manager_pt_BR.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/Epigrass/epigrass_ru_RU.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_fr.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_es.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/manager_pt_BR.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.6/Epigrass/epigrass_ru_RU.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_fr.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_es.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/manager_pt_BR.ts</Translation>
+    <Translation>Projects_software/EpigrassQt4/build/lib.linux-x86_64-2.7/Epigrass/epigrass_ru_RU.ts</Translation>
+    <Translation>Projects_software/Model_Builder_Qt/i18n/model-builder_pt_BR.ts</Translation>
+    <Translation>Epigrass/epigrass_es.qm</Translation>
+    <Translation>Epigrass/epigrass_fr.ts</Translation>
+    <Translation>Epigrass/epigrass_fr.qm</Translation>
+    <Translation>Epigrass/epigrass_es.ts</Translation>
+    <Translation>Epigrass/manager_pt_BR.ts</Translation>
+    <Translation>Epigrass/epigrass_ru_RU.ts</Translation>
+    <Translation>Epigrass/epigrass_ru_RU.qm</Translation>
+    <Translation>Epigrass/manager_pt_BR.qm</Translation>
+  </Translations>
+  <Resources>
+    <Resource>Epigrass/epigrass.qrc</Resource>
+  </Resources>
+  <Interfaces>
+  </Interfaces>
+  <Others>
+  </Others>
+  <MainScript>Projects_software/EpigrassQt4/Epigrass/epigrass.py</MainScript>
+  <Vcs>
+    <VcsType>None</VcsType>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ts" type="TRANSLATIONS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.qrc" type="RESOURCES" />
+  </FiletypeAssociations>
+</Project>

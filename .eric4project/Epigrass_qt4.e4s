@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Session SYSTEM "Session-4.4.dtd">
+<!-- eric4 session file for project Epigrass_qt4 -->
+<!-- This file was generated automatically, do not edit. -->
+<Session version="4.4">
+  <Filenames>
+    <Filename cline="481" cindex="30" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/epigrass.py</Filename>
+    <Filename cline="62" cindex="33" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/manager.py</Filename>
+    <Filename cline="185" cindex="22" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/epiplay.py</Filename>
+    <Filename cline="138" cindex="0" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/dgraph.py</Filename>
+    <Filename cline="121" cindex="60" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/Ui_display.py</Filename>
+  </Filenames>
+  <ActiveWindow cline="138" cindex="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/dgraph.py</ActiveWindow>
+  <Breakpoints>
+  </Breakpoints>
+  <Watchexpressions>
+  </Watchexpressions>
+  <DebugInfo>
+    <CommandLine></CommandLine>
+    <WorkingDirectory></WorkingDirectory>
+    <Environment></Environment>
+    <ReportExceptions value="True" />
+    <Exceptions>
+    </Exceptions>
+    <IgnoredExceptions>
+    </IgnoredExceptions>
+    <AutoClearShell value="True" />
+    <TracePython value="False" />
+    <AutoContinue value="True" />
+    <CovexcPattern></CovexcPattern>
+  </DebugInfo>
+  <Bookmarks>
+  </Bookmarks>
+</Session>

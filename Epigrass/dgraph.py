@@ -114,6 +114,7 @@ class MapWindow(Ui_Form):
         QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
         QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("released()"), self.replay)
         QtCore.QObject.connect(self.splitter,QtCore.SIGNAL("splitterMoved()"), self.centerScene)
+        QtCore.QObject.connect(self.showSumBox,QtCore.SIGNAL("stateChanged(int)"), self.on_showSumBox_stateChanged)
 #        self.server = MapServer()
 #        self.server.map = self.M
 #        st = threading.Thread(target=self.server.start)
@@ -121,7 +122,7 @@ class MapWindow(Ui_Form):
         
     def setupQwtPlot(self):
         """
-        sets up the time series plot
+        Sets up the time series plot
         """
 #        self.qwtPlot.setTitle('%s'%self.variable)
         self.qwtPlot.setAxisTitle(Qwt.QwtPlot.xBottom, 'time')
@@ -142,6 +143,7 @@ class MapWindow(Ui_Form):
         pl is a list of polygons
         """
         lo = self.nodeListLayout
+        pl.sort(key=lambda p:p.name)#adding sites in alphabetical order
         for n in pl:
             cb = QtGui.QCheckBox(self.scrollArea)
             cb.setText(n.name)
@@ -150,9 +152,36 @@ class MapWindow(Ui_Form):
             lo.addWidget(cb)
 #        self.nodeGroupBox.setLayout(lo)
             
+    def add_global_ts_curve(self, scope="all"):
+        """
+        Plots a time series which is the sum of all(scope="all") or 
+        selected timeseries (scope="set")
+        """
+        t = self.timeseries.keys()
+        t.sort()
+        data = [0]*len(self.timeseries)
+        if scope == "all":
+            name = "Total"
+            for k, v in self.timeseries.iteritems():
+                data[k] = sum(v.values())
+#                print v
+        elif scope == "Selected":
+            name ="Sum of Selected"
+            #TODO: fix this
+#        print data
+        curve = Qwt.QwtPlotCurve(name)
+        pen = Qt.QPen(Qt.Qt.gray)
+        pen.setStyle(4)
+        pen.setWidth(3)
+        curve.setPen(pen)
+        curve.attach(self.qwtPlot)
+        curve.setData(t, data)
+        self.globalCurve = curve
+        self.qwtPlot.replot()
+    
     def addTsCurve(self, gc, name):
         """
-        plots a time series curve to the plot window
+        Plots a time series curve to the plot window
         """
         
         data = [0]*len(self.timeseries)
@@ -207,7 +236,8 @@ class MapWindow(Ui_Form):
         #self.mapView.setWindowTitle(self.tr("Network View"))
         scale_factor = self.mapView.width()/xxs
         self.mapView.scale(scale_factor, scale_factor)
-        
+        if self.showSumBox.isChecked():
+            self.add_global_ts_curve("all")
         #print self.polys
     
     def drawGraph(self, nlist, elist=[] ):
@@ -280,9 +310,12 @@ class MapWindow(Ui_Form):
         if max(datadict.values()) > 1:
             normw = max(datadict.values())
         else:
-            normw = 1
+            normw = 1.
         for gc, val in datadict.iteritems():
-            val /= normw #normalize values if necessary
+            try:
+                val /= normw #normalize values if necessary
+            except TypeError as e:
+                print gc, val, datadict[gc],  e
             col = self.jet(val)#rgba list
             gc = int(gc)
 #            print gc, type(gc)
@@ -303,10 +336,7 @@ class MapWindow(Ui_Form):
         QtCore.QObject.connect(rw,QtCore.SIGNAL("flash"), self.flashBorders)
         QtCore.QObject.connect(self.pushButton_2,QtCore.SIGNAL("released()"), stop_replay)
         rw.render()
-        
 
-            
-    
     def drawStep(self,step,  datadict={}):
         """
         Draws one timestep on the map
@@ -338,6 +368,7 @@ class MapWindow(Ui_Form):
     def on_horizontalSlider_valueChanged(self):
         if self.horizontalSlider.isEnabled():
             self.on_horizontalSlider_sliderMoved()
+    
     def on_horizontalSlider_sliderMoved(self):
         """
         Handles updating the display on a slider move
@@ -349,6 +380,19 @@ class MapWindow(Ui_Form):
         self.mX.setXValue(self.step)
         self.mX.setLabel(Qwt.QwtText("t = %s"%self.step))
         self.qwtPlot.replot()
+        
+#    @QtCore.pyqtSignature("int")
+    def on_showSumBox_stateChanged(self, st):
+        """
+        Handles adding/remove global timeseries curve
+        """
+        if st:
+#            print "adding global series"
+            self.add_global_ts_curve()
+        else:
+#            print "removing global series"
+            self.globalCurve.detach()
+            self.qwtPlot.replot()
         
 #BlackBox  :-)
 class BaseBox(object):
