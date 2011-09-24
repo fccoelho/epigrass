@@ -1,16 +1,52 @@
 #!/usr/bin/env python
-##This module offers an arbitrary graph visualization in 2d
-##The graph is defined from a list of coordinates (nodes) 
-##and a list of edges. 
-##This modules is based on the PyQ example by the same name.
-##copyright 2007 by Flavio Codeco Coelho
-##licensed under the GPL
 
-import sys
+
+#############################################################################
+##
+## Copyright (C) 2010 Riverbank Computing Limited.
+## Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+## All rights reserved.
+##
+## This file is part of the examples of PyQt.
+##
+## $QT_BEGIN_LICENSE:BSD$
+## You may use this file under the terms of the BSD license as follows:
+##
+## "Redistribution and use in source and binary forms, with or without
+## modification, are permitted provided that the following conditions are
+## met:
+##   * Redistributions of source code must retain the above copyright
+##     notice, this list of conditions and the following disclaimer.
+##   * Redistributions in binary form must reproduce the above copyright
+##     notice, this list of conditions and the following disclaimer in
+##     the documentation and/or other materials provided with the
+##     distribution.
+##   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
+##     the names of its contributors may be used to endorse or promote
+##     products derived from this software without specific prior written
+##     permission.
+##
+## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+## "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+## LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+## A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+## OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+## SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+## LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+## DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+## THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+## $QT_END_LICENSE$
+##
+#############################################################################
+
+
 import math
-from PyQt4 import QtCore, QtGui, QtOpenGL
-from numpy import  array, sqrt
-from numpy.random import randint, uniform
+from math import sin,cos,pi
+
+from PyQt4 import QtCore, QtGui
+
 
 class Edge(QtGui.QGraphicsItem):
     Pi = math.pi
@@ -19,10 +55,12 @@ class Edge(QtGui.QGraphicsItem):
     Type = QtGui.QGraphicsItem.UserType + 2
 
     def __init__(self, sourceNode, destNode):
-        QtGui.QGraphicsItem.__init__(self)
+        super(Edge, self).__init__()
+
         self.arrowSize = 10.0
         self.sourcePoint = QtCore.QPointF()
         self.destPoint = QtCore.QPointF()
+
         self.setAcceptedMouseButtons(QtCore.Qt.NoButton)
         self.source = sourceNode
         self.dest = destNode
@@ -51,28 +89,32 @@ class Edge(QtGui.QGraphicsItem):
         if not self.source or not self.dest:
             return
 
-        line = QtCore.QLineF(self.mapFromItem(self.source, 0, 0), self.mapFromItem(self.dest, 0, 0))
+        line = QtCore.QLineF(self.mapFromItem(self.source, 0, 0),
+                self.mapFromItem(self.dest, 0, 0))
         length = line.length()
 
-        if length == 0.0:
-            return
-
-        edgeOffset = QtCore.QPointF((line.dx() * 10) / length, (line.dy() * 10) / length)
-
         self.prepareGeometryChange()
-        self.sourcePoint = line.p1() + edgeOffset
-        self.destPoint = line.p2() - edgeOffset
+
+        if length > 20.0:
+            edgeOffset = QtCore.QPointF((line.dx() * 10) / length,
+                    (line.dy() * 10) / length)
+
+            self.sourcePoint = line.p1() + edgeOffset
+            self.destPoint = line.p2() - edgeOffset
+        else:
+            self.sourcePoint = line.p1()
+            self.destPoint = line.p1()
 
     def boundingRect(self):
         if not self.source or not self.dest:
             return QtCore.QRectF()
 
-        penWidth = 1
+        penWidth = 1.0
         extra = (penWidth + self.arrowSize) / 2.0
 
         return QtCore.QRectF(self.sourcePoint,
-                             QtCore.QSizeF(self.destPoint.x() - self.sourcePoint.x(),
-                                           self.destPoint.y() - self.sourcePoint.y())).normalized().adjusted(-extra, -extra, extra, extra)
+                QtCore.QSizeF(self.destPoint.x() - self.sourcePoint.x(),
+                        self.destPoint.y() - self.sourcePoint.y())).normalized().adjusted(-extra, -extra, extra, extra)
 
     def paint(self, painter, option, widget):
         if not self.source or not self.dest:
@@ -84,7 +126,8 @@ class Edge(QtGui.QGraphicsItem):
         if line.length() == 0.0:
             return
 
-        painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
+        painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine,
+                QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
         painter.drawLine(line)
 
         # Draw the arrows if there's enough room.
@@ -92,14 +135,14 @@ class Edge(QtGui.QGraphicsItem):
         if line.dy() >= 0:
             angle = Edge.TwoPi - angle
 
-        sourceArrowP1 = self.sourcePoint + QtCore.QPointF(math.sin(angle + Edge.Pi / 3) * self.arrowSize,
-                                                          math.cos(angle + Edge.Pi / 3) * self.arrowSize)
-        sourceArrowP2 = self.sourcePoint + QtCore.QPointF(math.sin(angle + Edge.Pi - Edge.Pi / 3) * self.arrowSize,
-                                                          math.cos(angle + Edge.Pi - Edge.Pi / 3) * self.arrowSize);   
-        destArrowP1 = self.destPoint + QtCore.QPointF(math.sin(angle - Edge.Pi / 3) * self.arrowSize,
-                                                      math.cos(angle - Edge.Pi / 3) * self.arrowSize)
-        destArrowP2 = self.destPoint + QtCore.QPointF(math.sin(angle - Edge.Pi + Edge.Pi / 3) * self.arrowSize,
-                                                      math.cos(angle - Edge.Pi + Edge.Pi / 3) * self.arrowSize)
+        sourceArrowP1 = self.sourcePoint + QtCore.QPointF(sin(angle + pi / 3) * self.arrowSize,
+                                                          cos(angle + pi / 3) * self.arrowSize)
+        sourceArrowP2 = self.sourcePoint + QtCore.QPointF(sin(angle + pi - pi / 3) * self.arrowSize,
+                                                          cos(angle + pi - pi / 3) * self.arrowSize);
+        destArrowP1 = self.destPoint + QtCore.QPointF(sin(angle - pi / 3) * self.arrowSize,
+                                                      cos(angle - pi / 3) * self.arrowSize)
+        destArrowP2 = self.destPoint + QtCore.QPointF(sin(angle - pi + pi / 3) * self.arrowSize,
+                                                      cos(angle - pi + pi / 3) * self.arrowSize)
 
         painter.setBrush(QtCore.Qt.black)
         painter.drawPolygon(QtGui.QPolygonF([line.p1(), sourceArrowP1, sourceArrowP2]))
@@ -110,12 +153,15 @@ class Node(QtGui.QGraphicsItem):
     Type = QtGui.QGraphicsItem.UserType + 1
 
     def __init__(self, graphWidget):
-        QtGui.QGraphicsItem.__init__(self)
+        super(Node, self).__init__()
 
         self.graph = graphWidget
         self.edgeList = []
         self.newPos = QtCore.QPointF()
+
         self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
+        self.setFlag(QtGui.QGraphicsItem.ItemSendsGeometryChanges)
+        self.setCacheMode(QtGui.QGraphicsItem.DeviceCoordinateCache)
         self.setZValue(1)
 
     def type(self):
@@ -136,8 +182,12 @@ class Node(QtGui.QGraphicsItem):
         # Sum up all forces pushing this item away.
         xvel = 0.0
         yvel = 0.0
-        for item in self.graph.nodes:
-            line = QtCore.QLineF(self.mapFromItem(item, 0, 0), QtCore.QPointF(0, 0))
+        for item in self.scene().items():
+            if not isinstance(item, Node):
+                continue
+
+            line = QtCore.QLineF(self.mapFromItem(item, 0, 0),
+                    QtCore.QPointF(0, 0))
             dx = line.dx()
             dy = line.dy()
             l = 2.0 * (dx * dx + dy * dy)
@@ -172,8 +222,8 @@ class Node(QtGui.QGraphicsItem):
 
     def boundingRect(self):
         adjust = 2.0
-        return QtCore.QRectF(-10 - adjust, -10 - adjust,
-                             23 + adjust, 23 + adjust)
+        return QtCore.QRectF(-10 - adjust, -10 - adjust, 23 + adjust,
+                23 + adjust)
 
     def shape(self):
         path = QtGui.QPainterPath()
@@ -200,74 +250,86 @@ class Node(QtGui.QGraphicsItem):
         painter.drawEllipse(-10, -10, 20, 20)
 
     def itemChange(self, change, value):
-        if change == QtGui.QGraphicsItem.ItemPositionChange:
+        if change == QtGui.QGraphicsItem.ItemPositionHasChanged:
             for edge in self.edgeList:
                 edge.adjust()
             self.graph.itemMoved()
 
-        return QtGui.QGraphicsItem.itemChange(self, change, value)
+        return super(Node, self).itemChange(change, value)
 
     def mousePressEvent(self, event):
         self.update()
-        QtGui.QGraphicsItem.mousePressEvent(self, event)
+        super(Node, self).mousePressEvent(event)
 
     def mouseReleaseEvent(self, event):
         self.update()
-        QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
+        super(Node, self).mouseReleaseEvent(event)
 
 
 class GraphWidget(QtGui.QGraphicsView):
-    def __init__(self,poslist,elist):
-        """
-        Will generate a graph with as many nodes as
-        elements in poslist
-        poslist is a a list of (x,y) tuples.
-        elist is an edge list (s,d) refering to positions in poslist.
-        """
-        QtGui.QGraphicsView.__init__(self)
+    def __init__(self):
+        super(GraphWidget, self).__init__()
 
         self.timerId = 0
-        xmin,ymin = array(poslist).min(axis=0)
-        xmax,ymax = array(poslist).max(axis=0)
-        xxs = (xmax-xmin)*1.1 #percentage of extra space
-        yxs = (ymax-ymin)*1.1 #percentage of extra space
-        #calculating center of scene
-        xc = (xmax+xmin)/2. 
-        yc = (ymax+ymin)/2.
-        #creating the scene
+
         scene = QtGui.QGraphicsScene(self)
-        scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
-        scene.setSceneRect(xmin+xxs, ymin+yxs, xmax+xxs, ymax+yxs)
+        #~ scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        scene.setSceneRect(-200, -200, 400, 400)
         self.setScene(scene)
-        #self.setViewport(QtOpenGL.QGLWidget())
         self.setCacheMode(QtGui.QGraphicsView.CacheBackground)
+        self.setViewportUpdateMode(QtGui.QGraphicsView.BoundingRectViewportUpdate)
         self.setRenderHint(QtGui.QPainter.Antialiasing)
         self.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
         self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
-        
-        #create an add nodes
-        self.nlist = []
-        for c in poslist:
-            node = Node(self)
-            node.setPos(*c)
-            self.nlist.append(node)
-            scene.addItem(node)
-        #figure out center node
-        ecc =[sqrt((p[0]-xc)**2+(p[1]-yc)**2) for p in array(poslist)]#Thanks Pythagoras!
-        cnpos = ecc.index(min(ecc))
-        self.centerNode = self.nlist[cnpos]
-        #Adding Edges
-        for e in elist:
-            scene.addItem(Edge(self.nlist[e[0]], self.nlist[e[1]]))
 
-        self.scale(0.99, 0.99)
+        node1 = Node(self)
+        node2 = Node(self)
+        node3 = Node(self)
+        node4 = Node(self)
+        self.centerNode = Node(self)
+        node6 = Node(self)
+        node7 = Node(self)
+        node8 = Node(self)
+        node9 = Node(self)
+        scene.addItem(node1)
+        scene.addItem(node2)
+        scene.addItem(node3)
+        scene.addItem(node4)
+        scene.addItem(self.centerNode)
+        scene.addItem(node6)
+        scene.addItem(node7)
+        scene.addItem(node8)
+        scene.addItem(node9)
+        scene.addItem(Edge(node1, node2))
+        scene.addItem(Edge(node2, node3))
+        scene.addItem(Edge(node2, self.centerNode))
+        scene.addItem(Edge(node3, node6))
+        scene.addItem(Edge(node4, node1))
+        scene.addItem(Edge(node4, self.centerNode))
+        scene.addItem(Edge(self.centerNode, node6))
+        scene.addItem(Edge(self.centerNode, node8))
+        scene.addItem(Edge(node6, node9))
+        scene.addItem(Edge(node7, node4))
+        scene.addItem(Edge(node8, node7))
+        scene.addItem(Edge(node9, node8))
+
+        node1.setPos(-50, -50)
+        node2.setPos(0, -50)
+        node3.setPos(50, -50)
+        node4.setPos(-50, 0)
+        self.centerNode.setPos(0, 0)
+        node6.setPos(50, 0)
+        node7.setPos(-50, 50)
+        node8.setPos(0, 50)
+        node9.setPos(50, 50)
+
+        self.scale(0.8, 0.8)
         self.setMinimumSize(400, 400)
-        self.setWindowTitle(self.tr("Network View"))
-        self.nodes = [item for item in self.scene().items() if isinstance(item, Node)]
+        self.setWindowTitle("Elastic Nodes")
 
     def itemMoved(self):
         if not self.timerId:
-            self.timerId = self.startTimer(1000 / 25)
+            self.timerId = self.startTimer(1000 / 100)
 
     def keyPressEvent(self, event):
         key = event.key()
@@ -289,11 +351,11 @@ class GraphWidget(QtGui.QGraphicsView):
                 if isinstance(item, Node):
                     item.setPos(-150 + QtCore.qrand() % 300, -150 + QtCore.qrand() % 300)
         else:
-            QtGui.QGraphicsView.keyPressEvent(self, event)
+            super(GraphWidget, self).keyPressEvent(event)
 
     def timerEvent(self, event):
-        nodes = self.nodes#[item for item in self.scene().items() if isinstance(item, Node)]
-
+        nodes = [item for item in self.scene().items() if isinstance(item, Node)]
+        
         for node in nodes:
             node.calculateForces()
 
@@ -312,15 +374,18 @@ class GraphWidget(QtGui.QGraphicsView):
     def drawBackground(self, painter, rect):
         # Shadow.
         sceneRect = self.sceneRect()
-        rightShadow = QtCore.QRectF(sceneRect.right(), sceneRect.top() + 5, 5, sceneRect.height())
-        bottomShadow = QtCore.QRectF(sceneRect.left() + 5, sceneRect.bottom(), sceneRect.width(), 5)
+        rightShadow = QtCore.QRectF(sceneRect.right(), sceneRect.top() + 5, 5,
+                sceneRect.height())
+        bottomShadow = QtCore.QRectF(sceneRect.left() + 5, sceneRect.bottom(),
+                sceneRect.width(), 5)
         if rightShadow.intersects(rect) or rightShadow.contains(rect):
-            painter.fillRect(rightShadow, QtCore.Qt.darkGray)
+              painter.fillRect(rightShadow, QtCore.Qt.darkGray)
         if bottomShadow.intersects(rect) or bottomShadow.contains(rect):
-            painter.fillRect(bottomShadow, QtCore.Qt.darkGray)
+              painter.fillRect(bottomShadow, QtCore.Qt.darkGray)
 
         # Fill.
-        gradient = QtGui.QLinearGradient(sceneRect.topLeft(), sceneRect.bottomRight())
+        gradient = QtGui.QLinearGradient(sceneRect.topLeft(),
+                sceneRect.bottomRight())
         gradient.setColorAt(0, QtCore.Qt.white)
         gradient.setColorAt(1, QtCore.Qt.lightGray)
         painter.fillRect(rect.intersect(sceneRect), QtGui.QBrush(gradient))
@@ -329,13 +394,13 @@ class GraphWidget(QtGui.QGraphicsView):
 
         # Text.
         textRect = QtCore.QRectF(sceneRect.left() + 4, sceneRect.top() + 4,
-                                 sceneRect.width() - 4, sceneRect.height() - 4)
-        message = self.tr("Click and drag the nodes around, and zoom with the "
-                          "mouse wheel or the '+' and '-' keys")
+                sceneRect.width() - 4, sceneRect.height() - 4)
+        message = "Click and drag the nodes around, and zoom with the " \
+                "mouse wheel or the '+' and '-' keys"
 
         font = painter.font()
         font.setBold(True)
-        font.setPointSize(10)
+        font.setPointSize(14)
         painter.setFont(font)
         painter.setPen(QtCore.Qt.lightGray)
         painter.drawText(textRect.translated(2, 2), message)
@@ -351,16 +416,14 @@ class GraphWidget(QtGui.QGraphicsView):
         self.scale(scaleFactor, scaleFactor)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+
+    import sys
+
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
-    # Original PyQt graph example
-#    poslist = [(-50, -50),(0, -50),(50, -50),(-50, 0),(0, 0),(50, 0),(-50, 50),(0, 50),(50, 50)]
-#    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
-    # larger random graph
-    poslist = uniform(-180,180,size=(50,2)).tolist()
-    elist = list(set([tuple(randint(0,50,2)) for i in xrange(50)]))
-    widget = GraphWidget(poslist,elist)
+
+    widget = GraphWidget()
     widget.show()
 
     sys.exit(app.exec_())

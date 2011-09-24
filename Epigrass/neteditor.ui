@@ -34,6 +34,18 @@
        <property name="locale">
         <locale language="English" country="UnitedStates"/>
        </property>
+       <property name="renderHints">
+        <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+       </property>
+       <property name="cacheMode">
+        <set>QGraphicsView::CacheBackground</set>
+       </property>
+       <property name="transformationAnchor">
+        <enum>QGraphicsView::AnchorUnderMouse</enum>
+       </property>
+       <property name="viewportUpdateMode">
+        <enum>QGraphicsView::BoundingRectViewportUpdate</enum>
+       </property>
       </widget>
       <widget class="QTabWidget" name="dataPanel">
        <property name="currentIndex">

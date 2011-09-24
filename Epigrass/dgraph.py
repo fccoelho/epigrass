@@ -98,7 +98,7 @@ class MapWindow(Ui_Form):
         self.jet  = cm.get_cmap("jet",50) #colormap
         self.timeseries = {}
         self.arrivals = {}
-        self.colors = itertools.cycle([Qt.Qt.red,Qt.Qt.green,Qt.Qt.blue,Qt.Qt.cyan, Qt.Qt.magenta,Qt.Qt.yellow,Qt.Qt.black])
+        self.colors = itertools.cycle([Qt.Qt.red,Qt.Qt.green,Qt.Qt.blue,Qt.Qt.cyan, Qt.Qt.magenta,Qt.Qt.yellow,Qt.Qt.black, Qt.Qt.darkCyan,  Qt.Qt.darkRed,  Qt.Qt.darkGreen,  Qt.Qt.darkBlue,  Qt.Qt.darkMagenta,  Qt.Qt.darkYellow])
         self.setupQwtPlot()
         self.step = 0
         self.M = None #initialize map widget

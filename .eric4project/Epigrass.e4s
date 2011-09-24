@@ -7,12 +7,13 @@
     <Filename cline="0" cindex="0" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/setup.py</Filename>
     <Filename cline="521" cindex="0" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/epigrass.py</Filename>
     <Filename cline="0" cindex="0" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/manager.py</Filename>
-    <Filename cline="385" cindex="0" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/dgraph.py</Filename>
-    <Filename cline="131" cindex="31" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/Ui_display.py</Filename>
+    <Filename cline="100" cindex="228" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/dgraph.py</Filename>
+    <Filename cline="74" cindex="53" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/Ui_display.py</Filename>
     <Filename cline="194" cindex="45" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/epgeditor.py</Filename>
     <Filename cline="184" cindex="25" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/epiplay.py</Filename>
+    <Filename cline="260" cindex="7" folds="" zoom="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/neteditor.py</Filename>
   </Filenames>
-  <ActiveWindow cline="385" cindex="0">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/dgraph.py</ActiveWindow>
+  <ActiveWindow cline="260" cindex="7">/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/neteditor.py</ActiveWindow>
   <Breakpoints>
   </Breakpoints>
   <Watchexpressions>

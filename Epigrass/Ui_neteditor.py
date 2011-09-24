@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/home/fccoelho/Documents/Projects_software/EpigrassQt4/Epigrass/neteditor.ui'
 #
-# Created: Sun Sep 11 14:45:18 2011
+# Created: Sun Sep 18 17:29:15 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,6 +31,10 @@ class Ui_MainWindow(object):
         self.splitter.setObjectName(_fromUtf8("splitter"))
         self.graphicsView = QtGui.QGraphicsView(self.splitter)
         self.graphicsView.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        self.graphicsView.setRenderHints(QtGui.QPainter.Antialiasing|QtGui.QPainter.TextAntialiasing)
+        self.graphicsView.setCacheMode(QtGui.QGraphicsView.CacheBackground)
+        self.graphicsView.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
+        self.graphicsView.setViewportUpdateMode(QtGui.QGraphicsView.BoundingRectViewportUpdate)
         self.graphicsView.setObjectName(_fromUtf8("graphicsView"))
         self.dataPanel = QtGui.QTabWidget(self.splitter)
         self.dataPanel.setObjectName(_fromUtf8("dataPanel"))

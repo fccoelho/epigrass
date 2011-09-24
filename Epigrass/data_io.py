@@ -75,9 +75,6 @@ def loadData(fname,sep = ',', encoding='utf-8'):
         
     return sitelist
     
-
-
-
 def queryDb(usr,passw,db,table, host='localhost',port=3306,sql=''):
     """
     Fetch the contents of a table on a MySQL database
