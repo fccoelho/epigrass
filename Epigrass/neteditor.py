@@ -7,16 +7,30 @@ Module implementing NetEditor's MainWindow.
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QMainWindow
 from PyQt4.QtCore import pyqtSignature
-
+from types import MethodType
 from Ui_neteditor import Ui_MainWindow
 from data_io import  loadData
 import networkx as nx
-#import dgraph
-import math
-from math import sin,cos,pi
+import time
+from math import sin,cos,pi,sqrt,acos,pow
 from numpy import array
+import numpy as np
 import elasticnodes as dgraph
 from multiprocessing import Process
+
+def timeit(method):
+    """
+    Decorator to time methods
+    """
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+
+        print '%r  %2.2f sec' % \
+              (method.__name__ , te-ts)
+        return result
+    return timed
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -31,6 +45,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.network = None
         self.Map = None
         self.filename = None
+        self.graphicsView.wheelEvent = MethodType(wheelEvent, self.graphicsView)
+        self.graphicsView.scaleView = MethodType(scaleView, self.graphicsView)
     
     @pyqtSignature("QPoint")
     def on_centralWidget_customContextMenuRequested(self, pos):
@@ -154,6 +170,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i,n in enumerate(nodelist):
             item = QtGui.QTableWidgetItem(n)
             self.nodeTable.setItem(i,0,item)
+        return self.on_action_Graph_activated()
                 
     
     @pyqtSignature("")
@@ -269,22 +286,34 @@ class Network(object):
         self.View = displaywidget
         self.View.scene = QtGui.QGraphicsScene(self.View)
         self.View.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
+        self.View.setViewportUpdateMode(0)
+        self.View.setScene(self.View.scene)
         self.N = Graph()
         self.G = nx.DiGraph(multiedges=True)
         self.timer = QtCore.QTimer()
         self.timerId = 0
+        self.layout = {}
         QtCore.QObject.connect(self.timer,QtCore.SIGNAL("timeout()"),self.timerEvent)
 
 
     def getLayout(self):
-        return nx.random_layout(self.G)
+        self.layout = nx.circular_layout(self.G)#,scale=self.View.width())
+#        for k,v in self.layout.iteritems():
+#            self.layout[k] = (v[0]+self.View.width()/2.,v[1]+self.View.height()/2.)
+        return self.layout
         
     def timerEvent(self):
-        print "event"
+        return
         nodes = [item for item in self.View.scene.items() if isinstance(item, Node)]
-        for node in nodes:
-            lw = LayoutWorker(node)
-            lw.render()
+        thrs = []
+        for i,node in enumerate(nodes):
+            # run layout updates in separate Qt threads
+            qtp.start(LayoutRunnable(node))
+            if not i%5:
+                self.centerScene()
+#            thrs.append(LayoutWorker(node))
+#            thrs[-1].render()
+#        [t.wait() for t in thrs]
 #            node.calculateForces()
 
         itemsMoved = False
@@ -307,13 +336,13 @@ class Network(object):
         for n in nlist:
             node = Node(self, n[0], n[3], self.View.scene)
             node.setPos(*(n[1], -n[2]))
-            node.size = max(xmax-xmin, ymax-ymin)/math.sqrt(len(nlist))*0.5
+            node.size = max(xmax-xmin, ymax-ymin)/sqrt(len(nlist))*0.5
             self.View.scene.addItem(node)
             self.N.insertNode(node)
             #print node.x(), node.y(), n.center[0], n.center[1]
         self.View.nodes = self.N.nodes
        
-        asz = max(xmax-xmin, ymax-ymin)/math.sqrt(len(nlist))*0.2 #arrow size
+        asz = max(xmax-xmin, ymax-ymin)/sqrt(len(nlist))*0.2 #arrow size
         for e in elist:
             ed = Edge(self.N.polyDict[e[0]], self.N.polyDict[e[1]])
             ed.arrowSize = asz
@@ -322,7 +351,6 @@ class Network(object):
         self.xmax, self.xmin = xmax, xmin
         self.ymax, self.ymin = ymax, ymin
         self.centerScene()
-        self.timerId = self.timer.start(200)
     
 
             
@@ -333,35 +361,38 @@ class Network(object):
             return
 
         self.scale(scaleFactor, scaleFactor)
-    
 
     def centerScene(self):
         """
         centers the scene and fits the specified rectangle to it
         """
-#        ymax, ymin = self.ymax, self.ymin
-#        xmax, xmin = self.xmax, self.xmin
-        xmin, ymin, xmax, ymax = self.N.getRect()
-        xxs = (xmax-xmin)*1.1 #percentage of extra space
-        yxs = (ymax-ymin)*1.1 #percentage of extra space
+        ymax, ymin = self.ymax, self.ymin
+        xmax, xmin = self.xmax, self.xmin
+#        xmin, ymin, xmax, ymax = self.N.getRect()
+        xxs = yxs = 0.1*self.N.nodes[0].size #percentage of extra space
+#        yxs = self.View.scene.height()*1.1 #percentage of extra space
         #calculating center of scene
 
         xc = (xmax+xmin)/2. 
         yc = (ymax+ymin)/2.
-        self.View.scene.setItemIndexMethod(QtGui.QGraphicsScene.NoIndex)
-        self.View.scene.setSceneRect(xmin, ymin, xxs, yxs)
+
+#        self.View.scene.setSceneRect(xmin, ymin, xxs, yxs)
 #        print self.mapView.scene.width(), self.mapView.scene.height()
-        self.View.fitInView(xmin, ymin, xxs, yxs)
-        self.View.setScene(self.View.scene)
-        self.View.updateSceneRect(self.View.scene.sceneRect())
+#        self.View.fitInView(xmin, ymin, xxs, yxs)
+
+        self.View.ensureVisible(self.View.scene.sceneRect())#,xMargin=xxs,yMargin=yxs)
         self.View.centerOn(xc, yc)
-        scale_factor = self.View.width()/xxs
-        self.View.scale(scale_factor, scale_factor)
+#        if xxs: #only if xxs > 0
+#            scale_factor = self.View.width()/xxs
+#        else:
+#            scale_factor = self.View.width()
+#        self.View.scale(scale_factor, scale_factor)
         
         self.View.setCacheMode(QtGui.QGraphicsView.CacheBackground)
         self.View.setRenderHint(QtGui.QPainter.Antialiasing)
         self.View.setTransformationAnchor(QtGui.QGraphicsView.AnchorUnderMouse)
         self.View.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
+#        print xmin,ymin,xmax,ymax,xxs,yxs,self.View.width(),self.View.height()
         
 class Graph(object):
     """
@@ -437,18 +468,30 @@ class Graph(object):
         return el
 
 
-    def centerView(self):
-        pass
-
     def getRect(self):
         '''
         Returns the bounding rectangle for the graph
         '''
-        for n in self.nodes:
-            self.rect[0] = n.x() if n.x() < self.rect[0] else self.rect[0]
-            self.rect[1] = n.y() if n.y() < self.rect[1] else self.rect[1]
-            self.rect[2] = n.x() if n.x() > self.rect[2] else self.rect[2]
-            self.rect[3] = n.y() if n.y() > self.rect[3] else self.rect[3]
+        xs = np.array([n.x() for n in self.nodes],dtype=np.float)
+        ys = np.array([n.x() for n in self.nodes],dtype=np.float)
+        if xs.any():
+            minx = xs.min()
+            maxx = xs.max()
+        else:
+            minx = 0
+            maxx = 0
+        if ys.any():
+            miny = ys.min()
+            maxy = ys.max()
+        else:
+            miny = 0
+            maxy = 0
+        self.rect = minx,miny,maxx,maxy
+#        for n in self.nodes:
+#            self.rect[0] = n.x() if n.x() < self.rect[0] else self.rect[0]
+#            self.rect[1] = n.y() if n.y() < self.rect[1] else self.rect[1]
+#            self.rect[2] = n.x() if n.x() > self.rect[2] else self.rect[2]
+#            self.rect[3] = n.y() if n.y() > self.rect[3] else self.rect[3]
         return self.rect
 
 
@@ -465,6 +508,7 @@ class Node(QtGui.QGraphicsItem):
         self.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
         self.setFlag(QtGui.QGraphicsItem.ItemSendsGeometryChanges)
         self.setCacheMode(QtGui.QGraphicsItem.DeviceCoordinateCache)
+        self.setToolTip(geocode)
         self.setZValue(1)
         self.geocode = geocode
         self.name = name
@@ -482,50 +526,38 @@ class Node(QtGui.QGraphicsItem):
     def edges(self):
         return self.edgeList
 
+#    @timeit
     def calculateForces(self):
+#        return
         if not self.scene or self.scene.mouseGrabberItem() is self:
             self.newPos = self.pos()
             return
-    
-        # Sum up all forces pushing this item away.
-        xvel = 0.0
-        yvel = 0.0
-        for item in self.scene.items():
-            if not isinstance(item, Node):
-                continue
+        tgtpos = self.net.layout[self.geocode] #target position in the calculated layout
+#        print tgtpos, self.scene.sceneRect()
+        tgtpoint = self.mapToScene(QtCore.QPointF(*tgtpos))
+#        print tgtpoint.x(),tgtpoint.y(),self.scene.sceneRect()
+        line = QtCore.QLineF(self.mapFromItem(self,0, 0),tgtpoint) #line connecting actual position to target position
+        xvel = yvel = 0
+        # move 20% of the way to target position.
+        print line.length()
+        if line.length() > 2*self.size:
+            xvel = 0.5*line.dx()
+            yvel = 0.5*line.dy()
+        else:
+            xvel = line.dx()
+            yvel = line.dy()
 
-            line = QtCore.QLineF(self.mapFromItem(item, 0, 0),
-                    QtCore.QPointF(0, 0))
-            dx = line.dx()
-            dy = line.dy()
-            l = 2.0 * (dx * dx + dy * dy)
-            if l > 0:
-                xvel += (dx * 150.0) / l
-                yvel += (dy * 150.0) / l
-
-        # Now subtract all forces pulling items together.
-        weight = (len(self.edgeList) + 1) * 10.0
-        for edge in self.edgeList:
-            if edge.sourceNode() is self:
-                pos = self.mapFromItem(edge.destNode(), 0, 0)
-            else:
-                pos = self.mapFromItem(edge.sourceNode(), 0, 0)
-            xvel += pos.x() / weight
-            yvel += pos.y() / weight
-    
-        if QtCore.qAbs(xvel) < 0.1 and QtCore.qAbs(yvel) < 0.1:
-            xvel = yvel = 0.0
 
         sceneRect = self.scene.sceneRect()
         self.newPos = self.pos() + QtCore.QPointF(xvel, yvel)
-        self.newPos.setX(min(max(self.newPos.x(), sceneRect.left() + self.size/2.), sceneRect.right() - self.size/2.))
-        self.newPos.setY(min(max(self.newPos.y(), sceneRect.top() + self.size/2.), sceneRect.bottom() - self.size/2.))
+#        self.newPos.setX(min(max(self.newPos.x(), sceneRect.left() + self.size/2.), sceneRect.right() - self.size/2.))
+#        self.newPos.setY(min(max(self.newPos.y(), sceneRect.top() + self.size/2.), sceneRect.bottom() - self.size/2.))
 
     def advance(self):
         if self.newPos == self.pos():
             return False
-
         self.setPos(self.newPos)
+        self.update()
         return True
         
     def itemChange(self, change, value):
@@ -538,12 +570,13 @@ class Node(QtGui.QGraphicsItem):
         
     def itemMoved(self):
         if not self.timerId:
-            self.timerId = self.net.timer.start(200)
+            pass
+#            self.timerId = self.net.timer.start(100)
 
 
 
     def boundingRect(self):
-        adjust = 2.0
+        adjust = .1*self.size
         return QtCore.QRectF(-self.size/2. - adjust, -self.size/2. - adjust,
                              self.size*1.1 + adjust, self.size*1.1 + adjust)
 
@@ -583,8 +616,8 @@ class Node(QtGui.QGraphicsItem):
         QtGui.QGraphicsItem.mouseReleaseEvent(self, event)
 
 class Edge(QtGui.QGraphicsItem):
-    Pi = math.pi
-    TwoPi = 2.0 * Pi
+    Pi = pi
+    TwoPi = 2.0 * pi
 
     Type = QtGui.QGraphicsItem.UserType + 2
 
@@ -628,11 +661,10 @@ class Edge(QtGui.QGraphicsItem):
         self.prepareGeometryChange()
 
         if length > self.dest.size:
-            edgeOffset = QtCore.QPointF((line.dx() * self.source.size/.2) / length,
-                    (line.dy() * self.dest.size/.2) / length)
+            edgeOffset = QtCore.QPointF((line.dx() * self.source.size/.2) / length,(line.dy() * self.dest.size/.2) / length)
 
-            self.sourcePoint = line.p1() + edgeOffset
-            self.destPoint = line.p2() - edgeOffset
+            self.sourcePoint = line.p1()# + edgeOffset
+            self.destPoint = line.p2() #- edgeOffset
         else:
             self.sourcePoint = line.p1()
             self.destPoint = line.p1()
@@ -646,7 +678,8 @@ class Edge(QtGui.QGraphicsItem):
 
         return QtCore.QRectF(self.sourcePoint,
                              QtCore.QSizeF(self.destPoint.x() - self.sourcePoint.x(),
-                                           self.destPoint.y() - self.sourcePoint.y())).normalized().adjusted(-extra, -extra, extra, extra)
+                                           self.destPoint.y() - self.sourcePoint.y())).normalized().adjusted(-extra,
+                                                                                                -extra, extra, extra)
 
     def paint(self, painter, option, widget):
         if not self.source or not self.dest:
@@ -658,11 +691,11 @@ class Edge(QtGui.QGraphicsItem):
         if line.length() == 0.0:
             return
 
-        painter.setPen(QtGui.QPen(QtCore.Qt.gray, .1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
+        painter.setPen(QtGui.QPen(QtCore.Qt.lightGray, .1, QtCore.Qt.SolidLine, QtCore.Qt.RoundCap, QtCore.Qt.RoundJoin))
         painter.drawLine(line)
 
         # Draw the arrows if there's enough room.
-        angle = math.acos(line.dx() / line.length())
+        angle = acos(line.dx() / line.length())
         if line.dy() >= 0:
             angle = Edge.TwoPi - angle
 
@@ -679,26 +712,56 @@ class Edge(QtGui.QGraphicsItem):
         painter.drawPolygon(QtGui.QPolygonF([line.p1(), sourceArrowP1, sourceArrowP2]))
         painter.drawPolygon(QtGui.QPolygonF([line.p2(), destArrowP1, destArrowP2]))
 
+class LayoutRunnable(QtCore.QRunnable):
+    def __init__(self,node):
+        QtCore.QRunnable.__init__(self)
+        self.node = node
+        self.mutex = QtCore.QMutex()
+    def run(self):
+        self.mutex.lock()
+        self.node.calculateForces()
+#        if self.node.advance():
+#            self.node.net.centerScene()
+        self.mutex.unlock()
+
 class LayoutWorker(QtCore.QThread):
     def __init__(self,node,parent=None):
         QtCore.QThread.__init__(self, parent)
         self.mutex = QtCore.QMutex()
+        self.condition = QtCore.QWaitCondition()
         self.node = node
         
     def __del__(self):
-        pass
-#        self.wait()
+        self.mutex.lock()
+        self.condition.wakeOne()
+        self.mutex.unlock()
+        self.wait()
     def render(self):
         locker = QtCore.QMutexLocker(self.mutex)
         self.start()
     def run(self):
         self.node.calculateForces()
+#        self.mutex.lock()
+#        self.condition.wait(self.mutex)
+#        self.mutex.unlock()
 
+def wheelEvent(self, event):
+    self.scaleView(pow(2.0, -event.delta() / 240.0))
+
+def scaleView(self, scaleFactor):
+    factor = self.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()
+#        if factor < 0.07 or factor > 1000000:
+#            return
+    self.scale(scaleFactor, scaleFactor)
+
+
+    
 
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
+    qtp = QtCore.QThreadPool(app).globalInstance()
     MainW= QtGui.QMainWindow()
     ui = MainWindow()
     ui.show()

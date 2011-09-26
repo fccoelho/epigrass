@@ -96,8 +96,7 @@ class Edge(QtGui.QGraphicsItem):
         self.prepareGeometryChange()
 
         if length > 20.0:
-            edgeOffset = QtCore.QPointF((line.dx() * 10) / length,
-                    (line.dy() * 10) / length)
+            edgeOffset = QtCore.QPointF((line.dx() * 10) / length,(line.dy() * 10) / length)
 
             self.sourcePoint = line.p1() + edgeOffset
             self.destPoint = line.p2() - edgeOffset
