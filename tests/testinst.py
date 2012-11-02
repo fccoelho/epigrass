@@ -1,5 +1,5 @@
 """
-Unit testing script
+Tests for basic simulation model objects instantiation
 """
 
 import unittest
@@ -25,7 +25,7 @@ class testObjInstantiation(unittest.TestCase):
         l = self.S.instSites(self.sitios)
         e = self.S.instEdges(l,self.ed)
         g = self.S.instGraph('grafo',1,l,e)
-        
-        print g, g.getSiteNames()
+        self.assertEquals(len(g.site_list), len(self.sitios))
+        self.assertEquals(len(g.edge_list),len(self.ed))
 if __name__ == '__main__':
     unittest.main()

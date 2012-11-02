@@ -11,7 +11,7 @@ from types import MethodType
 from data_io import *
 
 
-class siteobj:
+class siteobj(object):
     """
     Basic site object containing attributes and methods common to all
     site objects.
@@ -327,7 +327,7 @@ class siteobj:
         return B
 
 
-class popmodels:
+class popmodels(object):
     """
     Defines a library of discrete time population models
     """
@@ -1161,7 +1161,7 @@ class popmodels:
 
         return [0,Ipos,Spos]
 
-class edge:
+class edge(object):
     """
     Defines an edge connecting two nodes (node source to node dest).
     with attributes given by value.
@@ -1223,7 +1223,7 @@ class edge:
 
 
 
-class graph:
+class graph(object):
     """
     Defines a graph with sites and edges
     """

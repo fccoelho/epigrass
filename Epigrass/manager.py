@@ -3,15 +3,13 @@
 Model Management and simulation objects.
 """
 import cPickle, time
-import os, codecs,  subprocess
+import os, codecs, subprocess
 from copy import deepcopy
 from xmlrpclib import ServerProxy, Error
 from simobj import graph, edge, siteobj
 from numpy import *
 import spread
 from numpy.random import uniform, poisson
-#from sqlobject import *
-from math import *
 from data_io import *
 from optparse import OptionParser
 import ConfigParser
@@ -25,13 +23,6 @@ import encodings.latin_1
 import sqlite3, MySQLdb
 #import pycallgraph
 
-# Import Psyco if available
-#try:
-#    import psyco
-#
-#    psyco.full()
-#except ImportError:
-#    pass
 
 class simulate:
     """
@@ -71,11 +62,7 @@ class simulate:
         l = self.instSites(sitios)
         e = self.instEdges(l,ed)
         self.g = self.instGraph(self.modelName,1,l,e)
-        #if self.layer:
-        #    pass
-            #self.grassVect2ascii(self.layer)
 
-        #self.g.plotDegreeDist()
 
 
     def loadModelScript(self,fname):
@@ -373,9 +360,6 @@ class simulate:
         if '/' in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
 #        print "====>", self.gui
-#        if self.gui and not self.round: #open the display window only on the first round of a reprun
-#            subprocess.Popen(['python','Epigrass/dgraph.py'])
-#            self.dserver = ServerProxy("http://localhost:50000", allow_none = True) # local display server
         time.sleep(10)
         self.Say('Simulation starting.')
         start = time.time()
