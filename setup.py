@@ -5,6 +5,7 @@ from setuptools import setup
 from glob import glob
 from Epigrass.__version__ import version
 #from distutils.core import setup
+#TODO: remove dependency on setuptools
 
 demos = glob('demos/*')
 try:

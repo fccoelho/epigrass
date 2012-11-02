@@ -3,6 +3,7 @@ This module contains functions to read and write from ascii files, as well as to
 """
 from numpy import *
 from string import *
+import codecs
 #from sqlobject import *
 
 from difflib import *
@@ -31,9 +32,8 @@ def load(fname, sep=None):
     X = load('test.dat, sep = ',') # file is csv
 
     """
-    f = open(fname,'r')
-    linelist = f.readlines()
-    f.close()
+    with codecs.open(fname,'r') as f:
+        linelist = f.readlines()
     
     
     X = []
@@ -58,7 +58,7 @@ def loadData(fname,sep = ',', encoding='utf-8'):
     Loads from ascii files with separated values
     and returns a list of lists.
     """
-    f = open(fname,'r')
+    f = codecs.open(fname,'r',encoding='utf8')
     linelist = f.readlines()
     f.close()
     
@@ -67,7 +67,7 @@ def loadData(fname,sep = ',', encoding='utf-8'):
     for line in linelist:
         line = line.strip()
         #if not len(line): continue
-        row = [unicode(strip(elmt),encoding) for elmt in line.split(str(sep))]
+        row = [elmt.strip().decode('utf8') for elmt in line.split(str(sep))]
         #thisLen = len(row)
         #if numCols is not None and thisLen != numCols:
         #    raise ValueError('All rows must have the same number of columns')
