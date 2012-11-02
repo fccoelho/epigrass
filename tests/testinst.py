@@ -8,7 +8,7 @@ class testObjInstantiation(unittest.TestCase):
     def setUp(self):
         self.sitios = loadData('sitios3.csv',sep=',')
         self.ed=loadData('edgesout.csv',sep=',')
-        self.S=simulate()
+        self.S=simulate('flu.epg')
     def testSites(self):
         l = self.S.instSites(self.sitios)
         for i in range(len(l)):
@@ -19,7 +19,7 @@ class testObjInstantiation(unittest.TestCase):
         e = self.S.instEdges(l,self.ed)
         j = 0
         for i in e:
-            self.assertEqual((i.source.sitename, i.dest.sitename),(self.ed[j][0],self.ed[j][1]))
+            self.assertEqual((i.source.geocode, i.dest.geocode),(int(self.ed[j][5]),int(self.ed[j][6])))
             j+=1
     def testGraph(self):
         l = self.S.instSites(self.sitios)

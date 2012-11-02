@@ -37,7 +37,7 @@ class simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
     """
-    def __init__(self, fname=None, host='localhost',port=3306,db='epigrass',user='epigrass', password='epigrass',backend = 'mysql'):
+    def __init__(self, fname=None, host='localhost',port=3306,db='epigrass',user='epigrass', password='epigrass',backend = 'sqlite'):
         #pycallgraph.start_trace()
         self.host = host
         self.port = port

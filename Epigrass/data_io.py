@@ -67,7 +67,7 @@ def loadData(fname,sep = ',', encoding='utf-8'):
     for line in linelist:
         line = line.strip()
         #if not len(line): continue
-        row = [elmt.strip().decode('utf8') for elmt in line.split(str(sep))]
+        row = [elmt.strip() for elmt in line.split(str(sep))]
         #thisLen = len(row)
         #if numCols is not None and thisLen != numCols:
         #    raise ValueError('All rows must have the same number of columns')
