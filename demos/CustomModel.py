@@ -4,11 +4,10 @@
 # so be careful. Please refer to the manual for intructions on how to write your 
 # own custom models.
 
-def Model(self,vars,par,theta=0, npass=0):
+def Model(self, inits, theta=0, npass=0):
         """
         This function implements the SIR model
         - inits = (E,I,S)
-        - par = (Beta, alpha, E,r,delta,B, w, p) see docs.
         - theta = infectious individuals from neighbor sites
         """
         ##### Defining variable names to appear in the database
@@ -19,7 +18,7 @@ def Model(self,vars,par,theta=0, npass=0):
         if self.parentSite.parentGraph.simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else: # get last value
-            E,I,S = vars
+            E,I,S = inits
             
         ##### Defining N, the total population     
         N = self.parentSite.totpop
