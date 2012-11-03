@@ -17,7 +17,6 @@ import string, sys, getpass
 import report as Rp
 import epigdal
 import __version__
-import multiprocessing
 import copy
 import encodings.utf_8
 import encodings.latin_1
@@ -26,11 +25,6 @@ import sqlite3, MySQLdb
 #import pycallgraph
 
 
-### Multiprocessing boiler plate ###
-po = multiprocessing.Pool()
-def prun_model(s):
-    s()
-##################################
 
 
 class simulate:
