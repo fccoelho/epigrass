@@ -12,6 +12,8 @@ from types import MethodType
 from data_io import *
 import multiprocessing
 
+sys.setrecursionlimit(3000) #to allow pickling of custom models
+
 
 
 class siteobj(object):
@@ -145,7 +147,7 @@ class siteobj(object):
             delay = len(self.migInf)-1
         lag = -1 - delay
 
-        print "==> ",lag,self.migInf
+        #print "==> ",lag,self.migInf
         if not self.stochtransp:
             theta = npass * self.migInf[lag]/float(self.totpop) # infectious migrants
 
@@ -400,8 +402,6 @@ class popmodels(object):
             return self.stepSIRS_s(**kwargs)
         elif type == 'Influenza':
             return self.stepFlu(**kwargs)
-        elif type == 'multiple':
-            return self.multipleStep(**kwargs)
         elif type == 'Custom':
             #adds the user model as a method of instance self
             try:
@@ -413,24 +413,6 @@ class popmodels(object):
         else:
             sys.exit('Model type specified in .epg file is invalid')
 
-
-#    def multipleStep(self,inits,par,theta=0, npass=0, modelos=[]):
-#        """
-#        Run multiple models on a single site
-#        - Inits and par are a list of lists.
-#        - modelos is a list of of the modeltypes.
-#        """
-#        if not modelos:
-#            raise Error, 'You have to define a list of model types when using "multiple"'
-#        if not isinstance(inits[0],list):
-#            raise Error, 'Model type is "multiple" but inits is not a tuple'
-#        if not isinstance(par[0],list):
-#            raise Error, 'Model type is "multiple" but par is not a tuple'
-#
-#        results=[]
-#        for i,m in enumerate(modelos):
-#            results.append(self.selectModel(m)(inits[i],par[i],theta,npass))
-#        return results
 
 
     def stepFlu(self,vars,N, theta=0,npass=0):
@@ -1236,8 +1218,10 @@ class graph(object):
     def __init__(self,graph_name,digraph=0):
         self.name = graph_name
         self.digraph = digraph
-        self.site_list = []
-        self.edge_list = []
+        self.site_dict = {} #geocode as keys
+        self.site_list = property(fget=lambda self:self.site_dict.values()) #only for backwards compatibility
+        self.edge_dict = {} #geocode tuple as key
+        self.edge_list = property(fget=lambda self:self.edge_dict.values()) #only for backwards compatibility
         self.speed = 0 # speed of the transportation system
         self.simstep = 1 #current step in the simulation
         self.maxstep = 100 #maximum number of steps in the simulation
@@ -1275,23 +1259,33 @@ class graph(object):
         Run node and edge dynamics
         :return:
         """
-        po = multiprocessing.Pool()
+        po = multiprocessing.Pool(multiprocessing.cpu_count(),maxtasksperchild=3)
         if transp:
             for n in xrange(self.maxstep):
                 print "==> ",n
-                #                po.map(prun_model, sites)
-                mrs = [po.apply_async(i) for i in self.site_list]
-                self.site_list = [i.get() for i in mrs]
-#                po.join()
-                po.close()
-                print [i.migInf for i in self.site_list]
-                #                for i in sites:
-                #                    i.runModel()
-                for j in self.edge_list:
-                    j.transportStoD()
-                    j.transportDtoS()
-                ##                self.outToODb(self.modelName,mode='p')
-                g.simstep += 1
+                mrs = [po.apply_async(i) for i in self.site_dict.itervalues()]
+                new_site_list = [i.get() for i in mrs]
+                self.site_dict.update({n.geocode:n for n in new_site_list})
+                self.do_transport()
+                self.simstep += 1
+        else:
+            for n in xrange(self.maxstep):
+                mrs = [po.apply_async(i) for i in self.site_dict.itervalues()]
+                new_site_list = [i.get() for i in mrs]
+                self.site_dict.update({n.geocode:n for n in new_site_list})
+                self.simstep += 1
+        po.close()
+
+    def do_transport(self):
+        for s,d in self.edge_dict.keys():
+            # Forwards
+            theta,npass = self.site_dict[s].getTheta(self.edge_dict[(s,d)].fmig,self.edge_dict[(s,d)].delay)
+            self.edge_dict[(s,d)].ftheta.append(theta)
+            self.site_dict[d].receiveTheta(theta,npass,self.site_dict[s])
+            # Backwards
+            theta,npass = self.site_dict[d].getTheta(self.edge_dict[(s,d)].bmig,self.edge_dict[(s,d)].delay)
+            self.edge_dict[(s,d)].btheta.append(theta)
+            self.site_dict[s].receiveTheta(theta,npass,self.site_dict[d])
 
 
     def addSite(self, sitio):
@@ -1303,8 +1297,8 @@ class graph(object):
 
         if not isinstance(sitio, siteobj):
             raise Error, 'add_site received a non siteobj class object'
-
-        self.site_list.append(sitio)
+        self.site_dict[sitio.geocode] = sitio
+#        self.site_list.append(sitio)
         sitio.parentGraph = self
 
     def dijkstra(self,G,start,end=None):
@@ -1406,12 +1400,13 @@ class graph(object):
         if not isinstance(graph_edge, edge):
             raise Error, 'add_edge received a non edge class object'
 
-        if not graph_edge.source in self.site_list:
+        if not graph_edge.source.geocode in self.site_dict:
             raise Error, 'Edge source does not belong to the graph'
 
-        if not graph_edge.dest in self.site_list:
+        if not graph_edge.dest.geocode in self.site_dict:
             raise Error, 'Edge destination does not belong to the graph'
-        self.edge_list.append(graph_edge)
+#        self.edge_list.append(graph_edge)
+        self.edge_dict[(graph_edge.source.geocode,graph_edge.dest.geocode)] = graph_edge
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
 
@@ -1421,7 +1416,7 @@ class graph(object):
         Generates a dictionary of the graph for use in the shortest path function.
         """
         G = {}
-        for i in self.site_list:
+        for i in self.site_dict.itervalues():
             G[i] = i.getNeighbors()
         self.graphdict = G
         return G
@@ -1454,7 +1449,7 @@ class graph(object):
         """
         returns list of site names for a given graph.
         """
-        sitenames = [s.sitename for s in self.site_list]
+        sitenames = [s.sitename for s in self.site_dict.itervalues()]
 
         return sitenames
 
@@ -1684,10 +1679,11 @@ class graph(object):
         except: pass
         if not self.graphdict: #this generates site neighbors lists
             self.getGraphdict()
-        nsites = len(self.site_list)
+        site_list = self.site_dict.values()
+        nsites = len(self.site_dict)
         cm = zeros((nsites,nsites),float)
-        for i,sitei in enumerate(self.site_list):
-            for j, sitej in enumerate(self.site_list[:i]):#calculates only lower triangle
+        for i,sitei in enumerate(site_list):
+            for j, sitej in enumerate(site_list[:i]):#calculates only lower triangle
                 if sitei == sitej: pass
                 else:
                     cm[i,j] = float(sitej in sitei.neighbors)
@@ -1761,7 +1757,7 @@ class graph(object):
         The weight of all nodes in the graph (W(G)) is the summation
         of each node's order (o) multiplied by 2 for all orders above 1.
         """
-        degrees = [i.getDegree() for i in self.site_list]
+        degrees = [i.getDegree() for i in self.site_dict.itervalues()]
         W = sum([i*2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
         return float(W)
 
@@ -1818,7 +1814,7 @@ class graph(object):
         number of links, the higher the number of paths possible in
         the network. Complex networks have a high value of Beta.
         """
-        B = len(self.edge_list)/float(len(self.site_list))
+        B = len(self.edge_dict)/float(len(self.site_dict))
         return B
 
     def getAlphaIndex(self):
@@ -1833,7 +1829,7 @@ class graph(object):
         nodes. It is very rare that a network will have an alpha value of 1,
         because this would imply very serious redundancies.
         """
-        nsites = float(len(self.site_list))
+        nsites = float(len(self.site_dict))
         A = self.getCycles()/(2.*nsites - 5)
         return A
 
@@ -1848,8 +1844,8 @@ class graph(object):
         unlikely in reality. Gamma is an efficient value to measure
         the progression of a network in time.
         """
-        nedg = float(len(self.edge_list))
-        nsites = float(len(self.site_list))
+        nedg = float(len(self.edge_dict))
+        nsites = float(len(self.site_dict))
         G = nedg/3*(nsites - 2)
         return G
 
@@ -1880,9 +1876,9 @@ class graph(object):
         Plots the Degree distribution of the graph
         maybe cumulative or not.
         """
-        nn = len(self.site_list)
-        ne = len(self.edge_list)
-        deglist = [i.getDegree() for i in self.site_list]
+        nn = len(self.site_dict)
+        ne = len(self.edge_dict)
+        deglist = [i.getDegree() for i in self.site_dict.itervalues()]
         if not cum:
             hist(deglist)
             title('Degree Distribution (N=%s, E=%s)'%(nn,ne))
@@ -1897,7 +1893,7 @@ class graph(object):
         """
         Returns the time taken by the epidemic to reach 50% of the nodes.
         """
-        n = len(self.site_list)
+        n = len(self.site_dict)
         try:
             median = self.epipath[int(n/2)][0]
         except: # In the case the epidemic does not reach 50% of nodes
@@ -1908,14 +1904,14 @@ class graph(object):
         """
         Returns the total number of vaccinated.
         """
-        tot = sum([i.nVaccinated for i in self.site_list])
+        tot = sum([i.nVaccinated for i in self.site_dict.itervalues()])
         return tot
 
     def getTotQuarantined(self):
         """
         Returns the total number of quarantined individuals.
         """
-        tot = sum([i.nQuarantined for i in self.site_list])
+        tot = sum([i.nQuarantined for i in self.site_dict.itervalues()])
         return tot
 
     def getEpistats(self):
@@ -1944,7 +1940,7 @@ class graph(object):
         """
         Returns the size of the epidemic
         """
-        N = sum([site.totalcases for site in self.site_list])
+        N = sum([site.totalcases for site in self.site_dict.itervalues()])
 
         return N
 
