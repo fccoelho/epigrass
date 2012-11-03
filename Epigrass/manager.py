@@ -17,6 +17,8 @@ import string, sys, getpass
 import report as Rp
 import epigdal
 import __version__
+import multiprocessing
+import copy
 import encodings.utf_8
 import encodings.latin_1
 #import dataObject as DO
@@ -24,12 +26,20 @@ import sqlite3, MySQLdb
 #import pycallgraph
 
 
+### Multiprocessing boiler plate ###
+po = multiprocessing.Pool()
+def prun_model(s):
+    s()
+##################################
+
+
 class simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
     """
-    def __init__(self, fname=None, host='localhost',port=3306,db='epigrass',user='epigrass', password='epigrass',backend = 'sqlite'):
+    def __init__(self, fname=None, host='localhost',port=3306,db='epigrass',user='epigrass', password='epigrass',backend = 'sqlite', silent=False):
         #pycallgraph.start_trace()
+#        self.pool = multiprocessing.Pool()
         self.host = host
         self.port = port
         self.usr = user
@@ -41,6 +51,7 @@ class simulate:
         self.shapefile = None
         self.World = None
         self.shpout = True
+        self.silent = silent
         self.dir = os.getcwd()
         sys.path.insert(0,self.dir) #add current path to sys.path
         self.gui = 0 # True if this object was created by the gui
@@ -252,7 +263,6 @@ class simulate:
                         o.createModel((E,I,S),self.modtype,self.modelName,v=values,bi=inits,bp=parms)
             else:
                 o.createModel((E,I,S),self.modtype,self.modelName,v=values,bi=inits,bp=parms)
-
         return objlist
 
     def instEdges(self,sitelist, edgelist):
@@ -317,16 +327,17 @@ class simulate:
         option: if 1 randomize; if 2, return unrundomized sequence
         """
         if option==1:
-            poplist = [log10(site.totpop) for site in self.g.site_list]
+            poplist = [log10(site.totpop) for site in self.g.site_dict.itervalues()]
             lpl = len(poplist)
             popprob = array(poplist)/sum(poplist) #acceptance probability
             u = floor(uniform(0,lpl, self.replicas))
             sites=[]
             i=0
+            site_list = self.g.site_list
             while i < self.replicas:
                 p = uniform(0,1)
                 if p <= popprob[int(u[i])]:
-                    sites.append(self.g.site_list[int(u[i])])
+                    sites.append(site_list[int(u[i])])
                     i += 1
         elif option ==2:
             sites = self.g.site_list
@@ -341,9 +352,10 @@ class simulate:
         #inits[self.seed[0][1].lower()] += 1
         seedvar = self.seed[0][1].lower() #retrieve the name of the variable containing the seeds
         self.Say('seedvar= %s'%seedvar)
-
+        site_list = self.g.site_list
         self.seed =[(seed.geocode, seedvar,n)]
-        for site in self.g.site_list:
+
+        for site in site_list:
             if site.geocode == seed.geocode:
                 site.bi[seedvar] = n
 #                site.ts[0][seedpos] = n
@@ -431,7 +443,7 @@ class simulate:
         varlist = ["prevalence","totalcases", "arrivals","population"]
         sitestats = []
         names = {}
-        for site in self.g.site_list:
+        for site in self.g.site_dict.itervalues():
             names[int(site.geocode)] = site.sitename
             prevalence = float(site.totalcases)/site.totpop
             #print prevalence
@@ -464,14 +476,17 @@ class simulate:
         k = epigdal.KmlGenerator()
         k.addNodes(lr,names)
         k.writeToFile(self.outdir)
-        if  len(self.g.site_list)*len(self.g.site_list[0].ts)<10000: #Only reasonably sized animations
-            for i, v in enumerate(self.g.site_list[0].vnames):
+        site_list = self.g.site_list
+        if  len(site_list)*len(site_list[0].ts)<10000: #Only reasonably sized animations
+            for i, v in enumerate(site_list[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
-                data = [(str(site.geocode), t, p[i]) for site in self.g.site_list for t, p in enumerate(site.ts)]
+                data = [(str(site.geocode), t, p[i]) for site in site_list for t, p in enumerate(site.ts)]
                 ka.add_data(data)
                 ka.save(v+'_animation')
                 self.Say(v+'_animation')
                 del ka
+        else:
+            self.Say("Simulation too large to export as kml.")
         
         self.Say("Done creating KML files!")
 
@@ -503,7 +518,7 @@ class simulate:
         head = ['geocode','time','totpop','name',
         'lat','longit']
         headerwritten = False
-        for site in self.g.site_list:
+        for site in self.g.site_dict.itervalues():
             t = 0
             regb = [str(site.geocode),str(t),str(site.totpop),
                 site.sitename.replace('"','').encode('ascii','replace'),
@@ -751,10 +766,10 @@ class simulate:
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(self.g.site_list[0].ts[-1]) +4 #state variables,  plus coords, plus incidence, plus infected arrivals.
+            nvar = len(self.g.site_dict.values()[0].ts[-1]) +4 #state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),'*nvar #nvar variables in the table
             str1lite = '%s REAL,'*nvar #nvar variables in the SQLite table
-            varnames = ['lat','longit']+list(self.g.site_list[0].vnames)+['incidence']+['Arrivals']
+            varnames = ['lat','longit']+list(self.g.site_dict.values()[0].vnames)+['incidence']+['Arrivals']
 #            print nvar, varnames, str1
             str1 = str1[:len(str1)-1] % tuple(varnames) #insert variable names (MySQL)
             str1lite = str1lite[:len(str1lite)-1] % tuple(varnames) #insert variable names (SQLITE)
@@ -782,7 +797,7 @@ class simulate:
                 str3 = str3[:-1]+')'
             sql2 = 'INSERT INTO %s' % table + ' VALUES('+str3
             nvalues = []
-            for site in self.g.site_list:
+            for site in self.g.site_dict.itervalues():
                 geoc = site.geocode
                 lat = site.pos[0]
                 long = site.pos[1]
@@ -818,9 +833,9 @@ class simulate:
                 Cursor.execute(esqlite)
                 esql2 = 'INSERT INTO %s' % etable + ' VALUES(?,?,?,?,?)'
             values = []
-            for e in self.g.edge_list:
-                s = e.source.geocode
-                d = e.dest.geocode
+            for gcs,e in self.g.edge_dict.iteritems():
+                s = gcs[0]
+                d = gcs[1]
                 t=0
                 for f,b in zip(e.ftheta,e.btheta):
                     values.append((s,d,t,f,b))
@@ -840,7 +855,7 @@ class simulate:
 
     def criaAdjMatrix(self):
         # saving the adjacency  matrix
-        codeslist = [str(i.geocode) for i in self.g.site_list]
+        codeslist = [str(i.geocode) for i in self.g.site_dict.itervalues()]
         if not os.path.exists('adjmat.csv'):
             self.Say('Saving the adjacency  matrix...')
             am = self.g.getConnMatrix()
@@ -865,7 +880,7 @@ class simulate:
         if not self.outdir == curdir:
             os.chdir(self.outdir)
 
-        codeslist = [str(i.geocode) for i in self.g.site_list]
+        codeslist = [str(i.geocode) for i in self.g.site_dict.itervalues()]
         self.criaAdjMatrix()
         #saving the shortest path matrices
 #        if not os.path.exists('spmat.csv'):
@@ -914,7 +929,7 @@ class simulate:
         #saving Epistats
         self.Say('Saving Epidemiological results...')
         stats = [str(i) for i in self.g.getEpistats()]
-        seed = [s for s in self.g.site_list if s.geocode == self.seed[0][0]][0]
+        seed = [s for s in self.g.site_dict.itervalues() if s.geocode == self.seed[0][0]][0]
         stats.pop(1) #Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
             stf = codecs.open('epistats.csv','a',self.encoding)#append to file
@@ -944,7 +959,7 @@ class simulate:
 
         #sitef.write('round,geocode,name,infection_time,degree,centrality,betweeness,theta_index,distance,seed,seedname\n')
         sitef.write('round,geocode,name,infection_time,degree,seed,seedname\n')
-        for s in self.g.site_list:
+        for s in self.g.site_dict.itervalues():
             degree = str(s.getDegree())
             #central = str(s.getCentrality())
             #bet = str(s.getBetweeness())
@@ -985,6 +1000,7 @@ class simulate:
         """
         call parallel inserts
         """
+        pass
 
     def runGraph(self,graphobj,iterations=1, transp=0):
         """
@@ -992,33 +1008,29 @@ class simulate:
         """
         g = graphobj
         g.maxstep = iterations
-        sites = tuple(graphobj.site_list)
-        edges = tuple(graphobj.edge_list)
+        sites = graphobj.site_dict.values()
+        edges = graphobj.edge_dict.itervalues()
         #viewer = Viewer(g,self.shapefile[0], "geocode" )
         if transp:
-            for n in xrange(iterations):
-                for i in sites:
-                    i.runModel()
-                for j in edges:
-                    j.transportStoD()
-                    j.transportDtoS()
-##                self.outToODb(self.modelName,mode='p')
-                if self.gui:
-#                    self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+            if not self.gui:
+                g.run_simulation(transp)
+            else:
+                for n in xrange(iterations):
+                    for i in sites:
+                        i.runModel()
+                    for j in edges:
+                        j.transportStoD()
+                        j.transportDtoS()
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
-#                    self.gui.RT.mutex.lock()
-#                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
-#                    self.gui.RT.mutex.unlock()
-                g.simstep += 1
+                    g.simstep += 1
         else:
             for n in xrange(iterations):
-                for i in sites:
-                    i.runModel()
-##                self.outToODb(self.modelName,mode='p')
-                #viewer.show(n)
-                if self.gui:
-                    #self.gui.graphDisplay.drawStep(g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                if not self.gui:
+                    g.run_simulation(transp)
+                else:
+                    for i in sites:
+                        i.runModel()
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
                     self.gui.RT.mutex.lock()
@@ -1031,7 +1043,11 @@ class simulate:
         """
         if self.gui:
             self.gui.textEdit1.insertPlainText(string+'\n''')
-        print string+'\n'
+        else:
+            if self.silent:
+                return
+            print string+'\n'
+
 def storeSimulation(s,db='epigrass', host='localhost',port=3306):
     """
     store the Simulate object *s* in the epigrass database
