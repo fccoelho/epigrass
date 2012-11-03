@@ -5,10 +5,13 @@ import sys, matplotlib
 #matplotlib.use("Agg")
 #from pylab import *
 #import dgraph
-from numpy import *
-from numpy.random import uniform, binomial, poisson
+#from numpy import *
+import numpy as np
+from numpy.random import uniform, binomial, poisson, beta, negative_binomial
 from types import MethodType
 from data_io import *
+import multiprocessing
+
 
 
 class siteobj(object):
@@ -67,6 +70,13 @@ class siteobj(object):
         self.infectedvisiting=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
+    def __call__(self):
+        """
+        For multiprocessing to work
+        """
+        self.runModel()
+        return self
+
     def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
@@ -103,15 +113,10 @@ class siteobj(object):
 
         npass = sum(self.passlist)
         self.thetahist.append(theta) #keep a record of infected passenger arriving
-        self.ts.append(self.model.step(self.ts[-1],theta,npass))
+        self.ts.append(self.model.step(inits=self.ts[-1],theta=theta,npass=npass))
 
         self.thetalist = []   # reset self.thetalist (for the new timestep)
-##        if self.parentGraph.gr: #updatn.box.length =es the visual graph display.
-##            i = self.parentGraph.site_list.index(self)
-##            if self.infected:
-##                self.parentGraph.gr.nodes[i].box.length = self.parentGraph.gr.nodes[i].box.width =self.parentGraph.gr.nodes[i].box.height = (self.ts[-1][1]/float(self.totpop)+0.4)**1/3.
-##                if not self.painted:
-##                    self.parentGraph.lightGRNode(self,'r')
+
 
 
     def vaccinate(self,cov):
@@ -138,9 +143,9 @@ class siteobj(object):
         """
         if delay>=len(self.migInf):
             delay = len(self.migInf)-1
-        lag = -1- delay
+        lag = -1 - delay
 
-
+        print "==> ",lag,self.migInf
         if not self.stochtransp:
             theta = npass * self.migInf[lag]/float(self.totpop) # infectious migrants
 
@@ -342,89 +347,90 @@ class popmodels(object):
         self.bp = bp # dictionary of parms
         self.parentSite = parentsite
         self.parentSite.vnames = ('E','I','S')
-        self.selectModel(self.type)#sets self.step
+#        self.selectModel(self.type) #sets self.step
 
+    def step(self,**kwargs):
+#        print kwargs
+        return self.selectModel(self.type,kwargs)
 
-        #print self.step
-
-    def selectModel(self,type):
+    def selectModel(self,type,kwargs):
         """
         sets the model engine
         """
 
         if type=='SIR':
-            self.step=self.stepSIR
+            return self.stepSIR(**kwargs)
         elif type == 'SIR_s':
-            self.step=self.stepSIR_s
+            return self.stepSIR_s(**kwargs)
         elif type == 'SIS':
-            self.step=self.stepSIS
+            return self.stepSIS(**kwargs)
         elif type == 'SIS_s':
-            self.step=self.stepSIS_s
+            return self.stepSIS_s(**kwargs)
         elif type == 'SEIS':
-            self.step=self.stepSEIS
+            return self.stepSEIS(**kwargs)
         elif type == 'SEIS_s':
-            self.step=self.stepSEIS_s
+            return self.stepSEIS_s(**kwargs)
         elif type=='SEIR':
-            self.step=self.stepSEIR
+            return self.stepSEIR(**kwargs)
         elif type == 'SEIR_s':
-            self.step = self.stepSEIR_s
+            return self.stepSEIR_s(**kwargs)
         elif type == 'SIpRpS':
-            self.step=self.stepSIpRpS
+            return self.stepSIpRpS(**kwargs)
         elif type == 'SIpRpS_s':
-            self.step=self.stepSIpRpS_s
+            return self.stepSIpRpS_s(**kwargs)
         elif type == 'SEIpRpS':
-            self.step=self.stepSEIpRpS
+            return self.stepSEIpRpS(**kwargs)
         elif type == 'SEIpRpS_s':
-            self.step=self.stepSEIpRpS_s
+            return self.stepSEIpRpS_s(**kwargs)
         elif type == 'SIpR':
             self.parentSite.incidence2 = []
-            self.step=self.stepSIpR
+            return self.stepSIpR(**kwargs)
         elif type == 'SIpR_s':
             self.parentSite.incidence2 = []
-            self.step=self.stepSIpR_s
+            return self.stepSIpR_s(**kwargs)
         elif type == 'SEIpR':
             self.parentSite.incidence2 = []
-            self.step=self.stepSEIpR
+            return self.stepSEIpR(**kwargs)
         elif type == 'SEIpR_s':
             self.parentSite.incidence2 = []
-            self.step=self.stepSEIpR_s
+            return self.stepSEIpR_s(**kwargs)
         elif type == 'SIRS':
-            self.step=self.stepSIRS
+            return self.stepSIRS(**kwargs)
         elif type == 'SIRS_s':
-            self.step=self.stepSIRS_s
+            return self.stepSIRS_s(**kwargs)
         elif type == 'Influenza':
-            self.step = self.stepFlu
+            return self.stepFlu(**kwargs)
         elif type == 'multiple':
-            self.step = self.multipleStep
+            return self.multipleStep(**kwargs)
         elif type == 'Custom':
             #adds the user model as a method of instance self
             try:
                 #TODO: move this import to the graph level
                 import CustomModel
-                self.step = MethodType(CustomModel.Model,self)
+                return MethodType(CustomModel.Model,self)(**kwargs)
             except ImportError:
                 print "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
         else:
             sys.exit('Model type specified in .epg file is invalid')
 
 
-    def multipleStep(self,inits,par,theta=0, npass=0, modelos=[]):
-        """
-        Run multiple models on a single site
-        - Inits and par are a list of lists.
-        - modelos is a list of of the modeltypes.
-        """
-        if not modelos:
-            raise Error, 'You have to define a list of model types when using "multiple"'
-        if not isinstance(inits[0],list):
-            raise Error, 'Model type is "multiple" but inits is not a tuple'
-        if not isinstance(par[0],list):
-            raise Error, 'Model type is "multiple" but par is not a tuple'
-
-        results=[]
-        for i,m in enumerate(modelos):
-            results.append(selectModel(m)(inits[i],par[i],theta,npass))
-        return results
+#    def multipleStep(self,inits,par,theta=0, npass=0, modelos=[]):
+#        """
+#        Run multiple models on a single site
+#        - Inits and par are a list of lists.
+#        - modelos is a list of of the modeltypes.
+#        """
+#        if not modelos:
+#            raise Error, 'You have to define a list of model types when using "multiple"'
+#        if not isinstance(inits[0],list):
+#            raise Error, 'Model type is "multiple" but inits is not a tuple'
+#        if not isinstance(par[0],list):
+#            raise Error, 'Model type is "multiple" but par is not a tuple'
+#
+#        results=[]
+#        for i,m in enumerate(modelos):
+#            results.append(self.selectModel(m)(inits[i],par[i],theta,npass))
+#        return results
 
 
     def stepFlu(self,vars,N, theta=0,npass=0):
@@ -1264,6 +1270,30 @@ class graph(object):
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
 
+    def run_simulation(self,transp=1):
+        """
+        Run node and edge dynamics
+        :return:
+        """
+        po = multiprocessing.Pool()
+        if transp:
+            for n in xrange(self.maxstep):
+                print "==> ",n
+                #                po.map(prun_model, sites)
+                mrs = [po.apply_async(i) for i in self.site_list]
+                self.site_list = [i.get() for i in mrs]
+#                po.join()
+                po.close()
+                print [i.migInf for i in self.site_list]
+                #                for i in sites:
+                #                    i.runModel()
+                for j in self.edge_list:
+                    j.transportStoD()
+                    j.transportDtoS()
+                ##                self.outToODb(self.modelName,mode='p')
+                g.simstep += 1
+
+
     def addSite(self, sitio):
         """
         Adds a site object to the graph.
@@ -1503,18 +1533,18 @@ class graph(object):
         except ImportError, v:
             print v
 
-    def lightGRNode(self,node,color = 'r'):
-        """
-        Paints red the sphere corresponding to the node in the visual display
-        """
-        i = self.site_list.index(node)
-        if color == 'r':
-            red = (self.maxstep-self.simstep)/float(self.maxstep)
-            blue = 1-red**6
-            self.gr.nodes[i].box.color = (red,0.,blue)
-            node.painted = 1
-        elif color == 'g':
-            self.gr.nodes[i].box.color = (0.,1.,0.)
+#    def lightGRNode(self,node,color = 'r'):
+#        """
+#        Paints red the sphere corresponding to the node in the visual display
+#        """
+#        i = self.site_list.index(node)
+#        if color == 'r':
+#            red = (self.maxstep-self.simstep)/float(self.maxstep)
+#            blue = 1-red**6
+#            self.gr.nodes[i].box.color = (red,0.,blue)
+#            node.painted = 1
+#        elif color == 'g':
+#            self.gr.nodes[i].box.color = (0.,1.,0.)
 
 
     def drawGraph(self):
@@ -1564,34 +1594,34 @@ class graph(object):
         #saving
         savefig('graph.png')
         close()
-    def drawGraphR(self):
-        """
-        Draws the network using R
-        """
-        d=r.capabilities()
-        if d['png']:
-            device = r.png
-            device('graph.png',width=733,height=550)
-        elif d['jpeg']:
-            device = r.jpeg
-            device('graph.png',width=733,height=550)
-        else:
-            device = r.postscript
-            device('graph.png',width=733,height=550)
-        # node data
-        x = [i.pos[1] for i in self.site_list]
-        y = [i.pos[0] for i in self.site_list]
-        r.plot(x,y,axes=r.F,pch=16,xlab="",ylab="")
-
-        #edge data
-        xs = [e.source.pos[1] for e in self.edge_list]
-        ys = [e.source.pos[0] for e in self.edge_list]
-        xd = [e.dest.pos[1] for e in self.edge_list]
-        yd = [e.dest.pos[0] for e in self.edge_list]
-        for i in range(len(xs)):
-            r.lines(r.c(xs[i],xd[i]),r.c(ys[i],yd[i]),lwd=0.5,col="gray")
-        r.points(x,y,pch=16)
-        r.dev_off()
+#    def drawGraphR(self):
+#        """
+#        Draws the network using R
+#        """
+#        d=r.capabilities()
+#        if d['png']:
+#            device = r.png
+#            device('graph.png',width=733,height=550)
+#        elif d['jpeg']:
+#            device = r.jpeg
+#            device('graph.png',width=733,height=550)
+#        else:
+#            device = r.postscript
+#            device('graph.png',width=733,height=550)
+#        # node data
+#        x = [i.pos[1] for i in self.site_list]
+#        y = [i.pos[0] for i in self.site_list]
+#        r.plot(x,y,axes=r.F,pch=16,xlab="",ylab="")
+#
+#        #edge data
+#        xs = [e.source.pos[1] for e in self.edge_list]
+#        ys = [e.source.pos[0] for e in self.edge_list]
+#        xd = [e.dest.pos[1] for e in self.edge_list]
+#        yd = [e.dest.pos[0] for e in self.edge_list]
+#        for i in range(len(xs)):
+#            r.lines(r.c(xs[i],xd[i]),r.c(ys[i],yd[i]),lwd=0.5,col="gray")
+#        r.points(x,y,pch=16)
+#        r.dev_off()
 
     def getAllPairs(self):
         """
