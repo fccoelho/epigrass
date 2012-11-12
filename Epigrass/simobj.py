@@ -11,6 +11,7 @@ from numpy.random import uniform, binomial, poisson, beta, negative_binomial
 from types import MethodType
 from data_io import *
 import multiprocessing
+import time
 
 sys.setrecursionlimit(3000) #to allow pickling of custom models
 
@@ -76,7 +77,9 @@ class siteobj(object):
         """
         For multiprocessing to work
         """
+        t0 = time.time()
         self.runModel()
+        print "Time to runModel: ", time.time()-t0
         return self
 
     def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
@@ -115,7 +118,7 @@ class siteobj(object):
 
         npass = sum(self.passlist)
         self.thetahist.append(theta) #keep a record of infected passenger arriving
-        self.ts.append(self.model.step(inits=self.ts[-1],theta=theta,npass=npass))
+        self.ts.append(self.model.step(inits=self.ts[-1],self.parentGraph.simstep,self.totpop,theta=theta,npass=npass))
 
         self.thetalist = []   # reset self.thetalist (for the new timestep)
 
@@ -415,23 +418,26 @@ class popmodels(object):
 
 
 
-    def stepFlu(self,vars,N, theta=0,npass=0):
+    def stepFlu(self,inits, simstep, totpop, theta=0,npass=0):
         """
         Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
         """
+        tinicial = time.time()
+        print "-->", self.parentSite.sitename
         #Variable long names to be used in the database output.
         self.parentSite.vnames = ('Susc_age1','Incub_age1','Subc_age1','Sympt_age1','Comp_age1',
         'Susc_age2','Incub_age2','Subc_age2','Sympt_age2','Comp_age2',
         'Susc_age3','Incub_age3','Subc_age3','Sympt_age3','Comp_age3',
         'Susc_age4','Incub_age4','Subc_age4','Sympt_age4','Comp_age4',)
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             S1,E1,Is1,Ic1,Ig1 = (self.bi['s1'],self.bi['e1'],self.bi['is1'],self.bi['ic1'],self.bi['ig1'])
             S2,E2,Is2,Ic2,Ig2 = (self.bi['s2'],self.bi['e2'],self.bi['is2'],self.bi['ic2'],self.bi['ig2'])
             S3,E3,Is3,Ic3,Ig3 = (self.bi['s3'],self.bi['e3'],self.bi['is3'],self.bi['ic3'],self.bi['ig3'])
             S4,E4,Is4,Ic4,Ig4 = (self.bi['s4'],self.bi['e4'],self.bi['is4'],self.bi['ic4'],self.bi['ig4'])
         else: #get values from last time step
-            S1,E1,Is1,Ic1,Ig1,S2,E2,Is2,Ic2,Ig2,S3,E3,Is3,Ic3,Ig3,S4,E4,Is4,Ic4,Ig4 = vars
-        N = self.parentSite.totpop
+            S1,E1,Is1,Ic1,Ig1,S2,E2,Is2,Ic2,Ig2,S3,E3,Is3,Ic3,Ig3,S4,E4,Is4,Ic4,Ig4 = inits
+        N = totpop
+
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameters: alpha,beta,r,e,c,g,d,pc1,pc2,pc3,pc4,pp1,pp2,pp3,pp4,b
@@ -492,22 +498,23 @@ class popmodels(object):
         #Migrating infecctious
         self.parentSite.migInf.append(Ig1pos+Ig2pos+Ig3pos+Ig4pos+Ic1pos+Ic2pos+Ic3pos+Ic4pos+0.5*(Is1pos+Is2pos+Is3pos+Is4pos))
         # Return variable values
+        print "------> exiting in %s seconds"%(time.time()-tinicial)
         return [S1pos,E1pos,Is1pos,Ic1pos,Ig1pos,S2pos,E2pos,Is2pos,
         Ic2pos,Ig2pos,S3pos,E3pos,Is3pos,Ic3pos,Ig3pos,S4pos,
         E4pos,Is4pos,Ic4pos,Ig4pos]
 
 
-    def stepSIS(self,inits,theta=0, npass=0):
+    def stepSIS(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SIS, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
@@ -528,17 +535,17 @@ class popmodels(object):
         self.parentSite.migInf.append(Ipos)
         return [0,Ipos,Spos]
 
-    def stepSIS_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSIS_s(self,inits=(0,0,0), simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIS:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -564,20 +571,20 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIR(self,inits,theta=0, npass=0):
+    def stepSIR(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SIR, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
+        # parameters: b ,r
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
         self.parentSite.totalcases += Lpos #update number of cases
         # Model
@@ -597,17 +604,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIR_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSIR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIR:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
@@ -634,27 +641,27 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSEIS(self,inits=(0,0,0),theta=0, npass=0):
+    def stepSEIS(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIS:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
-        #parameters: beta,alpha,e,r,delta,b,w,p
+        #parameters: b,e,r
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
         self.parentSite.totalcases += Lpos #update number of cases
-        #print N,E,I,S,Lpos,theta
+        #Model
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + r*I
-
+        # Updating stats
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -665,18 +672,18 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSEIS_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSEIS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIS:
         - inits = (E,I,S)
         - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameters: beta,alpha,e,r,delta,b,w,p
@@ -691,7 +698,7 @@ class popmodels(object):
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + r*I
-
+        # Updating stats
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -702,29 +709,30 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSEIR(self,inits=(0,0,0),theta=0, npass=0):
+    def stepSEIR(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIR:
         - inits = (E,I,S)
         - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameters: beta,alpha,e,r,delta,B,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
         self.parentSite.totalcases += Lpos #update number of cases
-        #print N,E,I,S,Lpos,theta
+        #Model
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Epos+Ipos)
         #self.parentSite.totpop = Spos+Epos+Ipos+Rpos
+        # Updating stats
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -735,14 +743,14 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSEIR_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSEIR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIR:
         - inits = (E,I,S)
         - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
@@ -764,7 +772,7 @@ class popmodels(object):
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Epos+Ipos)
-        #self.parentSite.totpop = Spos+Epos+Ipos+Rpos
+        #totpop = Spos+Epos+Ipos+Rpos
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -775,17 +783,17 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSIpRpS(self,inits,theta=0, npass=0):
+    def stepSIpRpS(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SIpRpS, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -808,17 +816,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIpRpS_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSIpRpS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIpRpS:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,B,w,p
@@ -845,13 +853,13 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSEIpRpS(self,inits=(0,0,0),theta=0, npass=0):
+    def stepSEIpRpS(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIpRpS:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
@@ -867,7 +875,7 @@ class popmodels(object):
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Epos+Ipos) + delta*r*I
-        #self.parentSite.totpop = Spos+Epos+Ipos+Rpos
+        #totpop = Spos+Epos+Ipos+Rpos
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -878,13 +886,13 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSEIpRpS_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSEIpRpS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIpRpS:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
@@ -904,7 +912,7 @@ class popmodels(object):
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Epos+Ipos) + delta*r*I
-        #self.parentSite.totpop = Spos+Epos+Ipos+Rpos
+        #totpop = Spos+Epos+Ipos+Rpos
         self.parentSite.incidence.append(Lpos)
         if not self.parentSite.infected:
             if Lpos > 0:
@@ -915,17 +923,17 @@ class popmodels(object):
 
         return [Epos,Ipos,Spos]
 
-    def stepSIpR(self,inits,theta=0, npass=0):
+    def stepSIpR(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SIpR, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         R = N-E-I-S
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
@@ -951,17 +959,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIpR_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSIpR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIpRs:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
@@ -995,17 +1003,17 @@ class popmodels(object):
         self.parentSite.migInf.append(Ipos)
         return [0,Ipos,Spos]
 
-    def stepSEIpR(self,inits,theta=0, npass=0):
+    def stepSEIpR(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SEIpR, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         R = N-E-I-S
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
@@ -1033,17 +1041,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSEIpR_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSEIpR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIpRs:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,B,w,p
@@ -1079,17 +1087,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIRS(self,inits,theta=0, npass=0):
+    def stepSIRS(self,inits,simstep, totpop,theta=0, npass=0):
         """
         calculates the model SIRS, and return its values (no demographics)
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
@@ -1112,17 +1120,17 @@ class popmodels(object):
 
         return [0,Ipos,Spos]
 
-    def stepSIRS_s(self,inits=(0,0,0),theta=0, npass=0,dist='poisson'):
+    def stepSIRS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIR:
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
         else:
             E,I,S = inits
-        N = self.parentSite.totpop
+        N = totpop
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -1259,12 +1267,15 @@ class graph(object):
         Run node and edge dynamics
         :return:
         """
-        po = multiprocessing.Pool(multiprocessing.cpu_count(),maxtasksperchild=3)
+        po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
+
         if transp:
             for n in xrange(self.maxstep):
+#                print "site dict size: ",len(self.site_dict)
                 print "==> ",n
                 mrs = [po.apply_async(i) for i in self.site_dict.itervalues()]
-                new_site_list = [i.get() for i in mrs]
+
+                new_site_list = [i.get(2) for i in mrs]
                 self.site_dict.update({n.geocode:n for n in new_site_list})
                 self.do_transport()
                 self.simstep += 1
@@ -1277,7 +1288,8 @@ class graph(object):
         po.close()
 
     def do_transport(self):
-        for s,d in self.edge_dict.keys():
+        print "===> trsnp"
+        for s,d in self.edge_dict.iterkeys():
             # Forwards
             theta,npass = self.site_dict[s].getTheta(self.edge_dict[(s,d)].fmig,self.edge_dict[(s,d)].delay)
             self.edge_dict[(s,d)].ftheta.append(theta)
