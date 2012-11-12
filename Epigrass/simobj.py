@@ -118,7 +118,16 @@ class siteobj(object):
 
         npass = sum(self.passlist)
         self.thetahist.append(theta) #keep a record of infected passenger arriving
-        self.ts.append(self.model.step(inits=self.ts[-1],self.parentGraph.simstep,self.totpop,theta=theta,npass=npass))
+        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=self.parentGraph.simstep,totpop=self.totpop,theta=theta,npass=npass)
+        self.ts.append(state)
+        self.totalcases += Lpos
+        self.incidence.append(Lpos)
+        if not self.infected:
+            if Lpos > 0:
+                self.infected = self.parentGraph.simstep
+                self.parentGraph.epipath.append((self.parentGraph.simstep,self.geocode,self.infector))
+                #TODO: have infector be stated in terms of geocodes
+        self.migInf.append(migInf)
 
         self.thetalist = []   # reset self.thetalist (for the new timestep)
 
@@ -460,7 +469,6 @@ class popmodels(object):
 
         ######################
         Lpos = L1pos+L2pos+L3pos+L4pos
-        self.parentSite.totalcases+=Lpos
         # Model
         # 0-2 anos
         E1pos = L1pos + (1-e)*E1
@@ -486,22 +494,14 @@ class popmodels(object):
         Ic4pos = (1-(pp4*g+(1-pp4)*r))*Ic4 + pc4*c*Is4
         Ig4pos = (1-d)*Ig4 + pp4*g*Ic4
         S4pos = b+S4 - L4pos
-        # Updating stats
 
-        self.parentSite.incidence.append(Lpos)
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
         #Migrating infecctious
-        self.parentSite.migInf.append(Ig1pos+Ig2pos+Ig3pos+Ig4pos+Ic1pos+Ic2pos+Ic3pos+Ic4pos+0.5*(Is1pos+Is2pos+Is3pos+Is4pos))
+        migInf = (Ig1pos+Ig2pos+Ig3pos+Ig4pos+Ic1pos+Ic2pos+Ic3pos+Ic4pos+0.5*(Is1pos+Is2pos+Is3pos+Is4pos))
         # Return variable values
         print "------> exiting in %s seconds"%(time.time()-tinicial)
         return [S1pos,E1pos,Is1pos,Ic1pos,Ig1pos,S2pos,E2pos,Is2pos,
         Ic2pos,Ig2pos,S3pos,E3pos,Is3pos,Ic3pos,Ig3pos,S4pos,
-        E4pos,Is4pos,Ic4pos,Ig4pos]
+        E4pos,Is4pos,Ic4pos,Ig4pos], Lpos, migInf
 
 
     def stepSIS(self,inits,simstep, totpop,theta=0, npass=0):
@@ -519,23 +519,15 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
-        return [0,Ipos,Spos]
 
-    def stepSIS_s(self,inits=(0,0,0), simstep, totpop,theta=0, npass=0,dist='poisson'):
+        #Migrating infecctious
+        migInf = (Ipos)
+        return [0,Ipos,Spos],Lpos,migInf
+
+    def stepSIS_s(self,inits, simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIS:
         - inits = (E,I,S)
@@ -556,20 +548,15 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
 
-        return [0,Ipos,Spos]
+        #Migrating infecctious
+        migInf = (Ipos)
+
+        return [0,Ipos,Spos], Lpos, migInf
 
     def stepSIR(self,inits,simstep, totpop,theta=0, npass=0):
         """
@@ -586,25 +573,18 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         # parameters: b ,r
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos)
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos],Lpos,migInf
 
-    def stepSIR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSIR_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIR:
         - inits = (E,I,S)
@@ -625,23 +605,18 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos)
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos, migInf
 
-    def stepSEIS(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
+    def stepSEIS(self,inits,simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIS:
         - inits = (E,I,S)
@@ -656,23 +631,18 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         #parameters: b,e,r
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
+
         #Model
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [Epos,Ipos,Spos]
+        return [Epos,Ipos,Spos], Lpos, migInf
 
-    def stepSEIS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSEIS_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIS:
         - inits = (E,I,S)
@@ -694,22 +664,17 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #converting between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [Epos,Ipos,Spos]
+        return [Epos,Ipos,Spos], Lpos,migInf
 
-    def stepSEIR(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
+    def stepSEIR(self,inits,simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIR:
         - inits = (E,I,S)
@@ -725,25 +690,20 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         #parameters: beta,alpha,e,r,delta,B,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
+
         #Model
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Epos+Ipos)
         #self.parentSite.totpop = Spos+Epos+Ipos+Rpos
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [Epos,Ipos,Spos]
+        return [Epos,Ipos,Spos], Lpos, migInf
 
-    def stepSEIR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSEIR_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIR:
         - inits = (E,I,S)
@@ -767,21 +727,16 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Epos+Ipos)
-        #totpop = Spos+Epos+Ipos+Rpos
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
 
-        return [Epos,Ipos,Spos]
+        #Migrating infecctious
+        migInf = Ipos
+
+        return [Epos,Ipos,Spos],Lpos, migInf
 
     def stepSIpRpS(self,inits,simstep, totpop,theta=0, npass=0):
         """
@@ -798,25 +753,18 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Ipos) + delta*r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos, migInf
 
-    def stepSIpRpS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSIpRpS_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIpRpS:
         - inits = (E,I,S)
@@ -837,23 +785,18 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Ipos) + delta*r*I
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos, migInf
 
-    def stepSEIpRpS(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0):
+    def stepSEIpRpS(self,inits,simstep, totpop,theta=0, npass=0):
         """
         Defines the model SEIpRpS:
         - inits = (E,I,S)
@@ -869,24 +812,18 @@ class popmodels(object):
         # parameter: beta,alpha,e,r,delta,b,w,p
 
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
-        #print N,E,I,S,Lpos,theta
+
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Epos+Ipos) + delta*r*I
-        #totpop = Spos+Epos+Ipos+Rpos
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [Epos,Ipos,Spos]
+        return [Epos,Ipos,Spos], Lpos, migInf
 
-    def stepSEIpRpS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSEIpRpS_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIpRpS:
         - inits = (E,I,S)
@@ -907,21 +844,16 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         Epos = (1-e)*E + Lpos
         Ipos = e*E + (1-r)*I
         Spos = S + b - Lpos + (1-delta)*r*I
         Rpos = N-(Spos+Epos+Ipos) + delta*r*I
-        #totpop = Spos+Epos+Ipos+Rpos
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
 
-        return [Epos,Ipos,Spos]
+        #Migrating infecctious
+        migInf = Ipos
+
+        return [Epos,Ipos,Spos], Lpos, migInf
 
     def stepSIpR(self,inits,simstep, totpop,theta=0, npass=0):
         """
@@ -939,27 +871,19 @@ class popmodels(object):
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        Lpos2 = p*float(beta)*R*((I+theta)/(N+npass))**alpha
-        self.parentSite.totalcases += Lpos+Lpos2 #update number of cases
+        Lpos2 = p*float(beta)*R*((I+theta)/(N+npass))**alpha #number of secondary Infections
+
         # Model
         Ipos = (1-r)*I + Lpos + Lpos2
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos) - Lpos2
-        # Updating stats
-        self.parentSite.incidence.append(Lpos+Lpos2) #total cases
-        self.parentSite.incidence2.append(Lpos2)  # secondary infections
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-    def stepSIpR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSIpR_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIpRs:
         - inits = (E,I,S)
@@ -976,7 +900,7 @@ class popmodels(object):
         R = N-E-I-S
 
         Lpos_esp = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        Lpos2_esp = p*float(beta)*R*((I+theta)/(N+npass))**alpha
+        Lpos2_esp = p*float(beta)*R*((I+theta)/(N+npass))**alpha #number of secondary Infections
 
         if dist == 'poisson':
             Lpos = poisson(Lpos_esp)
@@ -986,22 +910,15 @@ class popmodels(object):
             Lpos = negative_binomial(I,prob)
             prob = I/(I+Lpos2_esp) #convertin between parameterizations
             Lpos2 = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos+Lpos2 #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos + Lpos2
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos) - Lpos2
-        # Updating stats
-        self.parentSite.incidence.append(Lpos+Lpos2) #total cases
-        self.parentSite.incidence2.append(Lpos2)  # secondary infections
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
-        return [0,Ipos,Spos]
+        migInf = Ipos
+        return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
     def stepSEIpR(self,inits,simstep, totpop,theta=0, npass=0):
         """
@@ -1020,28 +937,20 @@ class popmodels(object):
         # parameters: beta,alpha,e,r,delta,b,w,p
 
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        Lpos2 = p*float(beta)*R*((I+theta)/(N+npass))**alpha
-        self.parentSite.totalcases += Lpos+Lpos2 #update number of cases
+        Lpos2 = p*float(beta)*R*((I+theta)/(N+npass))**alpha # secondary infections
+
         # Model
         Epos = (1-e)*E + Lpos + Lpos2
         Ipos = e*E+ (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos) - Lpos2
-        # Updating stats
-        self.parentSite.incidence.append(Lpos+Lpos2) #total cases
-        self.parentSite.incidence2.append(Lpos2)  # secondary infections
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-    def stepSEIpR_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSEIpR_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SEIpRs:
         - inits = (E,I,S)
@@ -1058,34 +967,27 @@ class popmodels(object):
         R = N-E-I-S
 
         Lpos_esp = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        Lpos2_esp = p*float(beta)*R*((I+theta)/(N+npass))**alpha
+        Lpos2_esp = p*float(beta)*R*((I+theta)/(N+npass))**alpha # secondary infections
 
         if dist == 'poisson':
             Lpos = poisson(Lpos_esp)
             Lpos2 = poisson(Lpos2_esp)
         elif dist == 'negbin':
-            prob = I/(I+Lpos_esp) #convertin between parameterizations
+            prob = I/(I+Lpos_esp) #converting between parameterizations
             Lpos = negative_binomial(I,prob)
-            prob = I/(I+Lpos2_esp) #convertin between parameterizations
+            prob = I/(I+Lpos2_esp) #converting between parameterizations
             Lpos2 = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos+Lpos2 #update number of cases
+
         # Model
         Epos = (1-e)*E + Lpos + Lpos2
         Ipos = e*E+ (1-r)*I
         Spos = S + b - Lpos
         Rpos = N-(Spos+Ipos) - Lpos2
-        # Updating stats
-        self.parentSite.incidence.append(Lpos+Lpos2) #total cases
-        self.parentSite.incidence2.append(Lpos2)  # secondary infections
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
 
-        return [0,Ipos,Spos]
+        #Migrating infecctious
+        migInf = Ipos
+
+        return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
     def stepSIRS(self,inits,simstep, totpop,theta=0, npass=0):
         """
@@ -1098,29 +1000,23 @@ class popmodels(object):
         else:
             E,I,S = inits
         N = totpop
+        R = N - E + I + S
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
         Lpos = float(beta)*S*((I+theta)/(N+npass))**alpha #Number of new cases
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + w*R
         Rpos = N-(Spos+Ipos) - w*R
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        # Raises site infected flag and adds parent site to the epidemic history list.
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
+
         #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
+        migInf = Ipos
 
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos, migInf
 
-    def stepSIRS_s(self,inits=(0,0,0),simstep, totpop,theta=0, npass=0,dist='poisson'):
+    def stepSIRS_s(self,inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         """
         Defines an stochastic model SIR:
         - inits = (E,I,S)
@@ -1131,6 +1027,7 @@ class popmodels(object):
         else:
             E,I,S = inits
         N = totpop
+        R = N - E + I + S
         for k, v in self.bp.items():
             exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -1141,21 +1038,16 @@ class popmodels(object):
         elif dist == 'negbin':
             prob = I/(I+Lpos_esp) #convertin between parameterizations
             Lpos = negative_binomial(I,prob)
-        self.parentSite.totalcases += Lpos #update number of cases
+
         # Model
         Ipos = (1-r)*I + Lpos
         Spos = S + b - Lpos + w*R
         Rpos = N-(Spos+Ipos) - w*R
-        # Updating stats
-        self.parentSite.incidence.append(Lpos)
-        if not self.parentSite.infected:
-            if Lpos > 0:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        #Migrating infecctious
-        self.parentSite.migInf.append(Ipos)
 
-        return [0,Ipos,Spos]
+        #Migrating infecctious
+        migInf = Ipos
+
+        return [0,Ipos,Spos], Lpos, migInf
 
 class edge(object):
     """
