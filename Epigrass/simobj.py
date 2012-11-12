@@ -12,6 +12,7 @@ from types import MethodType
 from data_io import *
 import multiprocessing
 import time
+import epimodels
 
 sys.setrecursionlimit(3000) #to allow pickling of custom models
 
@@ -98,7 +99,8 @@ class siteobj(object):
         self.bi = bi
         self.bp = bp
         self.ts =[[0, 0, 0]]
-        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
+        self.model = epimodels.Epimodel(modtype,v=self.values,bi=self.bi,bp=self.bp)
+#        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
 
     def runModel(self):
@@ -117,19 +119,32 @@ class siteobj(object):
 
 
         npass = sum(self.passlist)
-        self.thetahist.append(theta) #keep a record of infected passenger arriving
-        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=self.parentGraph.simstep,totpop=self.totpop,theta=theta,npass=npass)
-        self.ts.append(state)
-        self.totalcases += Lpos
-        self.incidence.append(Lpos)
-        if not self.infected:
-            if Lpos > 0:
-                self.infected = self.parentGraph.simstep
-                self.parentGraph.epipath.append((self.parentGraph.simstep,self.geocode,self.infector))
-                #TODO: have infector be stated in terms of geocodes
-        self.migInf.append(migInf)
+        simstep = self.parentGraph.simstep
 
-        self.thetalist = []   # reset self.thetalist (for the new timestep)
+        def handle_step(res):
+            """
+            processes the output of a step updating simulation statistics
+            """
+            print "%s: step done"%(os.getpid())
+            state, Lpos, migInf = res
+            self.ts.append(state)
+            self.totalcases += Lpos
+            self.incidence.append(Lpos)
+            if not self.infected:
+                if Lpos > 0:
+                    self.infected = simstep
+                    self.parentGraph.epipath.append((simstep,self.geocode,self.infector))
+                    #TODO: have infector be stated in terms of geocodes
+            self.migInf.append(migInf)
+            self.thetalist = []   # reset self.thetalist (for the new timestep)
+            self.parentGraph.sites_done +=1
+
+        self.thetahist.append(theta) #keep a record of infected passenger arriving
+        return self.parentGraph.po.apply_async(self.model,(self.ts[-1],simstep,self.totpop,theta,npass),callback=handle_step)
+#        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
+
+
+
 
 
 
@@ -1153,6 +1168,7 @@ class graph(object):
         self.gr = None #This will be th visual graph representation object (DEPRECATED)
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
+        self.po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
 
     def run_simulation(self,transp=1):
         """

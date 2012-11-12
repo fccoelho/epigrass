@@ -137,7 +137,7 @@ speed =0 #1440  km/day -- equivalent to 60 km/h
 [SIMULATION AND OUTPUT]
 #==============================================================#
 # Number of steps
-steps = 300
+steps = 50
 
 # Output dir. Must be a full path. If empty the output will be generated on the 
 # outdata-<date> sub-directory of same path as the model script.

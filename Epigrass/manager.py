@@ -1004,20 +1004,30 @@ class simulate:
         g.maxstep = iterations
         sites = graphobj.site_dict.values()
         edges = graphobj.edge_dict.itervalues()
-        #viewer = Viewer(g,self.shapefile[0], "geocode" )
+#        g.sites_done = 0
+        parallel = 0
+
         if transp:
-            if not self.gui:
+            if parallel:
                 g.run_simulation(transp)
             else:
                 for n in xrange(iterations):
-                    for i in sites:
-                        i.runModel()
+                    print "==> ",g.simstep
+                    t0=time.time()
+                    results=[i.runModel() for i in sites]
+#                    for i in sites:
+#                        i.runModel()
+                    [r.wait() for r in results]
+                    print "time %s sec"%(time.time()-t0)
+                    print g.sites_done
                     for j in edges:
                         j.transportStoD()
                         j.transportDtoS()
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
+                    if self.gui:
+                        self.gui.stepLCD.display(g.simstep)
+                        self.gui.app.processEvents()
                     g.simstep += 1
+                    g.sites_done = 0
         else:
             for n in xrange(iterations):
                 if not self.gui:
@@ -1025,11 +1035,12 @@ class simulate:
                 else:
                     for i in sites:
                         i.runModel()
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
-                    self.gui.RT.mutex.lock()
-                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
-                    self.gui.RT.mutex.unlock()
+                    if self.gui:
+                        self.gui.stepLCD.display(g.simstep)
+                        self.gui.app.processEvents()
+                        self.gui.RT.mutex.lock()
+                        self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                        self.gui.RT.mutex.unlock()
                 g.simstep += 1
     def Say(self,string):
         """
