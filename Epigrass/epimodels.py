@@ -1,4 +1,6 @@
 #coding:utf-8
+from __future__ import division
+
 """
 Library of discrete time population models
 
@@ -8,23 +10,32 @@ License: GPL-v3
 
 __author__ = 'fccoelho'
 
+from numpy.random import poisson
+import sys, time
+
+vnames = {
+    'SIR': ['Exposed','Infectious','Susceptible'],
+    'SIR_s':['Exposed','Infectious','Susceptible'],
+    'Custom':['Exposed','Infectious','Susceptible'],
+    'Influenza':('Susc_age1','Incub_age1','Subc_age1','Sympt_age1','Comp_age1',
+                 'Susc_age2','Incub_age2','Subc_age2','Sympt_age2','Comp_age2',
+                 'Susc_age3','Incub_age3','Subc_age3','Sympt_age3','Comp_age3',
+                 'Susc_age4','Incub_age4','Subc_age4','Sympt_age4','Comp_age4',),
+}
+
 class Epimodel(object):
     """
     Defines a library of discrete time population models
     """
-    def __init__(self,modtype='',v=[],bi=None,bp=None):
+    def __init__(self,modtype=''):
         """
         defines which models a given site will use
         and set variable names accordingly.
         """
-        values = v
-        bi = bi # dictionary of inits
-        bp = bp # dictionary of parms
-#        parentSite.vnames = ('E','I','S')
         self.step = selectModel(modtype)
 
     def __call__(self, *args, **kwargs):
-        return self.step(**kwargs)
+        return self.step(*args)
 
 def selectModel(Type):
     """
@@ -56,16 +67,12 @@ def selectModel(Type):
     elif Type == 'SEIpRpS_s':
         return stepSEIpRpS_s
     elif Type == 'SIpR':
-        parentSite.incidence2 = []
         return stepSIpR
     elif Type == 'SIpR_s':
-        parentSite.incidence2 = []
         return stepSIpR_s
     elif Type == 'SEIpR':
-        parentSite.incidence2 = []
         return stepSEIpR
     elif Type == 'SEIpR_s':
-        parentSite.incidence2 = []
         return stepSEIpR_s
     elif Type == 'SIRS':
         return stepSIRS
@@ -86,13 +93,12 @@ def selectModel(Type):
 
 
 
-def stepFlu(inits, simstep, totpop, theta=0,npass=0):
+def stepFlu(inits, simstep, totpop, theta=0,npass=0,bi={},bp={},values=()):
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
-    tinicial = time.time()
     #Variable long names to be used in the database output.
-    parentSite.vnames = ('Susc_age1','Incub_age1','Subc_age1','Sympt_age1','Comp_age1',
+    vnames = ('Susc_age1','Incub_age1','Subc_age1','Sympt_age1','Comp_age1',
                               'Susc_age2','Incub_age2','Subc_age2','Sympt_age2','Comp_age2',
                               'Susc_age3','Incub_age3','Subc_age3','Sympt_age3','Comp_age3',
                               'Susc_age4','Incub_age4','Subc_age4','Sympt_age4','Comp_age4',)
@@ -110,11 +116,11 @@ def stepFlu(inits, simstep, totpop, theta=0,npass=0):
         #parameters: alpha,beta,r,e,c,g,d,pc1,pc2,pc3,pc4,pp1,pp2,pp3,pp4,b
 
     #Vacination event
-    if parentSite.vaccineNow:
-        S1 -= parentSite.vaccov*S1
-        S2 -= parentSite.vaccov*S2
-        S3 -= parentSite.vaccov*S3
-        S4 -= parentSite.vaccov*S4
+    if vaccineNow: #TODO: add to bp when creating model
+        S1 -= vaccov*S1
+        S2 -= vaccov*S2
+        S3 -= vaccov*S3
+        S4 -= vaccov*S4
 
     #New cases by age class
     #beta=eval(values[2])
@@ -156,13 +162,13 @@ def stepFlu(inits, simstep, totpop, theta=0,npass=0):
     #Migrating infecctious
     migInf = (Ig1pos+Ig2pos+Ig3pos+Ig4pos+Ic1pos+Ic2pos+Ic3pos+Ic4pos+0.5*(Is1pos+Is2pos+Is3pos+Is4pos))
     # Return variable values
-    print "------> exiting in %s seconds"%(time.time()-tinicial)
+
     return [S1pos,E1pos,Is1pos,Ic1pos,Ig1pos,S2pos,E2pos,Is2pos,
             Ic2pos,Ig2pos,S3pos,E3pos,Is3pos,Ic3pos,Ig3pos,S4pos,
             E4pos,Is4pos,Ic4pos,Ig4pos], Lpos, migInf
 
 
-def stepSIS(inits,simstep, totpop,theta=0, npass=0):
+def stepSIS(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -185,7 +191,7 @@ def stepSIS(inits,simstep, totpop,theta=0, npass=0):
     migInf = (Ipos)
     return [0,Ipos,Spos],Lpos,migInf
 
-def stepSIS_s(inits, simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSIS_s(inits, simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
@@ -216,13 +222,12 @@ def stepSIS_s(inits, simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [0,Ipos,Spos], Lpos, migInf
 
-def stepSIR(inits,simstep, totpop,theta=0, npass=0):
+def stepSIR(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    print inits
     if simstep == 1: #get initial values
         E,I,S = (bi['e'],bi['i'],bi['s'])
     else:
@@ -243,7 +248,7 @@ def stepSIR(inits,simstep, totpop,theta=0, npass=0):
 
     return [0,Ipos,Spos],Lpos,migInf
 
-def stepSIR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSIR_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
@@ -275,7 +280,7 @@ def stepSIR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [0,Ipos,Spos], Lpos, migInf
 
-def stepSEIS(inits,simstep, totpop,theta=0, npass=0):
+def stepSEIS(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     Defines the model SEIS:
     - inits = (E,I,S)
@@ -301,7 +306,7 @@ def stepSEIS(inits,simstep, totpop,theta=0, npass=0):
 
     return [Epos,Ipos,Spos], Lpos, migInf
 
-def stepSEIS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSEIS_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -333,7 +338,7 @@ def stepSEIS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [Epos,Ipos,Spos], Lpos,migInf
 
-def stepSEIR(inits,simstep, totpop,theta=0, npass=0):
+def stepSEIR(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     Defines the model SEIR:
     - inits = (E,I,S)
@@ -355,14 +360,13 @@ def stepSEIR(inits,simstep, totpop,theta=0, npass=0):
     Ipos = e*E + (1-r)*I
     Spos = S + b - Lpos
     Rpos = N-(Spos+Epos+Ipos)
-    #parentSite.totpop = Spos+Epos+Ipos+Rpos
 
     #Migrating infecctious
     migInf = Ipos
 
     return [Epos,Ipos,Spos], Lpos, migInf
 
-def stepSEIR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSEIR_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -373,7 +377,7 @@ def stepSEIR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         E,I,S = (bi['e'],bi['i'],bi['s'])
     else:
         E,I,S = inits
-    N = parentSite.totpop
+    N = totpop
     for k, v in bp.items():
         exec('%s = %s'%(k, v))
         #parameters: beta,alpha,e,r,delta,B,w,p
@@ -397,7 +401,7 @@ def stepSEIR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [Epos,Ipos,Spos],Lpos, migInf
 
-def stepSIpRpS(inits,simstep, totpop,theta=0, npass=0):
+def stepSIpRpS(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -423,7 +427,7 @@ def stepSIpRpS(inits,simstep, totpop,theta=0, npass=0):
 
     return [0,Ipos,Spos], Lpos, migInf
 
-def stepSIpRpS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSIpRpS_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
@@ -455,7 +459,7 @@ def stepSIpRpS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [0,Ipos,Spos], Lpos, migInf
 
-def stepSEIpRpS(inits,simstep, totpop,theta=0, npass=0):
+def stepSEIpRpS(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
@@ -465,7 +469,7 @@ def stepSEIpRpS(inits,simstep, totpop,theta=0, npass=0):
         E,I,S = (bi['e'],bi['i'],bi['s'])
     else:
         E,I,S = inits
-    N = parentSite.totpop
+    N = totpop
     for k, v in bp.items():
         exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -482,7 +486,7 @@ def stepSEIpRpS(inits,simstep, totpop,theta=0, npass=0):
 
     return [Epos,Ipos,Spos], Lpos, migInf
 
-def stepSEIpRpS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSEIpRpS_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
@@ -492,7 +496,7 @@ def stepSEIpRpS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
         E,I,S = (bi['e'],bi['i'],bi['s'])
     else:
         E,I,S = inits
-    N = parentSite.totpop
+    N = totpop
     for k, v in bp.items():
         exec('%s = %s'%(k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
@@ -514,7 +518,7 @@ def stepSEIpRpS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [Epos,Ipos,Spos], Lpos, migInf
 
-def stepSIpR(inits,simstep, totpop,theta=0, npass=0):
+def stepSIpR(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -542,7 +546,7 @@ def stepSIpR(inits,simstep, totpop,theta=0, npass=0):
 
     return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-def stepSIpR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSIpR_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
@@ -579,7 +583,7 @@ def stepSIpR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
     migInf = Ipos
     return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-def stepSEIpR(inits,simstep, totpop,theta=0, npass=0):
+def stepSEIpR(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -609,7 +613,7 @@ def stepSEIpR(inits,simstep, totpop,theta=0, npass=0):
 
     return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-def stepSEIpR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSEIpR_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
@@ -648,7 +652,7 @@ def stepSEIpR_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
 
     return [0,Ipos,Spos], Lpos+Lpos2, migInf
 
-def stepSIRS(inits,simstep, totpop,theta=0, npass=0):
+def stepSIRS(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -675,7 +679,7 @@ def stepSIRS(inits,simstep, totpop,theta=0, npass=0):
 
     return [0,Ipos,Spos], Lpos, migInf
 
-def stepSIRS_s(inits,simstep, totpop,theta=0, npass=0,dist='poisson'):
+def stepSIRS_s(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=(),dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
