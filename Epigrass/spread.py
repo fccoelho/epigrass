@@ -141,12 +141,13 @@ class GraphML:
         #Creating nodes and edges
         self.nodes = []
         for n in self.g.epipath:
+            infected = self.g.site_dict[n[1]]
             infectors = n[-1]
-            self.addNodeEl(n[1].geocode, n[1].sitename)
-            self.nodes.append(n[1].geocode)
+            self.addNodeEl(n[1], infected.sitename)
+            self.nodes.append(n[1])
             for  i, c in infectors.iteritems():
                 self.addNodeEl(i.geocode, i.sitename)
-                self.addEdgeEl(i.geocode, n[1].geocode, n[0], c)
+                self.addEdgeEl(i.geocode, n[1], n[0], c)
         gml.appendChild(self.gr)
         self.doc.appendChild(gml)
                 
