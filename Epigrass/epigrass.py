@@ -15,19 +15,13 @@ except ImportError:
     epigrassLogger.error("Please install PyQT 4")
     print "Please install PyQT 4"
 
-from Epigrass.manager import *
+from manager import *
 import threading,  subprocess,  glob
-from Epigrass.Ui_cpanel4new import Ui_MainWindow
-from Epigrass.Ui_about4 import Ui_aboutDialog as aboutDialog
+from Ui_cpanel4new import Ui_MainWindow
+from Ui_about4 import Ui_aboutDialog as aboutDialog
 import sys,ConfigParser, string, copy, commands,getpass
-import Epigrass.epiplay as epi
-from Epigrass import spread,  dgraph
-try:
-    import psyco
-    psyco.full()
-except:
-    epigrassLogger.info("Install Psyco for better performance." )
-    pass
+import epiplay as epi
+import spread,  dgraph
 
 
 class MainWindow_Impl(QtGui.QMainWindow, Ui_MainWindow):
@@ -448,16 +442,30 @@ epigrass.sql > mysql"""),
                 self.trUtf8("""Could not open the report.
 Make sure you have generated it."""),
                 self.trUtf8("&OK"))
-            
-    
-    
+
+
+    def find_data_dirs(self):
+        print "scanning"
+        basedir = self.rootdir
+        os.chdir(basedir)
+        datadirs = [] #list of  outdata directories
+        while datadirs == []:
+            basedir = str(QFileDialog.getExistingDirectory(\
+                None,
+                self.trUtf8("Select a Directory"),
+                QtCore.QString(),
+                QFileDialog.Options(QFileDialog.ShowDirsOnly)))
+            os.chdir(basedir)
+            datadirs = [d for d in glob.glob("outdata-*") if os.path.isdir(d)] #list of  outdata directories
+
+
+        return basedir, datadirs
+
     def onVisual(self):
         """
         Scan the epigrass database an shows available simulations.
         """
-        print "scanning"
-        basedir = self.rootdir
-        datadirs = [d for d in glob.glob("outdata-*") if os.path.isdir(d)] #list of  outdata directories
+        basedir, datadirs = self.find_data_dirs()
         if self.dbType.currentIndex() == 0:
             if not self.pwEdit.text():
                 QMessageBox.warning(None,
@@ -465,15 +473,15 @@ Make sure you have generated it."""),
                     self.trUtf8("""Please enter the password for the MySQL database in the first tab."""))
                 return
         # for SQLite databases check for the existence os the database file.
-        if self.dbType.currentIndex() == 1: 
+        elif self.dbType.currentIndex() == 1:
             print "sqlite"
             if len(datadirs) > 1:
-                datadir = QtGui.QInputDialog.getItem(\
+                datadir = str(QtGui.QInputDialog.getItem(\
                     None,
                     self.trUtf8("Please Select Database to Open"),
                     self.trUtf8("Database"),
                     datadirs,
-                    0, False)
+                    0, False)[0])
             elif len(datadirs) == 0:
                 QtGui.QMessageBox.critical(None,
                     self.trUtf8("Invalid Folder"),
@@ -483,7 +491,10 @@ Make sure you have generated it."""),
 
             else:
                 datadir = datadirs[0]
-            os.chdir(datadir)
+            print basedir
+            print datadir
+            fulldatadir = os.path.join(basedir,datadir)
+            os.chdir(fulldatadir)
             print os.getcwd()
             if not os.path.exists('Epigrass.sqlite'):
                 QtGui.QMessageBox.warning(None,
@@ -496,7 +507,7 @@ Make sure you have generated it."""),
                 
         self.Display=epi.viewer(host=str(self.hostnEdit.text()),port=int(str(self.portEdit.text())),
                             db='epigrass',user=str(self.uidEdit.text()), pw=str(self.pwEdit.text()),backend=self.conf['database.backend'], gui=self)
-        os.chdir(self.curdir)
+        os.chdir(fulldatadir)
 
         for s in self.Display.tables:
             if s.endswith('_meta'):
@@ -534,7 +545,7 @@ Make sure you have generated it."""),
         else:
             mapa =None
         modname = table.split('_')[0] #self.sim.modelName.split('/')[-1]
-        #change the the outdata directory
+        #change to the outdata directory
         if not os.path.split(os.getcwd())[1].startswith("outdata"):
             os.chdir("outdata-"+modname)
         nodes,am = self.Display.readNodes(modname, table)
@@ -548,7 +559,7 @@ Please select another table from the menu."""))
         numbnodes = len(nodes)
         data = self.Display.readData(table)
         edata = self.Display.readEdges(table)
-        os.chdir(self.rootdir)
+#        os.chdir(self.rootdir)
         numbsteps = len(data)/numbnodes
         self.Display.viewGraph(nodes,am,var,mapa)
         self.Display.anim(data,edata,numbsteps,pos,r)
