@@ -105,7 +105,7 @@ I = 0
 #
 #  Keyword 'all' may be used if all sites are vaccinated:
 
-seed = [(1,'I',1)] #Sao Paulo
+seed = [(1,'I',1)]
 Vaccinate = []
 Quarantine = []
 
@@ -137,7 +137,7 @@ speed =0 #1440  km/day -- equivalent to 60 km/h
 [SIMULATION AND OUTPUT]
 #==============================================================#
 # Number of steps
-steps = 50
+steps = 250
 
 # Output dir. Must be a full path. If empty the output will be generated on the 
 # outdata-<date> sub-directory of same path as the model script.
