@@ -1,11 +1,8 @@
 """
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
-import sys, matplotlib
-#matplotlib.use("Agg")
-#from pylab import *
-#import dgraph
-#from numpy import *
+import sys
+import os
 import numpy as np
 from numpy.random import uniform, binomial, poisson, beta, negative_binomial
 from types import MethodType
@@ -13,6 +10,11 @@ from data_io import *
 import multiprocessing
 import time
 import epimodels
+import logging
+
+#logger = multiprocessing.log_to_stderr()
+#logger.setLevel(multiprocessing.SUBDEBUG)
+#logger.setLevel(logging.INFO)
 
 sys.setrecursionlimit(3000) #to allow pickling of custom models
 
@@ -38,7 +40,7 @@ class siteobj(object):
         -values: Tuple containing adicional values from the sites file
         """
         self.id = self #reference to site instance
-        self.stochtransp = 1 #Flag for stochastic transportation
+        self.stochtransp = 0 #Flag for stochastic transportation
         self.pos = coords
         self.totpop = float(initpop)
         self.ts = []
@@ -99,7 +101,10 @@ class siteobj(object):
         self.bi = bi
         self.bp = bp
         self.ts =[[0, 0, 0]]
-        self.model = epimodels.Epimodel(modtype,v=self.values,bi=self.bi,bp=self.bp)
+        self.model = epimodels.Epimodel(modtype)
+        self.vnames = epimodels.vnames[modtype]
+        self.bp['vaccineNow'] = 0
+        self.bp['vaccov'] = 0
 #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
 
@@ -107,45 +112,49 @@ class siteobj(object):
         """
         Iterate the model
         """
+
         if self.parentGraph.simstep in self.vaccination[0]:
             self.vaccineNow = 1
             self.vaccov = float(self.vaccination[1][self.vaccination[0].index(self.parentGraph.simstep)])
-        if self.thetalist:
+            self.bp['vaccineNow'] = 1
+            self.bp['vaccov'] = self.vaccov
+        if self.thetalist != []:
             theta = sum([i[1] for i in self.thetalist])
             self.infector = dict([i for i in self.thetalist if i[1] > 0]) #Only those that contribute at least one infected individual
         else:
             theta = 0
             self.infector = {}
-
-
         npass = sum(self.passlist)
         simstep = self.parentGraph.simstep
-
-        def handle_step(res):
-            """
-            processes the output of a step updating simulation statistics
-            """
-            print "%s: step done"%(os.getpid())
-            state, Lpos, migInf = res
-            self.ts.append(state)
-            self.totalcases += Lpos
-            self.incidence.append(Lpos)
-            if not self.infected:
-                if Lpos > 0:
-                    self.infected = simstep
-                    self.parentGraph.epipath.append((simstep,self.geocode,self.infector))
-                    #TODO: have infector be stated in terms of geocodes
-            self.migInf.append(migInf)
-            self.thetalist = []   # reset self.thetalist (for the new timestep)
-            self.parentGraph.sites_done +=1
-
+        inits = self.ts[-1]
+        totpop = self.totpop
+#        print self.model(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values)
+#        print '-->',self.geocode,self.thetalist, npass
         self.thetahist.append(theta) #keep a record of infected passenger arriving
-        return self.parentGraph.po.apply_async(self.model,(self.ts[-1],simstep,self.totpop,theta,npass),callback=handle_step)
+        return self.parentGraph.po.apply_async(self.model, args=(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values), callback=self.handle)
 #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
 
-
-
+    def handle(self,res):
+        """
+        processes the output of a step updating simulation statistics
+        """
+#        print os.getpid()
+#        logger.info( "%s: step done"%(os.getpid()))
+        state, Lpos, migInf = res
+        self.ts.append(state)
+        self.totalcases += Lpos
+        self.incidence.append(Lpos)
+        if not self.infected:
+            if Lpos > 0:
+                self.infected = self.parentGraph.simstep
+                self.parentGraph.epipath.append((self.parentGraph.simstep,self.geocode,self.infector))
+                #TODO: have infector be stated in terms of geocodes
+        self.migInf.append(migInf)
+#        print len(self.migInf)
+#        self.thetalist = []   # reset self.thetalist (for the new timestep)
+#        self.passlist = []
+#        self.parentGraph.sites_done +=1
 
 
     def vaccinate(self,cov):
@@ -174,17 +183,18 @@ class siteobj(object):
             delay = len(self.migInf)-1
         lag = -1 - delay
 
-        #print "==> ",lag,self.migInf
-        if not self.stochtransp:
+#        print "==> ",npass, lag, self.migInf,  self.totpop
+        if self.stochtransp == 0:
             theta = npass * self.migInf[lag]/float(self.totpop) # infectious migrants
 
         else: #Stochastic migration
             #print lag, self.migInf
-            #print npass
+#            print npass
             try:
                 theta = binomial(int(npass),self.migInf[lag]/float(self.totpop))
             except ValueError: #if npass is less than one
                 theta = 0
+#        print theta
         # Check if site is quarantined
         if self.parentGraph.simstep > self.quarantine[0]:
             self.nQuarantined = npass*self.quarantine[1]
@@ -207,6 +217,10 @@ class siteobj(object):
     def receiveTheta(self,thetai, npass, site):
         """
         Number of infectious individuals arriving from site i
+        :param thetai: number of infected passengers
+        :param npass: Number of passengers arriving
+        :param site: site sending passengers
+        :return:
         """
         self.thetalist.append((site,thetai))
         self.passlist.append(npass)
@@ -1109,20 +1123,21 @@ class edge(object):
         if self.parentGraph.speed > 0:
             self.delay = int(float(self.length)/self.parentGraph.speed)
 
-    def transportStoD(self):
+    def migrate(self):
         """
-        Get infectious individuals commuting from source node and inform them to destination
+        Get infectious individuals commuting from source node and inform them to destination.
+        this is done for both directions of the edge
         """
+        # Forward Migration
         theta,npass = self.source.getTheta(self.fmig,self.delay)
         self.ftheta.append(theta)
         self.dest.receiveTheta(theta,npass,self.source)
-    def transportDtoS(self):
-        """
-        Get infectious individuals commuting from destination node and inform them to source
-        """
+#        print "F -->", theta,npass
+        #Backwards Migration
         theta,npass = self.dest.getTheta(self.bmig,self.delay)
         self.btheta.append(theta)
         self.source.receiveTheta(theta,npass,self.dest)
+#        print "B -->", theta,npass
 
 
 
@@ -1169,43 +1184,6 @@ class graph(object):
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
         self.po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
-
-    def run_simulation(self,transp=1):
-        """
-        Run node and edge dynamics
-        :return:
-        """
-        po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
-
-        if transp:
-            for n in xrange(self.maxstep):
-#                print "site dict size: ",len(self.site_dict)
-                print "==> ",n
-                mrs = [po.apply_async(i) for i in self.site_dict.itervalues()]
-
-                new_site_list = [i.get(2) for i in mrs]
-                self.site_dict.update({n.geocode:n for n in new_site_list})
-                self.do_transport()
-                self.simstep += 1
-        else:
-            for n in xrange(self.maxstep):
-                mrs = [po.apply_async(i) for i in self.site_dict.itervalues()]
-                new_site_list = [i.get() for i in mrs]
-                self.site_dict.update({n.geocode:n for n in new_site_list})
-                self.simstep += 1
-        po.close()
-
-    def do_transport(self):
-        print "===> trsnp"
-        for s,d in self.edge_dict.iterkeys():
-            # Forwards
-            theta,npass = self.site_dict[s].getTheta(self.edge_dict[(s,d)].fmig,self.edge_dict[(s,d)].delay)
-            self.edge_dict[(s,d)].ftheta.append(theta)
-            self.site_dict[d].receiveTheta(theta,npass,self.site_dict[s])
-            # Backwards
-            theta,npass = self.site_dict[d].getTheta(self.edge_dict[(s,d)].bmig,self.edge_dict[(s,d)].delay)
-            self.edge_dict[(s,d)].btheta.append(theta)
-            self.site_dict[s].receiveTheta(theta,npass,self.site_dict[d])
 
 
     def addSite(self, sitio):
@@ -1318,13 +1296,13 @@ class graph(object):
         """
 
         if not isinstance(graph_edge, edge):
-            raise Error, 'add_edge received a non edge class object'
+            raise TypeError('add_edge received a non edge class object')
 
         if not graph_edge.source.geocode in self.site_dict:
-            raise Error, 'Edge source does not belong to the graph'
+            raise KeyError('Edge source does not belong to the graph')
 
         if not graph_edge.dest.geocode in self.site_dict:
-            raise Error, 'Edge destination does not belong to the graph'
+            raise KeyError('Edge destination does not belong to the graph')
 #        self.edge_list.append(graph_edge)
         self.edge_dict[(graph_edge.source.geocode,graph_edge.dest.geocode)] = graph_edge
         graph_edge.parentGraph = self

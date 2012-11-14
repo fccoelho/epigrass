@@ -207,7 +207,10 @@ class simulate:
                 long = float(site[1])
             objlist.append(siteobj(site[2],site[3],(lat,long),int(strip(site[4])),tuple([float(i.strip()) for i in site[5:]])))
         for o in objlist:
-            if self.stochTransp: o.stochtransp = 1
+            if self.stochTransp:
+                o.stochtransp = 1
+            else:
+                o.stochtransp = 0
             N = o.totpop #local copy for reference on model creation
             values = o.values #local copy for reference on model creation
             inits={}
@@ -765,7 +768,7 @@ class simulate:
             str1lite = '%s REAL,'*nvar #nvar variables in the SQLite table
             varnames = ['lat','longit']+list(self.g.site_dict.values()[0].vnames)+['incidence']+['Arrivals']
 #            print nvar, varnames, str1
-            str1 = str1[:len(str1)-1] % tuple(varnames) #insert variable names (MySQL)
+            str1 = str1[:-1] % tuple(varnames) #insert variable names (MySQL)
             str1lite = str1lite[:len(str1lite)-1] % tuple(varnames) #insert variable names (SQLITE)
             Cursor = con.cursor()
             str2 = """CREATE TABLE %s(
@@ -907,6 +910,7 @@ class simulate:
         epp.write('time,site,infector\n')
         for i in self.g.epipath:
             #print i
+            site = self.g.site_dict[i[1]]
             infectors = i[-1]
             # sorting infectors by number of infective contributed
             if len(infectors):
@@ -916,7 +920,7 @@ class simulate:
             else:
                 mli = 'NA'
             #print i[1].sitename, type(i[1].sitename), mli
-            epp.write(str(i[0])+','+i[1].sitename+','+mli+'\n')
+            epp.write(str(i[0])+','+site.sitename+','+mli+'\n')
         epp.close()
         self.Say('Done!')
 
@@ -1003,44 +1007,34 @@ class simulate:
         g = graphobj
         g.maxstep = iterations
         sites = graphobj.site_dict.values()
-        edges = graphobj.edge_dict.itervalues()
+        edges = graphobj.edge_dict.values()
 #        g.sites_done = 0
         parallel = 0
 
         if transp:
-            if parallel:
-                g.run_simulation(transp)
-            else:
-                for n in xrange(iterations):
-                    print "==> ",g.simstep
-                    t0=time.time()
-                    results=[i.runModel() for i in sites]
-#                    for i in sites:
-#                        i.runModel()
-                    [r.wait() for r in results]
-                    print "time %s sec"%(time.time()-t0)
-                    print g.sites_done
-                    for j in edges:
-                        j.transportStoD()
-                        j.transportDtoS()
-                    if self.gui:
-                        self.gui.stepLCD.display(g.simstep)
-                        self.gui.app.processEvents()
-                    g.simstep += 1
-                    g.sites_done = 0
+            for n in xrange(iterations):
+#                print "==> ",g.simstep
+                results=[i.runModel() for i in sites]
+                [r.wait() for r in results]
+
+#                print [s.migInf for s in sites]
+                for j in edges:
+                    j.migrate()
+                if self.gui:
+                    self.gui.stepLCD.display(g.simstep)
+                    self.gui.app.processEvents()
+                g.simstep += 1
+                g.sites_done = 0
         else:
             for n in xrange(iterations):
-                if not self.gui:
-                    g.run_simulation(transp)
-                else:
-                    for i in sites:
-                        i.runModel()
-                    if self.gui:
-                        self.gui.stepLCD.display(g.simstep)
-                        self.gui.app.processEvents()
-                        self.gui.RT.mutex.lock()
-                        self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
-                        self.gui.RT.mutex.unlock()
+                for i in sites:
+                    i.runModel()
+                if self.gui:
+                    self.gui.stepLCD.display(g.simstep)
+                    self.gui.app.processEvents()
+                    self.gui.RT.mutex.lock()
+                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
+                    self.gui.RT.mutex.unlock()
                 g.simstep += 1
     def Say(self,string):
         """
