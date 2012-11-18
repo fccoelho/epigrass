@@ -10,6 +10,7 @@ from data_io import *
 import multiprocessing
 import time
 import epimodels
+import networkx as NX
 import logging
 
 #logger = multiprocessing.log_to_stderr()
@@ -1784,6 +1785,22 @@ class graph(object):
         else:
             dur  = tl[-1]-tl[0]
         return dur
+
+    def save_topology(self,pa):
+        """
+        Saves graph structure to a graphml file for visualization
+        :Parameters:
+        :pa: path in which to save the graphml file
+        """
+
+        g = NX.MultiDiGraph()
+        for gc,n in self.site_dict.iteritems():
+            g.add_node(gc,attr_dict={
+                'name':n.sitename,
+            })
+        for ed,e in self.edge_dict.iteritems():
+            g.add_edge(ed[0],ed[1],weight=e.fmig+e.bmig)
+        NX.write_graphml(g,pa)
 
     def resetStats(self):
         """
