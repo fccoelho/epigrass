@@ -386,11 +386,7 @@ class simulate:
         spread.Spread(self.g,  self.outdir, self.encoding)
         #self.saveModel(self.modelName)
         #pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
-        #print len(self.g.site_list[-1].ts)
 
-##        for i in self.g.site_list:
-##            i.plotItself()
-##        show()
 
     def createDataFrame(self,site):
         """
@@ -868,10 +864,6 @@ class simulate:
         """
         Dumps data as csv (comma-separated-values)
         """
-##        pid = os.fork()
-##        if pid:
-##            return
-##        else:
         self.Say("Starting simulation Analysis")
         curdir = os.getcwd()
         if not self.outdir == curdir:
@@ -994,11 +986,6 @@ class simulate:
         g = cPickle.load(fname)
         return g
 
-    def fins(self):
-        """
-        call parallel inserts
-        """
-        pass
 
     def runGraph(self,graphobj,iterations=1, transp=0):
         """
@@ -1062,59 +1049,6 @@ def storeSimulation(s,db='epigrass', host='localhost',port=3306):
     Cursor.execute(sql2,blob)
     con.close()
 
-class Bunch:
-    """
-    Class to store a bunch os variables
-    """
-    def __init__(self, **kw):
-       self.__dict__.update(kw)
-
-class Tree:
-    """
-    Tree object representing the spread of an epidemic
-    """
-    def __init__(self,Simulation):
-        self.g = Simulation.g
-        Self.S = Simulation
-        pass
-
-    def writeNexus(self):
-        """
-        Writes a Nexus file containing(.nex) the phylogeographical
-        tree of the epidemic.
-        """
-        ntax = len(self.g.epipath)
-        sitenames = [i[1].sitename for i in self.g.epipath]
-        Name = self.S.modelName
-        header = """#NEXUS
-        [written %s from model % by EpiGrass]
-        """%(time.asctime(),Name)
-        taxablock = """BEGIN TAXA;
-                            TITLE %s;
-                            DIMENSIONS NTAX=%s;
-                            TAXLABELS
-                                %s
-                                ;
-                        END;
-
-        """%(Name,ntax,' '.join(sitenames))
-
-        treeblock = """BEGIN TREES;
-                        Title Epidemic_Path;
-                        LINK Taxa = %s;"""%(Name,)
-
-        transtring = ','.join(['%s %s'%(i,j) for i,j in zip(range(1,len(sitenames)+1),sitenames)])+';'
-        treeblock2 = """TRANSLATE
-                            %s
-                            """%transtring
-        venn = self.getVenn()
-        treeblock3 = """TREE 'Default ladder+' = %;
-                        END;"""%venn
-    def getVenn(self):
-        """"
-        Generates Venn Diagram from epipath.
-        """
-        pass
 
 def onStraightRun(options, args):
     """
