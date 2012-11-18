@@ -17,9 +17,6 @@ import string, sys, getpass
 import report as Rp
 import epigdal
 import __version__
-import copy
-import encodings.utf_8
-import encodings.latin_1
 #import dataObject as DO
 import sqlite3, MySQLdb
 #import pycallgraph
