@@ -15,7 +15,7 @@ import codecs
 class Spread:
     def __init__(self, graphobj, outdir='.',encoding='utf-8'):
         self.g = graphobj
-        self.nxg = nx.DiGraph()
+        self.nxg = nx.MultiDiGraph()
         self.outdir = outdir
         self.encoding = encoding
         self.create_tree()
