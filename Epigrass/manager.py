@@ -1016,8 +1016,6 @@ class simulate:
 #                print "==> ",g.simstep
                 results=[i.runModel() for i in sites]
                 [r.wait() for r in results]
-
-#                print [s.migInf for s in sites]
                 for j in edges:
                     j.migrate()
                 if self.gui:
