@@ -1180,7 +1180,6 @@ class graph(object):
         self.mediansurvival = None
         self.totVaccinated = 0
         self.totQuarantined = 0
-        self.gr = None #This will be th visual graph representation object (DEPRECATED)
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
         self.po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
@@ -1390,56 +1389,6 @@ class graph(object):
         Path.reverse()
         return Path
 
-    def clearVisual(self):
-        """
-        Clear the visual graph display
-        """
-##        for o in self.gr.display.objects:
-##            o.visible = 0
-
-        self.gr.display.visible = 0
-        del(self.gr)
-        self.gr = None
-
-    def viewGraph(self, mapa='limites.txt'):
-        """
-        Starts the Vpython display of the graph.
-        """
-        try:
-            import dgraph
-            self.gr = dgraph.Graph(0.04)
-
-            Nlist = [dgraph.Node(3,(i.pos[1],i.pos[0],0)) for i in self.site_list]
-            Elist = []
-            for e in self.edge_list:
-                s = self.site_list.index(e.source)
-                d = self.site_list.index(e.dest)
-                Elist.append(dgraph.RubberEdge(Nlist[s],Nlist[d],1,damping=0.7))
-
-            self.gr.insertNodeList(Nlist)
-            self.gr.insertEdgeList(Elist)
-            self.gr.centerView()
-            if self.dmap:
-                m = dgraph.Map(mapa)
-                self.gr.insertMap(m)
-
-        except ImportError, v:
-            print v
-
-#    def lightGRNode(self,node,color = 'r'):
-#        """
-#        Paints red the sphere corresponding to the node in the visual display
-#        """
-#        i = self.site_list.index(node)
-#        if color == 'r':
-#            red = (self.maxstep-self.simstep)/float(self.maxstep)
-#            blue = 1-red**6
-#            self.gr.nodes[i].box.color = (red,0.,blue)
-#            node.painted = 1
-#        elif color == 'g':
-#            self.gr.nodes[i].box.color = (0.,1.,0.)
-
-
     def drawGraph(self):
         """
         Draws the network using pylab
@@ -1487,34 +1436,6 @@ class graph(object):
         #saving
         savefig('graph.png')
         close()
-#    def drawGraphR(self):
-#        """
-#        Draws the network using R
-#        """
-#        d=r.capabilities()
-#        if d['png']:
-#            device = r.png
-#            device('graph.png',width=733,height=550)
-#        elif d['jpeg']:
-#            device = r.jpeg
-#            device('graph.png',width=733,height=550)
-#        else:
-#            device = r.postscript
-#            device('graph.png',width=733,height=550)
-#        # node data
-#        x = [i.pos[1] for i in self.site_list]
-#        y = [i.pos[0] for i in self.site_list]
-#        r.plot(x,y,axes=r.F,pch=16,xlab="",ylab="")
-#
-#        #edge data
-#        xs = [e.source.pos[1] for e in self.edge_list]
-#        ys = [e.source.pos[0] for e in self.edge_list]
-#        xd = [e.dest.pos[1] for e in self.edge_list]
-#        yd = [e.dest.pos[0] for e in self.edge_list]
-#        for i in range(len(xs)):
-#            r.lines(r.c(xs[i],xd[i]),r.c(ys[i],yd[i]),lwd=0.5,col="gray")
-#        r.points(x,y,pch=16)
-#        r.dev_off()
 
     def getAllPairs(self):
         """
