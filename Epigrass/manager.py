@@ -60,7 +60,7 @@ class simulate:
         if self.shapefile: #create world object if a shapefile is provided
             self.World = epigdal.World(*self.shapefile+[self.outdir])
         self.chkScript()
-        self.encoding = 'latin-1'#default encoding for strings in the sites and edges files
+        self.encoding = 'utf-8'#default encoding for strings in the sites and edges files
         self.round = 0 #No replicates
         sitios = loadData(self.sites, sep=',', encoding=self.encoding)
         ed = loadData(self.edges,sep=',', encoding=self.encoding)
@@ -383,7 +383,7 @@ class simulate:
         if self.shpout:
             self.outToShp()
         self.dumpData()
-        spread.Spread(self.g,  self.outdir, self.encoding)
+        spread.Spread(self.g, self.outdir, self.encoding)
         #self.saveModel(self.modelName)
         #pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
 
@@ -915,6 +915,7 @@ class simulate:
             epp.write(str(i[0])+','+site.sitename+','+mli+'\n')
         epp.close()
         self.Say('Done!')
+        self.g.save_topology('network.graphml')
 
         #saving Epistats
         self.Say('Saving Epidemiological results...')
