@@ -869,7 +869,7 @@ class simulate:
         if not self.outdir == curdir:
             os.chdir(self.outdir)
 
-        codeslist = [str(i.geocode) for i in self.g.site_dict.itervalues()]
+        codeslist = self.g.site_dict.keys()
         self.criaAdjMatrix()
         #saving the shortest path matrices
 #        if not os.path.exists('spmat.csv'):
@@ -906,9 +906,9 @@ class simulate:
             infectors = i[-1]
             # sorting infectors by number of infective contributed
             if len(infectors):
-                reverse_infectors = [ [v[1],v[0]] for v in infectors.items()]
-                reverse_infectors.sort()
-                mli = [reverse_infectors[j][1] for j in xrange(0,len(reverse_infectors))][-1].sitename#Most likely infector
+                reverse_infectors = infectors.items()
+                reverse_infectors.sort(key=lambda t:t[1])
+                mli = reverse_infectors[-1][0].sitename#Most likely infector
             else:
                 mli = 'NA'
             #print i[1].sitename, type(i[1].sitename), mli
