@@ -420,14 +420,14 @@ class simulate:
             return
         #Initialize world output layers
         self.Say("REading Nodes from shapefile...")
-        self.World.getNodeList(self.World.ds.GetLayerByName(self.World.layerlist[0]))
+        self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
         self.Say("Done reading nodes!")
         self.Say("Creating Nodes shapefile...")
-        self.World.createNodeLayer()
+        self.World.create_node_layer()
         self.Say("Done creating Nodes shapefile!")
         elist = [(e.source.geocode,e.dest.geocode,sum(e.ftheta),sum(e.btheta)) for e in self.g.edge_list]
         self.Say("Creating Edges shapefile...")
-        self.World.createEdgeLayer(elist)
+        self.World.create_edge_layer(elist)
         self.Say("Done creating Edges shapefile!")
         #Generate site epidemic stats
         varlist = ["prevalence","totalcases", "arrivals","population"]
@@ -440,7 +440,7 @@ class simulate:
             sitestats.append((site.geocode,prevalence,site.totalcases,sum(site.thetahist),float(site.totpop)))
 
         self.Say("Creating Data shapefile...")
-        self.World.createDataLayer(varlist,sitestats)
+        self.World.create_data_dayer(varlist,sitestats)
         self.Say("Done creating Data shapefile!")
         #Generate the kml too.
         self.out_to_kml(names)
@@ -455,7 +455,7 @@ class simulate:
 #        ka.save()
         self.Say("Done creating KML files!")
         #close files
-        self.World.closeSources()
+        self.World.close_sources()
     
     def out_to_kml(self, names):
         """

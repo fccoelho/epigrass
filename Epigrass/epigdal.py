@@ -2,10 +2,10 @@
 This module uses the GDAL and OGR Library to read maps in vaious formats and
 export the results of Epigrass simulations to the formats supported by these libraries
 
-copyright 2007 by Flavio Codeco Coelho
+copyright 2007,2012 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
-import locale, os#, pylab
+import locale, os, pylab
 from osgeo  import ogr,  gdal
 from xml.dom import minidom, Node
 from matplotlib.colors import  rgb2hex, LogNorm
@@ -34,8 +34,8 @@ class World:
         self.nodesource = False #True if Node datasource has been created
         self.edgesource = False #True if Edge datasource has been created
         self.datasource = False #True if Data datasource has been created
-        self.layerlist = self.getLayerList()
-    def getLayerList(self):
+        self.layerlist = self.get_layer_list()
+    def get_layer_list(self):
         """
         returns a list with the
         available layers by name
@@ -47,7 +47,7 @@ class World:
             ln.append(l.GetName())
         return ln
 
-    def drawLayer(self,L):
+    def draw_layer(self,L):
         '''
         Draws a polygon layer using pylab
         '''
@@ -75,9 +75,9 @@ class World:
         pylab.grid(True)
         pylab.show()
 
-    def getNodeList(self,l):
+    def get_node_list(self,l):
         '''
-        Returns the centroid coordinates
+        Updates self.centdict with centroid coordinates and self.nlist with layer features
         l is an OGR layer.
         '''
         self.nlist=[]
@@ -95,7 +95,7 @@ class World:
         #print (2600501 in self.centdict)
 
 
-    def createNodeLayer(self):
+    def create_node_layer(self):
         """
         Creates a new shape file to represent network nodes.
         The node layer will be based on the centroids of the
@@ -139,7 +139,7 @@ class World:
             nl.CreateFeature(fe)
         nl.SyncToDisk()
 
-    def createEdgeLayer(self,elist):
+    def create_edge_layer(self,elist):
         """
         Creates a new layer with edge information.
         elist is a list of tuples:
@@ -184,7 +184,7 @@ class World:
                 pass
         el.SyncToDisk()
 
-    def createDataLayer(self,varlist, data):
+    def create_data_dayer(self,varlist, data):
         """
         Creates a new shape to contain data about nodes.
         varlist is the list of fields names associated with
@@ -236,25 +236,30 @@ class World:
                 pass
             dl.SyncToDisk()
 
-    def genSitesFile(self,fname):
+    def save_data_geojson(self, varlist, data):
+        """
+        Creates a GeoJSON file containin the polygon layer and results of the simulation
+        """
+        pass
+
+    def gen_sites_file(self,fname):
         """
         This method generate a sites
         csv file from the nodes extracted from the
         map.
         """
-        f = open(fname,"w")
-        for fe in self.nlist:
-            gc = fe.GetFieldAsInteger(self.geocfield)
-            x = self.centdict[gc][0]
-            y = self.centdict[gc][1]
-            name = fe.GetField(self.namefield)
-            line = "%s,%s,%s,%s\n"%(x,y,name,gc)
-            #fe.SetField('name',f.GetField(self.namefield))
-            f.write(line)
-        f.close()
+        with open(fname,"w") as f:
+            for fe in self.nlist:
+                gc = fe.GetFieldAsInteger(self.geocfield)
+                x = self.centdict[gc][0]
+                y = self.centdict[gc][1]
+                name = fe.GetField(self.namefield)
+                line = "%s,%s,%s,%s\n"%(x,y,name,gc)
+                #fe.SetField('name',f.GetField(self.namefield))
+                f.write(line)
 
 
-    def closeSources(self):
+    def close_sources(self):
         """
         Close the data sources so that data is flushed and and files are closed
         """
@@ -521,9 +526,9 @@ if __name__=="__main__":
     # opening data source
     w = World('riozonas_LatLong.shp','nome_zonas','zona_trafe')
     layer = w.ds.GetLayerByName(w.layerlist[0])
-    w.getNodeList(layer)
-    w.drawLayer(layer)
-    w.createNodeLayer()
+    w.get_node_list(layer)
+    w.draw_layer(layer)
+    w.create_node_layer()
     w.nodesource.Destroy() #flush data to disk
 ##    k = KmlGenerator()
 ##    k.addNodes(w.datasource.GetLayer(0))
