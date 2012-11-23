@@ -440,7 +440,7 @@ class simulate:
             sitestats.append((site.geocode,prevalence,site.totalcases,sum(site.thetahist),float(site.totpop)))
 
         self.Say("Creating Data shapefile...")
-        self.World.create_data_dayer(varlist,sitestats)
+        self.World.create_data_layer(varlist,sitestats)
         self.Say("Done creating Data shapefile!")
         #Generate the kml too.
         self.out_to_kml(names)

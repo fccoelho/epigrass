@@ -13,6 +13,7 @@ from matplotlib.colors import normalize
 from matplotlib import cm
 from numpy import array
 from zipfile import ZipFile
+import json
 
 
 class World:
@@ -35,6 +36,7 @@ class World:
         self.edgesource = False #True if Edge datasource has been created
         self.datasource = False #True if Data datasource has been created
         self.layerlist = self.get_layer_list()
+
     def get_layer_list(self):
         """
         returns a list with the
@@ -184,7 +186,7 @@ class World:
                 pass
         el.SyncToDisk()
 
-    def create_data_dayer(self,varlist, data):
+    def create_data_layer(self,varlist, data):
         """
         Creates a new shape to contain data about nodes.
         varlist is the list of fields names associated with
@@ -236,11 +238,33 @@ class World:
                 pass
             dl.SyncToDisk()
 
-    def save_data_geojson(self, varlist, data):
+    def save_data_geojson(self, varlist, dl):
         """
         Creates a GeoJSON file containin the polygon layer and results of the simulation
+        :Parameters:
+        :parameter dl: datalayer to save
         """
-        pass
+        spatial_reference = dl.GetSpatialRef()
+
+        feature_collection = {"type": "FeatureCollection",
+                              "features": []
+        }
+        with open("data.crs", "wb") as f:
+            f.write(spatial_reference.ExportToProj4())
+
+        feature_collection["crs"] = {"type": "link",
+                                     "properties": {
+                                         "href": "data.crs",
+                                         "type": "proj4"
+                                     }
+        }
+        for fe in dl.GetNextFeature():
+            feature_collection["features"].append(fe.ExportToJson())
+
+        with open('data.json','w') as f:
+            json.dump(feature_collection,f)
+
+
 
     def gen_sites_file(self,fname):
         """
