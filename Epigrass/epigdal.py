@@ -157,8 +157,8 @@ class World:
             self.edgesource = dse
             el = dse.CreateLayer("edges",geom_type=ogr.wkbLineString)
         #Create the fields
-        fi1 = ogr.FieldDefn("source_geocode",field_type=ogr.OFTInteger)
-        fi2 = ogr.FieldDefn("dest_geocode",field_type=ogr.OFTInteger)
+        fi1 = ogr.FieldDefn("s_geocode",field_type=ogr.OFTInteger)
+        fi2 = ogr.FieldDefn("d_geocode",field_type=ogr.OFTInteger)
         fi3 = ogr.FieldDefn("flowSD",field_type=ogr.OFTReal)
         fi3.SetPrecision(12)
         fi4 = ogr.FieldDefn("flowDS",field_type=ogr.OFTReal)
@@ -169,12 +169,13 @@ class World:
         el.CreateField(fi4)
         #Add the features (lines)
         for e in elist:
+            print e
             #print "setting edge fields"
             fe = ogr.Feature(el.GetLayerDefn())
-            fe.SetField('source_geocode',e[0])
-            fe.SetField('dest_geocode',e[1])
-            fe.SetField('flowSD',e[2])
-            fe.SetField('flowSD',e[3])
+            fe.SetField('s_geocode',e[0])
+            fe.SetField('d_geocode',e[1])
+            fe.SetField('flowSD',float(e[2]))
+            fe.SetField('flowSD',float(e[3]))
             line = ogr.Geometry(type=ogr.wkbLineString)
             try:
                 #print "creating edge lines"
@@ -237,8 +238,9 @@ class World:
             except: #Geocode not in polygon dictionary
                 pass
             dl.SyncToDisk()
+            self.save_data_geojson(dl)
 
-    def save_data_geojson(self, varlist, dl):
+    def save_data_geojson(self, dl):
         """
         Creates a GeoJSON file containin the polygon layer and results of the simulation
         :Parameters:
@@ -249,17 +251,29 @@ class World:
         feature_collection = {"type": "FeatureCollection",
                               "features": []
         }
-        with open("data.crs", "wb") as f:
-            f.write(spatial_reference.ExportToProj4())
 
-        feature_collection["crs"] = {"type": "link",
-                                     "properties": {
-                                         "href": "data.crs",
-                                         "type": "proj4"
-                                     }
-        }
-        for fe in dl.GetNextFeature():
+#        if spatial_reference is not None:
+#            with open("data.crs", "wb") as f:
+#                f.write(spatial_reference.ExportToProj4())
+#
+#        feature_collection["crs"] = {"type": "link",
+#                                     "properties": {
+#                                         "href": "data.crs",
+#                                         "type": "proj4"
+#                                     }
+#        }
+        dl.ResetReading()
+        fe = dl.GetNextFeature()
+        while fe is not None:
+            fi = fe.GetField(self.namefield)
+            print fi,type(fi)
+            try:
+                fi = fi.decode('utf8','ignore')
+            except AttributeError:
+                fi = '' #name is None
+            fe.SetField(self.namefield,str(fi))
             feature_collection["features"].append(fe.ExportToJson())
+            fe = dl.GetNextFeature()
 
         with open('data.json','w') as f:
             json.dump(feature_collection,f)
@@ -552,6 +566,7 @@ if __name__=="__main__":
     layer = w.ds.GetLayerByName(w.layerlist[0])
     w.get_node_list(layer)
     w.draw_layer(layer)
+    w.save_data_geojson(layer)
     w.create_node_layer()
     w.nodesource.Destroy() #flush data to disk
 ##    k = KmlGenerator()

@@ -425,7 +425,7 @@ class simulate:
         self.Say("Creating Nodes shapefile...")
         self.World.create_node_layer()
         self.Say("Done creating Nodes shapefile!")
-        elist = [(e.source.geocode,e.dest.geocode,sum(e.ftheta),sum(e.btheta)) for e in self.g.edge_list]
+        elist = [(gcs[0],gcs[1],sum(e.ftheta),sum(e.btheta)) for gcs,e in self.g.edge_dict.iteritems()]
         self.Say("Creating Edges shapefile...")
         self.World.create_edge_layer(elist)
         self.Say("Done creating Edges shapefile!")
@@ -467,10 +467,11 @@ class simulate:
         k.addNodes(lr,names)
         k.writeToFile(self.outdir)
         site_list = self.g.site_list
-        if  len(site_list)*len(site_list[0].ts)<10000: #Only reasonably sized animations
+        site_dict = self.g.site_dict
+        if  len(site_dict)*len(site_dict.values()[0].ts)<10000: #Only reasonably sized animations
             for i, v in enumerate(site_list[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
-                data = [(str(site.geocode), t, p[i]) for site in site_list for t, p in enumerate(site.ts)]
+                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
                 ka.add_data(data)
                 ka.save(v+'_animation')
                 self.Say(v+'_animation')
