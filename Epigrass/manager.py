@@ -468,16 +468,17 @@ class simulate:
         k.writeToFile(self.outdir)
         site_list = self.g.site_list
         site_dict = self.g.site_dict
-        if  len(site_dict)*len(site_dict.values()[0].ts)<10000: #Only reasonably sized animations
-            for i, v in enumerate(site_dict.values()[0].vnames):
-                ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
-                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
-                ka.add_data(data)
-                ka.save(v+'_animation')
-                self.Say(v+'_animation')
-                del ka
-        else:
-            self.Say("Simulation too large to export as kml.")
+# Temporarily disabled animation output due to the sheer size of the kmz files
+#        if  len(site_dict)*len(site_dict.values()[0].ts)<10000: #Only reasonably sized animations
+#            for i, v in enumerate(site_dict.values()[0].vnames):
+#                ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
+#                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
+#                ka.add_data(data)
+#                ka.save(v+'_animation')
+#                self.Say(v+'_animation')
+#                del ka
+#        else:
+#            self.Say("Simulation too large to export as kml.")
         
         self.Say("Done creating KML files!")
 
