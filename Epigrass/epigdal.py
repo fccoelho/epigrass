@@ -17,7 +17,7 @@ import json
 
 
 class World:
-    def __init__(self,filename,namefield='name',geocfield='geocode',outdir = '.'):
+    def __init__(self,filename,namefield,geocfield,outdir = '.'):
         '''
         Instantiate a world object.
         Filename points to a file supported by OGR
@@ -31,6 +31,7 @@ class World:
         self.centroids = []#centroid list (x,y,z) tuples
         self.centdict = {} #keys are geocode, values are (x,y,z) tuples
         self.geomdict = {} #keys are geocode, values are geometries
+        self.namedict = {} #keys are geocode, values are locality names
         self.nlist = [] #nodelist: feature objects
         self.nodesource = False #True if Node datasource has been created
         self.edgesource = False #True if Edge datasource has been created
@@ -91,6 +92,7 @@ class World:
                 c = g.Centroid()
                 self.nlist.append(f)
                 self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(),c.GetY(),c.GetZ())
+                self.namedict[f.GetFieldAsInteger(self.geocfield)] = f.GetField(self.namefield)
             except: #in case feature is not a polygon
                 print  f.GetFID(),g.GetGeometryType()
             f = l.GetNextFeature()
@@ -169,7 +171,6 @@ class World:
         el.CreateField(fi4)
         #Add the features (lines)
         for e in elist:
-            print e
             #print "setting edge fields"
             fe = ogr.Feature(el.GetLayerDefn())
             fe.SetField('s_geocode',e[0])
@@ -196,6 +197,7 @@ class World:
         and the remaining elements are values of the fields, in the
         same order as they appear in varlist.
         """
+
         if os.path.exists(os.path.join(self.outdir,'Data.shp')):
             os.remove(os.path.join(self.outdir,'Data.shp'))
             os.remove(os.path.join(self.outdir,'Data.shx'))
@@ -207,7 +209,9 @@ class World:
             dl = dsd.CreateLayer("sim_results",geom_type=ogr.wkbPolygon)
         #Create the fields
         fi1 = ogr.FieldDefn("geocode",field_type=ogr.OFTInteger)
+        fin = ogr.FieldDefn(self.namefield,field_type=ogr.OFTString)
         dl.CreateField(fi1)
+        dl.CreateField(fin)
         for v in varlist:
             #print "creating data fields"
             fi = ogr.FieldDefn(v,field_type=ogr.OFTString)
@@ -216,36 +220,40 @@ class World:
 
         #Add the features (points)
         for n,l in enumerate(data):
+#            print n,l
             #Iterate over the lines of the data matrix.
             gc = l[0]
             try:
                 geom = self.geomdict[gc]
-                if geom.GetGeometryType() != 3: continue
-                #print geom.GetGeometryCount()
-                fe = ogr.Feature(dl.GetLayerDefn())
-                fe.SetField('geocode',gc)
-                for v,d in zip (varlist,l[1:]):
-                    #print v,d
-                    fe.SetField(v,str(d))
-                #Add the geometry
-                #print "cloning geometry"
-                clone = geom.Clone()
-                #print geom
-                #print "setting geometry"
-                fe.SetGeometry(clone)
-                #print "creating geom"
-                dl.CreateFeature(fe)
-            except: #Geocode not in polygon dictionary
-                pass
-            dl.SyncToDisk()
-            self.save_data_geojson(dl)
+            except KeyError: #Geocode not in polygon dictionary
+                raise KeyError( "Geocode %s not in polygon dictionary"%gc)
+            if geom.GetGeometryType() != 3: continue
+            #print geom.GetGeometryCount()
+            fe = ogr.Feature(dl.GetLayerDefn())
+            fe.SetField('geocode',gc)
+            fe.SetField(self.namefield,self.namedict[gc])
+            for v,d in zip (varlist,l[1:]):
+                #print v,d
+                fe.SetField(v,str(d))
+            #Add the geometry
+            #print "cloning geometry"
+            clone = geom.Clone()
+            #print geom
+            #print "setting geometry"
+            fe.SetGeometry(clone)
+            #print "creating geom"
+            dl.CreateFeature(fe)
 
-    def save_data_geojson(self, dl):
+        dl.SyncToDisk()
+        self.save_data_geojson(dl)
+
+    def save_data_geojson(self, dl, namefield=None):
         """
         Creates a GeoJSON file containin the polygon layer and results of the simulation
         :Parameters:
         :parameter dl: datalayer to save
         """
+        print "==> saving to GeoJSON"
         spatial_reference = dl.GetSpatialRef()
 
         feature_collection = {"type": "FeatureCollection",
@@ -262,20 +270,24 @@ class World:
 #                                         "type": "proj4"
 #                                     }
 #        }
+        if namefield is None:
+            namefield = self.namefield
         dl.ResetReading()
         fe = dl.GetNextFeature()
+        print fe
         while fe is not None:
-            fi = fe.GetField(self.namefield)
+            print namefield
+            fi = fe.GetField(namefield)
             print fi,type(fi)
             try:
                 fi = fi.decode('utf8','ignore')
             except AttributeError:
                 fi = '' #name is None
-            fe.SetField(self.namefield,str(fi))
+            fe.SetField(namefield,str(fi))
             feature_collection["features"].append(fe.ExportToJson())
             fe = dl.GetNextFeature()
 
-        with open('data.json','w') as f:
+        with open(os.path.join(self.outdir,'data.json'),'w') as f:
             json.dump(feature_collection,f)
 
 
@@ -445,10 +457,9 @@ class AnimatedKML(object):
             fname = os.path.join(dir, fname)
 #        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
         with open(fname+'.kml', 'w') as f:
-#            PrettyPrint(self.kmlDoc, stream=f, indent='  ', encoding='utf-8')
             f.write(self.kmlDoc.toprettyxml(indent='  ', encoding='utf-8'))
         # Now zip the kml to generate the kmz
-        with ZipFile(fname+'.kmz', 'w', 9, True) as kmz:
+        with ZipFile(fname+'.kmz', 'w', allowZip64=True) as kmz:
             kmz.write(fname+'.kml')
         os.unlink(fname+'.kml')
 

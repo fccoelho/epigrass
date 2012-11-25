@@ -431,13 +431,13 @@ class simulate:
         self.Say("Done creating Edges shapefile!")
         #Generate site epidemic stats
         varlist = ["prevalence","totalcases", "arrivals","population"]
-        sitestats = []
-        names = {}
-        for site in self.g.site_dict.itervalues():
-            names[int(site.geocode)] = site.sitename
-            prevalence = float(site.totalcases)/site.totpop
-            #print prevalence
-            sitestats.append((site.geocode,prevalence,site.totalcases,sum(site.thetahist),float(site.totpop)))
+        sitestats = [(site.geocode,float(site.totalcases)/site.totpop,site.totalcases,sum(site.thetahist),float(site.totpop)) for site in self.g.site_dict.itervalues()]
+        names = {k: v.sitename for k,v in self.g.site_dict.iteritems()}
+#        for site in self.g.site_dict.itervalues():
+#            names[int(site.geocode)] = site.sitename
+#            prevalence = float(site.totalcases)/site.totpop
+#            #print prevalence
+#            sitestats.append((site.geocode,prevalence,site.totalcases,sum(site.thetahist),float(site.totpop)))
 
         self.Say("Creating Data shapefile...")
         self.World.create_data_layer(varlist,sitestats)
@@ -469,7 +469,7 @@ class simulate:
         site_list = self.g.site_list
         site_dict = self.g.site_dict
         if  len(site_dict)*len(site_dict.values()[0].ts)<10000: #Only reasonably sized animations
-            for i, v in enumerate(site_list[0].vnames):
+            for i, v in enumerate(site_dict.values()[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
                 data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
                 ka.add_data(data)
