@@ -8,6 +8,7 @@ from copy import deepcopy
 from xmlrpclib import ServerProxy, Error
 from simobj import graph, edge, siteobj
 from numpy import *
+import numpy as np
 import spread
 from numpy.random import uniform, poisson
 from data_io import *
@@ -16,8 +17,8 @@ import ConfigParser
 import string, sys, getpass
 import report as Rp
 import epigdal
+import json
 import __version__
-#import dataObject as DO
 import sqlite3, MySQLdb
 #import pycallgraph
 
@@ -433,26 +434,13 @@ class simulate:
         varlist = ["prevalence","totalcases", "arrivals","population"]
         sitestats = [(site.geocode,float(site.totalcases)/site.totpop,site.totalcases,sum(site.thetahist),float(site.totpop)) for site in self.g.site_dict.itervalues()]
         names = {k: v.sitename for k,v in self.g.site_dict.iteritems()}
-#        for site in self.g.site_dict.itervalues():
-#            names[int(site.geocode)] = site.sitename
-#            prevalence = float(site.totalcases)/site.totpop
-#            #print prevalence
-#            sitestats.append((site.geocode,prevalence,site.totalcases,sum(site.thetahist),float(site.totpop)))
 
         self.Say("Creating Data shapefile...")
         self.World.create_data_layer(varlist,sitestats)
         self.Say("Done creating Data shapefile!")
         #Generate the kml too.
         self.out_to_kml(names)
-#        self.Say("Creating KML output files...")
-#        lr = self.World.datasource.GetLayer(0)
-#        k = epigdal.KmlGenerator()
-#        k.addNodes(lr,names)
-#        k.writeToFile(self.outdir)
-#        ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
-#        data = [(site.geocode, t, p[1]) for site in self.g.site_list for t, p in enumerate(site.ts)]
-#        ka.add_data(data)
-#        ka.save()
+
         self.Say("Done creating KML files!")
         #close files
         self.World.close_sources()
@@ -482,6 +470,20 @@ class simulate:
         
         self.Say("Done creating KML files!")
 
+    def series_to_JSON(self):
+        """
+        Saves timeseries to JSON for uploading to epigrass web
+        """
+        self.Say('Saving series to JSON')
+        series = {}
+        for gc,s in self.g.site_dict.iteritems():
+            ts = np.array(s.ts)
+            sdict = {}
+            for i,vn in enumerate(s.vnames):
+                sdict[vn] = ts[:,i].tolist()
+            series[gc] = sdict
+        with open('series.json','w') as f:
+            json.dump(series,f)
 
     def writeMetaCSV(self, table):
         """
@@ -967,6 +969,8 @@ class simulate:
 #            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+central+','+bet+','+thidx+','+distseed+','+seedgc+','+seedname+'\n')
             sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+seedgc+','+seedname+'\n')
 
+        # Saving series to JSON
+        self.series_to_JSON()
         os.chdir(curdir)
 
         self.Say('Done saving data!')

@@ -197,7 +197,9 @@ class World:
         and the remaining elements are values of the fields, in the
         same order as they appear in varlist.
         """
-
+        data = array(data)
+        # building normalizers for each variable, except geocode
+        norms = [normalize(c.min(),c.max()) for c in data[:,1:].T]
         if os.path.exists(os.path.join(self.outdir,'Data.shp')):
             os.remove(os.path.join(self.outdir,'Data.shp'))
             os.remove(os.path.join(self.outdir,'Data.shx'))
@@ -210,18 +212,21 @@ class World:
         #Create the fields
         fi1 = ogr.FieldDefn("geocode",field_type=ogr.OFTInteger)
         fin = ogr.FieldDefn(self.namefield,field_type=ogr.OFTString)
+        fic = ogr.FieldDefn("colors",field_type=ogr.OFTString)
         dl.CreateField(fi1)
         dl.CreateField(fin)
+        dl.CreateField(fic) #json array with colors
         for v in varlist:
             #print "creating data fields"
-            fi = ogr.FieldDefn(v,field_type=ogr.OFTString)
+            fi = ogr.FieldDefn(v,field_type=ogr.OFTReal)
             fi.SetPrecision(12)
             dl.CreateField(fi)
 
         #Add the features (points)
-        for n,l in enumerate(data):
+        for l in data:
 #            print n,l
             #Iterate over the lines of the data matrix.
+            hexcolors = str([self.get_hex_color(norms[i](v)) for i,v in l[1:]])
             gc = l[0]
             try:
                 geom = self.geomdict[gc]
@@ -232,9 +237,10 @@ class World:
             fe = ogr.Feature(dl.GetLayerDefn())
             fe.SetField('geocode',gc)
             fe.SetField(self.namefield,self.namedict[gc])
+            fe.SetField('colors',hexcolors)
             for v,d in zip (varlist,l[1:]):
                 #print v,d
-                fe.SetField(v,str(d))
+                fe.SetField(v,float(d))
             #Add the geometry
             #print "cloning geometry"
             clone = geom.Clone()
@@ -246,6 +252,14 @@ class World:
 
         dl.SyncToDisk()
         self.save_data_geojson(dl)
+
+    def get_hex_color(self, value):
+        cols  = cm.get_cmap("YlOrRd",256)
+        rgba = cols(value * 256)
+        bgrcol = list(rgba[:-1]) #rgb(list)
+        bgrcol.reverse() #turn it into bgr
+        hexcol = "#80" + rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
+        return hexcol
 
     def save_data_geojson(self, dl, namefield=None):
         """
@@ -284,7 +298,7 @@ class World:
             except AttributeError:
                 fi = '' #name is None
             fe.SetField(namefield,str(fi))
-            feature_collection["features"].append(fe.ExportToJson())
+            feature_collection["features"].append(json.loads( fe.ExportToJson()))
             fe = dl.GetNextFeature()
 
         with open(os.path.join(self.outdir,'data.json'),'w') as f:
@@ -491,6 +505,14 @@ class KmlGenerator:
         desc.appendChild(doc.createTextNode("Polygons with data"))
         self.dnode = d
 
+    def get_hex_color(self, value):
+        jet  = cm.get_cmap("jet",50)
+        rgba = jet(value * 50)
+        bgrcol = list(rgba[:-1]) #rgb(list)
+        bgrcol.reverse() #turn it into bgr
+        hexcol = "#80" + rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
+        return hexcol
+
     def addNodes(self,layer,names=None):
         """
         Adds a node to the document.
@@ -499,17 +521,14 @@ class KmlGenerator:
         names is a dictionary of names indexed by geocode(int)
         """
         doc = self.dnode
-        jet  = cm.get_cmap("jet",50)
+
         layer.ResetReading()
         while 1:
             f = layer.GetNextFeature()
             if not f:#exit after the last feature
                 break
             prevalence = float(f.GetField("prevalence"))
-            rgba = jet(prevalence*50)
-            bgrcol = list(rgba[:-1]) #rgb(list)
-            bgrcol.reverse() #turn it into bgr
-            hexcol = "#80"+rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
+            hexcol = self.get_hex_color(prevalence)
             g = f.GetGeometryRef()
             if g.GetGeometryType() == 3:
                 geoc = f.GetFieldAsInteger("geocode")
