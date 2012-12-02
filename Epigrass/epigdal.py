@@ -211,7 +211,7 @@ class World:
             dl = dsd.CreateLayer("sim_results",geom_type=ogr.wkbPolygon)
         #Create the fields
         fi1 = ogr.FieldDefn("geocode",field_type=ogr.OFTInteger)
-        fin = ogr.FieldDefn(self.namefield,field_type=ogr.OFTString)
+        fin = ogr.FieldDefn("name",field_type=ogr.OFTString)
         fic = ogr.FieldDefn("colors",field_type=ogr.OFTString)
         dl.CreateField(fi1)
         dl.CreateField(fin)
@@ -224,9 +224,9 @@ class World:
 
         #Add the features (points)
         for l in data:
-#            print n,l
+#            print l
             #Iterate over the lines of the data matrix.
-            hexcolors = str([self.get_hex_color(norms[i](v)) for i,v in l[1:]])
+            hexcolors = [self.get_hex_color(norms[i](v)) for i,v in enumerate(l[1:])]
             gc = l[0]
             try:
                 geom = self.geomdict[gc]
@@ -236,8 +236,8 @@ class World:
             #print geom.GetGeometryCount()
             fe = ogr.Feature(dl.GetLayerDefn())
             fe.SetField('geocode',gc)
-            fe.SetField(self.namefield,self.namedict[gc])
-            fe.SetField('colors',hexcolors)
+            fe.SetField('name',self.namedict[gc])
+            fe.SetField('colors',str(hexcolors))
             for v,d in zip (varlist,l[1:]):
                 #print v,d
                 fe.SetField(v,float(d))
@@ -288,17 +288,19 @@ class World:
             namefield = self.namefield
         dl.ResetReading()
         fe = dl.GetNextFeature()
-        print fe
+#        print fe
         while fe is not None:
-            print namefield
+#            print namefield
             fi = fe.GetField(namefield)
-            print fi,type(fi)
+#            print fi,type(fi)
             try:
                 fi = fi.decode('utf8','ignore')
             except AttributeError:
                 fi = '' #name is None
             fe.SetField(namefield,str(fi))
-            feature_collection["features"].append(json.loads( fe.ExportToJson()))
+            feature = json.loads( fe.ExportToJson())
+            feature['properties']['colors'] = eval(feature['properties']['colors'])
+            feature_collection["features"].append(feature)
             fe = dl.GetNextFeature()
 
         with open(os.path.join(self.outdir,'data.json'),'w') as f:
