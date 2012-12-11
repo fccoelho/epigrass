@@ -105,7 +105,13 @@ class siteobj(object):
         self.bp = bp
         self.model = epimodels.Epimodel(modtype)
         self.vnames = epimodels.vnames[modtype]
-        self.ts =[[bi[vn.lower()] for vn in self.vnames]]
+        try:
+            self.ts =[[bi[vn.lower()] for vn in self.vnames]]
+        except KeyError as ke:
+            if self.vnames == ['Exposed','Infectious','Susceptible']:
+                self.ts =[[bi[vn] for vn in ['e','i','s']]]
+            else:
+                raise KeyError('%s'%ke)
         self.bp['vaccineNow'] = 0
         self.bp['vaccov'] = 0
 #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
