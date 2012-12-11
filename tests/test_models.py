@@ -13,16 +13,16 @@ class TestModels(unittest.TestCase):
     def test_run_SIS(self):
         model = Epimodel("SIS")
         res = model.step((0,1,999),0,1000,0,0,bi={'e':0,'i':1,'s':999},bp={'r':0.1,'b':0.01,'beta':0.01,'alpha':1.})
-        self.assertEqual(res,([0,0.9,999.11],0,0.9))
+        self.assertAlmostEqual(res,([0,0.9,999.11],0,0.9))
         #TOdo: add asserts with the expected results of the models
     def test_run_SIS_s(self):
         model = Epimodel('SIS_s')
         res = model.step((0,1,999),0,1000,0,0,bi={'e':0,'i':1,'s':999},bp={'r':0.1,'b':0.01,'beta':0.01,'alpha':1.})
-        self.assertEqual(res,([0,0.9,999.11],0,0.9))
+        self.assertAlmostEqual(res,([0,0.9,999.11],0,0.9))
     def test_run_SIR(self):
         model = Epimodel('SIR')
         res = model.step((0,1,999),0,1000,0,0,bi={'e':0,'i':1,'s':999},bp={'r':0.1,'b':0.01,'beta':0.01,'alpha':1.})
-        self.assertEqual(res,([0,0.9,999.01],0,0.9))
+        self.assertAlmostEqual(res,([0,0.9,999.01],0,0.9))
     def test_run_SIR_s(self):
         model = Epimodel('SIR_s')
         res = model.step((0,1,999),0,1000,0,0,bi={'e':0,'i':1,'s':999},bp={'r':0.1,'b':0.01,'beta':0.01,'alpha':1.})
