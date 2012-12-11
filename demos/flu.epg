@@ -96,30 +96,31 @@ pp4 = 0.38
 #   S,E,I = 0.5*N, 0.01*N, 0.05*N
 #   S,E,I = N-1, 1, 0
 # Note. Epigrass expects to find S,E,I here. If not, an error will occur
+# Variable names below must match names defined in model if using custom model
 
 S=0
 E=0
 I=0
-S1 = 0.05*N
-S2 = 0.26*N
-S3 = 0.61*N
-S4 = 0.08*N
-E1 = 0
-E2 = 0
-E3 = 0
-E4 = 0
-Is1 = 0
-Is2 = 0
-Is3 = 0
-Is4 = 0
-Ic1 = 0
-Ic2 = 0
-Ic3 = 0
-Ic4 = 0
-Ig1 = 0
-Ig2 = 0
-Ig3 = 0
-Ig4 = 0
+Susc_age1 = 0.05*N
+Susc_age2 = 0.26*N
+Susc_age3 = 0.61*N
+Susc_age4 = 0.08*N
+Incub_age1 = 0
+Incub_age2 = 0
+Incub_age3 = 0
+Incub_age4 = 0
+Subc_age1 = 0
+Subc_age2 = 0
+Subc_age3 = 0
+Subc_age4 = 0
+Sympt_age1 = 0
+Sympt_age2 = 0
+Sympt_age3 = 0
+Sympt_age4 = 0
+Comp_age1 = 0
+Comp_age2 = 0
+Comp_age3 = 0
+Comp_age4 = 0
 
 #=============================================================#
 [EPIDEMIC EVENTS]
@@ -137,7 +138,7 @@ Ig4 = 0
 #
 #  Keyword 'all' may be used if all sites are vaccinated:
 
-seed = [(355030800,'Ic1',1)] #Sao Paulo
+seed = [(355030800,'Sympt_age1',1)] #Sao Paulo
 Vaccinate = [('all',[20,30],[0.5,0.5])] #Sao Paulo
 Quarantine = []
 

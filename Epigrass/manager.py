@@ -10,6 +10,7 @@ from simobj import graph, edge, siteobj
 from numpy import *
 import numpy as np
 import spread
+from collections import OrderedDict
 from numpy.random import uniform, poisson
 from data_io import *
 from optparse import OptionParser
@@ -144,7 +145,7 @@ class simulate:
             self.Batch = []#Turns off Batch mode
             self.round = 0# Initialize replicate counter
     # generate dictionaries for parameters and inits
-        self.inits = {}
+        self.inits = OrderedDict()
         self.parms = {}
         for k,v in config.items():
             if k.startswith('initial conditions'):
@@ -211,8 +212,8 @@ class simulate:
                 o.stochtransp = 0
             N = o.totpop #local copy for reference on model creation
             values = o.values #local copy for reference on model creation
-            inits={}
-            parms={}
+            inits = OrderedDict()
+            parms = {}
             #eval parms and inits
             for k,v in self.inits.items():
                 inits[k] = eval(v)

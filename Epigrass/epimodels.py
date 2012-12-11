@@ -121,10 +121,10 @@ def stepFlu(inits, simstep, totpop, theta=0,npass=0,bi={},bp={},values=()):
                               'Susc_age3','Incub_age3','Subc_age3','Sympt_age3','Comp_age3',
                               'Susc_age4','Incub_age4','Subc_age4','Sympt_age4','Comp_age4',)
     if simstep == 1: #get initial values
-        S1,E1,Is1,Ic1,Ig1 = (bi['s1'],bi['e1'],bi['is1'],bi['ic1'],bi['ig1'])
-        S2,E2,Is2,Ic2,Ig2 = (bi['s2'],bi['e2'],bi['is2'],bi['ic2'],bi['ig2'])
-        S3,E3,Is3,Ic3,Ig3 = (bi['s3'],bi['e3'],bi['is3'],bi['ic3'],bi['ig3'])
-        S4,E4,Is4,Ic4,Ig4 = (bi['s4'],bi['e4'],bi['is4'],bi['ic4'],bi['ig4'])
+        S1,E1,Is1,Ic1,Ig1 = (bi['susc_age1'],bi['incub_age1'],bi['subc_age1'],bi['sympt_age1'],bi['comp_age1'])
+        S2,E2,Is2,Ic2,Ig2 = (bi['susc_age2'],bi['incub_age2'],bi['subc_age2'],bi['sympt_age2'],bi['comp_age2'])
+        S3,E3,Is3,Ic3,Ig3 = (bi['susc_age3'],bi['incub_age3'],bi['subc_age3'],bi['sympt_age3'],bi['comp_age3'])
+        S4,E4,Is4,Ic4,Ig4 = (bi['susc_age4'],bi['incub_age4'],bi['subc_age4'],bi['sympt_age4'],bi['comp_age4'])
     else: #get values from last time step
         S1,E1,Is1,Ic1,Ig1,S2,E2,Is2,Ic2,Ig2,S3,E3,Is3,Ic3,Ig3,S4,E4,Is4,Ic4,Ig4 = inits
     N = totpop
