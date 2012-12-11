@@ -291,13 +291,13 @@ class World:
 #        print fe
         while fe is not None:
 #            print namefield
-            fi = fe.GetField(namefield)
+            fi = fe.GetField('name')
 #            print fi,type(fi)
             try:
                 fi = fi.decode('utf8','ignore')
             except AttributeError:
                 fi = '' #name is None
-            fe.SetField(namefield,str(fi))
+            fe.SetField('name',str(fi))
             feature = json.loads( fe.ExportToJson())
             feature['properties']['colors'] = eval(feature['properties']['colors'])
             feature_collection["features"].append(feature)

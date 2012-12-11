@@ -4,31 +4,33 @@
 # so be careful. Please refer to the manual for intructions on how to write your 
 # own custom models.
 
-def Model(self, inits, theta=0, npass=0):
+
+##### Defining variable names to appear in the database
+# Must be listed in the same order of variables they are returned by the model
+vnames = ['Exposed','Infectious','Susceptible']
+
+def Model(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
         """
         This function implements the SIR model
         - inits = (E,I,S)
         - theta = infectious individuals from neighbor sites
         """
-        ##### Defining variable names to appear in the database
-        # Must be listed in the same order of variables in the model 
-        self.parentSite.vnames = ('Exposed','Infectious','Susceptible')
         
         ##### Get state variables' current values
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
-            E,I,S = (self.bi['e'],self.bi['i'],self.bi['s'])
+        if simstep == 1: #get initial values
+            E,I,S = (bi['e'], bi['i'], bi['s'])
         else: # get last value
             E,I,S = inits
             
         ##### Defining N, the total population     
-        N = self.parentSite.totpop
+        N = totpop
         
         ##### Getting values for the model parameters
-        beta,alpha,e,r,delta,B,w,p = (self.bp['beta'],self.bp['alpha'],self.bp['e'],self.bp['r'],self.bp['delta'],self.bp['b'],self.bp['w'],self.bp['p'])
+        beta,alpha,e,r,delta,B,w,p = (bp['beta'],bp['alpha'],bp['e'],bp['r'],bp['delta'],bp['b'],bp['w'],bp['p'])
         
         ##### Defining a Vacination event (optional)
-        if self.parentSite.vaccineNow:
-            S -= self.parentSite.vaccov*S
+        if bp['vaccineNow']:
+            S -= bp['vaccov']*S
         
         ##### Modeling the number of new cases (incidence function)
         Lpos = beta*S*((I+theta)/(N+npass))**alpha #Number of new cases
@@ -37,18 +39,8 @@ def Model(self, inits, theta=0, npass=0):
         Ipos = (1-r)*I + Lpos
         Spos = S + B - Lpos
         Rpos = N-(Spos+Ipos)
+
+        # Number of infectious individuals commuting.
+        migInf = Ipos
         
-        ##### Updating stats
-        self.parentSite.incidence.append(Lpos) # incidence time series 
-        self.parentSite.totalcases += Lpos  # total cases so far
-        
-        #### If parentSite was not infected before and now it is... 
-        if not self.parentSite.infected: 
-            if Lpos > 0:
-                #if not self.parentSite.infected:
-                self.parentSite.infected = self.parentSite.parentGraph.simstep   # store the time of first infection
-                self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))
-        # Store the number of infectious individuals commuting to parentSite.
-        self.parentSite.migInf.append(Ipos)
-        
-        return [0,Ipos,Spos]
+        return [0,Ipos,Spos], Lpos, migInf

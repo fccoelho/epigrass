@@ -13,9 +13,26 @@ __author__ = 'fccoelho'
 from numpy.random import poisson
 import sys, time
 
+
 vnames = {
     'SIR': ['Exposed','Infectious','Susceptible'],
     'SIR_s':['Exposed','Infectious','Susceptible'],
+    'SIS': ['Exposed','Infectious','Susceptible'],
+    'SIS_s':['Exposed','Infectious','Susceptible'],
+    'SEIS': ['Exposed','Infectious','Susceptible'],
+    'SEIS_s':['Exposed','Infectious','Susceptible'],
+    'SEIR': ['Exposed','Infectious','Susceptible'],
+    'SEIR_s':['Exposed','Infectious','Susceptible'],
+    'SIpRpS': ['Exposed','Infectious','Susceptible'],
+    'SIpRpS_s':['Exposed','Infectious','Susceptible'],
+    'SEIpRpS': ['Exposed','Infectious','Susceptible'],
+    'SEIpRpS_s':['Exposed','Infectious','Susceptible'],
+    'SEIpR': ['Exposed','Infectious','Susceptible'],
+    'SEIpR_s':['Exposed','Infectious','Susceptible'],
+    'SIpR': ['Exposed','Infectious','Susceptible'],
+    'SIpR_s':['Exposed','Infectious','Susceptible'],
+    'SIRS': ['Exposed','Infectious','Susceptible'],
+    'SIRS_s':['Exposed','Infectious','Susceptible'],
     'Custom':['Exposed','Infectious','Susceptible'],
     'Influenza':('Susc_age1','Incub_age1','Subc_age1','Sympt_age1','Comp_age1',
                  'Susc_age2','Incub_age2','Subc_age2','Sympt_age2','Comp_age2',
@@ -85,6 +102,7 @@ def selectModel(Type):
         try:
             #TODO: move this import to the graph level
             import CustomModel
+            vnames['custom'] = CustomModel.vnames
             return CustomModel.Model
         except ImportError:
             print "You have to Create a CustomModel.py file before you can select\nthe Custom model type"

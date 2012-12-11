@@ -9,8 +9,10 @@ from types import MethodType
 from data_io import *
 import multiprocessing
 import time
+import json
 import epimodels
 import networkx as NX
+from networkx.readwrite import json_graph
 import logging
 
 #logger = multiprocessing.log_to_stderr()
@@ -1801,6 +1803,10 @@ class graph(object):
         for ed,e in self.edge_dict.iteritems():
             g.add_edge(ed[0],ed[1],weight=e.fmig+e.bmig)
         NX.write_graphml(g,pa)
+        nl = json_graph.node_link_data(g)
+        jsonpath = pa.replace('graphml','json')
+        with open(jsonpath,'w') as f:
+            json.dump(nl,f)
 
     def resetStats(self):
         """

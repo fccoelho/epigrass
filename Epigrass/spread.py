@@ -7,9 +7,10 @@
 #    print "Please install PyQT 4"
 #from qt import *
 from xml.dom import minidom, Node
-import os, string
+import os, json
 from numpy import *
 import networkx as nx
+from networkx.readwrite import  json_graph
 import codecs
 
 class Spread:
@@ -21,6 +22,9 @@ class Spread:
         self.create_tree()
         nx.write_graphml(self.nxg,os.path.join(outdir,'spread.graphml'),encoding=encoding)
         nx.write_gml(self.nxg,os.path.join(outdir,'spread.gml'))
+        nl = json_graph.node_link_data(self.nxg)
+        with open(os.path.join(outdir,'spread.json'),'w') as f:
+            json.dump(nl,f)
 #        nx.write_dot(self.nxg,os.path.join(outdir,'spread.graphml'))
 #        graphml = GraphML(self.g, outdir, encoding)
 #        graphml.write()
