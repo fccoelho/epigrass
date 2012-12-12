@@ -4,9 +4,10 @@ include epigrass.desktop
 include INSTALL
 include README
 include COPYING
-recursive-include demos *
+recursive-include demos *.py *.epg *.csv *.shp *.shx *.dbf
+prune demos/outdata-*
 recursive-include Epigrass *
 include docs/build/latex/Epigrass.pdf
-include docs/source/*
+prune docs/source*
 
 

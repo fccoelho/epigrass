@@ -193,17 +193,17 @@ class siteobj(object):
         if delay>=len(self.migInf):
             delay = len(self.migInf)-1
         lag = -1 - delay
-
+        migInf = 0 if self.migInf == [] else self.migInf[lag]
 #        print "==> ",npass, lag, self.migInf,  self.totpop
         if self.stochtransp == 0:
-            theta = npass * self.migInf[lag]/float(self.totpop) # infectious migrants
+            theta = npass * migInf/float(self.totpop) # infectious migrants
 
         else: #Stochastic migration
             #print lag, self.migInf
 #            print npass
             try:
-                theta = binomial(int(npass),self.migInf[lag]/float(self.totpop))
-            except ValueError: #if npass is less than one
+                theta = binomial(int(npass),migInf/float(self.totpop))
+            except ValueError: #if npass is less than one or migInf == 0
                 theta = 0
 #        print theta
         # Check if site is quarantined

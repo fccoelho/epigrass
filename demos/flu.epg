@@ -162,7 +162,7 @@ Quarantine = []
 doTransp = 1
 
 # Transportation Simulation can be stochatic (1) or deterministic(0). 
-stochastic = 1
+stochastic = 0
 
 #Average speed of transportation system in km per time step. Enter 0 for instantaneous travel.
 #Distance unit must be the same specified in edges files
