@@ -5,7 +5,6 @@ Model Management and simulation objects.
 import cPickle, time
 import os, codecs, subprocess
 from copy import deepcopy
-from xmlrpclib import ServerProxy, Error
 from simobj import graph, edge, siteobj
 from numpy import *
 import numpy as np
@@ -13,7 +12,7 @@ import spread
 from collections import OrderedDict
 from numpy.random import uniform, poisson
 from data_io import *
-from optparse import OptionParser
+from argparse import ArgumentParser
 import ConfigParser
 import string, sys, getpass
 import report as Rp
@@ -1006,8 +1005,9 @@ class simulate:
         if transp:
             for n in xrange(iterations):
 #                print "==> ",g.simstep
-                results=[i.runModel() for i in sites]
-                [r.wait() for r in results]
+                results=[i.runModel(self.parallel) for i in sites]
+                if self.parallel:
+                    [r.wait() for r in results]
                 for j in edges:
                     j.migrate()
                 if self.gui:
@@ -1018,7 +1018,7 @@ class simulate:
         else:
             for n in xrange(iterations):
                 for i in sites:
-                    i.runModel()
+                    i.runModel(self.parallel)
                 if self.gui:
                     self.gui.stepLCD.display(g.simstep)
                     self.gui.app.processEvents()
@@ -1055,14 +1055,15 @@ def storeSimulation(s,db='epigrass', host='localhost',port=3306):
     con.close()
 
 
-def onStraightRun(options, args):
+def onStraightRun(args):
     """
     Runs the model from the commandline
     """
-    if options.backend =="mysql":
-        S = simulate(fname=args[0],host=options.dbhost, user=options.dbuser, password=options.dbpass,  backend=options.backend)
+    if args.backend =="mysql":
+        S = simulate(fname=args.epg[0],host=args.dbhost, user=args.dbuser, password=args.dbpass,  backend=args.backend)
     else:
-        S = simulate(fname=args[0],backend=options.backend)
+        S = simulate(fname=args.epg[0],backend=args.backend)
+    S.parallel = args.parallel
     if not S.replicas:
         S.start()
         spread.Spread(S.g)
@@ -1113,34 +1114,30 @@ def repRuns(S):
 
 def main():
     # Options and Argument parsing for running model from the command line, without the GUI.
-    usage = "usage: %prog [options] your_model.epg"
-    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
-    parser.add_option("-b", "--backend",type="string",  dest="backend",
+    usage = "usage: PROG [options] your_model.epg"
+#    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
+    parser = ArgumentParser(usage=usage, description="Run epigrass models from the console",prog="PROG "+__version__.version)
+    parser.add_argument("-b", "--backend", dest="backend",
                   help="Define which datastorage backend to use", metavar="<mysql|sqlite|csv>",  default="sqlite")
-    parser.add_option("-u", "--dbusername", type="string",
+    parser.add_argument("-u", "--dbusername",
                   dest="dbuser", help="MySQL user name")
-    parser.add_option("-p", "--password", type="string",
+    parser.add_argument("-p", "--password",
                   dest="dbpass", help="MySQL password for user")
-    parser.add_option("-H", "--dbhost", type="string",
+    parser.add_argument("-H", "--dbhost",
                   dest="dbhost",default="localhost",  help="MySQL hostname or IP address")
+    parser.add_argument("-P", "--parallel", action="store_true", default=False,
+        dest="parallel", help="use multiprocessing to run the simulation")
+    parser.add_argument("epg", metavar='EPG', nargs=1,
+        help='Epigrass model definition file (.epg).')
 
-    (options, args) = parser.parse_args()
-    if options.backend == "mysql" and not (options.dbuser and options.dbpass):
+    args = parser.parse_args()
+    if args.backend == "mysql" and not (options.dbuser and options.dbpass):
         parser.error("You must specify a user and password when using MySQL.")
-    if options.backend not in ['mysql', 'sqlite', 'csv']:
+    if args.backend not in ['mysql', 'sqlite', 'csv']:
         parser.error('"%s" is an invalid backend type.'%options.backend)
+    print '==> ',args.epg
 
-    if args:
-        if len(args)<1:
-            parser.error("You must provide an EPG file to run.")
-        elif len(args)<1:
-            parser.error("Only a single EPG file can be specified.")
-        else:
-            if not os.path.exists(args[0]):
-                parser.error("The file '%s' does not exist."%args[0])
-    else:
-        parser.error("Wrong number of arguments.")
-    onStraightRun(options, args)
+    onStraightRun(args)
 if __name__ == '__main__':
     main()
     

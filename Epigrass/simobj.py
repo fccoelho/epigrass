@@ -117,9 +117,11 @@ class siteobj(object):
 #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
 
-    def runModel(self):
+    def runModel(self, parallel=True):
         """
         Iterate the model
+        :Parameters:
+        - parallel: run in a separate process if true
         """
 
         if self.parentGraph.simstep in self.vaccination[0]:
@@ -139,10 +141,15 @@ class siteobj(object):
         simstep = self.parentGraph.simstep
         inits = self.ts[-1]
         totpop = self.totpop
-#        print self.model(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values)
-#        print '-->',self.geocode,self.thetalist, npass
+        if parallel:
+            r = self.parentGraph.po.apply_async(self.model, args=(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values), callback=self.handle)
+        else:
+            res = self.model(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values)
+            self.handle(res)
+            r = None
+
         self.thetahist.append(theta) #keep a record of infected passenger arriving
-        return self.parentGraph.po.apply_async(self.model, args=(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values), callback=self.handle)
+        return r
 #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
 
