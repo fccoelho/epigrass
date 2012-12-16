@@ -39,7 +39,7 @@ class Spread:
             infectors = n[-1]
             self.nxg.add_node(n[1],name=infected.sitename,time=n[0])
             for  i, c in infectors.iteritems():
-                self.nxg.add_edge(n[1],i.geocode,weight=c)
+                self.nxg.add_edge(n[1],i.geocode,weight=float(c))
 
 
     def writeGML(self,tree, outdir,encoding,fname="spreadtree.gml"):
