@@ -9,9 +9,10 @@ from PyQt4.QtGui import QMainWindow
 from PyQt4.QtCore import pyqtSignature
 from types import MethodType
 from Ui_neteditor import Ui_MainWindow
-from data_io import  loadData
+from data_io import loadData
 import networkx as nx
 import time
+import sys
 from math import sin,cos,pi,sqrt,acos,pow
 from numpy import array
 import numpy as np
@@ -754,11 +755,7 @@ def scaleView(self, scaleFactor):
 #            return
     self.scale(scaleFactor, scaleFactor)
 
-
-    
-
-if __name__ == "__main__":
-    import sys
+def main():
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     qtp = QtCore.QThreadPool(app).globalInstance()
@@ -766,5 +763,10 @@ if __name__ == "__main__":
     ui = MainWindow()
     ui.show()
     sys.exit(app.exec_())
+    
+
+if __name__ == "__main__":
+    main()
+
     
 
