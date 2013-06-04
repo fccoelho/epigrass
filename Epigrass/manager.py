@@ -1026,6 +1026,7 @@ class simulate:
                     self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep, dict([(s.geocode, s.incidence[-1]) for s in sites]))
                     self.gui.RT.mutex.unlock()
                 g.simstep += 1
+
     def Say(self,string):
         """
         Exits outputs messages to the console or the gui accordingly

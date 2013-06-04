@@ -6,9 +6,9 @@ copyright 2007,2012 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
 import locale, os, pylab
-from osgeo  import ogr,  gdal
+from osgeo import ogr
 from xml.dom import minidom, Node
-from matplotlib.colors import  rgb2hex, LogNorm
+from matplotlib.colors import rgb2hex, LogNorm
 from matplotlib.colors import normalize
 from matplotlib import cm
 from numpy import array
@@ -17,7 +17,7 @@ import json
 
 
 class World:
-    def __init__(self,filename,namefield,geocfield,outdir = '.'):
+    def __init__(self, filename, namefield, geocfield, outdir='.'):
         '''
         Instantiate a world object.
         Filename points to a file supported by OGR
@@ -25,7 +25,7 @@ class World:
         self.geocfield = geocfield
         self.namefield = namefield
         self.outdir = outdir
-        self.ds =ogr.Open(filename)
+        self.ds = ogr.Open(filename)
         self.name = self.ds.GetName()
         self.driver = self.ds.GetDriver()
         self.centroids = []#centroid list (x,y,z) tuples
@@ -50,7 +50,7 @@ class World:
             ln.append(l.GetName())
         return ln
 
-    def draw_layer(self,L):
+    def draw_layer(self, L):
         '''
         Draws a polygon layer using pylab
         '''
@@ -60,30 +60,30 @@ class World:
         while feat is not None:
             field_count = L.GetLayerDefn().GetFieldCount()
             geo = feat.GetGeometryRef()
-            if geo.GetGeometryCount()<2:
-                g1 = geo.GetGeometryRef( 0 )
-                x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
-                y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
-                pylab.plot(x,y,'-',hold=True)
-            for c in range( geo.GetGeometryCount()):
-                        ring = geo.GetGeometryRef ( c )
-                        for cnt in range( ring.GetGeometryCount()):
-                            g1 = ring.GetGeometryRef( cnt )
-                            x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
-                            y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
-                            pylab.plot(x,y,'-',hold=True)
+            if geo.GetGeometryCount() < 2:
+                g1 = geo.GetGeometryRef(0)
+                x = [g1.GetX(i) for i in range(g1.GetPointCount())]
+                y = [g1.GetY(i) for i in range(g1.GetPointCount())]
+                pylab.plot(x, y, '-', hold=True)
+            for c in range(geo.GetGeometryCount()):
+                ring = geo.GetGeometryRef(c)
+                for cnt in range(ring.GetGeometryCount()):
+                    g1 = ring.GetGeometryRef(cnt)
+                    x = [g1.GetX(i) for i in range(g1.GetPointCount())]
+                    y = [g1.GetY(i) for i in range(g1.GetPointCount())]
+                    pylab.plot(x, y, '-', hold=True)
             feat = L.GetNextFeature()
         pylab.xlabel("Longitude")
         pylab.ylabel("Latitude")
         pylab.grid(True)
         pylab.show()
 
-    def get_node_list(self,l):
+    def get_node_list(self, l):
         '''
         Updates self.centdict with centroid coordinates and self.nlist with layer features
         l is an OGR layer.
         '''
-        self.nlist=[]
+        self.nlist = []
         f = l.GetNextFeature()
         while f is not None:
             g = f.GetGeometryRef()
@@ -91,12 +91,12 @@ class World:
             try:
                 c = g.Centroid()
                 self.nlist.append(f)
-                self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(),c.GetY(),c.GetZ())
+                self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(), c.GetY(), c.GetZ())
                 self.namedict[f.GetFieldAsInteger(self.geocfield)] = f.GetField(self.namefield)
             except: #in case feature is not a polygon
-                print  f.GetFID(),g.GetGeometryType()
+                print  f.GetFID(), g.GetGeometryType()
             f = l.GetNextFeature()
-        #print (2600501 in self.centdict)
+            #print (2600501 in self.centdict)
 
 
     def create_node_layer(self):
@@ -109,19 +109,19 @@ class World:
         geocfield - name of the field containing geocode
         """
         # Creates a new shape file to hold the data
-        if os.path.exists(os.path.join(self.outdir,'Nodes.shp')):
-            os.remove(os.path.join(self.outdir,'Nodes.shp'))
-            os.remove(os.path.join(self.outdir,'Nodes.shx'))
-            os.remove(os.path.join(self.outdir,'Nodes.dbf'))
+        if os.path.exists(os.path.join(self.outdir, 'Nodes.shp')):
+            os.remove(os.path.join(self.outdir, 'Nodes.shp'))
+            os.remove(os.path.join(self.outdir, 'Nodes.shx'))
+            os.remove(os.path.join(self.outdir, 'Nodes.dbf'))
         if not self.nodesource:
-            dsn = self.driver.CreateDataSource(os.path.join(self.outdir,'Nodes.shp'))
+            dsn = self.driver.CreateDataSource(os.path.join(self.outdir, 'Nodes.shp'))
             self.nodesource = dsn
-            nl = dsn.CreateLayer("nodes",geom_type=ogr.wkbPoint)
-        #Create the fields
+            nl = dsn.CreateLayer("nodes", geom_type=ogr.wkbPoint)
+            #Create the fields
         fi1 = ogr.FieldDefn("name")
-        fi2 = ogr.FieldDefn("geocode",field_type=ogr.OFTInteger)
-        fi3 = ogr.FieldDefn("x",field_type=ogr.OFTString)
-        fi4 = ogr.FieldDefn("y",field_type=ogr.OFTString)
+        fi2 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
+        fi3 = ogr.FieldDefn("x", field_type=ogr.OFTString)
+        fi4 = ogr.FieldDefn("y", field_type=ogr.OFTString)
         nl.CreateField(fi1)
         nl.CreateField(fi2)
         nl.CreateField(fi3)
@@ -133,37 +133,37 @@ class World:
             y = self.centdict[gc][1]
             fe = ogr.Feature(nl.GetLayerDefn())
             name = f.GetField(self.namefield)
-            fe.SetField('name',f.GetField(self.namefield))
-            fe.SetField('geocode',gc)
-            fe.SetField('x',str(x))
-            fe.SetField('y',str(y))
+            fe.SetField('name', f.GetField(self.namefield))
+            fe.SetField('geocode', gc)
+            fe.SetField('x', str(x))
+            fe.SetField('y', str(y))
             pt = ogr.Geometry(type=ogr.wkbPoint)
-            pt.AddPoint(x,y)
+            pt.AddPoint(x, y)
             fe.SetGeometryDirectly(pt)
             nl.CreateFeature(fe)
         nl.SyncToDisk()
 
-    def create_edge_layer(self,elist):
+    def create_edge_layer(self, elist):
         """
         Creates a new layer with edge information.
         elist is a list of tuples:
         (sgeoc,dgeoc,fsd,fds)
         """
         # Creates a new shape file to hold the data
-        if os.path.exists(os.path.join(self.outdir,'Edges.shp')):
-            os.remove(os.path.join(self.outdir,'Edges.shp'))
-            os.remove(os.path.join(self.outdir,'Edges.shx'))
-            os.remove(os.path.join(self.outdir,'Edges.dbf'))
+        if os.path.exists(os.path.join(self.outdir, 'Edges.shp')):
+            os.remove(os.path.join(self.outdir, 'Edges.shp'))
+            os.remove(os.path.join(self.outdir, 'Edges.shx'))
+            os.remove(os.path.join(self.outdir, 'Edges.dbf'))
         if not self.edgesource:
-            dse = self.driver.CreateDataSource(os.path.join(self.outdir,'Edges.shp'))
+            dse = self.driver.CreateDataSource(os.path.join(self.outdir, 'Edges.shp'))
             self.edgesource = dse
-            el = dse.CreateLayer("edges",geom_type=ogr.wkbLineString)
-        #Create the fields
-        fi1 = ogr.FieldDefn("s_geocode",field_type=ogr.OFTInteger)
-        fi2 = ogr.FieldDefn("d_geocode",field_type=ogr.OFTInteger)
-        fi3 = ogr.FieldDefn("flowSD",field_type=ogr.OFTReal)
+            el = dse.CreateLayer("edges", geom_type=ogr.wkbLineString)
+            #Create the fields
+        fi1 = ogr.FieldDefn("s_geocode", field_type=ogr.OFTInteger)
+        fi2 = ogr.FieldDefn("d_geocode", field_type=ogr.OFTInteger)
+        fi3 = ogr.FieldDefn("flowSD", field_type=ogr.OFTReal)
         fi3.SetPrecision(12)
-        fi4 = ogr.FieldDefn("flowDS",field_type=ogr.OFTReal)
+        fi4 = ogr.FieldDefn("flowDS", field_type=ogr.OFTReal)
         fi4.SetPrecision(12)
         el.CreateField(fi1)
         el.CreateField(fi2)
@@ -173,22 +173,22 @@ class World:
         for e in elist:
             #print "setting edge fields"
             fe = ogr.Feature(el.GetLayerDefn())
-            fe.SetField('s_geocode',e[0])
-            fe.SetField('d_geocode',e[1])
-            fe.SetField('flowSD',float(e[2]))
-            fe.SetField('flowSD',float(e[3]))
+            fe.SetField('s_geocode', e[0])
+            fe.SetField('d_geocode', e[1])
+            fe.SetField('flowSD', float(e[2]))
+            fe.SetField('flowSD', float(e[3]))
             line = ogr.Geometry(type=ogr.wkbLineString)
             try:
                 #print "creating edge lines"
-                line.AddPoint(self.centdict[int(e[0])][0],self.centdict[int(e[0])][1])
-                line.AddPoint(self.centdict[int(e[1])][0],self.centdict[int(e[1])][1])
+                line.AddPoint(self.centdict[int(e[0])][0], self.centdict[int(e[0])][1])
+                line.AddPoint(self.centdict[int(e[1])][0], self.centdict[int(e[1])][1])
                 fe.SetGeometryDirectly(line)
                 el.CreateFeature(fe)
             except: #node not in centdict
                 pass
         el.SyncToDisk()
 
-    def create_data_layer(self,varlist, data):
+    def create_data_layer(self, varlist, data):
         """
         Creates a new shape to contain data about nodes.
         varlist is the list of fields names associated with
@@ -199,49 +199,49 @@ class World:
         """
         data = array(data)
         # building normalizers for each variable, except geocode
-        norms = [normalize(c.min(),c.max()) for c in data[:,1:].T]
-        if os.path.exists(os.path.join(self.outdir,'Data.shp')):
-            os.remove(os.path.join(self.outdir,'Data.shp'))
-            os.remove(os.path.join(self.outdir,'Data.shx'))
-            os.remove(os.path.join(self.outdir,'Data.dbf'))
-        # Creates a new shape file to hold the data
+        norms = [normalize(c.min(), c.max()) for c in data[:, 1:].T]
+        if os.path.exists(os.path.join(self.outdir, 'Data.shp')):
+            os.remove(os.path.join(self.outdir, 'Data.shp'))
+            os.remove(os.path.join(self.outdir, 'Data.shx'))
+            os.remove(os.path.join(self.outdir, 'Data.dbf'))
+            # Creates a new shape file to hold the data
         if not self.datasource:
-            dsd = self.driver.CreateDataSource(os.path.join(self.outdir,'Data.shp'))
+            dsd = self.driver.CreateDataSource(os.path.join(self.outdir, 'Data.shp'))
             self.datasource = dsd
-            dl = dsd.CreateLayer("sim_results",geom_type=ogr.wkbPolygon)
-        #Create the fields
-        fi1 = ogr.FieldDefn("geocode",field_type=ogr.OFTInteger)
-        fin = ogr.FieldDefn("name",field_type=ogr.OFTString)
-        fic = ogr.FieldDefn("colors",field_type=ogr.OFTString)
+            dl = dsd.CreateLayer("sim_results", geom_type=ogr.wkbPolygon)
+            #Create the fields
+        fi1 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
+        fin = ogr.FieldDefn("name", field_type=ogr.OFTString)
+        fic = ogr.FieldDefn("colors", field_type=ogr.OFTString)
         dl.CreateField(fi1)
         dl.CreateField(fin)
         dl.CreateField(fic) #json array with colors
         for v in varlist:
             #print "creating data fields"
-            fi = ogr.FieldDefn(v,field_type=ogr.OFTReal)
+            fi = ogr.FieldDefn(v, field_type=ogr.OFTReal)
             fi.SetPrecision(12)
             dl.CreateField(fi)
 
         #Add the features (points)
         for l in data:
-#            print l
+        #            print l
             #Iterate over the lines of the data matrix.
-            hexcolors = [self.get_hex_color(norms[i](v)) for i,v in enumerate(l[1:])]
+            hexcolors = [self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]
             gc = l[0]
             try:
                 geom = self.geomdict[gc]
             except KeyError: #Geocode not in polygon dictionary
-                raise KeyError( "Geocode %s not in polygon dictionary"%gc)
+                raise KeyError("Geocode %s not in polygon dictionary" % gc)
             if geom.GetGeometryType() != 3: continue
             #print geom.GetGeometryCount()
             fe = ogr.Feature(dl.GetLayerDefn())
-            fe.SetField('geocode',gc)
-            fe.SetField('name',self.namedict[gc])
-            fe.SetField('colors',str(hexcolors))
-            for v,d in zip (varlist,l[1:]):
+            fe.SetField('geocode', gc)
+            fe.SetField('name', self.namedict[gc])
+            fe.SetField('colors', str(hexcolors))
+            for v, d in zip(varlist, l[1:]):
                 #print v,d
-                fe.SetField(v,float(d))
-            #Add the geometry
+                fe.SetField(v, float(d))
+                #Add the geometry
             #print "cloning geometry"
             clone = geom.Clone()
             #print geom
@@ -254,7 +254,7 @@ class World:
         self.save_data_geojson(dl)
 
     def get_hex_color(self, value):
-        cols  = cm.get_cmap("YlOrRd",256)
+        cols = cm.get_cmap("YlOrRd", 256)
         rgba = cols(value * 256)
         bgrcol = list(rgba[:-1]) #rgb(list)
         bgrcol.reverse() #turn it into bgr
@@ -274,53 +274,52 @@ class World:
                               "features": []
         }
 
-#        if spatial_reference is not None:
-#            with open("data.crs", "wb") as f:
-#                f.write(spatial_reference.ExportToProj4())
-#
-#        feature_collection["crs"] = {"type": "link",
-#                                     "properties": {
-#                                         "href": "data.crs",
-#                                         "type": "proj4"
-#                                     }
-#        }
+        #        if spatial_reference is not None:
+        #            with open("data.crs", "wb") as f:
+        #                f.write(spatial_reference.ExportToProj4())
+        #
+        #        feature_collection["crs"] = {"type": "link",
+        #                                     "properties": {
+        #                                         "href": "data.crs",
+        #                                         "type": "proj4"
+        #                                     }
+        #        }
         if namefield is None:
             namefield = self.namefield
         dl.ResetReading()
         fe = dl.GetNextFeature()
-#        print fe
+        #        print fe
         while fe is not None:
-#            print namefield
+        #            print namefield
             fi = fe.GetField('name')
-#            print fi,type(fi)
+            #            print fi,type(fi)
             try:
-                fi = fi.decode('utf8','ignore')
+                fi = fi.decode('utf8', 'ignore')
             except AttributeError:
                 fi = '' #name is None
-            fe.SetField('name',str(fi))
-            feature = json.loads( fe.ExportToJson())
+            fe.SetField('name', str(fi))
+            feature = json.loads(fe.ExportToJson())
             feature['properties']['colors'] = eval(feature['properties']['colors'])
             feature_collection["features"].append(feature)
             fe = dl.GetNextFeature()
 
-        with open(os.path.join(self.outdir,'data.json'),'w') as f:
-            json.dump(feature_collection,f)
+        with open(os.path.join(self.outdir, 'data.json'), 'w') as f:
+            json.dump(feature_collection, f)
 
 
-
-    def gen_sites_file(self,fname):
+    def gen_sites_file(self, fname):
         """
         This method generate a sites
         csv file from the nodes extracted from the
         map.
         """
-        with open(fname,"w") as f:
+        with open(fname, "w") as f:
             for fe in self.nlist:
                 gc = fe.GetFieldAsInteger(self.geocfield)
                 x = self.centdict[gc][0]
                 y = self.centdict[gc][1]
                 name = fe.GetField(self.namefield)
-                line = "%s,%s,%s,%s\n"%(x,y,name,gc)
+                line = "%s,%s,%s,%s\n" % (x, y, name, gc)
                 #fe.SetField('name',f.GetField(self.namefield))
                 f.write(line)
 
@@ -344,6 +343,7 @@ class AnimatedKML(object):
     """
     Creates animated KML based on layer given
     """
+
     def __init__(self, kmlfile, extrude=1):
         """
         kmlfile: File containing the layer over which the animation will be built. it must contain polygons. Placemarks should contain a tag <name> geocode</name>
@@ -359,7 +359,7 @@ class AnimatedKML(object):
             nel = e.getElementsByTagName("name")[0]
             name = self._get_text(nel.childNodes).split('-')[0]
             self.pmdict[name] = e
-    
+
     def _get_text(self, nodelist):
         """
         Returns  the text of a xml text node
@@ -369,22 +369,22 @@ class AnimatedKML(object):
             if node.nodeType == node.TEXT_NODE:
                 rc.append(node.data)
         return ''.join(rc)
-    
+
     def add_data(self, data):
         """
         Add time-series data for the localities: [(geocode,time,value),...]
         """
         vals = array([i[2] for i in data])
-        norm = normalize(vals.min(), vals.max()) 
+        norm = normalize(vals.min(), vals.max())
         for i, d in enumerate(data):
-#            print i, " of ",  len(data)
+        #            print i, " of ",  len(data)
             pm = self.pmdict[d[0]]
             #clone placemark to receive new data
             pm_newtime = pm.cloneNode(1)
             # Renaming placemark
             on = pm_newtime.getElementsByTagName('name')[0]
             nn = self.kmlDoc.createElement('name')
-            nn.appendChild(self.kmlDoc.createTextNode(d[0]+'-'+str(d[1])))
+            nn.appendChild(self.kmlDoc.createTextNode(d[0] + '-' + str(d[1])))
             pm_newtime.replaceChild(nn, on)
             nl = pm_newtime.childNodes
             #extrude polygon
@@ -401,16 +401,16 @@ class AnimatedKML(object):
             lr = pm_newtime.getElementsByTagName('LinearRing')[0]
             nlr = self.extrude_polygon(lr, d[2])
             ob = pm_newtime.getElementsByTagName('outerBoundaryIs')[0]
-#            ob.replaceChild(nlr, lr)
+            #            ob.replaceChild(nlr, lr)
             ob.removeChild(lr)
             ob.appendChild(nlr)
             #set polygon style
-            col = rgb2hex(cm.jet(norm(d[2]))[:3])+'ff'
+            col = rgb2hex(cm.jet(norm(d[2]))[:3]) + 'ff'
             st = pm_newtime.getElementsByTagName('Style')[0] #style
             nst = self.set_polygon_style(st, col)
             pm_newtime.removeChild(st)
             pm_newtime.appendChild(nst)
-            
+
             #add timestamp
             ts = self.kmlDoc.createElement('TimeStamp')
             w = self.kmlDoc.createElement('when')
@@ -420,8 +420,8 @@ class AnimatedKML(object):
             self.doc.appendChild(pm_newtime)
         for pm in self.pmdict.itervalues():
             self.doc.removeChild(pm)
-        self.pmdict={}
-    
+        self.pmdict = {}
+
     def extrude_polygon(self, lr, alt):
         """
         Adds altitude to the coordinates of the linear ring.
@@ -429,12 +429,12 @@ class AnimatedKML(object):
         c = lr.getElementsByTagName('coordinates')[0]
         nc = self.kmlDoc.createElement('coordinates')
         ctext = self._get_text(c.childNodes)
-        nctext = ' '.join([p+','+str(alt*100) for p in ctext.split(' ')])
+        nctext = ' '.join([p + ',' + str(alt * 100) for p in ctext.split(' ')])
         nc.appendChild(self.kmlDoc.createTextNode(nctext))
         alt = self.kmlDoc.createElement('altitudeMode')
         alt.appendChild(self.kmlDoc.createTextNode('relativeToGround'))
-#        altoff = self.kmlDoc.createElement('altitudeOffset')
-#        altoff.appendChild(self.kmlDoc.createTextNode(str(d[2]*1000)))
+        #        altoff = self.kmlDoc.createElement('altitudeOffset')
+        #        altoff.appendChild(self.kmlDoc.createTextNode(str(d[2]*1000)))
         ex = self.kmlDoc.createElement('extrude')
         ex.appendChild(self.kmlDoc.createTextNode('1'))
         ts = self.kmlDoc.createElement('tessellate')
@@ -444,11 +444,11 @@ class AnimatedKML(object):
         if self.extrude:
             lr.appendChild(ex)
             lr.appendChild(ts)
-#        lr.appendChild(altoff)
+        #        lr.appendChild(altoff)
         return lr
-        
-    
-    def set_polygon_style(self,style, color):
+
+
+    def set_polygon_style(self, style, color):
         st = style
         pst = st.getElementsByTagName('PolyStyle')[0] #polygon style
         pst1 = self.kmlDoc.createElement('PolyStyle')
@@ -460,41 +460,44 @@ class AnimatedKML(object):
         pst1.appendChild(pcol)
         st.replaceChild(pst1, pst)
         return st
-        
+
     def save(self, fname=''):
         """
         saves the new document
         """
         dir = os.path.split(self.fname)[0]
-        
+
         if not fname:
-            fname = self.fname.split('.')[0]+'_animation'
-        else: 
+            fname = self.fname.split('.')[0] + '_animation'
+        else:
             fname = os.path.join(dir, fname)
-#        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
-        with open(fname+'.kml', 'w') as f:
+        #        ld = zlib.compress(self.kmlDoc.toxml('utf-8'))
+        with open(fname + '.kml', 'w') as f:
             f.write(self.kmlDoc.toprettyxml(indent='  ', encoding='utf-8'))
-        # Now zip the kml to generate the kmz
-        with ZipFile(fname+'.kmz', 'w', allowZip64=True) as kmz:
-            kmz.write(fname+'.kml')
-        os.unlink(fname+'.kml')
+            # Now zip the kml to generate the kmz
+        with ZipFile(fname + '.kmz', 'w', allowZip64=True) as kmz:
+            kmz.write(fname + '.kml')
+        os.unlink(fname + '.kml')
+
 
 class KmlGenerator:
     """
         Generate a KML file for displaying data on 
         Google Maps/Earth
     """
+
     def __init__(self):
         self.doc = None
         self.dnode = None #document node in the DOM
         self.genRoot()
+
     def genRoot(self):
         """
         Generate a KML file root.
         """
         self.kmldoc = doc = minidom.Document()
         kml = doc.createElement("kml")
-        kml.setAttribute("xmlns","http://earth.google.com/kml/2.1")
+        kml.setAttribute("xmlns", "http://earth.google.com/kml/2.1")
         doc.appendChild(kml)
         d = doc.createElement("Document")
         kml.appendChild(d)
@@ -508,14 +511,14 @@ class KmlGenerator:
         self.dnode = d
 
     def get_hex_color(self, value):
-        jet  = cm.get_cmap("jet",50)
+        jet = cm.get_cmap("jet", 50)
         rgba = jet(value * 50)
         bgrcol = list(rgba[:-1]) #rgb(list)
         bgrcol.reverse() #turn it into bgr
         hexcol = "#80" + rgb2hex(bgrcol)[1:] #abgr Alpha set to 128
         return hexcol
 
-    def addNodes(self,layer,names=None):
+    def addNodes(self, layer, names=None):
         """
         Adds a node to the document.
         d is the document element KML dom object.
@@ -538,18 +541,19 @@ class KmlGenerator:
                     name = ""
                 else:
                     try:
-                        name = str(geoc)+"-"+names[geoc]
+                        name = str(geoc) + "-" + names[geoc]
                     except KeyError:
                         print geoc
                         name = ""
-                description = "Prevalence: %s;\nTotal cases: %s;\nImported Cases: %s;"%(prevalence,f.GetField("totalcases"),f.GetField("arrivals"))
-                locale.setlocale(locale.LC_ALL,"C") #avoids conversion of decimal points
+                description = "Prevalence: %s;\nTotal cases: %s;\nImported Cases: %s;" % (
+                    prevalence, f.GetField("totalcases"), f.GetField("arrivals"))
+                locale.setlocale(locale.LC_ALL, "C") #avoids conversion of decimal points
                 gml = g.ExportToGML() #extract the coordinates from the GML representation
                 coords = gml.split('<gml:coordinates>')[1].split('</gml:coordinates>')[0]
-                coords  = " ".join([i+",0" for i in coords.split(" ")]) #add z coordinate
+                coords = " ".join([i + ",0" for i in coords.split(" ")]) #add z coordinate
                 #create the kml elements
                 #placemark and sub elements
-                pm=self.kmldoc.createElement("Placemark")
+                pm = self.kmldoc.createElement("Placemark")
                 nm = self.kmldoc.createElement("name")
                 nm.appendChild(self.kmldoc.createTextNode(name))
                 desc = self.kmldoc.createElement("description")
@@ -557,7 +561,7 @@ class KmlGenerator:
                 pm.appendChild(nm)
                 pm.appendChild(desc)
                 #style and subelements
-                st=self.kmldoc.createElement("Style")
+                st = self.kmldoc.createElement("Style")
                 pm.appendChild(st)
                 ps = self.kmldoc.createElement("PolyStyle")
                 color = self.kmldoc.createElement("color")
@@ -583,18 +587,20 @@ class KmlGenerator:
                 coordin = self.kmldoc.createElement("coordinates")
                 linr.appendChild(coordin)
                 coordin.appendChild(self.kmldoc.createTextNode(coords))
-    def writeToFile(self,dir):
+
+    def writeToFile(self, dir):
         """
         Writes the kml file to disk
         """
-        fullpath = os.path.join(dir,"Data.kml")
-        f=open(fullpath,"w")
+        fullpath = os.path.join(dir, "Data.kml")
+        f = open(fullpath, "w")
         f.write(self.kmldoc.toxml())
         f.close()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     # opening data source
-    w = World('riozonas_LatLong.shp','nome_zonas','zona_trafe')
+    w = World('riozonas_LatLong.shp', 'nome_zonas', 'zona_trafe')
     layer = w.ds.GetLayerByName(w.layerlist[0])
     w.get_node_list(layer)
     w.draw_layer(layer)

@@ -14,13 +14,17 @@ import epimodels
 import networkx as NX
 from networkx.readwrite import json_graph
 import logging
+import redis
+
+# Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
+redisclient = redis.StrictRedis(host='localhost', port=6379)
+assert redisclient.ping()   # verify that redis server is running.
 
 #logger = multiprocessing.log_to_stderr()
 #logger.setLevel(multiprocessing.SUBDEBUG)
 #logger.setLevel(logging.INFO)
 
-sys.setrecursionlimit(3000) #to allow pickling of custom models
-
+sys.setrecursionlimit(3000)  # to allow pickling of custom models
 
 
 class siteobj(object):
@@ -28,7 +32,8 @@ class siteobj(object):
     Basic site object containing attributes and methods common to all
     site objects.
     """
-    def __init__(self, name, initpop,coords,geocode,values=()):
+
+    def __init__(self, name, initpop, coords, geocode, values=()):
         """
         Set initial values for site attributes.
 
@@ -63,11 +68,11 @@ class siteobj(object):
         self.thetahist = [] #infected arriving per time step
         self.passlist = []
         self.totalcases = 0
-        self.vaccination = [[],[]] #time and coverage of vaccination event
+        self.vaccination = [[], []] #time and coverage of vaccination event
         self.vaccineNow = 0 #flag to indicate that it is vaccination day
         self.vaccov = 0 #current vaccination coverage
         self.nVaccinated = 0
-        self.quarantine = [sys.maxint,0]
+        self.quarantine = [sys.maxint, 0]
         self.nQuarantined = 0
         self.geocode = geocode
         self.painted = 0 # Flag for the graph display
@@ -75,8 +80,8 @@ class siteobj(object):
         self.migInf = [] #infectious individuals able to migrate (time series)
         self.inedges = [] #Inbound edges
         self.outedges = [] #outbound edges
-        self.pdest=[]
-        self.infectedvisiting=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.pdest = []
+        self.infectedvisiting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
     def __call__(self):
@@ -85,10 +90,10 @@ class siteobj(object):
         """
         t0 = time.time()
         self.runModel()
-        print "Time to runModel: ", time.time()-t0
+        print "Time to runModel: ", time.time() - t0
         return self
 
-    def createModel(self,init,modtype='',name='model1',v=[],bi=None,bp=None):
+    def createModel(self, init, modtype='', name='model1', v=[], bi=None, bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total
@@ -103,18 +108,19 @@ class siteobj(object):
         self.values = v
         self.bi = bi
         self.bp = bp
-        self.model = epimodels.Epimodel(modtype)
+        self.model = epimodels.Epimodel(self.geocode, modtype)
         self.vnames = epimodels.vnames[modtype]
         try:
-            self.ts =[[bi[vn.lower()] for vn in self.vnames]]
+            self.ts = [[bi[vn.lower()] for vn in self.vnames]]
         except KeyError as ke:
-            if self.vnames == ['Exposed','Infectious','Susceptible']:
-                self.ts =[[bi[vn] for vn in ['e','i','s']]]
+            if self.vnames == ['Exposed', 'Infectious', 'Susceptible']:
+                self.ts = [[bi[vn] for vn in ['e', 'i', 's']]]
             else:
-                raise KeyError('%s'%ke)
+                raise KeyError('%s' % ke)
         self.bp['vaccineNow'] = 0
         self.bp['vaccov'] = 0
-#        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
+
+    #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
 
     def runModel(self, parallel=True):
@@ -133,7 +139,8 @@ class siteobj(object):
             self.bp['vaccineNow'] = 0
         if self.thetalist != []:
             theta = sum([i[1] for i in self.thetalist])
-            self.infector = dict([i for i in self.thetalist if i[1] > 0]) #Only those that contribute at least one infected individual
+            self.infector = dict(
+                [i for i in self.thetalist if i[1] > 0])  # Only those that contribute at least one infected individual
         else:
             theta = 0
             self.infector = {}
@@ -142,23 +149,40 @@ class siteobj(object):
         inits = self.ts[-1]
         totpop = self.totpop
         if parallel:
-            r = self.parentGraph.po.apply_async(self.model, args=(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values), callback=self.handle)
+            redisclient.set("{}:npass".format(self.geocode), npass)
+            redisclient.set("{}:theta".format(self.geocode), theta)
+            redisclient.hmset("{}:bi".format(self.geocode), self.bi)
+            redisclient.hmset("{}:bp".format(self.geocode), self.bp)
+            # r = self.parentGraph.po.apply_async(self.model, args=(inits, simstep, totpop, theta, npass, self.bi,
+            #                                                       self.bp, self.values), callback=self.handle)
+            r = self.parentGraph.po.apply_async(self.model, args=(), callback=self.handle)
         else:
-            res = self.model(inits,simstep,totpop,theta,npass,self.bi,self.bp,self.values)
+            res = self.model(inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values)
             self.handle(res)
             r = None
 
-        self.thetahist.append(theta) #keep a record of infected passenger arriving
+        self.thetahist.append(theta)  # keep a record of infected passenger arriving
         return r
-#        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
-
+    #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
     def handle(self,res):
+        self.ts.append(eval(redisclient.lindex("{}:ts".format(self.geocode))))
+        Lpos = int(redisclient("{}:Lpos".format(self.geocode)))
+        migInf = float(redisclient("{}:migInf".format(self.geocode)))
+        self.totalcases += Lpos
+        self.incidence.append(Lpos)
+        if not self.infected:
+            if Lpos > 0:
+                self.infected = self.parentGraph.simstep
+                self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
+                #TODO: have infector be stated in terms of geocodes
+        self.migInf.append(migInf)
+
+    def handle_old(self, res):
         """
-        processes the output of a step updating simulation statistics
+        Processes the output of a step updating simulation statistics
+        :param res: Tuple with the output of the simulation model
         """
-#        print os.getpid()
-#        logger.info( "%s: step done"%(os.getpid()))
         state, Lpos, migInf = res
         self.ts.append(state)
         self.totalcases += Lpos
@@ -166,30 +190,30 @@ class siteobj(object):
         if not self.infected:
             if Lpos > 0:
                 self.infected = self.parentGraph.simstep
-                self.parentGraph.epipath.append((self.parentGraph.simstep,self.geocode,self.infector))
+                self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
                 #TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
-#        print len(self.migInf)
-#        self.thetalist = []   # reset self.thetalist (for the new timestep)
-#        self.passlist = []
-#        self.parentGraph.sites_done +=1
 
+    #        print len(self.migInf)
+    #        self.thetalist = []   # reset self.thetalist (for the new timestep)
+    #        self.passlist = []
+    #        self.parentGraph.sites_done +=1
 
-    def vaccinate(self,cov):
+    def vaccinate(self, cov):
         """
         At time t the population will be vaccinated with coverage cov.
         """
-        self.nVaccinated = self.ts[-1][2]*cov
-        self.ts[-1][2] = self.ts[-1][2]*(1-cov)
+        self.nVaccinated = self.ts[-1][2] * cov
+        self.ts[-1][2] = self.ts[-1][2] * (1 - cov)
 
-    def intervention(self,par,cov,efic):
+    def intervention(self, par, cov, efic):
         """
         From time t on, parameter par is changed to
         par * (1-cov*efic)
         """
-        self.bp[par] = self.bp[par]*(1-cov*efic)
+        self.bp[par] = self.bp[par] * (1 - cov * efic)
 
-    def getTheta(self,npass, delay):
+    def getTheta(self, npass, delay):
         """
         Returns the number of infected individuals in this
         site commuting through the edge that called
@@ -197,28 +221,28 @@ class siteobj(object):
 
         npass -- number of individuals leaving the node.
         """
-        if delay>=len(self.migInf):
-            delay = len(self.migInf)-1
+        if delay >= len(self.migInf):
+            delay = len(self.migInf) - 1
         lag = -1 - delay
         migInf = 0 if self.migInf == [] else self.migInf[lag]
-#        print "==> ",npass, lag, self.migInf,  self.totpop
+        #        print "==> ",npass, lag, self.migInf,  self.totpop
         if self.stochtransp == 0:
-            theta = npass * migInf/float(self.totpop) # infectious migrants
+            theta = npass * migInf / float(self.totpop) # infectious migrants
 
         else: #Stochastic migration
-            #print lag, self.migInf
-#            print npass
+        #print lag, self.migInf
+        #            print npass
             try:
-                theta = binomial(int(npass),migInf/float(self.totpop))
+                theta = binomial(int(npass), migInf / float(self.totpop))
             except ValueError: #if npass is less than one or migInf == 0
                 theta = 0
-#        print theta
-        # Check if site is quarantined
+            #        print theta
+            # Check if site is quarantined
         if self.parentGraph.simstep > self.quarantine[0]:
-            self.nQuarantined = npass*self.quarantine[1]
-            return theta*(1-self.quarantine[1]),npass*(1-self.quarantine[1])
+            self.nQuarantined = npass * self.quarantine[1]
+            return theta * (1 - self.quarantine[1]), npass * (1 - self.quarantine[1])
         else:
-            return theta,npass
+            return theta, npass
 
     def getThetaindex(self):
         """
@@ -229,10 +253,10 @@ class siteobj(object):
         """
         if self.thidx:
             return self.thidx
-        self.thidx = thidx = sum([(i.fmig+i.bmig)/2. for i in self.edges])/len(self.parentGraph.site_list)
+        self.thidx = thidx = sum([(i.fmig + i.bmig) / 2. for i in self.edges]) / len(self.parentGraph.site_list)
         return thidx
 
-    def receiveTheta(self,thetai, npass, site):
+    def receiveTheta(self, thetai, npass, site):
         """
         Number of infectious individuals arriving from site i
         :param thetai: number of infected passengers
@@ -240,7 +264,7 @@ class siteobj(object):
         :param site: site sending passengers
         :return:
         """
-        self.thetalist.append((site,thetai))
+        self.thetalist.append((site, thetai))
         self.passlist.append(npass)
 
     def plotItself(self):
@@ -253,9 +277,9 @@ class siteobj(object):
         for i in xrange(3):
             plot(transpose(a[i]))
         title(self.sitename)
-        legend(('E','I','S'))
+        legend(('E', 'I', 'S'))
         xlabel('time(days)')
-        savefig(str(self.geocode)+'.png')
+        savefig(str(self.geocode) + '.png')
         close()
         #show()
 
@@ -274,7 +298,7 @@ class siteobj(object):
         '''
         if self.outedges:
             return self.outedges
-        oe = [e for e in self.edges if self==e.source]
+        oe = [e for e in self.edges if self == e.source]
         self.outedges = oe
         return oe
 
@@ -284,7 +308,7 @@ class siteobj(object):
         '''
         if self.inedges:
             return self.inedges
-        ie = [e for e in self.edges if self==e.dest]
+        ie = [e for e in self.edges if self == e.dest]
         self.inedges = ie
         return ie
 
@@ -299,7 +323,7 @@ class siteobj(object):
             return self.neighbors
         neigh = {}
         for i in self.edges:
-            n=[i.source,i.dest,i.length]
+            n = [i.source, i.dest, i.length]
             idx = n.index(self)
             n.pop(idx)
             neigh[n[0]] = n[-1]
@@ -321,14 +345,14 @@ class siteobj(object):
             if nei:
                 d = [e.length for e in self.edges if nei in e.sites][0]
             else:
-                sys.exit('%s is not a neighbor of %s!'%(nei[0].sitename, self.sitename))
+                sys.exit('%s is not a neighbor of %s!' % (nei[0].sitename, self.sitename))
         else:
             if neighbor in self.neighbors:
                 d = [e.length for e in self.edges if neighbor in e.sites][0]
                 #if d == 0:
-                    #print 'problem determining distance from neighboor'
+                #print 'problem determining distance from neighboor'
             else:
-                sys.exit('%s is not a neighbor of %s!'%(neighbor.sitename, self.sitename))
+                sys.exit('%s is not a neighbor of %s!' % (neighbor.sitename, self.sitename))
 
         return d
 
@@ -362,7 +386,7 @@ class siteobj(object):
         self.thidx = self.getThetaindex()
         self.betweeness = self.getBetweeness()
 
-        return [self.centrality,self.degree,self.thidx, self.betweeness]
+        return [self.centrality, self.degree, self.thidx, self.betweeness]
 
     def getCentrality(self):
         """
@@ -376,8 +400,9 @@ class siteobj(object):
         pos = self.parentGraph.site_list.index(self)
         if not self.parentGraph.allPairs.any():
             self.parentGraph.getAllPairs()
-        c = 1./sum(self.parentGraph.allPairs[pos])
+        c = 1. / sum(self.parentGraph.allPairs[pos])
         return c
+
     def getBetweeness(self):
         """
         Is the number of times any node figures in the the shortest path
@@ -389,7 +414,7 @@ class siteobj(object):
         for i in self.parentGraph.shortPathList:
             if not self in i:
                 if self in i[2]:
-                    B +=1
+                    B += 1
         return B
 
 
@@ -1122,7 +1147,7 @@ class edge(object):
             raise TypeError, 'destination received a non siteobj class object'
         self.dest = dest
         self.source = source
-        self.sites = [source,dest]
+        self.sites = [source, dest]
         self.fmig = float(fmig) #daily migration from source to destination
         self.bmig = float(bmig) #daily migration from destination to source
         self.parentGraph = None
@@ -1139,7 +1164,7 @@ class edge(object):
         calculate the Transportation delay given the speed and length.
         """
         if self.parentGraph.speed > 0:
-            self.delay = int(float(self.length)/self.parentGraph.speed)
+            self.delay = int(float(self.length) / self.parentGraph.speed)
 
     def migrate(self):
         """
@@ -1147,14 +1172,15 @@ class edge(object):
         this is done for both directions of the edge
         """
         # Forward Migration
-        theta,npass = self.source.getTheta(self.fmig,self.delay)
+        theta, npass = self.source.getTheta(self.fmig, self.delay)
         self.ftheta.append(theta)
-        self.dest.receiveTheta(theta,npass,self.source)
-#        print "F -->", theta,npass
+        self.dest.receiveTheta(theta, npass, self.source)
+        #        print "F -->", theta,npass
         #Backwards Migration
-        theta,npass = self.dest.getTheta(self.bmig,self.delay)
+        theta, npass = self.dest.getTheta(self.bmig, self.delay)
         self.btheta.append(theta)
-        self.source.receiveTheta(theta,npass,self.dest)
+        self.source.receiveTheta(theta, npass, self.dest)
+
 #        print "B -->", theta,npass
 
 
@@ -1163,13 +1189,14 @@ class graph(object):
     """
     Defines a graph with sites and edges
     """
-    def __init__(self,graph_name,digraph=0):
+
+    def __init__(self, graph_name, digraph=0):
         self.name = graph_name
         self.digraph = digraph
         self.site_dict = {} #geocode as keys
-        self.site_list = property(fget=lambda self:self.site_dict.values()) #only for backwards compatibility
+        self.site_list = property(fget=lambda self: self.site_dict.values()) #only for backwards compatibility
         self.edge_dict = {} #geocode tuple as key
-        self.edge_list = property(fget=lambda self:self.edge_dict.values()) #only for backwards compatibility
+        self.edge_list = property(fget=lambda self: self.edge_dict.values()) #only for backwards compatibility
         self.speed = 0 # speed of the transportation system
         self.simstep = 1 #current step in the simulation
         self.maxstep = 100 #maximum number of steps in the simulation
@@ -1200,7 +1227,7 @@ class graph(object):
         self.totQuarantined = 0
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
-        self.po = multiprocessing.Pool(multiprocessing.cpu_count()*2)
+        self.po = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
 
 
     def addSite(self, sitio):
@@ -1213,10 +1240,10 @@ class graph(object):
         if not isinstance(sitio, siteobj):
             raise Error, 'add_site received a non siteobj class object'
         self.site_dict[sitio.geocode] = sitio
-#        self.site_list.append(sitio)
+        #        self.site_list.append(sitio)
         sitio.parentGraph = self
 
-    def dijkstra(self,G,start,end=None):
+    def dijkstra(self, G, start, end=None):
         """
         Find shortest paths from the start vertex to all
         vertices nearer than or equal to the end.
@@ -1274,12 +1301,12 @@ class graph(object):
                     #print vwLength
                     if vwLength < D[w]:
                         raise ValueError, \
-      "Dijkstra: found better path to already-final vertex"
+                            "Dijkstra: found better path to already-final vertex"
                 elif w not in Q or vwLength < Q[w]:
                     Q[w] = vwLength
                     P[w] = v
 
-        return (D,P)
+        return (D, P)
 
     def getSite(self, name):
         """Retrieved a site from the graph.
@@ -1297,9 +1324,9 @@ class graph(object):
         match = [sitio for sitio in self.site_list if sitio.name() == str(name)]
 
         l = len(match)
-        if l==1:
+        if l == 1:
             return match[0]
-        elif l>1:
+        elif l > 1:
             return match
         else:
             return None
@@ -1320,8 +1347,8 @@ class graph(object):
 
         if not graph_edge.dest.geocode in self.site_dict:
             raise KeyError('Edge destination does not belong to the graph')
-#        self.edge_list.append(graph_edge)
-        self.edge_dict[(graph_edge.source.geocode,graph_edge.dest.geocode)] = graph_edge
+        #        self.edge_list.append(graph_edge)
+        self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = graph_edge
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
 
@@ -1353,9 +1380,9 @@ class graph(object):
         match = [edge for edge in self.edge_list if edge.source == src and edge.dest == dst]
 
         l = len(match)
-        if l==1:
+        if l == 1:
             return match[0]
-        elif l>1:
+        elif l > 1:
             return match
         else:
             return None
@@ -1367,7 +1394,6 @@ class graph(object):
         sitenames = [s.sitename for s in self.site_dict.itervalues()]
 
         return sitenames
-
 
 
     def getCycles(self):
@@ -1384,10 +1410,10 @@ class graph(object):
         so it can be used as an indicator of the level of development
         of a transport system.
         """
-        u = len(self.edge_list) - len(self.site_list)+ 1
+        u = len(self.edge_list) - len(self.site_list) + 1
         return u
 
-    def shortestPath(self,G,start,end):
+    def shortestPath(self, G, start, end):
         """
         Find a single shortest path from the given start node
         to the given end node.
@@ -1398,7 +1424,7 @@ class graph(object):
         the shortest path.
         """
 
-        D,P = self.dijkstra(G,start,end)
+        D, P = self.dijkstra(G, start, end)
         Path = []
         while 1:
             Path.append(end)
@@ -1413,6 +1439,7 @@ class graph(object):
         """
         from matplotlib.collections import LineCollection
         from matplotlib.colors import ColorConverter
+
         colorConverter = ColorConverter()
         names = [i.sitename for i in self.site_list]
         x = array([i.pos[1] for i in self.site_list])
@@ -1422,32 +1449,32 @@ class graph(object):
         ys = array([e.source.pos[0] for e in self.edge_list])
         xd = array([e.dest.pos[1] for e in self.edge_list])
         yd = array([e.dest.pos[0] for e in self.edge_list])
-        edge_list = [((a,b),(c,d)) for a,b,c,d in zip(xs,ys,xd,yd)]
+        edge_list = [((a, b), (c, d)) for a, b, c, d in zip(xs, ys, xd, yd)]
 
-        ax= axes()
+        ax = axes()
         ax.set_xticks([])
         ax.set_yticks([])
         #plotting nodes
-        node_plot = ax.scatter(x,y)
+        node_plot = ax.scatter(x, y)
         node_plot.set_zorder(2)
         #Plotting edges
         kolor = colorConverter.to_rgba('k')
         ed_colors = [kolor for i in edge_list]
-        edge_coll = LineCollection(edge_list,colors=ed_colors,linestyle='solid')
+        edge_coll = LineCollection(edge_list, colors=ed_colors, linestyle='solid')
         edge_coll.set_zorder(1)
         ax.add_collection(edge_coll)
         #plotting labels
-##        for x,y,l in zip(x,y,names):
-##            ax.text(x,y,l,transform=ax.transData)
+        ##        for x,y,l in zip(x,y,names):
+        ##            ax.text(x,y,l,transform=ax.transData)
         minx = amin(x)
         maxx = amax(x)
         miny = amin(y)
         maxy = amax(y)
-        w = maxx-minx
-        h = maxy-miny
-        padx, pady = 0.05*w, 0.05*h
-        corners = (minx-padx, miny-pady), (maxx+padx, maxy+pady)
-        ax.update_datalim( corners)
+        w = maxx - minx
+        h = maxy - miny
+        padx, pady = 0.05 * w, 0.05 * h
+        corners = (minx - padx, miny - pady), (maxx + padx, maxy + pady)
+        ax.update_datalim(corners)
 
         ax.autoscale_view()
 
@@ -1469,18 +1496,18 @@ class graph(object):
             g = self.getGraphdict()
 
         d = len(g)
-        dm = zeros((d,d),float)
-        ap = zeros((d,d),float)
+        dm = zeros((d, d), float)
+        ap = zeros((d, d), float)
         i = 0
         for sitei in g.iterkeys():
             j = 0
             for sitej in g.keys()[:i]: #calculates only the lower triangle
-                sp = self.shortestPath(g,sitei,sitej)
-                lsp = self.getShortestPathLength(sitei,sp) #length of the shortestpath
-                self.shortPathList.append((sitei,sitej,sp,lsp))
+                sp = self.shortestPath(g, sitei, sitej)
+                lsp = self.getShortestPathLength(sitei, sp) #length of the shortestpath
+                self.shortPathList.append((sitei, sitej, sp, lsp))
                 #fill the entire allpairs matrix
-                ap[i,j] = ap[j,i] = len(sp)-1
-                dm[i,j] = dm[j,i] = lsp
+                ap[i, j] = ap[j, i] = len(sp) - 1
+                dm[i, j] = dm[j, i] = lsp
                 j += 1
             i += 1
         self.shortDistMatrix = dm
@@ -1488,15 +1515,15 @@ class graph(object):
         self.allPairs = ap
         return ap
 
-    def getShortestPathLength(self,origin,sp):
+    def getShortestPathLength(self, origin, sp):
         """
         Returns sp Length
         """
         Length = 0
-        i=0
+        i = 0
         for s in sp[:-1]:
-            Length += s.getDistanceFromNeighbor(sp[i+1])
-            i+=1
+            Length += s.getDistanceFromNeighbor(sp[i + 1])
+            i += 1
         return Length
 
     def getConnMatrix(self):
@@ -1513,20 +1540,22 @@ class graph(object):
         """
         try:
             if self.connmatrix.any(): return self.connmatrix #don't run twice
-        except: pass
+        except:
+            pass
         if not self.graphdict: #this generates site neighbors lists
             self.getGraphdict()
         site_list = self.site_dict.values()
         nsites = len(self.site_dict)
-        cm = zeros((nsites,nsites),float)
-        for i,sitei in enumerate(site_list):
+        cm = zeros((nsites, nsites), float)
+        for i, sitei in enumerate(site_list):
             for j, sitej in enumerate(site_list[:i]):#calculates only lower triangle
-                if sitei == sitej: pass
+                if sitei == sitej:
+                    pass
                 else:
-                    cm[i,j] = float(sitej in sitei.neighbors)
-                #map results to the upper triangle
-                cm[j,i] = cm[i,j]
-        #print sum(cm), type(cm)
+                    cm[i, j] = float(sitej in sitei.neighbors)
+                    #map results to the upper triangle
+                cm[j, i] = cm[i, j]
+            #print sum(cm), type(cm)
         return cm
 
     def getWienerD(self):
@@ -1549,9 +1578,9 @@ class graph(object):
             return self.meanD
 
         if self.allPairs.any():
-            return mean(compress(greater(self.allPairs.flat,0),self.allPairs.flat))
+            return mean(compress(greater(self.allPairs.flat, 0), self.allPairs.flat))
 
-        return mean(compress(greater(self.getAllPairs().flat,0),self.getAllPairs().flat))
+        return mean(compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat))
 
 
     def getDiameter(self):
@@ -1586,7 +1615,7 @@ class graph(object):
         of each node's order (o) multiplied by 2 for all orders above 1.
         """
 
-        iota = self.getLength()/self.getWeight()
+        iota = self.getLength() / self.getWeight()
         return iota
 
     def getWeight(self):
@@ -1595,7 +1624,7 @@ class graph(object):
         of each node's order (o) multiplied by 2 for all orders above 1.
         """
         degrees = [i.getDegree() for i in self.site_dict.itervalues()]
-        W = sum([i*2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
+        W = sum([i * 2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
         return float(W)
 
 
@@ -1630,11 +1659,11 @@ class graph(object):
         lpidx = lsp.index(max(lsp))#position of the longest sp.
         lp = self.shortPathList[lpidx][2] #longest shortest path
         Dd = 0
-        for i in range(len(lp)-1): #calculates distance in km along lp
-            Dd += lp[i].getDistanceFromNeighbor(lp[i+1])
+        for i in range(len(lp) - 1): #calculates distance in km along lp
+            Dd += lp[i].getDistanceFromNeighbor(lp[i + 1])
 
         #pi = l/self.getDiameter()
-        pi = l/Dd
+        pi = l / Dd
         return float(pi)
 
     def getBetaIndex(self):
@@ -1651,7 +1680,7 @@ class graph(object):
         number of links, the higher the number of paths possible in
         the network. Complex networks have a high value of Beta.
         """
-        B = len(self.edge_dict)/float(len(self.site_dict))
+        B = len(self.edge_dict) / float(len(self.site_dict))
         return B
 
     def getAlphaIndex(self):
@@ -1667,7 +1696,7 @@ class graph(object):
         because this would imply very serious redundancies.
         """
         nsites = float(len(self.site_dict))
-        A = self.getCycles()/(2.*nsites - 5)
+        A = self.getCycles() / (2. * nsites - 5)
         return A
 
     def getGammaIndex(self):
@@ -1683,7 +1712,7 @@ class graph(object):
         """
         nedg = float(len(self.edge_dict))
         nsites = float(len(self.site_dict))
-        G = nedg/3*(nsites - 2)
+        G = nedg / 3 * (nsites - 2)
         return G
 
     def doStats(self):
@@ -1704,11 +1733,11 @@ class graph(object):
         self.gammaidx = self.getGammaIndex()
         self.connmatrix = self.getConnMatrix()
 
-        return [self.allPairs,self.cycles,self.wienerD,self.meanD,self.diameter,self.length,
-                self.weight,self.iotaidx,self.piidx,self.betaidx,self.alphaidx,self.gammaidx,
+        return [self.allPairs, self.cycles, self.wienerD, self.meanD, self.diameter, self.length,
+                self.weight, self.iotaidx, self.piidx, self.betaidx, self.alphaidx, self.gammaidx,
                 self.connmatrix]
 
-    def plotDegreeDist(self,cum = False):
+    def plotDegreeDist(self, cum=False):
         """
         Plots the Degree distribution of the graph
         maybe cumulative or not.
@@ -1718,7 +1747,7 @@ class graph(object):
         deglist = [i.getDegree() for i in self.site_dict.itervalues()]
         if not cum:
             hist(deglist)
-            title('Degree Distribution (N=%s, E=%s)'%(nn,ne))
+            title('Degree Distribution (N=%s, E=%s)' % (nn, ne))
             xlabel('Degree')
             ylabel('Frequency')
         else:
@@ -1732,7 +1761,7 @@ class graph(object):
         """
         n = len(self.site_dict)
         try:
-            median = self.epipath[int(n/2)][0]
+            median = self.epipath[int(n / 2)][0]
         except: # In the case the epidemic does not reach 50% of nodes
             median = 'NA'
         return median
@@ -1755,16 +1784,16 @@ class graph(object):
         """
         Returns a list of all epidemiologically related stats.
         """
-        self.episize =self.getEpisize()
+        self.episize = self.getEpisize()
         self.epispeed = self.getEpispeed()
         self.infectedcities = self.getInfectedCities()
-        self.spreadtime= 0 #self.getSpreadTime()
+        self.spreadtime = 0 #self.getSpreadTime()
         self.mediansurvival = self.getMedianSurvival()
         self.totVaccinated = self.getTotVaccinated()
         self.totQuarantined = self.getTotQuarantined()
 
-        return[self.episize,self.epispeed,self.infectedcities,
-        self.spreadtime,self.mediansurvival,self.totVaccinated,self.totQuarantined]
+        return [self.episize, self.epispeed, self.infectedcities,
+                self.spreadtime, self.mediansurvival, self.totVaccinated, self.totQuarantined]
 
     def getInfectedCities(self):
         """
@@ -1789,7 +1818,7 @@ class graph(object):
         nspt = []
         for j in range(self.simstep):
             nspt.append(tl.count(j)) #new sites per time step
-        #Speed = [nspt[i+1]-nspt[i] for i in range(len(nspt))]
+            #Speed = [nspt[i+1]-nspt[i] for i in range(len(nspt))]
         return nspt
 
     def getSpreadTime(self):
@@ -1800,10 +1829,10 @@ class graph(object):
         if not tl:
             dur = 'NA'
         else:
-            dur  = tl[-1]-tl[0]
+            dur = tl[-1] - tl[0]
         return dur
 
-    def save_topology(self,pa):
+    def save_topology(self, pa):
         """
         Saves graph structure to a graphml file for visualization
         :Parameters:
@@ -1811,17 +1840,17 @@ class graph(object):
         """
 
         g = NX.MultiDiGraph()
-        for gc,n in self.site_dict.iteritems():
-            g.add_node(gc,attr_dict={
-                'name':n.sitename,
+        for gc, n in self.site_dict.iteritems():
+            g.add_node(gc, attr_dict={
+                'name': n.sitename,
             })
-        for ed,e in self.edge_dict.iteritems():
-            g.add_edge(ed[0],ed[1],weight=e.fmig+e.bmig)
-        NX.write_graphml(g,pa)
+        for ed, e in self.edge_dict.iteritems():
+            g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
+        NX.write_graphml(g, pa)
         nl = json_graph.node_link_data(g)
-        jsonpath = pa.replace('graphml','json')
-        with open(jsonpath,'w') as f:
-            json.dump(nl,f)
+        jsonpath = pa.replace('graphml', 'json')
+        with open(jsonpath, 'w') as f:
+            json.dump(nl, f)
 
     def resetStats(self):
         """
@@ -1839,7 +1868,6 @@ class graph(object):
         self.betaidx = None
         self.alphaidx = None
         self.gammaidx = None
-
 
 
 class priorityDictionary(dict):
@@ -1866,9 +1894,9 @@ class priorityDictionary(dict):
             lastItem = heap.pop()
             insertionPoint = 0
             while 1:
-                smallChild = 2*insertionPoint+1
-                if smallChild+1 < len(heap) and \
-                        heap[smallChild] > heap[smallChild+1]:
+                smallChild = 2 * insertionPoint + 1
+                if smallChild + 1 < len(heap) and \
+                                heap[smallChild] > heap[smallChild + 1]:
                     smallChild += 1
                 if smallChild >= len(heap) or lastItem <= heap[smallChild]:
                     heap[insertionPoint] = lastItem
@@ -1881,50 +1909,53 @@ class priorityDictionary(dict):
         '''
         Create destructive sorted iterator of priorityDictionary.
         '''
+
         def iterfn():
             while len(self) > 0:
                 x = self.smallest()
                 yield x
                 del self[x]
+
         return iterfn()
 
-    def __setitem__(self,key,val):
+    def __setitem__(self, key, val):
         '''
         Change value stored in dictionary and add corresponding
         pair to heap.  Rebuilds the heap if the number of deleted
         items grows too large, to avoid memory leakage.
         '''
-        dict.__setitem__(self,key,val)
+        dict.__setitem__(self, key, val)
         heap = self.__heap
         if len(heap) > 2 * len(self):
-            self.__heap = [(v,k) for k,v in self.iteritems()]
+            self.__heap = [(v, k) for k, v in self.iteritems()]
             self.__heap.sort()  # builtin sort likely faster than O(n) heapify
         else:
-            newPair = (val,key)
+            newPair = (val, key)
             insertionPoint = len(heap)
             heap.append(None)
             while insertionPoint > 0 and \
-                    newPair < heap[(insertionPoint-1)//2]:
-                heap[insertionPoint] = heap[(insertionPoint-1)//2]
-                insertionPoint = (insertionPoint-1)//2
+                            newPair < heap[(insertionPoint - 1) // 2]:
+                heap[insertionPoint] = heap[(insertionPoint - 1) // 2]
+                insertionPoint = (insertionPoint - 1) // 2
             heap[insertionPoint] = newPair
 
     def update(self, other):
         for key in other.keys():
             self[key] = other[key]
 
-    def setdefault(self,key,val):
+    def setdefault(self, key, val):
         '''Reimplement setdefault to call our customized __setitem__.'''
         if key not in self:
             self[key] = val
         return self[key]
-#---main----------------------------------------------------------------------------
+
+    #---main----------------------------------------------------------------------------
 
 
-#if __name__ == '__main__':
-#    sitioA = siteobj("Penedo",2000)
-#    sitioB = siteobj("Itatiaia",3020)
-#    linhaA = edge(sitioA,sitioB,4)
-#    sitioA.createModel((.3,.3,.3),(1,1))
-#   sitioA.runModel()
+    #if __name__ == '__main__':
+    #    sitioA = siteobj("Penedo",2000)
+    #    sitioB = siteobj("Itatiaia",3020)
+    #    linhaA = edge(sitioA,sitioB,4)
+    #    sitioA.createModel((.3,.3,.3),(1,1))
+    #   sitioA.runModel()
     #lista_de_sitios = (i=siteobj(10) for i = range(10))
