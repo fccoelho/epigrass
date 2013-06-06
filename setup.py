@@ -32,7 +32,7 @@ setup(name='epigrass',
         'gui_scripts': [
             'epigrass = Epigrass.epigrass:main',
             'epgeditor= Epigrass.epgeditor:main', 
-            'neteditor= Epigrass.neteditor'
+            'neteditor= Epigrass.neteditor:main'
         ]
     }, 
 
