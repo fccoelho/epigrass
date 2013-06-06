@@ -11,7 +11,7 @@ except ImportError:
 from numpy import *
 #import sqlobject as SO
 #TODO: remove dependency on SQLObject
-from sqlalchemy.ext.sqlsoup import SqlSoup
+from sqlsoup import SQLSoup as SqlSoup
 
 from matplotlib import cm
 

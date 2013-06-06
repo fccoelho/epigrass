@@ -1000,11 +1000,10 @@ class simulate:
         sites = graphobj.site_dict.values()
         edges = graphobj.edge_dict.values()
 #        g.sites_done = 0
-        parallel = 0
 
         if transp:
             for n in xrange(iterations):
-#                print "==> ",g.simstep
+                print "==> {}\r".format(g.simstep),
                 results=[i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
@@ -1027,7 +1026,7 @@ class simulate:
                     self.gui.RT.mutex.unlock()
                 g.simstep += 1
 
-    def Say(self,string):
+    def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
         """

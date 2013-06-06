@@ -2,7 +2,7 @@
 from __future__ import division
 
 """
-Library of discrete time population models
+Library of discrete time Epidemic models
 
 copyright 2012 Flávio Codeco Coelho
 License: GPL-v3
@@ -48,7 +48,7 @@ class Epimodel(object):
     Defines a library of discrete time population models
     """
 
-    def __init__(self, geocode, modtype=''):
+    def __init__(self, geocode, modtype='', parallel=True):
         """
         defines which models a given site will use
         and set variable names accordingly.
@@ -56,9 +56,10 @@ class Epimodel(object):
         """
         self.step = selectModel(modtype)
         self.geocode = geocode
+        self.parallel = parallel
 
     def __call__(self, *args, **kwargs):
-        args = get_args_from_redis()
+        args = self.get_args_from_redis()
         res = self.step(*args)
         self.update_redis(res)
         #return res
@@ -68,13 +69,15 @@ class Epimodel(object):
         get updated parameters from the redis database.
         :param geocode: geocode of the site running this model.
         """
-        inits = [float(i) for i in redisclient.lrange("{}:inits".format(self.geocode), 0, -1)]
+        inits = [int(i) for i in eval(redisclient.lindex("{}:inits".format(self.geocode), -1))]
         simstep = int(redisclient.get("simstep"))
-        totpop = int(redisclient.get("{}:totpop".format(self.geocode)))
-        theta = int(redisclient.get("{}:theta".format(self.geocode)))
-        npass = int(redisclient.get("{}:npass".format(self.geocode)))
-        bi = redisclient.get("{}:bi".format(self.geocode))
-        bp = redisclient.get("{}:bp".format(self.geocode))
+        totpop = int(float(redisclient.get("{}:totpop".format(self.geocode))))
+        theta = int(float(redisclient.get("{}:theta".format(self.geocode))))
+        npass = int(float(redisclient.get("{}:npass".format(self.geocode))))
+        bi = redisclient.hgetall("{}:bi".format(self.geocode))
+        bi = {k: float(v) for k, v in bi.items()}
+        bp = redisclient.hgetall("{}:bp".format(self.geocode))
+        bp = {k: float(v) for k, v in bp.items()}
         values = [float(i) for i in redisclient.lrange("{}:values".format(self.geocode), 0, -1)]
         return inits, simstep, totpop, theta, npass, bi, bp, values
 
@@ -84,13 +87,14 @@ class Epimodel(object):
         :param results: results tuple.
         """
         # Site state
-        redisclient.delete("{}:inits".format(self.geocode))  # First delete previous state
-        redisclient.rpush("{}:inits".format(self.geocode), *results[0])  # updating inits
-        redisclient.rpush('{}:ts'.format(self.geocode), results[0])
-        redisclient.set('{}:Lpos'.format(self.geocode), results[1])
-        redisclient.incrby('{}:totalcases'.format(self.geocode), results[1])
-        redisclient.rpush('{}:incidence'.format(self.geocode), results[1])
-        redisclient.rpush('{}:migInf'.format(self.geocode), results[2])
+        state, Lpos, migInf = results
+        redisclient.rpush("{}:inits".format(self.geocode), state)  # updating inits
+        redisclient.rpush('{}:ts'.format(self.geocode), state)
+        redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
+        totc = int(float(redisclient.get('{}:totalcases'.format(self.geocode))))
+        redisclient.set('{}:totalcases'.format(self.geocode), Lpos+totc)
+        redisclient.rpush('{}:incidence'.format(self.geocode), Lpos)
+        redisclient.set('{}:migInf'.format(self.geocode), migInf)
 
         # Graph state
         if Lpos > 0:

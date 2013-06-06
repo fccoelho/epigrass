@@ -2,22 +2,21 @@
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
 import sys
-import os
-import numpy as np
-from numpy.random import uniform, binomial, poisson, beta, negative_binomial
-from types import MethodType
-from data_io import *
 import multiprocessing
 import time
 import json
-import epimodels
+
+from numpy.random import binomial
 import networkx as NX
 from networkx.readwrite import json_graph
-import logging
 import redis
 
+from data_io import *
+import epimodels
+
+
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
-redisclient = redis.StrictRedis(host='localhost', port=6379)
+redisclient = redis.Redis(host='localhost', port=6379)
 assert redisclient.ping()   # verify that redis server is running.
 
 #logger = multiprocessing.log_to_stderr()
@@ -68,6 +67,7 @@ class siteobj(object):
         self.thetahist = [] #infected arriving per time step
         self.passlist = []
         self.totalcases = 0
+
         self.vaccination = [[], []] #time and coverage of vaccination event
         self.vaccineNow = 0 #flag to indicate that it is vaccination day
         self.vaccov = 0 #current vaccination coverage
@@ -82,6 +82,7 @@ class siteobj(object):
         self.outedges = [] #outbound edges
         self.pdest = []
         self.infectedvisiting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        redisclient.set("{}:totalcases".format(self.geocode), 0)
 
 
     def __call__(self):
@@ -148,11 +149,18 @@ class siteobj(object):
         simstep = self.parentGraph.simstep
         inits = self.ts[-1]
         totpop = self.totpop
+        #---------------------
+        pipe = redisclient.pipeline()
+        pipe.set("simstep", simstep)\
+            .set("{}:totpop".format(self.geocode), totpop)\
+            .rpush("{}:inits".format(self.geocode), inits)\
+            .set("{}:npass".format(self.geocode), npass)\
+            .set("{}:theta".format(self.geocode), theta)\
+            .hmset("{}:bi".format(self.geocode), self.bi)\
+            .hmset("{}:bp".format(self.geocode), self.bp).execute()
+        #------------------------
         if parallel:
-            redisclient.set("{}:npass".format(self.geocode), npass)
-            redisclient.set("{}:theta".format(self.geocode), theta)
-            redisclient.hmset("{}:bi".format(self.geocode), self.bi)
-            redisclient.hmset("{}:bp".format(self.geocode), self.bp)
+
             # r = self.parentGraph.po.apply_async(self.model, args=(inits, simstep, totpop, theta, npass, self.bi,
             #                                                       self.bp, self.values), callback=self.handle)
             r = self.parentGraph.po.apply_async(self.model, args=(), callback=self.handle)
@@ -166,9 +174,13 @@ class siteobj(object):
     #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
     def handle(self,res):
-        self.ts.append(eval(redisclient.lindex("{}:ts".format(self.geocode))))
-        Lpos = int(redisclient("{}:Lpos".format(self.geocode)))
-        migInf = float(redisclient("{}:migInf".format(self.geocode)))
+        pipe = redisclient.pipeline()
+        last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1)\
+            .get("{}:Lpos".format(self.geocode))\
+            .get("{}:migInf".format(self.geocode)).execute()
+        self.ts.append(eval(last_state))
+        Lpos = float(Lpos)
+        migInf = float(migInf)
         self.totalcases += Lpos
         self.incidence.append(Lpos)
         if not self.infected:
@@ -267,20 +279,20 @@ class siteobj(object):
         self.thetalist.append((site, thetai))
         self.passlist.append(npass)
 
-    def plotItself(self):
-        """
-        plot site timeseries
-        """
-        a = transpose(array(self.ts))
-        #figure(int(self.totpop))
-        figure()
-        for i in xrange(3):
-            plot(transpose(a[i]))
-        title(self.sitename)
-        legend(('E', 'I', 'S'))
-        xlabel('time(days)')
-        savefig(str(self.geocode) + '.png')
-        close()
+    # def plotItself(self):
+    #     """
+    #     plot site timeseries
+    #     """
+    #     a = transpose(array(self.ts))
+    #     #figure(int(self.totpop))
+    #     figure()
+    #     for i in xrange(3):
+    #         plot(transpose(a[i]))
+    #     title(self.sitename)
+    #     legend(('E', 'I', 'S'))
+    #     xlabel('time(days)')
+    #     savefig(str(self.geocode) + '.png')
+    #     close()
         #show()
 
     def isNode(self):
@@ -1227,7 +1239,7 @@ class graph(object):
         self.totQuarantined = 0
         self.dmap = 0 #draw the map in the background?
         self.printed = 0 #Printed the custom model docstring?
-        self.po = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
+        self.po = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
     def addSite(self, sitio):
@@ -1737,23 +1749,23 @@ class graph(object):
                 self.weight, self.iotaidx, self.piidx, self.betaidx, self.alphaidx, self.gammaidx,
                 self.connmatrix]
 
-    def plotDegreeDist(self, cum=False):
-        """
-        Plots the Degree distribution of the graph
-        maybe cumulative or not.
-        """
-        nn = len(self.site_dict)
-        ne = len(self.edge_dict)
-        deglist = [i.getDegree() for i in self.site_dict.itervalues()]
-        if not cum:
-            hist(deglist)
-            title('Degree Distribution (N=%s, E=%s)' % (nn, ne))
-            xlabel('Degree')
-            ylabel('Frequency')
-        else:
-            pass
-        savefig('degdist.png')
-        close()
+    # def plotDegreeDist(self, cum=False):
+    #     """
+    #     Plots the Degree distribution of the graph
+    #     maybe cumulative or not.
+    #     """
+    #     nn = len(self.site_dict)
+    #     ne = len(self.edge_dict)
+    #     deglist = [i.getDegree() for i in self.site_dict.itervalues()]
+    #     if not cum:
+    #         hist(deglist)
+    #         title('Degree Distribution (N=%s, E=%s)' % (nn, ne))
+    #         xlabel('Degree')
+    #         ylabel('Frequency')
+    #     else:
+    #         pass
+    #     savefig('degdist.png')
+    #     close()
 
     def getMedianSurvival(self):
         """
