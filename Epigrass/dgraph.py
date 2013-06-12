@@ -88,17 +88,18 @@ def array_norm(a):
 def array_dot(a,b):
     return sum([a[i] * b[i]  for i in xrange(len(a))])
 
-class MapWindow(Ui_Form):
+class MapWindow(QtGui.QWidget, Ui_Form):
     '''
     Map and Time-series window
     '''
     def __init__(self, G=None):
-        self.Form =  QtGui.QWidget()
+        QtGui.QWidget.__init__(self, None)
+        self.Form = QtGui.QWidget()
         self.setupUi(self.Form)
-        self.jet  = cm.get_cmap("jet",50) #colormap
+        self.jet = cm.get_cmap("jet", 50)  # colormap
         self.timeseries = {}
         self.arrivals = {}
-        self.colors = itertools.cycle([Qt.Qt.red,Qt.Qt.green,Qt.Qt.blue,Qt.Qt.cyan, Qt.Qt.magenta,Qt.Qt.yellow,Qt.Qt.black, Qt.Qt.darkCyan,  Qt.Qt.darkRed,  Qt.Qt.darkGreen,  Qt.Qt.darkBlue,  Qt.Qt.darkMagenta,  Qt.Qt.darkYellow])
+        self.colors = itertools.cycle([Qt.Qt.red, Qt.Qt.green, Qt.Qt.blue, Qt.Qt.cyan, Qt.Qt.magenta, Qt.Qt.yellow, Qt.Qt.black, Qt.Qt.darkCyan,  Qt.Qt.darkRed,  Qt.Qt.darkGreen,  Qt.Qt.darkBlue,  Qt.Qt.darkMagenta,  Qt.Qt.darkYellow])
         self.setupQwtPlot()
         self.step = 0
         self.M = None #initialize map widget
@@ -110,11 +111,12 @@ class MapWindow(Ui_Form):
         self.mapView.wheelEvent = MethodType(wheelEvent, self.mapView)
         self.mapView.scaleView = MethodType(scaleView, self.mapView)
         # connections
-        QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
-        QtCore.QObject.connect(self.horizontalSlider,QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
-        QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("released()"), self.replay)
-        QtCore.QObject.connect(self.splitter,QtCore.SIGNAL("splitterMoved()"), self.centerScene)
-        QtCore.QObject.connect(self.showSumBox,QtCore.SIGNAL("stateChanged(int)"), self.on_showSumBox_stateChanged)
+        QtCore.QObject.connect(self.horizontalSlider, QtCore.SIGNAL("sliderReleased()"), self.on_horizontalSlider_sliderMoved)
+        QtCore.QObject.connect(self.horizontalSlider, QtCore.SIGNAL("valueChanged()"), self.on_horizontalSlider_valueChanged)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("released()"), self.replay)
+        QtCore.QObject.connect(self.splitter, QtCore.SIGNAL("splitterMoved()"), self.centerScene)
+        print hasattr(self, "showSumBox")
+        QtCore.QObject.connect(self.showSumBox, QtCore.SIGNAL("stateChanged(int)"), self.on_showSumBox_stateChanged)
 #        self.server = MapServer()
 #        self.server.map = self.M
 #        st = threading.Thread(target=self.server.start)
@@ -647,7 +649,16 @@ class BaseMap(object):
         if os.path.exists(fname):
             self.Reader(fname)
         else:
-            print "shapefile %s not found in %s"%(fname, os.getcwd())
+            # Check if it exist in parent directory
+            upfname = os.path.join('..', fname)
+            if os.path.exists(upfname):
+                self.Reader(upfname)
+            else:
+                QtGui.QMessageBox.information(None,
+                self.trUtf8("Map not found"),
+                self.trUtf8("""Neither {} nor {} were found in {}""".format(fname, upfname, os.getcwd())),
+                self.trUtf8("&OK"))
+
 
     def Reader(self, fname):
         """
@@ -1074,10 +1085,10 @@ if __name__=='__main__':
     app = QtGui.QApplication(sys.argv)
     QtCore.qsrand(QtCore.QTime(0,0,0).secsTo(QtCore.QTime.currentTime()))
     widget = MapWindow()
-    #widget.drawMap('riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE')
-    poslist = [(1, -50, -50, 'a'),(2, 0, -50, 'b'),(3, 50, -50, 'c'),(4, -50, 0,'d'),(5, 0, 0, 'e'),(6, 50, 0, 'f'),(7, -50, 50, 'g'),(8, 0, 50, 'h'),(9, 50, 50, 'i')]
-    elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
-    widget.drawGraph(poslist, elist)
+    widget.drawMap('riozonas_LatLong.shp', 'NOME_ZONAS', 'ZONA_TRAFE')
+    # poslist = [(1, -50, -50, 'a'),(2, 0, -50, 'b'),(3, 50, -50, 'c'),(4, -50, 0,'d'),(5, 0, 0, 'e'),(6, 50, 0, 'f'),(7, -50, 50, 'g'),(8, 0, 50, 'h'),(9, 50, 50, 'i')]
+    # elist = [(0,1),(1,2),(1,4),(2,5),(3,0),(3,4),(4,5),(4,7),(5,8),(6,3),(7,6),(8,7)]
+    # widget.drawGraph(poslist, elist)
     widget.show()
     sys.exit(app.exec_())
 

@@ -173,7 +173,7 @@ class siteobj(object):
         return r
     #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
-    def handle(self,res):
+    def handle(self, res):
         pipe = redisclient.pipeline()
         last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1)\
             .get("{}:Lpos".format(self.geocode))\

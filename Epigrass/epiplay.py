@@ -9,8 +9,6 @@ except ImportError:
     print "Please install PyQT 4"
 #
 from numpy import *
-#import sqlobject as SO
-#TODO: remove dependency on SQLObject
 from sqlsoup import SQLSoup as SqlSoup
 
 from matplotlib import cm
@@ -65,7 +63,7 @@ class viewer:
             r = glob.glob('*.tab')
         return r
 
-    def getFields(self,table):
+    def getFields(self, table):
         """
         Returns a list of fields (column names) for a given table.
         table is a string with table name
@@ -76,7 +74,7 @@ class viewer:
             r = [i[1] for i in self.connection.bind.execute('PRAGMA table_info(%s)'%table).fetchall()]
             shp =self.connection.bind.execute('SELECT the_world$shapefile FROM %s'%(table+'_meta')).fetchall()
             self.shapefile = eval(shp[0][0])
-            print self.shapefile
+            # print self.shapefile
         elif self.backend == 'mysql':
 #            r = [i[0] for i in self.connection.queryAll('SHOW FIELDS FROM %s'%table)]
 #            shp =self.connection.queryAll('SELECT the_world$shapefile FROM %s'%(table+'_meta'))
@@ -84,25 +82,25 @@ class viewer:
             shp =self.connection.bind.execute('SELECT the_world$shapefile FROM %s'%(table+'_meta')).fetchall()
             self.shapefile = eval(shp[0][0])
         elif self.backend == 'csv':
-            with open(table,'r') as f:
+            with open(table, 'r') as f:
                 r = f.read().strip().split(',')
         
         return r
     
-    def readNodes(self,name,table):
+    def readNodes(self, name, table):
         """
         Reads geocode and coords from database table
         for each node and adjacency matrix.
         """
-        if self.backend =="csv":
+        if self.backend == "csv":
             # the equivalent of a select for a csv file
-            f=open(table,"r")
+            f = open(table, "r")
             names = f.readline().strip().split(",")#remove header
             d = {}
             for l in f:
-                l=l.strip().split(',')
-                d[l[names.index('geocode')]]=[l[names.index('geocode')],l[names.index('lat')],l[names.index('longit')],l[names.index('name')]]
-            r= d.values()
+                l = l.strip().split(',')
+                d[l[names.index('geocode')]] = [l[names.index('geocode')], l[names.index('lat')], l[names.index('longit')], l[names.index('name')]]
+            r = d.values()
             f.close()
             self.numbnodes = len(r)
         else:
@@ -118,19 +116,19 @@ class viewer:
         m = cPickle.load(file)
         self.adjacency = m
         file.close()
-        return r,m
+        return r, m
     
     
-    def readData(self,table):
+    def readData(self, table):
         """
         Read node time series data
         """
-        if self.backend =="csv":
-            f=open(table,"r")
+        if self.backend == "csv":
+            f = open(table, "r")
             f.readline()#remove header
             r = []
             for l in f:
-                l=l.strip().split(',')
+                l = l.strip().split(',')
                 r.append(l)
             f.close()
         else:
@@ -138,40 +136,40 @@ class viewer:
             r = self.connection.bind.execute('SELECT * FROM %s'%table).fetchall()
         return r
 
-    def readEdges(self,table):
+    def readEdges(self, table):
         """
         Read edge time series
         """
-        if self.backend =="csv":
+        if self.backend == "csv":
             tab = table.split(".")[0]+"_e.tab"
-            f = open(tab,"r")
-            f.readline()#remove header
+            f = open(tab, "r")
+            f.readline()  # remove header
             r = [l.strip().split(',') for l in f]
             f.close()
             self.numbedges = len(r)
         else:
             tab = table+'e'
 #            r = self.connection.queryAll('SELECT * FROM %s'%tab)
-            r = self.connection.bind.execute('SELECT * FROM %s'%tab).fetchall()
+            r = self.connection.bind.execute('SELECT * FROM %s' % tab).fetchall()
             self.numbedges = len(r)
         self.elist = [(self.nodes_gc.index(e[0]), self.nodes_gc.index(e[1])) for e in r]
         if not self.elist:
             self.elist = transpose(self.adjacency.nonzero()).tolist()
         return r
         
-    def viewGraph(self, nodes, am, var,mapa=''):
+    def viewGraph(self, nodes, am, var, mapa=''):
         """
         Starts the Qt display of the map or graph.
         """
         if self.shapefile:
-            self.gui.openGraphDisplay(mapa,self.shapefile[1],self.shapefile[2], self.nodes_pos, self.elist  )
+            self.gui.openGraphDisplay(mapa, self.shapefile[1],self.shapefile[2], self.nodes_pos, self.elist)
         else:
-            self.gui.openGraphDisplay(mapa,nlist=self.nodes_pos, elist=self.elist  )
+            self.gui.openGraphDisplay(mapa, nlist=self.nodes_pos, elist=self.elist)
         self.gr = self.gui.graphDisplay
         self.gr.qwtPlot.setTitle(var)
 
             
-    def anim(self,data,edata, numbsteps,pos, rate=20):
+    def anim(self, data, edata, numbsteps, pos, rate=20):
         """
         Starts the animation.
         * data: time series from database
@@ -184,7 +182,7 @@ class viewer:
         for t in xrange(numbsteps):
             stepdict = {}
             for i in xrange(self.numbnodes):
-                start = i*numbsteps+t
+                start = i * numbsteps + t
                 stepdict[data[start][0]] = data[start][pos] #{geocode: value}
             self.gr.drawStep(t, stepdict)
             #paint Edges when there are infectious coming or going 
