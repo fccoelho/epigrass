@@ -147,21 +147,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.trUtf8("*.csv;;*.*"),
             None))
         self.filename = fname
+        if self.filename == "":
+            QtGui.QMessageBox.warning(None,
+                self.trUtf8("No File Selected"),
+                self.trUtf8("""Please Select an edges file."""),
+                self.trUtf8("&OK"))
+            return
         self.network = Network(self.graphicsView)
         edgelist = loadData(fname, ',')
-        nodelist  = set([])
+        nodelist = set([])
         header = edgelist.pop(0)
         
         self.edgeTable.setColumnCount(len(header))
         self.edgeTable.setRowCount(len(edgelist))
         self.edgeTable.setHorizontalHeaderLabels(header)
         print self.edgeTable.rowCount()
-        for i,e in enumerate(edgelist):
+        for i, e in enumerate(edgelist):
             nodelist.add(e[5])
             nodelist.add(e[6])
-            self.network.G.add_edge(e[5], e[6], {'weight':e[2], 'source_name':e[0], 'dest_name':e[1]}) #edge weight is flow S->D
-            for j,v in enumerate(e):
-                item  = QtGui.QTableWidgetItem(v)
+            self.network.G.add_edge(e[5], e[6], {'weight': e[2], 'source_name': e[0], 'dest_name': e[1]})  # Edge weight is flow S->D
+            for j, v in enumerate(e):
+                item = QtGui.QTableWidgetItem(v)
                 self.edgeTable.setItem(i,j,item)
         print self.edgeTable.takeItem(0,0).text()
         # Fill nodes table
@@ -170,7 +176,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.nodeTable.setHorizontalHeaderLabels(['Geocode'])
         for i,n in enumerate(nodelist):
             item = QtGui.QTableWidgetItem(n)
-            self.nodeTable.setItem(i,0,item)
+            self.nodeTable.setItem(i, 0, item)
         return self.on_action_Graph_activated()
                 
     
