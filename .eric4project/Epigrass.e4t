@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project Epigrass -->
-<!-- Saved: 2012-11-13, 11:36:49 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: remove dependency on SQLObject</Summary>
+    <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
     <Description></Description>
-    <Created>2011-09-18, 15:16:41</Created>
+    <Created>2012-10-06, 06:53:10</Created>
     <Resource>
-      <Filename>Epigrass/epiplay.py</Filename>
-      <Linenumber>13</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="True">
-    <Summary>FIXME: the animation rate is not working....</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 15:16:41</Created>
-    <Resource>
-      <Filename>Epigrass/epiplay.py</Filename>
-      <Linenumber>181</Linenumber>
+      <Filename>Epigrass/epigrass.py</Filename>
+      <Linenumber>519</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: fix this</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:27:22</Created>
+    <Created>2012-10-06, 06:53:17</Created>
     <Resource>
       <Filename>Epigrass/dgraph.py</Filename>
       <Linenumber>170</Linenumber>
@@ -33,7 +23,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:27:22</Created>
+    <Created>2012-10-06, 06:53:17</Created>
     <Resource>
       <Filename>Epigrass/dgraph.py</Filename>
       <Linenumber>540</Linenumber>
@@ -42,7 +32,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:27:22</Created>
+    <Created>2012-10-06, 06:53:17</Created>
     <Resource>
       <Filename>Epigrass/dgraph.py</Filename>
       <Linenumber>577</Linenumber>
@@ -51,154 +41,163 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: consertar algoritmo para funcionar com qualquer sistema de coordenadas</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:27:22</Created>
+    <Created>2012-10-06, 06:53:17</Created>
     <Resource>
       <Filename>Epigrass/dgraph.py</Filename>
       <Linenumber>719</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
+    <Summary>TODO: remove dependency on SQLObject</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:20</Created>
     <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>37</Linenumber>
+      <Filename>Epigrass/epiplay.py</Filename>
+      <Linenumber>13</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
+  <Task priority="1" completed="False" bugfix="True">
+    <Summary>FIXME: the animation rate is not working....</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:20</Created>
     <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>45</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>53</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>68</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>76</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>84</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>92</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>100</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>108</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>173</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
-    <Resource>
-      <Filename>Epigrass/neteditor.py</Filename>
+      <Filename>Epigrass/epiplay.py</Filename>
       <Linenumber>181</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:22</Created>
     <Resource>
       <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>208</Linenumber>
+      <Linenumber>56</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:22</Created>
     <Resource>
       <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>216</Linenumber>
+      <Linenumber>64</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>72</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>87</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>95</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>103</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>111</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>119</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>127</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>193</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>201</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>228</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2012-10-06, 06:53:22</Created>
+    <Resource>
+      <Filename>Epigrass/neteditor.py</Filename>
+      <Linenumber>236</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: verify time overhead of this check</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:22</Created>
     <Resource>
       <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>354</Linenumber>
+      <Linenumber>424</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: eitehr integrate this into the graph object, or make it a separate function</Summary>
     <Description></Description>
-    <Created>2011-09-18, 16:31:09</Created>
+    <Created>2012-10-06, 06:53:22</Created>
     <Resource>
       <Filename>Epigrass/neteditor.py</Filename>
-      <Linenumber>391</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: read meta-info from table and show in the tooltip</Summary>
-    <Description></Description>
-    <Created>2012-11-13, 11:35:06</Created>
-    <Resource>
-      <Filename>Epigrass/epigrass.py</Filename>
-      <Linenumber>530</Linenumber>
+      <Linenumber>461</Linenumber>
     </Resource>
   </Task>
 </Tasks>
