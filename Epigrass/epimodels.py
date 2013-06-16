@@ -11,6 +11,7 @@ License: GPL-v3
 __author__ = 'fccoelho'
 
 from numpy.random import poisson
+from numpy import inf, nan, nan_to_num
 import sys
 import redis
 
@@ -69,10 +70,10 @@ class Epimodel(object):
         get updated parameters from the redis database.
         :param geocode: geocode of the site running this model.
         """
-        inits = [int(i) for i in eval(redisclient.lindex("{}:inits".format(self.geocode), -1))]
+        inits = [int(nan_to_num(i)) for i in eval(redisclient.lindex("{}:inits".format(self.geocode), -1))]
         simstep = int(redisclient.get("simstep"))
         totpop = int(float(redisclient.get("{}:totpop".format(self.geocode))))
-        theta = int(float(redisclient.get("{}:theta".format(self.geocode))))
+        theta = int(nan_to_num(float(redisclient.get("{}:theta".format(self.geocode)))))
         npass = int(float(redisclient.get("{}:npass".format(self.geocode))))
         bi = redisclient.hgetall("{}:bi".format(self.geocode))
         bi = {k: float(v) for k, v in bi.items()}
@@ -91,7 +92,7 @@ class Epimodel(object):
         redisclient.rpush("{}:inits".format(self.geocode), state)  # updating inits
         redisclient.rpush('{}:ts'.format(self.geocode), state)
         redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
-        totc = int(float(redisclient.get('{}:totalcases'.format(self.geocode))))
+        totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
         redisclient.set('{}:totalcases'.format(self.geocode), Lpos+totc)
         redisclient.rpush('{}:incidence'.format(self.geocode), Lpos)
         redisclient.set('{}:migInf'.format(self.geocode), migInf)
@@ -202,25 +203,25 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     ######################
     Lpos = L1pos + L2pos + L3pos + L4pos
     # Model
-    # 0-2 anos
+    # 0-2 years old
     E1pos = L1pos + (1 - e) * E1
     Is1pos = (1 - (pc1 * c + (1 - pc1) * r)) * Is1 + e * E1
     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1
     Ig1pos = (1 - d) * Ig1 + pp1 * g * Ic1
     S1pos = b + S1 - L1pos
-    # 3-14 anos
+    # 3-14 years old
     E2pos = L2pos + (1 - e) * E2
     Is2pos = (1 - (pc2 * c + (1 - pc2) * r)) * Is2 + e * E2
     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2
     Ig2pos = (1 - d) * Ig2 + pp2 * g * Ic2
     S2pos = b + S2 - L2pos
-    # 15-59 anos
+    # 15-59 years old
     E3pos = L3pos + (1 - e) * E3
     Is3pos = (1 - (pc3 * c + (1 - pc3) * r)) * Is3 + e * E3
     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3
     Ig3pos = (1 - d) * Ig3 + pp3 * g * Ic3
     S3pos = b + S3 - L3pos
-    # >60 anos
+    # >60 years old
     E4pos = L4pos + (1 - e) * E4
     Is4pos = (1 - (pc4 * c + (1 - pc4) * r)) * Is4 + e * E4
     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4
