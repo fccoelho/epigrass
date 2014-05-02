@@ -93,14 +93,14 @@ class Epimodel(object):
         redisclient.rpush('{}:ts'.format(self.geocode), state)
         redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
         totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
-        redisclient.set('{}:totalcases'.format(self.geocode), Lpos+totc)
+        redisclient.set('{}:totalcases'.format(self.geocode), Lpos + totc)
         redisclient.rpush('{}:incidence'.format(self.geocode), Lpos)
         redisclient.set('{}:migInf'.format(self.geocode), migInf)
 
         # Graph state
         if Lpos > 0:
             infected = int(redisclient.get("simstep"))
-            redisclient.rpush("epipath", (infected, self.geocode, {})) #TODO: replace empty dict with infectors
+            redisclient.rpush("epipath", (infected, self.geocode, {}))  #TODO: replace empty dict with infectors
             # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
             #TODO: have infector be stated in terms of geocodes
 
@@ -171,12 +171,12 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
               'Susc_age2', 'Incub_age2', 'Subc_age2', 'Sympt_age2', 'Comp_age2',
               'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         S1, E1, Is1, Ic1, Ig1 = (bi['susc_age1'], bi['incub_age1'], bi['subc_age1'], bi['sympt_age1'], bi['comp_age1'])
         S2, E2, Is2, Ic2, Ig2 = (bi['susc_age2'], bi['incub_age2'], bi['subc_age2'], bi['sympt_age2'], bi['comp_age2'])
         S3, E3, Is3, Ic3, Ig3 = (bi['susc_age3'], bi['incub_age3'], bi['subc_age3'], bi['sympt_age3'], bi['comp_age3'])
         S4, E4, Is4, Ic4, Ig4 = (bi['susc_age4'], bi['incub_age4'], bi['subc_age4'], bi['sympt_age4'], bi['comp_age4'])
-    else: #get values from last time step
+    else:  #get values from last time step
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
     N = totpop
 
@@ -185,7 +185,7 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
         #parameters: alpha,beta,r,e,c,g,d,pc1,pc2,pc3,pc4,pp1,pp2,pp3,pp4,b
 
     #Vacination event
-    if vaccineNow: #TODO: add to bp when creating model
+    if vaccineNow:  #TODO: add to bp when creating model
         S1 -= vaccov * S1
         S2 -= vaccov * S2
         S3 -= vaccov * S3
@@ -230,7 +230,8 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
 
     #Migrating infecctious
     migInf = (
-        Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (Is1pos + Is2pos + Is3pos + Is4pos))
+        Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
+        Is1pos + Is2pos + Is3pos + Is4pos))
     # Return variable values
 
     return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,
@@ -244,7 +245,7 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -252,7 +253,7 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + r * I
@@ -268,7 +269,7 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -276,12 +277,12 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -300,7 +301,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -308,7 +309,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameters: b ,r
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
@@ -327,7 +328,7 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -335,12 +336,12 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -360,7 +361,7 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -368,7 +369,7 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameters: b,e,r
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     #Model
     Epos = (1 - e) * E + Lpos
@@ -388,7 +389,7 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -396,12 +397,12 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameters: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #converting between parameterizations
+        prob = I / (I + Lpos_esp)  #converting between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
@@ -421,7 +422,7 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -429,7 +430,7 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameters: beta,alpha,e,r,delta,B,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     #Model
     Epos = (1 - e) * E + Lpos
@@ -450,7 +451,7 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -458,14 +459,14 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameters: beta,alpha,e,r,delta,B,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
-        Lpos = poisson(Lpos_esp) #poisson(Lpos_esp)
+        Lpos = poisson(Lpos_esp)  #poisson(Lpos_esp)
     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
@@ -485,7 +486,7 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -493,7 +494,7 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
@@ -512,7 +513,7 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -520,12 +521,12 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,B,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -545,7 +546,7 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -554,7 +555,7 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
 
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -573,7 +574,7 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -581,12 +582,12 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
@@ -606,7 +607,7 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -615,8 +616,8 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
-    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha #number of secondary Infections
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  #number of secondary Infections
 
     # Model
     Ipos = (1 - r) * I + Lpos + Lpos2
@@ -635,7 +636,7 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -645,16 +646,16 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
         #parameter: beta,alpha,e,r,delta,b,w,p
     R = N - E - I - S
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
-    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha #number of secondary Infections
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  #number of secondary Infections
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
         Lpos2 = poisson(Lpos2_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
-        prob = I / (I + Lpos2_esp) #convertin between parameterizations
+        prob = I / (I + Lpos2_esp)  #convertin between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
     # Model
@@ -673,7 +674,7 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=())
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -683,8 +684,8 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=())
         exec ('%s = %s' % (k, v))
         # parameters: beta,alpha,e,r,delta,b,w,p
 
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
-    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha # secondary infections
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
 
     # Model
     Epos = (1 - e) * E + Lpos + Lpos2
@@ -704,7 +705,7 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
@@ -714,16 +715,16 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
         # parameter: beta,alpha,e,r,delta,B,w,p
     R = N - E - I - S
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
-    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha # secondary infections
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
         Lpos2 = poisson(Lpos2_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #converting between parameterizations
+        prob = I / (I + Lpos_esp)  #converting between parameterizations
         Lpos = negative_binomial(I, prob)
-        prob = I / (I + Lpos2_esp) #converting between parameterizations
+        prob = I / (I + Lpos2_esp)  #converting between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
     # Model
@@ -744,16 +745,16 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    R = N - E + I + S
+    R = N - (E + I + S)
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
@@ -772,21 +773,21 @@ def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1: #get initial values
+    if simstep == 1:  #get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    R = N - E + I + S
+    R = N - (E + I + S)
     for k, v in bp.items():
         exec ('%s = %s' % (k, v))
         # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp) #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  #convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model

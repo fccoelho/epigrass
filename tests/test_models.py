@@ -108,7 +108,7 @@ class TestModels(unittest.TestCase):
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'e': 0.1, 'pc1': .1, 'c': 0.1, 'pp1': .1, 'g': .1,
                              'd': .1, 'pc2': .1, 'pp2': .1, 'pc3': .1, 'pp3': .1, 'pc4': .1, 'pp4': .1, 'alpha': 1.,
                              'delta': 0.1, 'vaccineNow': 1, 'vaccov': 0.3})
-        print res
+        # print res
 
         for x, y in zip(res[0], [699.3065035, 0.0034964999999999996, 0.9, 0.010000000000000002, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0]):
             self.assertAlmostEqual(x, y, 0)
@@ -120,42 +120,87 @@ class TestModels(unittest.TestCase):
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1})
 
+        # print res
+        for x, y in zip(res[0], [0, 0.9, 999.01]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
+
     def test_run_SEIpRpS(self):
         model = Epimodel(1, modtype='SEIpRpS')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1})
+
+        for x, y in zip(res[0], [0, 0.9, 999.01]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
 
     def test_run_SEIpRpS_s(self):
         model = Epimodel(1, modtype='SEIpRpS_s')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1})
 
+        for x, y in zip(res[0], [0, 0.9, 999.01]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
+
     def test_run_SIpR(self):
         model = Epimodel(1, modtype='SIpR')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
+
+        for x, y in zip(res[0], [0, 0.9, 999.01]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
 
     def test_run_SIpR_s(self):
         model = Epimodel(1, modtype='SIpR_s')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
 
+        for x, y in zip(res[0], [0, 0.9, 999]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
+
     def test_run_SEIpR(self):
         model = Epimodel(1, modtype='SEIpR')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
+
+        for x, y in zip(res[0], [0, 0.9, 999]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
 
     def test_run_SEIpR_s(self):
         model = Epimodel(1, modtype='SEIpR_s')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
 
+        for x, y in zip(res[0], [0, 0.9, 999]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
+
     def test_run_SIRS(self):
         model = Epimodel(1, modtype='SIRS')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1, 'w': 0.1})
+        print res
+        for x, y in zip(res[0], [0, 0.9, 999]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
 
     def test_run_SIRS_s(self):
         model = Epimodel(1, modtype='SIRS_s')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1, 'w': 0.1})
+        for x, y in zip(res[0], [0, 0.9, 999.01]):
+            self.assertAlmostEqual(x, y, 0)
+        self.assertAlmostEqual(res[1], 0, 1)
+        self.assertAlmostEqual(res[2], 0.9, 1)
