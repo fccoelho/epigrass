@@ -94,7 +94,7 @@ class siteobj(object):
         print "Time to runModel: ", time.time() - t0
         return self
 
-    def createModel(self, init, modtype='', name='model1', v=[], bi=None, bp=None):
+    def createModel(self, modtype='', name='model1', v=[], bi=None, bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total
@@ -103,7 +103,7 @@ class siteobj(object):
         v -- List of extra variables passed in the sites files
         bi, bp -- dictionaries containing all the inits and parms defined in the .epg model
         """
-        Init = init  # deprecated
+       # Init = init  # deprecated
         N = self.totpop
         self.modtype = modtype
         self.values = v
@@ -112,7 +112,8 @@ class siteobj(object):
         self.model = epimodels.Epimodel(self.geocode, modtype)
         self.vnames = epimodels.vnames[modtype]
         try:
-            self.ts = [[bi[vn.lower()] for vn in self.vnames]]
+            # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
+            self.ts.append(list(bi.values()))  # This is fine since bi is an OrderedDict
         except KeyError as ke:
             if self.vnames == ['Exposed', 'Infectious', 'Susceptible']:
                 self.ts = [[bi[vn] for vn in ['e', 'i', 's']]]

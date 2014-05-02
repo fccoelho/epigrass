@@ -4,13 +4,15 @@ Tests for basic simulation model objects instantiation
 
 import unittest
 from Epigrass.manager import *
-from Epigrass.simobj import siteobj,graph,edge
+from Epigrass.simobj import siteobj, graph, edge
+
 
 class testObjInstantiation(unittest.TestCase):
     def setUp(self):
-        self.sitios = loadData('sitios3.csv',sep=',')
-        self.ed=loadData('edgesout.csv',sep=',')
-        self.S=simulate('flu.epg')
+        self.sitios = loadData('sitios3.csv', sep=',')
+        self.ed = loadData('edgesout.csv', sep=',')
+        self.S = simulate('flu.epg')
+
     def tearDown(self):
         if os.path.exists('demos/outdata-flu'):
             os.system('rm -rf demos/outdata-flu')
@@ -18,23 +20,22 @@ class testObjInstantiation(unittest.TestCase):
     def testSites(self):
         l = self.S.instSites(self.sitios)
         for i in range(len(l)):
-            self.assertEqual(l[i].sitename,self.sitios[i][2])
-            
+            self.assertEqual(l[i].sitename, self.sitios[i][2])
+
     def testEdges(self):
         l = self.S.instSites(self.sitios)
-        e = self.S.instEdges(l,self.ed)
+        e = self.S.instEdges(l, self.ed)
         j = 0
         for i in e:
-            self.assertEqual((i.source.geocode, i.dest.geocode),(int(self.ed[j][5]),int(self.ed[j][6])))
-            j+=1
+            self.assertEqual((i.source.geocode, i.dest.geocode), (int(self.ed[j][5]), int(self.ed[j][6])))
+            j += 1
+
     def testGraph(self):
         l = self.S.instSites(self.sitios)
-        e = self.S.instEdges(l,self.ed)
-        g = self.S.instGraph('grafo',1,l,e)
+        e = self.S.instEdges(l, self.ed)
+        g = self.S.instGraph('grafo', 1, l, e)
         self.assertEquals(len(g.site_dict), len(self.sitios))
-        self.assertEquals(len(g.edge_dict),len(self.ed))
-
-
+        self.assertEquals(len(g.edge_dict), len(self.ed))
 
 
 #class TestSimulationRuns(unittest.TestCase):
