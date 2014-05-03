@@ -225,19 +225,7 @@ class simulate:
                 inits[k] = eval(v)
             for k, v in self.parms.items():
                 parms[k] = eval(v)
-            #Linhas abaixo estao obsoletas (remover quando tiver tempo para testar)
-            #I = eval(self.I)
-            #E = eval(self.E)
-            #S = eval(self.S)
-            beta = eval(self.beta)
-            alpha = eval(self.alpha)
-            e = eval(self.e)
-            r = eval(self.r)
-            delta = eval(self.delta)
-            B = eval(self.B)
-            w = eval(self.w)
-            p = eval(self.p)
-            #################
+
             if self.vaccinate:
                 if self.vaccinate[0][0] == 'all':
                     o.vaccination = [self.vaccinate[0][1], self.vaccinate[0][2]]
@@ -409,13 +397,6 @@ class simulate:
 
         return 'E,I,S\n' + tss
 
-    def grassVect2ascii(self, layer):
-        """
-        Convert Grass vector layer to an ascii file epigrass can read
-        Deprecated!
-        """
-        com = 'v.out.ascii input=%s output=map.txt format=standard' % layer
-        os.system(com)
 
     def outToShp(self):
         """

@@ -1,7 +1,4 @@
 # -*- coding:utf8 -*-
-import ez_setup
-
-ez_setup.use_setuptools()
 from setuptools import setup
 from glob import glob
 from Epigrass.__version__ import version
