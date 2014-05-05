@@ -13,14 +13,16 @@ import string
 import json
 import sqlite3
 import os
-
+import getpass
 import MySQLdb
-
+import numpy as np
 from simobj import graph, edge, siteobj
 import spread
 from data_io import *
 import epigdal
 import __version__
+import requests
+
 
 
 #import pycallgraph
@@ -1108,12 +1110,45 @@ def repRuns(S):
         del S
 
 
+def upload_model(args):
+    """
+    Uploads Model specification, auxiliary files and
+    :return:
+    """
+    username = raw_input("Enter your epigrass Web User id:")
+    passwd = getpass("Enter your Epigrass Web password:")
+    S = simulate(fname=args.epg[0], backend=args.backend)
+
+    app_url = "http://app.epigrass.net/simulations/view/new/"
+    # creating the app id
+    r = requests.get(app_url, auth=(username, passwd))
+    fields = {'epg': (S.modelName, open(S.fname, 'rb'), 'text/plain')}
+    if os.path.exists(os.path.join(S.outdir, 'data.json')):
+        fields['map'] = ('data.json', open(os.path.join(S.outdir, 'data.json'), 'rb'), 'text/plain')
+    if os.path.exists(os.path.join(S.outdir, 'series.json')):
+        fields['series'] = ('series.json', open(os.path.join(S.outdir, 'series.json'), 'rb'), 'text/plain')
+    if os.path.exists(os.path.join(S.outdir, 'network.json')):
+        fields['network'] = ('network.json', open(os.path.join(S.outdir, 'network.json'), 'rb'), 'text/plain')
+    if os.path.exists(os.path.join(S.outdir, 'spread.json')):
+        fields['spread'] = ('spread.json', open(os.path.join(S.outdir, 'spread.json'), 'rb'), 'text/plain')
+
+    hdrs = {'Content-Type': fields.content_type,
+            'content-encoding': 'gzip',
+            'transfer-encoding': 'chunked'}
+
+    r = requests.post(app_url, files=fields, headers=hdrs)
+    if r.status_code == requests.codes.ok:
+        print "Model has been uploaded sucessfully!"
+    else:
+        print "Model Upload failed."
+
+
 def main():
     # Options and Argument parsing for running model from the command line, without the GUI.
     usage = "usage: PROG [options] your_model.epg"
     #    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
     parser = ArgumentParser(usage=usage, description="Run epigrass models from the console",
-                            prog="PROG " + __version__.version)
+                            prog="epirunner " + __version__.version)
     parser.add_argument("-b", "--backend", dest="backend",
                         help="Define which datastorage backend to use", metavar="<mysql|sqlite|csv>", default="sqlite")
     parser.add_argument("-u", "--dbusername",
@@ -1122,6 +1157,7 @@ def main():
                         dest="dbpass", help="MySQL password for user")
     parser.add_argument("-H", "--dbhost",
                         dest="dbhost", default="localhost", help="MySQL hostname or IP address")
+    parser.add_argument("--upload", help="Upload your models and latest simulation to Epigrass Web")
     parser.add_argument("-P", "--parallel", action="store_true", default=False,
                         dest="parallel", help="use multiprocessing to run the simulation")
     parser.add_argument("epg", metavar='EPG', nargs=1,
@@ -1135,7 +1171,10 @@ def main():
     print
     '==> ', args.epg
 
-    onStraightRun(args)
+    if args.upload:  # Only upload model
+        upload_model(args)
+    else:
+        onStraightRun(args)
 
 
 if __name__ == '__main__':

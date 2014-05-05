@@ -5,3 +5,5 @@ cx_freeze_dist/*$
 build/*$
 dist/*$
 epigrass.egg-info/*$
+outdata*
+outdata*/*
