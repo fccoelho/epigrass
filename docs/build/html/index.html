@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Welcome to Epigrass&#8217;s documentation! &mdash; Epigrass v2.0a1 documentation</title>
+
+    <title>Welcome to Epigrass’s documentation! &mdash; Epigrass 2.0a1 documentation</title>
+
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0a1',
-        COLLAPSE_MODINDEX: false,
-        FILE_SUFFIX: '.html',
+          URL_ROOT: './',
+          VERSION:     '2.0a1',
+          COLLAPSE_INDEX: false,
+          FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="Epigrass v2.0a1 documentation" href="" />
+    <link rel="top" title="Epigrass 2.0a1 documentation" href="#"/>
     <link rel="next" title="Overview of Epigrass" href="overview.html" /> 
   </head>
   <body>
@@ -32,66 +36,79 @@
         <li class="right" >
           <a href="overview.html" title="Overview of Epigrass"
              accesskey="N">next</a> |</li>
-        <li><a href="">Epigrass Documentation</a> &raquo;</li> 
+          <li><a href="#">Epigrass Documentation</a> &raquo;</li>
       </ul>
-    </div>  
+    </div>
+
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
             
-  
   <div class="section" id="welcome-to-epigrass-s-documentation">
 <h1>Welcome to Epigrass&#8217;s documentation!<a class="headerlink" href="#welcome-to-epigrass-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Epigrass is a framework for the construction and simulation of complex network epidemiology models. At least this is its main vocation. However, Epigrass can be used to simulate any dynamical system on a set of nodes (connected into a network or not!). Epigrass is written in pure Python and is scriptable in Python, for your enjoyment!.</p>
 <p>Contents:</p>
-<ul>
-<li class="toctree-l1"><a class="reference" href="overview.html">Overview of Epigrass</a><ul>
-<li class="toctree-l2"><a class="reference" href="overview.html#modeling-approach">Modeling Approach</a></li>
-<li class="toctree-l2"><a class="reference" href="overview.html#geographical-network-models">Geographical Network Models</a></li>
-<li class="toctree-l2"><a class="reference" href="overview.html#the-simulation">The Simulation</a></li>
-</ul>
+
+      <div class="toctree-wrapper compound">
+          <ul>
+              <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a>
+                  <ul>
+                      <li class="toctree-l2"><a class="reference internal" href="overview.html#modeling-approach">Modeling
+                          Approach</a></li>
+                      <li class="toctree-l2"><a class="reference internal"
+                                                href="overview.html#geographical-network-models">Geographical Network
+                          Models</a></li>
+                      <li class="toctree-l2"><a class="reference internal" href="overview.html#the-simulation">The
+                          Simulation</a></li>
+                  </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference" href="install.html">Building and Installing</a><ul>
-<li class="toctree-l2"><a class="reference" href="install.html#required-packages">Required Packages</a></li>
-</ul>
+              <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a>
+                  <ul>
+                      <li class="toctree-l2"><a class="reference internal" href="install.html#required-packages">Required
+                          Packages</a></li>
+                  </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference" href="intromodels.html">Epidemic Models</a><ul>
-<li class="toctree-l2"><a class="reference" href="intromodels.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference" href="intromodels.html#disease-models">Disease models</a></li>
-<li class="toctree-l2"><a class="reference" href="intromodels.html#network-transportation-models">Network transportation models</a></li>
-</ul>
+              <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a>
+                  <ul>
+                      <li class="toctree-l2"><a class="reference internal" href="intromodels.html#introduction">Introduction</a>
+                      </li>
+                      <li class="toctree-l2"><a class="reference internal" href="intromodels.html#disease-models">Disease
+                          models</a></li>
+                      <li class="toctree-l2"><a class="reference internal"
+                                                href="intromodels.html#network-transportation-models">Network
+                          transportation models</a></li>
+                  </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference" href="using.html">Using Epigrass</a><ul>
-<li class="toctree-l2"><a class="reference" href="using.html#data">Data</a></li>
-<li class="toctree-l2"><a class="reference" href="using.html#specifying-a-model-the-script">Specifying a model: the script</a></li>
-<li class="toctree-l2"><a class="reference" href="using.html#the-graphical-user-interface-gui">The Graphical User Interface(GUI)</a></li>
-</ul>
+              <li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a>
+                  <ul>
+                      <li class="toctree-l2"><a class="reference internal" href="using.html#data">Data</a></li>
+                      <li class="toctree-l2"><a class="reference internal"
+                                                href="using.html#specifying-a-model-the-script">Specifying a model: the
+                          script</a></li>
+                      <li class="toctree-l2"><a class="reference internal"
+                                                href="using.html#the-graphical-user-interface-gui">The Graphical User
+                          Interface(GUI)</a></li>
+                  </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference" href="analysis.html">Analysis</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference" href="scripting.html">Writing Custom Models</a><ul>
-<li class="toctree-l2"><a class="reference" href="scripting.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference" href="scripting.html#the-environment">The Environment</a></li>
-</ul>
+              <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a>
+                  <ul>
+                      <li class="toctree-l2"><a class="reference internal" href="scripting.html#getting-started">Getting
+                          Started</a></li>
+                      <li class="toctree-l2"><a class="reference internal" href="scripting.html#the-environment">The
+                          Environment</a></li>
+                  </ul>
 </li>
 </ul>
 </div>
-<div class="section" id="indices-and-tables">
+  </div>
+              <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference" href="modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference" href="search.html"><em>Search Page</em></a></li>
+    <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+    <li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+    <li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
 </ul>
 </div>
 
@@ -101,29 +118,40 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+            <p class="logo"><a href="#">
+            <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
             </a></p>
-            <h3><a href="">Table Of Contents</a></h3>
+
+            <h3><a href="#">Table Of Contents</a></h3>
             <ul>
-<li><a class="reference" href="">Welcome to Epigrass&#8217;s documentation!</a><ul>
-</ul>
-</li>
-<li><a class="reference" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
+                <li><a class="reference internal" href="#">Welcome to Epigrass&#8217;s documentation!</a></li>
+                <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+            </ul>
 
             <h4>Next topic</h4>
-            <p class="topless"><a href="overview.html" title="next chapter">Overview of Epigrass</a></p>
+
+            <p class="topless"><a href="overview.html"
+                                  title="next chapter">Overview of Epigrass</a></p>
+
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="_sources/index.txt">Show Source</a></li>
+                <li><a href="_sources/index.txt"
+                       rel="nofollow">Show Source</a></li>
             </ul>
-          <h3>Quick search</h3>
-            <form class="search" action="search.html" method="get">
-              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
-            </form>
+            <div id="searchbox" style="display: none">
+                <h3>Quick search</h3>
+
+                <form class="search" action="search.html" method="get">
+                    <input type="text" name="q"/>
+                    <input type="submit" value="Go"/>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+                <p class="searchtip" style="font-size: 90%">
+                    Enter search terms or a module, class or function name.
+                </p>
+            </div>
+            <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -133,17 +161,18 @@
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
+                  >index</a></li>
+          <li class="right" >
           <a href="overview.html" title="Overview of Epigrass"
-             accesskey="N">next</a> |</li>
-        <li><a href="">Epigrass Documentation</a> &raquo;</li> 
+                  >next</a> |
+          </li>
+          <li><a href="#">Epigrass Documentation</a> &raquo;</li>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2008, Flávio Codeço Coelho.
-      Last updated on Mar 08, 2009.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+        &copy; Copyright 2008, Flávio Codeço Coelho.
+        Last updated on May 06, 2014.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

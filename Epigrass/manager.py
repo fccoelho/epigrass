@@ -1119,8 +1119,8 @@ def upload_model(args):
     passwd = getpass("Enter your Epigrass Web password:")
     S = simulate(fname=args.epg[0], backend=args.backend)
 
-    app_url = "http://app.epigrass.net/simulations/view/new/"
-    # creating the app id
+
+app_url = "http://app.epigrass.net/simulations/view/new/"  # creating the app id
     r = requests.get(app_url, auth=(username, passwd))
     fields = {'epg': (S.modelName, open(S.fname, 'rb'), 'text/plain')}
     if os.path.exists(os.path.join(S.outdir, 'data.json')):

@@ -20,7 +20,7 @@ Python
 *Web-site:*
     http://www.python.org
 *Version required:*
-    >=2.5
+    >= 2.5 < 3
 
 
 Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.
@@ -29,7 +29,7 @@ Python is probably installed automatically by your GNU/Linux distribution (it is
 
 .. code-block:: bash
 
-    $ sudo apt-get install python python-dev
+    $ sudo apt-get install python python-dev build-essentials python-setuptools
 
 
 Numeric Python
@@ -114,40 +114,36 @@ Example installation:
 
     $ sudo apt-get install mysql-server mysql-client python-mysqldb
 
+Redis
+-----
+
+*web-site:*
+    http://redis.io
+*Version required:*
+    >=2.8
+
+Redis is a persistent Key-value database.
+
+Example installation:
+
+.. code-block:: bash
+
+    $ sudo apt-get install redis-server
+
+Other Requirements
+------------------
+
+Some other requirements can be installed directly from the Python Package index using the *pip* tool:
+
+.. code-block:: bash
+
+    $ sudo pip install networkx redis sqlsoup requests sphinx
 
 
 Post-install configuration
 """"""""""""""""""""""""""
 
 After installing MySQL, you will need to create a new database in the server, called *epigrass* and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.
-
-
-
-R
--
-
-*Web-site:*
-    http://www.r-project.org
-*Version required:*
-    The most recent.
-
-**R** is a statistical computing platform whis is very useful to analyze the output of Epirass's models. The Epigrass source distribution includes some example **R** scripts to interact with Epigrass-generated data.
-
-Example installations:
-
-.. code-block:: bash
-
-    $ apt-get install r-base
-
-After installing R, start an interactive session, and install a few extra packages.
-
-.. code-block:: bash
-
-    $ R
-    > update.packages()
-    > install.packages('RMySQL')
-    > install.packages('DBI')
-    > install.packages('lattice')
 
 
 

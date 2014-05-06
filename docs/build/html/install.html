@@ -1,250 +1,368 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Building and Installing &mdash; Epigrass v2.0a1 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>Building and Installing &mdash; Epigrass 2.0a1 documentation</title>
+
+    <link rel="stylesheet" href="_static/default.css" type="text/css"/>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+
     <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0a1',
-        COLLAPSE_MODINDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: './',
+            VERSION: '2.0a1',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE: true
+        };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="Epigrass v2.0a1 documentation" href="index.html" />
-    <link rel="next" title="Epidemic Models" href="intromodels.html" />
-    <link rel="prev" title="Overview of Epigrass" href="overview.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
+    <link rel="top" title="Epigrass 2.0a1 documentation" href="index.html"/>
+    <link rel="next" title="Epidemic Models" href="intromodels.html"/>
+    <link rel="prev" title="Overview of Epigrass" href="overview.html"/>
+</head>
+<body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="intromodels.html" title="Epidemic Models"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="overview.html" title="Overview of Epigrass"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
-    <div class="document">
-      <div class="documentwrapper">
+            <a href="genindex.html" title="General Index"
+               accesskey="I">index</a></li>
+        <li class="right">
+            <a href="intromodels.html" title="Epidemic Models"
+               accesskey="N">next</a> |
+        </li>
+        <li class="right">
+            <a href="overview.html" title="Overview of Epigrass"
+               accesskey="P">previous</a> |
+        </li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+    </ul>
+</div>
+
+<div class="document">
+    <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
-            
-  
-  <div class="section" id="building-and-installing">
-<span id="install"></span><h1>Building and Installing<a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h1>
-<p>This chapter will walk through all aspects of Epigrass installation. From obtaining, building and installing  the prerequisites to the installation of Epigrass itself.</p>
-<p>Most of the steps will be quite simple and similar since they will make use of standard tools for package installation on Debian GNU/Linux and derivatives. If you use a different distribution, you should check its documentation for package installation instructions.</p>
-<p>If, on your distribution, a package is not available for the required version, you can try to obtain an updated version of the package at the web-sites provided. On the rare cases where pre-built packages are not available, instructions on how to build the software from source should also be available from its web-site.</p>
-<div class="section" id="required-packages">
-<h2>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="python">
-<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://www.python.org">http://www.python.org</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;=2.5</dd>
-</dl>
-<p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.</p>
-<p>Python is probably installed automatically by your GNU/Linux distribution (it is on Debian). If not, it is best to use your distribution&#8217;s standard tools for package installation. On Debian for example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python python-dev
-</pre></div>
-</div>
-</div>
-<div class="section" id="numeric-python">
-<h3>Numeric Python<a class="headerlink" href="#numeric-python" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;= 1.0</dd>
-</dl>
-<p>Numeric Python is a module for fast numeric computations in Python.</p>
-<p>Example installation:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-numpy
-</pre></div>
-</div>
-</div>
-<div class="section" id="matplotlib">
-<h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;0.9</dd>
-</dl>
-<p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
-</pre></div>
-</div>
-</div>
-<div class="section" id="pyqt">
-<h3>PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;4.0</dd>
-</dl>
-<p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the simplicity of Python.</p>
-<p>PyQt depends on the Qt libraries to run. This dependency will be taken care by the package installation tools of most distributions, which will automatically install the required version of Qt.</p>
-<p>Example installation:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qt4
-</pre></div>
-</div>
-</div>
-<div class="section" id="pyqwt">
-<h3>PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;5.0</dd>
-</dl>
-<p>PyQwt is a Python binding for the Qwt5 technical widget library. It is necessary for some os Epigrass&#8217; visualizations capabilities.</p>
-<p>Example installation:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qwt5-qt4
-</pre></div>
-</div>
-</div>
-<div class="section" id="mysql">
-<h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://www.mysql.com">http://www.mysql.com</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>&gt;5.0</dd>
-</dl>
-<p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL server available in your LAN, you may skip this step after making sure you have permission to access and use it to store your data.</p>
-<p>Example installation:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mysql-server mysql-client python-mysqldb
-</pre></div>
-</div>
-<div class="section" id="post-install-configuration">
-<h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
-<p>After installing MySQL, you will need to create a new database in the server, called <em>epigrass</em> and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.</p>
-</div>
-</div>
-<div class="section" id="r">
-<h3>R<a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt><em>Web-site:</em></dt>
-<dd><a class="reference" href="http://www.r-project.org">http://www.r-project.org</a></dd>
-<dt><em>Version required:</em></dt>
-<dd>The most recent.</dd>
-</dl>
-<p><strong>R</strong> is a statistical computing platform whis is very useful to analyze the output of Epirass&#8217;s models. The Epigrass source distribution includes some example <strong>R</strong> scripts to interact with Epigrass-generated data.</p>
-<p>Example installations:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>apt-get install r-base
-</pre></div>
-</div>
-<p>After installing R, start an interactive session, and install a few extra packages.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>R
-&gt; update.packages<span class="o">()</span>
-&gt; install.packages<span class="o">(</span><span class="s1">&#39;RMySQL&#39;</span><span class="o">)</span>
-&gt; install.packages<span class="o">(</span><span class="s1">&#39;DBI&#39;</span><span class="o">)</span>
-&gt; install.packages<span class="o">(</span><span class="s1">&#39;lattice&#39;</span><span class="o">)</span>
-</pre></div>
-</div>
-<p>section{Installing Epigrass}
-If you got through all the steps above, it will be an easy task to install Epigrass. There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maitained by the developers of Epigrass, It may very well be outdated.  So please download Epigrass&#8217;s source tarball (something named <tt class="docutils literal"><span class="pre">Epigrass_someversion.tar.gz</span></tt>) from Sourceforge and, after unpacking it to some temporary directory, install it by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo python setup.py install
-</pre></div>
-</div>
-<p>If the installation proceeds without errors, you will have three new executables available on your system:</p>
-<dl class="docutils">
-<dt><em>epigrass</em></dt>
-<dd>This starts Epigrass graphical user interface (GUI).</dd>
-<dt><em>epirunner</em></dt>
-<dd>This is a command line version of Epigrass. With it you can run models without invoking the GUI. It&#8217;s great for batch simulations and for remote use. for a quick help, try &#8220;epirunner -h&#8221;.</dd>
-<dt><em>epgeditor</em></dt>
-<dd>A graphical editor of .epg models. A easy way to edit already existing models. Contains detailed explanations of every section of the EPG file. <img class="math" src="_images/math/69ad55fcfacdd81e56c88b1e93e5b5578cf1c976.png" alt="x_3+y" /></dd>
-</dl>
-</div>
-</div>
-</div>
+            <div class="body">
+
+                <div class="section" id="building-and-installing">
+                    <span id="install"></span>
+
+                    <h1>Building and Installing<a class="headerlink" href="#building-and-installing"
+                                                  title="Permalink to this headline">¶</a></h1>
+
+                    <p>This chapter will walk through all aspects of Epigrass installation. From obtaining, building and
+                        installing the prerequisites to the installation of Epigrass itself.</p>
+
+                    <p>Most of the steps will be quite simple and similar since they will make use of standard tools for
+                        package installation on Debian GNU/Linux and derivatives. If you use a different distribution,
+                        you should check its documentation for package installation instructions.</p>
+
+                    <p>If, on your distribution, a package is not available for the required version, you can try to
+                        obtain an updated version of the package at the web-sites provided. On the rare cases where
+                        pre-built packages are not available, instructions on how to build the software from source
+                        should also be available from its web-site.</p>
+
+                    <div class="section" id="required-packages">
+                        <h2>Required Packages<a class="headerlink" href="#required-packages"
+                                                title="Permalink to this headline">¶</a></h2>
+
+                        <div class="section" id="python">
+                            <h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://www.python.org">http://www.python.org</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;= 2.5 &lt; 3</dd>
+                            </dl>
+                            <p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to
+                                learn, but its power means that large and complex applications can also be created
+                                easily. Its interpreted nature means that Python programmers are very productive because
+                                there is no edit/compile/link/run development cycle.</p>
+
+                            <p>Python is probably installed automatically by your GNU/Linux distribution (it is on
+                                Debian). If not, it is best to use your distribution&#8217;s standard tools for package
+                                installation. On Debian for example:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python python-dev build-essentials python-setuptools
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="numeric-python">
+                            <h3>Numeric Python<a class="headerlink" href="#numeric-python"
+                                                 title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;= 1.0</dd>
+                            </dl>
+                            <p>Numeric Python is a module for fast numeric computations in Python.</p>
+
+                            <p>Example installation:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-numpy
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="matplotlib">
+                            <h3>Matplotlib<a class="headerlink" href="#matplotlib"
+                                             title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;0.9</dd>
+                            </dl>
+                            <p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="pyqt">
+                            <h3>PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;4.0</dd>
+                            </dl>
+                            <p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of
+                                Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the
+                                simplicity of Python.</p>
+
+                            <p>PyQt depends on the Qt libraries to run. This dependency will be taken care by the
+                                package installation tools of most distributions, which will automatically install the
+                                required version of Qt.</p>
+
+                            <p>Example installation:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qt4
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="pyqwt">
+                            <h3>PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;5.0</dd>
+                            </dl>
+                            <p>PyQwt is a Python binding for the Qwt5 technical widget library. It is necessary for some
+                                os Epigrass&#8217; visualizations capabilities.</p>
+
+                            <p>Example installation:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-qwt5-qt4
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="mysql">
+                            <h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>Web-site:</em></dt>
+                                <dd><a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a>
+                                </dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;5.0</dd>
+                            </dl>
+                            <p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL
+                                server available in your LAN, you may skip this step after making sure you have
+                                permission to access and use it to store your data.</p>
+
+                            <p>Example installation:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mysql-server mysql-client python-mysqldb
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="redis">
+                            <h3>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
+                            <dl class="docutils">
+                                <dt><em>web-site:</em></dt>
+                                <dd><a class="reference external" href="http://redis.io">http://redis.io</a></dd>
+                                <dt><em>Version required:</em></dt>
+                                <dd>&gt;=2.8</dd>
+                            </dl>
+                            <p>Redis is a persistent Key-value database.</p>
+
+                            <p>Example installation:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install redis-server
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section" id="other-requirements">
+                            <h3>Other Requirements<a class="headerlink" href="#other-requirements"
+                                                     title="Permalink to this headline">¶</a></h3>
+
+                            <p>Some other requirements can be installed directly from the Python Package index using the
+                                <em>pip</em> tool:</p>
+
+                            <div class="highlight-bash">
+                                <div class="highlight"><pre><span class="nv">$ </span>sudo pip install networkx redis sqlsoup requests sphinx
+</pre>
+                                </div>
+                            </div>
+                            <div class="section" id="post-install-configuration">
+                                <h4>Post-install configuration<a class="headerlink" href="#post-install-configuration"
+                                                                 title="Permalink to this headline">¶</a></h4>
+
+                                <p>After installing MySQL, you will need to create a new database in the server, called
+                                    <em>epigrass</em> and a user with all priviledges to access and modify it. This is
+                                    the user Epigrass will use to interact with MySQL.</p>
+
+                                <p>section{Installing Epigrass}
+                                    If you got through all the steps above, it will be an easy task to install Epigrass.
+                                    There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu.
+                                    However, since it is not maitained by the developers of Epigrass, It may very well
+                                    be outdated. So please download Epigrass&#8217;s source tarball (something named <tt
+                                            class="file docutils literal"><span
+                                            class="pre">Epigrass_someversion.tar.gz</span></tt>) from Sourceforge and,
+                                    after unpacking it to some temporary directory, install it by typing:</p>
+
+                                <div class="highlight-bash">
+                                    <div class="highlight"><pre><span class="nv">$ </span>sudo python setup.py install
+</pre>
+                                    </div>
+                                </div>
+                                <p>If the installation proceeds without errors, you will have three new executables
+                                    available on your system:</p>
+                                <dl class="docutils">
+                                    <dt><em>epigrass</em></dt>
+                                    <dd>This starts Epigrass graphical user interface (GUI).</dd>
+                                    <dt><em>epirunner</em></dt>
+                                    <dd>This is a command line version of Epigrass. With it you can run models without
+                                        invoking the GUI. It&#8217;s great for batch simulations and for remote use. for
+                                        a quick help, try &#8220;epirunner -h&#8221;.
+                                    </dd>
+                                    <dt><em>epgeditor</em></dt>
+                                    <dd>A graphical editor of .epg models. A easy way to edit already existing models.
+                                        Contains detailed explanations of every section of the EPG file. <img
+                                                class="math"
+                                                src="_images/math/4fdb9ff437fc54bb08d0442de43b6ae5f710b73e.png"
+                                                alt="x_3+y"/></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-          </div>
+            </div>
         </div>
-      </div>
-      <div class="sphinxsidebar">
+    </div>
+    <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+                <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
             </a></p>
+
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
-<li><a class="reference" href="">Building and Installing</a><ul>
-<li><a class="reference" href="#required-packages">Required Packages</a><ul>
-<li><a class="reference" href="#python">Python</a></li>
-<li><a class="reference" href="#numeric-python">Numeric Python</a></li>
-<li><a class="reference" href="#matplotlib">Matplotlib</a></li>
-<li><a class="reference" href="#pyqt">PyQt</a></li>
-<li><a class="reference" href="#pyqwt">PyQwt</a></li>
-<li><a class="reference" href="#mysql">MySQL</a><ul>
-<li><a class="reference" href="#post-install-configuration">Post-install configuration</a></li>
-</ul>
-</li>
-<li><a class="reference" href="#r">R</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+                <li><a class="reference internal" href="#">Building and Installing</a>
+                    <ul>
+                        <li><a class="reference internal" href="#required-packages">Required Packages</a>
+                            <ul>
+                                <li><a class="reference internal" href="#python">Python</a></li>
+                                <li><a class="reference internal" href="#numeric-python">Numeric Python</a></li>
+                                <li><a class="reference internal" href="#matplotlib">Matplotlib</a></li>
+                                <li><a class="reference internal" href="#pyqt">PyQt</a></li>
+                                <li><a class="reference internal" href="#pyqwt">PyQwt</a></li>
+                                <li><a class="reference internal" href="#mysql">MySQL</a></li>
+                                <li><a class="reference internal" href="#redis">Redis</a></li>
+                                <li><a class="reference internal" href="#other-requirements">Other Requirements</a>
+                                    <ul>
+                                        <li><a class="reference internal" href="#post-install-configuration">Post-install
+                                            configuration</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
             <h4>Previous topic</h4>
-            <p class="topless"><a href="overview.html" title="previous chapter">Overview of Epigrass</a></p>
+
+            <p class="topless"><a href="overview.html"
+                                  title="previous chapter">Overview of Epigrass</a></p>
             <h4>Next topic</h4>
-            <p class="topless"><a href="intromodels.html" title="next chapter">Epidemic Models</a></p>
+
+            <p class="topless"><a href="intromodels.html"
+                                  title="next chapter">Epidemic Models</a></p>
+
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="_sources/install.txt">Show Source</a></li>
+                <li><a href="_sources/install.txt"
+                       rel="nofollow">Show Source</a></li>
             </ul>
-          <h3>Quick search</h3>
-            <form class="search" action="search.html" method="get">
-              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
-            </form>
+            <div id="searchbox" style="display: none">
+                <h3>Quick search</h3>
+
+                <form class="search" action="search.html" method="get">
+                    <input type="text" name="q"/>
+                    <input type="submit" value="Go"/>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+                <p class="searchtip" style="font-size: 90%">
+                    Enter search terms or a module, class or function name.
+                </p>
+            </div>
+            <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
-      </div>
-      <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
+    <div class="clearer"></div>
+</div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="intromodels.html" title="Epidemic Models"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="overview.html" title="Overview of Epigrass"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-      &copy; Copyright 2008, Flávio Codeço Coelho.
-      Last updated on Mar 08, 2009.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
-    </div>
-  </body>
+            <a href="genindex.html" title="General Index"
+                    >index</a></li>
+        <li class="right">
+            <a href="intromodels.html" title="Epidemic Models"
+                    >next</a> |
+        </li>
+        <li class="right">
+            <a href="overview.html" title="Overview of Epigrass"
+                    >previous</a> |
+        </li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+    </ul>
+</div>
+<div class="footer">
+    &copy; Copyright 2008, Flávio Codeço Coelho.
+    Last updated on May 06, 2014.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+</div>
+</body>
 </html>

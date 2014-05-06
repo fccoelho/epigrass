@@ -1,374 +1,691 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Epidemic Models &mdash; Epigrass v2.0a1 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>Epidemic Models &mdash; Epigrass 2.0a1 documentation</title>
+
+    <link rel="stylesheet" href="_static/default.css" type="text/css"/>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+
     <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0a1',
-        COLLAPSE_MODINDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: './',
+            VERSION: '2.0a1',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE: true
+        };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="Epigrass v2.0a1 documentation" href="index.html" />
-    <link rel="next" title="Using Epigrass" href="using.html" />
-    <link rel="prev" title="Building and Installing" href="install.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
+    <link rel="top" title="Epigrass 2.0a1 documentation" href="index.html"/>
+    <link rel="next" title="Using Epigrass" href="using.html"/>
+    <link rel="prev" title="Building and Installing" href="install.html"/>
+</head>
+<body>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="using.html" title="Using Epigrass"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="install.html" title="Building and Installing"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  
-  <div class="section" id="epidemic-models">
+            <a href="genindex.html" title="General Index"
+               accesskey="I">index</a></li>
+        <li class="right">
+            <a href="using.html" title="Using Epigrass"
+               accesskey="N">next</a> |
+        </li>
+        <li class="right">
+            <a href="install.html" title="Building and Installing"
+               accesskey="P">previous</a> |
+        </li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+    </ul>
+</div>
+
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body">
+
+<div class="section" id="epidemic-models">
 <h1>Epidemic Models<a class="headerlink" href="#epidemic-models" title="Permalink to this headline">¶</a></h1>
+
 <div class="section" id="introduction">
-<span id="index-381"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p id="index-382">Epidemiological models are implemented in the EpiGrass environment as a tool to predict, understand and develop strategies to control the spread of infectious diseases at different time/spatial scales. In this context, there are two direct potential applications. One is to model the spread of new diseases through an entirely susceptible population (ecological invasion). The velocity of spread of new diseases in a network of susceptible populations depends on their spatial distribution, size, susceptibility and patterns of contact. In a spatial scale, climate and environment may also impact the dynamics of geographical spread as it introduces temporal and spatial heterogeneity. Understanding and predicting the direction and velocity of an invasion wave is key for emergency preparedness.</p>
-<p>Besides invasion, network epidemiological models can also be used to understand patterns of geographical spread of endemic diseases. Many infectious diseases can only be maintained in a endemic state in cities with population size above a threshold, or under appropriate environmental conditions (climate, availability of a reservoir, vectors, etc). The variables and the magnitudes associated with endemicity threshold depends on the natural history of the disease cite{MJKeelingandBTGrenfell1997}. Theses magnitudes may vary from place to place as it depends on the contact structure of the individuals. Predicting which cities are sources for the endemicity and understanding the path of recurrent traveling waves may help us to design optimal surveillance and control strategies. For measles, for example, models suggest that geographical spread tend to follow a hierarchical pattern, starting in big cities (core) and then spreading to smaller neighborhood cities (satellites) cite{BTGrenfellandONBjoernstadandJKappey2001}.</p>
-<p>EpiGrass implements a series of epidemiological models which, integrated with a set of analytical and visualization tools,  may give us clues about the overall pattern of diseases spread in the geographical space. Besides, it can be used for scenario analysis to compare alternative intervention scenarios.</p>
+    <span id="index-0"></span>
+
+    <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+
+    <p id="index-1">Epidemiological models are implemented in the EpiGrass environment as a tool to predict, understand
+        and develop strategies to control the spread of infectious diseases at different time/spatial scales. In this
+        context, there are two direct potential applications. One is to model the spread of new diseases through an
+        entirely susceptible population (ecological invasion). The velocity of spread of new diseases in a network of
+        susceptible populations depends on their spatial distribution, size, susceptibility and patterns of contact. In
+        a spatial scale, climate and environment may also impact the dynamics of geographical spread as it introduces
+        temporal and spatial heterogeneity. Understanding and predicting the direction and velocity of an invasion wave
+        is key for emergency preparedness.</p>
+
+    <p>Besides invasion, network epidemiological models can also be used to understand patterns of geographical spread
+        of endemic diseases. Many infectious diseases can only be maintained in a endemic state in cities with
+        population size above a threshold, or under appropriate environmental conditions (climate, availability of a
+        reservoir, vectors, etc). The variables and the magnitudes associated with endemicity threshold depends on the
+        natural history of the disease cite{MJKeelingandBTGrenfell1997}. Theses magnitudes may vary from place to place
+        as it depends on the contact structure of the individuals. Predicting which cities are sources for the
+        endemicity and understanding the path of recurrent traveling waves may help us to design optimal surveillance
+        and control strategies. For measles, for example, models suggest that geographical spread tend to follow a
+        hierarchical pattern, starting in big cities (core) and then spreading to smaller neighborhood cities
+        (satellites) cite{BTGrenfellandONBjoernstadandJKappey2001}.</p>
+
+    <p>EpiGrass implements a series of epidemiological models which, integrated with a set of analytical and
+        visualization tools, may give us clues about the overall pattern of diseases spread in the geographical space.
+        Besides, it can be used for scenario analysis to compare alternative intervention scenarios.</p>
 </div>
 <div class="section" id="disease-models">
 <h2>Disease models<a class="headerlink" href="#disease-models" title="Permalink to this headline">¶</a></h2>
+
 <p>Models of disease dynamics are quite diverse, ranging from caricatures
-to very detailed simulations. Traditional models of spread of diseases
-are based on the mean field assumption, i.e., that individuals
-interact randomly at a certain rate. Important references to the
-subject are
-cite{DiekmannOandHeesterbeekJAP2000,DaleyDJandGaniJandCanningsC2001,IshamVandMedleyG1996,AndersonRMandMayRMandAndersonB1992}.
-These models are expressed mathematically as difference equations
-(discrete time) or differential equations (continuous time). In the
-simplest form, these models do not take into consideration either
-individual heterogeneity or the local nature of transmission
-events. Increased realism is achieved by structuring the population according to age, risk behavior, sex, susceptibility, or other category associated with different risk of getting or transmitting the disease. Within each sub-population, however, the assumption of well mixing must hold. When other species are involved in the transmission process (non-human hosts and vectors), these are also considered as compartments that may be sub-divided as well according to covariates associated with the risk of acquiring or transmitting the disease.</p>
-<p>In this context, epidemiological models take the form of multi-compartmental models where each compartment is a well-mixed homogeneous population. The model describes the transition of the individuals in this population through a sequence of disease-related stages. These stages could be <em>Susceptible</em>, <em>Infected</em>, <em>Recovered</em>, for example. And the transitions could be
-.. math:: Susceptible longrightarrow Infected
-.. math:: Infected longrightarrow Recovered</p>
-<p>If only these transitions are allowed, then individuals in the recovered class never become susceptible again (lifelong immunity). If, on the other hand, immunity is only temporary (as in pertussis), then another transition should be included:
-.. math:: Susceptible longrightarrow Infected
-.. math:: Infected longrightarrow Recovered
-.. math:: Recovered longrightarrow Susceptible</p>
-<p>One way to visualize these models is using state-flow diagrams, where boxes represent states (compartments) and arrows indicate the transitions. It is the state identity together with the transitions allowed that define the type of model in use.</p>
+    to very detailed simulations. Traditional models of spread of diseases
+    are based on the mean field assumption, i.e., that individuals
+    interact randomly at a certain rate. Important references to the
+    subject are
+    cite{DiekmannOandHeesterbeekJAP2000,DaleyDJandGaniJandCanningsC2001,IshamVandMedleyG1996,AndersonRMandMayRMandAndersonB1992}.
+    These models are expressed mathematically as difference equations
+    (discrete time) or differential equations (continuous time). In the
+    simplest form, these models do not take into consideration either
+    individual heterogeneity or the local nature of transmission
+    events. Increased realism is achieved by structuring the population according to age, risk behavior, sex,
+    susceptibility, or other category associated with different risk of getting or transmitting the disease. Within each
+    sub-population, however, the assumption of well mixing must hold. When other species are involved in the
+    transmission process (non-human hosts and vectors), these are also considered as compartments that may be
+    sub-divided as well according to covariates associated with the risk of acquiring or transmitting the disease.</p>
+
+<p>In this context, epidemiological models take the form of multi-compartmental models where each compartment is a
+    well-mixed homogeneous population. The model describes the transition of the individuals in this population through
+    a sequence of disease-related stages. These stages could be <em>Susceptible</em>, <em>Infected</em>,
+    <em>Recovered</em>, for example. And the transitions could be
+    .. math:: Susceptible longrightarrow Infected
+    .. math:: Infected longrightarrow Recovered</p>
+
+<p>If only these transitions are allowed, then individuals in the recovered class never become susceptible again
+    (lifelong immunity). If, on the other hand, immunity is only temporary (as in pertussis), then another transition
+    should be included:
+    .. math:: Susceptible longrightarrow Infected
+    .. math:: Infected longrightarrow Recovered
+    .. math:: Recovered longrightarrow Susceptible</p>
+
+<p>One way to visualize these models is using state-flow diagrams, where boxes represent states (compartments) and
+    arrows indicate the transitions. It is the state identity together with the transitions allowed that define the type
+    of model in use.</p>
+
 <div class="section" id="dispersal-of-infected-individuals">
-<h3>Dispersal of infected individuals<a class="headerlink" href="#dispersal-of-infected-individuals" title="Permalink to this headline">¶</a></h3>
-<p>A key feature of EpiGrass is to allow the simulation of geographical spread of infection from one locality to others. Dispersal of infection is modeled as in a &#8216;forest fire&#8217; model cite{BTGrenfellandONBjoernstadandJKappey2001}. An infected individual, traveling to another city, acts as a spark that may trigger an epidemic in the new locality. This approach is based on the assumption that individuals commute between localities and contribute temporarily to the number of infected in the new locality, but not to its demography. Further details about this approach can be found in Grenfell et al (2001).</p>
-<p>In all models presented below, new infections in locality <img class="math" src="_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i" /> arise from the contact between Susceptibles in <img class="math" src="_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i" /> and Infectious individuals. Infectious individuals are of two types: those residents in <img class="math" src="_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i" /> <img class="math" src="_images/math/ce6a485725d52935353934a171bf897d3da2a39b.png" alt="(I_t)" /> and those visiting <img class="math" src="_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i" /> <img class="math" src="_images/math/8b953d396f434900925523b4e79b2ff52346e40a.png" alt="(\theta)" />. Mathematically, this is written as:</p>
-<div class="math">
-<p><img src="_images/math/51b2c6f2a764e8007d15cf4fd6bb77533ec37ec4.png" alt="L_{t+1} = \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}" />
-</div></p><p>where <img class="math" src="_images/math/c9c25fac6fee81c2670c776361dd8e82276988e4.png" alt="L_{t+1}" /> is the number of new cases, <img class="math" src="_images/math/fdb63b9e51abe6bbb16acfb5d7b773ddbb5bf4a8.png" alt="\beta" /> is the contact rate between Susceptibles and Infectious individuals, <img class="math" src="_images/math/93d5be9bdec94fc912e4bc9b74fc6812a19e186e.png" alt="S_t" /> is the number of susceptibles, <img class="math" src="_images/math/e82aca3b77354c7d456dabf032e4f36fd1495fe8.png" alt="I_t" /> is the number of infectious individuals resident in the locality, <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" /> is the number of infectious individuals visiting the locality, <img class="math" src="_images/math/9aa0045de3dbedbd4198cab37b2756783c0749ce.png" alt="N_t" /> is the population residing in the locality and <img class="math" src="_images/math/f1d65afac7941da498c38652d7e03e63e375c8fd.png" alt="n_t" /> is the total number of individuals visiting the locality. <img class="math" src="_images/math/10f32377ac67d94f764f12a15ea987e88c85d3e1.png" alt="\alpha" /> is a mixing parameter. <img class="math" src="_images/math/5d739b3faa1ca596d500cae6ad311fd86a8b6937.png" alt="\alpha=1" /> corresponds to homogeneous mixing (Finkenstadt and Grenfell, 2000).</p>
+    <h3>Dispersal of infected individuals<a class="headerlink" href="#dispersal-of-infected-individuals"
+                                            title="Permalink to this headline">¶</a></h3>
+
+    <p>A key feature of EpiGrass is to allow the simulation of geographical spread of infection from one locality to
+        others. Dispersal of infection is modeled as in a &#8216;forest fire&#8217; model
+        cite{BTGrenfellandONBjoernstadandJKappey2001}. An infected individual, traveling to another city, acts as a
+        spark that may trigger an epidemic in the new locality. This approach is based on the assumption that
+        individuals commute between localities and contribute temporarily to the number of infected in the new locality,
+        but not to its demography. Further details about this approach can be found in Grenfell et al (2001).</p>
+
+    <p>In all models presented below, new infections in locality <img class="math"
+                                                                      src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png"
+                                                                      alt="i"/> arise from the contact between
+        Susceptibles in <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> and
+        Infectious individuals. Infectious individuals are of two types: those residents in <img class="math"
+                                                                                                 src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png"
+                                                                                                 alt="i"/> <img
+                class="math" src="_images/math/c616602ad537b9d8818ef4962b5a3b54093138c2.png" alt="(I_t)"/> and those
+        visiting <img class="math" src="_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" alt="i"/> <img
+                class="math" src="_images/math/6a17c38235f1975600d0301eb45b752fe603e645.png" alt="(\theta)"/>.
+        Mathematically, this is written as:</p>
+
+    <div class="math">
+        <p><img src="_images/math/fe968ba21ce9ab2dd02cd83d9d3917b269fc264d.png"
+                alt="L_{t+1} = \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}"/></p>
+    </div>
+    <p>where <img class="math" src="_images/math/8fcc7abc2ffacf96ed02429fcb5091a351c80170.png" alt="L_{t+1}"/> is the
+        number of new cases, <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png"
+                                  alt="\beta"/> is the contact rate between Susceptibles and Infectious individuals,
+        <img class="math" src="_images/math/640cd6ce2ad9f6f4826d45cd0b0f205043d8ef46.png" alt="S_t"/> is the number of
+        susceptibles, <img class="math" src="_images/math/9becca3d1acbcd4ae8e257c8748f8ac1ca1e021a.png" alt="I_t"/> is
+        the number of infectious individuals resident in the locality, <img class="math"
+                                                                            src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png"
+                                                                            alt="\theta"/> is the number of infectious
+        individuals visiting the locality, <img class="math"
+                                                src="_images/math/d04dd02c1e493cefdf4ca2ab4462db3a063d05e8.png"
+                                                alt="N_t"/> is the population residing in the locality and <img
+                class="math" src="_images/math/6875c33c62b511caca07c9fdac6d5fba053051d0.png" alt="n_t"/> is the total
+        number of individuals visiting the locality. <img class="math"
+                                                          src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png"
+                                                          alt="\alpha"/> is a mixing parameter. <img class="math"
+                                                                                                     src="_images/math/e1414c9f072e8b0170686043af51c3fbf387615d.png"
+                                                                                                     alt="\alpha=1"/>
+        corresponds to homogeneous mixing (Finkenstadt and Grenfell, 2000).</p>
 </div>
 <div class="section" id="typology-of-infectious-diseases-and-corresponding-models">
-<h3>Typology of infectious diseases and corresponding models<a class="headerlink" href="#typology-of-infectious-diseases-and-corresponding-models" title="Permalink to this headline">¶</a></h3>
-<p id="index-383">Here we present a brief description of the typology of infectious
-diseases models based on the main route of transmission, and type of
-immunity resulting from infection. These models correspond to the
-types of models built into EpiGrass.</p>
-<div class="section" id="sir-like-models">
-<h4>SIR-like models<a class="headerlink" href="#sir-like-models" title="Permalink to this headline">¶</a></h4>
-<p>The natural history of many directly transmitted infectious diseases can be appropriately described by a SIR-like model. <em>SIR</em> stands for Susceptible <img class="math" src="_images/math/79fa964b311f69ce3025fee495414ebfdc38d9c2.png" alt="(S)" />, Infected <img class="math" src="_images/math/ebe59c3c1a5b23edf946ca3e675d637f3998f7b8.png" alt="(I)" /> and Recovered <img class="math" src="_images/math/68f23571b03a7a23f6ec21ad88eba4bee8f9c919.png" alt="(R)" />. Archetypal <em>SIRs</em> are measles or chickenpox, i.e., diseases that confer lifelong immunity (but see cite{KGlassandBTGrenfell2004}). An individual starts his life in the <img class="math" src="_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S" /> state and may progress to the <img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> state. The rate of progression of individuals from <img class="math" src="_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S" /> to <img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> is called the incidence rate or force of infection <img class="math" src="_images/math/192f73fdb747fef3847be103c3801fb7bf98fe0e.png" alt="(\lambda)" /> which is a function of contact rate, probability of transmission per contact and density of infectious individuals. Individuals stay in the infectious period for a certain time and then move to the recovered state where they become immune to new infections. Generally, the removal rate from the infectious class is the inverse of the infectious period (i.e., it is assumed that the duration of infection is exponentially distributed).</p>
-<div class="figure" id="fig-sir">
-<img alt="_images/SIRdiagram.png" src="_images/SIRdiagram.png" />
-<p class="caption">Figure: SIR-like models</p>
-</div>
-<p>Variations of this model allow cases where infected individuals do not acquire immunity after infection, thus returning to the susceptible pool (<em>SIS</em> model). Another variation is the inclusion of a latent stage to hold individuals that are infected but not infectious to others yet (incubation period). These are the <em>SEIR</em> (with immunity) and <em>SEIS</em> (no immunity) models.</p>
-<p>Next, we describe in more detail each one of these models in their deterministic and stochastic versions, as used by EpiGrass.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="76%" />
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head"><strong>Symbol</strong></th>
-<th class="head"><strong>Meaning</strong></th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr><td><img class="math" src="_images/math/c06de7744737a7319b5189179d949e670219ea31.png" alt="L_t" /></td>
-<td>number of newly infected individuals at time</td>
-</tr>
-<tr><td><img class="math" src="_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" /></td>
-<td>number of exposed but not infectious individuals
-at time t</td>
-</tr>
-<tr><td><img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /></td>
-<td>number of infectious individuals at time t</td>
-</tr>
-<tr><td><img class="math" src="_images/math/eff43e84f8a3bcf7b6965f0a3248bc4d3a9d0cd4.png" alt="R" /></td>
-<td>number of recovered individuals at time t</td>
-</tr>
-<tr><td><img class="math" src="_images/math/fdb63b9e51abe6bbb16acfb5d7b773ddbb5bf4a8.png" alt="\beta" /></td>
-<td>contact rate (<img class="math" src="_images/math/7ae7122862685938aa0dac45bee1958ac2cb25c1.png" alt="t^{-1}" />)</td>
-</tr>
-<tr><td><img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" /></td>
-<td>number of infectious visitors</td>
-</tr>
-<tr><td><img class="math" src="_images/math/10f32377ac67d94f764f12a15ea987e88c85d3e1.png" alt="\alpha" /></td>
-<td>mixing parameter (<img class="math" src="_images/math/1f44b40acbe984616d832cd5d3b185280621c89f.png" alt="\alpha = 1" /> means
-homogeneous mixing)</td>
-</tr>
-<tr><td><img class="math" src="_images/math/174fadd07fd54c9afe288e96558c92e0c1da733a.png" alt="n" /></td>
-<td>number of visitors</td>
-</tr>
-<tr><td colspan="2"><img class="math" src="_images/math/fc97ef67268cd4e91bacdf12b8901d7036c9a056.png" alt="N" />      | population <img class="math" src="_images/math/8a9b7d7df0382aaa689142dea7755ef30b095565.png" alt="(S+E+I+R)" /></td>
-</tr>
-<tr><td colspan="2"><img class="math" src="_images/math/ff5fb3d775862e2123b007eb4373ff6cc1a34d4e.png" alt="B" />      | susceptible pool replenishment</td>
-</tr>
-<tr><td><img class="math" src="_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" /></td>
-<td>fraction of <img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> recovering from infection
-per unit of time <img class="math" src="_images/math/06f618754c6e68ff7005e4c0f4c73716e8d3b7ee.png" alt="([0,1])" /></td>
-</tr>
-<tr><td><img class="math" src="_images/math/a3a59bb1293ee3f6dec19de4019a7178874219ae.png" alt="e" /></td>
-<td>fraction of <img class="math" src="_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" /> becoming infectious per
-unit of time <img class="math" src="_images/math/06f618754c6e68ff7005e4c0f4c73716e8d3b7ee.png" alt="([0,1])" /></td>
-</tr>
-<tr><td><img class="math" src="_images/math/0a42a8b725c200085e5253db2d2fbf8dab898a8f.png" alt="\delta" /></td>
-<td>probability of acquiring immunity <img class="math" src="_images/math/06f618754c6e68ff7005e4c0f4c73716e8d3b7ee.png" alt="([0,1])" /></td>
-</tr>
-<tr><td><img class="math" src="_images/math/9ee4b825a2e36ae093ed7be5e4851ef453b34914.png" alt="w" /></td>
-<td>probability of losing immunity <img class="math" src="_images/math/06f618754c6e68ff7005e4c0f4c73716e8d3b7ee.png" alt="([0,1])" /></td>
-</tr>
-<tr><td><img class="math" src="_images/math/36f73fc1312ee0349b3f3a0f3bd9eb5504339011.png" alt="p" /></td>
-<td>probability of recovered individual acquiring
-infection, given exposure <img class="math" src="_images/math/06f618754c6e68ff7005e4c0f4c73716e8d3b7ee.png" alt="([0,1])" /></td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt><strong>SIR models</strong></dt>
-<dd>Examples of diseases represented by SIR models are measles, chickenpox. Some diseases that do not confer lifelong immunity may be represented by this model if only short term dynamics is of interest. In the scale of a year, influenza and pertussis, for example, could be described using SIR. The SIR model is implemented in EpiGrass as a system of four difference equations. Besides the three equations describing the dynamics of <img class="math" src="_images/math/ad28c83c99a8fd0dd2e2e594c9d02ee532765a0a.png" alt="S" />, <img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> and <img class="math" src="_images/math/eff43e84f8a3bcf7b6965f0a3248bc4d3a9d0cd4.png" alt="R" />, a fourth equation explicitly defines the number of new cases per time step, <img class="math" src="_images/math/551ed4358eb390fbb41184d6789cc8407fc434fa.png" alt="L(t)" /> (i.e., the incidence). In general, this quantity is embedded in the <img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> equation (prevalence), but it is important to keep track of the incidence if one wishes to compare prediction with notification data.</dd>
-</dl>
-<div class="math" id="equation-E:SIRmodel">
-<p><span class="eqno">(1)</span><img src="_images/math/7566739a8dafc1d1c5596aa550ab0f53482778cb.png" alt="\begin{align}
+    <h3>Typology of infectious diseases and corresponding models<a class="headerlink"
+                                                                   href="#typology-of-infectious-diseases-and-corresponding-models"
+                                                                   title="Permalink to this headline">¶</a></h3>
+
+    <p id="index-2">Here we present a brief description of the typology of infectious
+        diseases models based on the main route of transmission, and type of
+        immunity resulting from infection. These models correspond to the
+        types of models built into EpiGrass.</p>
+
+    <div class="section" id="sir-like-models">
+        <h4>SIR-like models<a class="headerlink" href="#sir-like-models" title="Permalink to this headline">¶</a></h4>
+
+        <p>The natural history of many directly transmitted infectious diseases can be appropriately described by a
+            SIR-like model. <em>SIR</em> stands for Susceptible <img class="math"
+                                                                     src="_images/math/9d80ab70185a8685e3c53838bc7aaa3848c60714.png"
+                                                                     alt="(S)"/>, Infected <img class="math"
+                                                                                                src="_images/math/bc54bdfe4a077f2a3a61081483484db6b68f42b5.png"
+                                                                                                alt="(I)"/> and
+            Recovered <img class="math" src="_images/math/92b201e5ae73178e0cce6336ff1ff1a4828577cc.png" alt="(R)"/>.
+            Archetypal <em>SIRs</em> are measles or chickenpox, i.e., diseases that confer lifelong immunity (but see
+            cite{KGlassandBTGrenfell2004}). An individual starts his life in the <img class="math"
+                                                                                      src="_images/math/11a85f3c69ae6702cb1d99d3de451913b8f84c04.png"
+                                                                                      alt="S"/> state and may progress
+            to the <img class="math" src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png" alt="I"/> state.
+            The rate of progression of individuals from <img class="math"
+                                                             src="_images/math/11a85f3c69ae6702cb1d99d3de451913b8f84c04.png"
+                                                             alt="S"/> to <img class="math"
+                                                                               src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png"
+                                                                               alt="I"/> is called the incidence rate or
+            force of infection <img class="math" src="_images/math/9457be8f66af8fef835a0d55c58479670350f025.png"
+                                    alt="(\lambda)"/> which is a function of contact rate, probability of transmission
+            per contact and density of infectious individuals. Individuals stay in the infectious period for a certain
+            time and then move to the recovered state where they become immune to new infections. Generally, the removal
+            rate from the infectious class is the inverse of the infectious period (i.e., it is assumed that the
+            duration of infection is exponentially distributed).</p>
+
+        <div class="figure" id="fig-sir">
+            <img alt="_images/SIRdiagram.png" src="_images/SIRdiagram.png"/>
+
+            <p class="caption">Figure: SIR-like models</p>
+        </div>
+        <p>Variations of this model allow cases where infected individuals do not acquire immunity after infection, thus
+            returning to the susceptible pool (<em>SIS</em> model). Another variation is the inclusion of a latent stage
+            to hold individuals that are infected but not infectious to others yet (incubation period). These are the
+            <em>SEIR</em> (with immunity) and <em>SEIS</em> (no immunity) models.</p>
+
+        <p>Next, we describe in more detail each one of these models in their deterministic and stochastic versions, as
+            used by EpiGrass.</p>
+        <table border="1" class="docutils">
+            <colgroup>
+                <col width="24%"/>
+                <col width="76%"/>
+            </colgroup>
+            <thead valign="bottom">
+            <tr class="row-odd">
+                <th class="head"><strong>Symbol</strong></th>
+                <th class="head"><strong>Meaning</strong></th>
+            </tr>
+            </thead>
+            <tbody valign="top">
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/5c36ac964f4070b7920c9ad93498e852492f1c20.png" alt="L_t"/></td>
+                <td>number of newly infected individuals at time</td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/cfd13a0f26eb7ef0093319a7669da7dd3771dbac.png" alt="E"/></td>
+                <td>number of exposed but not infectious individuals
+                    at time t
+                </td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png" alt="I"/></td>
+                <td>number of infectious individuals at time t</td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" alt="R"/></td>
+                <td>number of recovered individuals at time t</td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/></td>
+                <td>contact rate (<img class="math" src="_images/math/9b61dec4035593c66a4f1a9650a29b7cbcf7253f.png"
+                                       alt="t^{-1}"/>)
+                </td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" alt="\theta"/>
+                </td>
+                <td>number of infectious visitors</td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>
+                </td>
+                <td>mixing parameter (<img class="math" src="_images/math/7eab7af9a483d7c6e4e628ba496fb65c5c56faac.png"
+                                           alt="\alpha = 1"/> means
+                    homogeneous mixing)
+                </td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/></td>
+                <td>number of visitors</td>
+            </tr>
+            <tr class="row-even">
+                <td colspan="2"><img class="math" src="_images/math/75e27f04188974063be3230dca208cd495b77ce1.png"
+                                     alt="N"/> | population <img class="math"
+                                                                 src="_images/math/4bc61022e3ce4e9e6c65c70d8c6faf3f6a9347e8.png"
+                                                                 alt="(S+E+I+R)"/></td>
+            </tr>
+            <tr class="row-odd">
+                <td colspan="2"><img class="math" src="_images/math/83956e92fcc80dee17fce864543216939a3c9da7.png"
+                                     alt="B"/> | susceptible pool replenishment
+                </td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/2ede365ad144ab396916ec60458da03860803078.png" alt="r"/></td>
+                <td>fraction of <img class="math" src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png"
+                                     alt="I"/> recovering from infection
+                    per unit of time <img class="math" src="_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png"
+                                          alt="([0,1])"/></td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/630e3a780577ea7921e81ee2ac5237dd1802ec8d.png" alt="e"/></td>
+                <td>fraction of <img class="math" src="_images/math/cfd13a0f26eb7ef0093319a7669da7dd3771dbac.png"
+                                     alt="E"/> becoming infectious per
+                    unit of time <img class="math" src="_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png"
+                                      alt="([0,1])"/></td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/b35a9439ad8c8657b1b1d792ad5c2d77a52c0aef.png" alt="\delta"/>
+                </td>
+                <td>probability of acquiring immunity <img class="math"
+                                                           src="_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png"
+                                                           alt="([0,1])"/></td>
+            </tr>
+            <tr class="row-odd">
+                <td><img class="math" src="_images/math/8659700e6646cd91bc02c32affaa5ec046ee9935.png" alt="w"/></td>
+                <td>probability of losing immunity <img class="math"
+                                                        src="_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png"
+                                                        alt="([0,1])"/></td>
+            </tr>
+            <tr class="row-even">
+                <td><img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" alt="p"/></td>
+                <td>probability of recovered individual acquiring
+                    infection, given exposure <img class="math"
+                                                   src="_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png"
+                                                   alt="([0,1])"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <dl class="docutils">
+            <dt><strong>SIR models</strong></dt>
+            <dd>Examples of diseases represented by SIR models are measles, chickenpox. Some diseases that do not confer
+                lifelong immunity may be represented by this model if only short term dynamics is of interest. In the
+                scale of a year, influenza and pertussis, for example, could be described using SIR. The SIR model is
+                implemented in EpiGrass as a system of four difference equations. Besides the three equations describing
+                the dynamics of <img class="math" src="_images/math/11a85f3c69ae6702cb1d99d3de451913b8f84c04.png"
+                                     alt="S"/>, <img class="math"
+                                                     src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png"
+                                                     alt="I"/> and <img class="math"
+                                                                        src="_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png"
+                                                                        alt="R"/>, a fourth equation explicitly defines
+                the number of new cases per time step, <img class="math"
+                                                            src="_images/math/7500d9b1aba9165be500157f296fef0ffaed2bbd.png"
+                                                            alt="L(t)"/> (i.e., the incidence). In general, this
+                quantity is embedded in the <img class="math"
+                                                 src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png"
+                                                 alt="I"/> equation (prevalence), but it is important to keep track of
+                the incidence if one wishes to compare prediction with notification data.
+            </dd>
+        </dl>
+        <div class="math" id="equation-E:SIRmodel">
+            <p><span class="eqno">(1)</span><img src="_images/math/7354939ef1456a691d68cb6dc53481810d71477d.png" alt="\begin{align}
     L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
     I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\\
     S_{t+1} &amp;= S_t + B - L_{t+1}\nonumber\\
     R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})\nonumber
-\end{align}" />
-</div></p><p>This model can be easily extended to include diseases without recovery, for example AIDS, the so called SI models. Basically, the recovery rate is set to 0.</p>
-<dl class="docutils" id="index-385">
-<dt><strong>SIS models</strong></dt>
-<dd><p class="first">In the SIS model, individuals do not acquire immunity after the infection. They return directly to the susceptible class.</p>
-<p class="last">The only difference between $SIS$ and $SIR$ models is the absence of $R$ and the flow of recovered individuals to the susceptible stage:</p>
-</dd>
-</dl>
-<div class="math" id="equation-E:SISmodel">
-<p><span class="eqno">(2)</span><img src="_images/math/c3c552d32767fd62d8515c6fc497ce441bad29df.png" alt="\begin{align}
+\end{align}"/></p>
+        </div>
+        <p>This model can be easily extended to include diseases without recovery, for example AIDS, the so called SI
+            models. Basically, the recovery rate is set to 0.</p>
+        <dl class="docutils" id="index-4">
+            <dt><strong>SIS models</strong></dt>
+            <dd><p class="first">In the SIS model, individuals do not acquire immunity after the infection. They return
+                directly to the susceptible class.</p>
+
+                <p class="last">The only difference between $SIS$ and $SIR$ models is the absence of $R$ and the flow of
+                    recovered individuals to the susceptible stage:</p>
+            </dd>
+        </dl>
+        <div class="math" id="equation-E:SISmodel">
+            <p><span class="eqno">(2)</span><img src="_images/math/95db7d3828755e930da50687998d80dc04b4ae13.png" alt="\begin{align}
         L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t} \nonumber\\
         I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\\
         S_{t+1} &amp;= S_t + B - L_{t+1} + r I_{t+1}\nonumber
-\end{align}" />
-</div></p><dl class="docutils" id="index-386">
-<dt><strong>SEIR models</strong></dt>
-<dd>These models have an extra compartment for those individuals who have acquired the infection but are still not infectious to others. This is the latent period and it is often parameterized as the inverse of the incubation period. Note, however, that for many diseases, initiation of infectiousness does not necessarily coincides with symptoms. In principle, any disease described by the SIR model can also be described by the SEIR model. The decision regarding the use of one or another depends on the magnitude of the latent period in relation to the time frame of other events in the simulation. The model has the form:</dd>
-</dl>
-<div class="math" id="equation-E:SEIRmodel">
-<p><span class="eqno">(3)</span><img src="_images/math/7b26a46052c62ea2223dc593acd15cfaadbb9349.png" alt="\begin{align}
+\end{align}"/></p>
+        </div>
+        <dl class="docutils" id="index-5">
+            <dt><strong>SEIR models</strong></dt>
+            <dd>These models have an extra compartment for those individuals who have acquired the infection but are
+                still not infectious to others. This is the latent period and it is often parameterized as the inverse
+                of the incubation period. Note, however, that for many diseases, initiation of infectiousness does not
+                necessarily coincides with symptoms. In principle, any disease described by the SIR model can also be
+                described by the SEIR model. The decision regarding the use of one or another depends on the magnitude
+                of the latent period in relation to the time frame of other events in the simulation. The model has the
+                form:
+            </dd>
+        </dl>
+        <div class="math" id="equation-E:SEIRmodel">
+            <p><span class="eqno">(3)</span><img src="_images/math/8e2f44a452ab99ce955d61fb2fa59f24fcf98ba0.png" alt="\begin{align}
         L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
     E_{t+1} &amp;= (1-e) E_t + L_{t+1}\nonumber\\
         I_{t+1} &amp;= e E_t + (1-r)I_t\nonumber\\
         S_{t+1} &amp;= S_t + B - L_{t+1}\nonumber\\
         R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}+E_{t+1})\nonumber
-\end{align}" />
-</div></p><dl class="docutils" id="index-387">
-<dt><strong>SEIS models</strong></dt>
-<dd>These are SIS models with the inclusion of the latent stage.</dd>
-</dl>
-<div class="math" id="equation-E:SEISmodel">
-<p><span class="eqno">(4)</span><img src="_images/math/ed3d93e6c49c02ef9da8a1ea898be0ac98330ac1.png" alt="\begin{align}
+\end{align}"/></p>
+        </div>
+        <dl class="docutils" id="index-6">
+            <dt><strong>SEIS models</strong></dt>
+            <dd>These are SIS models with the inclusion of the latent stage.</dd>
+        </dl>
+        <div class="math" id="equation-E:SEISmodel">
+            <p><span class="eqno">(4)</span><img src="_images/math/c55d1683435f4b619433ce7648324dc960eda9c8.png" alt="\begin{align}
         L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
     E_{t+1} &amp;= (1-e) E_t + L_{t+1}\nonumber\\
         I_{t+1} &amp;= e E_t + (1-r)I_t\nonumber\\
         S_{t+1} &amp;= S_t + B - L_{t+1} + r I_t\nonumber
-\end{align}" />
-</div></p></div>
-<div class="section" id="sipr-like-models">
-<h4>SIpR-like models<a class="headerlink" href="#sipr-like-models" title="Permalink to this headline">¶</a></h4>
-<p>These are <em>SIR</em> models with immunity intermediary between full (<em>SIR</em>) and null (<em>SIS</em>).
-Some possibilities arise here: 1) Infection confers full immunity to a fraction of the individuals and the remaining ones return to the susceptible class again, after infection. (<em>SIpRpS</em>); 2) Infection provides only partial immunity and recovered individuals are partially susceptible to new infection (<em>SIpR</em>); 3) Immunity is full right after infection but wanes with time (<em>SIRS</em>). Each model is presented below. Figure <div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/home/fccoelho/Documents/Projects_software/epigrass/epigrassqt4/docs/source/intromodels.rst</tt>)</p>
-undefined label: fig:sipr &#8211; if you don&#8217;t give a link caption the label must precede a section header.</div>
- illustrates them diagrammatically.</p>
-<div class="figure">
-<img alt="_images/SIpRdiagram.png" src="_images/SIpRdiagram.png" />
-<p class="caption">SIpR-like models.</p>
-</div>
-<p>Related models, that included the latent state $E$ are: textit{SEIpRpS}, <em>SEIpR</em>, <em>SEIRS</em>.</p>
-<dl class="docutils" id="index-388">
-<dt><strong>SIpRpS model</strong></dt>
-<dd>This model assumes that a fraction $delta$ of infectious individuals acquire full immunity while the remaining $(1-delta)$ returns to the susceptible stage. The model is:</dd>
-</dl>
-<div class="math" id="equation-E:SIpRpSmodel">
-<p><span class="eqno">(5)</span><img src="_images/math/2e94db2ac818e466fc63dbe9f0951510549135db.png" alt="\begin{align}
+\end{align}"/></p>
+        </div>
+    </div>
+    <div class="section" id="sipr-like-models">
+        <h4>SIpR-like models<a class="headerlink" href="#sipr-like-models" title="Permalink to this headline">¶</a></h4>
+
+        <p>These are <em>SIR</em> models with immunity intermediary between full (<em>SIR</em>) and null (<em>SIS</em>).
+            Some possibilities arise here: 1) Infection confers full immunity to a fraction of the individuals and the
+            remaining ones return to the susceptible class again, after infection. (<em>SIpRpS</em>); 2) Infection
+            provides only partial immunity and recovered individuals are partially susceptible to new infection (<em>SIpR</em>);
+            3) Immunity is full right after infection but wanes with time (<em>SIRS</em>). Each model is presented
+            below. Figure <em class="xref std std-ref">fig:sipr</em> illustrates them diagrammatically.</p>
+
+        <div class="figure">
+            <img alt="_images/SIpRdiagram.png" src="_images/SIpRdiagram.png"/>
+
+            <p class="caption">SIpR-like models.</p>
+        </div>
+        <p>Related models, that included the latent state $E$ are: textit{SEIpRpS}, <em>SEIpR</em>, <em>SEIRS</em>.</p>
+        <dl class="docutils" id="index-7">
+            <dt><strong>SIpRpS model</strong></dt>
+            <dd>This model assumes that a fraction $delta$ of infectious individuals acquire full immunity while the
+                remaining $(1-delta)$ returns to the susceptible stage. The model is:
+            </dd>
+        </dl>
+        <div class="math" id="equation-E:SIpRpSmodel">
+            <p><span class="eqno">(5)</span><img src="_images/math/c7da88ff7afb918966367d305acb51de50b60652.png" alt="\begin{align}
         L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
         I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\\
         S_{t+1} &amp;= S_t + B - L_{t+1} + (1-\delta) r I_t\nonumber\\
         R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})\nonumber
-\end{align}" />
-</div></p><dl class="docutils">
-<dt><strong>SIpR model</strong></dt>
-<dd>This model assumes that immunity is only partial and recovered individuals may acquire infection again (at a  lower rate <img class="math" src="_images/math/330287cf2cdb54e7270861cc536a291675d54035.png" alt="p \lambda" />, where <img class="math" src="_images/math/37b5ff252bda1fde888d22db2e7b15dc6e7033bd.png" alt="0\leq p \leq 1" />). Two equations calculate the number of new infections. <img class="math" src="_images/math/25b597226f6bbd9e8be3cd3cb5a352ec697f7972.png" alt="L_S" />  calculates the number of susceptibles that become infected at <img class="math" src="_images/math/6698e583d6d03ec099c12e35add2e895252c49dd.png" alt="t+1" />. <img class="math" src="_images/math/4cf2ac81416e02ca2c173b514980d0aeaf5e8cfb.png" alt="L_R" />  calculates the number of recovered that become infected at <img class="math" src="_images/math/6698e583d6d03ec099c12e35add2e895252c49dd.png" alt="t+1" />. The latter are less susceptible to the disease when compared to susceptibles. The model is:</dd>
-</dl>
-<div class="math" id="equation-E:SIpRmodel">
-<p><span class="eqno">(6)</span><img src="_images/math/fc2c486ef47b857c3c8db2ecc998ad9ad432644a.png" alt="\begin{align}
+\end{align}"/></p>
+        </div>
+        <dl class="docutils">
+            <dt><strong>SIpR model</strong></dt>
+            <dd>This model assumes that immunity is only partial and recovered individuals may acquire infection again
+                (at a lower rate <img class="math" src="_images/math/33f4189328b442bb0be8faecb62c0f5798554452.png"
+                                      alt="p \lambda"/>, where <img class="math"
+                                                                    src="_images/math/3c25546a6e9432111c764e3b1ae38a0fa211add7.png"
+                                                                    alt="0\leq p \leq 1"/>). Two equations calculate the
+                number of new infections. <img class="math"
+                                               src="_images/math/235f09cb740a17bd81adeb0ace77979e570c5fbc.png"
+                                               alt="L_S"/> calculates the number of susceptibles that become infected at
+                <img class="math" src="_images/math/c87b8a49cd3fe903fc242cb32b1a47c2a5d10677.png" alt="t+1"/>. <img
+                        class="math" src="_images/math/8f3b1d05b409246df688a948b9201c3cf24d1d3f.png" alt="L_R"/>
+                calculates the number of recovered that become infected at <img class="math"
+                                                                                src="_images/math/c87b8a49cd3fe903fc242cb32b1a47c2a5d10677.png"
+                                                                                alt="t+1"/>. The latter are less
+                susceptible to the disease when compared to susceptibles. The model is:
+            </dd>
+        </dl>
+        <div class="math" id="equation-E:SIpRmodel">
+            <p><span class="eqno">(6)</span><img src="_images/math/277b8ae9be0d5bce6bd4db99b103f15c28835fe7.png" alt="\begin{align}
     L_{S,t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
     L_{R,t+1} &amp;= p \beta R_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber\\
     I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_t\nonumber\\
     S_{t+1} &amp;= S_t + B - L_{S,t+1} \nonumber\\
     R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) \nonumber
-    \end{align}" />
-</div></p><dl class="docutils" id="index-389">
-<dt><strong>SIRS model</strong></dt>
-<dd>Here, the immunity acquired by infection wanes with time. Pertussis is an example of this dynamic.</dd>
-</dl>
-<div class="math" id="equation-E:SIRSmodel">
-<p><span class="eqno">(7)</span><img src="_images/math/f67684a60370a42f02e8bace824b3c587c76d2d2.png" alt="\begin{align} \label{}
+    \end{align}"/></p>
+        </div>
+        <dl class="docutils" id="index-8">
+            <dt><strong>SIRS model</strong></dt>
+            <dd>Here, the immunity acquired by infection wanes with time. Pertussis is an example of this dynamic.</dd>
+        </dl>
+        <div class="math" id="equation-E:SIRSmodel">
+            <p><span class="eqno">(7)</span><img src="_images/math/0c60490cbaa3f7aae0230ac5435629429f43c987.png" alt="\begin{align} \label{}
         L_{S,t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \\
     I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_t\nonumber\\
         S_{t+1} &amp;= S_t + B - L_{S,t+1} + w R_t\nonumber\\
         R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) \nonumber
-\end{align}" />
-</div></p></div>
-<div class="section" id="sninrn-like-models">
-<h4>SnInRn-like Models<a class="headerlink" href="#sninrn-like-models" title="Permalink to this headline">¶</a></h4>
-<p>These are models with more than one compartment for susceptibles,
-infected and recovered stages. They are used when infection involves
-more than one distinct populations. Vector borne diseases are
-classical examples where a SIR model is used to describe infection in
-humans and another SIR-like model is used to describe infection in the
-vector (and/or the reservoir(s)). Dengue fever and yellow fever are
-examples. Sexually transmitted diseases may also be modeled with
-SnInRn models if male and female populations are distinguished. These
-models can be define by the user as a custom model.</p>
-</div>
+\end{align}"/></p>
+        </div>
+    </div>
+    <div class="section" id="sninrn-like-models">
+        <h4>SnInRn-like Models<a class="headerlink" href="#sninrn-like-models" title="Permalink to this headline">¶</a>
+        </h4>
+
+        <p>These are models with more than one compartment for susceptibles,
+            infected and recovered stages. They are used when infection involves
+            more than one distinct populations. Vector borne diseases are
+            classical examples where a SIR model is used to describe infection in
+            humans and another SIR-like model is used to describe infection in the
+            vector (and/or the reservoir(s)). Dengue fever and yellow fever are
+            examples. Sexually transmitted diseases may also be modeled with
+            SnInRn models if male and female populations are distinguished. These
+            models can be define by the user as a custom model.</p>
+    </div>
 </div>
 <div class="section" id="stochastic-models">
-<h3>Stochastic models<a class="headerlink" href="#stochastic-models" title="Permalink to this headline">¶</a></h3>
-<p id="index-390">All models described so far are deterministic. EpiGrass allows simulation of stochastic processes. This is done by assuming that <img class="math" src="_images/math/c9c25fac6fee81c2670c776361dd8e82276988e4.png" alt="L_{t+1}" /> is a random variable with expected value given by the expressions found in the deterministic models. The user may choose the probability distribution for <img class="math" src="_images/math/c9c25fac6fee81c2670c776361dd8e82276988e4.png" alt="L_{t+1}" /> between Poisson or Negative Binomial to draw realizations of <img class="math" src="_images/math/c9c25fac6fee81c2670c776361dd8e82276988e4.png" alt="L_{t+1}" />:</p>
-<div class="math">
-<p><img src="_images/math/2035ac759c23838f8b8638a47bb7c4d0ce3e3f6d.png" alt="l_{t+1} \sim Poisson (L_{t+1})" />
-</div></p><p>or</p>
-<div class="math">
-<p><img src="_images/math/80485358c75b9e0a1976da0409a1f53165884d5e.png" alt="l_{t+1} \sim NegBin (I_t, \frac{I_t}{I_t+L_{t+1}})" />
-</div></p><p>The Poisson distribution assumes independent events while the negative Binomial assume clustering of transmission events.</p>
+    <h3>Stochastic models<a class="headerlink" href="#stochastic-models" title="Permalink to this headline">¶</a></h3>
+
+    <p id="index-9">All models described so far are deterministic. EpiGrass allows simulation of stochastic processes.
+        This is done by assuming that <img class="math" src="_images/math/8fcc7abc2ffacf96ed02429fcb5091a351c80170.png"
+                                           alt="L_{t+1}"/> is a random variable with expected value given by the
+        expressions found in the deterministic models. The user may choose the probability distribution for <img
+                class="math" src="_images/math/8fcc7abc2ffacf96ed02429fcb5091a351c80170.png" alt="L_{t+1}"/> between
+        Poisson or Negative Binomial to draw realizations of <img class="math"
+                                                                  src="_images/math/8fcc7abc2ffacf96ed02429fcb5091a351c80170.png"
+                                                                  alt="L_{t+1}"/>:</p>
+
+    <div class="math">
+        <p><img src="_images/math/8aa697acc66add49df0e8aa359e69a01a8d97a59.png" alt="l_{t+1} \sim Poisson (L_{t+1})"/>
+        </p>
+    </div>
+    <p>or</p>
+
+    <div class="math">
+        <p><img src="_images/math/49986e0d73789371d752820bb55e87e1cbaf79d9.png"
+                alt="l_{t+1} \sim NegBin (I_t, \frac{I_t}{I_t+L_{t+1}})"/></p>
+    </div>
+    <p>The Poisson distribution assumes independent events while the negative Binomial assume clustering of transmission
+        events.</p>
 </div>
 </div>
 <div class="section" id="network-transportation-models">
-<h2>Network transportation models<a class="headerlink" href="#network-transportation-models" title="Permalink to this headline">¶</a></h2>
-<p id="index-391">The transmission models describe the dynamics of infection in a well-mixed population. EpiGrass allows the user to model the movement of infectious individuals between well-mixed populations, thus simulating the spread of disease through space. EpiGrass represents geographical space as a network where cities or localities are nodes and transportation routes are edges. The term network refers to the framework of routes within a system of locations, identified as nodes or sites. An edge is a single link between two sites (a road, a railroad, an air route or a river/sea corridor).</p>
-<p>Transportation networks, like many networks, are generally embodied as
-set of locations and a set of links representing connections between
-those locations. The arrangement and connectivity of a network is
-known as its <em>topology</em>. Major types of topology are
-illustrated in figure ref{fig:artgraphs}. Velocity and direction of
-disease spread depend on the topology and weight of the edges of the
-transport network and there are many properties of networks that may
-useful when analyzing the spread of diseases. EpiGrass calculates a
-set of these properties as described in chapter <a class="reference" href="analysis.html#analysis"><em>Analysis</em></a>.</p>
-<p>In a transportation network, each edge (or link) is characterized by a variable <em>flow</em> which states the number of passengers that travel through that link per unit time. EpiGrass uses this information to calculate the number of passengers arriving at each city, per time step. For example, consider node <img class="math" src="_images/math/6e98dcfa48d54d8f45f579b67fac07614bc45690.png" alt="N1" /> in figure <a class="reference" href="#simpnet"><em>A simple transportation network</em></a>. At each time step, it receives 10 passengers from <img class="math" src="_images/math/8a39fc85d6e540dcebbba5f3e72a12b1f1e84357.png" alt="N2" />, 5 from <img class="math" src="_images/math/4f8e96deba0d985ffd4c5116b1ed7e0352dac55f.png" alt="N5" />, 1 from <img class="math" src="_images/math/0d6b0919897fe08f272945adee235d9e86cafc36.png" alt="N4" />. Now suppose that, at this time step, 10% of the population within each site is infectious (<img class="math" src="_images/math/027f4a11d6090f9eac0ce2488df6384dad1263ea.png" alt="I" /> state), according to the epidemic model. Thus, a total of <img class="math" src="_images/math/4b5394ff5de9620e0129f0a1d3b6a438888b5646.png" alt="10\% \times 10 + 10\% \times 5 + 10\% \times 1 = 1.6" /> infectious individuals are visiting site <img class="math" src="_images/math/6e98dcfa48d54d8f45f579b67fac07614bc45690.png" alt="N1" />. In the epidemic model embedded in <img class="math" src="_images/math/6e98dcfa48d54d8f45f579b67fac07614bc45690.png" alt="N1" />, EpiGrass sets <img class="math" src="_images/math/0cc07543367c5ab74f704f0ebf77cefd67cf2ed5.png" alt="n = 16" /> and <img class="math" src="_images/math/9b65745747eb01150dc16048fcb85784de4a7328.png" alt="\theta = 1.6" />. This calculation of <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" /> is based on a deterministic argument. The other possibility, allowed by Epigrass, is to define <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" /> as a random variable, that follows a binomial distribution with parameters <img class="math" src="_images/math/174fadd07fd54c9afe288e96558c92e0c1da733a.png" alt="n" />,:math:<cite>p</cite>, where <img class="math" src="_images/math/174fadd07fd54c9afe288e96558c92e0c1da733a.png" alt="n" /> is as given in the deterministic version and <img class="math" src="_images/math/36f73fc1312ee0349b3f3a0f3bd9eb5504339011.png" alt="p" /> is the proportion of infectious individuals in the source population. From version 1.4 on, EpiGrass can also take into account the specific delays of each connection. When the average speed of the transportation system is set to a value greater than zero, epigrass calculates the time required to complete each trip and attributes this delay (in units of time) to the parameter <img class="math" src="_images/math/0a42a8b725c200085e5253db2d2fbf8dab898a8f.png" alt="\delta" />. So, the number of infectious passengers arriving at any given city, at time <img class="math" src="_images/math/e0d2bf360290fd61d1c1557e763f2622363b3d35.png" alt="t" /> corresponds to the number of infectious passengers that left the city of origin at time <img class="math" src="_images/math/b7d9cf9a1e52d3f271f9a798c951e2332d136e54.png" alt="t-\delta" />.</p>
-<p>Deterministic:</p>
-<div class="math">
-<p><img src="_images/math/18e93f8139f42132bd782b1523656c8a7cde022f.png" alt="\Theta_t=n\times\frac{I_{t-\delta}}{N}" />
-</div></p><p>Stochastic:</p>
-<div class="math">
-<p><img src="_images/math/95f6bbfd15056858c7b021d2d908635d68884fd6.png" alt="\Theta_t \sim Binomial(N,\frac{I_{t-\delta}}{N})" />
-</div></p><div class="figure" id="simpnet">
-<img alt="_images/simplenet.png" src="_images/simplenet.png" />
-<p class="caption">A simple transportation network</p>
-</div>
+    <h2>Network transportation models<a class="headerlink" href="#network-transportation-models"
+                                        title="Permalink to this headline">¶</a></h2>
+
+    <p id="index-10">The transmission models describe the dynamics of infection in a well-mixed population. EpiGrass
+        allows the user to model the movement of infectious individuals between well-mixed populations, thus simulating
+        the spread of disease through space. EpiGrass represents geographical space as a network where cities or
+        localities are nodes and transportation routes are edges. The term network refers to the framework of routes
+        within a system of locations, identified as nodes or sites. An edge is a single link between two sites (a road,
+        a railroad, an air route or a river/sea corridor).</p>
+
+    <p>Transportation networks, like many networks, are generally embodied as
+        set of locations and a set of links representing connections between
+        those locations. The arrangement and connectivity of a network is
+        known as its <em>topology</em>. Major types of topology are
+        illustrated in figure ref{fig:artgraphs}. Velocity and direction of
+        disease spread depend on the topology and weight of the edges of the
+        transport network and there are many properties of networks that may
+        useful when analyzing the spread of diseases. EpiGrass calculates a
+        set of these properties as described in chapter <a class="reference internal" href="analysis.html#analysis"><em>Analysis</em></a>.
+    </p>
+
+    <p>In a transportation network, each edge (or link) is characterized by a variable <em>flow</em> which states the
+        number of passengers that travel through that link per unit time. EpiGrass uses this information to calculate
+        the number of passengers arriving at each city, per time step. For example, consider node <img class="math"
+                                                                                                       src="_images/math/138a3cbb5276048bdeeee8cc572d993ca664c30d.png"
+                                                                                                       alt="N1"/> in
+        figure <a class="reference internal" href="#simpnet"><em>A simple transportation network</em></a>. At each time
+        step, it receives 10 passengers from <img class="math"
+                                                  src="_images/math/caf0f8fcd68a4bc5058895a67b9f155ce776b875.png"
+                                                  alt="N2"/>, 5 from <img class="math"
+                                                                          src="_images/math/368cfddac1f300af3fa17c5858e439d485af6c6d.png"
+                                                                          alt="N5"/>, 1 from <img class="math"
+                                                                                                  src="_images/math/655777d828d0e9fc776c3f0b6cbb54a138d09ff3.png"
+                                                                                                  alt="N4"/>. Now
+        suppose that, at this time step, 10% of the population within each site is infectious (<img class="math"
+                                                                                                    src="_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png"
+                                                                                                    alt="I"/> state),
+        according to the epidemic model. Thus, a total of <img class="math"
+                                                               src="_images/math/abe812b729d393f553e38581929dcc8fecc408d4.png"
+                                                               alt="10\% \times 10 + 10\% \times 5 + 10\% \times 1 = 1.6"/>
+        infectious individuals are visiting site <img class="math"
+                                                      src="_images/math/138a3cbb5276048bdeeee8cc572d993ca664c30d.png"
+                                                      alt="N1"/>. In the epidemic model embedded in <img class="math"
+                                                                                                         src="_images/math/138a3cbb5276048bdeeee8cc572d993ca664c30d.png"
+                                                                                                         alt="N1"/>,
+        EpiGrass sets <img class="math" src="_images/math/b0fefa706d5349eaca3d18af9c06c9552a304715.png" alt="n = 16"/>
+        and <img class="math" src="_images/math/6068ffbe8996fe287f2e39f6cb3ea3e3d8e6b1ee.png" alt="\theta = 1.6"/>. This
+        calculation of <img class="math" src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" alt="\theta"/>
+        is based on a deterministic argument. The other possibility, allowed by Epigrass, is to define <img class="math"
+                                                                                                            src="_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png"
+                                                                                                            alt="\theta"/>
+        as a random variable, that follows a binomial distribution with parameters <img class="math"
+                                                                                        src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png"
+                                                                                        alt="n"/>,:math:<cite>p</cite>,
+        where <img class="math" src="_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/> is as given in
+        the deterministic version and <img class="math" src="_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png"
+                                           alt="p"/> is the proportion of infectious individuals in the source
+        population. From version 1.4 on, EpiGrass can also take into account the specific delays of each connection.
+        When the average speed of the transportation system is set to a value greater than zero, epigrass calculates the
+        time required to complete each trip and attributes this delay (in units of time) to the parameter <img
+                class="math" src="_images/math/b35a9439ad8c8657b1b1d792ad5c2d77a52c0aef.png" alt="\delta"/>. So, the
+        number of infectious passengers arriving at any given city, at time <img class="math"
+                                                                                 src="_images/math/ef9270877405055756d345facd044e4ab297f858.png"
+                                                                                 alt="t"/> corresponds to the number of
+        infectious passengers that left the city of origin at time <img class="math"
+                                                                        src="_images/math/16af9099253aa5b39d730f5df3cbaf06409cf8ac.png"
+                                                                        alt="t-\delta"/>.</p>
+
+    <p>Deterministic:</p>
+
+    <div class="math">
+        <p><img src="_images/math/7f428d3a0c8666928b8ae7570571e6dd8b44e6ad.png"
+                alt="\Theta_t=n\times\frac{I_{t-\delta}}{N}"/></p>
+    </div>
+    <p>Stochastic:</p>
+
+    <div class="math">
+        <p><img src="_images/math/001328a37cf2f3ea3275aaf1ae4dc75641864155.png"
+                alt="\Theta_t \sim Binomial(N,\frac{I_{t-\delta}}{N})"/></p>
+    </div>
+    <div class="figure" id="simpnet">
+        <img alt="_images/simplenet.png" src="_images/simplenet.png"/>
+
+        <p class="caption">A simple transportation network</p>
+    </div>
 </div>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
-            </a></p>
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference" href="">Epidemic Models</a><ul>
-<li><a class="reference" href="#introduction">Introduction</a></li>
-<li><a class="reference" href="#disease-models">Disease models</a><ul>
-<li><a class="reference" href="#dispersal-of-infected-individuals">Dispersal of infected individuals</a></li>
-<li><a class="reference" href="#typology-of-infectious-diseases-and-corresponding-models">Typology of infectious diseases and corresponding models</a><ul>
-<li><a class="reference" href="#sir-like-models">SIR-like models</a></li>
-<li><a class="reference" href="#sipr-like-models">SIpR-like models</a></li>
-<li><a class="reference" href="#sninrn-like-models">SnInRn-like Models</a></li>
-</ul>
-</li>
-<li><a class="reference" href="#stochastic-models">Stochastic models</a></li>
-</ul>
-</li>
-<li><a class="reference" href="#network-transportation-models">Network transportation models</a></li>
-</ul>
-</li>
-</ul>
+</div>
+</div>
+</div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html">
+            <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+        </a></p>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="install.html" title="previous chapter">Building and Installing</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="using.html" title="next chapter">Using Epigrass</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/intromodels.txt">Show Source</a></li>
-            </ul>
-          <h3>Quick search</h3>
+        <h3><a href="index.html">Table Of Contents</a></h3>
+        <ul>
+            <li><a class="reference internal" href="#">Epidemic Models</a>
+                <ul>
+                    <li><a class="reference internal" href="#introduction">Introduction</a></li>
+                    <li><a class="reference internal" href="#disease-models">Disease models</a>
+                        <ul>
+                            <li><a class="reference internal" href="#dispersal-of-infected-individuals">Dispersal of
+                                infected individuals</a></li>
+                            <li><a class="reference internal"
+                                   href="#typology-of-infectious-diseases-and-corresponding-models">Typology of
+                                infectious diseases and corresponding models</a>
+                                <ul>
+                                    <li><a class="reference internal" href="#sir-like-models">SIR-like models</a></li>
+                                    <li><a class="reference internal" href="#sipr-like-models">SIpR-like models</a></li>
+                                    <li><a class="reference internal" href="#sninrn-like-models">SnInRn-like Models</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="reference internal" href="#stochastic-models">Stochastic models</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="reference internal" href="#network-transportation-models">Network transportation
+                        models</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Previous topic</h4>
+
+        <p class="topless"><a href="install.html"
+                              title="previous chapter">Building and Installing</a></p>
+        <h4>Next topic</h4>
+
+        <p class="topless"><a href="using.html"
+                              title="next chapter">Using Epigrass</a></p>
+
+        <h3>This Page</h3>
+        <ul class="this-page-menu">
+            <li><a href="_sources/intromodels.txt"
+                   rel="nofollow">Show Source</a></li>
+        </ul>
+        <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+
             <form class="search" action="search.html" method="get">
-              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
+                <input type="text" name="q"/>
+                <input type="submit" value="Go"/>
+                <input type="hidden" name="check_keywords" value="yes"/>
+                <input type="hidden" name="area" value="default"/>
             </form>
+            <p class="searchtip" style="font-size: 90%">
+                Enter search terms or a module, class or function name.
+            </p>
         </div>
-      </div>
-      <div class="clearer"></div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
+</div>
+<div class="clearer"></div>
+</div>
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="using.html" title="Using Epigrass"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="install.html" title="Building and Installing"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-      &copy; Copyright 2008, Flávio Codeço Coelho.
-      Last updated on Mar 08, 2009.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
-    </div>
-  </body>
+            <a href="genindex.html" title="General Index"
+                    >index</a></li>
+        <li class="right">
+            <a href="using.html" title="Using Epigrass"
+                    >next</a> |
+        </li>
+        <li class="right">
+            <a href="install.html" title="Building and Installing"
+                    >previous</a> |
+        </li>
+        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+    </ul>
+</div>
+<div class="footer">
+    &copy; Copyright 2008, Flávio Codeço Coelho.
+    Last updated on May 06, 2014.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+</div>
+</body>
 </html>
