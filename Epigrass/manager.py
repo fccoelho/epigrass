@@ -789,12 +789,12 @@ class simulate:
                 ts = array(site.ts[1:])  #remove init conds so that ts and inc are the same size
                 inc = site.incidence
                 thist = site.thetahist
-
+                t = 0
                 for incid, flow in zip(inc, thist):
                     tstep = str(t)
                     flow = float(thist[t])
-
-                    nvalues.append(tuple([geoc, tstep, name] + [lat, long] + list(i) + [incid] + [flow]))
+                    nvalues.append(tuple([geoc, tstep, name] + [lat, long] + list(ts[t]) + [incid] + [flow]))
+                    t += 1
             Cursor.executemany(sql2, nvalues)
             #Creating a table for edge data
             self.etable = etable = table + 'e'
