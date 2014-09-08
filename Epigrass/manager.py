@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+# ! /usr/bin/env python
 """
 Model Management and simulation objects.
 """
@@ -247,7 +247,7 @@ class simulate:
                     if int(o.geocode) == j[0] or self.seed[0][0] == "all":
                         #self.Say("%s infected person(s) arrived at %s"%(j[2],o.sitename))
                         inits[j[1].lower()] += j[2]
-                        o.createModel( self.modtype, self.modelName, v=values, bi=inits, bp=parms)
+                        o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
                     else:
                         o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
             else:
@@ -445,16 +445,16 @@ class simulate:
         site_list = self.g.site_list
         site_dict = self.g.site_dict
         # Temporarily disabled animation output due to the sheer size of the kmz files
-        #        if  len(site_dict)*len(site_dict.values()[0].ts)<10000: #Only reasonably sized animations
-        #            for i, v in enumerate(site_dict.values()[0].vnames):
-        #                ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude = True)
-        #                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
-        #                ka.add_data(data)
-        #                ka.save(v+'_animation')
-        #                self.Say(v+'_animation')
-        #                del ka
-        #        else:
-        #            self.Say("Simulation too large to export as kml.")
+        if len(site_dict) * len(site_dict.values()[0].ts) < 10000:  # Only reasonably sized animations
+            for i, v in enumerate(site_dict.values()[0].vnames):
+                ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
+                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
+                ka.add_data(data)
+                ka.save(v + '_animation')
+                self.Say(v + '_animation')
+                del ka
+        else:
+            self.Say("Simulation too large to export as kml.")
 
         self.Say("Done creating KML files!")
 
@@ -749,7 +749,8 @@ class simulate:
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(self.g.site_dict.values()[0].ts[-1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
+            nvar = len(self.g.site_dict.values()[0].ts[
+                -1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
             str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
             varnames = ['lat', 'longit'] + list(self.g.site_dict.values()[0].vnames) + ['incidence'] + ['Arrivals']
