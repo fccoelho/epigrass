@@ -1,6 +1,7 @@
-numpy >=1.2
+numpy>=1.2
 networkx>=1.1
-redis >=2.4
+redis>=2.4
+SQLAlchemy>=0.7
 sqlsoup>=0.9
 requests
 requests-toolbelt

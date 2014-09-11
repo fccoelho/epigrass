@@ -7,3 +7,4 @@ dist/*$
 epigrass.egg-info/*$
 outdata*
 outdata*/*
+/*.kml$
