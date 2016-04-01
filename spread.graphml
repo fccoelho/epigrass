@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="latin-1"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+	<key attr.name="name" attr.type="string" for="node" id="d0"/>
+	<graph edgedefault="directed" id="graphname">
+		<node id="4552110">
+			<data key="d0">
+				Pechincha 1
+			</data>
+		</node>
+		<node id="4550915">
+			<data key="d0">
+				Urca
+			</data>
+		</node>
+		<node id="4551002">
+			<data key="d0">
+				Lido
+			</data>
+		</node>
+		<node id="4551203">
+			<data key="d0">
+				Rua Bela
+			</data>
+		</node>
+		<node id="4551211">
+			<data key="d0">
+				Benfica 2
+			</data>
+		</node>
+		<node id="4552108">
+			<data key="d0">
+				Pau Ferro
+			</data>
+		</node>
+		<node id="4552111">
+			<data key="d0">
+				Estr. do Gabinal
+			</data>
+		</node>
+		<node id="4552913">
+			<data key="d0">
+				Celso Kelly
+			</data>
+		</node>
+		<node id="4551726">
+			<data key="d0">
+				Abolicao
+			</data>
+		</node>
+		<node id="4552012">
+			<data key="d0">
+				Madureira
+			</data>
+		</node>
+		<node id="4552101">
+			<data key="d0">
+				Estrada Tres Rios
+			</data>
+		</node>
+		<node id="4552109">
+			<data key="d0">
+				Tanque
+			</data>
+		</node>
+		<node id="4552117">
+			<data key="d0">
+				Pechincha 2
+			</data>
+		</node>
+		<node id="4552903">
+			<data key="d0">
+				Centro da Barra
+			</data>
+		</node>
+		<node id="4552934">
+			<data key="d0">
+				Recreio 2
+			</data>
+		</node>
+		<node id="4551904">
+			<data key="d0">
+				Iraja 1
+			</data>
+		</node>
+		<node id="4552107">
+			<data key="d0">
+				Rua Tirol
+			</data>
+		</node>
+		<node id="4550913">
+			<data key="d0">
+				Venceslau Braz
+			</data>
+		</node>
+		<node id="4552907">
+			<data key="d0">
+				Barra 1
+			</data>
+		</node>
+	</graph>
+</graphml>

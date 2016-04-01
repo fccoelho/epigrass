@@ -9,7 +9,7 @@ import locale, os, pylab
 from osgeo import ogr
 from xml.dom import minidom, Node
 from matplotlib.colors import rgb2hex, LogNorm
-from matplotlib.colors import normalize
+from matplotlib.colors import Normalize
 from matplotlib import cm
 from numpy import array
 from zipfile import ZipFile

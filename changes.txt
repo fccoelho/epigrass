@@ -1,0 +1,6 @@
+Changes
+======
+
+ - Fixed output in spreadtree graphml output
+ - Added select directory dialog box for opening SQlite databases for visualization
+ - Fixed drawing of graphs when no shape file is available

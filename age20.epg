@@ -1,0 +1,260 @@
+###############################################################
+#
+#  EPIGRASS -Model Definition
+#  This script describes model and parameters specified
+#  by the user.
+#  It can be edited by the user directly, by means of a text editor.
+#  WARNING: No variables may be removed, even if not used by the chosen model . 
+#  Any comments added by the user must be preceeded  by the symbol #
+#
+################################################################
+################################################################
+
+#==============================================================#
+[THE WORLD]
+#==============================================================#
+# Here you add information about the files that described the world the model is enclosed
+# "Location" is the GRASS location with the maps describing the area.
+# "vector layer" is the map layer that will be used as a background for the network display
+# "sites" and "edges" are the files that describe the topology of the network (see Documentation)
+
+shapefile =  ['riozonas_LatLong.shp','nome_zonas','zona_trafe']
+sites = zonasRJcompleto.csv
+edges = edgesRIO.csv
+encoding =
+#==============================================================#
+[EPIDEMIOLOGICAL MODEL]
+#==============================================================#
+#model types available: SIS, SIS_s ,SIR, SIR_s, SEIS, SEIS_s, SEIR, SEIR_s, 
+# SIpRpS, SIpRpS_s,SIpR,SIpR_s(see documentation for description)
+modtype = Custom
+
+#==============================================================#
+[MODEL PARAMETERS]
+#==============================================================#
+
+#  They can be specified as constants or as functions of global or 
+#    site-specific variables. these site-specific variables, are provided
+#  in the sites file. All the numbers given after the geocode (4th column)
+#  are collected into the values tuple.
+#   Examples:
+#   beta = 0.001
+#   beta=values[0] #assigns the first element of values to beta 
+#   beta=0.001*values[1]
+
+# sem uso
+beta = 0   #transmission coefficient (contact rate * transmissibility)
+alpha = 0   # clumping parameter
+e = 0           # inverse of incubation period
+r = 0         # inverse of infectious period
+delta = 0       # probability of acquiring full immunity [0,1]
+B = 0           # Birth rate
+w = 0           # probability of immunity waning [0,1]
+p = 0           # Probability of a recovered become infected per time step [0,1]
+
+
+
+# parametros do modelo:
+pp = 1     # infecciosidade infeccao primaria
+ps = 0.01   # infecciosidade infeccao secundaria
+sp = 1     # suscetibilidade para infeccao primaria
+ss = 0.7   # suscetibilidade para infeccao secundaria
+pv = 0.90  # taxa de vacinacao
+e = 0.7    # eficacia da vacina
+gp = 0.1 # taxa de recuperacao infeccao primaria (0.333)
+gs = 0.666 # taxa de recuperacao infeccao secundaria
+a = 0.0019 # taxa de perda de imunidade adquirida pela infeccao
+r = 0.0032 # taxa de perda de imunidade adquirida pela vacina
+c0 = 0.1  # intensiade de contatos 
+c1 = 0.3 # intensiade de contatos 
+c2 = 0.7 # intensiade de contatos 
+c3 = 1.0 # intensiade de contatos 
+c4 = 1.4 # intensiade de contatos 
+c5 = 1.8 # intensiade de contatos 
+n0 = 4
+n2 =  15
+n10 = 15
+n15 = 20
+n20 = 20
+n40 = 15
+ep = 0. # 1/tempo de incubacao
+es = 0.
+
+
+
+#==============================================================#
+[INITIAL CONDITIONS]
+#==============================================================#
+#   Here, the number of individuals in each epidemiological
+#   state (SEI) is specified. They can be specified in absolute
+#   or relative numbers.
+#   N is the population size of each site.
+#   The rule defined here will be applied equally to all sites.
+#   For site-specific definitions, use EVENTS (below)
+#   Examples:
+#   S,E,I = 0.8*N, 10, 0.5*E
+#   S,E,I = 0.5*N, 0.01*N, 0.05*N
+#   S,E,I = N-1, 1, 0
+### sem uso
+S = N
+E = 0
+I = 0
+
+### CI do modelo:
+
+#S0 = 0.029*N   #media etaria das ZTs do rio
+#S2 = 0.132*N
+#S10 = 0.076*N
+#S15 = 0.07*N
+#S20 = 0.324*N
+#S40 = 0.369*N 
+S0 = values[3]*N   #media etaria das ZTs do rio
+S2 = values[4]*N
+S10 = values[5]*N
+S15 = values[6]*N
+S20 = values[7]*N
+S40 = values[8]*N 
+Ep0 = 0
+Ep2 = 0
+Ep10= 0
+Ep15= 0
+Ep20=0
+Ep40 = 0
+Ip0 = 0
+Ip2 = 0
+Ip10= 0
+Ip15= 0
+Ip20=0
+Ip40 = 0
+Es0 = 0
+Es2 = 0
+Es10= 0
+Es15= 0
+Es20=0
+Es40 = 0
+Is0= 0
+Is2= 0
+Is10= 0
+Is15= 0
+Is20= 0
+Is40 = 0
+Rmax0= 0
+Rmax2= 0
+Rmax10= 0
+Rmax15= 0
+Rmax20= 0
+Rmax40 = 0
+Rmed0= 0
+Rmed2= 0
+Rmed10= 0
+Rmed15= 0
+Rmed20= 0
+Rmed40 = 0 
+Rmin0= 0
+Rmin2= 0
+Rmin10= 0
+Rmin15= 0
+Rmin20= 0
+Rmin40 = 0
+Vmax0= 0
+Vmax2= 0
+Vmax10= 0
+Vmax15= 0
+Vmax20= 0
+Vmax40 = 0
+Vmed0= 0
+Vmed2= 0
+Vmed10= 0
+Vmed15= 0
+Vmed20= 0
+Vmed40 = 0
+Vmin0= 0
+Vmin2= 0
+Vmin10= 0
+Vmin15= 0
+Vmin20= 0
+Vmin40 = 0
+
+
+#=============================================================#
+[EPIDEMIC EVENTS]
+#=============================================================#
+#   Specify isolated events.
+#   Localities where the events are to take place should be Identified by the geocode, which 
+#  comes after population size on the sites data file.
+#  All coverages must be a number between 0 and 1.
+#  Seed : [('locality1's geocode', n),('locality2's geocode', n)]. 
+#  N infected cases will be added to locality at time 0.
+#  Vaccinate: [('locality1's geocode', time, coverage),('locality2's geocode', time, coverage)] 
+#  Quarantine: [(locality1's geocode,time,coverage), (locality2's geocode,time,coverage)]
+#seed = [(4550601,'ip20',10)] #santo cristo  #
+seed = [(4552110,'ip20',1)] #pechincha  #  
+#seed = []
+Vaccinate = [] #
+Quarantine = []
+
+# The following events have not yet been implemented
+#Screening = (locality, time, coverage) #screening for sick people on aiports bus stations
+#Vector_control = (locality, time, coverage)
+#Treatment = (locality, time, coverage)
+#Prophylaxis = (locality, time, coverage)
+
+#==============================================================#
+[TRANSPORTATION MODEL]
+#==============================================================#
+# If doTransp = 1 the transportation dinamics will be included. Use 0 here only for debugging purposes.
+doTransp = 0
+
+# Mechanism can be stochatic (1) or deterministic(0). 
+stochastic = 0
+#Average speed of transportation system in km per time step. Enter 0 for instantaneous travel.
+#Distance unit must be the same specified in edges files
+speed =1440  # km/day -- equivalent to 60 km/h
+
+#==============================================================#
+[SIMULATION AND OUTPUT]
+#==============================================================#
+
+# Number of steps
+steps = 50
+
+# Output dir. Must be a full path. If empty the output will be generated on the 
+# same path as the model script.
+outdir = 
+
+# Output file
+outfile = simul.dat
+
+# Database Output
+# MySQLout can be 0 (no database output) or 1
+MySQLout = 1 
+
+# Graphical outputs
+draw map = 0
+
+# Report Generation
+# The variable report can take the following values:
+# 0 - No report is generated.
+# 1 - A network analysis report is generated in PDF Format.
+# 2 - An epidemiological report is generated in PDF Format.
+# 3 - A full report is generated in PDF Format.
+# siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
+report = 0
+siteRep = []
+
+#Replicate runs
+#If replicas is set to an integer(n) larger than zero, the model will be run n times and the results will be con-
+#solidated before storing.
+#Replicate mode automatically turn off report and batch options. 
+Replicas = 340
+RandSeed = 2 
+#Batch Run
+#  list other scripts to be run in after this one. don't forget the extension .epg
+#  model scripts must be in the same directory as this file or provide full path.
+#  Example: Batch = ['model2.epg','model3.epg','/home/jose/model4.epg']
+Batch = []#['sarsDF.epg','sarsPA.epg','sarsRS.epg']
+
+################################################################
+################################################################
+
+
