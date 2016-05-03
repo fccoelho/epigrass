@@ -199,7 +199,7 @@ class World:
         """
         data = array(data)
         # building normalizers for each variable, except geocode
-        norms = [normalize(c.min(), c.max()) for c in data[:, 1:].T]
+        norms = [Normalize(c.min(), c.max()) for c in data[:, 1:].T]
         if os.path.exists(os.path.join(self.outdir, 'Data.shp')):
             os.remove(os.path.join(self.outdir, 'Data.shp'))
             os.remove(os.path.join(self.outdir, 'Data.shx'))
@@ -375,7 +375,7 @@ class AnimatedKML(object):
         Add time-series data for the localities: [(geocode,time,value),...]
         """
         vals = array([i[2] for i in data])
-        norm = normalize(vals.min(), vals.max())
+        norm = Normalize(vals.min(), vals.max())
         for i, d in enumerate(data):
         #            print i, " of ",  len(data)
             pm = self.pmdict[d[0]]
