@@ -321,12 +321,12 @@ class simulate:
             poplist = [log10(site.totpop) for site in self.g.site_dict.itervalues()]
             lpl = len(poplist)
             popprob = array(poplist) / sum(poplist)  #acceptance probability
-            u = floor(uniform(0, lpl, self.replicas))
+            u = floor(np.random.uniform(0, lpl, self.replicas))
             sites = []
             i = 0
             site_list = self.g.site_list
             while i < self.replicas:
-                p = uniform(0, 1)
+                p = np.random.uniform(0, 1)
                 if p <= popprob[int(u[i])]:
                     sites.append(site_list[int(u[i])])
                     i += 1
@@ -347,7 +347,7 @@ class simulate:
         self.seed = [(seed.geocode, seedvar, n)]
 
         for site in site_list:
-            if site.geocode == seed.geocode:
+            if site.geocode == seed.geocode or seed.geocode == 'all':
                 site.bi[seedvar] = n
                 #                site.ts[0][seedpos] = n
 
@@ -387,7 +387,7 @@ class simulate:
         Saves the time series *site.ts* to outfile as specified on the
         model script.
         """
-        data = array(site.ts, Float)
+        data = array(site.ts, float)
         inc = site.incidence
         f = open(self.outdir + self.outfile, 'w')
         f.write('time,E,I,S,incidence\n')
@@ -1038,7 +1038,7 @@ class simulate:
             string + '\n'
 
 
-def storeSimulation(s, db='epigrass', host='localhost', port=3306):
+def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
     """
     store the Simulate object *s* in the epigrass database
     to allow distributed runs. Currently not working.
@@ -1050,7 +1050,7 @@ def storeSimulation(s, db='epigrass', host='localhost', port=3306):
     sql = """CREATE TABLE %s(
         `simulation` BLOB);""" % table
     Cursor.execute(sql)
-    blob = cPickle.dumps(s)
+    blob = cPickle.dumps(S)
     sql2 = 'INSERT INTO %s' % table + ' VALUES(%s)'
     Cursor.execute(sql2, blob)
     con.close()
@@ -1072,7 +1072,7 @@ def onStraightRun(args):
         repRuns(S)
 
     if S.Batch:
-        self.Say('Simulation Started.')
+        S.Say('Simulation Started.')
 
         # run the batch list
         for i in S.Batch:
@@ -1083,7 +1083,7 @@ def onStraightRun(args):
             # Generates the simulation object
             T = simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
 
-            self.Say('starting model %s' % i)
+            S.Say('starting model %s' % i)
             T.start()  # Start the simulation
 
 
@@ -1100,12 +1100,12 @@ def repRuns(S):
     password = S.passw
     backend = S.backend
     nseeds = S.seed[0][2]  #number o individual to be used as seeds
-    self.Say("Replication type: ", randseed)
+    S.Say("Replication type: ", randseed)
     if randseed:
         seeds = S.randomizeSeed(randseed)
     reps = S.replicas
     for i in xrange(reps):
-        self.Say("Starting replicate number %s" % i)
+        S.Say("Starting replicate number %s" % i)
         S = simulate(fname=fname, host=host, user=user, password=password, backend=backend)
         if randseed:
             S.setSeed(seeds[i], nseeds)
@@ -1168,10 +1168,10 @@ def main():
                         help='Epigrass model definition file (.epg).')
 
     args = parser.parse_args()
-    if args.backend == "mysql" and not (options.dbuser and options.dbpass):
+    if args.backend == "mysql" and not (args.dbuser and args.dbpass):
         parser.error("You must specify a user and password when using MySQL.")
     if args.backend not in ['mysql', 'sqlite', 'csv']:
-        parser.error('"%s" is an invalid backend type.' % options.backend)
+        parser.error('"%s" is an invalid backend type.' % args.backend)
     print
     '==> ', args.epg
 
