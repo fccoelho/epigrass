@@ -22,6 +22,8 @@ from data_io import *
 import epigdal
 import __version__
 import requests
+# import pydevd
+# pydevd.settrace('localhost', port=39347, stdoutToServer=True, stderrToServer=True)
 
 
 
