@@ -915,7 +915,8 @@ class simulate:
         #saving Epistats
         self.Say('Saving Epidemiological results...')
         stats = [str(i) for i in self.g.getEpistats()]
-        seed = [s for s in self.g.site_dict.itervalues() if s.geocode == self.seed[0][0]][0]
+
+        seed = [s for s in self.g.site_dict.itervalues() if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
         stats.pop(1)  #Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
             stf = codecs.open('epistats.csv', 'a', self.encoding)  #append to file
