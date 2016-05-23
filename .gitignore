@@ -1,5 +1,5 @@
-/*pyc$
-/*~$
+*pyc$
+*~$
 cx_freeze_dist
 cx_freeze_dist/*$
 build/*$
@@ -7,4 +7,5 @@ dist/*$
 epigrass.egg-info/*$
 outdata*
 outdata*/*
-/*.kml$
+*.kml$
+.idea/
