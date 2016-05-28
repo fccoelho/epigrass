@@ -8,5 +8,5 @@ epigrass.egg-info/*
 outdata*
 outdata*/*
 *.kml
-.idea/*.xml
-.idea/*.iml
+.idea/*
+.idea/*
