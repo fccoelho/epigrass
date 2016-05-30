@@ -10,10 +10,11 @@ License: GPL-v3
 
 __author__ = 'fccoelho'
 
-from numpy.random import poisson
+from numpy.random import poisson, negative_binomial
 from numpy import inf, nan, nan_to_num
 import sys
 import redis
+import cython
 
 redisclient = redis.StrictRedis()
 
@@ -48,8 +49,8 @@ class Epimodel(object):
     """
     Defines a library of discrete time population models
     """
-
-    def __init__(self, geocode, modtype='', parallel=True):
+    @cython.locals(geocode='long', modtype='bytes', parallel='bint')
+    def __init__(self, geocode, modtype=b'', parallel=True):
         """
         defines which models a given site will use
         and set variable names accordingly.
@@ -104,7 +105,7 @@ class Epimodel(object):
             # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
             # TODO: have infector be stated in terms of geocodes
 
-
+@cython.locals(Type='bytes')
 def selectModel(Type):
     """
     Sets the model engine
@@ -162,7 +163,11 @@ def selectModel(Type):
         sys.exit('Model type specified in .epg file is invalid')
 
 
-def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
@@ -256,20 +261,31 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
             Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
 
-
-def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits= 'object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
+    :param inits: tuple with initial conditions
+    :param simstep: step of the simulation
+    :param totpop: total population
+    :param theta: inflow of infectives parameter
+    :param npass: total inflow
+    :param bi: dictionary with state
+    :param bp: dictionary with parameter values
+    :param values: tuple of extra values
+    :return:
     """
     if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    # for k, v in bp.items():
-    #     exec ('%s = %s' % (k, v))
+
     beta = bp['beta'];
     alpha = bp['alpha'];
     r = bp['r'];
@@ -285,7 +301,11 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
@@ -323,7 +343,11 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -355,7 +379,11 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
@@ -393,7 +421,11 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIS:
     - inits = (E,I,S)
@@ -425,7 +457,11 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -463,7 +499,11 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIR:
     - inits = (E,I,S)
@@ -497,7 +537,11 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -538,7 +582,11 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -570,7 +618,11 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
@@ -608,7 +660,11 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
@@ -641,7 +697,11 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
@@ -679,7 +739,11 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -713,7 +777,11 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
@@ -756,7 +824,11 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -792,7 +864,11 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=())
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
@@ -837,7 +913,11 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -870,7 +950,11 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
