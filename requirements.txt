@@ -6,3 +6,5 @@ sqlsoup>=0.9
 requests
 requests-toolbelt
 sphinx>1.0
+matplotlib
+cython
