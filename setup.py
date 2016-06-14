@@ -3,8 +3,7 @@ from setuptools import setup
 from Cython.Build import cythonize
 from glob import glob
 from Epigrass.__version__ import version
-#from distutils.core import setup
-#TODO: remove dependency on setuptools
+
 
 demos = glob('demos/*')
 try:
@@ -24,7 +23,8 @@ setup(name='epigrass',
       download_url='http://sourceforge.net/project/showfiles.php?group_id=128000',
       license='GPL',
       packages=['Epigrass'],
-      install_requires=["numpy >= 1.2", "networkx >= 1.1", "SQLAlchemy >= 0.7", "sqlsoup", "redis >= 2.4", "requests"],
+      install_requires=["numpy >= 1.2", "networkx >= 1.1", "SQLAlchemy >= 0.7", "sqlsoup", "redis >= 2.4", "requests", "cython"],
+      zip_safe = False,
       entry_points={
           'console_scripts': [
               'epirunner = Epigrass.manager:main',
@@ -38,5 +38,5 @@ setup(name='epigrass',
       ext_modules=cythonize('Epigrass/epimodels.py'),
       include_package_data=True,
       package_data={'': ['INSTALL', 'README', 'COPYING', 'epigrass.desktop', '*.rst', '*.tex', '*.png', '*.jpg']},
-      #data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/build/latex/Epigrass.pdf']),('/usr/share/applications',['epigrass.desktop'])]
+      data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/build/latex/Epigrass.pdf']),('/usr/share/applications',['epigrass.desktop'])]
 )

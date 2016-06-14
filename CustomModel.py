@@ -7,17 +7,18 @@ from numpy.random import poisson,  multinomial
 from numpy import *
 
 
-def Model(self,vars,par,theta=0, npass=0):
+def Model(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
         """
         Calculates the model SIR, and return its values.
         - inits = (E,I,S)
         - par = (Beta, alpha, E,r,delta,B, w, p) see docs.
-        - theta = infectious individuals from neighbor sites (CONSIDERANDO QUE CHEGUE COMO UMA lista         'Ip0','Ip2','Ip10','Ip15','Ip20','Ip40','Is0','Is2','Is10','Is15','Is20','Is40'
+        - theta = infectious individuals from neighbor sites (CONSIDERANDO QUE CHEGUE COMO UMA lista
+            'Ip0','Ip2','Ip10','Ip15','Ip20','Ip40','Is0','Is2','Is10','Is15','Is20','Is40'
         - npass deve ser tb um vetor com populacao por faixa etaria
         """
         #Initializing
 
-        self.parentSite.vnames = ('S0','S2','S10','S15','S20','S40',
+        vnames = ('S0','S2','S10','S15','S20','S40',
                 'Ep0','Ep2','Ep10','Ep15','Ep20','Ep40',                  
                 'Ip0','Ip2','Ip10','Ip15','Ip20','Ip40',
                 'Es0','Es2','Es10','Es15','Es20','Es40',
@@ -30,7 +31,7 @@ def Model(self,vars,par,theta=0, npass=0):
                 'Vmin0','Vmin2','Vmin10','Vmin15','Vmin20','Vmin40')
  
         # A distribuicao etaria e sitio-especificas
-        if self.parentSite.parentGraph.simstep == 1: #get initial values
+        if simstep == 1: #get initial values
             S0,S2,S10,S15,S20,S40 = (self.bi['s0'],self.bi['s2'], self.bi['s10'],self.bi['s15'],self.bi['s20'],self.bi['s40'])
             Ep0,Ep2,Ep10,Ep15,Ep20,Ep40 = (self.bi['ep0'],self.bi['ep2'],self.bi['ep10'],self.bi['ep15'],self.bi['ep20'],self.bi['ep40'])
             Ip0,Ip2,Ip10,Ip15,Ip20,Ip40 = (self.bi['ip0'],self.bi['ip2'],self.bi['ip10'],self.bi['ip15'],self.bi['ip20'],self.bi['ip40'])
@@ -48,19 +49,19 @@ def Model(self,vars,par,theta=0, npass=0):
 
             # calculando o dicionario de fluxos:
             self.parentSite.pdest = setPassDest(self)
-            npass0, npass2, npass10, npass15, npass20, npass40 = getNPass(self)
+            npass0, npass2, npass10, npass15, npass20, npass40 = npass
             
             
         else:
-            S0,S2,S10,S15,S20,S40,Ep0,Ep2,Ep10,Ep15,Ep20,Ep40,Ip0,Ip2,Ip10,Ip15,Ip20,Ip40,Es0,Es2,Es10,Es15,Es20,Es40,Is0,Is2,Is10,Is15,Is20,Is40,Rmax0,Rmax2,Rmax10,Rmax15,Rmax20,Rmax40,Rmed0,Rmed2,Rmed10,Rmed15,Rmed20,Rmed40,Rmin0,Rmin2,Rmin10,Rmin15,Rmin20,Rmin40,Vmax0,Vmax2,Vmax10,Vmax15,Vmax20,Vmax40,Vmed0,Vmed2,Vmed10,Vmed15,Vmed20,Vmed40,Vmin0,Vmin2,Vmin10,Vmin15,Vmin20,Vmin40 = vars
+            S0,S2,S10,S15,S20,S40,Ep0,Ep2,Ep10,Ep15,Ep20,Ep40,Ip0,Ip2,Ip10,Ip15,Ip20,Ip40,Es0,Es2,Es10,Es15,Es20,Es40,Is0,Is2,Is10,Is15,Is20,Is40,Rmax0,Rmax2,Rmax10,Rmax15,Rmax20,Rmax40,Rmed0,Rmed2,Rmed10,Rmed15,Rmed20,Rmed40,Rmin0,Rmin2,Rmin10,Rmin15,Rmin20,Rmin40,Vmax0,Vmax2,Vmax10,Vmax15,Vmax20,Vmax40,Vmed0,Vmed2,Vmed10,Vmed15,Vmed20,Vmed40,Vmin0,Vmin2,Vmin10,Vmin15,Vmin20,Vmin40 = inits
             # obtendo os visitantes
             Mp0,Mp2,Mp10,Mp15,Mp20,Mp40,Ms0,Ms2,Ms10,Ms15,Ms20,Ms40 = self.parentSite.infectedvisiting
-            npass0,npass2,npass10,npass15,npass20,npass40 = getNPass(self)
+            npass0,npass2,npass10,npass15,npass20,npass40 = npass
             # resetando os visitantes:
             self.parentSite.infectedvisiting=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         
         totpass=npass0+npass2+npass10+npass15+npass20+npass40
-        N = self.parentSite.totpop
+        N = totpop
         # Parametros
         #beta,alpha,e,r,delta,B,w,p = par
         
@@ -222,7 +223,7 @@ def Model(self,vars,par,theta=0, npass=0):
         # Raises site infected flag and adds parent site to the epidemic history list.
         if not self.parentSite.infected: 
             if Lpos > 0:
-                print 'infected',self.parentSite.sitename
+                print 'infected', self.parentSite.sitename
                 #if not self.parentSite.infected:
                 self.parentSite.infected = self.parentSite.parentGraph.simstep
                 self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))

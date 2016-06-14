@@ -10,4 +10,5 @@ recursive-include Epigrass *
 include docs/build/latex/Epigrass.pdf
 prune docs/source*
 
-
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

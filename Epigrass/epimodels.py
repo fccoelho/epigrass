@@ -66,6 +66,7 @@ class Epimodel(object):
         self.update_redis(res)
         # return res
 
+    @cython.locals( simstep='long', totpop='long', theta='double', npass='double')
     def get_args_from_redis(self):
         """
         get updated parameters from the redis database.
@@ -110,7 +111,6 @@ def selectModel(Type):
     """
     Sets the model engine
     """
-
     if Type == 'SIR':
         return stepSIR
     elif Type == 'SIR_s':
@@ -155,7 +155,6 @@ def selectModel(Type):
             # TODO: move this import to the graph level
             import CustomModel
 
-            vnames['Custom'] = CustomModel.vnames
             return CustomModel.Model
         except ImportError:
             print "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
