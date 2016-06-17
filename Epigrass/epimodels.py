@@ -155,7 +155,6 @@ def selectModel(Type):
             # TODO: move this import to the graph level
             import CustomModel
 
-            vnames['Custom'] = CustomModel.vnames
             return CustomModel.Model
         except ImportError:
             print "You have to Create a CustomModel.py file before you can select\nthe Custom model type"

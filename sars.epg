@@ -35,7 +35,7 @@ encoding =
 #==============================================================#
 #model types available: SIS, SIS_s ,SIR, SIR_s, SEIS, SEIS_s, SEIR, SEIR_s, 
 # SIpRpS, SIpRpS_s,SIpR,SIpR_s,Influenza or multiple (see documentation for description).
-modtype = Custom
+modtype = SIRS
 # List of models in case of multiple models. 
 # Example: models = ['SIS','SIR','SIS']
 models = [] 
@@ -139,8 +139,8 @@ outdir =
 
 
 # Database Output
-# MySQLout can be 0 (no database output) or 1
-MySQLout = 1 
+# SQLout can be 0 (no database output) or 1
+SQLout = 1
 
 # Report Generation
 # The variable report can take the following values:
