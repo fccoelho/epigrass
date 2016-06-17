@@ -1,5 +1,6 @@
 # -*- coding:utf8 -*-
 from setuptools import setup
+from Cython.Build import cythonize
 from glob import glob
 from Epigrass.__version__ import version
 #from distutils.core import setup
@@ -34,7 +35,7 @@ setup(name='epigrass',
               'neteditor= Epigrass.neteditor:main'
           ]
       },
-
+      ext_modules=cythonize('Epigrass/epimodels.py'),
       include_package_data=True,
       package_data={'': ['INSTALL', 'README', 'COPYING', 'epigrass.desktop', '*.rst', '*.tex', '*.png', '*.jpg']},
       #data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/build/latex/Epigrass.pdf']),('/usr/share/applications',['epigrass.desktop'])]

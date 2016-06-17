@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 from __future__ import division
 
 """
@@ -10,10 +10,11 @@ License: GPL-v3
 
 __author__ = 'fccoelho'
 
-from numpy.random import poisson
+from numpy.random import poisson, negative_binomial
 from numpy import inf, nan, nan_to_num
 import sys
 import redis
+import cython
 
 redisclient = redis.StrictRedis()
 
@@ -48,8 +49,8 @@ class Epimodel(object):
     """
     Defines a library of discrete time population models
     """
-
-    def __init__(self, geocode, modtype='', parallel=True):
+    @cython.locals(geocode='long', modtype='bytes', parallel='bint')
+    def __init__(self, geocode, modtype=b'', parallel=True):
         """
         defines which models a given site will use
         and set variable names accordingly.
@@ -63,7 +64,7 @@ class Epimodel(object):
         args = self.get_args_from_redis()
         res = self.step(*args)
         self.update_redis(res)
-        #return res
+        # return res
 
     def get_args_from_redis(self):
         """
@@ -100,11 +101,11 @@ class Epimodel(object):
         # Graph state
         if Lpos > 0:
             infected = int(redisclient.get("simstep"))
-            redisclient.rpush("epipath", (infected, self.geocode, {}))  #TODO: replace empty dict with infectors
+            redisclient.rpush("epipath", (infected, self.geocode, {}))  # TODO: replace empty dict with infectors
             # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
-            #TODO: have infector be stated in terms of geocodes
+            # TODO: have infector be stated in terms of geocodes
 
-
+@cython.locals(Type='bytes')
 def selectModel(Type):
     """
     Sets the model engine
@@ -149,9 +150,9 @@ def selectModel(Type):
     elif Type == 'Influenza':
         return stepFlu
     elif Type == 'Custom':
-        #adds the user model as a method of instance self
+        # adds the user model as a method of instance self
         try:
-            #TODO: move this import to the graph level
+            # TODO: move this import to the graph level
             import CustomModel
 
             vnames['Custom'] = CustomModel.vnames
@@ -162,37 +163,59 @@ def selectModel(Type):
         sys.exit('Model type specified in .epg file is invalid')
 
 
-def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
-    #Variable long names to be used in the database output.
+    # Variable long names to be used in the database output.
     vnames = ('Susc_age1', 'Incub_age1', 'Subc_age1', 'Sympt_age1', 'Comp_age1',
               'Susc_age2', 'Incub_age2', 'Subc_age2', 'Sympt_age2', 'Comp_age2',
               'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         S1, E1, Is1, Ic1, Ig1 = (bi['susc_age1'], bi['incub_age1'], bi['subc_age1'], bi['sympt_age1'], bi['comp_age1'])
         S2, E2, Is2, Ic2, Ig2 = (bi['susc_age2'], bi['incub_age2'], bi['subc_age2'], bi['sympt_age2'], bi['comp_age2'])
         S3, E3, Is3, Ic3, Ig3 = (bi['susc_age3'], bi['incub_age3'], bi['subc_age3'], bi['sympt_age3'], bi['comp_age3'])
         S4, E4, Is4, Ic4, Ig4 = (bi['susc_age4'], bi['incub_age4'], bi['subc_age4'], bi['sympt_age4'], bi['comp_age4'])
-    else:  #get values from last time step
+    else:  # get values from last time step
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
     N = totpop
 
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameters: alpha,beta,r,e,c,g,d,pc1,pc2,pc3,pc4,pp1,pp2,pp3,pp4,b
+    # for k, v in bp.items():
+    #     exec ('%s = %s' % (k, v))
+    alpha = bp['alpha']
+    beta = bp['beta']
+    r = bp['r']
+    e = bp['e']
+    c = bp['c']
+    g = bp['g']
+    d = bp['d']
+    pc1 = bp['pc1']
+    pc2 = bp['pc2']
+    pc3 = bp['pc3']
+    pc4 = bp['pc4']
+    pp1 = bp['pp1']
+    pp2 = bp['pp2']
+    pp3 = bp['pp3']
+    pp4 = bp['pp4']
+    b = bp['b']
 
-    #Vacination event
-    if vaccineNow:  #TODO: add to bp when creating model
+    # Vacination event
+
+    if 'vaccineNow' in bp:  # TODO: add to bp when creating model
+        vaccineNow = bp['vaccineNow']
+        vaccov = bp['vaccov']
         S1 -= vaccov * S1
         S2 -= vaccov * S2
         S3 -= vaccov * S3
         S4 -= vaccov * S4
 
-    #New cases by age class
-    #beta=eval(values[2])
+    # New cases by age class
+    # beta=eval(values[2])
 
     Infectantes = Ig1 + Ig2 + Ig3 + Ig4 + Ic1 + Ic2 + Ic3 + Ic4 + 0.5 * (Is1 + Is2 + Is3 + Is4) + theta
     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha
@@ -228,120 +251,163 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
     Ig4pos = (1 - d) * Ig4 + pp4 * g * Ic4
     S4pos = b + S4 - L4pos
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = (
         Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
-        Is1pos + Is2pos + Is3pos + Is4pos))
+            Is1pos + Is2pos + Is3pos + Is4pos))
     # Return variable values
 
     return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,
             Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
 
-
-def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits= 'object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
+    :param inits: tuple with initial conditions
+    :param simstep: step of the simulation
+    :param totpop: total population
+    :param theta: inflow of infectives parameter
+    :param npass: total inflow
+    :param bi: dictionary with state
+    :param bp: dictionary with parameter values
+    :param values: tuple of extra values
+    :return:
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    r = bp['r'];
+    b = bp['b']
+
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = (Ipos)
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
+
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = (Ipos)
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameters: b ,r
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos)
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -349,124 +415,160 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(),
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos)
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameters: b,e,r
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
-    #Model
+    # Model
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos + r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameters: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #converting between parameterizations
+        prob = I / (I + Lpos_esp)  # converting between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos + r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIR:
     - inits = (E,I,S)
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameters: beta,alpha,e,r,delta,B,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
-    #Model
+    # Model
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos
     Rpos = N - (Spos + Epos + Ipos)
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
     - par = (Beta, alpha, E,r,delta,B,w,p) see docs.
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameters: beta,alpha,e,r,delta,B,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
-        Lpos = poisson(Lpos_esp)  #poisson(Lpos_esp)
+        Lpos = poisson(Lpos_esp)  # poisson(Lpos_esp)
     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
@@ -474,59 +576,77 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     Spos = S + b - Lpos
     Rpos = N - (Spos + Epos + Ipos)
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + (1 - delta) * r * I
     Rpos = N - (Spos + Ipos) + delta * r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,B,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -534,60 +654,78 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=
     Spos = S + b - Lpos + (1 - delta) * r * I
     Rpos = N - (Spos + Ipos) + delta * r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
 
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos + (1 - delta) * r * I
     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     Epos = (1 - e) * E + Lpos
@@ -595,67 +733,85 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values
     Spos = S + b - Lpos + (1 - delta) * r * I
     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
-    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  #number of secondary Infections
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
 
     # Model
     Ipos = (1 - r) * I + Lpos + Lpos2
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos) - Lpos2
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameter: beta,alpha,e,r,delta,b,w,p
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    p = bp['p']
     R = N - E - I - S
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
-    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  #number of secondary Infections
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
         Lpos2 = poisson(Lpos2_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
-        prob = I / (I + Lpos2_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos2_esp)  # convertin between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
     # Model
@@ -663,28 +819,37 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos) - Lpos2
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameters: beta,alpha,e,r,delta,b,w,p
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    p = bp['p']
 
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
 
     # Model
@@ -693,38 +858,47 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=())
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos) - Lpos2
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,B,w,p
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    # w = bp['w'];
+    p = bp['p']
     R = N - E - I - S
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
         Lpos2 = poisson(Lpos2_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #converting between parameterizations
+        prob = I / (I + Lpos_esp)  # converting between parameterizations
         Lpos = negative_binomial(I, prob)
-        prob = I / (I + Lpos2_esp)  #converting between parameterizations
+        prob = I / (I + Lpos2_esp)  # converting between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
     # Model
@@ -733,61 +907,79 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(
     Spos = S + b - Lpos
     Rpos = N - (Spos + Ipos) - Lpos2
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        #parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    w = bp['w'];
+    # p = bp['p']
+    Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + w * R
     Rpos = N - (Spos + Ipos) - w * R
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), dist='poisson'):
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
+               beta='double', alpha='double', E='double', I='double', S='double', N='long',
+               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+               Ipos='double', Spos='double', Rpos='double')
+def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
-    if simstep == 1:  #get initial values
+    if simstep == 1:  # get initial values
         E, I, S = (bi['e'], bi['i'], bi['s'])
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    for k, v in bp.items():
-        exec ('%s = %s' % (k, v))
-        # parameter: beta,alpha,e,r,delta,b,w,p
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  #Number of new cases
+    beta = bp['beta'];
+    alpha = bp['alpha'];
+    # e = bp['e'];
+    r = bp['r'];
+    # delta = bp['delta'];
+    b = bp['b'];
+    w = bp['w'];
+    # p = bp['p']
+    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
         Lpos = poisson(Lpos_esp)
     elif dist == 'negbin':
-        prob = I / (I + Lpos_esp)  #convertin between parameterizations
+        prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
     # Model
@@ -795,8 +987,7 @@ def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()
     Spos = S + b - Lpos + w * R
     Rpos = N - (Spos + Ipos) - w * R
 
-    #Migrating infecctious
+    # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
-
