@@ -25,7 +25,10 @@ class World:
         self.geocfield = geocfield
         self.namefield = namefield
         self.outdir = outdir
-        self.ds = ogr.Open(filename)
+        try:
+            self.ds = ogr.Open(filename)
+        except AttributeError:
+            raise AttributeError("Could not open the Shapefile {}. Please check if the path is correct.".format(filename))
         self.name = self.ds.GetName()
         self.driver = self.ds.GetDriver()
         self.centroids = []#centroid list (x,y,z) tuples
