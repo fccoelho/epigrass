@@ -17,6 +17,7 @@ except ImportError:
     print "Please install PyQT 4"
 
 from manager import *
+from threading import Thread, Condition
 import threading, subprocess, glob
 from Ui_cpanel4new import Ui_MainWindow
 from Ui_about4 import Ui_aboutDialog as aboutDialog

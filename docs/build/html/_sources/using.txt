@@ -336,8 +336,8 @@ Now it is time to define some final operational variables for the simulation::
 	outfile = simul.dat
 
 	# Database Output
-	# MySQLout can be 0 (no database output) or 1
-	MySQLout = 1
+	# SQLout can be 0 (no database output) or 1
+	SQLout = 1
 
 
 	# Report Generation

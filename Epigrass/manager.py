@@ -139,13 +139,13 @@ class simulate:
             #SIMULATION AND OUTPUT
             self.steps = eval(config['simulation and output.steps'])
             self.outdir = config['simulation and output.outdir']
-            self.MySQLout = eval(config['simulation and output.mysqlout'])
+            self.SQLout = eval(config['simulation and output.sqlout'])
             #            self.Rep = eval(config['simulation and output.report'])
             #            self.siteRep = eval(config['simulation and output.siterep'])
             self.replicas = eval(config['simulation and output.replicas'])
             self.randomize_seeds = eval(config['simulation and output.randseed'])
             self.Batch = eval(config['simulation and output.batch'])
-        except KeyError, v:
+        except KeyError as v:
             V = v.__str__().split('.')
             sys.exit("Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified." % (
                 V[1], V[0]))
@@ -369,7 +369,7 @@ class simulate:
         self.runGraph(self.g, self.steps, transp=self.doTransp)
         elapsed = time.time() - start
         self.Say('Simulation lasted %s seconds.' % elapsed)
-        if self.MySQLout:
+        if self.SQLout:
             if self.backend == 'csv':
                 self.outToCsv(self.modelName)
             else:

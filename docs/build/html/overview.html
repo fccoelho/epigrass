@@ -1,416 +1,238 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>Overview of Epigrass &mdash; Epigrass 2.0a1 documentation</title>
-
-    <link rel="stylesheet" href="_static/default.css" type="text/css"/>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
-
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT: './',
-            VERSION: '2.0a1',
-            COLLAPSE_INDEX: false,
-            FILE_SUFFIX: '.html',
-            HAS_SOURCE: true
-        };
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Epigrass 2.0a1 documentation" href="index.html"/>
-    <link rel="next" title="Building and Installing" href="install.html"/>
-    <link rel="prev" title="Welcome to Epigrass’s documentation!" href="index.html"/>
-</head>
-<body>
-<div class="related">
-    <h3>Navigation</h3>
-    <ul>
-        <li class="right" style="margin-right: 10px">
-            <a href="genindex.html" title="General Index"
-               accesskey="I">index</a></li>
-        <li class="right">
-            <a href="install.html" title="Building and Installing"
-               accesskey="N">next</a> |
-        </li>
-        <li class="right">
-            <a href="index.html" title="Welcome to Epigrass’s documentation!"
-               accesskey="P">previous</a> |
-        </li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
-    </ul>
+    <link rel="top" title="Epigrass 2.0a1 documentation" href="index.html" />
+    <link rel="next" title="Building and Installing" href="install.html" />
+    <link rel="prev" title="Welcome to Epigrass’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="overview-of-epigrass">
+<h1>Overview of Epigrass<a class="headerlink" href="#overview-of-epigrass" title="Permalink to this headline">¶</a></h1>
+<p>Epigrass is a platform for network epidemiological simulation and analysis. It enables researchers to perform comprehensive spatio-temporal simulations incorporating epidemiological data and models for disease transmission and control in order to create sophisticated scenario analyses.</p>
+<div class="section" id="modeling-approach">
+<h2>Modeling Approach<a class="headerlink" href="#modeling-approach" title="Permalink to this headline">¶</a></h2>
+<p>The geographical networks  over which epidemiological processes take place can be very straightforwardly represented in a object-oriented framework. In such a framework, the nodes and edges of the geographical networks are objects with their attributes and methods.</p>
+<p>Once the archetypal node and edge objects are defined with appropriate attributes and methods, then a code representation of the real system can be constructed, where cities (or other geographical localities) and transportation routes are instances of the node and edge objects, respectively. The whole network is also an object with a whole collection of attributes and methods.</p>
+<p>This framework leads to a compact and hierarchical computational model consisting of a network object containing a variable number of node and edge objects. This framework also do not pose limitations to encapsulation, potentially allowing for networks within networks if desirable.</p>
+<p>For the end user perspective, this framework is transparent since it mimics the natural structure of the real system. Even after the model is converted into a code object all of its component objects remain accessible to the user&#8217;s  models.</p>
+</div>
+<div class="section" id="geographical-network-models">
+<h2>Geographical Network Models<a class="headerlink" href="#geographical-network-models" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">Epigrass&#8217;s geo-referenced models are built from two basic sources of data: a map (in shapefile format) which provide the cartographical base over which the models are represented and specific data about nodes and edges that are provided by the user for the network of interest.</p>
+<div class="section" id="defining-the-cartographic-background">
+<h3>Defining the Cartographic Background<a class="headerlink" href="#defining-the-cartographic-background" title="Permalink to this headline">¶</a></h3>
+<p>If the user has a map for the georeferred data, this can be passed to Epigrass. In this case, the cartographic background is defined by defining the name of the shapefile file (with path relative to the working directory) in the model&#8217;.epg file. Along with the path to the shapefile,  the variable in the shapefile, which contains the geocode of localities and their name must also be specified:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">shapefile</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;riozonas_LatLong.shp&#39;</span><span class="p">,</span><span class="s1">&#39;nome_zonas&#39;</span><span class="p">,</span><span class="s1">&#39;zona_trafe&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If the user does not have a map in shapefile format, he can still use Epigrass. In this case, the georeferred data is read only from two .csv files (more on that ahead).</p>
+</div>
+<div class="section" id="defining-nodes">
+<span id="index-1"></span><h3>Defining Nodes<a class="headerlink" href="#defining-nodes" title="Permalink to this headline">¶</a></h3>
+<p>A graph has nodes and edges. Nodes can be cities or other localities depending on the model being constructed. The definition of nodes require the setting of many attributes listed below. The nodes will have many more attributes defined at run-time which will depend on other aspects of the model, these will be discussed later.</p>
+<p>The data necessary at build time to create nodes come from a CSV (comma-separated-values) ASCII-text file, with the following attributes, (in this order):</p>
+<dl class="docutils">
+<dt><em>Latitude, Longitude</em></dt>
+<dd>This attribute will be used to geo reference the  node. The coordinate system must match those used in the cartographic base imported from GRASS. Coordinates can be coded in either decimal or sexagesimal format.</dd>
+<dt><em>Name</em></dt>
+<dd>Used for identification purposes only. It can be a city name, for instance.</dd>
+<dt><em>Population</em></dt>
+<dd>Since the simulation models will all be of a populational nature. Population size must be specified at build time.</dd>
+<dt><em>Geocode</em></dt>
+<dd>A Unique Geocode (a number) is required. It will be used as a label/index to facilitate  reference to specific nodes.</dd>
+</dl>
+</div>
+<div class="section" id="defining-edges">
+<span id="index-2"></span><h3>Defining Edges<a class="headerlink" href="#defining-edges" title="Permalink to this headline">¶</a></h3>
+<p>In Epigrass&#8217; graphs, edges represent transportation routes. Similarly to nodes, edges are defined at build-time with a reduced set of attributes which will be extended at run-time. Epigrass also expects to get these attributes from a CSV file:</p>
+<dl class="docutils">
+<dt><em>Source</em></dt>
+<dd>The name of the source node. The edges are bi-directional, but the nodes are labeled source and destination for reference purposes.</dd>
+<dt><em>Destination</em></dt>
+<dd>The name of the destination node.</dd>
+<dt><em>Forward migration</em></dt>
+<dd>Migration rate from source to destination, in number of persons per unit of time.</dd>
+<dt><em>Backward migration</em></dt>
+<dd>Migration rate from destination to source, in number of persons per unit of time.</dd>
+<dt><em>Length</em></dt>
+<dd>Distance in kilometers (or another unit) from source to destination via the particular route (not straight line distance).</dd>
+<dt><em>Source&#8217;s geocode</em></dt>
+<dd>This is the unique numerical identifier used in the sites file.</dd>
+<dt><em>Destination&#8217;s geocode</em></dt>
+<dd>This is the unique numerical identifier used in the sites file.</dd>
+</dl>
+</div>
+<div class="section" id="defining-models">
+<span id="index-3"></span><h3>Defining models<a class="headerlink" href="#defining-models" title="Permalink to this headline">¶</a></h3>
+<p>The word model in Epigrass can mean two distinct objects: The network model and the node&#8217;s epidemic model.</p>
+<p>Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard epidemiological modelsindex{Models!epidemiological models} to choose from when setting up your network. Currently, The same model type is applied to every node although their parameterization is node-specific. Besides the built-in model types, users can define their own, as shown in the chapter <em>Using Epigrass</em>.</p>
+<p id="index-4">Network models are specified in a ASCII-text script file (Called a <code class="file docutils literal"><span class="pre">.epg</span></code> file). Epigrass comes with a few demo Network models for the user to play with until he/she is confident enough to build their own. Even then, it is advisable to use the demo scripts provided as templates to minimize syntax errors.</p>
+<p>The script on the appendix  specifies a network model with an stochastic SEIR (see chapter on epidemiological modeling) epidemic model in its nodes. The user should study this model and play with its parameters to understand the features of Epigrass. A step-by-step tutorial on how to edit the model script can be found in the chapter <em>Using Epigrass</em>.</p>
+</div>
+</div>
+<div class="section" id="the-simulation">
+<h2>The Simulation<a class="headerlink" href="#the-simulation" title="Permalink to this headline">¶</a></h2>
+<p>A simulation run in Epigrass consists of a series of tasks performed at each time step <a class="footnote-reference" href="#id3" id="id1">[1]</a> .</p>
+<dl class="docutils">
+<dt><em>Calculate migration</em></dt>
+<dd>For all edges in the network, the number of persons traveling each way is determined for the current time-step.</dd>
+<dt><em>Run epidemic models</em></dt>
+<dd>For each node in the network the epidemic demographics are updated based on the local number of infected and susceptible individuals which have been updated by the transportation system.</dd>
+</dl>
+<p>All aspects of the simulation such as number of passengers traveling on each edge, number of infected/susceptible on each node and etc., are recorded in a step-by-step basis. This complete record allows for the model to be analyzed after the simulation has been completed without having to recalculate it.</p>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<p>The output of a simulation in Epigrass is three-fold: A graphical display which the animated outcome of the simulation,  a written report, and a database table with numeric results.</p>
+<div class="section" id="graphical-display">
+<h4>Graphical display<a class="headerlink" href="#graphical-display" title="Permalink to this headline">¶</a></h4>
+<p>During a simulation, selected epidemiological variables are animated in a 3-dimensional rendering over the map of the region containing the network.</p>
+</div>
+<div class="section" id="report-generation">
+<h4>Report Generation<a class="headerlink" href="#report-generation" title="Permalink to this headline">¶</a></h4>
+<p>The report contains a detailed analysis of the network model and the simulations ran with it. The report generates a LaTeX source file and compiles it to a PDF document for visualization.</p>
+<p>Three types of report are currently available:</p>
+<dl class="docutils">
+<dt><strong>Report = 1</strong></dt>
+<dd>Returns a set of descriptors of the network, described in chapter</dd>
+<dt><strong>Report = 2</strong></dt>
+<dd>Returns a set of basic epidemiological measures and plots of the time series.</dd>
+<dt><strong>Report = 3</strong></dt>
+<dd>Report 1 + Report 2</dd>
+</dl>
+<p>Report Generation is an optional, though recommended, step done at the end of the simulation. For the report, descriptive statistics are generated for the network. These have to do with network topology and properties. Additional sections can be added to the report with basic statistical analyses of the output of pre-selected nodes <a class="footnote-reference" href="#id4" id="id2">[2]</a> .</p>
+</div>
+<div class="section" id="database-output">
+<h4>Database output<a class="headerlink" href="#database-output" title="Permalink to this headline">¶</a></h4>
+<p id="index-5">Time series of <strong>L</strong>, <strong>S</strong>, <strong>E</strong>, and <strong>I</strong>, from simulations, are stored in a MySQL database named <em>epigrass</em> . The results of each individual simulation is stored in a different table named after the model&#8217;s script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named <code class="file docutils literal"><span class="pre">script.epg</span></code>, then at the end of the simulation, a new table in the epigrass database will be created with the following name: <em>script_Wed_Jan_26_154411_2005</em>. Thus, the results of multiple runs from the same model get stored independently.</p>
+<p>Epigrass also supports the SQLite database and CSV files as output for the time-series. The naming convention also applies to these other formats.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The number of time steps is defined in the model script</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Listed in the siteRep variable at the script</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 
-<div class="document">
-    <div class="documentwrapper">
-        <div class="bodywrapper">
-            <div class="body">
 
-                <div class="section" id="overview-of-epigrass">
-                    <h1>Overview of Epigrass<a class="headerlink" href="#overview-of-epigrass"
-                                               title="Permalink to this headline">¶</a></h1>
-
-                    <p>Epigrass is a platform for network epidemiological simulation and analysis. It enables
-                        researchers to perform comprehensive spatio-temporal simulations incorporating epidemiological
-                        data and models for disease transmission and control in order to create sophisticated scenario
-                        analyses.</p>
-
-                    <div class="section" id="modeling-approach">
-                        <h2>Modeling Approach<a class="headerlink" href="#modeling-approach"
-                                                title="Permalink to this headline">¶</a></h2>
-
-                        <p>The geographical networks over which epidemiological processes take place can be very
-                            straightforwardly represented in a object-oriented framework. In such a framework, the nodes
-                            and edges of the geographical networks are objects with their attributes and methods.</p>
-
-                        <p>Once the archetypal node and edge objects are defined with appropriate attributes and
-                            methods, then a code representation of the real system can be constructed, where cities (or
-                            other geographical localities) and transportation routes are instances of the node and edge
-                            objects, respectively. The whole network is also an object with a whole collection of
-                            attributes and methods.</p>
-
-                        <p>This framework leads to a compact and hierarchical computational model consisting of a
-                            network object containing a variable number of node and edge objects. This framework also do
-                            not pose limitations to encapsulation, potentially allowing for networks within networks if
-                            desirable.</p>
-
-                        <p>For the end user perspective, this framework is transparent since it mimics the natural
-                            structure of the real system. Even after the model is converted into a code object all of
-                            its component objects remain accessible to the user&#8217;s models.</p>
-                    </div>
-                    <div class="section" id="geographical-network-models">
-                        <h2>Geographical Network Models<a class="headerlink" href="#geographical-network-models"
-                                                          title="Permalink to this headline">¶</a></h2>
-
-                        <p id="index-0">Epigrass&#8217;s geo-referenced models are built from two basic sources of data:
-                            a map (in shapefile format) which provide the cartographical base over which the models are
-                            represented and specific data about nodes and edges that are provided by the user for the
-                            network of interest.</p>
-
-                        <div class="section" id="defining-the-cartographic-background">
-                            <h3>Defining the Cartographic Background<a class="headerlink"
-                                                                       href="#defining-the-cartographic-background"
-                                                                       title="Permalink to this headline">¶</a></h3>
-
-                            <p>If the user has a map for the georeferred data, this can be passed to Epigrass. In this
-                                case, the cartographic background is defined by defining the name of the shapefile file
-                                (with path relative to the working directory) in the model&#8217;.epg file. Along with
-                                the path to the shapefile, the variable in the shapefile, which contains the geocode of
-                                localities and their name must also be specified:</p>
-
-                            <div class="highlight-python">
-                                <div class="highlight"><pre><span class="n">shapefile</span> <span
-                                        class="o">=</span>  <span class="p">[</span><span class="s">&#39;riozonas_LatLong.shp&#39;</span><span
-                                        class="p">,</span><span class="s">&#39;nome_zonas&#39;</span><span
-                                        class="p">,</span><span class="s">&#39;zona_trafe&#39;</span><span
-                                        class="p">]</span>
-</pre>
-                                </div>
-                            </div>
-                            <p>If the user does not have a map in shapefile format, he can still use Epigrass. In this
-                                case, the georeferred data is read only from two .csv files (more on that ahead).</p>
-                        </div>
-                        <div class="section" id="defining-nodes">
-                            <span id="index-1"></span>
-
-                            <h3>Defining Nodes<a class="headerlink" href="#defining-nodes"
-                                                 title="Permalink to this headline">¶</a></h3>
-
-                            <p>A graph has nodes and edges. Nodes can be cities or other localities depending on the
-                                model being constructed. The definition of nodes require the setting of many attributes
-                                listed below. The nodes will have many more attributes defined at run-time which will
-                                depend on other aspects of the model, these will be discussed later.</p>
-
-                            <p>The data necessary at build time to create nodes come from a CSV (comma-separated-values)
-                                ASCII-text file, with the following attributes, (in this order):</p>
-                            <dl class="docutils">
-                                <dt><em>Latitude, Longitude</em></dt>
-                                <dd>This attribute will be used to geo reference the node. The coordinate system must
-                                    match those used in the cartographic base imported from GRASS. Coordinates can be
-                                    coded in either decimal or sexagesimal format.
-                                </dd>
-                                <dt><em>Name</em></dt>
-                                <dd>Used for identification purposes only. It can be a city name, for instance.</dd>
-                                <dt><em>Population</em></dt>
-                                <dd>Since the simulation models will all be of a populational nature. Population size
-                                    must be specified at build time.
-                                </dd>
-                                <dt><em>Geocode</em></dt>
-                                <dd>A Unique Geocode (a number) is required. It will be used as a label/index to
-                                    facilitate reference to specific nodes.
-                                </dd>
-                            </dl>
-                        </div>
-                        <div class="section" id="defining-edges">
-                            <span id="index-2"></span>
-
-                            <h3>Defining Edges<a class="headerlink" href="#defining-edges"
-                                                 title="Permalink to this headline">¶</a></h3>
-
-                            <p>In Epigrass&#8217; graphs, edges represent transportation routes. Similarly to nodes,
-                                edges are defined at build-time with a reduced set of attributes which will be extended
-                                at run-time. Epigrass also expects to get these attributes from a CSV file:</p>
-                            <dl class="docutils">
-                                <dt><em>Source</em></dt>
-                                <dd>The name of the source node. The edges are bi-directional, but the nodes are labeled
-                                    source and destination for reference purposes.
-                                </dd>
-                                <dt><em>Destination</em></dt>
-                                <dd>The name of the destination node.</dd>
-                                <dt><em>Forward migration</em></dt>
-                                <dd>Migration rate from source to destination, in number of persons per unit of time.
-                                </dd>
-                                <dt><em>Backward migration</em></dt>
-                                <dd>Migration rate from destination to source, in number of persons per unit of time.
-                                </dd>
-                                <dt><em>Length</em></dt>
-                                <dd>Distance in kilometers (or another unit) from source to destination via the
-                                    particular route (not straight line distance).
-                                </dd>
-                                <dt><em>Source&#8217;s geocode</em></dt>
-                                <dd>This is the unique numerical identifier used in the sites file.</dd>
-                                <dt><em>Destination&#8217;s geocode</em></dt>
-                                <dd>This is the unique numerical identifier used in the sites file.</dd>
-                            </dl>
-                        </div>
-                        <div class="section" id="defining-models">
-                            <span id="index-3"></span>
-
-                            <h3>Defining models<a class="headerlink" href="#defining-models"
-                                                  title="Permalink to this headline">¶</a></h3>
-
-                            <p>The word model in Epigrass can mean two distinct objects: The network model and the node&#8217;s
-                                epidemic model.</p>
-
-                            <p>Node objects, in an Epigrass model, contain well-mixed population dynamic models within
-                                them. These models determine the dynamics of epidemics within the particular
-                                environments of each node. Epigrass comes with a few standard epidemiological
-                                modelsindex{Models!epidemiological models} to choose from when setting up your network.
-                                Currently, The same model type is applied to every node although their parameterization
-                                is node-specific. Besides the built-in model types, users can define their own, as shown
-                                in the chapter <em>Using Epigrass</em>.</p>
-
-                            <p id="index-4">Network models are specified in a ASCII-text script file (Called a <tt
-                                    class="file docutils literal"><span class="pre">.epg</span></tt> file). Epigrass
-                                comes with a few demo Network models for the user to play with until he/she is confident
-                                enough to build their own. Even then, it is advisable to use the demo scripts provided
-                                as templates to minimize syntax errors.</p>
-
-                            <p>The script on the appendix specifies a network model with an stochastic SEIR (see chapter
-                                on epidemiological modeling) epidemic model in its nodes. The user should study this
-                                model and play with its parameters to understand the features of Epigrass. A
-                                step-by-step tutorial on how to edit the model script can be found in the chapter <em>Using
-                                    Epigrass</em>.</p>
-                        </div>
-                    </div>
-                    <div class="section" id="the-simulation">
-                        <h2>The Simulation<a class="headerlink" href="#the-simulation"
-                                             title="Permalink to this headline">¶</a></h2>
-
-                        <p>A simulation run in Epigrass consists of a series of tasks performed at each time step <a
-                                class="footnote-reference" href="#id3" id="id1">[1]</a> .</p>
-                        <dl class="docutils">
-                            <dt><em>Calculate migration</em></dt>
-                            <dd>For all edges in the network, the number of persons traveling each way is determined for
-                                the current time-step.
-                            </dd>
-                            <dt><em>Run epidemic models</em></dt>
-                            <dd>For each node in the network the epidemic demographics are updated based on the local
-                                number of infected and susceptible individuals which have been updated by the
-                                transportation system.
-                            </dd>
-                        </dl>
-                        <p>All aspects of the simulation such as number of passengers traveling on each edge, number of
-                            infected/susceptible on each node and etc., are recorded in a step-by-step basis. This
-                            complete record allows for the model to be analyzed after the simulation has been completed
-                            without having to recalculate it.</p>
-
-                        <div class="section" id="output">
-                            <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-
-                            <p>The output of a simulation in Epigrass is three-fold: A graphical display which the
-                                animated outcome of the simulation, a written report, and a database table with numeric
-                                results.</p>
-
-                            <div class="section" id="graphical-display">
-                                <h4>Graphical display<a class="headerlink" href="#graphical-display"
-                                                        title="Permalink to this headline">¶</a></h4>
-
-                                <p>During a simulation, selected epidemiological variables are animated in a
-                                    3-dimensional rendering over the map of the region containing the network.</p>
-                            </div>
-                            <div class="section" id="report-generation">
-                                <h4>Report Generation<a class="headerlink" href="#report-generation"
-                                                        title="Permalink to this headline">¶</a></h4>
-
-                                <p>The report contains a detailed analysis of the network model and the simulations ran
-                                    with it. The report generates a LaTeX source file and compiles it to a PDF document
-                                    for visualization.</p>
-
-                                <p>Three types of report are currently available:</p>
-                                <dl class="docutils">
-                                    <dt><strong>Report = 1</strong></dt>
-                                    <dd>Returns a set of descriptors of the network, described in chapter</dd>
-                                    <dt><strong>Report = 2</strong></dt>
-                                    <dd>Returns a set of basic epidemiological measures and plots of the time series.
-                                    </dd>
-                                    <dt><strong>Report = 3</strong></dt>
-                                    <dd>Report 1 + Report 2</dd>
-                                </dl>
-                                <p>Report Generation is an optional, though recommended, step done at the end of the
-                                    simulation. For the report, descriptive statistics are generated for the network.
-                                    These have to do with network topology and properties. Additional sections can be
-                                    added to the report with basic statistical analyses of the output of pre-selected
-                                    nodes <a class="footnote-reference" href="#id4" id="id2">[2]</a> .</p>
-                            </div>
-                            <div class="section" id="database-output">
-                                <h4>Database output<a class="headerlink" href="#database-output"
-                                                      title="Permalink to this headline">¶</a></h4>
-
-                                <p id="index-5">Time series of <strong>L</strong>, <strong>S</strong>,
-                                    <strong>E</strong>, and <strong>I</strong>, from simulations, are stored in a MySQL
-                                    database named <em>epigrass</em> . The results of each individual simulation is
-                                    stored in a different table named after the model&#8217;s script name, the date and
-                                    time the simulation has been run. For instance, suppose you run a simulation of a
-                                    model stored in a file named <tt class="file docutils literal"><span class="pre">script.epg</span></tt>,
-                                    then at the end of the simulation, a new table in the epigrass database will be
-                                    created with the following name: <em>script_Wed_Jan_26_154411_2005</em>. Thus, the
-                                    results of multiple runs from the same model get stored independently.</p>
-
-                                <p>Epigrass also supports the SQLite database and CSV files as output for the
-                                    time-series. The naming convention also applies to these other formats.</p>
-
-                                <p class="rubric">Footnotes</p>
-                                <table class="docutils footnote" frame="void" id="id3" rules="none">
-                                    <colgroup>
-                                        <col class="label"/>
-                                        <col/>
-                                    </colgroup>
-                                    <tbody valign="top">
-                                    <tr>
-                                        <td class="label"><a class="fn-backref" href="#id1">[1]</a></td>
-                                        <td>The number of time steps is defined in the model script</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <table class="docutils footnote" frame="void" id="id4" rules="none">
-                                    <colgroup>
-                                        <col class="label"/>
-                                        <col/>
-                                    </colgroup>
-                                    <tbody valign="top">
-                                    <tr>
-                                        <td class="label"><a class="fn-backref" href="#id2">[2]</a></td>
-                                        <td>Listed in the siteRep variable at the script</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+          </div>
         </div>
-    </div>
-    <div class="sphinxsidebar">
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-                <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
             </a></p>
-
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-                <li><a class="reference internal" href="#">Overview of Epigrass</a>
-                    <ul>
-                        <li><a class="reference internal" href="#modeling-approach">Modeling Approach</a></li>
-                        <li><a class="reference internal" href="#geographical-network-models">Geographical Network
-                            Models</a>
-                            <ul>
-                                <li><a class="reference internal" href="#defining-the-cartographic-background">Defining
-                                    the Cartographic Background</a></li>
-                                <li><a class="reference internal" href="#defining-nodes">Defining Nodes</a></li>
-                                <li><a class="reference internal" href="#defining-edges">Defining Edges</a></li>
-                                <li><a class="reference internal" href="#defining-models">Defining models</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="reference internal" href="#the-simulation">The Simulation</a>
-                            <ul>
-                                <li><a class="reference internal" href="#output">Output</a>
-                                    <ul>
-                                        <li><a class="reference internal" href="#graphical-display">Graphical
-                                            display</a></li>
-                                        <li><a class="reference internal" href="#report-generation">Report
-                                            Generation</a></li>
-                                        <li><a class="reference internal" href="#database-output">Database output</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>Previous topic</h4>
-
-            <p class="topless"><a href="index.html"
-                                  title="previous chapter">Welcome to Epigrass&#8217;s documentation!</a></p>
-            <h4>Next topic</h4>
-
-            <p class="topless"><a href="install.html"
-                                  title="next chapter">Building and Installing</a></p>
-
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-                <li><a href="_sources/overview.txt"
-                       rel="nofollow">Show Source</a></li>
-            </ul>
-            <div id="searchbox" style="display: none">
-                <h3>Quick search</h3>
-
-                <form class="search" action="search.html" method="get">
-                    <input type="text" name="q"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
-            </div>
-            <script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-    </div>
-    <div class="clearer"></div>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview of Epigrass</a><ul>
+<li><a class="reference internal" href="#modeling-approach">Modeling Approach</a></li>
+<li><a class="reference internal" href="#geographical-network-models">Geographical Network Models</a><ul>
+<li><a class="reference internal" href="#defining-the-cartographic-background">Defining the Cartographic Background</a></li>
+<li><a class="reference internal" href="#defining-nodes">Defining Nodes</a></li>
+<li><a class="reference internal" href="#defining-edges">Defining Edges</a></li>
+<li><a class="reference internal" href="#defining-models">Defining models</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-simulation">The Simulation</a><ul>
+<li><a class="reference internal" href="#output">Output</a><ul>
+<li><a class="reference internal" href="#graphical-display">Graphical display</a></li>
+<li><a class="reference internal" href="#report-generation">Report Generation</a></li>
+<li><a class="reference internal" href="#database-output">Database output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Epigrass&#8217;s documentation!</a></li>
+      <li>Next: <a href="install.html" title="next chapter">Building and Installing</a></li>
+  </ul></li>
+</ul>
 </div>
-<div class="related">
-    <h3>Navigation</h3>
-    <ul>
-        <li class="right" style="margin-right: 10px">
-            <a href="genindex.html" title="General Index"
-                    >index</a></li>
-        <li class="right">
-            <a href="install.html" title="Building and Installing"
-                    >next</a> |
-        </li>
-        <li class="right">
-            <a href="index.html" title="Welcome to Epigrass’s documentation!"
-                    >previous</a> |
-        </li>
-        <li><a href="index.html">Epigrass Documentation</a> &raquo;</li>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/overview.txt"
+            rel="nofollow">Show Source</a></li>
     </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
 </div>
-<div class="footer">
-    &copy; Copyright 2008, Flávio Codeço Coelho.
-    Last updated on May 06, 2014.
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
-</div>
-</body>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2008, Flávio Codeço Coelho.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/overview.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
 </html>
