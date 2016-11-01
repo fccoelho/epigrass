@@ -5,134 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/SIRdiagram.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/SIpRdiagram.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/epigrass1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/epigrass2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/epigrass4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/0c60490cbaa3f7aae0230ac5435629429f43c987.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/11a85f3c69ae6702cb1d99d3de451913b8f84c04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/138a3cbb5276048bdeeee8cc572d993ca664c30d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/16af9099253aa5b39d730f5df3cbaf06409cf8ac.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/235f09cb740a17bd81adeb0ace77979e570c5fbc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/277b8ae9be0d5bce6bd4db99b103f15c28835fe7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/2ede365ad144ab396916ec60458da03860803078.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/33f4189328b442bb0be8faecb62c0f5798554452.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/368cfddac1f300af3fa17c5858e439d485af6c6d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/3c25546a6e9432111c764e3b1ae38a0fa211add7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/3eca8557203e86160952e1c0f735f7417f3285b1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/4bc61022e3ce4e9e6c65c70d8c6faf3f6a9347e8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/4fdb9ff437fc54bb08d0442de43b6ae5f710b73e.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/598f16cc898efd52bfb6b9f105b45434eabbbe00.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/5c36ac964f4070b7920c9ad93498e852492f1c20.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/5d9e7b2aec3287330051a115f2ea3cdc8c7a6587.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/5f0bc7c2047c6b4daaba7c48e0286e510bb0a625.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/6068ffbe8996fe287f2e39f6cb3ea3e3d8e6b1ee.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/630e3a780577ea7921e81ee2ac5237dd1802ec8d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/640cd6ce2ad9f6f4826d45cd0b0f205043d8ef46.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/655777d828d0e9fc776c3f0b6cbb54a138d09ff3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/6875c33c62b511caca07c9fdac6d5fba053051d0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/6a17c38235f1975600d0301eb45b752fe603e645.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/7354939ef1456a691d68cb6dc53481810d71477d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/73dcd6886c95b5394f24f9aafd74ad2a33e6a3a6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/7500d9b1aba9165be500157f296fef0ffaed2bbd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/75e27f04188974063be3230dca208cd495b77ce1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/7eab7af9a483d7c6e4e628ba496fb65c5c56faac.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/83956e92fcc80dee17fce864543216939a3c9da7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/8659700e6646cd91bc02c32affaa5ec046ee9935.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/8e2f44a452ab99ce955d61fb2fa59f24fcf98ba0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/8f3b1d05b409246df688a948b9201c3cf24d1d3f.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/8fcc7abc2ffacf96ed02429fcb5091a351c80170.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/92b201e5ae73178e0cce6336ff1ff1a4828577cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/9457be8f66af8fef835a0d55c58479670350f025.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/95db7d3828755e930da50687998d80dc04b4ae13.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/9b61dec4035593c66a4f1a9650a29b7cbcf7253f.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/9becca3d1acbcd4ae8e257c8748f8ac1ca1e021a.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/9d80ab70185a8685e3c53838bc7aaa3848c60714.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/9d86170e7de539c0ff999de09621ee0c7b6c8ed0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/a581f053bbfa5115f42c13094857cdd12a37ec49.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/a9cfbeb8ebee1f365919e147a79e242dcb67ee5d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/abe812b729d393f553e38581929dcc8fecc408d4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/b0fefa706d5349eaca3d18af9c06c9552a304715.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/b35a9439ad8c8657b1b1d792ad5c2d77a52c0aef.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/bc54bdfe4a077f2a3a61081483484db6b68f42b5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/c55d1683435f4b619433ce7648324dc960eda9c8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/c616602ad537b9d8818ef4962b5a3b54093138c2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/c7da88ff7afb918966367d305acb51de50b60652.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/c87b8a49cd3fe903fc242cb32b1a47c2a5d10677.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/caf0f8fcd68a4bc5058895a67b9f155ce776b875.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/cfd13a0f26eb7ef0093319a7669da7dd3771dbac.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/d04dd02c1e493cefdf4ca2ab4462db3a063d05e8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/dbaab9a096404f4400d9fd41e381c6f8c72e3c47.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/e0a44ef877e4e40c51d35b1e095746123768736c.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/e1414c9f072e8b0170686043af51c3fbf387615d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/ef9270877405055756d345facd044e4ab297f858.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/math/f00273249757f3e2087bc4ff297725c1400a3bb7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/simplenet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_images/simuview.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/ajax-loader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/comment-bright.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/comment-close.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/comment.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/down-pressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/up-pressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Epigrass/extract_sites.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/alabaster.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/basic.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/custom.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/jquery-1.11.1.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/underscore-1.3.1.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/underscore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/_static/websupport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snapcraft.yaml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_epigdal.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/cssxfire.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/file.png" afterPath="$PROJECT_DIR$/docs/build/html/_static/file.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/minus.png" afterPath="$PROJECT_DIR$/docs/build/html/_static/minus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/plus.png" afterPath="$PROJECT_DIR$/docs/build/html/_static/plus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/epigrass-code.iml" afterPath="$PROJECT_DIR$/.idea/epigrass-code.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/Florida_2000.dbf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/Florida_2000.shp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/Florida_2000.shx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/edges.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/florida.epg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/Florida/sites.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Epigrass/__version__.py" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Epigrass/epigrass.py" afterPath="$PROJECT_DIR$/Epigrass/epigrass.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Epigrass/manager.py" afterPath="$PROJECT_DIR$/Epigrass/manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_sources/using.txt" afterPath="$PROJECT_DIR$/docs/build/html/_sources/using.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/doctools.js" afterPath="$PROJECT_DIR$/docs/build/html/_static/doctools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/jquery.js" afterPath="$PROJECT_DIR$/docs/build/html/_static/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/pygments.css" afterPath="$PROJECT_DIR$/docs/build/html/_static/pygments.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/_static/searchtools.js" afterPath="$PROJECT_DIR$/docs/build/html/_static/searchtools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/analysis.html" afterPath="$PROJECT_DIR$/docs/build/html/analysis.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/index.html" afterPath="$PROJECT_DIR$/docs/build/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/install.html" afterPath="$PROJECT_DIR$/docs/build/html/install.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/overview.html" afterPath="$PROJECT_DIR$/docs/build/html/overview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/scripting.html" afterPath="$PROJECT_DIR$/docs/build/html/scripting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/search.html" afterPath="$PROJECT_DIR$/docs/build/html/search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/build/html/using.html" afterPath="$PROJECT_DIR$/docs/build/html/using.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/source/using.rst" afterPath="$PROJECT_DIR$/docs/source/using.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flu.epg" afterPath="$PROJECT_DIR$/flu.epg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rio.epg" afterPath="$PROJECT_DIR$/rio.epg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sars.epg" afterPath="$PROJECT_DIR$/sars.epg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.epg" afterPath="$PROJECT_DIR$/script.epg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MANIFEST.in" afterPath="$PROJECT_DIR$/MANIFEST.in" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spread.graphml" afterPath="$PROJECT_DIR$/spread.graphml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/star.epg" afterPath="$PROJECT_DIR$/star.epg" />
     </list>
     <ignored path="epigrassqt4.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -144,11 +28,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Epigrass_GH$Nosetests_in_tests.coverage" NAME="Nosetests in tests Coverage Results" MODIFIED="1465907802183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Epigrass_GH$epigrass.coverage" NAME="epigrass Coverage Results" MODIFIED="1475514886496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Epigrass_GH$manager.coverage" NAME="manager Coverage Results" MODIFIED="1475515353360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Dropbox/Alunos/Bruno_Lucian/Dissertacao/epigrass/Lousiana_shp" />
     <SUITE FILE_PATH="coverage/Epigrass_GH$Nosetests_in_test_models.coverage" NAME="Nosetests in test_models Coverage Results" MODIFIED="1465907650799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Epigrass_GH$epigrass.coverage" NAME="epigrass Coverage Results" MODIFIED="1478013882455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/Epigrass_GH$Nosetests_in_tests.coverage" NAME="Nosetests in tests Coverage Results" MODIFIED="1465907802183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Epigrass_GH$manager.coverage" NAME="manager Coverage Results" MODIFIED="1475515353360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Dropbox/Alunos/Bruno_Lucian/Dissertacao/epigrass/Lousiana_shp" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -162,10 +47,10 @@
       <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="126">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding>
-                <marker date="1476353639880" expanded="true" signature="22:148" ph="import ..." />
+                <element signature="e#22#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -174,38 +59,18 @@
       <file leaf-file-name="MANIFEST.in" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MANIFEST.in">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+            <state relative-caret-position="126">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="epimodels.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Epigrass/epimodels.py">
+      <file leaf-file-name="setup.cfg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5598">
-              <caret line="311" column="7" selection-start-line="311" selection-start-column="7" selection-end-line="311" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sars.epg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sars.epg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simobj.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Epigrass/simobj.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2088">
-              <caret line="127" column="27" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -224,8 +89,8 @@
       <file leaf-file-name="manager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Epigrass/manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20286">
-              <caret line="1146" column="36" selection-start-line="1146" selection-start-column="36" selection-end-line="1146" selection-end-column="36" />
+            <state relative-caret-position="1701">
+              <caret line="289" column="27" selection-start-line="289" selection-start-column="21" selection-end-line="289" selection-end-column="27" />
               <folding>
                 <marker date="1476353639808" expanded="true" signature="29217:29239" ph="INSERT INTO missing_value... " />
                 <marker date="1476353639808" expanded="true" signature="31149:31263" ph="CREATE TABLE... missing_value" />
@@ -241,6 +106,46 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="intromodels.rst" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/source/intromodels.rst">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-972">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scripting.rst" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/source/scripting.rst">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3481">
+              <caret line="84" column="394" selection-start-line="84" selection-start-column="394" selection-end-line="84" selection-end-column="394" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="overview.rst" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/source/overview.rst">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__version__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Epigrass/__version__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="sitios3.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sitios3.csv">
           <provider selected="true" editor-type-id="text-editor">
@@ -251,34 +156,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__version__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Epigrass/__version__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomModel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CustomModel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="epigdal.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="epigdal.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Epigrass/epigdal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="441">
+              <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
               <folding>
                 <element signature="e#241#265#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="epigrass.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Epigrass/epigrass.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="73" column="77" selection-start-line="73" selection-start-column="77" selection-end-line="73" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -334,13 +229,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/tests/tests.py" />
-        <option value="$PROJECT_DIR$/MANIFEST.in" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/Epigrass/epimodels.py" />
         <option value="$PROJECT_DIR$/sars.epg" />
         <option value="$PROJECT_DIR$/CustomModel.py" />
-        <option value="$PROJECT_DIR$/Epigrass/epigdal.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Epigrass/epigdal.py" />
+        <option value="$PROJECT_DIR$/MANIFEST.in" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/Epigrass/__version__.py" />
       </list>
     </option>
   </component>
@@ -384,6 +280,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -393,9 +290,64 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass_GH" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Epigrass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -411,7 +363,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="prop_add_unversioned_files" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.epigrass">
     <configuration default="false" name="dgraph" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -430,6 +382,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="epigrass" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Epigrass" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Epigrass_GH" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Epigrass/epigrass.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
@@ -651,12 +621,14 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.dgraph" />
+      <item index="1" class="java.lang.String" itemvalue="Python.epigrass" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.dgraph" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.epigrass" />
+        <item index="1" class="java.lang.String" itemvalue="Python.dgraph" />
       </list>
     </recent_temporary>
   </component>
@@ -724,30 +696,30 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16214721" sideWeight="0.58146966" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1641791" sideWeight="0.57348245" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16214721" sideWeight="0.41853034" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3268817" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32618025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1641791" sideWeight="0.42651758" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32618025" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39806867" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32671082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39977604" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32686085" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="CSS-X-Fire" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -798,50 +770,23 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs in dgraph" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/Epigrass/epigdal.py</url>
+          <line>254</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.geomdict.keys()" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Epigrass/Ui_neteditor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/epigrass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="90" column="46" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/simobj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2952">
-          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17532">
-          <caret line="993" column="8" selection-start-line="993" selection-start-column="8" selection-end-line="993" selection-end-column="8" />
-          <folding>
-            <marker date="1476353639808" expanded="true" signature="29217:29239" ph="INSERT INTO missing_value... " />
-            <marker date="1476353639808" expanded="true" signature="31149:31263" ph="CREATE TABLE... missing_value" />
-            <marker date="1476353639808" expanded="true" signature="31878:31913" ph="INSERT INTO missing_value... " />
-            <marker date="1476353639808" expanded="true" signature="32765:32949" ph="CREATE TABLE... missing_value" />
-            <marker date="1476353639808" expanded="true" signature="32988:33151" ph="CREATE TABLE... missing_value" />
-            <marker date="1476353639808" expanded="true" signature="33276:33327" ph="INSERT INTO missing_value... " />
-            <marker date="1476353639808" expanded="true" signature="33445:33491" ph="INSERT INTO missing_value... " />
-            <marker date="1476353639808" expanded="true" signature="42431:42474" ph="CREATE TABLE... missing_value" />
-            <marker date="1476353639808" expanded="true" signature="42551:42589" ph="INSERT INTO missing_value... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Epigrass/epiplay.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2916">
@@ -883,7 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -892,7 +836,7 @@
         <state relative-caret-position="432">
           <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
           <folding>
-            <marker date="1476353639880" expanded="true" signature="22:148" ph="import ..." />
+            <element signature="e#22#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1009,7 +953,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1476353639880" expanded="true" signature="22:148" ph="import ..." />
+            <element signature="e#22#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1072,18 +1016,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/epigrass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="90" column="46" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="954">
           <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1108,22 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2088">
           <caret line="127" column="27" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/__version__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MANIFEST.in">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1199,20 +1119,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        <state relative-caret-position="198">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Epigrass/epigrass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="73" column="77" selection-start-line="73" selection-start-column="77" selection-end-line="73" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Epigrass/epigdal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
           <folding>
-            <marker date="1476353639880" expanded="true" signature="22:148" ph="import ..." />
+            <element signature="e#241#265#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MANIFEST.in">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Epigrass/manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20286">
-          <caret line="1146" column="36" selection-start-line="1146" selection-start-column="36" selection-end-line="1146" selection-end-column="36" />
+        <state relative-caret-position="1701">
+          <caret line="289" column="27" selection-start-line="289" selection-start-column="21" selection-end-line="289" selection-end-column="27" />
           <folding>
             <marker date="1476353639808" expanded="true" signature="29217:29239" ph="INSERT INTO missing_value... " />
             <marker date="1476353639808" expanded="true" signature="31149:31263" ph="CREATE TABLE... missing_value" />
@@ -1227,21 +1178,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/docs/source/intromodels.rst">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="-972">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Epigrass/epigdal.py">
+    <entry file="file://$PROJECT_DIR$/docs/source/scripting.rst">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state relative-caret-position="-3481">
+          <caret line="84" column="394" selection-start-line="84" selection-start-column="394" selection-end-line="84" selection-end-column="394" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/overview.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding>
-            <element signature="e#241#265#0" expanded="true" />
+            <element signature="e#22#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Epigrass/__version__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

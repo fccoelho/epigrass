@@ -248,11 +248,11 @@ class World:
             #            print l
             # Iterate over the lines of the data matrix.
             hexcolors = [self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]
-            gc = l[0]
+            gc = int(l[0])
             try:
                 geom = self.geomdict[gc]
             except KeyError:  # Geocode not in polygon dictionary
-                raise KeyError("Geocode %s not in polygon dictionary" % gc)
+                raise KeyError("Geocode %s not in polygon dictionary\n{}" % gc)
             if geom.GetGeometryType() != 3: continue
             # print geom.GetGeometryCount()
             fe = ogr.Feature(dl.GetLayerDefn())

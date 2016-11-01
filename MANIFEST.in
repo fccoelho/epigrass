@@ -1,11 +1,11 @@
-include ez_setup.py
+
 include egicon.png
 include epigrass.desktop
-include INSTALL
-include README
 include COPYING
+recursive-include demos/Florida *.py *.epg *.csv *.shp *.shx *.dbf
 recursive-include demos *.py *.epg *.csv *.shp *.shx *.dbf
-prune demos/outdata-*
+#prune demos/outdata-*
+#prune demos/Florida/outdata-*
 recursive-include Epigrass *
 include docs/build/latex/Epigrass.pdf
 prune docs/source*

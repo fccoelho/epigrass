@@ -1,0 +1,3551 @@
+NOME_ORIGEM,NOME_DEST,flowOD,flowDO,Dist,COD_ORIGEM,COD_DESTINO
+Alachua,Baker,138,26,1,1,3
+Alachua,Bay,496,155,1,1,5
+Alachua,Bradford,129,77,1,1,7
+Alachua,Brevard,357,880,1,1,9
+Alachua,Broward,1006,1938,1,1,11
+Alachua,Calhoun,5,0,1,1,13
+Alachua,Charlotte,26,59,1,1,15
+Alachua,Citrus,108,223,1,1,17
+Alachua,Clay,214,281,1,1,19
+Alachua,Collier,172,240,1,1,21
+Alachua,Columbia,511,516,1,1,23
+Alachua,Desoto,0,11,1,1,27
+Alachua,Dixie,0,14,1,1,29
+Alachua,Duval,1040,983,1,1,31
+Alachua,Escambia,68,460,1,1,33
+Alachua,Flagler,21,57,1,1,35
+Alachua,Franklin,47,36,1,1,37
+Alachua,Gadsden,18,11,1,1,39
+Alachua,Gilchrist,141,211,1,1,41
+Alachua,Gulf,28,5,1,1,45
+Alachua,Hamilton,12,17,1,1,47
+Alachua,Hardee,0,104,1,1,49
+Alachua,Hendry,18,8,1,1,51
+Alachua,Hernando,108,130,1,1,53
+Alachua,Highlands,43,13,1,1,55
+Alachua,Hillsborough,1058,1316,1,1,57
+Alachua,Holmes,36,9,1,1,59
+Alachua,Indian River,41,74,1,1,61
+Alachua,Jackson,68,50,1,1,63
+Alachua,Jefferson,13,0,1,1,65
+Alachua,Lafayette,0,10,1,1,67
+Alachua,Lake,119,126,1,1,69
+Alachua,Lee,236,397,1,1,71
+Alachua,Leon,567,448,1,1,73
+Alachua,Levy,483,313,1,1,75
+Alachua,Madison,2,0,1,1,79
+Alachua,Manatee,248,187,1,1,81
+Alachua,Marion,482,1026,1,1,83
+Alachua,Martin,29,297,1,1,85
+Alachua,Miami-Dade,686,1390,1,1,86
+Alachua,Monroe,236,136,1,1,87
+Alachua,Nassau,68,72,1,1,89
+Alachua,Okaloosa,26,111,1,1,91
+Alachua,Okeechobee,0,13,1,1,93
+Alachua,Orange,958,977,1,1,95
+Alachua,Osceola,25,173,1,1,97
+Alachua,Palm Beach,345,1377,1,1,99
+Alachua,Pasco,111,324,1,1,101
+Alachua,Pinellas,613,619,1,1,103
+Alachua,Polk,186,261,1,1,105
+Alachua,Putnam,343,309,1,1,107
+Alachua,St. Johns,677,307,1,1,109
+Alachua,St. Lucie,78,107,1,1,111
+Alachua,Santa Rosa,35,95,1,1,113
+Alachua,Sarasota,231,391,1,1,115
+Alachua,Seminole,126,372,1,1,117
+Alachua,Sumter,21,33,1,1,119
+Alachua,Suwannee,7,130,1,1,121
+Alachua,Taylor,37,0,1,1,123
+Alachua,Union,73,122,1,1,125
+Alachua,Volusia,255,474,1,1,127
+Alachua,Wakulla,28,0,1,1,129
+Alachua,Walton,40,16,1,1,131
+Alachua,Washington,0,43,1,1,133
+Baker,Alachua,26,138,1,3,1
+Baker,Bay,105,3,1,3,5
+Baker,Bradford,43,23,1,3,7
+Baker,Brevard,0,21,1,3,9
+Baker,Broward,0,39,1,3,11
+Baker,Calhoun,0,24,1,3,13
+Baker,Charlotte,10,0,1,3,15
+Baker,Clay,14,88,1,3,19
+Baker,Collier,36,9,1,3,21
+Baker,Columbia,64,11,1,3,23
+Baker,Dixie,0,23,1,3,29
+Baker,Duval,580,820,1,3,31
+Baker,Escambia,0,2,1,3,33
+Baker,Flagler,8,0,1,3,35
+Baker,Franklin,9,0,1,3,37
+Baker,Gulf,0,16,1,3,45
+Baker,Hamilton,4,68,1,3,47
+Baker,Hardee,7,0,1,3,49
+Baker,Hendry,6,0,1,3,51
+Baker,Highlands,12,0,1,3,55
+Baker,Hillsborough,0,20,1,3,57
+Baker,Holmes,0,22,1,3,59
+Baker,Jackson,21,4,1,3,63
+Baker,Jefferson,0,20,1,3,65
+Baker,Lafayette,0,22,1,3,67
+Baker,Lake,36,10,1,3,69
+Baker,Lee,7,7,1,3,71
+Baker,Levy,0,8,1,3,75
+Baker,Liberty,0,5,1,3,77
+Baker,Madison,0,2,1,3,79
+Baker,Marion,10,0,1,3,83
+Baker,Miami-Dade,11,2,1,3,86
+Baker,Monroe,1,0,1,3,87
+Baker,Nassau,3,205,1,3,89
+Baker,Okaloosa,0,5,1,3,91
+Baker,Orange,14,11,1,3,95
+Baker,Osceola,0,8,1,3,97
+Baker,Palm Beach,2,15,1,3,99
+Baker,Pasco,13,0,1,3,101
+Baker,Pinellas,38,0,1,3,103
+Baker,Polk,8,4,1,3,105
+Baker,Putnam,17,25,1,3,107
+Baker,St. Johns,0,54,1,3,109
+Baker,Santa Rosa,5,15,1,3,113
+Baker,Seminole,108,0,1,3,117
+Baker,Suwannee,18,12,1,3,121
+Baker,Union,17,140,1,3,125
+Baker,Volusia,126,35,1,3,127
+Baker,Wakulla,0,53,1,3,129
+Baker,Walton,0,3,1,3,131
+Bay,Alachua,155,496,1,5,1
+Bay,Baker,3,105,1,5,3
+Bay,Bradford,8,0,1,5,7
+Bay,Brevard,362,179,1,5,9
+Bay,Broward,166,119,1,5,11
+Bay,Calhoun,114,51,1,5,13
+Bay,Charlotte,23,0,1,5,15
+Bay,Citrus,25,0,1,5,17
+Bay,Clay,31,0,1,5,19
+Bay,Columbia,31,35,1,5,23
+Bay,Dixie,0,19,1,5,29
+Bay,Duval,178,63,1,5,31
+Bay,Escambia,478,106,1,5,33
+Bay,Franklin,77,23,1,5,37
+Bay,Gadsden,37,4,1,5,39
+Bay,Gilchrist,31,0,1,5,41
+Bay,Glades,9,0,1,5,43
+Bay,Gulf,272,149,1,5,45
+Bay,Hendry,13,0,1,5,51
+Bay,Hernando,8,48,1,5,53
+Bay,Highlands,0,7,1,5,55
+Bay,Hillsborough,78,192,1,5,57
+Bay,Holmes,86,103,1,5,59
+Bay,Indian River,9,0,1,5,61
+Bay,Jackson,154,335,1,5,63
+Bay,Lake,0,64,1,5,69
+Bay,Lee,20,0,1,5,71
+Bay,Leon,530,143,1,5,73
+Bay,Liberty,104,38,1,5,77
+Bay,Madison,3,1,1,5,79
+Bay,Manatee,0,1,1,5,81
+Bay,Marion,42,72,1,5,83
+Bay,Martin,0,23,1,5,85
+Bay,Miami-Dade,101,62,1,5,85
+Bay,Monroe,0,13,1,5,87
+Bay,Nassau,34,2,1,5,89
+Bay,Okaloosa,293,353,1,5,91
+Bay,Okeechobee,0,67,1,5,93
+Bay,Orange,167,137,1,5,95
+Bay,Osceola,5,0,1,5,97
+Bay,Palm Beach,129,54,1,5,99
+Bay,Pasco,14,2,1,5,101
+Bay,Pinellas,80,103,1,5,103
+Bay,Polk,15,70,1,5,105
+Bay,St. Lucie,21,21,1,5,111
+Bay,Santa Rosa,333,18,1,5,113
+Bay,Seminole,0,67,1,5,117
+Bay,Sumter,67,0,1,5,119
+Bay,Taylor,0,31,1,5,123
+Bay,Union,46,0,1,5,125
+Bay,Volusia,95,85,1,5,127
+Bay,Wakulla,30,56,1,5,129
+Bay,Walton,309,186,1,5,131
+Bay,Washington,464,449,1,5,133
+Bradford,Alachua,77,129,1,7,1
+Bradford,Baker,23,43,1,7,3
+Bradford,Bay,0,8,1,7,5
+Bradford,Brevard,0,4,1,7,9
+Bradford,Broward,0,8,1,7,11
+Bradford,Calhoun,0,13,1,7,13
+Bradford,Charlotte,10,43,1,7,15
+Bradford,Clay,75,262,1,7,19
+Bradford,Columbia,2,172,1,7,23
+Bradford,Desoto,0,21,1,7,27
+Bradford,Dixie,0,30,1,7,29
+Bradford,Duval,102,300,1,7,31
+Bradford,Escambia,14,16,1,7,33
+Bradford,Flagler,0,13,1,7,35
+Bradford,Franklin,11,8,1,7,37
+Bradford,Gilchrist,21,0,1,7,41
+Bradford,Gulf,0,54,1,7,45
+Bradford,Hamilton,31,69,1,7,47
+Bradford,Hardee,0,15,1,7,49
+Bradford,Highlands,0,4,1,7,55
+Bradford,Hillsborough,0,80,1,7,57
+Bradford,Holmes,0,14,1,7,59
+Bradford,Indian River,0,9,1,7,61
+Bradford,Jackson,0,135,1,7,63
+Bradford,Jefferson,10,0,1,7,65
+Bradford,Lafayette,0,20,1,7,67
+Bradford,Lake,0,10,1,7,69
+Bradford,Lee,0,10,1,7,71
+Bradford,Leon,8,3,1,7,73
+Bradford,Levy,0,9,1,7,75
+Bradford,Liberty,0,13,1,7,77
+Bradford,Madison,17,7,1,7,79
+Bradford,Manatee,37,12,1,7,81
+Bradford,Marion,11,12,1,7,83
+Bradford,Martin,0,29,1,7,85
+Bradford,Miami-Dade,31,112,1,7,86
+Bradford,Monroe,0,15,1,7,87
+Bradford,Nassau,0,37,1,7,89
+Bradford,Okaloosa,0,40,1,7,91
+Bradford,Okeechobee,0,9,1,7,93
+Bradford,Orange,0,25,1,7,95
+Bradford,Osceola,0,9,1,7,97
+Bradford,Palm Beach,7,17,1,7,99
+Bradford,Pasco,0,32,1,7,101
+Bradford,Pinellas,20,29,1,7,103
+Bradford,Polk,20,32,1,7,105
+Bradford,Putnam,0,13,1,7,107
+Bradford,St. Johns,13,31,1,7,109
+Bradford,St. Lucie,6,0,1,7,111
+Bradford,Santa Rosa,0,23,1,7,113
+Bradford,Sarasota,0,12,1,7,115
+Bradford,Sumter,31,4,1,7,119
+Bradford,Suwannee,1,86,1,7,121
+Bradford,Taylor,1,67,1,7,123
+Bradford,Union,69,178,1,7,125
+Bradford,Volusia,58,17,1,7,127
+Bradford,Walton,0,19,1,7,131
+Bradford,Washington,0,57,1,7,133
+Brevard,Alachua,880,357,1,9,1
+Brevard,Baker,21,0,1,9,3
+Brevard,Bay,179,362,1,9,5
+Brevard,Bradford,4,0,1,9,7
+Brevard,Broward,1589,1009,1,9,11
+Brevard,Calhoun,24,53,1,9,13
+Brevard,Charlotte,39,27,1,9,15
+Brevard,Citrus,33,157,1,9,17
+Brevard,Clay,73,32,1,9,19
+Brevard,Collier,44,59,1,9,21
+Brevard,Columbia,254,152,1,9,23
+Brevard,Desoto,6,3,1,9,27
+Brevard,Dixie,30,1,1,9,29
+Brevard,Duval,769,564,1,9,31
+Brevard,Escambia,125,103,1,9,33
+Brevard,Flagler,46,27,1,9,35
+Brevard,Franklin,8,0,1,9,37
+Brevard,Gadsden,26,0,1,9,39
+Brevard,Gilchrist,54,0,1,9,41
+Brevard,Glades,8,0,1,9,43
+Brevard,Gulf,62,0,1,9,45
+Brevard,Hamilton,41,0,1,9,47
+Brevard,Hardee,28,0,1,9,49
+Brevard,Hendry,0,7,1,9,51
+Brevard,Hernando,32,35,1,9,53
+Brevard,Highlands,62,72,1,9,55
+Brevard,Hillsborough,982,374,1,9,57
+Brevard,Holmes,12,0,1,9,59
+Brevard,Indian River,393,495,1,9,61
+Brevard,Jackson,22,147,1,9,63
+Brevard,Jefferson,15,0,1,9,65
+Brevard,Lafayette,12,0,1,9,67
+Brevard,Lake,135,117,1,9,69
+Brevard,Lee,199,102,1,9,71
+Brevard,Leon,369,163,1,9,73
+Brevard,Levy,13,0,1,9,75
+Brevard,Liberty,3,12,1,9,77
+Brevard,Madison,21,6,1,9,79
+Brevard,Manatee,168,42,1,9,81
+Brevard,Marion,433,99,1,9,83
+Brevard,Martin,43,76,1,9,85
+Brevard,Miami-Dade,276,421,1,9,86
+Brevard,Monroe,10,92,1,9,87
+Brevard,Nassau,0,5,1,9,89
+Brevard,Okaloosa,98,116,1,9,91
+Brevard,Okeechobee,21,6,1,9,93
+Brevard,Orange,2366,1598,1,9,95
+Brevard,Osceola,238,333,1,9,97
+Brevard,Palm Beach,751,444,1,9,99
+Brevard,Pasco,33,249,1,9,101
+Brevard,Pinellas,191,126,1,9,103
+Brevard,Polk,277,243,1,9,105
+Brevard,Putnam,33,18,1,9,107
+Brevard,St. Johns,370,46,1,9,109
+Brevard,St. Lucie,208,436,1,9,111
+Brevard,Santa Rosa,23,6,1,9,113
+Brevard,Sarasota,59,87,1,9,115
+Brevard,Seminole,445,263,1,9,117
+Brevard,Sumter,114,91,1,9,119
+Brevard,Suwannee,57,0,1,9,121
+Brevard,Taylor,61,23,1,9,123
+Brevard,Union,20,3,1,9,125
+Brevard,Volusia,187,508,1,9,127
+Brevard,Wakulla,10,0,1,9,129
+Brevard,Walton,0,25,1,9,131
+Broward,Alachua,1938,1006,1,11,1
+Broward,Baker,39,0,1,11,3
+Broward,Bay,119,166,1,11,5
+Broward,Bradford,8,0,1,11,7
+Broward,Brevard,1009,1589,1,11,9
+Broward,Calhoun,66,13,1,11,13
+Broward,Charlotte,461,311,1,11,15
+Broward,Citrus,118,86,1,11,17
+Broward,Clay,405,14,1,11,19
+Broward,Collier,229,588,1,11,21
+Broward,Columbia,290,43,1,11,23
+Broward,Desoto,94,114,1,11,27
+Broward,Dixie,94,0,1,11,29
+Broward,Duval,1057,231,1,11,31
+Broward,Escambia,110,157,1,11,33
+Broward,Flagler,519,131,1,11,35
+Broward,Franklin,30,0,1,11,37
+Broward,Gadsden,60,131,1,11,39
+Broward,Gilchrist,109,0,1,11,41
+Broward,Glades,91,6,1,11,43
+Broward,Gulf,17,0,1,11,45
+Broward,Hamilton,43,27,1,11,47
+Broward,Hardee,39,3,1,11,49
+Broward,Hendry,27,17,1,11,51
+Broward,Hernando,161,154,1,11,53
+Broward,Highlands,302,150,1,11,55
+Broward,Hillsborough,1061,1064,1,11,57
+Broward,Holmes,0,18,1,11,59
+Broward,Indian River,378,240,1,11,61
+Broward,Jackson,68,91,1,11,63
+Broward,Jefferson,21,3,1,11,65
+Broward,Lafayette,36,20,1,11,67
+Broward,Lake,295,189,1,11,69
+Broward,Lee,2050,1087,1,11,71
+Broward,Leon,1788,581,1,11,73
+Broward,Levy,41,12,1,11,75
+Broward,Madison,43,0,1,11,79
+Broward,Manatee,392,211,1,11,81
+Broward,Marion,480,510,1,11,83
+Broward,Martin,383,198,1,11,85
+Broward,Miami-Dade,10762,24200,1,11,86
+Broward,Monroe,279,50,1,11,87
+Broward,Okaloosa,95,178,1,11,91
+Broward,Okeechobee,47,45,1,11,93
+Broward,Orange,3432,2214,1,11,95
+Broward,Osceola,252,607,1,11,97
+Broward,Palm Beach,9756,8486,1,11,99
+Broward,Pasco,111,57,1,11,101
+Broward,Pinellas,319,934,1,11,103
+Broward,Polk,347,104,1,11,105
+Broward,Putnam,66,2,1,11,107
+Broward,St. Johns,520,115,1,11,109
+Broward,St. Lucie,1260,585,1,11,111
+Broward,Santa Rosa,41,273,1,11,113
+Broward,Sarasota,357,196,1,11,115
+Broward,Seminole,309,234,1,11,117
+Broward,Sumter,205,2,1,11,119
+Broward,Suwannee,15,52,1,11,121
+Broward,Taylor,71,0,1,11,123
+Broward,Union,27,0,1,11,125
+Broward,Volusia,768,365,1,11,127
+Broward,Wakulla,34,7,1,11,129
+Broward,Walton,19,34,1,11,131
+Broward,Washington,10,0,1,11,133
+Calhoun,Alachua,0,5,1,13,1
+Calhoun,Baker,24,0,1,13,3
+Calhoun,Bay,51,114,1,13,5
+Calhoun,Bradford,13,0,1,13,7
+Calhoun,Brevard,53,24,1,13,9
+Calhoun,Broward,13,66,1,13,11
+Calhoun,Citrus,69,8,1,13,17
+Calhoun,Collier,0,27,1,13,21
+Calhoun,Columbia,58,0,1,13,23
+Calhoun,Duval,21,33,1,13,31
+Calhoun,Escambia,27,0,1,13,33
+Calhoun,Flagler,0,14,1,13,35
+Calhoun,Franklin,0,10,1,13,37
+Calhoun,Gadsden,31,40,1,13,39
+Calhoun,Gulf,117,9,1,13,45
+Calhoun,Hamilton,10,0,1,13,47
+Calhoun,Hendry,6,0,1,13,51
+Calhoun,Hillsborough,15,53,1,13,57
+Calhoun,Jackson,52,81,1,13,63
+Calhoun,Jefferson,15,0,1,13,65
+Calhoun,Lafayette,0,18,1,13,67
+Calhoun,Lake,12,0,1,13,69
+Calhoun,Lee,0,66,1,13,71
+Calhoun,Leon,0,66,1,13,73
+Calhoun,Liberty,102,42,1,13,77
+Calhoun,Madison,0,4,1,13,79
+Calhoun,Marion,0,10,1,13,83
+Calhoun,Miami-Dade,51,65,1,13,86
+Calhoun,Nassau,0,8,1,13,89
+Calhoun,Okeechobee,0,9,1,13,93
+Calhoun,Orange,0,26,1,13,95
+Calhoun,Osceola,0,10,1,13,97
+Calhoun,Palm Beach,0,13,1,13,99
+Calhoun,Pasco,0,2,1,13,101
+Calhoun,Pinellas,18,4,1,13,103
+Calhoun,Polk,11,10,1,13,105
+Calhoun,Putnam,17,0,1,13,107
+Calhoun,Santa Rosa,3,0,1,13,113
+Calhoun,Sarasota,0,1,1,13,115
+Calhoun,Suwannee,0,3,1,13,121
+Calhoun,Taylor,15,2,1,13,123
+Calhoun,Union,10,0,1,13,125
+Calhoun,Volusia,0,23,1,13,127
+Calhoun,Wakulla,50,20,1,13,129
+Calhoun,Walton,17,0,1,13,131
+Calhoun,Washington,49,0,1,13,133
+Charlotte,Alachua,59,26,1,15,1
+Charlotte,Baker,0,10,1,15,3
+Charlotte,Bay,0,23,1,15,5
+Charlotte,Bradford,43,10,1,15,7
+Charlotte,Brevard,27,39,1,15,9
+Charlotte,Broward,311,461,1,15,11
+Charlotte,Citrus,1,0,1,15,17
+Charlotte,Clay,70,0,1,15,19
+Charlotte,Collier,152,225,1,15,21
+Charlotte,Columbia,39,26,1,15,23
+Charlotte,Desoto,355,130,1,15,27
+Charlotte,Dixie,1,209,1,15,29
+Charlotte,Duval,7,226,1,15,31
+Charlotte,Escambia,0,7,1,15,33
+Charlotte,Franklin,0,15,1,15,37
+Charlotte,Glades,0,13,1,15,43
+Charlotte,Gulf,3,0,1,15,45
+Charlotte,Hamilton,22,12,1,15,47
+Charlotte,Hendry,38,8,1,15,51
+Charlotte,Hernando,18,76,1,15,53
+Charlotte,Highlands,0,39,1,15,55
+Charlotte,Hillsborough,158,132,1,15,57
+Charlotte,Indian River,26,0,1,15,61
+Charlotte,Jackson,18,0,1,15,63
+Charlotte,Jefferson,7,0,1,15,65
+Charlotte,Lafayette,9,0,1,15,67
+Charlotte,Lake,49,21,1,15,69
+Charlotte,Lee,790,878,1,15,71
+Charlotte,Leon,102,23,1,15,73
+Charlotte,Manatee,172,115,1,15,81
+Charlotte,Marion,20,36,1,15,83
+Charlotte,Miami-Dade,215,233,1,15,86
+Charlotte,Nassau,45,7,1,15,89
+Charlotte,Okaloosa,0,1,1,15,91
+Charlotte,Okeechobee,14,0,1,15,93
+Charlotte,Orange,230,229,1,15,95
+Charlotte,Osceola,0,8,1,15,97
+Charlotte,Palm Beach,47,85,1,15,99
+Charlotte,Pasco,57,24,1,15,101
+Charlotte,Pinellas,110,65,1,15,103
+Charlotte,Polk,64,217,1,15,105
+Charlotte,Putnam,26,0,1,15,107
+Charlotte,St. Johns,0,75,1,15,109
+Charlotte,St. Lucie,809,4,1,15,111
+Charlotte,Santa Rosa,11,0,1,15,113
+Charlotte,Sarasota,2615,1932,1,15,115
+Charlotte,Seminole,54,56,1,15,117
+Charlotte,Sumter,55,37,1,15,119
+Charlotte,Suwannee,4,14,1,15,121
+Charlotte,Union,44,5,1,15,125
+Charlotte,Volusia,54,157,1,15,127
+Charlotte,Wakulla,24,14,1,15,129
+Charlotte,Walton,0,3,1,15,131
+Citrus,Alachua,223,108,1,17,1
+Citrus,Bay,0,25,1,17,5
+Citrus,Brevard,157,33,1,17,9
+Citrus,Broward,86,118,1,17,11
+Citrus,Calhoun,8,69,1,17,13
+Citrus,Charlotte,0,1,1,17,15
+Citrus,Clay,37,0,1,17,19
+Citrus,Collier,7,0,1,17,21
+Citrus,Columbia,72,186,1,17,23
+Citrus,Dixie,22,0,1,17,29
+Citrus,Duval,38,0,1,17,31
+Citrus,Escambia,42,7,1,17,33
+Citrus,Flagler,23,0,1,17,35
+Citrus,Franklin,16,0,1,17,37
+Citrus,Gadsden,0,1,1,17,39
+Citrus,Gilchrist,3,0,1,17,41
+Citrus,Hamilton,44,15,1,17,47
+Citrus,Hernando,455,437,1,17,53
+Citrus,Highlands,60,0,1,17,55
+Citrus,Hillsborough,245,251,1,17,57
+Citrus,Holmes,9,0,1,17,59
+Citrus,Indian River,8,70,1,17,61
+Citrus,Jackson,105,0,1,17,63
+Citrus,Jefferson,32,0,1,17,65
+Citrus,Lake,147,300,1,17,69
+Citrus,Lee,36,20,1,17,71
+Citrus,Leon,95,27,1,17,73
+Citrus,Levy,173,222,1,17,75
+Citrus,Liberty,25,17,1,17,77
+Citrus,Madison,14,0,1,17,79
+Citrus,Manatee,42,34,1,17,81
+Citrus,Marion,1426,301,1,17,83
+Citrus,Miami-Dade,129,80,1,17,86
+Citrus,Okaloosa,8,0,1,17,91
+Citrus,Orange,188,121,1,17,95
+Citrus,Osceola,0,7,1,17,97
+Citrus,Palm Beach,163,119,1,17,99
+Citrus,Pasco,80,264,1,17,101
+Citrus,Pinellas,388,171,1,17,103
+Citrus,Polk,124,67,1,17,105
+Citrus,Putnam,15,0,1,17,107
+Citrus,St. Lucie,5,0,1,17,111
+Citrus,Santa Rosa,38,0,1,17,113
+Citrus,Sarasota,22,56,1,17,115
+Citrus,Seminole,34,25,1,17,117
+Citrus,Sumter,126,573,1,17,119
+Citrus,Suwannee,0,45,1,17,121
+Citrus,Taylor,33,0,1,17,123
+Citrus,Union,1,0,1,17,125
+Citrus,Volusia,125,1,1,17,127
+Citrus,Walton,24,0,1,17,131
+Citrus,Washington,16,0,1,17,133
+Clay,Alachua,281,214,1,19,1
+Clay,Baker,88,14,1,19,3
+Clay,Bay,0,31,1,19,5
+Clay,Bradford,262,75,1,19,7
+Clay,Brevard,32,73,1,19,9
+Clay,Broward,14,405,1,19,11
+Clay,Charlotte,0,70,1,19,15
+Clay,Citrus,0,37,1,19,17
+Clay,Collier,101,41,1,19,21
+Clay,Columbia,29,134,1,19,23
+Clay,Desoto,0,23,1,19,27
+Clay,Duval,4701,6972,1,19,31
+Clay,Escambia,9,40,1,19,33
+Clay,Flagler,43,84,1,19,35
+Clay,Franklin,3,0,1,19,37
+Clay,Gadsden,10,7,1,19,39
+Clay,Gilchrist,0,43,1,19,41
+Clay,Hamilton,10,0,1,19,47
+Clay,Hendry,0,11,1,19,51
+Clay,Hernando,266,0,1,19,53
+Clay,Hillsborough,393,13,1,19,57
+Clay,Holmes,7,0,1,19,59
+Clay,Indian River,0,13,1,19,61
+Clay,Jackson,19,0,1,19,63
+Clay,Lafayette,4,0,1,19,67
+Clay,Lake,83,36,1,19,69
+Clay,Lee,90,11,1,19,71
+Clay,Leon,249,210,1,19,73
+Clay,Levy,0,6,1,19,75
+Clay,Manatee,7,0,1,19,81
+Clay,Marion,118,38,1,19,83
+Clay,Martin,11,0,1,19,85
+Clay,Miami-Dade,13,383,1,19,86
+Clay,Monroe,10,0,1,19,87
+Clay,Nassau,126,64,1,19,89
+Clay,Okaloosa,0,2,1,19,91
+Clay,Orange,153,105,1,19,95
+Clay,Osceola,76,0,1,19,97
+Clay,Palm Beach,79,21,1,19,99
+Clay,Pasco,95,20,1,19,101
+Clay,Pinellas,0,210,1,19,103
+Clay,Polk,61,0,1,19,105
+Clay,Putnam,51,358,1,19,107
+Clay,St. Johns,179,223,1,19,109
+Clay,St. Lucie,5,0,1,19,111
+Clay,Santa Rosa,7,0,1,19,113
+Clay,Sarasota,0,21,1,19,115
+Clay,Seminole,79,0,1,19,117
+Clay,Sumter,0,44,1,19,119
+Clay,Suwannee,23,2,1,19,121
+Clay,Union,88,29,1,19,125
+Clay,Volusia,3,100,1,19,127
+Clay,Wakulla,11,0,1,19,129
+Collier,Alachua,240,172,1,21,1
+Collier,Baker,9,36,1,21,3
+Collier,Brevard,59,44,1,21,9
+Collier,Broward,588,229,1,21,11
+Collier,Calhoun,27,0,1,21,13
+Collier,Charlotte,225,152,1,21,15
+Collier,Citrus,0,7,1,21,17
+Collier,Clay,41,101,1,21,19
+Collier,Columbia,153,180,1,21,23
+Collier,Desoto,28,0,1,21,27
+Collier,Duval,607,348,1,21,31
+Collier,Escambia,47,218,1,21,33
+Collier,Gadsden,3,0,1,21,39
+Collier,Gilchrist,1,0,1,21,41
+Collier,Glades,53,165,1,21,43
+Collier,Hardee,11,0,1,21,49
+Collier,Hendry,6,6,1,21,51
+Collier,Hernando,87,0,1,21,53
+Collier,Highlands,48,132,1,21,55
+Collier,Hillsborough,357,148,1,21,57
+Collier,Indian River,108,11,1,21,61
+Collier,Jackson,19,0,1,21,63
+Collier,Jefferson,0,53,1,21,65
+Collier,Lake,11,12,1,21,69
+Collier,Lee,3688,1864,1,21,71
+Collier,Leon,160,321,1,21,73
+Collier,Levy,20,72,1,21,75
+Collier,Liberty,3,0,1,21,77
+Collier,Manatee,127,37,1,21,81
+Collier,Marion,73,25,1,21,83
+Collier,Martin,196,0,1,21,85
+Collier,Miami-Dade,438,1412,1,21,86
+Collier,Monroe,6,14,1,21,87
+Collier,Nassau,0,61,1,21,89
+Collier,Okaloosa,23,0,1,21,91
+Collier,Orange,400,224,1,21,95
+Collier,Osceola,111,0,1,21,97
+Collier,Palm Beach,222,475,1,21,99
+Collier,Pasco,47,53,1,21,101
+Collier,Pinellas,105,66,1,21,103
+Collier,Polk,69,124,1,21,105
+Collier,St. Johns,46,81,1,21,109
+Collier,St. Lucie,2,103,1,21,111
+Collier,Santa Rosa,3,0,1,21,113
+Collier,Sarasota,81,97,1,21,115
+Collier,Seminole,154,9,1,21,117
+Collier,Sumter,56,158,1,21,119
+Collier,Union,18,0,1,21,125
+Collier,Volusia,49,14,1,21,127
+Collier,Wakulla,15,0,1,21,129
+Collier,Walton,68,0,1,21,131
+Collier,Washington,0,8,1,21,133
+Columbia,Alachua,516,511,1,23,1
+Columbia,Baker,11,64,1,23,3
+Columbia,Bay,35,31,1,23,5
+Columbia,Bradford,172,2,1,23,7
+Columbia,Brevard,152,254,1,23,9
+Columbia,Broward,43,290,1,23,11
+Columbia,Calhoun,0,58,1,23,13
+Columbia,Charlotte,26,39,1,23,15
+Columbia,Citrus,186,72,1,23,17
+Columbia,Clay,134,29,1,23,19
+Columbia,Collier,180,153,1,23,21
+Columbia,Desoto,38,32,1,23,27
+Columbia,Dixie,17,86,1,23,29
+Columbia,Duval,400,146,1,23,31
+Columbia,Escambia,21,4,1,23,33
+Columbia,Flagler,58,12,1,23,35
+Columbia,Franklin,17,13,1,23,37
+Columbia,Gadsden,56,109,1,23,39
+Columbia,Gilchrist,76,18,1,23,41
+Columbia,Gulf,0,31,1,23,45
+Columbia,Hamilton,230,112,1,23,47
+Columbia,Hardee,43,0,1,23,49
+Columbia,Hernando,16,29,1,23,53
+Columbia,Highlands,0,54,1,23,55
+Columbia,Hillsborough,75,104,1,23,57
+Columbia,Indian River,0,26,1,23,61
+Columbia,Jackson,51,7,1,23,63
+Columbia,Jefferson,12,0,1,23,65
+Columbia,Lafayette,14,49,1,23,67
+Columbia,Lake,20,9,1,23,69
+Columbia,Lee,83,79,1,23,71
+Columbia,Leon,129,34,1,23,73
+Columbia,Madison,20,10,1,23,79
+Columbia,Manatee,1,34,1,23,81
+Columbia,Marion,69,89,1,23,83
+Columbia,Martin,65,8,1,23,85
+Columbia,Miami-Dade,234,316,1,23,86
+Columbia,Nassau,16,8,1,23,89
+Columbia,Okaloosa,0,56,1,23,91
+Columbia,Okeechobee,11,20,1,23,93
+Columbia,Orange,30,58,1,23,95
+Columbia,Osceola,11,0,1,23,97
+Columbia,Palm Beach,44,41,1,23,99
+Columbia,Pasco,27,94,1,23,101
+Columbia,Pinellas,66,3,1,23,103
+Columbia,Polk,35,458,1,23,105
+Columbia,Putnam,46,4,1,23,107
+Columbia,St. Johns,38,0,1,23,109
+Columbia,St. Lucie,33,7,1,23,111
+Columbia,Santa Rosa,93,10,1,23,113
+Columbia,Sarasota,0,3,1,23,115
+Columbia,Seminole,0,17,1,23,117
+Columbia,Sumter,16,5,1,23,119
+Columbia,Suwannee,665,486,1,23,121
+Columbia,Taylor,5,34,1,23,123
+Columbia,Union,50,115,1,23,125
+Columbia,Volusia,0,56,1,23,127
+Columbia,Wakulla,21,15,1,23,129
+Columbia,Walton,17,13,1,23,131
+Columbia,Washington,8,0,1,23,133
+Desoto,Alachua,11,0,1,27,1
+Desoto,Bradford,21,0,1,27,7
+Desoto,Brevard,3,6,1,27,9
+Desoto,Broward,114,94,1,27,11
+Desoto,Charlotte,130,355,1,27,15
+Desoto,Clay,23,0,1,27,19
+Desoto,Collier,0,28,1,27,21
+Desoto,Columbia,32,38,1,27,23
+Desoto,Dixie,0,10,1,27,29
+Desoto,Duval,0,2,1,27,31
+Desoto,Escambia,0,18,1,27,33
+Desoto,Franklin,19,0,1,27,37
+Desoto,Gilchrist,15,0,1,27,41
+Desoto,Glades,4,66,1,27,43
+Desoto,Gulf,3,12,1,27,45
+Desoto,Hamilton,15,19,1,27,47
+Desoto,Hardee,197,150,1,27,49
+Desoto,Hendry,15,44,1,27,51
+Desoto,Highlands,56,77,1,27,55
+Desoto,Hillsborough,86,74,1,27,57
+Desoto,Holmes,8,0,1,27,59
+Desoto,Indian River,0,22,1,27,61
+Desoto,Jackson,17,19,1,27,63
+Desoto,Lake,48,0,1,27,69
+Desoto,Lee,11,125,1,27,71
+Desoto,Leon,0,4,1,27,73
+Desoto,Levy,0,28,1,27,75
+Desoto,Madison,22,0,1,27,79
+Desoto,Manatee,0,36,1,27,81
+Desoto,Marion,2,48,1,27,83
+Desoto,Martin,12,22,1,27,85
+Desoto,Miami-Dade,153,298,1,27,86
+Desoto,Monroe,0,9,1,27,87
+Desoto,Okaloosa,0,12,1,27,91
+Desoto,Okeechobee,0,2,1,27,93
+Desoto,Orange,20,50,1,27,95
+Desoto,Palm Beach,17,139,1,27,99
+Desoto,Pinellas,1,1,1,27,103
+Desoto,Polk,55,17,1,27,105
+Desoto,St. Johns,0,29,1,27,109
+Desoto,St. Lucie,30,4,1,27,111
+Desoto,Santa Rosa,3,32,1,27,113
+Desoto,Sarasota,103,133,1,27,115
+Desoto,Seminole,0,25,1,27,117
+Desoto,Sumter,23,0,1,27,119
+Desoto,Suwannee,6,84,1,27,121
+Desoto,Taylor,0,17,1,27,123
+Desoto,Volusia,0,19,1,27,127
+Desoto,Walton,0,21,1,27,131
+Dixie,Alachua,14,0,1,29,1
+Dixie,Baker,23,0,1,29,3
+Dixie,Bay,19,0,1,29,5
+Dixie,Bradford,30,0,1,29,7
+Dixie,Brevard,1,30,1,29,9
+Dixie,Broward,0,94,1,29,11
+Dixie,Charlotte,209,1,1,29,15
+Dixie,Citrus,0,22,1,29,17
+Dixie,Columbia,86,17,1,29,23
+Dixie,Desoto,10,0,1,29,27
+Dixie,Duval,65,10,1,29,31
+Dixie,Escambia,8,5,1,29,33
+Dixie,Gadsden,23,0,1,29,39
+Dixie,Gilchrist,253,55,1,29,41
+Dixie,Gulf,17,0,1,29,45
+Dixie,Hamilton,5,8,1,29,47
+Dixie,Hendry,9,0,1,29,51
+Dixie,Hernando,29,0,1,29,53
+Dixie,Hillsborough,0,86,1,29,57
+Dixie,Holmes,5,0,1,29,59
+Dixie,Jackson,0,28,1,29,63
+Dixie,Jefferson,0,40,1,29,65
+Dixie,Lafayette,21,38,1,29,67
+Dixie,Levy,94,139,1,29,75
+Dixie,Liberty,7,12,1,29,77
+Dixie,Madison,3,0,1,29,79
+Dixie,Marion,28,5,1,29,83
+Dixie,Miami-Dade,19,0,1,29,86
+Dixie,Monroe,22,0,1,29,87
+Dixie,Orange,47,3,1,29,95
+Dixie,Palm Beach,0,88,1,29,99
+Dixie,Pasco,34,0,1,29,101
+Dixie,Pinellas,5,0,1,29,103
+Dixie,Polk,70,10,1,29,105
+Dixie,Santa Rosa,12,15,1,29,113
+Dixie,Sarasota,0,57,1,29,115
+Dixie,Suwannee,0,3,1,29,121
+Dixie,Taylor,0,64,1,29,123
+Dixie,Union,3,17,1,29,125
+Dixie,Volusia,7,0,1,29,127
+Dixie,Wakulla,13,32,1,29,129
+Duval,Alachua,983,1040,1,31,1
+Duval,Baker,820,580,1,31,3
+Duval,Bay,63,178,1,31,5
+Duval,Bradford,300,102,1,31,7
+Duval,Brevard,564,769,1,31,9
+Duval,Broward,231,1057,1,31,11
+Duval,Calhoun,33,21,1,31,13
+Duval,Charlotte,226,7,1,31,15
+Duval,Citrus,0,38,1,31,17
+Duval,Clay,6972,4701,1,31,19
+Duval,Collier,348,607,1,31,21
+Duval,Columbia,146,400,1,31,23
+Duval,Desoto,2,0,1,31,27
+Duval,Dixie,10,65,1,31,29
+Duval,Escambia,583,470,1,31,33
+Duval,Flagler,276,382,1,31,35
+Duval,Franklin,60,0,1,31,37
+Duval,Gadsden,77,45,1,31,39
+Duval,Gilchrist,28,9,1,31,41
+Duval,Hamilton,56,0,1,31,47
+Duval,Hendry,29,1,1,31,51
+Duval,Hernando,123,109,1,31,53
+Duval,Highlands,89,0,1,31,55
+Duval,Hillsborough,1170,915,1,31,57
+Duval,Holmes,41,45,1,31,59
+Duval,Indian River,16,104,1,31,61
+Duval,Jackson,271,27,1,31,63
+Duval,Jefferson,36,0,1,31,65
+Duval,Lafayette,16,8,1,31,67
+Duval,Lake,107,87,1,31,69
+Duval,Lee,229,161,1,31,71
+Duval,Leon,1069,782,1,31,73
+Duval,Liberty,23,0,1,31,77
+Duval,Madison,41,0,1,31,79
+Duval,Manatee,45,71,1,31,81
+Duval,Marion,338,295,1,31,83
+Duval,Martin,26,90,1,31,85
+Duval,Miami-Dade,399,1022,1,31,86
+Duval,Monroe,43,53,1,31,87
+Duval,Nassau,1284,1011,1,31,89
+Duval,Okaloosa,258,199,1,31,91
+Duval,Okeechobee,70,0,1,31,93
+Duval,Orange,1144,953,1,31,95
+Duval,Osceola,51,124,1,31,97
+Duval,Palm Beach,414,584,1,31,99
+Duval,Pasco,50,94,1,31,101
+Duval,Pinellas,294,226,1,31,103
+Duval,Polk,180,79,1,31,105
+Duval,Putnam,89,271,1,31,107
+Duval,St. Johns,3013,3012,1,31,109
+Duval,St. Lucie,124,98,1,31,111
+Duval,Santa Rosa,90,155,1,31,113
+Duval,Sarasota,173,70,1,31,115
+Duval,Seminole,208,680,1,31,117
+Duval,Sumter,19,58,1,31,119
+Duval,Suwannee,20,128,1,31,121
+Duval,Taylor,91,0,1,31,123
+Duval,Union,181,50,1,31,125
+Duval,Volusia,478,603,1,31,127
+Duval,Wakulla,107,12,1,31,129
+Duval,Walton,98,6,1,31,131
+Duval,Washington,57,13,1,31,133
+Escambia,Alachua,460,68,1,33,1
+Escambia,Baker,2,0,1,33,3
+Escambia,Bay,106,478,1,33,5
+Escambia,Bradford,16,14,1,33,7
+Escambia,Brevard,103,125,1,33,9
+Escambia,Broward,157,110,1,33,11
+Escambia,Calhoun,0,27,1,33,13
+Escambia,Charlotte,7,0,1,33,15
+Escambia,Citrus,7,42,1,33,17
+Escambia,Clay,40,9,1,33,19
+Escambia,Collier,218,47,1,33,21
+Escambia,Columbia,4,21,1,33,23
+Escambia,Desoto,18,0,1,33,27
+Escambia,Dixie,5,8,1,33,29
+Escambia,Duval,470,583,1,33,31
+Escambia,Flagler,271,0,1,33,35
+Escambia,Franklin,36,9,1,33,37
+Escambia,Gadsden,55,45,1,33,39
+Escambia,Gilchrist,7,4,1,33,41
+Escambia,Gulf,24,24,1,33,45
+Escambia,Hamilton,5,0,1,33,47
+Escambia,Hendry,13,0,1,33,51
+Escambia,Hernando,15,37,1,33,53
+Escambia,Highlands,4,1,1,33,55
+Escambia,Hillsborough,436,168,1,33,57
+Escambia,Holmes,50,54,1,33,59
+Escambia,Indian River,7,0,1,33,61
+Escambia,Jackson,190,27,1,33,63
+Escambia,Jefferson,2,2,1,33,65
+Escambia,Lafayette,0,11,1,33,67
+Escambia,Lake,10,10,1,33,69
+Escambia,Lee,73,124,1,33,71
+Escambia,Leon,305,439,1,33,73
+Escambia,Levy,10,0,1,33,75
+Escambia,Liberty,3,15,1,33,77
+Escambia,Madison,12,5,1,33,79
+Escambia,Manatee,2,0,1,33,81
+Escambia,Marion,116,355,1,33,83
+Escambia,Martin,8,9,1,33,85
+Escambia,Miami-Dade,285,431,1,33,86
+Escambia,Monroe,10,20,1,33,87
+Escambia,Nassau,0,10,1,33,89
+Escambia,Okaloosa,203,259,1,33,91
+Escambia,Okeechobee,36,13,1,33,93
+Escambia,Orange,320,246,1,33,95
+Escambia,Osceola,11,35,1,33,97
+Escambia,Palm Beach,198,61,1,33,99
+Escambia,Pasco,136,104,1,33,101
+Escambia,Pinellas,116,188,1,33,103
+Escambia,Polk,32,52,1,33,105
+Escambia,Putnam,1,64,1,33,107
+Escambia,St. Johns,7,75,1,33,109
+Escambia,St. Lucie,0,22,1,33,111
+Escambia,Santa Rosa,2082,2616,1,33,113
+Escambia,Sarasota,10,37,1,33,115
+Escambia,Seminole,33,59,1,33,117
+Escambia,Sumter,23,0,1,33,119
+Escambia,Suwannee,0,22,1,33,121
+Escambia,Taylor,0,11,1,33,123
+Escambia,Union,1,0,1,33,125
+Escambia,Volusia,72,39,1,33,127
+Escambia,Wakulla,41,9,1,33,129
+Escambia,Walton,107,222,1,33,131
+Escambia,Washington,95,119,1,33,133
+Flagler,Alachua,57,21,1,35,1
+Flagler,Baker,0,8,1,35,3
+Flagler,Bradford,13,0,1,35,7
+Flagler,Brevard,27,46,1,35,9
+Flagler,Broward,131,519,1,35,11
+Flagler,Calhoun,14,0,1,35,13
+Flagler,Citrus,0,23,1,35,17
+Flagler,Clay,84,43,1,35,19
+Flagler,Columbia,12,58,1,35,23
+Flagler,Duval,382,276,1,35,31
+Flagler,Escambia,0,271,1,35,33
+Flagler,Gadsden,5,0,1,35,39
+Flagler,Hamilton,9,0,1,35,47
+Flagler,Hernando,62,0,1,35,53
+Flagler,Hillsborough,33,32,1,35,57
+Flagler,Indian River,17,0,1,35,61
+Flagler,Lake,3,22,1,35,69
+Flagler,Leon,126,40,1,35,73
+Flagler,Madison,7,0,1,35,79
+Flagler,Miami-Dade,0,65,1,35,86
+Flagler,Monroe,0,3,1,35,87
+Flagler,Okaloosa,2,41,1,35,91
+Flagler,Orange,218,148,1,35,95
+Flagler,Osceola,32,0,1,35,97
+Flagler,Palm Beach,55,30,1,35,99
+Flagler,Pasco,0,145,1,35,101
+Flagler,Pinellas,61,82,1,35,103
+Flagler,Polk,27,145,1,35,105
+Flagler,Putnam,0,53,1,35,107
+Flagler,St. Johns,179,331,1,35,109
+Flagler,St. Lucie,0,19,1,35,111
+Flagler,Sarasota,0,15,1,35,115
+Flagler,Seminole,0,44,1,35,117
+Flagler,Taylor,0,6,1,35,123
+Flagler,Volusia,1110,631,1,35,127
+Franklin,Alachua,36,47,1,37,1
+Franklin,Baker,0,9,1,37,3
+Franklin,Bay,23,77,1,37,5
+Franklin,Bradford,8,11,1,37,7
+Franklin,Brevard,0,8,1,37,9
+Franklin,Broward,0,30,1,37,11
+Franklin,Calhoun,10,0,1,37,13
+Franklin,Charlotte,15,0,1,37,15
+Franklin,Citrus,0,16,1,37,17
+Franklin,Clay,0,3,1,37,19
+Franklin,Columbia,13,17,1,37,23
+Franklin,Desoto,0,19,1,37,27
+Franklin,Duval,0,60,1,37,31
+Franklin,Escambia,9,36,1,37,33
+Franklin,Gadsden,0,15,1,37,39
+Franklin,Gilchrist,0,11,1,37,41
+Franklin,Glades,21,0,1,37,43
+Franklin,Gulf,26,16,1,37,45
+Franklin,Hamilton,0,14,1,37,47
+Franklin,Highlands,6,0,1,37,55
+Franklin,Hillsborough,0,29,1,37,57
+Franklin,Holmes,3,7,1,37,59
+Franklin,Jackson,16,50,1,37,63
+Franklin,Jefferson,0,9,1,37,65
+Franklin,Lake,7,0,1,37,69
+Franklin,Lee,1,0,1,37,71
+Franklin,Leon,72,74,1,37,73
+Franklin,Levy,0,11,1,37,75
+Franklin,Liberty,0,24,1,37,77
+Franklin,Madison,3,10,1,37,79
+Franklin,Marion,0,19,1,37,83
+Franklin,Martin,0,20,1,37,85
+Franklin,Miami-Dade,0,24,1,37,86
+Franklin,Okaloosa,24,17,1,37,91
+Franklin,Okeechobee,0,39,1,37,93
+Franklin,Orange,0,92,1,37,95
+Franklin,Palm Beach,0,41,1,37,99
+Franklin,Pinellas,6,84,1,37,103
+Franklin,Polk,31,70,1,37,105
+Franklin,Putnam,24,0,1,37,107
+Franklin,St. Johns,0,26,1,37,109
+Franklin,Santa Rosa,2,0,1,37,113
+Franklin,Sarasota,26,8,1,37,115
+Franklin,Seminole,0,23,1,37,117
+Franklin,Sumter,7,0,1,37,119
+Franklin,Union,20,10,1,37,125
+Franklin,Volusia,2,13,1,37,127
+Franklin,Wakulla,23,64,1,37,129
+Franklin,Washington,36,0,1,37,133
+Gadsden,Alachua,11,18,1,39,1
+Gadsden,Bay,4,37,1,39,5
+Gadsden,Brevard,0,26,1,39,9
+Gadsden,Broward,131,60,1,39,11
+Gadsden,Calhoun,40,31,1,39,13
+Gadsden,Citrus,1,0,1,39,17
+Gadsden,Clay,7,10,1,39,19
+Gadsden,Collier,0,3,1,39,21
+Gadsden,Columbia,109,56,1,39,23
+Gadsden,Dixie,0,23,1,39,29
+Gadsden,Duval,45,77,1,39,31
+Gadsden,Escambia,45,55,1,39,33
+Gadsden,Flagler,0,5,1,39,35
+Gadsden,Franklin,15,0,1,39,37
+Gadsden,Gilchrist,6,0,1,39,41
+Gadsden,Gulf,5,43,1,39,45
+Gadsden,Hernando,111,21,1,39,53
+Gadsden,Highlands,0,7,1,39,55
+Gadsden,Hillsborough,5,130,1,39,57
+Gadsden,Holmes,67,7,1,39,59
+Gadsden,Indian River,12,0,1,39,61
+Gadsden,Jackson,52,52,1,39,63
+Gadsden,Jefferson,2,38,1,39,65
+Gadsden,Lake,2,29,1,39,69
+Gadsden,Lee,11,26,1,39,71
+Gadsden,Leon,1498,712,1,39,73
+Gadsden,Levy,0,10,1,39,75
+Gadsden,Liberty,4,39,1,39,77
+Gadsden,Madison,12,16,1,39,79
+Gadsden,Manatee,29,4,1,39,81
+Gadsden,Marion,7,120,1,39,83
+Gadsden,Martin,0,8,1,39,85
+Gadsden,Miami-Dade,13,33,1,39,86
+Gadsden,Okaloosa,43,26,1,39,91
+Gadsden,Okeechobee,0,4,1,39,93
+Gadsden,Orange,17,134,1,39,95
+Gadsden,Osceola,29,5,1,39,97
+Gadsden,Palm Beach,0,48,1,39,99
+Gadsden,Pasco,14,148,1,39,101
+Gadsden,Pinellas,50,66,1,39,103
+Gadsden,Polk,33,34,1,39,105
+Gadsden,Putnam,0,18,1,39,107
+Gadsden,St. Johns,0,37,1,39,109
+Gadsden,St. Lucie,0,19,1,39,111
+Gadsden,Santa Rosa,0,26,1,39,113
+Gadsden,Sarasota,0,52,1,39,115
+Gadsden,Seminole,2,0,1,39,117
+Gadsden,Sumter,0,4,1,39,119
+Gadsden,Volusia,0,4,1,39,127
+Gadsden,Wakulla,33,0,1,39,129
+Gadsden,Walton,16,4,1,39,131
+Gadsden,Washington,2,17,1,39,133
+Gilchrist,Alachua,211,141,1,41,1
+Gilchrist,Bay,0,31,1,41,5
+Gilchrist,Bradford,0,21,1,41,7
+Gilchrist,Brevard,0,54,1,41,9
+Gilchrist,Broward,0,109,1,41,11
+Gilchrist,Citrus,0,3,1,41,17
+Gilchrist,Clay,43,0,1,41,19
+Gilchrist,Collier,0,1,1,41,21
+Gilchrist,Columbia,18,76,1,41,23
+Gilchrist,Desoto,0,15,1,41,27
+Gilchrist,Dixie,55,253,1,41,29
+Gilchrist,Duval,9,28,1,41,31
+Gilchrist,Escambia,4,7,1,41,33
+Gilchrist,Franklin,11,0,1,41,37
+Gilchrist,Gadsden,0,6,1,41,39
+Gilchrist,Hamilton,12,0,1,41,47
+Gilchrist,Hendry,0,8,1,41,51
+Gilchrist,Hernando,133,0,1,41,53
+Gilchrist,Hillsborough,0,41,1,41,57
+Gilchrist,Holmes,7,0,1,41,59
+Gilchrist,Indian River,0,25,1,41,61
+Gilchrist,Jackson,9,9,1,41,63
+Gilchrist,Jefferson,29,0,1,41,65
+Gilchrist,Lafayette,79,0,1,41,67
+Gilchrist,Lee,0,43,1,41,71
+Gilchrist,Leon,170,0,1,41,73
+Gilchrist,Levy,357,118,1,41,75
+Gilchrist,Marion,10,6,1,41,83
+Gilchrist,Miami-Dade,2,3,1,41,86
+Gilchrist,Monroe,0,3,1,41,87
+Gilchrist,Orange,0,30,1,41,95
+Gilchrist,Palm Beach,0,53,1,41,99
+Gilchrist,Pasco,0,7,1,41,101
+Gilchrist,Pinellas,0,58,1,41,103
+Gilchrist,Polk,0,73,1,41,105
+Gilchrist,Putnam,0,1,1,41,107
+Gilchrist,Sarasota,0,3,1,41,115
+Gilchrist,Seminole,0,15,1,41,117
+Gilchrist,Sumter,0,2,1,41,119
+Gilchrist,Suwannee,0,83,1,41,121
+Gilchrist,Taylor,7,7,1,41,123
+Gilchrist,Union,13,0,1,41,125
+Gilchrist,Walton,0,5,1,41,131
+Gilchrist,Washington,11,0,1,41,133
+Glades,Bay,0,9,1,43,5
+Glades,Brevard,0,8,1,43,9
+Glades,Broward,6,91,1,43,11
+Glades,Charlotte,13,0,1,43,15
+Glades,Collier,165,53,1,43,21
+Glades,Desoto,66,4,1,43,27
+Glades,Franklin,0,21,1,43,37
+Glades,Gulf,3,15,1,43,45
+Glades,Hardee,37,0,1,43,49
+Glades,Hendry,78,83,1,43,51
+Glades,Highlands,70,11,1,43,55
+Glades,Lee,0,52,1,43,71
+Glades,Levy,7,0,1,43,75
+Glades,Marion,19,0,1,43,83
+Glades,Martin,0,5,1,43,85
+Glades,Miami-Dade,59,192,1,43,86
+Glades,Okeechobee,53,164,1,43,93
+Glades,Palm Beach,6,49,1,43,99
+Glades,Polk,0,55,1,43,105
+Glades,Putnam,8,0,1,43,107
+Gulf,Alachua,5,28,1,45,1
+Gulf,Baker,16,0,1,45,3
+Gulf,Bay,149,272,1,45,5
+Gulf,Bradford,54,0,1,45,7
+Gulf,Brevard,0,62,1,45,9
+Gulf,Broward,0,17,1,45,11
+Gulf,Calhoun,9,117,1,45,13
+Gulf,Charlotte,0,3,1,45,15
+Gulf,Columbia,31,0,1,45,23
+Gulf,Desoto,12,3,1,45,27
+Gulf,Dixie,0,17,1,45,29
+Gulf,Escambia,24,24,1,45,33
+Gulf,Franklin,16,26,1,45,37
+Gulf,Gadsden,43,5,1,45,39
+Gulf,Glades,15,3,1,45,43
+Gulf,Hamilton,5,6,1,45,47
+Gulf,Hardee,4,0,1,45,49
+Gulf,Hendry,0,21,1,45,51
+Gulf,Hernando,0,6,1,45,53
+Gulf,Highlands,0,34,1,45,55
+Gulf,Hillsborough,22,114,1,45,57
+Gulf,Holmes,7,0,1,45,59
+Gulf,Indian River,0,27,1,45,61
+Gulf,Jackson,63,22,1,45,63
+Gulf,Lake,11,0,1,45,69
+Gulf,Lee,26,0,1,45,71
+Gulf,Leon,25,0,1,45,73
+Gulf,Levy,0,15,1,45,75
+Gulf,Liberty,26,0,1,45,77
+Gulf,Madison,3,0,1,45,79
+Gulf,Manatee,0,42,1,45,81
+Gulf,Marion,9,3,1,45,83
+Gulf,Martin,0,8,1,45,85
+Gulf,Miami-Dade,67,21,1,45,86
+Gulf,Orange,32,36,1,45,95
+Gulf,Osceola,0,5,1,45,97
+Gulf,Palm Beach,4,0,1,45,99
+Gulf,Pasco,2,35,1,45,101
+Gulf,Pinellas,13,28,1,45,103
+Gulf,Polk,20,17,1,45,105
+Gulf,St. Johns,0,6,1,45,109
+Gulf,St. Lucie,0,61,1,45,111
+Gulf,Santa Rosa,9,17,1,45,113
+Gulf,Sarasota,0,13,1,45,115
+Gulf,Seminole,0,24,1,45,117
+Gulf,Sumter,0,10,1,45,119
+Gulf,Taylor,14,4,1,45,123
+Gulf,Union,63,8,1,45,125
+Gulf,Volusia,0,18,1,45,127
+Gulf,Wakulla,86,3,1,45,129
+Gulf,Walton,7,0,1,45,131
+Gulf,Washington,4,0,1,45,133
+Hamilton,Alachua,17,12,1,47,1
+Hamilton,Baker,68,4,1,47,3
+Hamilton,Bradford,69,31,1,47,7
+Hamilton,Brevard,0,41,1,47,9
+Hamilton,Broward,27,43,1,47,11
+Hamilton,Calhoun,0,10,1,47,13
+Hamilton,Charlotte,12,22,1,47,15
+Hamilton,Citrus,15,44,1,47,17
+Hamilton,Clay,0,10,1,47,19
+Hamilton,Columbia,112,230,1,47,23
+Hamilton,Desoto,19,15,1,47,27
+Hamilton,Dixie,8,5,1,47,29
+Hamilton,Duval,0,56,1,47,31
+Hamilton,Escambia,0,5,1,47,33
+Hamilton,Flagler,0,9,1,47,35
+Hamilton,Franklin,14,0,1,47,37
+Hamilton,Gilchrist,0,12,1,47,41
+Hamilton,Gulf,6,5,1,47,45
+Hamilton,Hardee,65,21,1,47,49
+Hamilton,Hendry,42,0,1,47,51
+Hamilton,Hernando,0,26,1,47,53
+Hamilton,Highlands,23,9,1,47,55
+Hamilton,Hillsborough,95,77,1,47,57
+Hamilton,Indian River,0,8,1,47,61
+Hamilton,Jackson,0,4,1,47,63
+Hamilton,Lafayette,66,57,1,47,67
+Hamilton,Lake,4,27,1,47,69
+Hamilton,Leon,27,0,1,47,73
+Hamilton,Liberty,0,9,1,47,77
+Hamilton,Madison,41,57,1,47,79
+Hamilton,Manatee,7,0,1,47,81
+Hamilton,Marion,29,60,1,47,83
+Hamilton,Martin,17,12,1,47,85
+Hamilton,Miami-Dade,353,97,1,47,86
+Hamilton,Monroe,11,0,1,47,87
+Hamilton,Okaloosa,3,7,1,47,91
+Hamilton,Okeechobee,0,7,1,47,93
+Hamilton,Orange,0,127,1,47,95
+Hamilton,Palm Beach,0,54,1,47,99
+Hamilton,Pasco,7,22,1,47,101
+Hamilton,Pinellas,0,79,1,47,103
+Hamilton,Polk,86,27,1,47,105
+Hamilton,Putnam,0,20,1,47,107
+Hamilton,St. Lucie,7,0,1,47,111
+Hamilton,Santa Rosa,76,15,1,47,113
+Hamilton,Sarasota,0,39,1,47,115
+Hamilton,Seminole,61,13,1,47,117
+Hamilton,Sumter,0,21,1,47,119
+Hamilton,Suwannee,520,97,1,47,121
+Hamilton,Taylor,0,6,1,47,123
+Hamilton,Union,41,21,1,47,125
+Hamilton,Volusia,98,44,1,47,127
+Hamilton,Wakulla,29,20,1,47,129
+Hamilton,Walton,12,19,1,47,131
+Hamilton,Washington,9,6,1,47,133
+Hardee,Alachua,104,0,1,49,1
+Hardee,Baker,0,7,1,49,3
+Hardee,Bradford,15,0,1,49,7
+Hardee,Brevard,0,28,1,49,9
+Hardee,Broward,3,39,1,49,11
+Hardee,Collier,0,11,1,49,21
+Hardee,Columbia,0,43,1,49,23
+Hardee,Desoto,150,197,1,49,27
+Hardee,Glades,0,37,1,49,43
+Hardee,Gulf,0,4,1,49,45
+Hardee,Hamilton,21,65,1,49,47
+Hardee,Hendry,22,0,1,49,51
+Hardee,Hernando,18,0,1,49,53
+Hardee,Highlands,84,44,1,49,55
+Hardee,Hillsborough,56,3,1,49,57
+Hardee,Jackson,13,0,1,49,63
+Hardee,Lake,276,0,1,49,69
+Hardee,Lee,17,0,1,49,71
+Hardee,Leon,104,9,1,49,73
+Hardee,Liberty,8,0,1,49,77
+Hardee,Madison,2,0,1,49,79
+Hardee,Manatee,0,31,1,49,81
+Hardee,Marion,0,102,1,49,83
+Hardee,Martin,0,37,1,49,85
+Hardee,Miami-Dade,107,40,1,49,86
+Hardee,Okeechobee,24,39,1,49,93
+Hardee,Orange,12,20,1,49,95
+Hardee,Palm Beach,34,24,1,49,99
+Hardee,Pinellas,44,0,1,49,103
+Hardee,Polk,126,150,1,49,105
+Hardee,St. Lucie,7,0,1,49,111
+Hardee,Santa Rosa,8,3,1,49,113
+Hardee,Sarasota,9,0,1,49,115
+Hardee,Seminole,17,2,1,49,117
+Hardee,Sumter,0,25,1,49,119
+Hardee,Taylor,19,0,1,49,123
+Hardee,Union,9,0,1,49,125
+Hendry,Alachua,8,18,1,51,1
+Hendry,Baker,0,6,1,51,3
+Hendry,Bay,0,13,1,51,5
+Hendry,Brevard,7,0,1,51,9
+Hendry,Broward,17,27,1,51,11
+Hendry,Calhoun,0,6,1,51,13
+Hendry,Charlotte,8,38,1,51,15
+Hendry,Clay,11,0,1,51,19
+Hendry,Collier,6,6,1,51,21
+Hendry,Desoto,44,15,1,51,27
+Hendry,Dixie,0,9,1,51,29
+Hendry,Duval,1,29,1,51,31
+Hendry,Escambia,0,13,1,51,33
+Hendry,Gilchrist,8,0,1,51,41
+Hendry,Glades,83,78,1,51,43
+Hendry,Gulf,21,0,1,51,45
+Hendry,Hamilton,0,42,1,51,47
+Hendry,Hardee,0,22,1,51,49
+Hendry,Hernando,6,0,1,51,53
+Hendry,Highlands,167,27,1,51,55
+Hendry,Hillsborough,0,8,1,51,57
+Hendry,Jackson,46,0,1,51,63
+Hendry,Lee,651,201,1,51,71
+Hendry,Leon,32,157,1,51,73
+Hendry,Madison,5,11,1,51,79
+Hendry,Marion,46,21,1,51,83
+Hendry,Miami-Dade,105,200,1,51,86
+Hendry,Monroe,82,72,1,51,87
+Hendry,Okeechobee,48,22,1,51,93
+Hendry,Orange,19,95,1,51,95
+Hendry,Palm Beach,269,326,1,51,99
+Hendry,Pasco,75,168,1,51,101
+Hendry,Pinellas,0,11,1,51,103
+Hendry,Polk,19,6,1,51,105
+Hendry,St. Lucie,10,0,1,51,111
+Hendry,Seminole,0,22,1,51,117
+Hendry,Suwannee,0,19,1,51,121
+Hendry,Taylor,0,27,1,51,123
+Hendry,Walton,0,6,1,51,131
+Hernando,Alachua,130,108,1,53,1
+Hernando,Bay,48,8,1,53,5
+Hernando,Brevard,35,32,1,53,9
+Hernando,Broward,154,161,1,53,11
+Hernando,Charlotte,76,18,1,53,15
+Hernando,Citrus,437,455,1,53,17
+Hernando,Clay,0,266,1,53,19
+Hernando,Collier,0,87,1,53,21
+Hernando,Columbia,29,16,1,53,23
+Hernando,Dixie,0,29,1,53,29
+Hernando,Duval,109,123,1,53,31
+Hernando,Escambia,37,15,1,53,33
+Hernando,Flagler,0,62,1,53,35
+Hernando,Gadsden,21,111,1,53,39
+Hernando,Gilchrist,0,133,1,53,41
+Hernando,Gulf,6,0,1,53,45
+Hernando,Hamilton,26,0,1,53,47
+Hernando,Hardee,0,18,1,53,49
+Hernando,Hendry,0,6,1,53,51
+Hernando,Hillsborough,1236,688,1,53,57
+Hernando,Holmes,5,0,1,53,59
+Hernando,Indian River,138,8,1,53,61
+Hernando,Jefferson,0,15,1,53,65
+Hernando,Lake,91,65,1,53,69
+Hernando,Lee,62,8,1,53,71
+Hernando,Leon,129,57,1,53,73
+Hernando,Levy,0,31,1,53,75
+Hernando,Manatee,56,33,1,53,81
+Hernando,Marion,91,77,1,53,83
+Hernando,Martin,35,0,1,53,85
+Hernando,Miami-Dade,9,198,1,53,86
+Hernando,Okaloosa,0,6,1,53,91
+Hernando,Okeechobee,33,0,1,53,93
+Hernando,Orange,186,145,1,53,95
+Hernando,Osceola,39,96,1,53,97
+Hernando,Palm Beach,143,51,1,53,99
+Hernando,Pasco,1321,2397,1,53,101
+Hernando,Pinellas,845,755,1,53,103
+Hernando,Polk,117,0,1,53,105
+Hernando,Putnam,8,0,1,53,107
+Hernando,St. Johns,5,0,1,53,109
+Hernando,St. Lucie,0,23,1,53,111
+Hernando,Santa Rosa,71,17,1,53,113
+Hernando,Sarasota,33,41,1,53,115
+Hernando,Seminole,78,13,1,53,117
+Hernando,Sumter,96,167,1,53,119
+Hernando,Suwannee,29,39,1,53,121
+Hernando,Taylor,36,0,1,53,123
+Hernando,Union,20,0,1,53,125
+Hernando,Volusia,165,15,1,53,127
+Hernando,Walton,4,0,1,53,131
+Highlands,Alachua,13,43,1,55,1
+Highlands,Baker,0,12,1,55,3
+Highlands,Bay,7,0,1,55,5
+Highlands,Bradford,4,0,1,55,7
+Highlands,Brevard,72,62,1,55,9
+Highlands,Broward,150,302,1,55,11
+Highlands,Charlotte,39,0,1,55,15
+Highlands,Citrus,0,60,1,55,17
+Highlands,Collier,132,48,1,55,21
+Highlands,Columbia,54,0,1,55,23
+Highlands,Desoto,77,56,1,55,27
+Highlands,Duval,0,89,1,55,31
+Highlands,Escambia,1,4,1,55,33
+Highlands,Franklin,0,6,1,55,37
+Highlands,Gadsden,7,0,1,55,39
+Highlands,Glades,11,70,1,55,43
+Highlands,Gulf,34,0,1,55,45
+Highlands,Hamilton,9,23,1,55,47
+Highlands,Hardee,44,84,1,55,49
+Highlands,Hendry,27,167,1,55,51
+Highlands,Hillsborough,126,124,1,55,57
+Highlands,Indian River,0,38,1,55,61
+Highlands,Jackson,56,22,1,55,63
+Highlands,Lafayette,8,0,1,55,67
+Highlands,Lake,49,5,1,55,69
+Highlands,Lee,107,60,1,55,71
+Highlands,Leon,29,26,1,55,73
+Highlands,Levy,85,0,1,55,75
+Highlands,Liberty,41,0,1,55,77
+Highlands,Madison,0,9,1,55,79
+Highlands,Manatee,27,1,1,55,81
+Highlands,Marion,22,0,1,55,83
+Highlands,Miami-Dade,11,341,1,55,86
+Highlands,Monroe,32,0,1,55,87
+Highlands,Okeechobee,265,0,1,55,93
+Highlands,Orange,124,86,1,55,95
+Highlands,Osceola,5,0,1,55,97
+Highlands,Palm Beach,221,165,1,55,99
+Highlands,Pasco,8,32,1,55,101
+Highlands,Pinellas,81,157,1,55,103
+Highlands,Polk,471,285,1,55,105
+Highlands,Putnam,40,0,1,55,107
+Highlands,St. Johns,14,0,1,55,109
+Highlands,St. Lucie,27,0,1,55,111
+Highlands,Santa Rosa,0,19,1,55,113
+Highlands,Sarasota,4,117,1,55,115
+Highlands,Sumter,121,7,1,55,119
+Highlands,Suwannee,84,30,1,55,121
+Highlands,Taylor,14,0,1,55,123
+Highlands,Union,13,0,1,55,125
+Highlands,Volusia,49,12,1,55,127
+Highlands,Wakulla,4,0,1,55,129
+Hillsborough,Alachua,1316,1058,1,57,1
+Hillsborough,Baker,20,0,1,57,3
+Hillsborough,Bay,192,78,1,57,5
+Hillsborough,Bradford,80,0,1,57,7
+Hillsborough,Brevard,374,982,1,57,9
+Hillsborough,Broward,1064,1061,1,57,11
+Hillsborough,Calhoun,53,15,1,57,13
+Hillsborough,Charlotte,132,158,1,57,15
+Hillsborough,Citrus,251,245,1,57,17
+Hillsborough,Clay,13,393,1,57,19
+Hillsborough,Collier,148,357,1,57,21
+Hillsborough,Columbia,104,75,1,57,23
+Hillsborough,Desoto,74,86,1,57,27
+Hillsborough,Dixie,86,0,1,57,29
+Hillsborough,Duval,915,1170,1,57,31
+Hillsborough,Escambia,168,436,1,57,33
+Hillsborough,Flagler,32,33,1,57,35
+Hillsborough,Franklin,29,0,1,57,37
+Hillsborough,Gadsden,130,5,1,57,39
+Hillsborough,Gilchrist,41,0,1,57,41
+Hillsborough,Gulf,114,22,1,57,45
+Hillsborough,Hamilton,77,95,1,57,47
+Hillsborough,Hardee,3,56,1,57,49
+Hillsborough,Hendry,8,0,1,57,51
+Hillsborough,Hernando,688,1236,1,57,53
+Hillsborough,Highlands,124,126,1,57,55
+Hillsborough,Holmes,0,22,1,57,59
+Hillsborough,Indian River,652,55,1,57,61
+Hillsborough,Jackson,98,14,1,57,63
+Hillsborough,Jefferson,79,0,1,57,65
+Hillsborough,Lafayette,3,0,1,57,67
+Hillsborough,Lake,500,323,1,57,69
+Hillsborough,Lee,1155,714,1,57,71
+Hillsborough,Leon,1036,837,1,57,73
+Hillsborough,Levy,66,32,1,57,75
+Hillsborough,Liberty,57,15,1,57,77
+Hillsborough,Madison,106,0,1,57,79
+Hillsborough,Manatee,1000,1036,1,57,81
+Hillsborough,Marion,700,308,1,57,83
+Hillsborough,Martin,71,52,1,57,85
+Hillsborough,Miami-Dade,1540,1469,1,57,86
+Hillsborough,Monroe,92,105,1,57,87
+Hillsborough,Nassau,12,34,1,57,89
+Hillsborough,Okaloosa,293,278,1,57,91
+Hillsborough,Okeechobee,44,84,1,57,93
+Hillsborough,Orange,1952,2030,1,57,95
+Hillsborough,Osceola,710,326,1,57,97
+Hillsborough,Palm Beach,1102,576,1,57,99
+Hillsborough,Pasco,6548,6506,1,57,101
+Hillsborough,Pinellas,6429,5728,1,57,103
+Hillsborough,Polk,2019,2872,1,57,105
+Hillsborough,Putnam,47,57,1,57,107
+Hillsborough,St. Johns,527,248,1,57,109
+Hillsborough,St. Lucie,542,266,1,57,111
+Hillsborough,Santa Rosa,39,227,1,57,113
+Hillsborough,Sarasota,438,637,1,57,115
+Hillsborough,Seminole,405,393,1,57,117
+Hillsborough,Sumter,156,103,1,57,119
+Hillsborough,Suwannee,112,13,1,57,121
+Hillsborough,Taylor,120,10,1,57,123
+Hillsborough,Volusia,341,868,1,57,127
+Hillsborough,Wakulla,110,7,1,57,129
+Hillsborough,Walton,4,69,1,57,131
+Hillsborough,Washington,3,0,1,57,133
+Holmes,Alachua,9,36,1,59,1
+Holmes,Baker,22,0,1,59,3
+Holmes,Bay,103,86,1,59,5
+Holmes,Bradford,14,0,1,59,7
+Holmes,Brevard,0,12,1,59,9
+Holmes,Broward,18,0,1,59,11
+Holmes,Citrus,0,9,1,59,17
+Holmes,Clay,0,7,1,59,19
+Holmes,Desoto,0,8,1,59,27
+Holmes,Dixie,0,5,1,59,29
+Holmes,Duval,45,41,1,59,31
+Holmes,Escambia,54,50,1,59,33
+Holmes,Franklin,7,3,1,59,37
+Holmes,Gadsden,7,67,1,59,39
+Holmes,Gilchrist,0,7,1,59,41
+Holmes,Gulf,0,7,1,59,45
+Holmes,Hernando,0,5,1,59,53
+Holmes,Hillsborough,22,0,1,59,57
+Holmes,Jackson,69,24,1,59,63
+Holmes,Lake,3,0,1,59,69
+Holmes,Lee,0,9,1,59,71
+Holmes,Leon,28,61,1,59,73
+Holmes,Madison,21,0,1,59,79
+Holmes,Marion,29,17,1,59,83
+Holmes,Martin,0,7,1,59,85
+Holmes,Miami-Dade,3,19,1,59,86
+Holmes,Monroe,0,24,1,59,87
+Holmes,Okaloosa,0,87,1,59,91
+Holmes,Orange,0,41,1,59,95
+Holmes,Osceola,0,8,1,59,97
+Holmes,Palm Beach,0,7,1,59,99
+Holmes,Pasco,108,6,1,59,101
+Holmes,Pinellas,9,11,1,59,103
+Holmes,Polk,0,20,1,59,105
+Holmes,St. Johns,0,8,1,59,109
+Holmes,Santa Rosa,21,3,1,59,113
+Holmes,Seminole,0,5,1,59,117
+Holmes,Sumter,7,0,1,59,119
+Holmes,Suwannee,0,13,1,59,121
+Holmes,Taylor,0,3,1,59,123
+Holmes,Union,0,6,1,59,125
+Holmes,Volusia,3,4,1,59,127
+Holmes,Wakulla,71,27,1,59,129
+Holmes,Walton,38,171,1,59,131
+Holmes,Washington,283,127,1,59,133
+Indian River,Alachua,74,41,1,61,1
+Indian River,Bay,0,9,1,61,5
+Indian River,Bradford,9,0,1,61,7
+Indian River,Brevard,495,393,1,61,9
+Indian River,Broward,240,378,1,61,11
+Indian River,Charlotte,0,26,1,61,15
+Indian River,Citrus,70,8,1,61,17
+Indian River,Clay,13,0,1,61,19
+Indian River,Collier,11,108,1,61,21
+Indian River,Columbia,26,0,1,61,23
+Indian River,Desoto,22,0,1,61,27
+Indian River,Duval,104,16,1,61,31
+Indian River,Escambia,0,7,1,61,33
+Indian River,Flagler,0,17,1,61,35
+Indian River,Gadsden,0,12,1,61,39
+Indian River,Gilchrist,25,0,1,61,41
+Indian River,Gulf,27,0,1,61,45
+Indian River,Hamilton,8,0,1,61,47
+Indian River,Hernando,8,138,1,61,53
+Indian River,Highlands,38,0,1,61,55
+Indian River,Hillsborough,55,652,1,61,57
+Indian River,Jackson,5,0,1,61,63
+Indian River,Jefferson,38,0,1,61,65
+Indian River,Lake,240,16,1,61,69
+Indian River,Lee,345,63,1,61,71
+Indian River,Leon,84,8,1,61,73
+Indian River,Manatee,20,3,1,61,81
+Indian River,Marion,13,9,1,61,83
+Indian River,Martin,41,80,1,61,85
+Indian River,Miami-Dade,123,282,1,61,86
+Indian River,Nassau,1,0,1,61,89
+Indian River,Okaloosa,68,4,1,61,91
+Indian River,Okeechobee,14,42,1,61,93
+Indian River,Orange,121,145,1,61,95
+Indian River,Osceola,47,68,1,61,97
+Indian River,Palm Beach,360,353,1,61,99
+Indian River,Pasco,0,29,1,61,101
+Indian River,Pinellas,50,49,1,61,103
+Indian River,Polk,237,41,1,61,105
+Indian River,St. Johns,43,21,1,61,109
+Indian River,St. Lucie,503,1531,1,61,111
+Indian River,Santa Rosa,26,1,1,61,113
+Indian River,Sarasota,13,7,1,61,115
+Indian River,Seminole,5,27,1,61,117
+Indian River,Sumter,12,0,1,61,119
+Indian River,Suwannee,0,89,1,61,121
+Indian River,Taylor,13,5,1,61,123
+Indian River,Union,23,0,1,61,125
+Indian River,Volusia,114,20,1,61,127
+Indian River,Washington,40,0,1,61,133
+Jackson,Alachua,50,68,1,63,1
+Jackson,Baker,4,21,1,63,3
+Jackson,Bay,335,154,1,63,5
+Jackson,Bradford,135,0,1,63,7
+Jackson,Brevard,147,22,1,63,9
+Jackson,Broward,91,68,1,63,11
+Jackson,Calhoun,81,52,1,63,13
+Jackson,Charlotte,0,18,1,63,15
+Jackson,Citrus,0,105,1,63,17
+Jackson,Clay,0,19,1,63,19
+Jackson,Collier,0,19,1,63,21
+Jackson,Columbia,7,51,1,63,23
+Jackson,Desoto,19,17,1,63,27
+Jackson,Dixie,28,0,1,63,29
+Jackson,Duval,27,271,1,63,31
+Jackson,Escambia,27,190,1,63,33
+Jackson,Franklin,50,16,1,63,37
+Jackson,Gadsden,52,52,1,63,39
+Jackson,Gilchrist,9,9,1,63,41
+Jackson,Gulf,22,63,1,63,45
+Jackson,Hamilton,4,0,1,63,47
+Jackson,Hardee,0,13,1,63,49
+Jackson,Hendry,0,46,1,63,51
+Jackson,Highlands,22,56,1,63,55
+Jackson,Hillsborough,14,98,1,63,57
+Jackson,Holmes,24,69,1,63,59
+Jackson,Indian River,0,5,1,63,61
+Jackson,Jefferson,41,7,1,63,65
+Jackson,Lafayette,17,0,1,63,67
+Jackson,Lake,30,65,1,63,69
+Jackson,Lee,0,12,1,63,71
+Jackson,Leon,242,196,1,63,73
+Jackson,Levy,38,15,1,63,75
+Jackson,Liberty,23,13,1,63,77
+Jackson,Madison,10,14,1,63,79
+Jackson,Manatee,103,7,1,63,81
+Jackson,Marion,99,121,1,63,83
+Jackson,Miami-Dade,110,120,1,63,86
+Jackson,Monroe,3,10,1,63,87
+Jackson,Nassau,0,8,1,63,89
+Jackson,Okaloosa,0,145,1,63,91
+Jackson,Orange,35,194,1,63,95
+Jackson,Osceola,0,21,1,63,97
+Jackson,Palm Beach,21,69,1,63,99
+Jackson,Pasco,40,17,1,63,101
+Jackson,Pinellas,10,77,1,63,103
+Jackson,Polk,391,78,1,63,105
+Jackson,Putnam,21,5,1,63,107
+Jackson,St. Johns,0,46,1,63,109
+Jackson,St. Lucie,7,75,1,63,111
+Jackson,Santa Rosa,52,28,1,63,113
+Jackson,Sarasota,0,22,1,63,115
+Jackson,Sumter,214,0,1,63,119
+Jackson,Suwannee,12,3,1,63,121
+Jackson,Taylor,0,21,1,63,123
+Jackson,Union,21,43,1,63,125
+Jackson,Volusia,16,58,1,63,127
+Jackson,Wakulla,221,65,1,63,129
+Jackson,Walton,58,28,1,63,131
+Jackson,Washington,323,212,1,63,133
+Jefferson,Alachua,0,13,1,65,1
+Jefferson,Baker,20,0,1,65,3
+Jefferson,Bradford,0,10,1,65,7
+Jefferson,Brevard,0,15,1,65,9
+Jefferson,Broward,3,21,1,65,11
+Jefferson,Calhoun,0,15,1,65,13
+Jefferson,Charlotte,0,7,1,65,15
+Jefferson,Citrus,0,32,1,65,17
+Jefferson,Collier,53,0,1,65,21
+Jefferson,Columbia,0,12,1,65,23
+Jefferson,Dixie,40,0,1,65,29
+Jefferson,Duval,0,36,1,65,31
+Jefferson,Escambia,2,2,1,65,33
+Jefferson,Franklin,9,0,1,65,37
+Jefferson,Gadsden,38,2,1,65,39
+Jefferson,Gilchrist,0,29,1,65,41
+Jefferson,Hernando,15,0,1,65,53
+Jefferson,Hillsborough,0,79,1,65,57
+Jefferson,Indian River,0,38,1,65,61
+Jefferson,Jackson,7,41,1,65,63
+Jefferson,Lake,67,13,1,65,69
+Jefferson,Leon,220,114,1,65,73
+Jefferson,Liberty,0,20,1,65,77
+Jefferson,Madison,34,25,1,65,79
+Jefferson,Manatee,103,0,1,65,81
+Jefferson,Marion,3,23,1,65,83
+Jefferson,Martin,0,7,1,65,85
+Jefferson,Miami-Dade,76,34,1,65,86
+Jefferson,Okaloosa,11,21,1,65,91
+Jefferson,Osceola,0,18,1,65,97
+Jefferson,Palm Beach,1,0,1,65,99
+Jefferson,Pasco,2,22,1,65,101
+Jefferson,Pinellas,8,22,1,65,103
+Jefferson,Polk,21,8,1,65,105
+Jefferson,Putnam,23,28,1,65,107
+Jefferson,St. Lucie,0,8,1,65,111
+Jefferson,Santa Rosa,0,9,1,65,113
+Jefferson,Sarasota,0,2,1,65,115
+Jefferson,Seminole,0,9,1,65,117
+Jefferson,Suwannee,0,20,1,65,121
+Jefferson,Taylor,0,1,1,65,123
+Jefferson,Union,36,23,1,65,125
+Jefferson,Volusia,0,34,1,65,127
+Jefferson,Wakulla,29,64,1,65,129
+Jefferson,Walton,0,28,1,65,131
+Jefferson,Washington,12,49,1,65,133
+Lafayette,Alachua,10,0,1,67,1
+Lafayette,Baker,22,0,1,67,3
+Lafayette,Bradford,20,0,1,67,7
+Lafayette,Brevard,0,12,1,67,9
+Lafayette,Broward,20,36,1,67,11
+Lafayette,Calhoun,18,0,1,67,13
+Lafayette,Charlotte,0,9,1,67,15
+Lafayette,Clay,0,4,1,67,19
+Lafayette,Columbia,49,14,1,67,23
+Lafayette,Dixie,38,21,1,67,29
+Lafayette,Duval,8,16,1,67,31
+Lafayette,Escambia,11,0,1,67,33
+Lafayette,Gilchrist,0,79,1,67,41
+Lafayette,Hamilton,57,66,1,67,47
+Lafayette,Highlands,0,8,1,67,55
+Lafayette,Hillsborough,0,3,1,67,57
+Lafayette,Jackson,0,17,1,67,63
+Lafayette,Lake,0,2,1,67,69
+Lafayette,Lee,0,3,1,67,71
+Lafayette,Leon,0,3,1,67,73
+Lafayette,Levy,6,0,1,67,75
+Lafayette,Madison,13,3,1,67,79
+Lafayette,Manatee,0,19,1,67,81
+Lafayette,Marion,0,28,1,67,83
+Lafayette,Miami-Dade,12,33,1,67,86
+Lafayette,Okeechobee,0,10,1,67,93
+Lafayette,Orange,0,31,1,67,95
+Lafayette,Palm Beach,5,149,1,67,99
+Lafayette,Pasco,0,13,1,67,101
+Lafayette,Polk,30,33,1,67,105
+Lafayette,Santa Rosa,5,1,1,67,113
+Lafayette,Sumter,0,2,1,67,119
+Lafayette,Suwannee,68,23,1,67,121
+Lafayette,Taylor,41,66,1,67,123
+Lafayette,Union,0,13,1,67,125
+Lafayette,Wakulla,11,26,1,67,129
+Lafayette,Walton,0,1,1,67,131
+Lafayette,Washington,0,21,1,67,133
+Lake,Alachua,126,119,1,69,1
+Lake,Baker,10,36,1,69,3
+Lake,Bay,64,0,1,69,5
+Lake,Bradford,10,0,1,69,7
+Lake,Brevard,117,135,1,69,9
+Lake,Broward,189,295,1,69,11
+Lake,Calhoun,0,12,1,69,13
+Lake,Charlotte,21,49,1,69,15
+Lake,Citrus,300,147,1,69,17
+Lake,Clay,36,83,1,69,19
+Lake,Collier,12,11,1,69,21
+Lake,Columbia,9,20,1,69,23
+Lake,Desoto,0,48,1,69,27
+Lake,Duval,87,107,1,69,31
+Lake,Escambia,10,10,1,69,33
+Lake,Flagler,22,3,1,69,35
+Lake,Franklin,0,7,1,69,37
+Lake,Gadsden,29,2,1,69,39
+Lake,Gulf,0,11,1,69,45
+Lake,Hamilton,27,4,1,69,47
+Lake,Hardee,0,276,1,69,49
+Lake,Hernando,65,91,1,69,53
+Lake,Highlands,5,49,1,69,55
+Lake,Hillsborough,323,500,1,69,57
+Lake,Holmes,0,3,1,69,59
+Lake,Indian River,16,240,1,69,61
+Lake,Jackson,65,30,1,69,63
+Lake,Jefferson,13,67,1,69,65
+Lake,Lafayette,2,0,1,69,67
+Lake,Lee,189,19,1,69,71
+Lake,Leon,237,289,1,69,73
+Lake,Levy,6,27,1,69,75
+Lake,Liberty,42,23,1,69,77
+Lake,Madison,3,4,1,69,79
+Lake,Manatee,106,38,1,69,81
+Lake,Marion,1152,471,1,69,83
+Lake,Martin,187,13,1,69,85
+Lake,Miami-Dade,62,180,1,69,86
+Lake,Monroe,4,8,1,69,87
+Lake,Okeechobee,0,65,1,69,93
+Lake,Orange,3299,3023,1,69,95
+Lake,Osceola,181,484,1,69,97
+Lake,Palm Beach,282,232,1,69,99
+Lake,Pasco,151,165,1,69,101
+Lake,Pinellas,119,29,1,69,103
+Lake,Polk,1409,612,1,69,105
+Lake,Putnam,37,0,1,69,107
+Lake,St. Johns,231,41,1,69,109
+Lake,St. Lucie,6,105,1,69,111
+Lake,Santa Rosa,72,88,1,69,113
+Lake,Sarasota,130,95,1,69,115
+Lake,Seminole,543,657,1,69,117
+Lake,Sumter,339,686,1,69,119
+Lake,Suwannee,21,44,1,69,121
+Lake,Taylor,37,11,1,69,123
+Lake,Union,20,60,1,69,125
+Lake,Volusia,644,591,1,69,127
+Lake,Wakulla,9,0,1,69,129
+Lake,Walton,19,15,1,69,131
+Lake,Washington,2,3,1,69,133
+Lee,Alachua,397,236,1,71,1
+Lee,Baker,7,7,1,71,3
+Lee,Bay,0,20,1,71,5
+Lee,Bradford,10,0,1,71,7
+Lee,Brevard,102,199,1,71,9
+Lee,Broward,1087,2050,1,71,11
+Lee,Calhoun,66,0,1,71,13
+Lee,Charlotte,878,790,1,71,15
+Lee,Citrus,20,36,1,71,17
+Lee,Clay,11,90,1,71,19
+Lee,Collier,1864,3688,1,71,21
+Lee,Columbia,79,83,1,71,23
+Lee,Desoto,125,11,1,71,27
+Lee,Duval,161,229,1,71,31
+Lee,Escambia,124,73,1,71,33
+Lee,Franklin,0,1,1,71,37
+Lee,Gadsden,26,11,1,71,39
+Lee,Gilchrist,43,0,1,71,41
+Lee,Glades,52,0,1,71,43
+Lee,Gulf,0,26,1,71,45
+Lee,Hardee,0,17,1,71,49
+Lee,Hendry,201,651,1,71,51
+Lee,Hernando,8,62,1,71,53
+Lee,Highlands,60,107,1,71,55
+Lee,Hillsborough,714,1155,1,71,57
+Lee,Holmes,9,0,1,71,59
+Lee,Indian River,63,345,1,71,61
+Lee,Jackson,12,0,1,71,63
+Lee,Lafayette,3,0,1,71,67
+Lee,Lake,19,189,1,71,69
+Lee,Leon,791,645,1,71,73
+Lee,Levy,34,0,1,71,75
+Lee,Liberty,3,0,1,71,77
+Lee,Madison,6,0,1,71,79
+Lee,Manatee,573,253,1,71,81
+Lee,Marion,741,323,1,71,83
+Lee,Martin,150,120,1,71,85
+Lee,Miami-Dade,837,1605,1,71,86
+Lee,Monroe,49,115,1,71,87
+Lee,Nassau,1,0,1,71,89
+Lee,Okaloosa,83,35,1,71,91
+Lee,Orange,1186,807,1,71,95
+Lee,Osceola,118,32,1,71,97
+Lee,Palm Beach,300,495,1,71,99
+Lee,Pasco,76,254,1,71,101
+Lee,Pinellas,1045,646,1,71,103
+Lee,Polk,348,242,1,71,105
+Lee,Putnam,36,13,1,71,107
+Lee,St. Johns,19,27,1,71,109
+Lee,St. Lucie,125,38,1,71,111
+Lee,Santa Rosa,24,12,1,71,113
+Lee,Sarasota,377,364,1,71,115
+Lee,Seminole,225,128,1,71,117
+Lee,Sumter,103,122,1,71,119
+Lee,Suwannee,13,0,1,71,121
+Lee,Taylor,3,0,1,71,123
+Lee,Union,0,6,1,71,125
+Lee,Volusia,96,197,1,71,127
+Lee,Wakulla,30,3,1,71,129
+Lee,Washington,0,6,1,71,133
+Leon,Alachua,448,567,1,73,1
+Leon,Bay,143,530,1,73,5
+Leon,Bradford,3,8,1,73,7
+Leon,Brevard,163,369,1,73,9
+Leon,Broward,581,1788,1,73,11
+Leon,Calhoun,66,0,1,73,13
+Leon,Charlotte,23,102,1,73,15
+Leon,Citrus,27,95,1,73,17
+Leon,Clay,210,249,1,73,19
+Leon,Collier,321,160,1,73,21
+Leon,Columbia,34,129,1,73,23
+Leon,Desoto,4,0,1,73,27
+Leon,Duval,782,1069,1,73,31
+Leon,Escambia,439,305,1,73,33
+Leon,Flagler,40,126,1,73,35
+Leon,Franklin,74,72,1,73,37
+Leon,Gadsden,712,1498,1,73,39
+Leon,Gilchrist,0,170,1,73,41
+Leon,Gulf,0,25,1,73,45
+Leon,Hamilton,0,27,1,73,47
+Leon,Hardee,9,104,1,73,49
+Leon,Hendry,157,32,1,73,51
+Leon,Hernando,57,129,1,73,53
+Leon,Highlands,26,29,1,73,55
+Leon,Hillsborough,837,1036,1,73,57
+Leon,Holmes,61,28,1,73,59
+Leon,Indian River,8,84,1,73,61
+Leon,Jackson,196,242,1,73,63
+Leon,Jefferson,114,220,1,73,65
+Leon,Lafayette,3,0,1,73,67
+Leon,Lake,289,237,1,73,69
+Leon,Lee,645,791,1,73,71
+Leon,Levy,57,0,1,73,75
+Leon,Liberty,139,8,1,73,77
+Leon,Madison,25,76,1,73,79
+Leon,Manatee,972,238,1,73,81
+Leon,Marion,205,241,1,73,83
+Leon,Martin,79,230,1,73,85
+Leon,Miami-Dade,787,1090,1,73,86
+Leon,Monroe,0,47,1,73,87
+Leon,Nassau,0,7,1,73,89
+Leon,Okaloosa,178,207,1,73,91
+Leon,Orange,619,766,1,73,95
+Leon,Osceola,0,132,1,73,97
+Leon,Palm Beach,374,1254,1,73,99
+Leon,Pasco,45,121,1,73,101
+Leon,Pinellas,529,616,1,73,103
+Leon,Polk,255,437,1,73,105
+Leon,Putnam,25,20,1,73,107
+Leon,St. Johns,185,411,1,73,109
+Leon,St. Lucie,8,174,1,73,111
+Leon,Santa Rosa,78,332,1,73,113
+Leon,Sarasota,107,248,1,73,115
+Leon,Seminole,87,382,1,73,117
+Leon,Sumter,26,9,1,73,119
+Leon,Suwannee,53,383,1,73,121
+Leon,Taylor,29,171,1,73,123
+Leon,Union,6,3,1,73,125
+Leon,Volusia,242,199,1,73,127
+Leon,Wakulla,648,1012,1,73,129
+Leon,Walton,73,94,1,73,131
+Leon,Washington,90,47,1,73,133
+Levy,Alachua,313,483,1,75,1
+Levy,Baker,8,0,1,75,3
+Levy,Bradford,9,0,1,75,7
+Levy,Brevard,0,13,1,75,9
+Levy,Broward,12,41,1,75,11
+Levy,Citrus,222,173,1,75,17
+Levy,Clay,6,0,1,75,19
+Levy,Collier,72,20,1,75,21
+Levy,Desoto,28,0,1,75,27
+Levy,Dixie,139,94,1,75,29
+Levy,Escambia,0,10,1,75,33
+Levy,Franklin,11,0,1,75,37
+Levy,Gadsden,10,0,1,75,39
+Levy,Gilchrist,118,357,1,75,41
+Levy,Glades,0,7,1,75,43
+Levy,Gulf,15,0,1,75,45
+Levy,Hernando,31,0,1,75,53
+Levy,Highlands,0,85,1,75,55
+Levy,Hillsborough,32,66,1,75,57
+Levy,Jackson,15,38,1,75,63
+Levy,Lafayette,0,6,1,75,67
+Levy,Lake,27,6,1,75,69
+Levy,Lee,0,34,1,75,71
+Levy,Leon,0,57,1,75,73
+Levy,Liberty,12,0,1,75,77
+Levy,Manatee,1,0,1,75,81
+Levy,Marion,74,372,1,75,83
+Levy,Martin,0,5,1,75,85
+Levy,Miami-Dade,0,6,1,75,86
+Levy,Monroe,140,30,1,75,87
+Levy,Okaloosa,5,0,1,75,91
+Levy,Okeechobee,3,8,1,75,93
+Levy,Orange,19,31,1,75,95
+Levy,Osceola,14,0,1,75,97
+Levy,Pasco,0,10,1,75,101
+Levy,Pinellas,0,47,1,75,103
+Levy,Polk,14,18,1,75,105
+Levy,Putnam,24,0,1,75,107
+Levy,St. Lucie,0,157,1,75,111
+Levy,Santa Rosa,10,0,1,75,113
+Levy,Sarasota,5,24,1,75,115
+Levy,Sumter,0,3,1,75,119
+Levy,Suwannee,69,4,1,75,121
+Levy,Taylor,0,27,1,75,123
+Levy,Union,27,3,1,75,125
+Levy,Volusia,84,0,1,75,127
+Levy,Wakulla,0,28,1,75,129
+Levy,Walton,1,0,1,75,131
+Liberty,Baker,5,0,1,77,3
+Liberty,Bay,38,104,1,77,5
+Liberty,Bradford,13,0,1,77,7
+Liberty,Brevard,12,3,1,77,9
+Liberty,Calhoun,42,102,1,77,13
+Liberty,Citrus,17,25,1,77,17
+Liberty,Collier,0,3,1,77,21
+Liberty,Dixie,12,7,1,77,29
+Liberty,Duval,0,23,1,77,31
+Liberty,Escambia,15,3,1,77,33
+Liberty,Franklin,24,0,1,77,37
+Liberty,Gadsden,39,4,1,77,39
+Liberty,Gulf,0,26,1,77,45
+Liberty,Hamilton,9,0,1,77,47
+Liberty,Hardee,0,8,1,77,49
+Liberty,Highlands,0,41,1,77,55
+Liberty,Hillsborough,15,57,1,77,57
+Liberty,Jackson,13,23,1,77,63
+Liberty,Jefferson,20,0,1,77,65
+Liberty,Lake,23,42,1,77,69
+Liberty,Lee,0,3,1,77,71
+Liberty,Leon,8,139,1,77,73
+Liberty,Levy,0,12,1,77,75
+Liberty,Madison,43,0,1,77,79
+Liberty,Manatee,7,11,1,77,81
+Liberty,Marion,10,6,1,77,83
+Liberty,Miami-Dade,1,32,1,77,86
+Liberty,Okaloosa,0,7,1,77,91
+Liberty,Orange,0,82,1,77,95
+Liberty,Palm Beach,65,9,1,77,99
+Liberty,Pasco,15,7,1,77,101
+Liberty,Pinellas,0,54,1,77,103
+Liberty,Polk,14,40,1,77,105
+Liberty,St. Johns,0,10,1,77,109
+Liberty,St. Lucie,7,0,1,77,111
+Liberty,Sarasota,0,43,1,77,115
+Liberty,Sumter,25,21,1,77,119
+Liberty,Suwannee,10,0,1,77,121
+Liberty,Taylor,19,15,1,77,123
+Liberty,Union,17,16,1,77,125
+Liberty,Volusia,0,14,1,77,127
+Liberty,Wakulla,13,44,1,77,129
+Madison,Alachua,0,2,1,79,1
+Madison,Baker,2,0,1,79,3
+Madison,Bay,1,3,1,79,5
+Madison,Bradford,7,17,1,79,7
+Madison,Brevard,6,21,1,79,9
+Madison,Broward,0,43,1,79,11
+Madison,Calhoun,4,0,1,79,13
+Madison,Citrus,0,14,1,79,17
+Madison,Columbia,10,20,1,79,23
+Madison,Desoto,0,22,1,79,27
+Madison,Dixie,0,3,1,79,29
+Madison,Duval,0,41,1,79,31
+Madison,Escambia,5,12,1,79,33
+Madison,Flagler,0,7,1,79,35
+Madison,Franklin,10,3,1,79,37
+Madison,Gadsden,16,12,1,79,39
+Madison,Gulf,0,3,1,79,45
+Madison,Hamilton,57,41,1,79,47
+Madison,Hardee,0,2,1,79,49
+Madison,Hendry,11,5,1,79,51
+Madison,Highlands,9,0,1,79,55
+Madison,Hillsborough,0,106,1,79,57
+Madison,Holmes,0,21,1,79,59
+Madison,Jackson,14,10,1,79,63
+Madison,Jefferson,25,34,1,79,65
+Madison,Lafayette,3,13,1,79,67
+Madison,Lake,4,3,1,79,69
+Madison,Lee,0,6,1,79,71
+Madison,Leon,76,25,1,79,73
+Madison,Liberty,0,43,1,79,77
+Madison,Manatee,0,12,1,79,81
+Madison,Marion,11,67,1,79,83
+Madison,Miami-Dade,20,123,1,79,86
+Madison,Monroe,27,20,1,79,87
+Madison,Nassau,0,2,1,79,89
+Madison,Okaloosa,0,6,1,79,91
+Madison,Okeechobee,9,0,1,79,93
+Madison,Orange,0,17,1,79,95
+Madison,Osceola,0,29,1,79,97
+Madison,Palm Beach,0,17,1,79,99
+Madison,Pasco,0,2,1,79,101
+Madison,Pinellas,0,44,1,79,103
+Madison,Polk,12,45,1,79,105
+Madison,Putnam,30,15,1,79,107
+Madison,St. Johns,0,12,1,79,109
+Madison,St. Lucie,7,11,1,79,111
+Madison,Santa Rosa,17,19,1,79,113
+Madison,Sarasota,18,19,1,79,115
+Madison,Seminole,0,21,1,79,117
+Madison,Sumter,16,0,1,79,119
+Madison,Suwannee,0,30,1,79,121
+Madison,Taylor,62,0,1,79,123
+Madison,Union,5,57,1,79,125
+Madison,Volusia,0,2,1,79,127
+Madison,Wakulla,8,45,1,79,129
+Madison,Washington,0,9,1,79,133
+Manatee,Alachua,187,248,1,81,1
+Manatee,Bay,1,0,1,81,5
+Manatee,Bradford,12,37,1,81,7
+Manatee,Brevard,42,168,1,81,9
+Manatee,Broward,211,392,1,81,11
+Manatee,Charlotte,115,172,1,81,15
+Manatee,Citrus,34,42,1,81,17
+Manatee,Clay,0,7,1,81,19
+Manatee,Collier,37,127,1,81,21
+Manatee,Columbia,34,1,1,81,23
+Manatee,Desoto,36,0,1,81,27
+Manatee,Duval,71,45,1,81,31
+Manatee,Escambia,0,2,1,81,33
+Manatee,Gadsden,4,29,1,81,39
+Manatee,Gulf,42,0,1,81,45
+Manatee,Hamilton,0,7,1,81,47
+Manatee,Hardee,31,0,1,81,49
+Manatee,Hernando,33,56,1,81,53
+Manatee,Highlands,1,27,1,81,55
+Manatee,Hillsborough,1036,1000,1,81,57
+Manatee,Indian River,3,20,1,81,61
+Manatee,Jackson,7,103,1,81,63
+Manatee,Jefferson,0,103,1,81,65
+Manatee,Lafayette,19,0,1,81,67
+Manatee,Lake,38,106,1,81,69
+Manatee,Lee,253,573,1,81,71
+Manatee,Leon,238,972,1,81,73
+Manatee,Levy,0,1,1,81,75
+Manatee,Liberty,11,7,1,81,77
+Manatee,Madison,12,0,1,81,79
+Manatee,Marion,122,26,1,81,83
+Manatee,Martin,75,0,1,81,85
+Manatee,Miami-Dade,126,163,1,81,86
+Manatee,Monroe,0,30,1,81,87
+Manatee,Okaloosa,6,78,1,81,91
+Manatee,Orange,390,507,1,81,95
+Manatee,Osceola,87,50,1,81,97
+Manatee,Palm Beach,74,240,1,81,99
+Manatee,Pasco,97,221,1,81,101
+Manatee,Pinellas,739,1161,1,81,103
+Manatee,Polk,153,226,1,81,105
+Manatee,Putnam,10,0,1,81,107
+Manatee,St. Johns,34,25,1,81,109
+Manatee,St. Lucie,6,17,1,81,111
+Manatee,Santa Rosa,2,26,1,81,113
+Manatee,Sarasota,3328,3446,1,81,115
+Manatee,Seminole,14,207,1,81,117
+Manatee,Sumter,11,23,1,81,119
+Manatee,Suwannee,7,14,1,81,121
+Manatee,Taylor,14,0,1,81,123
+Manatee,Volusia,281,119,1,81,127
+Manatee,Wakulla,5,0,1,81,129
+Manatee,Walton,0,1,1,81,131
+Marion,Alachua,1026,482,1,83,1
+Marion,Baker,0,10,1,83,3
+Marion,Bay,72,42,1,83,5
+Marion,Bradford,12,11,1,83,7
+Marion,Brevard,99,433,1,83,9
+Marion,Broward,510,480,1,83,11
+Marion,Calhoun,10,0,1,83,13
+Marion,Charlotte,36,20,1,83,15
+Marion,Citrus,301,1426,1,83,17
+Marion,Clay,38,118,1,83,19
+Marion,Collier,25,73,1,83,21
+Marion,Columbia,89,69,1,83,23
+Marion,Desoto,48,2,1,83,27
+Marion,Dixie,5,28,1,83,29
+Marion,Duval,295,338,1,83,31
+Marion,Escambia,355,116,1,83,33
+Marion,Franklin,19,0,1,83,37
+Marion,Gadsden,120,7,1,83,39
+Marion,Gilchrist,6,10,1,83,41
+Marion,Glades,0,19,1,83,43
+Marion,Gulf,3,9,1,83,45
+Marion,Hamilton,60,29,1,83,47
+Marion,Hardee,102,0,1,83,49
+Marion,Hendry,21,46,1,83,51
+Marion,Hernando,77,91,1,83,53
+Marion,Highlands,0,22,1,83,55
+Marion,Hillsborough,308,700,1,83,57
+Marion,Holmes,17,29,1,83,59
+Marion,Indian River,9,13,1,83,61
+Marion,Jackson,121,99,1,83,63
+Marion,Jefferson,23,3,1,83,65
+Marion,Lafayette,28,0,1,83,67
+Marion,Lake,471,1152,1,83,69
+Marion,Lee,323,741,1,83,71
+Marion,Leon,241,205,1,83,73
+Marion,Levy,372,74,1,83,75
+Marion,Liberty,6,10,1,83,77
+Marion,Madison,67,11,1,83,79
+Marion,Manatee,26,122,1,83,81
+Marion,Martin,172,0,1,83,85
+Marion,Miami-Dade,483,371,1,83,86
+Marion,Monroe,35,1,1,83,87
+Marion,Nassau,22,48,1,83,89
+Marion,Okaloosa,237,24,1,83,91
+Marion,Okeechobee,24,0,1,83,93
+Marion,Orange,728,470,1,83,95
+Marion,Osceola,156,37,1,83,97
+Marion,Palm Beach,234,166,1,83,99
+Marion,Pasco,164,82,1,83,101
+Marion,Pinellas,335,594,1,83,103
+Marion,Polk,235,128,1,83,105
+Marion,Putnam,256,307,1,83,107
+Marion,St. Johns,411,143,1,83,109
+Marion,St. Lucie,120,100,1,83,111
+Marion,Santa Rosa,101,37,1,83,113
+Marion,Sarasota,22,32,1,83,115
+Marion,Seminole,286,170,1,83,117
+Marion,Sumter,248,373,1,83,119
+Marion,Suwannee,65,17,1,83,121
+Marion,Taylor,101,10,1,83,123
+Marion,Union,42,302,1,83,125
+Marion,Volusia,245,322,1,83,127
+Marion,Wakulla,48,6,1,83,129
+Marion,Walton,31,8,1,83,131
+Marion,Washington,15,0,1,83,133
+Martin,Alachua,297,29,1,85,1
+Martin,Bay,23,0,1,85,5
+Martin,Bradford,29,0,1,85,7
+Martin,Brevard,76,43,1,85,9
+Martin,Broward,198,383,1,85,11
+Martin,Clay,0,11,1,85,19
+Martin,Collier,0,196,1,85,21
+Martin,Columbia,8,65,1,85,23
+Martin,Desoto,22,12,1,85,27
+Martin,Duval,90,26,1,85,31
+Martin,Escambia,9,8,1,85,33
+Martin,Franklin,20,0,1,85,37
+Martin,Gadsden,8,0,1,85,39
+Martin,Glades,5,0,1,85,43
+Martin,Gulf,8,0,1,85,45
+Martin,Hamilton,12,17,1,85,47
+Martin,Hardee,37,0,1,85,49
+Martin,Hernando,0,35,1,85,53
+Martin,Hillsborough,52,71,1,85,57
+Martin,Holmes,7,0,1,85,59
+Martin,Indian River,80,41,1,85,61
+Martin,Jefferson,7,0,1,85,65
+Martin,Lake,13,187,1,85,69
+Martin,Lee,120,150,1,85,71
+Martin,Leon,230,79,1,85,73
+Martin,Levy,5,0,1,85,75
+Martin,Manatee,0,75,1,85,81
+Martin,Marion,0,172,1,85,83
+Martin,Miami-Dade,456,241,1,85,86
+Martin,Monroe,0,2,1,85,87
+Martin,Nassau,0,17,1,85,89
+Martin,Okaloosa,0,11,1,85,91
+Martin,Okeechobee,39,13,1,85,93
+Martin,Orange,260,292,1,85,95
+Martin,Osceola,0,54,1,85,97
+Martin,Palm Beach,899,1578,1,85,99
+Martin,Pasco,93,40,1,85,101
+Martin,Pinellas,81,80,1,85,103
+Martin,Polk,4,34,1,85,105
+Martin,St. Johns,0,57,1,85,109
+Martin,St. Lucie,1825,2123,1,85,111
+Martin,Santa Rosa,7,5,1,85,113
+Martin,Sarasota,11,2,1,85,115
+Martin,Seminole,0,52,1,85,117
+Martin,Sumter,61,4,1,85,119
+Martin,Suwannee,33,0,1,85,121
+Martin,Taylor,29,0,1,85,123
+Martin,Volusia,104,28,1,85,127
+Martin,Wakulla,0,4,1,85,129
+Martin,Washington,10,0,1,85,133
+Miami-Dade,Alachua,1390,686,1,86,1
+Miami-Dade,Baker,2,11,1,86,3
+Miami-Dade,Bay,62,101,1,86,5
+Miami-Dade,Bradford,112,31,1,86,7
+Miami-Dade,Brevard,421,276,1,86,9
+Miami-Dade,Broward,24200,10762,1,86,11
+Miami-Dade,Calhoun,65,51,1,86,13
+Miami-Dade,Charlotte,233,215,1,86,15
+Miami-Dade,Citrus,80,129,1,86,17
+Miami-Dade,Clay,383,13,1,86,19
+Miami-Dade,Collier,1412,438,1,86,21
+Miami-Dade,Columbia,316,234,1,86,23
+Miami-Dade,Desoto,298,153,1,86,27
+Miami-Dade,Dixie,0,19,1,86,29
+Miami-Dade,Duval,1022,399,1,86,31
+Miami-Dade,Escambia,431,285,1,86,33
+Miami-Dade,Flagler,65,0,1,86,35
+Miami-Dade,Franklin,24,0,1,86,37
+Miami-Dade,Gadsden,33,13,1,86,39
+Miami-Dade,Gilchrist,3,2,1,86,41
+Miami-Dade,Glades,192,59,1,86,43
+Miami-Dade,Gulf,21,67,1,86,45
+Miami-Dade,Hamilton,97,353,1,86,47
+Miami-Dade,Hardee,40,107,1,86,49
+Miami-Dade,Hendry,200,105,1,86,51
+Miami-Dade,Hernando,198,9,1,86,53
+Miami-Dade,Highlands,341,11,1,86,55
+Miami-Dade,Hillsborough,1469,1540,1,86,57
+Miami-Dade,Holmes,19,3,1,86,59
+Miami-Dade,Indian River,282,123,1,86,61
+Miami-Dade,Jackson,120,110,1,86,63
+Miami-Dade,Jefferson,34,76,1,86,65
+Miami-Dade,Lafayette,33,12,1,86,67
+Miami-Dade,Lake,180,62,1,86,69
+Miami-Dade,Lee,1605,837,1,86,71
+Miami-Dade,Leon,1090,787,1,86,73
+Miami-Dade,Levy,6,0,1,86,75
+Miami-Dade,Liberty,32,1,1,86,77
+Miami-Dade,Madison,123,20,1,86,79
+Miami-Dade,Manatee,163,126,1,86,81
+Miami-Dade,Marion,371,483,1,86,83
+Miami-Dade,Martin,241,456,1,86,85
+Miami-Dade,Monroe,512,649,1,86,87
+Miami-Dade,Nassau,63,22,1,86,89
+Miami-Dade,Okaloosa,330,100,1,86,91
+Miami-Dade,Okeechobee,91,173,1,86,93
+Miami-Dade,Orange,3510,2001,1,86,95
+Miami-Dade,Osceola,429,534,1,86,97
+Miami-Dade,Palm Beach,3767,2293,1,86,99
+Miami-Dade,Pasco,229,218,1,86,101
+Miami-Dade,Pinellas,305,762,1,86,103
+Miami-Dade,Polk,531,640,1,86,105
+Miami-Dade,Putnam,22,47,1,86,107
+Miami-Dade,St. Johns,171,7,1,86,109
+Miami-Dade,St. Lucie,846,481,1,86,111
+Miami-Dade,Santa Rosa,71,56,1,86,113
+Miami-Dade,Sarasota,440,499,1,86,115
+Miami-Dade,Seminole,54,125,1,86,117
+Miami-Dade,Sumter,71,105,1,86,119
+Miami-Dade,Suwannee,144,1,1,86,121
+Miami-Dade,Taylor,4,46,1,86,123
+Miami-Dade,Union,68,184,1,86,125
+Miami-Dade,Volusia,607,602,1,86,127
+Miami-Dade,Wakulla,25,62,1,86,129
+Miami-Dade,Walton,21,13,1,86,131
+Miami-Dade,Washington,16,84,1,86,133
+Monroe,Alachua,136,236,1,87,1
+Monroe,Baker,0,1,1,87,3
+Monroe,Bay,13,0,1,87,5
+Monroe,Bradford,15,0,1,87,7
+Monroe,Brevard,92,10,1,87,9
+Monroe,Broward,50,279,1,87,11
+Monroe,Clay,0,10,1,87,19
+Monroe,Collier,14,6,1,87,21
+Monroe,Desoto,9,0,1,87,27
+Monroe,Dixie,0,22,1,87,29
+Monroe,Duval,53,43,1,87,31
+Monroe,Escambia,20,10,1,87,33
+Monroe,Flagler,3,0,1,87,35
+Monroe,Gilchrist,3,0,1,87,41
+Monroe,Hamilton,0,11,1,87,47
+Monroe,Hendry,72,82,1,87,51
+Monroe,Highlands,0,32,1,87,55
+Monroe,Hillsborough,105,92,1,87,57
+Monroe,Holmes,24,0,1,87,59
+Monroe,Jackson,10,3,1,87,63
+Monroe,Lake,8,4,1,87,69
+Monroe,Lee,115,49,1,87,71
+Monroe,Leon,47,0,1,87,73
+Monroe,Levy,30,140,1,87,75
+Monroe,Madison,20,27,1,87,79
+Monroe,Manatee,30,0,1,87,81
+Monroe,Marion,1,35,1,87,83
+Monroe,Martin,2,0,1,87,85
+Monroe,Miami-Dade,649,512,1,87,86
+Monroe,Nassau,15,4,1,87,89
+Monroe,Okaloosa,52,39,1,87,91
+Monroe,Okeechobee,22,0,1,87,93
+Monroe,Orange,83,152,1,87,95
+Monroe,Osceola,0,13,1,87,97
+Monroe,Palm Beach,331,216,1,87,99
+Monroe,Pasco,37,6,1,87,101
+Monroe,Pinellas,84,307,1,87,103
+Monroe,Polk,2,7,1,87,105
+Monroe,Putnam,24,8,1,87,107
+Monroe,St. Johns,23,18,1,87,109
+Monroe,St. Lucie,0,7,1,87,111
+Monroe,Sarasota,90,55,1,87,115
+Monroe,Seminole,31,70,1,87,117
+Monroe,Volusia,55,3,1,87,127
+Monroe,Walton,97,11,1,87,131
+Nassau,Alachua,72,68,1,89,1
+Nassau,Baker,205,3,1,89,3
+Nassau,Bay,2,34,1,89,5
+Nassau,Bradford,37,0,1,89,7
+Nassau,Brevard,5,0,1,89,9
+Nassau,Calhoun,8,0,1,89,13
+Nassau,Charlotte,7,45,1,89,15
+Nassau,Clay,64,126,1,89,19
+Nassau,Collier,61,0,1,89,21
+Nassau,Columbia,8,16,1,89,23
+Nassau,Duval,1011,1284,1,89,31
+Nassau,Escambia,10,0,1,89,33
+Nassau,Hillsborough,34,12,1,89,57
+Nassau,Indian River,0,1,1,89,61
+Nassau,Jackson,8,0,1,89,63
+Nassau,Lee,0,1,1,89,71
+Nassau,Leon,7,0,1,89,73
+Nassau,Madison,2,0,1,89,79
+Nassau,Marion,48,22,1,89,83
+Nassau,Martin,17,0,1,89,85
+Nassau,Miami-Dade,22,63,1,89,86
+Nassau,Monroe,4,15,1,89,87
+Nassau,Okaloosa,106,0,1,89,91
+Nassau,Okeechobee,0,15,1,89,93
+Nassau,Orange,97,24,1,89,95
+Nassau,Osceola,0,28,1,89,97
+Nassau,Palm Beach,48,111,1,89,99
+Nassau,Pasco,0,32,1,89,101
+Nassau,Pinellas,31,107,1,89,103
+Nassau,Polk,48,102,1,89,105
+Nassau,Putnam,83,0,1,89,107
+Nassau,St. Lucie,4,0,1,89,111
+Nassau,Santa Rosa,13,0,1,89,113
+Nassau,Seminole,34,66,1,89,117
+Nassau,Union,17,0,1,89,125
+Nassau,Volusia,60,0,1,89,127
+Nassau,Walton,5,0,1,89,131
+Okaloosa,Alachua,111,26,1,91,1
+Okaloosa,Baker,5,0,1,91,3
+Okaloosa,Bay,353,293,1,91,5
+Okaloosa,Bradford,40,0,1,91,7
+Okaloosa,Brevard,116,98,1,91,9
+Okaloosa,Broward,178,95,1,91,11
+Okaloosa,Charlotte,1,0,1,91,15
+Okaloosa,Citrus,0,8,1,91,17
+Okaloosa,Clay,2,0,1,91,19
+Okaloosa,Collier,0,23,1,91,21
+Okaloosa,Columbia,56,0,1,91,23
+Okaloosa,Desoto,12,0,1,91,27
+Okaloosa,Duval,199,258,1,91,31
+Okaloosa,Escambia,259,203,1,91,33
+Okaloosa,Flagler,41,2,1,91,35
+Okaloosa,Franklin,17,24,1,91,37
+Okaloosa,Gadsden,26,43,1,91,39
+Okaloosa,Hamilton,7,3,1,91,47
+Okaloosa,Hernando,6,0,1,91,53
+Okaloosa,Hillsborough,278,293,1,91,57
+Okaloosa,Holmes,87,0,1,91,59
+Okaloosa,Indian River,4,68,1,91,61
+Okaloosa,Jackson,145,0,1,91,63
+Okaloosa,Jefferson,21,11,1,91,65
+Okaloosa,Lee,35,83,1,91,71
+Okaloosa,Leon,207,178,1,91,73
+Okaloosa,Levy,0,5,1,91,75
+Okaloosa,Liberty,7,0,1,91,77
+Okaloosa,Madison,6,0,1,91,79
+Okaloosa,Manatee,78,6,1,91,81
+Okaloosa,Marion,24,237,1,91,83
+Okaloosa,Martin,11,0,1,91,85
+Okaloosa,Miami-Dade,100,330,1,91,86
+Okaloosa,Monroe,39,52,1,91,87
+Okaloosa,Nassau,0,106,1,91,89
+Okaloosa,Okeechobee,22,0,1,91,93
+Okaloosa,Orange,642,107,1,91,95
+Okaloosa,Palm Beach,117,42,1,91,99
+Okaloosa,Pasco,32,22,1,91,101
+Okaloosa,Pinellas,190,9,1,91,103
+Okaloosa,Polk,26,26,1,91,105
+Okaloosa,St. Johns,88,3,1,91,109
+Okaloosa,St. Lucie,0,44,1,91,111
+Okaloosa,Santa Rosa,968,1304,1,91,113
+Okaloosa,Sarasota,60,5,1,91,115
+Okaloosa,Seminole,25,22,1,91,117
+Okaloosa,Sumter,81,2,1,91,119
+Okaloosa,Suwannee,0,1,1,91,121
+Okaloosa,Taylor,18,53,1,91,123
+Okaloosa,Union,40,12,1,91,125
+Okaloosa,Volusia,0,76,1,91,127
+Okaloosa,Wakulla,32,49,1,91,129
+Okaloosa,Walton,948,481,1,91,131
+Okaloosa,Washington,26,11,1,91,133
+Okeechobee,Alachua,13,0,1,93,1
+Okeechobee,Bay,67,0,1,93,5
+Okeechobee,Bradford,9,0,1,93,7
+Okeechobee,Brevard,6,21,1,93,9
+Okeechobee,Broward,45,47,1,93,11
+Okeechobee,Calhoun,9,0,1,93,13
+Okeechobee,Charlotte,0,14,1,93,15
+Okeechobee,Columbia,20,11,1,93,23
+Okeechobee,Desoto,2,0,1,93,27
+Okeechobee,Duval,0,70,1,93,31
+Okeechobee,Escambia,13,36,1,93,33
+Okeechobee,Franklin,39,0,1,93,37
+Okeechobee,Gadsden,4,0,1,93,39
+Okeechobee,Glades,164,53,1,93,43
+Okeechobee,Hamilton,7,0,1,93,47
+Okeechobee,Hardee,39,24,1,93,49
+Okeechobee,Hendry,22,48,1,93,51
+Okeechobee,Hernando,0,33,1,93,53
+Okeechobee,Highlands,0,265,1,93,55
+Okeechobee,Hillsborough,84,44,1,93,57
+Okeechobee,Indian River,42,14,1,93,61
+Okeechobee,Lafayette,10,0,1,93,67
+Okeechobee,Lake,65,0,1,93,69
+Okeechobee,Levy,8,3,1,93,75
+Okeechobee,Madison,0,9,1,93,79
+Okeechobee,Marion,0,24,1,93,83
+Okeechobee,Martin,13,39,1,93,85
+Okeechobee,Miami-Dade,173,91,1,93,86
+Okeechobee,Monroe,0,22,1,93,87
+Okeechobee,Nassau,15,0,1,93,89
+Okeechobee,Okaloosa,0,22,1,93,91
+Okeechobee,Orange,50,26,1,93,95
+Okeechobee,Palm Beach,211,72,1,93,99
+Okeechobee,Pasco,72,0,1,93,101
+Okeechobee,Pinellas,0,25,1,93,103
+Okeechobee,Polk,21,44,1,93,105
+Okeechobee,Putnam,126,0,1,93,107
+Okeechobee,St. Johns,0,32,1,93,109
+Okeechobee,St. Lucie,228,145,1,93,111
+Okeechobee,Santa Rosa,11,0,1,93,113
+Okeechobee,Seminole,0,25,1,93,117
+Okeechobee,Sumter,79,0,1,93,119
+Okeechobee,Volusia,0,15,1,93,127
+Okeechobee,Wakulla,16,0,1,93,129
+Okeechobee,Walton,0,1,1,93,131
+Orange,Alachua,977,958,1,95,1
+Orange,Baker,11,14,1,95,3
+Orange,Bay,137,167,1,95,5
+Orange,Bradford,25,0,1,95,7
+Orange,Brevard,1598,2366,1,95,9
+Orange,Broward,2214,3432,1,95,11
+Orange,Calhoun,26,0,1,95,13
+Orange,Charlotte,229,230,1,95,15
+Orange,Citrus,121,188,1,95,17
+Orange,Clay,105,153,1,95,19
+Orange,Collier,224,400,1,95,21
+Orange,Columbia,58,30,1,95,23
+Orange,Desoto,50,20,1,95,27
+Orange,Dixie,3,47,1,95,29
+Orange,Duval,953,1144,1,95,31
+Orange,Escambia,246,320,1,95,33
+Orange,Flagler,148,218,1,95,35
+Orange,Franklin,92,0,1,95,37
+Orange,Gadsden,134,17,1,95,39
+Orange,Gilchrist,30,0,1,95,41
+Orange,Gulf,36,32,1,95,45
+Orange,Hamilton,127,0,1,95,47
+Orange,Hardee,20,12,1,95,49
+Orange,Hendry,95,19,1,95,51
+Orange,Hernando,145,186,1,95,53
+Orange,Highlands,86,124,1,95,55
+Orange,Hillsborough,2030,1952,1,95,57
+Orange,Holmes,41,0,1,95,59
+Orange,Indian River,145,121,1,95,61
+Orange,Jackson,194,35,1,95,63
+Orange,Lafayette,31,0,1,95,67
+Orange,Lake,3023,3299,1,95,69
+Orange,Lee,807,1186,1,95,71
+Orange,Leon,766,619,1,95,73
+Orange,Levy,31,19,1,95,75
+Orange,Liberty,82,0,1,95,77
+Orange,Madison,17,0,1,95,79
+Orange,Manatee,507,390,1,95,81
+Orange,Marion,470,728,1,95,83
+Orange,Martin,292,260,1,95,85
+Orange,Miami-Dade,2001,3510,1,95,86
+Orange,Monroe,152,83,1,95,87
+Orange,Nassau,24,97,1,95,89
+Orange,Okaloosa,107,642,1,95,91
+Orange,Okeechobee,26,50,1,95,93
+Orange,Osceola,4846,5502,1,95,97
+Orange,Palm Beach,1736,1984,1,95,99
+Orange,Pasco,303,365,1,95,101
+Orange,Pinellas,1438,1369,1,95,103
+Orange,Polk,2397,2682,1,95,105
+Orange,Putnam,4,27,1,95,107
+Orange,St. Johns,417,268,1,95,109
+Orange,St. Lucie,186,295,1,95,111
+Orange,Santa Rosa,58,263,1,95,113
+Orange,Sarasota,125,259,1,95,115
+Orange,Seminole,10527,9532,1,95,117
+Orange,Sumter,111,57,1,95,119
+Orange,Suwannee,38,31,1,95,121
+Orange,Taylor,93,129,1,95,123
+Orange,Union,75,0,1,95,125
+Orange,Volusia,1862,1391,1,95,127
+Orange,Wakulla,45,0,1,95,129
+Orange,Walton,154,18,1,95,131
+Orange,Washington,71,48,1,95,133
+Osceola,Alachua,173,25,1,97,1
+Osceola,Baker,8,0,1,97,3
+Osceola,Bay,0,5,1,97,5
+Osceola,Bradford,9,0,1,97,7
+Osceola,Brevard,333,238,1,97,9
+Osceola,Broward,607,252,1,97,11
+Osceola,Calhoun,10,0,1,97,13
+Osceola,Charlotte,8,0,1,97,15
+Osceola,Citrus,7,0,1,97,17
+Osceola,Clay,0,76,1,97,19
+Osceola,Collier,0,111,1,97,21
+Osceola,Columbia,0,11,1,97,23
+Osceola,Duval,124,51,1,97,31
+Osceola,Escambia,35,11,1,97,33
+Osceola,Flagler,0,32,1,97,35
+Osceola,Gadsden,5,29,1,97,39
+Osceola,Gulf,5,0,1,97,45
+Osceola,Hernando,96,39,1,97,53
+Osceola,Highlands,0,5,1,97,55
+Osceola,Hillsborough,326,710,1,97,57
+Osceola,Holmes,8,0,1,97,59
+Osceola,Indian River,68,47,1,97,61
+Osceola,Jackson,21,0,1,97,63
+Osceola,Jefferson,18,0,1,97,65
+Osceola,Lake,484,181,1,97,69
+Osceola,Lee,32,118,1,97,71
+Osceola,Leon,132,0,1,97,73
+Osceola,Levy,0,14,1,97,75
+Osceola,Madison,29,0,1,97,79
+Osceola,Manatee,50,87,1,97,81
+Osceola,Marion,37,156,1,97,83
+Osceola,Martin,54,0,1,97,85
+Osceola,Miami-Dade,534,429,1,97,86
+Osceola,Monroe,13,0,1,97,87
+Osceola,Nassau,28,0,1,97,89
+Osceola,Orange,5502,4846,1,97,95
+Osceola,Palm Beach,687,155,1,97,99
+Osceola,Pasco,77,51,1,97,101
+Osceola,Pinellas,101,3,1,97,103
+Osceola,Polk,2051,1723,1,97,105
+Osceola,St. Johns,64,0,1,97,109
+Osceola,St. Lucie,116,17,1,97,111
+Osceola,Sarasota,12,240,1,97,115
+Osceola,Seminole,339,298,1,97,117
+Osceola,Sumter,0,12,1,97,119
+Osceola,Suwannee,59,0,1,97,121
+Osceola,Taylor,0,3,1,97,123
+Osceola,Union,3,2,1,97,125
+Osceola,Volusia,286,245,1,97,127
+Osceola,Wakulla,0,3,1,97,129
+Palm Beach,Alachua,1377,345,1,99,1
+Palm Beach,Baker,15,2,1,99,3
+Palm Beach,Bay,54,129,1,99,5
+Palm Beach,Bradford,17,7,1,99,7
+Palm Beach,Brevard,444,751,1,99,9
+Palm Beach,Broward,8486,9756,1,99,11
+Palm Beach,Calhoun,13,0,1,99,13
+Palm Beach,Charlotte,85,47,1,99,15
+Palm Beach,Citrus,119,163,1,99,17
+Palm Beach,Clay,21,79,1,99,19
+Palm Beach,Collier,475,222,1,99,21
+Palm Beach,Columbia,41,44,1,99,23
+Palm Beach,Desoto,139,17,1,99,27
+Palm Beach,Dixie,88,0,1,99,29
+Palm Beach,Duval,584,414,1,99,31
+Palm Beach,Escambia,61,198,1,99,33
+Palm Beach,Flagler,30,55,1,99,35
+Palm Beach,Franklin,41,0,1,99,37
+Palm Beach,Gadsden,48,0,1,99,39
+Palm Beach,Gilchrist,53,0,1,99,41
+Palm Beach,Glades,49,6,1,99,43
+Palm Beach,Gulf,0,4,1,99,45
+Palm Beach,Hamilton,54,0,1,99,47
+Palm Beach,Hardee,24,34,1,99,49
+Palm Beach,Hendry,326,269,1,99,51
+Palm Beach,Hernando,51,143,1,99,53
+Palm Beach,Highlands,165,221,1,99,55
+Palm Beach,Hillsborough,576,1102,1,99,57
+Palm Beach,Holmes,7,0,1,99,59
+Palm Beach,Indian River,353,360,1,99,61
+Palm Beach,Jackson,69,21,1,99,63
+Palm Beach,Jefferson,0,1,1,99,65
+Palm Beach,Lafayette,149,5,1,99,67
+Palm Beach,Lake,232,282,1,99,69
+Palm Beach,Lee,495,300,1,99,71
+Palm Beach,Leon,1254,374,1,99,73
+Palm Beach,Liberty,9,65,1,99,77
+Palm Beach,Madison,17,0,1,99,79
+Palm Beach,Manatee,240,74,1,99,81
+Palm Beach,Marion,166,234,1,99,83
+Palm Beach,Martin,1578,899,1,99,85
+Palm Beach,Miami-Dade,2293,3767,1,99,86
+Palm Beach,Monroe,216,331,1,99,87
+Palm Beach,Nassau,111,48,1,99,89
+Palm Beach,Okaloosa,42,117,1,99,91
+Palm Beach,Okeechobee,72,211,1,99,93
+Palm Beach,Orange,1984,1736,1,99,95
+Palm Beach,Osceola,155,687,1,99,97
+Palm Beach,Pasco,345,122,1,99,101
+Palm Beach,Pinellas,644,416,1,99,103
+Palm Beach,Polk,758,204,1,99,105
+Palm Beach,Putnam,18,14,1,99,107
+Palm Beach,St. Johns,462,147,1,99,109
+Palm Beach,St. Lucie,2423,1709,1,99,111
+Palm Beach,Santa Rosa,73,48,1,99,113
+Palm Beach,Sarasota,334,69,1,99,115
+Palm Beach,Seminole,485,329,1,99,117
+Palm Beach,Sumter,203,7,1,99,119
+Palm Beach,Suwannee,42,27,1,99,121
+Palm Beach,Taylor,53,58,1,99,123
+Palm Beach,Union,38,28,1,99,125
+Palm Beach,Volusia,430,447,1,99,127
+Palm Beach,Wakulla,148,33,1,99,129
+Palm Beach,Walton,122,22,1,99,131
+Palm Beach,Washington,0,5,1,99,133
+Pasco,Alachua,324,111,1,101,1
+Pasco,Baker,0,13,1,101,3
+Pasco,Bay,2,14,1,101,5
+Pasco,Bradford,32,0,1,101,7
+Pasco,Brevard,249,33,1,101,9
+Pasco,Broward,57,111,1,101,11
+Pasco,Calhoun,2,0,1,101,13
+Pasco,Charlotte,24,57,1,101,15
+Pasco,Citrus,264,80,1,101,17
+Pasco,Clay,20,95,1,101,19
+Pasco,Collier,53,47,1,101,21
+Pasco,Columbia,94,27,1,101,23
+Pasco,Dixie,0,34,1,101,29
+Pasco,Duval,94,50,1,101,31
+Pasco,Escambia,104,136,1,101,33
+Pasco,Flagler,145,0,1,101,35
+Pasco,Gadsden,148,14,1,101,39
+Pasco,Gilchrist,7,0,1,101,41
+Pasco,Gulf,35,2,1,101,45
+Pasco,Hamilton,22,7,1,101,47
+Pasco,Hendry,168,75,1,101,51
+Pasco,Hernando,2397,1321,1,101,53
+Pasco,Highlands,32,8,1,101,55
+Pasco,Hillsborough,6506,6548,1,101,57
+Pasco,Holmes,6,108,1,101,59
+Pasco,Indian River,29,0,1,101,61
+Pasco,Jackson,17,40,1,101,63
+Pasco,Jefferson,22,2,1,101,65
+Pasco,Lafayette,13,0,1,101,67
+Pasco,Lake,165,151,1,101,69
+Pasco,Lee,254,76,1,101,71
+Pasco,Leon,121,45,1,101,73
+Pasco,Levy,10,0,1,101,75
+Pasco,Liberty,7,15,1,101,77
+Pasco,Madison,2,0,1,101,79
+Pasco,Manatee,221,97,1,101,81
+Pasco,Marion,82,164,1,101,83
+Pasco,Martin,40,93,1,101,85
+Pasco,Miami-Dade,218,229,1,101,86
+Pasco,Monroe,6,37,1,101,87
+Pasco,Nassau,32,0,1,101,89
+Pasco,Okaloosa,22,32,1,101,91
+Pasco,Okeechobee,0,72,1,101,93
+Pasco,Orange,365,303,1,101,95
+Pasco,Osceola,51,77,1,101,97
+Pasco,Palm Beach,122,345,1,101,99
+Pasco,Pinellas,3799,3178,1,101,103
+Pasco,Polk,413,239,1,101,105
+Pasco,Putnam,38,5,1,101,107
+Pasco,St. Johns,32,9,1,101,109
+Pasco,St. Lucie,11,31,1,101,111
+Pasco,Santa Rosa,94,19,1,101,113
+Pasco,Sarasota,46,28,1,101,115
+Pasco,Seminole,34,66,1,101,117
+Pasco,Sumter,410,88,1,101,119
+Pasco,Suwannee,42,47,1,101,121
+Pasco,Taylor,42,28,1,101,123
+Pasco,Union,2,106,1,101,125
+Pasco,Volusia,221,54,1,101,127
+Pasco,Wakulla,4,6,1,101,129
+Pasco,Walton,2,28,1,101,131
+Pasco,Washington,0,74,1,101,133
+Pinellas,Alachua,619,613,1,103,1
+Pinellas,Baker,0,38,1,103,3
+Pinellas,Bay,103,80,1,103,5
+Pinellas,Bradford,29,20,1,103,7
+Pinellas,Brevard,126,191,1,103,9
+Pinellas,Broward,934,319,1,103,11
+Pinellas,Calhoun,4,18,1,103,13
+Pinellas,Charlotte,65,110,1,103,15
+Pinellas,Citrus,171,388,1,103,17
+Pinellas,Clay,210,0,1,103,19
+Pinellas,Collier,66,105,1,103,21
+Pinellas,Columbia,3,66,1,103,23
+Pinellas,Desoto,1,1,1,103,27
+Pinellas,Dixie,0,5,1,103,29
+Pinellas,Duval,226,294,1,103,31
+Pinellas,Escambia,188,116,1,103,33
+Pinellas,Flagler,82,61,1,103,35
+Pinellas,Franklin,84,6,1,103,37
+Pinellas,Gadsden,66,50,1,103,39
+Pinellas,Gilchrist,58,0,1,103,41
+Pinellas,Gulf,28,13,1,103,45
+Pinellas,Hamilton,79,0,1,103,47
+Pinellas,Hardee,0,44,1,103,49
+Pinellas,Hendry,11,0,1,103,51
+Pinellas,Hernando,755,845,1,103,53
+Pinellas,Highlands,157,81,1,103,55
+Pinellas,Hillsborough,5728,6429,1,103,57
+Pinellas,Holmes,11,9,1,103,59
+Pinellas,Indian River,49,50,1,103,61
+Pinellas,Jackson,77,10,1,103,63
+Pinellas,Jefferson,22,8,1,103,65
+Pinellas,Lake,29,119,1,103,69
+Pinellas,Lee,646,1045,1,103,71
+Pinellas,Leon,616,529,1,103,73
+Pinellas,Levy,47,0,1,103,75
+Pinellas,Liberty,54,0,1,103,77
+Pinellas,Madison,44,0,1,103,79
+Pinellas,Manatee,1161,739,1,103,81
+Pinellas,Marion,594,335,1,103,83
+Pinellas,Martin,80,81,1,103,85
+Pinellas,Miami-Dade,762,305,1,103,86
+Pinellas,Monroe,307,84,1,103,87
+Pinellas,Nassau,107,31,1,103,89
+Pinellas,Okaloosa,9,190,1,103,91
+Pinellas,Okeechobee,25,0,1,103,93
+Pinellas,Orange,1369,1438,1,103,95
+Pinellas,Osceola,3,101,1,103,97
+Pinellas,Palm Beach,416,644,1,103,99
+Pinellas,Pasco,3178,3799,1,103,101
+Pinellas,Polk,1160,496,1,103,105
+Pinellas,Putnam,49,54,1,103,107
+Pinellas,St. Johns,136,136,1,103,109
+Pinellas,St. Lucie,229,55,1,103,111
+Pinellas,Santa Rosa,30,16,1,103,113
+Pinellas,Sarasota,609,520,1,103,115
+Pinellas,Seminole,59,238,1,103,117
+Pinellas,Sumter,154,254,1,103,119
+Pinellas,Suwannee,32,0,1,103,121
+Pinellas,Taylor,72,27,1,103,123
+Pinellas,Union,46,116,1,103,125
+Pinellas,Volusia,259,79,1,103,127
+Pinellas,Wakulla,45,0,1,103,129
+Pinellas,Walton,31,0,1,103,131
+Pinellas,Washington,15,13,1,103,133
+Polk,Alachua,261,186,1,105,1
+Polk,Baker,4,8,1,105,3
+Polk,Bay,70,15,1,105,5
+Polk,Bradford,32,20,1,105,7
+Polk,Brevard,243,277,1,105,9
+Polk,Broward,104,347,1,105,11
+Polk,Calhoun,10,11,1,105,13
+Polk,Charlotte,217,64,1,105,15
+Polk,Citrus,67,124,1,105,17
+Polk,Clay,0,61,1,105,19
+Polk,Collier,124,69,1,105,21
+Polk,Columbia,458,35,1,105,23
+Polk,Desoto,17,55,1,105,27
+Polk,Dixie,10,70,1,105,29
+Polk,Duval,79,180,1,105,31
+Polk,Escambia,52,32,1,105,33
+Polk,Flagler,145,27,1,105,35
+Polk,Franklin,70,31,1,105,37
+Polk,Gadsden,34,33,1,105,39
+Polk,Gilchrist,73,0,1,105,41
+Polk,Glades,55,0,1,105,43
+Polk,Gulf,17,20,1,105,45
+Polk,Hamilton,27,86,1,105,47
+Polk,Hardee,150,126,1,105,49
+Polk,Hendry,6,19,1,105,51
+Polk,Hernando,0,117,1,105,53
+Polk,Highlands,285,471,1,105,55
+Polk,Hillsborough,2872,2019,1,105,57
+Polk,Holmes,20,0,1,105,59
+Polk,Indian River,41,237,1,105,61
+Polk,Jackson,78,391,1,105,63
+Polk,Jefferson,8,21,1,105,65
+Polk,Lafayette,33,30,1,105,67
+Polk,Lake,612,1409,1,105,69
+Polk,Lee,242,348,1,105,71
+Polk,Leon,437,255,1,105,73
+Polk,Levy,18,14,1,105,75
+Polk,Liberty,40,14,1,105,77
+Polk,Madison,45,12,1,105,79
+Polk,Manatee,226,153,1,105,81
+Polk,Marion,128,235,1,105,83
+Polk,Martin,34,4,1,105,85
+Polk,Miami-Dade,640,531,1,105,86
+Polk,Monroe,7,2,1,105,87
+Polk,Nassau,102,48,1,105,89
+Polk,Okaloosa,26,26,1,105,91
+Polk,Okeechobee,44,21,1,105,93
+Polk,Orange,2682,2397,1,105,95
+Polk,Osceola,1723,2051,1,105,97
+Polk,Palm Beach,204,758,1,105,99
+Polk,Pasco,239,413,1,105,101
+Polk,Pinellas,496,1160,1,105,103
+Polk,Putnam,11,7,1,105,107
+Polk,St. Johns,671,69,1,105,109
+Polk,St. Lucie,1290,95,1,105,111
+Polk,Santa Rosa,74,57,1,105,113
+Polk,Sarasota,281,112,1,105,115
+Polk,Seminole,341,431,1,105,117
+Polk,Sumter,191,11,1,105,119
+Polk,Suwannee,86,0,1,105,121
+Polk,Taylor,60,61,1,105,123
+Polk,Union,114,255,1,105,125
+Polk,Volusia,523,221,1,105,127
+Polk,Wakulla,37,80,1,105,129
+Polk,Walton,18,14,1,105,131
+Polk,Washington,6,3,1,105,133
+Putnam,Alachua,309,343,1,107,1
+Putnam,Baker,25,17,1,107,3
+Putnam,Bradford,13,0,1,107,7
+Putnam,Brevard,18,33,1,107,9
+Putnam,Broward,2,66,1,107,11
+Putnam,Calhoun,0,17,1,107,13
+Putnam,Charlotte,0,26,1,107,15
+Putnam,Citrus,0,15,1,107,17
+Putnam,Clay,358,51,1,107,19
+Putnam,Columbia,4,46,1,107,23
+Putnam,Duval,271,89,1,107,31
+Putnam,Escambia,64,1,1,107,33
+Putnam,Flagler,53,0,1,107,35
+Putnam,Franklin,0,24,1,107,37
+Putnam,Gadsden,18,0,1,107,39
+Putnam,Gilchrist,1,0,1,107,41
+Putnam,Glades,0,8,1,107,43
+Putnam,Hamilton,20,0,1,107,47
+Putnam,Hernando,0,8,1,107,53
+Putnam,Highlands,0,40,1,107,55
+Putnam,Hillsborough,57,47,1,107,57
+Putnam,Jackson,5,21,1,107,63
+Putnam,Jefferson,28,23,1,107,65
+Putnam,Lake,0,37,1,107,69
+Putnam,Lee,13,36,1,107,71
+Putnam,Leon,20,25,1,107,73
+Putnam,Levy,0,24,1,107,75
+Putnam,Madison,15,30,1,107,79
+Putnam,Manatee,0,10,1,107,81
+Putnam,Marion,307,256,1,107,83
+Putnam,Miami-Dade,47,22,1,107,86
+Putnam,Monroe,8,24,1,107,87
+Putnam,Nassau,0,83,1,107,89
+Putnam,Okeechobee,0,126,1,107,93
+Putnam,Orange,27,4,1,107,95
+Putnam,Palm Beach,14,18,1,107,99
+Putnam,Pasco,5,38,1,107,101
+Putnam,Pinellas,54,49,1,107,103
+Putnam,Polk,7,11,1,107,105
+Putnam,St. Johns,354,372,1,107,109
+Putnam,St. Lucie,43,8,1,107,111
+Putnam,Sarasota,0,21,1,107,115
+Putnam,Seminole,32,0,1,107,117
+Putnam,Sumter,20,0,1,107,119
+Putnam,Suwannee,10,0,1,107,121
+Putnam,Taylor,16,20,1,107,123
+Putnam,Union,74,74,1,107,125
+Putnam,Volusia,74,225,1,107,127
+Putnam,Wakulla,24,0,1,107,129
+Putnam,Walton,0,4,1,107,131
+St. Johns,Alachua,307,677,1,109,1
+St. Johns,Baker,54,0,1,109,3
+St. Johns,Bradford,31,13,1,109,7
+St. Johns,Brevard,46,370,1,109,9
+St. Johns,Broward,115,520,1,109,11
+St. Johns,Charlotte,75,0,1,109,15
+St. Johns,Clay,223,179,1,109,19
+St. Johns,Collier,81,46,1,109,21
+St. Johns,Columbia,0,38,1,109,23
+St. Johns,Desoto,29,0,1,109,27
+St. Johns,Duval,3012,3013,1,109,31
+St. Johns,Escambia,75,7,1,109,33
+St. Johns,Flagler,331,179,1,109,35
+St. Johns,Franklin,26,0,1,109,37
+St. Johns,Gadsden,37,0,1,109,39
+St. Johns,Gulf,6,0,1,109,45
+St. Johns,Hernando,0,5,1,109,53
+St. Johns,Highlands,0,14,1,109,55
+St. Johns,Hillsborough,248,527,1,109,57
+St. Johns,Holmes,8,0,1,109,59
+St. Johns,Indian River,21,43,1,109,61
+St. Johns,Jackson,46,0,1,109,63
+St. Johns,Lake,41,231,1,109,69
+St. Johns,Lee,27,19,1,109,71
+St. Johns,Leon,411,185,1,109,73
+St. Johns,Liberty,10,0,1,109,77
+St. Johns,Madison,12,0,1,109,79
+St. Johns,Manatee,25,34,1,109,81
+St. Johns,Marion,143,411,1,109,83
+St. Johns,Martin,57,0,1,109,85
+St. Johns,Miami-Dade,7,171,1,109,86
+St. Johns,Monroe,18,23,1,109,87
+St. Johns,Okaloosa,3,88,1,109,91
+St. Johns,Okeechobee,32,0,1,109,93
+St. Johns,Orange,268,417,1,109,95
+St. Johns,Osceola,0,64,1,109,97
+St. Johns,Palm Beach,147,462,1,109,99
+St. Johns,Pasco,9,32,1,109,101
+St. Johns,Pinellas,136,136,1,109,103
+St. Johns,Polk,69,671,1,109,105
+St. Johns,Putnam,372,354,1,109,107
+St. Johns,St. Lucie,127,119,1,109,111
+St. Johns,Santa Rosa,15,7,1,109,113
+St. Johns,Sarasota,74,0,1,109,115
+St. Johns,Seminole,147,188,1,109,117
+St. Johns,Sumter,5,147,1,109,119
+St. Johns,Suwannee,19,0,1,109,121
+St. Johns,Taylor,15,0,1,109,123
+St. Johns,Union,13,0,1,109,125
+St. Johns,Volusia,52,229,1,109,127
+St. Johns,Walton,33,35,1,109,131
+St. Lucie,Alachua,107,78,1,111,1
+St. Lucie,Bay,21,21,1,111,5
+St. Lucie,Bradford,0,6,1,111,7
+St. Lucie,Brevard,436,208,1,111,9
+St. Lucie,Broward,585,1260,1,111,11
+St. Lucie,Charlotte,4,809,1,111,15
+St. Lucie,Citrus,0,5,1,111,17
+St. Lucie,Clay,0,5,1,111,19
+St. Lucie,Collier,103,2,1,111,21
+St. Lucie,Columbia,7,33,1,111,23
+St. Lucie,Desoto,4,30,1,111,27
+St. Lucie,Duval,98,124,1,111,31
+St. Lucie,Escambia,22,0,1,111,33
+St. Lucie,Flagler,19,0,1,111,35
+St. Lucie,Gadsden,19,0,1,111,39
+St. Lucie,Gulf,61,0,1,111,45
+St. Lucie,Hamilton,0,7,1,111,47
+St. Lucie,Hardee,0,7,1,111,49
+St. Lucie,Hendry,0,10,1,111,51
+St. Lucie,Hernando,23,0,1,111,53
+St. Lucie,Highlands,0,27,1,111,55
+St. Lucie,Hillsborough,266,542,1,111,57
+St. Lucie,Indian River,1531,503,1,111,61
+St. Lucie,Jackson,75,7,1,111,63
+St. Lucie,Jefferson,8,0,1,111,65
+St. Lucie,Lake,105,6,1,111,69
+St. Lucie,Lee,38,125,1,111,71
+St. Lucie,Leon,174,8,1,111,73
+St. Lucie,Levy,157,0,1,111,75
+St. Lucie,Liberty,0,7,1,111,77
+St. Lucie,Madison,11,7,1,111,79
+St. Lucie,Manatee,17,6,1,111,81
+St. Lucie,Marion,100,120,1,111,83
+St. Lucie,Martin,2123,1825,1,111,85
+St. Lucie,Miami-Dade,481,846,1,111,86
+St. Lucie,Monroe,7,0,1,111,87
+St. Lucie,Nassau,0,4,1,111,89
+St. Lucie,Okaloosa,44,0,1,111,91
+St. Lucie,Okeechobee,145,228,1,111,93
+St. Lucie,Orange,295,186,1,111,95
+St. Lucie,Osceola,17,116,1,111,97
+St. Lucie,Palm Beach,1709,2423,1,111,99
+St. Lucie,Pasco,31,11,1,111,101
+St. Lucie,Pinellas,55,229,1,111,103
+St. Lucie,Polk,95,1290,1,111,105
+St. Lucie,Putnam,8,43,1,111,107
+St. Lucie,St. Johns,119,127,1,111,109
+St. Lucie,Santa Rosa,107,3,1,111,113
+St. Lucie,Sarasota,485,72,1,111,115
+St. Lucie,Seminole,22,97,1,111,117
+St. Lucie,Sumter,4,30,1,111,119
+St. Lucie,Suwannee,0,13,1,111,121
+St. Lucie,Taylor,15,10,1,111,123
+St. Lucie,Union,26,0,1,111,125
+St. Lucie,Volusia,359,130,1,111,127
+St. Lucie,Wakulla,511,0,1,111,129
+St. Lucie,Walton,11,0,1,111,131
+St. Lucie,Washington,10,0,1,111,133
+Santa Rosa,Alachua,95,35,1,113,1
+Santa Rosa,Baker,15,5,1,113,3
+Santa Rosa,Bay,18,333,1,113,5
+Santa Rosa,Bradford,23,0,1,113,7
+Santa Rosa,Brevard,6,23,1,113,9
+Santa Rosa,Broward,273,41,1,113,11
+Santa Rosa,Calhoun,0,3,1,113,13
+Santa Rosa,Charlotte,0,11,1,113,15
+Santa Rosa,Citrus,0,38,1,113,17
+Santa Rosa,Clay,0,7,1,113,19
+Santa Rosa,Collier,0,3,1,113,21
+Santa Rosa,Columbia,10,93,1,113,23
+Santa Rosa,Desoto,32,3,1,113,27
+Santa Rosa,Dixie,15,12,1,113,29
+Santa Rosa,Duval,155,90,1,113,31
+Santa Rosa,Escambia,2616,2082,1,113,33
+Santa Rosa,Franklin,0,2,1,113,37
+Santa Rosa,Gadsden,26,0,1,113,39
+Santa Rosa,Gulf,17,9,1,113,45
+Santa Rosa,Hamilton,15,76,1,113,47
+Santa Rosa,Hardee,3,8,1,113,49
+Santa Rosa,Hernando,17,71,1,113,53
+Santa Rosa,Highlands,19,0,1,113,55
+Santa Rosa,Hillsborough,227,39,1,113,57
+Santa Rosa,Holmes,3,21,1,113,59
+Santa Rosa,Indian River,1,26,1,113,61
+Santa Rosa,Jackson,28,52,1,113,63
+Santa Rosa,Jefferson,9,0,1,113,65
+Santa Rosa,Lafayette,1,5,1,113,67
+Santa Rosa,Lake,88,72,1,113,69
+Santa Rosa,Lee,12,24,1,113,71
+Santa Rosa,Leon,332,78,1,113,73
+Santa Rosa,Levy,0,10,1,113,75
+Santa Rosa,Madison,19,17,1,113,79
+Santa Rosa,Manatee,26,2,1,113,81
+Santa Rosa,Marion,37,101,1,113,83
+Santa Rosa,Martin,5,7,1,113,85
+Santa Rosa,Miami-Dade,56,71,1,113,86
+Santa Rosa,Nassau,0,13,1,113,89
+Santa Rosa,Okaloosa,1304,968,1,113,91
+Santa Rosa,Okeechobee,0,11,1,113,93
+Santa Rosa,Orange,263,58,1,113,95
+Santa Rosa,Palm Beach,48,73,1,113,99
+Santa Rosa,Pasco,19,94,1,113,101
+Santa Rosa,Pinellas,16,30,1,113,103
+Santa Rosa,Polk,57,74,1,113,105
+Santa Rosa,St. Johns,7,15,1,113,109
+Santa Rosa,St. Lucie,3,107,1,113,111
+Santa Rosa,Sarasota,129,12,1,113,115
+Santa Rosa,Seminole,125,53,1,113,117
+Santa Rosa,Sumter,14,0,1,113,119
+Santa Rosa,Suwannee,28,48,1,113,121
+Santa Rosa,Taylor,2,14,1,113,123
+Santa Rosa,Union,8,59,1,113,125
+Santa Rosa,Volusia,56,408,1,113,127
+Santa Rosa,Wakulla,59,0,1,113,129
+Santa Rosa,Walton,320,146,1,113,131
+Santa Rosa,Washington,46,35,1,113,133
+Sarasota,Alachua,391,231,1,115,1
+Sarasota,Bradford,12,0,1,115,7
+Sarasota,Brevard,87,59,1,115,9
+Sarasota,Broward,196,357,1,115,11
+Sarasota,Calhoun,1,0,1,115,13
+Sarasota,Charlotte,1932,2615,1,115,15
+Sarasota,Citrus,56,22,1,115,17
+Sarasota,Clay,21,0,1,115,19
+Sarasota,Collier,97,81,1,115,21
+Sarasota,Columbia,3,0,1,115,23
+Sarasota,Desoto,133,103,1,115,27
+Sarasota,Dixie,57,0,1,115,29
+Sarasota,Duval,70,173,1,115,31
+Sarasota,Escambia,37,10,1,115,33
+Sarasota,Flagler,15,0,1,115,35
+Sarasota,Franklin,8,26,1,115,37
+Sarasota,Gadsden,52,0,1,115,39
+Sarasota,Gilchrist,3,0,1,115,41
+Sarasota,Gulf,13,0,1,115,45
+Sarasota,Hamilton,39,0,1,115,47
+Sarasota,Hardee,0,9,1,115,49
+Sarasota,Hernando,41,33,1,115,53
+Sarasota,Highlands,117,4,1,115,55
+Sarasota,Hillsborough,637,438,1,115,57
+Sarasota,Indian River,7,13,1,115,61
+Sarasota,Jackson,22,0,1,115,63
+Sarasota,Jefferson,2,0,1,115,65
+Sarasota,Lake,95,130,1,115,69
+Sarasota,Lee,364,377,1,115,71
+Sarasota,Leon,248,107,1,115,73
+Sarasota,Levy,24,5,1,115,75
+Sarasota,Liberty,43,0,1,115,77
+Sarasota,Madison,19,18,1,115,79
+Sarasota,Manatee,3446,3328,1,115,81
+Sarasota,Marion,32,22,1,115,83
+Sarasota,Martin,2,11,1,115,85
+Sarasota,Miami-Dade,499,440,1,115,86
+Sarasota,Monroe,55,90,1,115,87
+Sarasota,Okaloosa,5,60,1,115,91
+Sarasota,Orange,259,125,1,115,95
+Sarasota,Osceola,240,12,1,115,97
+Sarasota,Palm Beach,69,334,1,115,99
+Sarasota,Pasco,28,46,1,115,101
+Sarasota,Pinellas,520,609,1,115,103
+Sarasota,Polk,112,281,1,115,105
+Sarasota,Putnam,21,0,1,115,107
+Sarasota,St. Johns,0,74,1,115,109
+Sarasota,St. Lucie,72,485,1,115,111
+Sarasota,Santa Rosa,12,129,1,115,113
+Sarasota,Seminole,276,66,1,115,117
+Sarasota,Sumter,67,90,1,115,119
+Sarasota,Suwannee,13,0,1,115,121
+Sarasota,Taylor,34,22,1,115,123
+Sarasota,Volusia,393,311,1,115,127
+Sarasota,Wakulla,21,31,1,115,129
+Sarasota,Walton,0,11,1,115,131
+Seminole,Alachua,372,126,1,117,1
+Seminole,Baker,0,108,1,117,3
+Seminole,Bay,67,0,1,117,5
+Seminole,Brevard,263,445,1,117,9
+Seminole,Broward,234,309,1,117,11
+Seminole,Charlotte,56,54,1,117,15
+Seminole,Citrus,25,34,1,117,17
+Seminole,Clay,0,79,1,117,19
+Seminole,Collier,9,154,1,117,21
+Seminole,Columbia,17,0,1,117,23
+Seminole,Desoto,25,0,1,117,27
+Seminole,Duval,680,208,1,117,31
+Seminole,Escambia,59,33,1,117,33
+Seminole,Flagler,44,0,1,117,35
+Seminole,Franklin,23,0,1,117,37
+Seminole,Gadsden,0,2,1,117,39
+Seminole,Gilchrist,15,0,1,117,41
+Seminole,Gulf,24,0,1,117,45
+Seminole,Hamilton,13,61,1,117,47
+Seminole,Hardee,2,17,1,117,49
+Seminole,Hendry,22,0,1,117,51
+Seminole,Hernando,13,78,1,117,53
+Seminole,Hillsborough,393,405,1,117,57
+Seminole,Holmes,5,0,1,117,59
+Seminole,Indian River,27,5,1,117,61
+Seminole,Jefferson,9,0,1,117,65
+Seminole,Lake,657,543,1,117,69
+Seminole,Lee,128,225,1,117,71
+Seminole,Leon,382,87,1,117,73
+Seminole,Madison,21,0,1,117,79
+Seminole,Manatee,207,14,1,117,81
+Seminole,Marion,170,286,1,117,83
+Seminole,Martin,52,0,1,117,85
+Seminole,Miami-Dade,125,54,1,117,86
+Seminole,Monroe,70,31,1,117,87
+Seminole,Nassau,66,34,1,117,89
+Seminole,Okaloosa,22,25,1,117,91
+Seminole,Okeechobee,25,0,1,117,93
+Seminole,Orange,9532,10527,1,117,95
+Seminole,Osceola,298,339,1,117,97
+Seminole,Palm Beach,329,485,1,117,99
+Seminole,Pasco,66,34,1,117,101
+Seminole,Pinellas,238,59,1,117,103
+Seminole,Polk,431,341,1,117,105
+Seminole,Putnam,0,32,1,117,107
+Seminole,St. Johns,188,147,1,117,109
+Seminole,St. Lucie,97,22,1,117,111
+Seminole,Santa Rosa,53,125,1,117,113
+Seminole,Sarasota,66,276,1,117,115
+Seminole,Sumter,232,16,1,117,119
+Seminole,Suwannee,1,18,1,117,121
+Seminole,Taylor,39,0,1,117,123
+Seminole,Union,5,0,1,117,125
+Seminole,Volusia,3531,1568,1,117,127
+Seminole,Wakulla,198,0,1,117,129
+Seminole,Walton,10,9,1,117,131
+Seminole,Washington,4,0,1,117,133
+Sumter,Alachua,33,21,1,119,1
+Sumter,Bay,0,67,1,119,5
+Sumter,Bradford,4,31,1,119,7
+Sumter,Brevard,91,114,1,119,9
+Sumter,Broward,2,205,1,119,11
+Sumter,Charlotte,37,55,1,119,15
+Sumter,Citrus,573,126,1,119,17
+Sumter,Clay,44,0,1,119,19
+Sumter,Collier,158,56,1,119,21
+Sumter,Columbia,5,16,1,119,23
+Sumter,Desoto,0,23,1,119,27
+Sumter,Duval,58,19,1,119,31
+Sumter,Escambia,0,23,1,119,33
+Sumter,Franklin,0,7,1,119,37
+Sumter,Gadsden,4,0,1,119,39
+Sumter,Gilchrist,2,0,1,119,41
+Sumter,Gulf,10,0,1,119,45
+Sumter,Hamilton,21,0,1,119,47
+Sumter,Hardee,25,0,1,119,49
+Sumter,Hernando,167,96,1,119,53
+Sumter,Highlands,7,121,1,119,55
+Sumter,Hillsborough,103,156,1,119,57
+Sumter,Holmes,0,7,1,119,59
+Sumter,Indian River,0,12,1,119,61
+Sumter,Jackson,0,214,1,119,63
+Sumter,Lafayette,2,0,1,119,67
+Sumter,Lake,686,339,1,119,69
+Sumter,Lee,122,103,1,119,71
+Sumter,Leon,9,26,1,119,73
+Sumter,Levy,3,0,1,119,75
+Sumter,Liberty,21,25,1,119,77
+Sumter,Madison,0,16,1,119,79
+Sumter,Manatee,23,11,1,119,81
+Sumter,Marion,373,248,1,119,83
+Sumter,Martin,4,61,1,119,85
+Sumter,Miami-Dade,105,71,1,119,86
+Sumter,Okaloosa,2,81,1,119,91
+Sumter,Okeechobee,0,79,1,119,93
+Sumter,Orange,57,111,1,119,95
+Sumter,Osceola,12,0,1,119,97
+Sumter,Palm Beach,7,203,1,119,99
+Sumter,Pasco,88,410,1,119,101
+Sumter,Pinellas,254,154,1,119,103
+Sumter,Polk,11,191,1,119,105
+Sumter,Putnam,0,20,1,119,107
+Sumter,St. Johns,147,5,1,119,109
+Sumter,St. Lucie,30,4,1,119,111
+Sumter,Santa Rosa,0,14,1,119,113
+Sumter,Sarasota,90,67,1,119,115
+Sumter,Seminole,16,232,1,119,117
+Sumter,Suwannee,83,34,1,119,121
+Sumter,Taylor,58,11,1,119,123
+Sumter,Union,30,0,1,119,125
+Sumter,Volusia,293,0,1,119,127
+Sumter,Walton,0,4,1,119,131
+Sumter,Washington,3,0,1,119,133
+Suwannee,Alachua,130,7,1,121,1
+Suwannee,Baker,12,18,1,121,3
+Suwannee,Bradford,86,1,1,121,7
+Suwannee,Brevard,0,57,1,121,9
+Suwannee,Broward,52,15,1,121,11
+Suwannee,Calhoun,3,0,1,121,13
+Suwannee,Charlotte,14,4,1,121,15
+Suwannee,Citrus,45,0,1,121,17
+Suwannee,Clay,2,23,1,121,19
+Suwannee,Columbia,486,665,1,121,23
+Suwannee,Desoto,84,6,1,121,27
+Suwannee,Dixie,3,0,1,121,29
+Suwannee,Duval,128,20,1,121,31
+Suwannee,Escambia,22,0,1,121,33
+Suwannee,Gilchrist,83,0,1,121,41
+Suwannee,Hamilton,97,520,1,121,47
+Suwannee,Hendry,19,0,1,121,51
+Suwannee,Hernando,39,29,1,121,53
+Suwannee,Highlands,30,84,1,121,55
+Suwannee,Hillsborough,13,112,1,121,57
+Suwannee,Holmes,13,0,1,121,59
+Suwannee,Indian River,89,0,1,121,61
+Suwannee,Jackson,3,12,1,121,63
+Suwannee,Jefferson,20,0,1,121,65
+Suwannee,Lafayette,23,68,1,121,67
+Suwannee,Lake,44,21,1,121,69
+Suwannee,Lee,0,13,1,121,71
+Suwannee,Leon,383,53,1,121,73
+Suwannee,Levy,4,69,1,121,75
+Suwannee,Liberty,0,10,1,121,77
+Suwannee,Madison,30,0,1,121,79
+Suwannee,Manatee,14,7,1,121,81
+Suwannee,Marion,17,65,1,121,83
+Suwannee,Martin,0,33,1,121,85
+Suwannee,Miami-Dade,1,144,1,121,86
+Suwannee,Okaloosa,1,0,1,121,91
+Suwannee,Orange,31,38,1,121,95
+Suwannee,Osceola,0,59,1,121,97
+Suwannee,Palm Beach,27,42,1,121,99
+Suwannee,Pasco,47,42,1,121,101
+Suwannee,Pinellas,0,32,1,121,103
+Suwannee,Polk,0,86,1,121,105
+Suwannee,Putnam,0,10,1,121,107
+Suwannee,St. Johns,0,19,1,121,109
+Suwannee,St. Lucie,13,0,1,121,111
+Suwannee,Santa Rosa,48,28,1,121,113
+Suwannee,Sarasota,0,13,1,121,115
+Suwannee,Seminole,18,1,1,121,117
+Suwannee,Sumter,34,83,1,121,119
+Suwannee,Taylor,60,4,1,121,123
+Suwannee,Union,66,0,1,121,125
+Suwannee,Volusia,42,27,1,121,127
+Suwannee,Wakulla,24,0,1,121,129
+Suwannee,Walton,28,0,1,121,131
+Suwannee,Washington,21,0,1,121,133
+Taylor,Alachua,0,37,1,123,1
+Taylor,Bay,31,0,1,123,5
+Taylor,Bradford,67,1,1,123,7
+Taylor,Brevard,23,61,1,123,9
+Taylor,Broward,0,71,1,123,11
+Taylor,Calhoun,2,15,1,123,13
+Taylor,Citrus,0,33,1,123,17
+Taylor,Columbia,34,5,1,123,23
+Taylor,Desoto,17,0,1,123,27
+Taylor,Dixie,64,0,1,123,29
+Taylor,Duval,0,91,1,123,31
+Taylor,Escambia,11,0,1,123,33
+Taylor,Flagler,6,0,1,123,35
+Taylor,Gilchrist,7,7,1,123,41
+Taylor,Gulf,4,14,1,123,45
+Taylor,Hamilton,6,0,1,123,47
+Taylor,Hardee,0,19,1,123,49
+Taylor,Hendry,27,0,1,123,51
+Taylor,Hernando,0,36,1,123,53
+Taylor,Highlands,0,14,1,123,55
+Taylor,Hillsborough,10,120,1,123,57
+Taylor,Holmes,3,0,1,123,59
+Taylor,Indian River,5,13,1,123,61
+Taylor,Jackson,21,0,1,123,63
+Taylor,Jefferson,1,0,1,123,65
+Taylor,Lafayette,66,41,1,123,67
+Taylor,Lake,11,37,1,123,69
+Taylor,Lee,0,3,1,123,71
+Taylor,Leon,171,29,1,123,73
+Taylor,Levy,27,0,1,123,75
+Taylor,Liberty,15,19,1,123,77
+Taylor,Madison,0,62,1,123,79
+Taylor,Manatee,0,14,1,123,81
+Taylor,Marion,10,101,1,123,83
+Taylor,Martin,0,29,1,123,85
+Taylor,Miami-Dade,46,4,1,123,86
+Taylor,Okaloosa,53,18,1,123,91
+Taylor,Orange,129,93,1,123,95
+Taylor,Osceola,3,0,1,123,97
+Taylor,Palm Beach,58,53,1,123,99
+Taylor,Pasco,28,42,1,123,101
+Taylor,Pinellas,27,72,1,123,103
+Taylor,Polk,61,60,1,123,105
+Taylor,Putnam,20,16,1,123,107
+Taylor,St. Johns,0,15,1,123,109
+Taylor,St. Lucie,10,15,1,123,111
+Taylor,Santa Rosa,14,2,1,123,113
+Taylor,Sarasota,22,34,1,123,115
+Taylor,Seminole,0,39,1,123,117
+Taylor,Sumter,11,58,1,123,119
+Taylor,Suwannee,4,60,1,123,121
+Taylor,Union,20,15,1,123,125
+Taylor,Volusia,17,36,1,123,127
+Taylor,Wakulla,62,72,1,123,129
+Taylor,Washington,14,0,1,123,133
+Union,Alachua,122,73,1,125,1
+Union,Baker,140,17,1,125,3
+Union,Bay,0,46,1,125,5
+Union,Bradford,178,69,1,125,7
+Union,Brevard,3,20,1,125,9
+Union,Broward,0,27,1,125,11
+Union,Calhoun,0,10,1,125,13
+Union,Charlotte,5,44,1,125,15
+Union,Citrus,0,1,1,125,17
+Union,Clay,29,88,1,125,19
+Union,Collier,0,18,1,125,21
+Union,Columbia,115,50,1,125,23
+Union,Dixie,17,3,1,125,29
+Union,Duval,50,181,1,125,31
+Union,Escambia,0,1,1,125,33
+Union,Franklin,10,20,1,125,37
+Union,Gilchrist,0,13,1,125,41
+Union,Gulf,8,63,1,125,45
+Union,Hamilton,21,41,1,125,47
+Union,Hardee,0,9,1,125,49
+Union,Hernando,0,20,1,125,53
+Union,Highlands,0,13,1,125,55
+Union,Holmes,6,0,1,125,59
+Union,Indian River,0,23,1,125,61
+Union,Jackson,43,21,1,125,63
+Union,Jefferson,23,36,1,125,65
+Union,Lafayette,13,0,1,125,67
+Union,Lake,60,20,1,125,69
+Union,Lee,6,0,1,125,71
+Union,Leon,3,6,1,125,73
+Union,Levy,3,27,1,125,75
+Union,Liberty,16,17,1,125,77
+Union,Madison,57,5,1,125,79
+Union,Marion,302,42,1,125,83
+Union,Miami-Dade,184,68,1,125,86
+Union,Nassau,0,17,1,125,89
+Union,Okaloosa,12,40,1,125,91
+Union,Orange,0,75,1,125,95
+Union,Osceola,2,3,1,125,97
+Union,Palm Beach,28,38,1,125,99
+Union,Pasco,106,2,1,125,101
+Union,Pinellas,116,46,1,125,103
+Union,Polk,255,114,1,125,105
+Union,Putnam,74,74,1,125,107
+Union,St. Johns,0,13,1,125,109
+Union,St. Lucie,0,26,1,125,111
+Union,Santa Rosa,59,8,1,125,113
+Union,Seminole,0,5,1,125,117
+Union,Sumter,0,30,1,125,119
+Union,Suwannee,0,66,1,125,121
+Union,Taylor,15,20,1,125,123
+Union,Volusia,3,0,1,125,127
+Union,Wakulla,20,48,1,125,129
+Union,Walton,8,0,1,125,131
+Union,Washington,60,8,1,125,133
+Volusia,Alachua,474,255,1,127,1
+Volusia,Baker,35,126,1,127,3
+Volusia,Bay,85,95,1,127,5
+Volusia,Bradford,17,58,1,127,7
+Volusia,Brevard,508,187,1,127,9
+Volusia,Broward,365,768,1,127,11
+Volusia,Calhoun,23,0,1,127,13
+Volusia,Charlotte,157,54,1,127,15
+Volusia,Citrus,1,125,1,127,17
+Volusia,Clay,100,3,1,127,19
+Volusia,Collier,14,49,1,127,21
+Volusia,Columbia,56,0,1,127,23
+Volusia,Desoto,19,0,1,127,27
+Volusia,Dixie,0,7,1,127,29
+Volusia,Duval,603,478,1,127,31
+Volusia,Escambia,39,72,1,127,33
+Volusia,Flagler,631,1110,1,127,35
+Volusia,Franklin,13,2,1,127,37
+Volusia,Gadsden,4,0,1,127,39
+Volusia,Gulf,18,0,1,127,45
+Volusia,Hamilton,44,98,1,127,47
+Volusia,Hernando,15,165,1,127,53
+Volusia,Highlands,12,49,1,127,55
+Volusia,Hillsborough,868,341,1,127,57
+Volusia,Holmes,4,3,1,127,59
+Volusia,Indian River,20,114,1,127,61
+Volusia,Jackson,58,16,1,127,63
+Volusia,Jefferson,34,0,1,127,65
+Volusia,Lake,591,644,1,127,69
+Volusia,Lee,197,96,1,127,71
+Volusia,Leon,199,242,1,127,73
+Volusia,Levy,0,84,1,127,75
+Volusia,Liberty,14,0,1,127,77
+Volusia,Madison,2,0,1,127,79
+Volusia,Manatee,119,281,1,127,81
+Volusia,Marion,322,245,1,127,83
+Volusia,Martin,28,104,1,127,85
+Volusia,Miami-Dade,602,607,1,127,86
+Volusia,Monroe,3,55,1,127,87
+Volusia,Nassau,0,60,1,127,89
+Volusia,Okaloosa,76,0,1,127,91
+Volusia,Okeechobee,15,0,1,127,93
+Volusia,Orange,1391,1862,1,127,95
+Volusia,Osceola,245,286,1,127,97
+Volusia,Palm Beach,447,430,1,127,99
+Volusia,Pasco,54,221,1,127,101
+Volusia,Pinellas,79,259,1,127,103
+Volusia,Polk,221,523,1,127,105
+Volusia,Putnam,225,74,1,127,107
+Volusia,St. Johns,229,52,1,127,109
+Volusia,St. Lucie,130,359,1,127,111
+Volusia,Santa Rosa,408,56,1,127,113
+Volusia,Sarasota,311,393,1,127,115
+Volusia,Seminole,1568,3531,1,127,117
+Volusia,Sumter,0,293,1,127,119
+Volusia,Suwannee,27,42,1,127,121
+Volusia,Taylor,36,17,1,127,123
+Volusia,Union,0,3,1,127,125
+Volusia,Wakulla,63,0,1,127,129
+Volusia,Walton,43,15,1,127,131
+Volusia,Washington,47,0,1,127,133
+Wakulla,Alachua,0,28,1,129,1
+Wakulla,Baker,53,0,1,129,3
+Wakulla,Bay,56,30,1,129,5
+Wakulla,Brevard,0,10,1,129,9
+Wakulla,Broward,7,34,1,129,11
+Wakulla,Calhoun,20,50,1,129,13
+Wakulla,Charlotte,14,24,1,129,15
+Wakulla,Clay,0,11,1,129,19
+Wakulla,Collier,0,15,1,129,21
+Wakulla,Columbia,15,21,1,129,23
+Wakulla,Dixie,32,13,1,129,29
+Wakulla,Duval,12,107,1,129,31
+Wakulla,Escambia,9,41,1,129,33
+Wakulla,Franklin,64,23,1,129,37
+Wakulla,Gadsden,0,33,1,129,39
+Wakulla,Gulf,3,86,1,129,45
+Wakulla,Hamilton,20,29,1,129,47
+Wakulla,Highlands,0,4,1,129,55
+Wakulla,Hillsborough,7,110,1,129,57
+Wakulla,Holmes,27,71,1,129,59
+Wakulla,Jackson,65,221,1,129,63
+Wakulla,Jefferson,64,29,1,129,65
+Wakulla,Lafayette,26,11,1,129,67
+Wakulla,Lake,0,9,1,129,69
+Wakulla,Lee,3,30,1,129,71
+Wakulla,Leon,1012,648,1,129,73
+Wakulla,Levy,28,0,1,129,75
+Wakulla,Liberty,44,13,1,129,77
+Wakulla,Madison,45,8,1,129,79
+Wakulla,Manatee,0,5,1,129,81
+Wakulla,Marion,6,48,1,129,83
+Wakulla,Martin,4,0,1,129,85
+Wakulla,Miami-Dade,62,25,1,129,86
+Wakulla,Okaloosa,49,32,1,129,91
+Wakulla,Okeechobee,0,16,1,129,93
+Wakulla,Orange,0,45,1,129,95
+Wakulla,Osceola,3,0,1,129,97
+Wakulla,Palm Beach,33,148,1,129,99
+Wakulla,Pasco,6,4,1,129,101
+Wakulla,Pinellas,0,45,1,129,103
+Wakulla,Polk,80,37,1,129,105
+Wakulla,Putnam,0,24,1,129,107
+Wakulla,St. Lucie,0,511,1,129,111
+Wakulla,Santa Rosa,0,59,1,129,113
+Wakulla,Sarasota,31,21,1,129,115
+Wakulla,Seminole,0,198,1,129,117
+Wakulla,Suwannee,0,24,1,129,121
+Wakulla,Taylor,72,62,1,129,123
+Wakulla,Union,48,20,1,129,125
+Wakulla,Volusia,0,63,1,129,127
+Wakulla,Walton,57,29,1,129,131
+Wakulla,Washington,18,17,1,129,133
+Walton,Alachua,16,40,1,131,1
+Walton,Baker,3,0,1,131,3
+Walton,Bay,186,309,1,131,5
+Walton,Bradford,19,0,1,131,7
+Walton,Brevard,25,0,1,131,9
+Walton,Broward,34,19,1,131,11
+Walton,Calhoun,0,17,1,131,13
+Walton,Charlotte,3,0,1,131,15
+Walton,Citrus,0,24,1,131,17
+Walton,Collier,0,68,1,131,21
+Walton,Columbia,13,17,1,131,23
+Walton,Desoto,21,0,1,131,27
+Walton,Duval,6,98,1,131,31
+Walton,Escambia,222,107,1,131,33
+Walton,Gadsden,4,16,1,131,39
+Walton,Gilchrist,5,0,1,131,41
+Walton,Gulf,0,7,1,131,45
+Walton,Hamilton,19,12,1,131,47
+Walton,Hendry,6,0,1,131,51
+Walton,Hernando,0,4,1,131,53
+Walton,Hillsborough,69,4,1,131,57
+Walton,Holmes,171,38,1,131,59
+Walton,Jackson,28,58,1,131,63
+Walton,Jefferson,28,0,1,131,65
+Walton,Lafayette,1,0,1,131,67
+Walton,Lake,15,19,1,131,69
+Walton,Leon,94,73,1,131,73
+Walton,Levy,0,1,1,131,75
+Walton,Manatee,1,0,1,131,81
+Walton,Marion,8,31,1,131,83
+Walton,Miami-Dade,13,21,1,131,86
+Walton,Monroe,11,97,1,131,87
+Walton,Nassau,0,5,1,131,89
+Walton,Okaloosa,481,948,1,131,91
+Walton,Okeechobee,1,0,1,131,93
+Walton,Orange,18,154,1,131,95
+Walton,Palm Beach,22,122,1,131,99
+Walton,Pasco,28,2,1,131,101
+Walton,Pinellas,0,31,1,131,103
+Walton,Polk,14,18,1,131,105
+Walton,Putnam,4,0,1,131,107
+Walton,St. Johns,35,33,1,131,109
+Walton,St. Lucie,0,11,1,131,111
+Walton,Santa Rosa,146,320,1,131,113
+Walton,Sarasota,11,0,1,131,115
+Walton,Seminole,9,10,1,131,117
+Walton,Sumter,4,0,1,131,119
+Walton,Suwannee,0,28,1,131,121
+Walton,Union,0,8,1,131,125
+Walton,Volusia,15,43,1,131,127
+Walton,Wakulla,29,57,1,131,129
+Walton,Washington,50,31,1,131,133
+Washington,Alachua,43,0,1,133,1
+Washington,Bay,449,464,1,133,5
+Washington,Bradford,57,0,1,133,7
+Washington,Broward,0,10,1,133,11
+Washington,Calhoun,0,49,1,133,13
+Washington,Citrus,0,16,1,133,17
+Washington,Collier,8,0,1,133,21
+Washington,Columbia,0,8,1,133,23
+Washington,Duval,13,57,1,133,31
+Washington,Escambia,119,95,1,133,33
+Washington,Franklin,0,36,1,133,37
+Washington,Gadsden,17,2,1,133,39
+Washington,Gilchrist,0,11,1,133,41
+Washington,Gulf,0,4,1,133,45
+Washington,Hamilton,6,9,1,133,47
+Washington,Hillsborough,0,3,1,133,57
+Washington,Holmes,127,283,1,133,59
+Washington,Indian River,0,40,1,133,61
+Washington,Jackson,212,323,1,133,63
+Washington,Jefferson,49,12,1,133,65
+Washington,Lafayette,21,0,1,133,67
+Washington,Lake,3,2,1,133,69
+Washington,Lee,6,0,1,133,71
+Washington,Leon,47,90,1,133,73
+Washington,Madison,9,0,1,133,79
+Washington,Marion,0,15,1,133,83
+Washington,Martin,0,10,1,133,85
+Washington,Miami-Dade,84,16,1,133,86
+Washington,Okaloosa,11,26,1,133,91
+Washington,Orange,48,71,1,133,95
+Washington,Palm Beach,5,0,1,133,99
+Washington,Pasco,74,0,1,133,101
+Washington,Pinellas,13,15,1,133,103
+Washington,Polk,3,6,1,133,105
+Washington,St. Lucie,0,10,1,133,111
+Washington,Santa Rosa,35,46,1,133,113
+Washington,Seminole,0,4,1,133,117
+Washington,Sumter,0,3,1,133,119
+Washington,Suwannee,0,21,1,133,121
+Washington,Taylor,0,14,1,133,123
+Washington,Union,8,60,1,133,125
+Washington,Volusia,0,47,1,133,127
+Washington,Wakulla,17,18,1,133,129
+Washington,Walton,31,50,1,133,131

@@ -1,15 +1,9 @@
 # -*- coding:utf8 -*-
 from setuptools import setup
 from Cython.Build import cythonize
-from glob import glob
 from Epigrass.__version__ import version
 
 
-demos = glob('demos/*')
-try:
-    demos.remove('demos/CVS')
-except:
-    pass
 
 setup(name='epigrass',
       version=version,
@@ -24,7 +18,8 @@ setup(name='epigrass',
       license='GPL',
       packages=['Epigrass'],
       setup_requires=['cython'],
-      install_requires=["numpy >= 1.2", "networkx >= 1.1", "SQLAlchemy >= 0.7", "sqlsoup", "redis >= 2.4", "requests", "dbfread"],
+      install_requires=["numpy >= 1.2", "networkx >= 1.1", "SQLAlchemy >= 0.7", "sqlsoup", "redis >= 2.4", "requests",
+                        "dbfread"],
       entry_points={
           'console_scripts': [
               'epirunner = Epigrass.manager:main',
@@ -36,7 +31,10 @@ setup(name='epigrass',
           ]
       },
       ext_modules=cythonize('Epigrass/epimodels.py'),
+      zip_safe=False,
       include_package_data=True,
-      package_data={'': ['INSTALL', 'README', 'COPYING', 'epigrass.desktop', '*.rst', '*.tex', '*.png', '*.jpg']},
-      data_files = [('/usr/share/pixmaps',['egicon.png']),('/usr/share/doc/epigrass/demos',demos),('/usr/share/doc/epigrass/',['docs/build/latex/Epigrass.pdf']),('/usr/share/applications',['epigrass.desktop'])]
-)
+      package_data={'': ['COPYING', 'epigrass.desktop', '*.rst', '*.tex', '*.png', '*.jpg']},
+      data_files=[('/usr/share/pixmaps', ['egicon.png']),
+                  ('/usr/share/doc/epigrass/', ['docs/build/latex/Epigrass.pdf']),
+                  ('/usr/share/applications', ['epigrass.desktop'])]
+      )
