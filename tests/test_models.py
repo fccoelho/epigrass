@@ -1,3 +1,6 @@
+from __future__ import absolute_import
+from __future__ import print_function
+from six.moves import zip
 __author__ = 'fccoelho'
 
 import unittest
@@ -190,7 +193,7 @@ class TestModels(unittest.TestCase):
         model = Epimodel(1, modtype='SIRS')
         res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1, 'w': 0.1})
-        print res
+        print(res)
         for x, y in zip(res[0], [0, 0.9, 999]):
             self.assertAlmostEqual(x, y, 0)
         self.assertAlmostEqual(res[1], 0, 1)

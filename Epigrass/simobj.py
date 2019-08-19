@@ -1,6 +1,8 @@
 """
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 import sys
 import multiprocessing
 import time
@@ -10,9 +12,14 @@ from numpy.random import binomial
 import networkx as NX
 from networkx.readwrite import json_graph
 import redis
+import six
+from six.moves import range
+from six.moves import zip
+from .data_io import *
+# import pyximport
+# pyximport.install(pyimport=True)
+from Epigrass import epimodels
 
-from data_io import *
-import epimodels
 
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
@@ -72,7 +79,7 @@ class siteobj(object):
         self.vaccineNow = 0 #flag to indicate that it is vaccination day
         self.vaccov = 0 #current vaccination coverage
         self.nVaccinated = 0
-        self.quarantine = [sys.maxint, 0]
+        self.quarantine = [sys.maxsize, 0]
         self.nQuarantined = 0
         self.geocode = geocode
         self.painted = 0 # Flag for the graph display
@@ -91,7 +98,7 @@ class siteobj(object):
         """
         t0 = time.time()
         self.runModel()
-        print "Time to runModel: ", time.time() - t0
+        print("Time to runModel: ", time.time() - t0)
         return self
 
     def createModel(self, modtype='', name='model1', v=[], bi=None, bp=None):
@@ -1155,9 +1162,9 @@ class edge(object):
         Length -- Length in kilometers of this route
         """
         if not isinstance(source, siteobj):
-            raise TypeError, 'source received a non siteobj class object'
+            raise TypeError('source received a non siteobj class object')
         if not isinstance(dest, siteobj):
-            raise TypeError, 'destination received a non siteobj class object'
+            raise TypeError('destination received a non siteobj class object')
         self.dest = dest
         self.source = source
         self.sites = [source, dest]
@@ -1207,9 +1214,9 @@ class graph(object):
         self.name = graph_name
         self.digraph = digraph
         self.site_dict = {} #geocode as keys
-        self.site_list = property(fget=lambda self: self.site_dict.values()) #only for backwards compatibility
+        self.site_list = property(fget=lambda self: list(self.site_dict.values())) #only for backwards compatibility
         self.edge_dict = {} #geocode tuple as key
-        self.edge_list = property(fget=lambda self: self.edge_dict.values()) #only for backwards compatibility
+        self.edge_list = property(fget=lambda self: list(self.edge_dict.values())) #only for backwards compatibility
         self.speed = 0 # speed of the transportation system
         self.simstep = 1 #current step in the simulation
         self.maxstep = 100 #maximum number of steps in the simulation
@@ -1251,7 +1258,7 @@ class graph(object):
         """
 
         if not isinstance(sitio, siteobj):
-            raise Error, 'add_site received a non siteobj class object'
+            raise Error('add_site received a non siteobj class object')
         self.site_dict[sitio.geocode] = sitio
         #        self.site_list.append(sitio)
         sitio.parentGraph = self
@@ -1313,8 +1320,7 @@ class graph(object):
                 if w in D:
                     #print vwLength
                     if vwLength < D[w]:
-                        raise ValueError, \
-                            "Dijkstra: found better path to already-final vertex"
+                        raise ValueError("Dijkstra: found better path to already-final vertex")
                 elif w not in Q or vwLength < Q[w]:
                     Q[w] = vwLength
                     P[w] = v
@@ -1371,7 +1377,7 @@ class graph(object):
         Generates a dictionary of the graph for use in the shortest path function.
         """
         G = {}
-        for i in self.site_dict.itervalues():
+        for i in six.itervalues(self.site_dict):
             G[i] = i.getNeighbors()
         self.graphdict = G
         return G
@@ -1404,7 +1410,7 @@ class graph(object):
         """
         returns list of site names for a given graph.
         """
-        sitenames = [s.sitename for s in self.site_dict.itervalues()]
+        sitenames = [s.sitename for s in six.itervalues(self.site_dict)]
 
         return sitenames
 
@@ -1512,9 +1518,9 @@ class graph(object):
         dm = zeros((d, d), float)
         ap = zeros((d, d), float)
         i = 0
-        for sitei in g.iterkeys():
+        for sitei in six.iterkeys(g):
             j = 0
-            for sitej in g.keys()[:i]: #calculates only the lower triangle
+            for sitej in list(g.keys())[:i]: #calculates only the lower triangle
                 sp = self.shortestPath(g, sitei, sitej)
                 lsp = self.getShortestPathLength(sitei, sp) #length of the shortestpath
                 self.shortPathList.append((sitei, sitej, sp, lsp))
@@ -1557,7 +1563,7 @@ class graph(object):
             pass
         if not self.graphdict: #this generates site neighbors lists
             self.getGraphdict()
-        site_list = self.site_dict.values()
+        site_list = list(self.site_dict.values())
         nsites = len(self.site_dict)
         cm = zeros((nsites, nsites), float)
         for i, sitei in enumerate(site_list):
@@ -1636,7 +1642,7 @@ class graph(object):
         The weight of all nodes in the graph (W(G)) is the summation
         of each node's order (o) multiplied by 2 for all orders above 1.
         """
-        degrees = [i.getDegree() for i in self.site_dict.itervalues()]
+        degrees = [i.getDegree() for i in six.itervalues(self.site_dict)]
         W = sum([i * 2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
         return float(W)
 
@@ -1783,14 +1789,14 @@ class graph(object):
         """
         Returns the total number of vaccinated.
         """
-        tot = sum([i.nVaccinated for i in self.site_dict.itervalues()])
+        tot = sum([i.nVaccinated for i in six.itervalues(self.site_dict)])
         return tot
 
     def getTotQuarantined(self):
         """
         Returns the total number of quarantined individuals.
         """
-        tot = sum([i.nQuarantined for i in self.site_dict.itervalues()])
+        tot = sum([i.nQuarantined for i in six.itervalues(self.site_dict)])
         return tot
 
     def getEpistats(self):
@@ -1819,7 +1825,7 @@ class graph(object):
         """
         Returns the size of the epidemic
         """
-        N = sum([site.totalcases for site in self.site_dict.itervalues()])
+        N = sum([site.totalcases for site in six.itervalues(self.site_dict)])
 
         return N
 
@@ -1853,11 +1859,11 @@ class graph(object):
         """
 
         g = NX.MultiDiGraph()
-        for gc, n in self.site_dict.iteritems():
+        for gc, n in six.iteritems(self.site_dict):
             g.add_node(gc, attr_dict={
                 'name': n.sitename,
             })
-        for ed, e in self.edge_dict.iteritems():
+        for ed, e in six.iteritems(self.edge_dict):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
         NX.write_graphml(g, pa)
         nl = json_graph.node_link_data(g)
@@ -1901,7 +1907,7 @@ class priorityDictionary(dict):
         Find smallest item after removing deleted items from heap.
         '''
         if len(self) == 0:
-            raise IndexError, "smallest of empty priorityDictionary"
+            raise IndexError("smallest of empty priorityDictionary")
         heap = self.__heap
         while heap[0][1] not in self or self[heap[0][1]] != heap[0][0]:
             lastItem = heap.pop()
@@ -1940,7 +1946,7 @@ class priorityDictionary(dict):
         dict.__setitem__(self, key, val)
         heap = self.__heap
         if len(heap) > 2 * len(self):
-            self.__heap = [(v, k) for k, v in self.iteritems()]
+            self.__heap = [(v, k) for k, v in six.iteritems(self)]
             self.__heap.sort()  # builtin sort likely faster than O(n) heapify
         else:
             newPair = (val, key)

@@ -2,7 +2,10 @@
 This module generates a report of the network simulation model
 using LaTeX.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 import os, sys, commands, string, time, matplotlib, codecs
+from six.moves import range
 #matplotlib.use("Agg")
 
 #from pylab import *
@@ -348,12 +351,12 @@ class report:
         cuminc=[sum(incidence[:i]) for i in range(len(incidence))]
         
         infc = site.thetahist
-        bar(range(len(cuminc)),cuminc)
+        bar(list(range(len(cuminc))),cuminc)
         xlabel('Time')
         ylabel('Incidence')
         savefig('inc.png')
         close()
-        bar(range(len(infc)),infc)
+        bar(list(range(len(infc))),infc)
         xlabel('Time')
         ylabel('Infectious individuous')
         savefig('inf.png')
@@ -382,7 +385,7 @@ class report:
         """
         epistats = self.sim.g.getEpistats()
         cumcities = [sum(epistats[1][:i]) for i in range(len(epistats[1]))]
-        bar(range(len(cumcities)),cumcities)
+        bar(list(range(len(cumcities))),cumcities)
         ylabel=('Number of infected cities')
         xlabel=('Time')
         savefig('sp.png')
@@ -439,7 +442,7 @@ class report:
         Path = Path.replace(' ','-')
         os.system('mkdir '+Path)
         os.chdir(Path)
-        print "Starting report generation..."
+        print("Starting report generation...")
         
         sitehead = r"""
                 \chapter{Site Specific Analyses}"
@@ -476,7 +479,7 @@ class report:
                     latexsrc += self.siteReport(site)
             latexsrc += tail
             timer = time.clock()-start
-            print 'Time to generate Network report: %s seconds.'% timer
+            print('Time to generate Network report: %s seconds.'% timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate Network report: %s seconds.'% timer,-1)
             self.savenBuild('Netreport',latexsrc)
@@ -489,7 +492,7 @@ class report:
                     latexsrc += self.genSiteEpi(site)
             latexsrc +=  tail
             timer = time.clock()-start
-            print 'Time to generate Epidemiological report: %s seconds.'% timer
+            print('Time to generate Epidemiological report: %s seconds.'% timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.'% timer,-1)
             self.savenBuild('epireport',latexsrc)
@@ -508,7 +511,7 @@ class report:
                     latexsrc += self.genSiteEpi(site)
             latexsrc += tail
             timer = time.clock()-start
-            print 'Time to generate full report: %s seconds.'% timer
+            print('Time to generate full report: %s seconds.'% timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate full report: %s seconds.'% timer,-1)
             self.savenBuild('fullreport',latexsrc)
@@ -520,7 +523,7 @@ class report:
         if self.sim.gui:
             self.sim.gui.textEdit1.insertParagraph(string,-1)
         else:
-            print string
+            print(string)
     
     def savenBuild(self,name,src):
         """

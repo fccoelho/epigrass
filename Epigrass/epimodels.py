@@ -1,6 +1,3 @@
-# coding:utf-8
-from __future__ import division
-
 """
 Library of discrete time Epidemic models
 
@@ -49,6 +46,7 @@ class Epimodel(object):
     """
     Defines a library of discrete time population models
     """
+
     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
     def __init__(self, geocode, modtype=b'', parallel=True):
         """
@@ -66,7 +64,7 @@ class Epimodel(object):
         self.update_redis(res)
         # return res
 
-    @cython.locals( simstep='long', totpop='long', theta='double', npass='double')
+    @cython.locals(simstep='long', totpop='long', theta='double', npass='double')
     def get_args_from_redis(self):
         """
         get updated parameters from the redis database.
@@ -105,6 +103,7 @@ class Epimodel(object):
             redisclient.rpush("epipath", (infected, self.geocode, {}))  # TODO: replace empty dict with infectors
             # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
             # TODO: have infector be stated in terms of geocodes
+
 
 @cython.locals(Type='bytes')
 def selectModel(Type):
@@ -157,7 +156,7 @@ def selectModel(Type):
 
             return CustomModel.Model
         except ImportError:
-            print "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
+            print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
     else:
         sys.exit('Model type specified in .epg file is invalid')
 
@@ -252,7 +251,7 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 
     # Migrating infecctious
     migInf = (
-        Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
+            Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
             Is1pos + Is2pos + Is3pos + Is4pos))
     # Return variable values
 
@@ -260,7 +259,8 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
             Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
 
-@cython.locals(inits= 'object', simstep='long', totpop='long', theta='double', npass='double',
+
+@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')

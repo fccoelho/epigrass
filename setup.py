@@ -1,4 +1,3 @@
-# -*- coding:utf8 -*-
 from setuptools import setup
 from Cython.Build import cythonize
 from Epigrass.__version__ import version
