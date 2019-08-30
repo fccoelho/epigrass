@@ -23,11 +23,6 @@ setup(name='epigrass',
           'console_scripts': [
               'epirunner = Epigrass.manager:main',
           ],
-          'gui_scripts': [
-              'epigrass = Epigrass.epigrass:main',
-              'epgeditor= Epigrass.epgeditor:main',
-              'neteditor= Epigrass.neteditor:main'
-          ]
       },
       ext_modules=cythonize('Epigrass/epimodels.py'),
       zip_safe=False,

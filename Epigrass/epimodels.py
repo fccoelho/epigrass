@@ -110,45 +110,45 @@ def selectModel(Type):
     """
     Sets the model engine
     """
-    if Type == 'SIR':
+    if Type == b'SIR':
         return stepSIR
-    elif Type == 'SIR_s':
+    elif Type == b'SIR_s':
         return stepSIR_s
-    elif Type == 'SIS':
+    elif Type == b'SIS':
         return stepSIS
-    elif Type == 'SIS_s':
+    elif Type == b'SIS_s':
         return stepSIS_s
-    elif Type == 'SEIS':
+    elif Type == b'SEIS':
         return stepSEIS
-    elif Type == 'SEIS_s':
+    elif Type == b'SEIS_s':
         return stepSEIS_s
-    elif Type == 'SEIR':
+    elif Type == b'SEIR':
         return stepSEIR
-    elif Type == 'SEIR_s':
+    elif Type == b'SEIR_s':
         return stepSEIR_s
-    elif Type == 'SIpRpS':
+    elif Type == b'SIpRpS':
         return stepSIpRpS
-    elif Type == 'SIpRpS_s':
+    elif Type == b'SIpRpS_s':
         return stepSIpRpS_s
-    elif Type == 'SEIpRpS':
+    elif Type == b'SEIpRpS':
         return stepSEIpRpS
-    elif Type == 'SEIpRpS_s':
+    elif Type == b'SEIpRpS_s':
         return stepSEIpRpS_s
-    elif Type == 'SIpR':
+    elif Type == b'SIpR':
         return stepSIpR
-    elif Type == 'SIpR_s':
+    elif Type == b'SIpR_s':
         return stepSIpR_s
-    elif Type == 'SEIpR':
+    elif Type == b'SEIpR':
         return stepSEIpR
-    elif Type == 'SEIpR_s':
+    elif Type == b'SEIpR_s':
         return stepSEIpR_s
-    elif Type == 'SIRS':
+    elif Type == b'SIRS':
         return stepSIRS
-    elif Type == 'SIRS_s':
+    elif Type == b'SIRS_s':
         return stepSIRS_s
-    elif Type == 'Influenza':
+    elif Type == b'Influenza':
         return stepFlu
-    elif Type == 'Custom':
+    elif Type == b'Custom':
         # adds the user model as a method of instance self
         try:
             # TODO: move this import to the graph level

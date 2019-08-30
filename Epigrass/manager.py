@@ -1,4 +1,4 @@
-# ! /usr/bin/env python
+#! /usr/bin/env python3
 """
 Model Management and simulation objects.
 """
@@ -11,18 +11,17 @@ from numpy import *
 from collections import OrderedDict
 from argparse import ArgumentParser
 import six.moves.configparser
-import string
 import json
 import sqlite3
 import os
 import getpass
 import pymysql.cursors
 import numpy as np
-from .simobj import graph, edge, siteobj
-from . import spread
-from .data_io import *
-from . import epigdal
-from . import __version__
+from Epigrass.simobj import graph, edge, siteobj
+from Epigrass import spread
+from Epigrass.data_io import *
+from Epigrass import epigdal
+from Epigrass import __version__
 import requests
 import six
 from six.moves import range
@@ -30,11 +29,6 @@ from six.moves import zip
 from six.moves import input
 
 
-# import pydevd
-# pydevd.settrace('localhost', port=39347, stdoutToServer=True, stderrToServer=True)
-
-
-# import pycallgraph
 
 
 class simulate:
@@ -92,9 +86,9 @@ class simulate:
         cp = six.moves.configparser.SafeConfigParser()
         cp.read(fname)
         for sec in cp.sections():
-            name = string.lower(sec)
+            name = sec.lower()
             for opt in cp.options(sec):
-                config[name + "." + string.lower(opt)] = string.strip(cp.get(sec, opt))
+                config[name + "." + opt.lower()] = cp.get(sec, opt).strip()
         return config
 
     def evalConfig(self, config):
