@@ -465,7 +465,9 @@ class simulate:
         self.Say('Saving series to JSON')
         series = {}
         for gc, s in six.iteritems(self.g.site_dict):
-            ts = np.array(s.ts)
+            length = max(map(len, s.ts))
+            y = np.array([xi + [None] * (length - len(xi)) for xi in s.ts])
+            ts = np.array(y)
             sdict = {}
             for i, vn in enumerate(s.vnames):
                 sdict[vn] = ts[:, i].tolist()

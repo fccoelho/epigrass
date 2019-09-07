@@ -1855,7 +1855,7 @@ class graph(object):
             g.add_node(gc, name=n.sitename)
         for ed, e in six.iteritems(self.edge_dict):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
-        print(g.nodes)
+        # print(g.nodes)
         # NX.write_graphml_lxml(g, pa)
         NX.write_gexf(g, pa)
         NX.write_gml(g, pa.replace('gexf', 'gml'))
