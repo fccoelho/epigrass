@@ -67,10 +67,11 @@ class Epimodel(object):
     @cython.locals(simstep='long', totpop='long', theta='double', npass='double')
     def get_args_from_redis(self):
         """
-        get updated parameters from the redis database.
-        :param geocode: geocode of the site running this model.
+        Get updated parameters from the redis database.
         """
-        inits = [int(nan_to_num(i)) for i in eval(redisclient.lindex("{}:inits".format(self.geocode), -1))]
+        sinits = redisclient.lrange("{}:inits".format(self.geocode),-1,-1)
+        # print(sinits)
+        inits = eval(sinits[0])
         simstep = int(redisclient.get("simstep"))
         totpop = int(float(redisclient.get("{}:totpop".format(self.geocode))))
         theta = int(nan_to_num(float(redisclient.get("{}:theta".format(self.geocode)))))
@@ -89,8 +90,9 @@ class Epimodel(object):
         """
         # Site state
         state, Lpos, migInf = results
-        redisclient.rpush("{}:inits".format(self.geocode), state)  # updating inits
-        redisclient.rpush('{}:ts'.format(self.geocode), state)
+        # print("Updating redis: ", state, migInf)
+        redisclient.rpush("{}:inits".format(self.geocode), str(state))  # updating inits
+        redisclient.rpush('{}:ts'.format(self.geocode), str(state))
         redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
         totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
         redisclient.set('{}:totalcases'.format(self.geocode), Lpos + totc)
@@ -100,55 +102,57 @@ class Epimodel(object):
         # Graph state
         if Lpos > 0:
             infected = int(redisclient.get("simstep"))
-            redisclient.rpush("epipath", (infected, self.geocode, {}))  # TODO: replace empty dict with infectors
+            redisclient.rpush("epipath", str((infected, self.geocode, {})))  # TODO: replace empty dict with infectors
             # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
             # TODO: have infector be stated in terms of geocodes
 
 
 @cython.locals(Type='bytes')
-def selectModel(Type):
+def selectModel(modtype):
     """
     Sets the model engine
     """
-    if Type == b'SIR':
+    if isinstance(modtype, str):
+        modtype = bytes(modtype, 'utf8')
+    if modtype == b'SIR':
         return stepSIR
-    elif Type == b'SIR_s':
+    elif modtype == b'SIR_s':
         return stepSIR_s
-    elif Type == b'SIS':
+    elif modtype == b'SIS':
         return stepSIS
-    elif Type == b'SIS_s':
+    elif modtype == b'SIS_s':
         return stepSIS_s
-    elif Type == b'SEIS':
+    elif modtype == b'SEIS':
         return stepSEIS
-    elif Type == b'SEIS_s':
+    elif modtype == b'SEIS_s':
         return stepSEIS_s
-    elif Type == b'SEIR':
+    elif modtype == b'SEIR':
         return stepSEIR
-    elif Type == b'SEIR_s':
+    elif modtype == b'SEIR_s':
         return stepSEIR_s
-    elif Type == b'SIpRpS':
+    elif modtype == b'SIpRpS':
         return stepSIpRpS
-    elif Type == b'SIpRpS_s':
+    elif modtype == b'SIpRpS_s':
         return stepSIpRpS_s
-    elif Type == b'SEIpRpS':
+    elif modtype == b'SEIpRpS':
         return stepSEIpRpS
-    elif Type == b'SEIpRpS_s':
+    elif modtype == b'SEIpRpS_s':
         return stepSEIpRpS_s
-    elif Type == b'SIpR':
+    elif modtype == b'SIpR':
         return stepSIpR
-    elif Type == b'SIpR_s':
+    elif modtype == b'SIpR_s':
         return stepSIpR_s
-    elif Type == b'SEIpR':
+    elif modtype == b'SEIpR':
         return stepSEIpR
-    elif Type == b'SEIpR_s':
+    elif modtype == b'SEIpR_s':
         return stepSEIpR_s
-    elif Type == b'SIRS':
+    elif modtype == b'SIRS':
         return stepSIRS
-    elif Type == b'SIRS_s':
+    elif modtype == b'SIRS_s':
         return stepSIRS_s
-    elif Type == b'Influenza':
+    elif modtype == b'Influenza':
         return stepFlu
-    elif Type == b'Custom':
+    elif modtype == b'Custom':
         # adds the user model as a method of instance self
         try:
             # TODO: move this import to the graph level
@@ -175,32 +179,32 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
               'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
     if simstep == 1:  # get initial values
-        S1, E1, Is1, Ic1, Ig1 = (bi['susc_age1'], bi['incub_age1'], bi['subc_age1'], bi['sympt_age1'], bi['comp_age1'])
-        S2, E2, Is2, Ic2, Ig2 = (bi['susc_age2'], bi['incub_age2'], bi['subc_age2'], bi['sympt_age2'], bi['comp_age2'])
-        S3, E3, Is3, Ic3, Ig3 = (bi['susc_age3'], bi['incub_age3'], bi['subc_age3'], bi['sympt_age3'], bi['comp_age3'])
-        S4, E4, Is4, Ic4, Ig4 = (bi['susc_age4'], bi['incub_age4'], bi['subc_age4'], bi['sympt_age4'], bi['comp_age4'])
+        S1, E1, Is1, Ic1, Ig1 = (bi[b'susc_age1'], bi[b'incub_age1'], bi[b'subc_age1'], bi[b'sympt_age1'], bi[b'comp_age1'])
+        S2, E2, Is2, Ic2, Ig2 = (bi[b'susc_age2'], bi[b'incub_age2'], bi[b'subc_age2'], bi[b'sympt_age2'], bi[b'comp_age2'])
+        S3, E3, Is3, Ic3, Ig3 = (bi[b'susc_age3'], bi[b'incub_age3'], bi[b'subc_age3'], bi[b'sympt_age3'], bi[b'comp_age3'])
+        S4, E4, Is4, Ic4, Ig4 = (bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])
     else:  # get values from last time step
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
     N = totpop
 
     # for k, v in bp.items():
     #     exec ('%s = %s' % (k, v))
-    alpha = bp['alpha']
-    beta = bp['beta']
-    r = bp['r']
-    e = bp['e']
-    c = bp['c']
-    g = bp['g']
-    d = bp['d']
-    pc1 = bp['pc1']
-    pc2 = bp['pc2']
-    pc3 = bp['pc3']
-    pc4 = bp['pc4']
-    pp1 = bp['pp1']
-    pp2 = bp['pp2']
-    pp3 = bp['pp3']
-    pp4 = bp['pp4']
-    b = bp['b']
+    alpha = bp[b'alpha']
+    beta = bp[b'beta']
+    r = bp[b'r']
+    e = bp[b'e']
+    c = bp[b'c']
+    g = bp[b'g']
+    d = bp[b'd']
+    pc1 = bp[b'pc1']
+    pc2 = bp[b'pc2']
+    pc3 = bp[b'pc3']
+    pc4 = bp[b'pc4']
+    pp1 = bp[b'pp1']
+    pp2 = bp[b'pp2']
+    pp3 = bp[b'pp3']
+    pp4 = bp[b'pp4']
+    b = bp[b'b']
 
     # Vacination event
 
@@ -352,17 +356,18 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
+    # print(inits)
     if simstep == 1:  # get initial values
-        E, I, S = (bi['e'], bi['i'], bi['s'])
+        E, I, S = (bi.get(b'e', 0), bi[b'i'], bi[b's'])
     else:
         E, I, S = inits
     N = totpop
-    beta = bp['beta'];
-    alpha = bp['alpha'];
+    beta = bp[b'beta'];
+    alpha = bp[b'alpha'];
     # e = bp['e'];
-    r = bp['r'];
+    r = bp[b'r'];
     # delta = bp['delta'];
-    b = bp['b'];
+    b = bp[b'b'];
     # w = bp['w'];
     # p = bp['p']
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -375,7 +380,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     # Migrating infecctious
     migInf = Ipos
 
-    return [0, Ipos, Spos], Lpos, migInf
+    return (0, Ipos, Spos), Lpos, migInf
 
 
 @cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',

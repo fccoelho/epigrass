@@ -155,6 +155,7 @@ class simulate:
         self.inits = OrderedDict()
         self.parms = {}
         for k, v in config.items():
+
             if k.startswith('initial conditions'):
                 self.inits[k.split('.')[-1]] = v
             elif k.startswith('model parameters'):
@@ -224,6 +225,7 @@ class simulate:
             # eval parms and inits
             for k, v in self.inits.items():
                 inits[k] = eval(v)
+                inits[k.lower()] = eval(v)
             for k, v in self.parms.items():
                 parms[k] = eval(v)
 

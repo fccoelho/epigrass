@@ -153,15 +153,18 @@ class siteobj(object):
         simstep = self.parentGraph.simstep
         inits = self.ts[-1]
         totpop = self.totpop
+        # print("writing inits: ", inits)
         # ---------------------
+        # print ([type(x) for x in [totpop, npass, theta, simstep]] )
         pipe = redisclient.pipeline()
-        pipe.set("simstep", simstep) \
-            .set("{}:totpop".format(self.geocode), totpop) \
-            .rpush("{}:inits".format(self.geocode), inits) \
-            .set("{}:npass".format(self.geocode), npass) \
-            .set("{}:theta".format(self.geocode), theta) \
-            .hmset("{}:bi".format(self.geocode), self.bi) \
-            .hmset("{}:bp".format(self.geocode), self.bp).execute()
+        pipe.set("simstep", simstep)
+        pipe.set("{}:totpop".format(self.geocode), totpop)
+        pipe.rpush("{}:inits".format(self.geocode), str(inits))
+        pipe.set("{}:npass".format(self.geocode), float(npass))
+        pipe.set("{}:theta".format(self.geocode), int(nan_to_num(theta)))
+        pipe.hmset("{}:bi".format(self.geocode), self.bi)
+        pipe.hmset("{}:bp".format(self.geocode), self.bp)
+        pipe.execute()
         # ------------------------
         if parallel:
 
