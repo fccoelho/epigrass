@@ -5,6 +5,8 @@ export the results of Epigrass simulations to the formats supported by these lib
 copyright 2007,2012 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 import locale, os, pylab
 from osgeo import ogr, osr, gdal
 from xml.dom import minidom, Node
@@ -14,6 +16,9 @@ from matplotlib import cm
 from numpy import array
 from zipfile import ZipFile
 import json
+import six
+from six.moves import range
+from six.moves import zip
 
 
 class World:
@@ -60,7 +65,7 @@ class World:
         """
         nlay = self.ds.GetLayerCount()
         ln = []
-        for i in xrange(nlay):
+        for i in range(nlay):
             l = self.ds.GetLayer(i)
             ln.append(l.GetName())
         return ln
@@ -110,7 +115,7 @@ class World:
                 self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(), c.GetY(), c.GetZ())
                 self.namedict[f.GetFieldAsInteger(self.geocfield)] = f.GetField(self.namefield)
             except:  # in case feature is not a polygon
-                print  f.GetFID(), g.GetGeometryType()
+                print(f.GetFID(), g.GetGeometryType())
             f = l.GetNextFeature()
             # print (2600501 in self.centdict)
 
@@ -291,7 +296,7 @@ class World:
         :Parameters:
         :parameter dl: datalayer to save
         """
-        print "==> saving to GeoJSON"
+        print("==> saving to GeoJSON")
         spatial_reference = dl.GetSpatialRef()
 
         feature_collection = {"type": "FeatureCollection",
@@ -439,7 +444,7 @@ class AnimatedKML(object):
             ts.appendChild(w)
             pm_newtime.appendChild(ts)
             self.doc.appendChild(pm_newtime)
-        for pm in self.pmdict.itervalues():
+        for pm in six.itervalues(self.pmdict):
             self.doc.removeChild(pm)
         self.pmdict = {}
 
@@ -563,7 +568,7 @@ class KmlGenerator:
                     try:
                         name = str(geoc) + "-" + names[geoc]
                     except KeyError:
-                        print geoc
+                        print(geoc)
                         name = ""
                 description = "Prevalence: %s;\nTotal cases: %s;\nImported Cases: %s;" % (
                     prevalence, f.GetField("totalcases"), f.GetField("arrivals"))
@@ -628,9 +633,9 @@ def gdal_error_handler(err_class, err_num, err_msg):
     }
     err_msg = err_msg.replace('\n', ' ')
     err_class = errtype.get(err_class, 'None')
-    print 'Error Number: %s' % (err_num)
-    print 'Error Type: %s' % (err_class)
-    print 'Error Message: %s' % (err_msg)
+    print('Error Number: %s' % (err_num))
+    print('Error Type: %s' % (err_class))
+    print('Error Message: %s' % (err_msg))
 
 
 # install error handler

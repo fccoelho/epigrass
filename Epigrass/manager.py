@@ -1,33 +1,33 @@
-# ! /usr/bin/env python
+#! /usr/bin/env python3
 """
 Model Management and simulation objects.
 """
-import cPickle
+from __future__ import absolute_import
+from __future__ import print_function
+import pickle
 import time
 from copy import deepcopy
 from numpy import *
 from collections import OrderedDict
 from argparse import ArgumentParser
-import ConfigParser
-import string
+import six.moves.configparser
 import json
 import sqlite3
 import os
 import getpass
-import MySQLdb
+from tqdm import tqdm
+import pymysql.cursors
 import numpy as np
-from simobj import graph, edge, siteobj
-import spread
-from data_io import *
-import epigdal
-import __version__
+from Epigrass.simobj import graph, edge, siteobj
+from Epigrass import spread
+from Epigrass.data_io import *
+from Epigrass import epigdal
+from Epigrass import __version__
 import requests
-# import pydevd
-# pydevd.settrace('localhost', port=39347, stdoutToServer=True, stderrToServer=True)
-
-
-
-#import pycallgraph
+import six
+from six.moves import range
+from six.moves import zip
+from six.moves import input
 
 
 
@@ -39,7 +39,7 @@ class simulate:
 
     def __init__(self, fname=None, host='localhost', port=3306, db='epigrass', user='epigrass', password='epigrass',
                  backend='sqlite', silent=False):
-        #pycallgraph.start_trace()
+        # pycallgraph.start_trace()
         #        self.pool = multiprocessing.Pool()
         self.parallel = True
         self.host = host
@@ -55,9 +55,9 @@ class simulate:
         self.shpout = True
         self.silent = silent
         self.dir = os.getcwd()
-        sys.path.insert(0, self.dir)  #add current path to sys.path
+        sys.path.insert(0, self.dir)  # add current path to sys.path
         self.gui = 0  # True if this object was created by the gui
-        self.now = time.asctime().replace(' ', '_').replace(':', '')  #current date and time
+        self.now = time.asctime().replace(' ', '_').replace(':', '')  # current date and time
         self.modelName = os.path.split(self.fname)[-1].split('.')[0]
         self.config = self.loadModelScript(self.fname)
         self.evalConfig(self.config)
@@ -65,17 +65,16 @@ class simulate:
             self.outdir = outdir = 'outdata-' + self.modelName
         if not os.path.exists(self.outdir):
             os.mkdir(self.outdir)
-        if self.shapefile:  #create world object if a shapefile is provided
+        if self.shapefile:  # create world object if a shapefile is provided
             self.World = epigdal.World(*self.shapefile + [self.outdir])
         self.chkScript()
-        self.encoding = 'utf-8'  #default encoding for strings in the sites and edges files
-        self.round = 0  #No replicates
+        self.encoding = 'utf-8'  # default encoding for strings in the sites and edges files
+        self.round = 0  # No replicates
         sitios = loadData(self.sites, sep=',', encoding=self.encoding)
         ed = loadData(self.edges, sep=',', encoding=self.encoding)
         l = self.instSites(sitios)
         e = self.instEdges(l, ed)
         self.g = self.instGraph(self.modelName, 1, l, e)
-
 
     def loadModelScript(self, fname):
         """
@@ -85,12 +84,12 @@ class simulate:
         """
         config = {}
         config = config.copy()
-        cp = ConfigParser.SafeConfigParser()
+        cp = six.moves.configparser.SafeConfigParser()
         cp.read(fname)
         for sec in cp.sections():
-            name = string.lower(sec)
+            name = sec.lower()
             for opt in cp.options(sec):
-                config[name + "." + string.lower(opt)] = string.strip(cp.get(sec, opt))
+                config[name + "." + opt.lower()] = cp.get(sec, opt).strip()
         return config
 
     def evalConfig(self, config):
@@ -98,22 +97,22 @@ class simulate:
         Takes in the config dictionary and generates the global variables needed.
         """
         try:
-            #WORLD
-            #load Shapefile if specified
+            # WORLD
+            # load Shapefile if specified
             if config['the world.shapefile']:
                 self.shapefile = eval(config['the world.shapefile'])
             else:
                 self.shapefile = []
 
-            #self.layer = config['the world.vector layer']
-            self.sites = config['the world.sites']  #file containing site info
-            self.edges = config['the world.edges']  #file containing edge info
+            # self.layer = config['the world.vector layer']
+            self.sites = config['the world.sites']  # file containing site info
+            self.edges = config['the world.edges']  # file containing edge info
             if config['the world.encoding']:
-                self.encoding = config['the world.encoding']  #encoding specification
-            #Epidemiological model
+                self.encoding = config['the world.encoding']  # encoding specification
+            # Epidemiological model
             self.modtype = config['epidemiological model.modtype']
-            #self.models = eval(config['epidemiological model.models'])
-            #PARAMETERS
+            # self.models = eval(config['epidemiological model.models'])
+            # PARAMETERS
             self.beta = config['model parameters.beta']
             self.alpha = config['model parameters.alpha']
             self.e = config['model parameters.e']
@@ -122,21 +121,21 @@ class simulate:
             self.B = config['model parameters.b']
             self.w = config['model parameters.w']
             self.p = config['model parameters.p']
-            #INITIAL CONDITIONS  (inits are string to evaluated inside siteobj.createmodel)
-            #self.S = config['initial conditions.s']
-            #self.E = config['initial conditions.e']
-            #self.I = config['initial conditions.i']
-            #EPIDEMIC EVENTS
+            # INITIAL CONDITIONS  (inits are string to evaluated inside siteobj.createmodel)
+            # self.S = config['initial conditions.s']
+            # self.E = config['initial conditions.e']
+            # self.I = config['initial conditions.i']
+            # EPIDEMIC EVENTS
             self.seed = eval(config['epidemic events.seed'])
             self.vaccinate = eval(config['epidemic events.vaccinate'])
-            #self.quarantine = eval(config['epidemic events.quarantine'])
+            # self.quarantine = eval(config['epidemic events.quarantine'])
 
-            #[TRANSPORTATION MODEL]
+            # [TRANSPORTATION MODEL]
             self.doTransp = eval(config['transportation model.dotransp'])
             self.stochTransp = eval(config['transportation model.stochastic'])
             self.speed = eval(config['transportation model.speed'])
 
-            #SIMULATION AND OUTPUT
+            # SIMULATION AND OUTPUT
             self.steps = eval(config['simulation and output.steps'])
             self.outdir = config['simulation and output.outdir']
             self.SQLout = eval(config['simulation and output.sqlout'])
@@ -151,12 +150,13 @@ class simulate:
                 V[1], V[0]))
         if self.replicas:
             #            self.Rep = 0 #Turns off reports
-            self.Batch = []  #Turns off Batch mode
+            self.Batch = []  # Turns off Batch mode
             self.round = 0  # Initialize replicate counter
             # generate dictionaries for parameters and inits
         self.inits = OrderedDict()
         self.parms = {}
         for k, v in config.items():
+
             if k.startswith('initial conditions'):
                 self.inits[k.split('.')[-1]] = v
             elif k.startswith('model parameters'):
@@ -194,7 +194,6 @@ class simulate:
 
         return result
 
-
     def instSites(self, sitelist):
         """
         Instantiates and returns a list of siteobj instances, from a list of site specification
@@ -209,24 +208,25 @@ class simulate:
                 raise ValueError("This line in your sites file has a different number elements:\n%s" % str(site))
             if ':' in site[0]:
                 lat = self.deg2dec(site[0])
-                long = self.deg2dec(site[1])
+                longit = self.deg2dec(site[1])
             else:
                 lat = float(site[0])
-                long = float(site[1])
-            objlist.append(siteobj(site[2], site[3], (lat, long), int(strip(site[4])),
+                longit = float(site[1])
+            objlist.append(siteobj(site[2], site[3], (lat, longit), int((site[4]).strip()),
                                    tuple([float(i.strip()) for i in site[5:]])))
         for o in objlist:
             if self.stochTransp:
                 o.stochtransp = 1
             else:
                 o.stochtransp = 0
-            N = o.totpop  #local copy for reference on model creation
-            values = o.values  #local copy for reference on model creation
+            N = o.totpop  # local copy for reference on model creation
+            values = o.values  # local copy for reference on model creation
             inits = OrderedDict()
             parms = {}
-            #eval parms and inits
+            # eval parms and inits
             for k, v in self.inits.items():
                 inits[k] = eval(v)
+                inits[k.lower()] = eval(v)
             for k, v in self.parms.items():
                 parms[k] = eval(v)
 
@@ -243,11 +243,11 @@ class simulate:
                             #                        o.quarantine == i[1:]
 
             if self.seed:
-                #print type(o.geocode), type(self.seed[0])
+                # print type(o.geocode), type(self.seed[0])
 
                 for j in self.seed:
                     if int(o.geocode) == j[0] or self.seed[0][0] == "all":
-                        #self.Say("%s infected person(s) arrived at %s"%(j[2],o.sitename))
+                        # self.Say("%s infected person(s) arrived at %s"%(j[2],o.sitename))
                         inits[j[1].lower()] += j[2]
                         o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
                     else:
@@ -265,27 +265,27 @@ class simulate:
         edgelist -- list of edge specifications as returned by data_io.loadData.
         """
         header = edgelist.pop(0)
-        #print [i.sitename for i in sitelist]
+        # print [i.sitename for i in sitelist]
         objlist = []
         source = dest = None
         for edg in edgelist:
-            #print edgelist.index(edg)
+            # print edgelist.index(edg)
             if edg[5] == edg[6]:
-                #ignore circular edges
+                # ignore circular edges
                 continue
             for site in sitelist:
-                #print site.sitename
+                # print site.sitename
                 if str(site.geocode) == edg[5]:
                     source = site
-                    #print 'found source = ',source.sitename
+                    # print 'found source = ',source.sitename
                 elif str(site.geocode) == edg[6]:
                     dest = site
-                    #print 'found dest = ',dest.sitename
+                    # print 'found dest = ',dest.sitename
                 if (source and dest):
-                    #print 'next edge!'
+                    # print 'next edge!'
                     break
             if not (source and dest):
-                #print source ,dest
+                # print source ,dest
                 sys.exit(
                     'One of the vertices on edge ' + edg[0] + '-' + edg[1] + ' could not be found on the site list')
 
@@ -318,9 +318,9 @@ class simulate:
         option: if 1 randomize; if 2, return unrundomized sequence
         """
         if option == 1:
-            poplist = [log10(site.totpop) for site in self.g.site_dict.itervalues()]
+            poplist = [log10(site.totpop) for site in six.itervalues(self.g.site_dict)]
             lpl = len(poplist)
-            popprob = array(poplist) / sum(poplist)  #acceptance probability
+            popprob = array(poplist) / sum(poplist)  # acceptance probability
             u = floor(np.random.uniform(0, lpl, self.replicas))
             sites = []
             i = 0
@@ -340,8 +340,8 @@ class simulate:
         which get n infected cases.
         seed must be a siteobj object.
         '''
-        #inits[self.seed[0][1].lower()] += 1
-        seedvar = self.seed[0][1].lower()  #retrieve the name of the variable containing the seeds
+        # inits[self.seed[0][1].lower()] += 1
+        seedvar = self.seed[0][1].lower()  # retrieve the name of the variable containing the seeds
         self.Say('seedvar= %s' % seedvar)
         site_list = self.g.site_list
         self.seed = [(seed.geocode, seedvar, n)]
@@ -378,9 +378,8 @@ class simulate:
             self.outToShp()
         self.dumpData()
         spread.Spread(self.g, self.outdir, self.encoding)
-        #self.saveModel(self.modelName)
-        #pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
-
+        # self.saveModel(self.modelName)
+        # pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
 
     def createDataFrame(self, site):
         """
@@ -399,8 +398,7 @@ class simulate:
         finally:
             f.close()
 
-        return 'E,I,S\n' + tss
-
+        return 'E,I,S\n' #+ tss
 
     def outToShp(self):
         """
@@ -408,31 +406,31 @@ class simulate:
         """
         if not self.World:
             return
-        #Initialize world output layers
+        # Initialize world output layers
         self.Say("REading Nodes from shapefile...")
         self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
         self.Say("Done reading nodes!")
         self.Say("Creating Nodes shapefile...")
         self.World.create_node_layer()
         self.Say("Done creating Nodes shapefile!")
-        elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in self.g.edge_dict.iteritems()]
+        elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in six.iteritems(self.g.edge_dict)]
         self.Say("Creating Edges shapefile...")
         self.World.create_edge_layer(elist)
         self.Say("Done creating Edges shapefile!")
-        #Generate site epidemic stats
+        # Generate site epidemic stats
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
-                      float(site.totpop)) for site in self.g.site_dict.itervalues()]
-        names = {k: v.sitename for k, v in self.g.site_dict.iteritems()}
+                      float(site.totpop)) for site in six.itervalues(self.g.site_dict)]
+        names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
 
         self.Say("Creating Data shapefile...")
         self.World.create_data_layer(varlist, sitestats)
         self.Say("Done creating Data shapefile!")
-        #Generate the kml too.
+        # Generate the kml too.
         self.out_to_kml(names)
 
         self.Say("Done creating KML files!")
-        #close files
+        # close files
         self.World.close_sources()
 
     def out_to_kml(self, names):
@@ -447,10 +445,10 @@ class simulate:
         site_list = self.g.site_list
         site_dict = self.g.site_dict
         # Temporarily disabled animation output due to the sheer size of the kmz files
-        if len(site_dict) * len(site_dict.values()[0].ts) < 20000:  # Only reasonably sized animations
-            for i, v in enumerate(site_dict.values()[0].vnames):
+        if len(site_dict) * len(list(site_dict.values())[0].ts) < 20000:  # Only reasonably sized animations
+            for i, v in enumerate(list(site_dict.values())[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
-                data = [(str(site.geocode), t, p[i]) for site in site_dict.itervalues() for t, p in enumerate(site.ts)]
+                data = [(str(site.geocode), t, p[i]) for site in six.itervalues(site_dict) for t, p in enumerate(site.ts)]
                 ka.add_data(data)
                 ka.save(v + '_animation')
                 self.Say(v + '_animation')
@@ -466,8 +464,10 @@ class simulate:
         """
         self.Say('Saving series to JSON')
         series = {}
-        for gc, s in self.g.site_dict.iteritems():
-            ts = np.array(s.ts)
+        for gc, s in six.iteritems(self.g.site_dict):
+            length = max(map(len, s.ts))
+            y = np.array([xi + [None] * (length - len(xi)) for xi in s.ts])
+            ts = np.array(y)
             sdict = {}
             for i, vn in enumerate(s.vnames):
                 sdict[vn] = ts[:, i].tolist()
@@ -482,7 +482,7 @@ class simulate:
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
         f = open(table + '_meta', 'w')
-        cfgitems = self.config.items()
+        cfgitems = list(self.config.items())
         h = ';'.join([k.strip().replace(' ', '_').replace('.', '$') for k, v in cfgitems])
         l = ';'.join([v.split('#')[0] for k, v in cfgitems])
         f.write(h + '\n')
@@ -496,24 +496,24 @@ class simulate:
         """
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
-        tablee = table + "_" + self.now + "_e.tab"  #edgetable name
-        table += "_" + self.now + ".tab"  #sitetable name
+        tablee = table + "_" + self.now + "_e.tab"  # edgetable name
+        table += "_" + self.now + ".tab"  # sitetable name
         f = open(table, "w")
         head = ['geocode', 'time', 'totpop', 'name',
                 'lat', 'longit']
         headerwritten = False
-        for site in self.g.site_dict.itervalues():
+        for site in six.itervalues(self.g.site_dict):
             t = 0
             regb = [str(site.geocode), str(t), str(site.totpop),
                     site.sitename.replace('"', '').encode('ascii', 'replace'),
                     str(site.pos[0]), str(site.pos[1])
-            ]
+                    ]
             if site.values:
                 for n, v in enumerate(site.values):
                     head.append('values%s' % n)
                     regb.append(str(v))
-            #print site.sitename, site.ts
-            ts = array(site.ts[1:])  #remove init conds so that ts and inc are the same size
+            # print site.sitename, site.ts
+            ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
             head.extend(['incidence', 'arrivals'])
             for n, v in enumerate(site.vnames):
                 head.append(str(v))
@@ -530,7 +530,7 @@ class simulate:
                 f.write(','.join(reg) + '\n')
                 t += 1
         f.close()
-        #inserting data in edges file
+        # inserting data in edges file
         g = open(tablee, 'w')
         t = 0
         head = ['source_code', 'dest_code', 'time', 'ftheta', 'btheta']
@@ -590,7 +590,7 @@ class simulate:
     #        #saving pickle of adjacency matrix
     #        matname = 'adj_'+self.modelName # table
     #        adjfile = open(matname,'w')
-    #        cPickle.dump(self.g.getConnMatrix(),adjfile)
+    #        pickle.dump(self.g.getConnMatrix(),adjfile)
     #        adjfile.close()
     #        #calling insert function
     #        if mode == 'b':
@@ -694,7 +694,7 @@ class simulate:
         try:
             table = table + '_meta'
             if self.backend.lower() == "mysql":
-                con = MySQLdb.connect(host=self.host, port=self.port,
+                con = pymysql.connect(host=self.host, port=self.port,
                                       user=self.usr, passwd=self.passw, db=self.db)
             elif self.backend.lower() == "sqlite":
                 if not self.outdir == os.getcwd():
@@ -704,13 +704,13 @@ class simulate:
             # Create table
             sqlstr1 = "CREATE TABLE %s(" % table
             vars = []
-            cfgitems = self.config.items()
+            cfgitems = list(self.config.items())
             for k, v in cfgitems:
                 vars.append(k.strip().replace(' ', '_').replace('.', '$'))
             sqlstr2 = ', '.join(["%s text" % i for i in vars])
             Cursor = con.cursor()
             Cursor.execute(sqlstr1 + sqlstr2 + ');')
-            #doing inserts
+            # doing inserts
             values = [v.split('#')[0] for k, v in cfgitems]
             #            for k, v in cfgitems:
             #                v = v.split('#')[0]
@@ -719,7 +719,7 @@ class simulate:
             #                values.append()
             str3 = ','.join(['"%s"' % i for i in values]) + ')'
             sqlstr3 = '''INSERT INTO %s VALUES(%s''' % (table, str3)
-            #print sqlstr3
+            # print sqlstr3
             Cursor.execute(sqlstr3)
         finally:
             if con:
@@ -743,7 +743,7 @@ class simulate:
             self.writeMetaTable(table)
             self.outtable = table
             if self.backend.lower() == "mysql":
-                con = MySQLdb.connect(host=self.host, port=self.port,
+                con = pymysql.connect(host=self.host, port=self.port,
                                       user=self.usr, passwd=self.passw, db=self.db)
             elif self.backend.lower() == "sqlite":
                 if not self.outdir == os.getcwd():
@@ -751,15 +751,15 @@ class simulate:
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(self.g.site_dict.values()[0].ts[
-                -1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
+            nvar = len(list(self.g.site_dict.values())[0].ts[
+                           -1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
             str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
-            varnames = ['lat', 'longit'] + list(self.g.site_dict.values()[0].vnames) + ['incidence'] + ['Arrivals']
+            varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + ['Arrivals']
             #            print nvar, varnames, str1
-            print nvar, len(varnames)
-            str1 = str1[:-1] % tuple(varnames)  #insert variable names (MySQL)
-            str1lite = str1lite[:len(str1lite) - 1] % tuple(varnames)  #insert variable names (SQLITE)
+            print((nvar, len(varnames)))
+            str1 = str1[:-1] % tuple(varnames)  # insert variable names (MySQL)
+            str1lite = str1lite[:len(str1lite) - 1] % tuple(varnames)  # insert variable names (SQLITE)
             Cursor = con.cursor()
             str2 = """CREATE TABLE %s(
             `geocode` INT( 9 )  ,
@@ -784,22 +784,23 @@ class simulate:
                 str3 = str3[:-1] + ')'
             sql2 = 'INSERT INTO %s' % table + ' VALUES(' + str3
             nvalues = []
-            for site in self.g.site_dict.itervalues():
+            for site in six.itervalues(self.g.site_dict):
                 geoc = site.geocode
                 lat = site.pos[0]
-                long = site.pos[1]
+                longit = site.pos[1]
                 name = site.sitename
-                ts = array(site.ts[1:])  #remove init conds so that ts and inc are the same size
+                ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
                 inc = site.incidence
                 thist = site.thetahist
                 t = 0
                 for incid, flow in zip(inc, thist):
                     tstep = str(t)
                     flow = float(thist[t])
-                    nvalues.append(tuple([geoc, tstep, name] + [lat, long] + list(ts[t]) + [incid] + [flow]))
+                    nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
                     t += 1
+            # print(nvalues)
             Cursor.executemany(sql2, nvalues)
-            #Creating a table for edge data
+            # Creating a table for edge data
             self.etable = etable = table + 'e'
             esql = """CREATE TABLE %s(
             `source_code` INT( 9 )  ,
@@ -821,7 +822,7 @@ class simulate:
                 Cursor.execute(esqlite)
                 esql2 = 'INSERT INTO %s' % etable + ' VALUES(?,?,?,?,?)'
             values = []
-            for gcs, e in self.g.edge_dict.iteritems():
+            for gcs, e in six.iteritems(self.g.edge_dict):
                 s = gcs[0]
                 d = gcs[1]
                 t = 0
@@ -834,16 +835,16 @@ class simulate:
         finally:
             if con:
                 con.close()
-        #saving pickle of adjacency matrix
+        # saving pickle of adjacency matrix
         matname = 'adj_' + self.modelName  # table
         fname = os.path.join(self.outdir, matname)
-        adjfile = open(fname, 'w')
-        cPickle.dump(self.g.getConnMatrix(), adjfile)
+        adjfile = open(fname, 'wb')
+        pickle.dump(self.g.getConnMatrix(), adjfile)
         adjfile.close()
 
     def criaAdjMatrix(self):
         # saving the adjacency  matrix
-        codeslist = [str(i.geocode) for i in self.g.site_dict.itervalues()]
+        codeslist = [str(i.geocode) for i in six.itervalues(self.g.site_dict)]
         if not os.path.exists('adjmat.csv'):
             self.Say('Saving the adjacency  matrix...')
             am = self.g.getConnMatrix()
@@ -864,14 +865,14 @@ class simulate:
         if not self.outdir == curdir:
             os.chdir(self.outdir)
 
-        codeslist = self.g.site_dict.keys()
+        codeslist = list(self.g.site_dict.keys())
         self.criaAdjMatrix()
-        #saving the shortest path matrices
+        # saving the shortest path matrices
         #        if not os.path.exists('spmat.csv'):
         #            self.Say('Calculating the shortest path matrices...')
         #            ap = self.g.getAllPairs()
         #            f = open('ap','w')
-        #            cPickle.dump(ap,f)
+        #            pickle.dump(ap,f)
         #            f.close()
         #            spd = self.g.shortDistMatrix
         #            apf = open ('spmat.csv','w')
@@ -888,7 +889,7 @@ class simulate:
         #            spdf.close()
         #            print 'Done!'
 
-        #Saving epidemic path
+        # Saving epidemic path
         self.Say('Saving Epidemic path...')
         if self.round:
             epp = codecs.open('epipath%s.csv' % str(self.round), 'w', self.encoding)
@@ -896,38 +897,38 @@ class simulate:
             epp = codecs.open('epipath.csv', 'w', self.encoding)
         epp.write('time,site,infector\n')
         for i in self.g.epipath:
-            #print i
+            # print i
             site = self.g.site_dict[i[1]]
             infectors = i[-1]
             # sorting infectors by number of infective contributed
             if len(infectors):
-                reverse_infectors = infectors.items()
+                reverse_infectors = list(infectors.items())
                 reverse_infectors.sort(key=lambda t: t[1])
-                mli = reverse_infectors[-1][0].sitename  #Most likely infector
+                mli = reverse_infectors[-1][0].sitename  # Most likely infector
             else:
                 mli = 'NA'
-            #print i[1].sitename, type(i[1].sitename), mli
+            # print i[1].sitename, type(i[1].sitename), mli
             epp.write(str(i[0]) + ',' + site.sitename + ',' + mli + '\n')
         epp.close()
         self.Say('Done!')
-        self.g.save_topology('network.graphml')
+        self.g.save_topology('network.gexf')
 
-        #saving Epistats
+        # saving Epistats
         self.Say('Saving Epidemiological results...')
         stats = [str(i) for i in self.g.getEpistats()]
 
-        seed = [s for s in self.g.site_dict.itervalues() if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
-        stats.pop(1)  #Remove epispeed which is a vector
+        seed = [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
+        stats.pop(1)  # Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
-            stf = codecs.open('epistats.csv', 'a', self.encoding)  #append to file
+            stf = codecs.open('epistats.csv', 'a', self.encoding)  # append to file
         else:
-            stf = codecs.open('epistats.csv', 'w', self.encoding)  #create a new file
+            stf = codecs.open('epistats.csv', 'w', self.encoding)  # create a new file
             stf.write(
                 'seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
         ##            stf.write('seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
-        #scent = str(seed.getCentrality())
-        #sbetw = str(seed.getBetweeness())
-        #sthidx = str(seed.getThetaindex())
+        # scent = str(seed.getCentrality())
+        # sbetw = str(seed.getBetweeness())
+        # sthidx = str(seed.getThetaindex())
         sdeg = str(seed.getDegree())
         spop = str(seed.totpop)
         sname = seed.sitename
@@ -937,28 +938,28 @@ class simulate:
         stf.close()
         self.Say('Done saving!')
 
-        #Saving site stats
+        # Saving site stats
         self.Say('Saving site statistics...')
-        #self.g.getAllPairs()
+        # self.g.getAllPairs()
         if os.path.exists('sitestats.csv'):
-            sitef = codecs.open('sitestats.csv', 'a', self.encoding)  #append to file
+            sitef = codecs.open('sitestats.csv', 'a', self.encoding)  # append to file
         else:
             sitef = codecs.open('sitestats.csv', 'w', self.encoding)
 
-        #sitef.write('round,geocode,name,infection_time,degree,centrality,betweeness,theta_index,distance,seed,seedname\n')
+        # sitef.write('round,geocode,name,infection_time,degree,centrality,betweeness,theta_index,distance,seed,seedname\n')
         sitef.write('round,geocode,name,infection_time,degree,seed,seedname\n')
-        for s in self.g.site_dict.itervalues():
+        for s in six.itervalues(self.g.site_dict):
             degree = str(s.getDegree())
-            #central = str(s.getCentrality())
-            #bet = str(s.getBetweeness())
-            #thidx = str(s.getThetaindex())
+            # central = str(s.getCentrality())
+            # bet = str(s.getBetweeness())
+            # thidx = str(s.getThetaindex())
             seedgc = str(self.seed[0][0])
             seedname = seed.sitename
             #            f = open('ap','r')
-            #            ap = cPickle.load(f)
+            #            ap = pickle.load(f)
             #            f.close()
             #            distseed = str(ap[codeslist.index(str(s.geocode)),codeslist.index(str(self.seed[0][0]))])
-            it = str(s.infected)  #infection time
+            it = str(s.infected)  # infection time
             if it == 'FALSE':
                 it = 'NA'
 
@@ -977,16 +978,15 @@ class simulate:
         Save the fully specified graph.
         """
         f = open(fname, 'w')
-        cPickle.dump(self.g, f)
+        pickle.dump(self.g, f)
         f.close()
 
     def loadModel(self, fname):
         """
         Loads a pre-saved graph.
         """
-        g = cPickle.load(fname)
+        g = pickle.load(fname)
         return g
-
 
     def runGraph(self, graphobj, iterations=1, transp=0):
         """
@@ -994,14 +994,14 @@ class simulate:
         """
         g = graphobj
         g.maxstep = iterations
-        sites = graphobj.site_dict.values()
-        edges = graphobj.edge_dict.values()
+        sites = list(graphobj.site_dict.values())
+        edges = list(graphobj.edge_dict.values())
         #        g.sites_done = 0
 
         if transp:
-            for n in xrange(iterations):
-                print
-                "==> {}\r".format(g.simstep),
+            for n in tqdm(range(iterations), desc='Simulation steps'):
+                # print()
+                # "==> {}\r".format(g.simstep),
                 results = [i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
@@ -1013,8 +1013,8 @@ class simulate:
                 g.simstep += 1
                 g.sites_done = 0
         else:
-            for n in xrange(iterations):
-                for i in sites:
+            for n in tqdm(range(iterations), desc='Simulation steps'):
+                for i in tqdm(sites, desc='Sites'):
                     i.runModel(self.parallel)
                 if self.gui:
                     self.gui.stepLCD.display(g.simstep)
@@ -1034,7 +1034,7 @@ class simulate:
         else:
             if self.silent:
                 return
-            print
+            print()
             string + '\n'
 
 
@@ -1045,12 +1045,12 @@ def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
     """
     now = time.asctime().replace(' ', '_').replace(':', '')
     table = 'Model_' + S.modelName + now
-    con = MySQLdb.connect(host=host, port=port, user=usr, passwd=passw, db=db)
+    con = pymysql.connect(host=host, port=port, user=usr, passwd=passw, db=db)
     Cursor = con.cursor()
     sql = """CREATE TABLE %s(
         `simulation` BLOB);""" % table
     Cursor.execute(sql)
-    blob = cPickle.dumps(S)
+    blob = pickle.dumps(S)
     sql2 = 'INSERT INTO %s' % table + ' VALUES(%s)'
     Cursor.execute(sql2, blob)
     con.close()
@@ -1076,9 +1076,9 @@ def onStraightRun(args):
 
         # run the batch list
         for i in S.Batch:
-            #Makes sure it comes back to original directory before opening models in the batch list
+            # Makes sure it comes back to original directory before opening models in the batch list
             os.chdir(S.dir)
-            #delete the old graph object to save memory
+            # delete the old graph object to save memory
             S.graph = None
             # Generates the simulation object
             T = simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
@@ -1099,12 +1099,12 @@ def repRuns(S):
     user = S.usr
     password = S.passw
     backend = S.backend
-    nseeds = S.seed[0][2]  #number o individual to be used as seeds
+    nseeds = S.seed[0][2]  # number o individual to be used as seeds
     S.Say("Replication type: ", randseed)
     if randseed:
         seeds = S.randomizeSeed(randseed)
     reps = S.replicas
-    for i in xrange(reps):
+    for i in range(reps):
         S.Say("Starting replicate number %s" % i)
         S = simulate(fname=fname, host=host, user=user, password=password, backend=backend)
         if randseed:
@@ -1120,7 +1120,7 @@ def upload_model(args):
     Uploads Model specification, auxiliary files and
     :return:
     """
-    username = raw_input("Enter your epigrass Web User id:")
+    username = input("Enter your epigrass Web User id:")
     passwd = getpass("Enter your Epigrass Web password:")
     S = simulate(fname=args.epg[0], backend=args.backend)
 
@@ -1142,9 +1142,9 @@ def upload_model(args):
 
     r = requests.post(app_url, files=fields, headers=hdrs)
     if r.status_code == requests.codes.ok:
-        print "Model has been uploaded sucessfully!"
+        print("Model has been uploaded sucessfully!")
     else:
-        print "Model Upload failed."
+        print("Model Upload failed.")
 
 
 def main():
@@ -1172,8 +1172,8 @@ def main():
         parser.error("You must specify a user and password when using MySQL.")
     if args.backend not in ['mysql', 'sqlite', 'csv']:
         parser.error('"%s" is an invalid backend type.' % args.backend)
-    print
-    '==> ', args.epg
+    print('==> ', args.epg)
+
 
     if args.upload:  # Only upload model
         upload_model(args)
@@ -1183,8 +1183,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-
-
-
-

@@ -138,7 +138,7 @@ outdir =
 
 # Database Output
 # MySQLout can be 0 (no database output) or 1
-MySQLout = 1
+sqlout = 1
 
 # Report Generation
 # The variable report can take the following values:
