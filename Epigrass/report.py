@@ -14,7 +14,7 @@ header =r"""
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 """
 
 class report:
