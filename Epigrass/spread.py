@@ -1,11 +1,6 @@
 #coding: utf8
 #spread display and analisys
-#
-#try:
-#    from PyQt4.QtGui import *
-#except ImportError: 
-#    print "Please install PyQT 4"
-#from qt import *
+
 from __future__ import absolute_import
 from __future__ import print_function
 from xml.dom import minidom, Node
