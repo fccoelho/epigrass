@@ -4,14 +4,12 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="fixed more bugs related with porting to python3">
-      <change afterPath="$PROJECT_DIR$/tests/test_manager.py" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed redis issues arisen from migration to python3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -402,7 +400,7 @@
       <option name="presentableId" value="Default" />
       <updated>1369672529712</updated>
       <workItem from="1567179699140" duration="10388000" />
-      <workItem from="1567850490613" duration="4621000" />
+      <workItem from="1567850490613" duration="7624000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -439,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567183249473</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed redis issues arisen from migration to python3">
+      <created>1567858956670</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567858956670</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +474,8 @@
     <MESSAGE value="Fixed bug in neteditor &quot;open edges file&quot;;&#10;added dependencies to setup.py" />
     <MESSAGE value="Fixed bugs in dgraph" />
     <MESSAGE value="fixed more bugs related with porting to python3" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed more bugs related with porting to python3" />
+    <MESSAGE value="Fixed redis issues arisen from migration to python3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed redis issues arisen from migration to python3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

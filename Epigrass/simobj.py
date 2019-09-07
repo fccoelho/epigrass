@@ -1852,14 +1852,15 @@ class graph(object):
 
         g = NX.MultiDiGraph()
         for gc, n in six.iteritems(self.site_dict):
-            g.add_node(gc, attr_dict={
-                'name': n.sitename,
-            })
+            g.add_node(gc, name=n.sitename)
         for ed, e in six.iteritems(self.edge_dict):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
-        NX.write_graphml(g, pa)
+        print(g.nodes)
+        # NX.write_graphml_lxml(g, pa)
+        NX.write_gexf(g, pa)
+        NX.write_gml(g, pa.replace('gexf', 'gml'))
         nl = json_graph.node_link_data(g)
-        jsonpath = pa.replace('graphml', 'json')
+        jsonpath = pa.replace('gexf', 'json')
         with open(jsonpath, 'w') as f:
             json.dump(nl, f)
 

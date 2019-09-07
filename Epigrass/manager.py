@@ -15,6 +15,7 @@ import json
 import sqlite3
 import os
 import getpass
+from tqdm import tqdm
 import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
@@ -207,11 +208,11 @@ class simulate:
                 raise ValueError("This line in your sites file has a different number elements:\n%s" % str(site))
             if ':' in site[0]:
                 lat = self.deg2dec(site[0])
-                long = self.deg2dec(site[1])
+                longit = self.deg2dec(site[1])
             else:
                 lat = float(site[0])
-                long = float(site[1])
-            objlist.append(siteobj(site[2], site[3], (lat, int), int((site[4]).strip()),
+                longit = float(site[1])
+            objlist.append(siteobj(site[2], site[3], (lat, longit), int((site[4]).strip()),
                                    tuple([float(i.strip()) for i in site[5:]])))
         for o in objlist:
             if self.stochTransp:
@@ -784,7 +785,7 @@ class simulate:
             for site in six.itervalues(self.g.site_dict):
                 geoc = site.geocode
                 lat = site.pos[0]
-                long = site.pos[1]
+                longit = site.pos[1]
                 name = site.sitename
                 ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
                 inc = site.incidence
@@ -793,8 +794,9 @@ class simulate:
                 for incid, flow in zip(inc, thist):
                     tstep = str(t)
                     flow = float(thist[t])
-                    nvalues.append(tuple([geoc, tstep, name] + [lat, int] + list(ts[t]) + [incid] + [flow]))
+                    nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
                     t += 1
+            # print(nvalues)
             Cursor.executemany(sql2, nvalues)
             # Creating a table for edge data
             self.etable = etable = table + 'e'
@@ -834,7 +836,7 @@ class simulate:
         # saving pickle of adjacency matrix
         matname = 'adj_' + self.modelName  # table
         fname = os.path.join(self.outdir, matname)
-        adjfile = open(fname, 'w')
+        adjfile = open(fname, 'wb')
         pickle.dump(self.g.getConnMatrix(), adjfile)
         adjfile.close()
 
@@ -907,7 +909,7 @@ class simulate:
             epp.write(str(i[0]) + ',' + site.sitename + ',' + mli + '\n')
         epp.close()
         self.Say('Done!')
-        self.g.save_topology('network.graphml')
+        self.g.save_topology('network.gexf')
 
         # saving Epistats
         self.Say('Saving Epidemiological results...')
@@ -995,9 +997,9 @@ class simulate:
         #        g.sites_done = 0
 
         if transp:
-            for n in range(iterations):
-                print()
-                "==> {}\r".format(g.simstep),
+            for n in tqdm(range(iterations), desc='Simulation steps'):
+                # print()
+                # "==> {}\r".format(g.simstep),
                 results = [i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
@@ -1009,8 +1011,8 @@ class simulate:
                 g.simstep += 1
                 g.sites_done = 0
         else:
-            for n in range(iterations):
-                for i in sites:
+            for n in tqdm(range(iterations), desc='Simulation steps'):
+                for i in tqdm(sites, desc='Sites'):
                     i.runModel(self.parallel)
                 if self.gui:
                     self.gui.stepLCD.display(g.simstep)
