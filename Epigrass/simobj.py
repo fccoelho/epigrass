@@ -15,20 +15,18 @@ import redis
 import six
 from six.moves import range
 from six.moves import zip
-from .data_io import *
+from Epigrass.data_io import *
 # import pyximport
 # pyximport.install(pyimport=True)
 from Epigrass import epimodels
 
-
-
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
 redisclient = redis.Redis(host='localhost', port=6379)
-assert redisclient.ping()   # verify that redis server is running.
+assert redisclient.ping()  # verify that redis server is running.
 
-#logger = multiprocessing.log_to_stderr()
-#logger.setLevel(multiprocessing.SUBDEBUG)
-#logger.setLevel(logging.INFO)
+# logger = multiprocessing.log_to_stderr()
+# logger.setLevel(multiprocessing.SUBDEBUG)
+# logger.setLevel(logging.INFO)
 
 sys.setrecursionlimit(3000)  # to allow pickling of custom models
 
@@ -53,8 +51,8 @@ class siteobj(object):
 
         -values: Tuple containing adicional values from the sites file
         """
-        self.id = self #reference to site instance
-        self.stochtransp = 0 #Flag for stochastic transportation
+        self.id = self  # reference to site instance
+        self.stochtransp = 0  # Flag for stochastic transportation
         self.pos = coords
         self.totpop = float(initpop)
         self.ts = []
@@ -71,26 +69,25 @@ class siteobj(object):
         self.edges = []
         self.neighbors = []
         self.thetalist = []
-        self.thetahist = [] #infected arriving per time step
+        self.thetahist = []  # infected arriving per time step
         self.passlist = []
         self.totalcases = 0
 
-        self.vaccination = [[], []] #time and coverage of vaccination event
-        self.vaccineNow = 0 #flag to indicate that it is vaccination day
-        self.vaccov = 0 #current vaccination coverage
+        self.vaccination = [[], []]  # time and coverage of vaccination event
+        self.vaccineNow = 0  # flag to indicate that it is vaccination day
+        self.vaccov = 0  # current vaccination coverage
         self.nVaccinated = 0
         self.quarantine = [sys.maxsize, 0]
         self.nQuarantined = 0
         self.geocode = geocode
-        self.painted = 0 # Flag for the graph display
+        self.painted = 0  # Flag for the graph display
         self.modtype = None
-        self.migInf = [] #infectious individuals able to migrate (time series)
-        self.inedges = [] #Inbound edges
-        self.outedges = [] #outbound edges
+        self.migInf = []  # infectious individuals able to migrate (time series)
+        self.inedges = []  # Inbound edges
+        self.outedges = []  # outbound edges
         self.pdest = []
         self.infectedvisiting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         redisclient.set("{}:totalcases".format(self.geocode), 0)
-
 
     def __call__(self):
         """
@@ -110,13 +107,13 @@ class siteobj(object):
         v -- List of extra variables passed in the sites files
         bi, bp -- dictionaries containing all the inits and parms defined in the .epg model
         """
-       # Init = init  # deprecated
+        # Init = init  # deprecated
         N = self.totpop
-        self.modtype = modtype
+        self.modtype = bytes(modtype, 'utf8')
         self.values = v
         self.bi = bi
         self.bp = bp
-        self.model = epimodels.Epimodel(self.geocode, modtype)
+        self.model = epimodels.Epimodel(self.geocode, self.modtype)
         self.vnames = epimodels.vnames[modtype]
         try:
             # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
@@ -130,7 +127,6 @@ class siteobj(object):
         self.bp['vaccov'] = 0
 
     #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
-
 
     def runModel(self, parallel=True):
         """
@@ -157,16 +153,19 @@ class siteobj(object):
         simstep = self.parentGraph.simstep
         inits = self.ts[-1]
         totpop = self.totpop
-        #---------------------
+        # print("writing inits: ", inits)
+        # ---------------------
+        # print ([type(x) for x in [totpop, npass, theta, simstep]] )
         pipe = redisclient.pipeline()
-        pipe.set("simstep", simstep)\
-            .set("{}:totpop".format(self.geocode), totpop)\
-            .rpush("{}:inits".format(self.geocode), inits)\
-            .set("{}:npass".format(self.geocode), npass)\
-            .set("{}:theta".format(self.geocode), theta)\
-            .hmset("{}:bi".format(self.geocode), self.bi)\
-            .hmset("{}:bp".format(self.geocode), self.bp).execute()
-        #------------------------
+        pipe.set("simstep", simstep)
+        pipe.set("{}:totpop".format(self.geocode), totpop)
+        pipe.rpush("{}:inits".format(self.geocode), str(inits))
+        pipe.set("{}:npass".format(self.geocode), float(npass))
+        pipe.set("{}:theta".format(self.geocode), int(nan_to_num(theta)))
+        pipe.hmset("{}:bi".format(self.geocode), self.bi)
+        pipe.hmset("{}:bp".format(self.geocode), self.bp)
+        pipe.execute()
+        # ------------------------
         if parallel:
 
             # r = self.parentGraph.po.apply_async(self.model, args=(inits, simstep, totpop, theta, npass, self.bi,
@@ -179,12 +178,13 @@ class siteobj(object):
 
         self.thetahist.append(theta)  # keep a record of infected passenger arriving
         return r
+
     #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
     def handle(self, res):
         pipe = redisclient.pipeline()
-        last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1)\
-            .get("{}:Lpos".format(self.geocode))\
+        last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1) \
+            .get("{}:Lpos".format(self.geocode)) \
             .get("{}:migInf".format(self.geocode)).execute()
         self.ts.append(eval(last_state))
         Lpos = float(Lpos)
@@ -195,7 +195,7 @@ class siteobj(object):
             if Lpos > 0:
                 self.infected = self.parentGraph.simstep
                 self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
-                #TODO: have infector be stated in terms of geocodes
+                # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
 
     def handle_old(self, res):
@@ -211,7 +211,7 @@ class siteobj(object):
             if Lpos > 0:
                 self.infected = self.parentGraph.simstep
                 self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
-                #TODO: have infector be stated in terms of geocodes
+                # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
 
     #        print len(self.migInf)
@@ -247,14 +247,14 @@ class siteobj(object):
         migInf = 0 if self.migInf == [] else self.migInf[lag]
         #        print "==> ",npass, lag, self.migInf,  self.totpop
         if self.stochtransp == 0:
-            theta = npass * migInf / float(self.totpop) # infectious migrants
+            theta = npass * migInf / float(self.totpop)  # infectious migrants
 
-        else: #Stochastic migration
-        #print lag, self.migInf
-        #            print npass
+        else:  # Stochastic migration
+            # print lag, self.migInf
+            #            print npass
             try:
                 theta = binomial(int(npass), migInf / float(self.totpop))
-            except ValueError: #if npass is less than one or migInf == 0
+            except ValueError:  # if npass is less than one or migInf == 0
                 theta = 0
             #        print theta
             # Check if site is quarantined
@@ -301,7 +301,7 @@ class siteobj(object):
     #     xlabel('time(days)')
     #     savefig(str(self.geocode) + '.png')
     #     close()
-        #show()
+    # show()
 
     def isNode(self):
         """
@@ -369,8 +369,8 @@ class siteobj(object):
         else:
             if neighbor in self.neighbors:
                 d = [e.length for e in self.edges if neighbor in e.sites][0]
-                #if d == 0:
-                #print 'problem determining distance from neighboor'
+                # if d == 0:
+                # print 'problem determining distance from neighboor'
             else:
                 sys.exit('%s is not a neighbor of %s!' % (neighbor.sitename, self.sitename))
 
@@ -414,7 +414,7 @@ class siteobj(object):
         inverse of the sum of the shortest paths to all other nodes
         in the graph.
         """
-        #get position in the distance matrix.
+        # get position in the distance matrix.
         if self.centrality:
             return self.centrality
         pos = self.parentGraph.site_list.index(self)
@@ -438,7 +438,7 @@ class siteobj(object):
         return B
 
 
-#class popmodels(object):
+# class popmodels(object):
 #    """
 #    Defines a library of discrete time population models
 #    """
@@ -1168,16 +1168,15 @@ class edge(object):
         self.dest = dest
         self.source = source
         self.sites = [source, dest]
-        self.fmig = float(fmig) #daily migration from source to destination
-        self.bmig = float(bmig) #daily migration from destination to source
+        self.fmig = float(fmig)  # daily migration from source to destination
+        self.bmig = float(bmig)  # daily migration from destination to source
         self.parentGraph = None
         self.length = Leng
         self.delay = 0
-        self.ftheta = [] #time series of number of infected individuals travelling forward
-        self.btheta = [] #time series of number of infected individuals travelling backwards
-        dest.edges.append(self) #add itself to edge list of dest site
-        source.edges.append(self) #add itself to edge list of source site
-
+        self.ftheta = []  # time series of number of infected individuals travelling forward
+        self.btheta = []  # time series of number of infected individuals travelling backwards
+        dest.edges.append(self)  # add itself to edge list of dest site
+        source.edges.append(self)  # add itself to edge list of source site
 
     def calcDelay(self):
         """
@@ -1196,13 +1195,13 @@ class edge(object):
         self.ftheta.append(theta)
         self.dest.receiveTheta(theta, npass, self.source)
         #        print "F -->", theta,npass
-        #Backwards Migration
+        # Backwards Migration
         theta, npass = self.dest.getTheta(self.bmig, self.delay)
         self.btheta.append(theta)
         self.source.receiveTheta(theta, npass, self.dest)
 
-#        print "B -->", theta,npass
 
+#        print "B -->", theta,npass
 
 
 class graph(object):
@@ -1213,13 +1212,13 @@ class graph(object):
     def __init__(self, graph_name, digraph=0):
         self.name = graph_name
         self.digraph = digraph
-        self.site_dict = {} #geocode as keys
-        self.site_list = property(fget=lambda self: list(self.site_dict.values())) #only for backwards compatibility
-        self.edge_dict = {} #geocode tuple as key
-        self.edge_list = property(fget=lambda self: list(self.edge_dict.values())) #only for backwards compatibility
-        self.speed = 0 # speed of the transportation system
-        self.simstep = 1 #current step in the simulation
-        self.maxstep = 100 #maximum number of steps in the simulation
+        self.site_dict = {}  # geocode as keys
+        self.site_list = property(fget=lambda self: list(self.site_dict.values()))  # only for backwards compatibility
+        self.edge_dict = {}  # geocode tuple as key
+        self.edge_list = property(fget=lambda self: list(self.edge_dict.values()))  # only for backwards compatibility
+        self.speed = 0  # speed of the transportation system
+        self.simstep = 1  # current step in the simulation
+        self.maxstep = 100  # maximum number of steps in the simulation
         self.epipath = []
         self.graphdict = {}
         self.shortPathList = []
@@ -1238,17 +1237,16 @@ class graph(object):
         self.gammaidx = None
         self.connmatrix = None
         self.shortDistMatrix = None
-        self.episize = 0 # total number of people infected
-        self.epispeed = [] # new cities pre unit of time
-        self.infectedcities = 0 #total number of cities infected.
+        self.episize = 0  # total number of people infected
+        self.epispeed = []  # new cities pre unit of time
+        self.infectedcities = 0  # total number of cities infected.
         self.spreadtime = 0
         self.mediansurvival = None
         self.totVaccinated = 0
         self.totQuarantined = 0
-        self.dmap = 0 #draw the map in the background?
-        self.printed = 0 #Printed the custom model docstring?
+        self.dmap = 0  # draw the map in the background?
+        self.printed = 0  # Printed the custom model docstring?
         self.po = multiprocessing.Pool(multiprocessing.cpu_count())
-
 
     def addSite(self, sitio):
         """
@@ -1308,7 +1306,7 @@ class graph(object):
 
         D = {}  # dictionary of final distances
         P = {}  # dictionary of predecessors
-        Q = priorityDictionary()   # est.dist. of non-final vert.
+        Q = priorityDictionary()  # est.dist. of non-final vert.
         Q[start] = 0
 
         for v in Q:
@@ -1318,7 +1316,7 @@ class graph(object):
             for w in G[v]:
                 vwLength = D[v] + G[v][w]
                 if w in D:
-                    #print vwLength
+                    # print vwLength
                     if vwLength < D[w]:
                         raise ValueError("Dijkstra: found better path to already-final vertex")
                 elif w not in Q or vwLength < Q[w]:
@@ -1350,7 +1348,6 @@ class graph(object):
         else:
             return None
 
-
     def addEdge(self, graph_edge):
         """Adds an edge object to the graph.
 
@@ -1370,7 +1367,6 @@ class graph(object):
         self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = graph_edge
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
-
 
     def getGraphdict(self):
         """
@@ -1413,7 +1409,6 @@ class graph(object):
         sitenames = [s.sitename for s in six.itervalues(self.site_dict)]
 
         return sitenames
-
 
     def getCycles(self):
         """
@@ -1463,7 +1458,7 @@ class graph(object):
         names = [i.sitename for i in self.site_list]
         x = array([i.pos[1] for i in self.site_list])
         y = array([i.pos[0] for i in self.site_list])
-        #edge data
+        # edge data
         xs = array([e.source.pos[1] for e in self.edge_list])
         ys = array([e.source.pos[0] for e in self.edge_list])
         xd = array([e.dest.pos[1] for e in self.edge_list])
@@ -1473,16 +1468,16 @@ class graph(object):
         ax = axes()
         ax.set_xticks([])
         ax.set_yticks([])
-        #plotting nodes
+        # plotting nodes
         node_plot = ax.scatter(x, y)
         node_plot.set_zorder(2)
-        #Plotting edges
+        # Plotting edges
         kolor = colorConverter.to_rgba('k')
         ed_colors = [kolor for i in edge_list]
         edge_coll = LineCollection(edge_list, colors=ed_colors, linestyle='solid')
         edge_coll.set_zorder(1)
         ax.add_collection(edge_coll)
-        #plotting labels
+        # plotting labels
         ##        for x,y,l in zip(x,y,names):
         ##            ax.text(x,y,l,transform=ax.transData)
         minx = amin(x)
@@ -1497,7 +1492,7 @@ class graph(object):
 
         ax.autoscale_view()
 
-        #saving
+        # saving
         savefig('graph.png')
         close()
 
@@ -1507,7 +1502,7 @@ class graph(object):
         the distance is the shortest path. Creates another
         distance matrix where the distances are the lengths of the paths.
         """
-        if self.allPairs.any(): #don't run twice
+        if self.allPairs.any():  # don't run twice
             return self.allPairs
         if self.graphdict:
             g = self.graphdict
@@ -1520,17 +1515,17 @@ class graph(object):
         i = 0
         for sitei in six.iterkeys(g):
             j = 0
-            for sitej in list(g.keys())[:i]: #calculates only the lower triangle
+            for sitej in list(g.keys())[:i]:  # calculates only the lower triangle
                 sp = self.shortestPath(g, sitei, sitej)
-                lsp = self.getShortestPathLength(sitei, sp) #length of the shortestpath
+                lsp = self.getShortestPathLength(sitei, sp)  # length of the shortestpath
                 self.shortPathList.append((sitei, sitej, sp, lsp))
-                #fill the entire allpairs matrix
+                # fill the entire allpairs matrix
                 ap[i, j] = ap[j, i] = len(sp) - 1
                 dm[i, j] = dm[j, i] = lsp
                 j += 1
             i += 1
         self.shortDistMatrix = dm
-        #print ap,dm
+        # print ap,dm
         self.allPairs = ap
         return ap
 
@@ -1558,30 +1553,30 @@ class graph(object):
         basic measure of accessibility, also known as the degree of a node.
         """
         try:
-            if self.connmatrix.any(): return self.connmatrix #don't run twice
+            if self.connmatrix.any(): return self.connmatrix  # don't run twice
         except:
             pass
-        if not self.graphdict: #this generates site neighbors lists
+        if not self.graphdict:  # this generates site neighbors lists
             self.getGraphdict()
         site_list = list(self.site_dict.values())
         nsites = len(self.site_dict)
         cm = zeros((nsites, nsites), float)
         for i, sitei in enumerate(site_list):
-            for j, sitej in enumerate(site_list[:i]):#calculates only lower triangle
+            for j, sitej in enumerate(site_list[:i]):  # calculates only lower triangle
                 if sitei == sitej:
                     pass
                 else:
                     cm[i, j] = float(sitej in sitei.neighbors)
-                    #map results to the upper triangle
+                    # map results to the upper triangle
                 cm[j, i] = cm[i, j]
-            #print sum(cm), type(cm)
+            # print sum(cm), type(cm)
         return cm
 
     def getWienerD(self):
         """
         Returns the Wiener distance for a graph.
         """
-        if self.wienerD: # Check if it has been calculated.
+        if self.wienerD:  # Check if it has been calculated.
             return self.wienerD
 
         if self.allPairs.any():
@@ -1601,7 +1596,6 @@ class graph(object):
 
         return mean(compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat))
 
-
     def getDiameter(self):
         """
         Returns the diameter of the graph: longest shortest path.
@@ -1613,7 +1607,6 @@ class graph(object):
             return max(self.allPairs.flat)
 
         return max(self.getAllPairs().flat)
-
 
     def getIotaindex(self):
         """
@@ -1646,7 +1639,6 @@ class graph(object):
         W = sum([i * 2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
         return float(W)
 
-
     def getLength(self):
         """
         Sum of the length in kilometers of all edges in the graph.
@@ -1674,14 +1666,14 @@ class graph(object):
         else:
             l = self.getLength()
 
-        lsp = [len(i[2]) for i in self.shortPathList] #list of lenghts of shortest paths.
-        lpidx = lsp.index(max(lsp))#position of the longest sp.
-        lp = self.shortPathList[lpidx][2] #longest shortest path
+        lsp = [len(i[2]) for i in self.shortPathList]  # list of lenghts of shortest paths.
+        lpidx = lsp.index(max(lsp))  # position of the longest sp.
+        lp = self.shortPathList[lpidx][2]  # longest shortest path
         Dd = 0
-        for i in range(len(lp) - 1): #calculates distance in km along lp
+        for i in range(len(lp) - 1):  # calculates distance in km along lp
             Dd += lp[i].getDistanceFromNeighbor(lp[i + 1])
 
-        #pi = l/self.getDiameter()
+        # pi = l/self.getDiameter()
         pi = l / Dd
         return float(pi)
 
@@ -1781,7 +1773,7 @@ class graph(object):
         n = len(self.site_dict)
         try:
             median = self.epipath[int(n / 2)][0]
-        except: # In the case the epidemic does not reach 50% of nodes
+        except:  # In the case the epidemic does not reach 50% of nodes
             median = 'NA'
         return median
 
@@ -1806,7 +1798,7 @@ class graph(object):
         self.episize = self.getEpisize()
         self.epispeed = self.getEpispeed()
         self.infectedcities = self.getInfectedCities()
-        self.spreadtime = 0 #self.getSpreadTime()
+        self.spreadtime = 0  # self.getSpreadTime()
         self.mediansurvival = self.getMedianSurvival()
         self.totVaccinated = self.getTotVaccinated()
         self.totQuarantined = self.getTotQuarantined()
@@ -1836,8 +1828,8 @@ class graph(object):
         tl = [i[0] for i in self.epipath]
         nspt = []
         for j in range(self.simstep):
-            nspt.append(tl.count(j)) #new sites per time step
-            #Speed = [nspt[i+1]-nspt[i] for i in range(len(nspt))]
+            nspt.append(tl.count(j))  # new sites per time step
+            # Speed = [nspt[i+1]-nspt[i] for i in range(len(nspt))]
         return nspt
 
     def getSpreadTime(self):
@@ -1860,14 +1852,15 @@ class graph(object):
 
         g = NX.MultiDiGraph()
         for gc, n in six.iteritems(self.site_dict):
-            g.add_node(gc, attr_dict={
-                'name': n.sitename,
-            })
+            g.add_node(gc, name=n.sitename)
         for ed, e in six.iteritems(self.edge_dict):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
-        NX.write_graphml(g, pa)
+        # print(g.nodes)
+        # NX.write_graphml_lxml(g, pa)
+        NX.write_gexf(g, pa)
+        NX.write_gml(g, pa.replace('gexf', 'gml'))
         nl = json_graph.node_link_data(g)
-        jsonpath = pa.replace('graphml', 'json')
+        jsonpath = pa.replace('gexf', 'json')
         with open(jsonpath, 'w') as f:
             json.dump(nl, f)
 
@@ -1915,7 +1908,7 @@ class priorityDictionary(dict):
             while 1:
                 smallChild = 2 * insertionPoint + 1
                 if smallChild + 1 < len(heap) and \
-                                heap[smallChild] > heap[smallChild + 1]:
+                        heap[smallChild] > heap[smallChild + 1]:
                     smallChild += 1
                 if smallChild >= len(heap) or lastItem <= heap[smallChild]:
                     heap[insertionPoint] = lastItem
@@ -1953,7 +1946,7 @@ class priorityDictionary(dict):
             insertionPoint = len(heap)
             heap.append(None)
             while insertionPoint > 0 and \
-                            newPair < heap[(insertionPoint - 1) // 2]:
+                    newPair < heap[(insertionPoint - 1) // 2]:
                 heap[insertionPoint] = heap[(insertionPoint - 1) // 2]
                 insertionPoint = (insertionPoint - 1) // 2
             heap[insertionPoint] = newPair
@@ -1968,13 +1961,12 @@ class priorityDictionary(dict):
             self[key] = val
         return self[key]
 
-    #---main----------------------------------------------------------------------------
+    # ---main----------------------------------------------------------------------------
 
-
-    #if __name__ == '__main__':
+    # if __name__ == '__main__':
     #    sitioA = siteobj("Penedo",2000)
     #    sitioB = siteobj("Itatiaia",3020)
     #    linhaA = edge(sitioA,sitioB,4)
     #    sitioA.createModel((.3,.3,.3),(1,1))
     #   sitioA.runModel()
-    #lista_de_sitios = (i=siteobj(10) for i = range(10))
+    # lista_de_sitios = (i=siteobj(10) for i = range(10))
