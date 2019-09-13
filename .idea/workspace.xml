@@ -4,9 +4,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Bumped up version to 2.5.0 (gui-less version)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Bumped up version to 2.5.0 (gui-less version)" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="no_gui" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -340,8 +338,8 @@
     <list>
       <item itemvalue="Python.dgraph" />
       <item itemvalue="Python.epigrass" />
-      <item itemvalue="Python tests.Unittests in test_models.py" />
       <item itemvalue="Python tests.Unittests in test_epigdal.py" />
+      <item itemvalue="Python tests.Unittests in test_models.py" />
     </list>
     <recent_temporary>
       <list>
@@ -371,7 +369,7 @@
       <updated>1369672529712</updated>
       <workItem from="1566219403320" duration="6321000" />
       <workItem from="1567772821310" duration="102000" />
-      <workItem from="1568375332378" duration="355000" />
+      <workItem from="1568375332378" duration="663000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
