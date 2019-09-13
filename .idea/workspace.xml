@@ -35,6 +35,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="xlwxUMNf" />
@@ -338,8 +339,8 @@
     <list>
       <item itemvalue="Python.dgraph" />
       <item itemvalue="Python.epigrass" />
-      <item itemvalue="Python tests.Unittests in test_epigdal.py" />
       <item itemvalue="Python tests.Unittests in test_models.py" />
+      <item itemvalue="Python tests.Unittests in test_epigdal.py" />
     </list>
     <recent_temporary>
       <list>
