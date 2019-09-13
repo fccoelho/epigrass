@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed graph exporting">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/spread.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/spread.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/HelpEpg.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/dgraph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epiRTplay.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +69,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="prop_add_unversioned_files" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.leinardi.pycharm.mypy.MypyConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -80,6 +84,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Python tests.Nosetests in test_models.py">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="PROJECT_INTERPRETER" value="false" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -99,17 +114,6 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <method />
-    </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="PROJECT_INTERPRETER" value="false" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-      <method v="2" />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="epigrass-code" />
@@ -399,6 +403,8 @@
       <workItem from="1567179699140" duration="10388000" />
       <workItem from="1567850490613" duration="8433000" />
       <workItem from="1567864061254" duration="49000" />
+      <workItem from="1568376325934" duration="30000" />
+      <workItem from="1568392901519" duration="705000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
