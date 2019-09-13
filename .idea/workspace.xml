@@ -4,48 +4,9 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Migrated code to Python3&#10;&#10;removed code related with Qt GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/Ui_about4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/Ui_cpanel4new.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/Ui_display.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/Ui_epgeditor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/Ui_neteditor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/about.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/cpanel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/dataObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/dataObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/elasticnodes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epgeditor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epiRTplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epiRTplay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass.qrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_es.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_es.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_fr.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_fr.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_rc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_ru_RU.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigrass_ru_RU.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epiplay.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/neteditor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/neteditor.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/primitives.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/pylabQtcanvas.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/qtgraph.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/spread.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/spread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_epigdal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,6 +76,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Python tests.Unittests in test_epigdal.py">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="PROJECT_INTERPRETER" value="false" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -134,17 +106,6 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <method />
-    </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="PROJECT_INTERPRETER" value="false" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <module name="" />
-      <method v="2" />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="epigrass-code" />
@@ -394,6 +355,7 @@
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="/usr/bin" />
+    <option name="version" value="2" />
   </component>
   <component name="SqlCodeAssistantSettings">
     <option name="dbBrowserSelectedConnection" value="epigrassqt4" />
@@ -408,7 +370,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1369672529712</updated>
-      <workItem from="1566219403320" duration="5135000" />
+      <workItem from="1566219403320" duration="6321000" />
+      <workItem from="1567772821310" duration="102000" />
+      <workItem from="1568375332378" duration="64000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -445,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478028251719</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Migrated code to Python3&#10;&#10;removed code related with Qt GUI">
+      <created>1566239936418</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1566239936418</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +427,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -475,7 +448,8 @@
     <MESSAGE value="Fixed bug in neteditor &quot;open edges file&quot;;&#10;added dependencies to setup.py" />
     <MESSAGE value="Fixed bugs in dgraph" />
     <MESSAGE value="Fixed bugs in epigdal and added example for Florida" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs in epigdal and added example for Florida" />
+    <MESSAGE value="Migrated code to Python3&#10;&#10;removed code related with Qt GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrated code to Python3&#10;&#10;removed code related with Qt GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
