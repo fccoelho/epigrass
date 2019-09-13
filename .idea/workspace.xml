@@ -341,8 +341,8 @@
     <list>
       <item itemvalue="Python.dgraph" />
       <item itemvalue="Python.epigrass" />
-      <item itemvalue="Python tests.Unittests in test_models.py" />
       <item itemvalue="Python tests.Unittests in test_epigdal.py" />
+      <item itemvalue="Python tests.Unittests in test_models.py" />
     </list>
     <recent_temporary>
       <list>
