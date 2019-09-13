@@ -1,7 +1,10 @@
 # Module for interacting with the database backend through SQLObject 
 # 10/2005 - Flavio Codeco Coelho
-from    sqlobject import *
+from __future__ import absolute_import
+from __future__ import print_function
+from sqlobject import *
 import sys,os
+from six.moves import range
 
 #initialization data -- to be reset by calling module
 ##backend='mysql'
@@ -62,13 +65,13 @@ if __name__ =='__main__':
     Edge.createTable()
     dicin={'geocode':0000000,'time':0,'name':'euheim','totpop':100,'lat':10.1,'longit':20.3}
     
-    for i in xrange(1):
+    for i in range(1):
         pid = os.fork()
         if pid:
             pass
         else:
             Site(**dicin)
             Site._connection.commit()
-            print "commit from process %d"%os.getpid()
+            print("commit from process %d"%os.getpid())
             sys.exit()
 

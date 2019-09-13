@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 #program to animate simulations in Real Time using Pyglet
-import cPickle, glob, os, epigdal
+from __future__ import absolute_import
+from __future__ import print_function
+import six.moves.cPickle, glob, os, epigdal
 from math import *
 from pyglet import font
 from pyglet import clock
@@ -16,6 +18,8 @@ from matplotlib import cm
 from matplotlib.colors import rgb2hex
 import primitives
 import gdal,locale, ogr
+from six.moves import range
+from six.moves import zip
 
 class Viewer:
     """
@@ -70,9 +74,9 @@ class Viewer:
             geo = feat.GetGeometryRef()
             if geo.GetGeometryCount()<2:
                 g1 = geo.GetGeometryRef( 0 )
-                x =[g1.GetX(i) for i in xrange(g1.GetPointCount()) ]
-                y =[g1.GetY(i) for i in xrange(g1.GetPointCount()) ]
-                polv=zip(x, y) #Vertices do poligono
+                x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
+                y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
+                polv=list(zip(x, y)) #Vertices do poligono
                 poligono = primitives.Polygon(polv) #Definimos o poligono
                 pl[gc]=poligono
             for c in range( geo.GetGeometryCount()):
@@ -81,7 +85,7 @@ class Viewer:
                     g1 = ring.GetGeometryRef( cnt )
                     x =[g1.GetX(i) for i in range(g1.GetPointCount()) ]
                     y =[g1.GetY(i) for i in range(g1.GetPointCount()) ]
-                    polv=zip(x, y) #Vertices do poligono
+                    polv=list(zip(x, y)) #Vertices do poligono
                     poligono = primitives.Polygon(polv, color=(.3,0.2,0.5,.7)) #Definimos o poligono
                     pl[gc]=poligono
                     
@@ -96,7 +100,7 @@ class Viewer:
         - ax: is the axis containing the polygons
         - pl is the polygon dictionary
         """
-        for step in xrange(0, self.graph.maxstep):
+        for step in range(0, self.graph.maxstep):
             self.show(step)
         
 if __name__ == "__main__":
@@ -106,6 +110,6 @@ if __name__ == "__main__":
         Display.win.dispatch_events()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         [pol[1].render() for pol in Display.polygons.items()]
-        print "show"
+        print("show")
         Display.win.flip()
     

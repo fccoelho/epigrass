@@ -2,9 +2,11 @@
 Tests for basic simulation model objects instantiation
 """
 
+from __future__ import absolute_import
 import unittest
 from Epigrass.manager import *
 from Epigrass.simobj import siteobj, graph, edge
+from six.moves import range
 
 
 class testObjInstantiation(unittest.TestCase):

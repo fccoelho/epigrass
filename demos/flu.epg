@@ -173,7 +173,7 @@ speed =0 #1440  km/day -- equivalent to 60 km/h
 #==============================================================#
 
 # Number of steps
-steps = 100
+steps = 10
 
 # Output dir. Must be a full path. If empty the output will be generated on the 
 # outdata-<date> sub-directory of same path as the model script.
@@ -181,7 +181,7 @@ outdir =
 
 # Database Output
 # MySQLout can be 0 (no database output) or 1
-MySQLout = 1 
+sqlout = 1
 
 
 # Replicate runs

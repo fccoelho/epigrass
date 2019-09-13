@@ -1,6 +1,8 @@
 """
 This module contains functions to read and write from ascii files, as well as to/from MySQL databases.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 from numpy import *
 from string import *
 import codecs
@@ -8,6 +10,8 @@ import codecs
 
 from difflib import *
 import sys
+from six.moves import range
+from six.moves import zip
 
 def load(fname, sep=None):
     """
@@ -111,7 +115,7 @@ def loadEdgeData(fname):
     dicCity = queryDb('root','mysql','epigrass','localidades')
     dados[0].append('codigo1')
     dados[0].append('codigo2')
-    for i in xrange(1,len(dados)):
+    for i in range(1,len(dados)):
         cidade1 = dados[i][1].lower() #word
         UF1 = dados[i][2]
         cidade2 = dados[i][3].lower() #word2
@@ -128,7 +132,7 @@ def loadEdgeData(fname):
             try:
                 dados[i].append(geoc1[0])
             except IndexError:
-                print 'No match for city name ', cidade1
+                print('No match for city name ', cidade1)
                 sys.exit()
         #print cidade1,UF1, mat
         
@@ -142,7 +146,7 @@ def loadEdgeData(fname):
             try:
                 dados[i].append(geoc2[0])
             except IndexError:
-                print 'No match for city name ', cidade2
+                print('No match for city name ', cidade2)
                 sys.exit()
         #print cidade2,UF2, mat2
         

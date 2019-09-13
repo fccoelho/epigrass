@@ -6,12 +6,15 @@
 #except ImportError: 
 #    print "Please install PyQT 4"
 #from qt import *
+from __future__ import absolute_import
+from __future__ import print_function
 from xml.dom import minidom, Node
 import os, json
 from numpy import *
 import networkx as nx
 from networkx.readwrite import  json_graph
 import codecs
+import six
 
 class Spread:
     def __init__(self, graphobj, outdir='.',encoding='utf-8'):
@@ -38,7 +41,7 @@ class Spread:
             infected = self.g.site_dict[n[1]]
             infectors = n[-1]
             self.nxg.add_node(n[1],name=infected.sitename,time=n[0])
-            for  i, c in infectors.iteritems():
+            for  i, c in six.iteritems(infectors):
                 self.nxg.add_edge(n[1],i.geocode,weight=float(c))
 
 
@@ -62,7 +65,7 @@ class Spread:
         Spread.writeENGML(f,tree) #calling as a class method
         f.write(']')
         f.close()
-        print "Wrote %s"%fname
+        print("Wrote %s"%fname)
     writeGML = classmethod(writeGML)
         
     def writeENGML(self,fobj,tree):
@@ -72,10 +75,10 @@ class Spread:
         f=fobj
         #Create dictionary of node IDs, and eliminate possible node duplicates.
         nodes = dict([(i[1],n) for n,i in enumerate(tree)])
-        for n,k in enumerate(nodes.iterkeys()):
+        for n,k in enumerate(six.iterkeys(nodes)):
             nodes[k] = n
         #writing nodes
-        for i,n in nodes.iteritems():
+        for i,n in six.iteritems(nodes):
             f.writelines(['\tnode\n','\t[\n'])
             f.writelines(['\t\tid\t%s\n'%n,'\t\tlabel\t"%s"\n'%i])
             f.writelines(['\t\tgraphics\n','\t\t[\n','\t\t\tw\t60\n','\t\t\th\t30\n'])
