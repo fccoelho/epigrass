@@ -4,9 +4,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="minor changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="minor changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +41,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="jZcaGZUS" />
@@ -390,7 +389,7 @@
       <workItem from="1567179699140" duration="10388000" />
       <workItem from="1567850490613" duration="8433000" />
       <workItem from="1567864061254" duration="1030000" />
-      <workItem from="1581924649320" duration="967000" />
+      <workItem from="1581924649320" duration="1493000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -484,6 +483,16 @@
     <MESSAGE value="Fixed graph exporting" />
     <MESSAGE value="minor changes" />
     <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="924" y="215" key="VCS.ChangeListViewerDialog" timestamp="1581926147333">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
+    <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581926142605">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
