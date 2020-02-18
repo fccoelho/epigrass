@@ -1464,6 +1464,7 @@ static const char __pyx_k_alpha[] = "alpha";
 static const char __pyx_k_delta[] = "delta";
 static const char __pyx_k_inits[] = "{}:inits";
 static const char __pyx_k_items[] = "items";
+static const char __pyx_k_model[] = "model";
 static const char __pyx_k_npass[] = "npass";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_print[] = "print";
@@ -1817,6 +1818,7 @@ static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_metaclass;
 static PyObject *__pyx_kp_s_migInf;
 static PyObject *__pyx_n_s_migInf_2;
+static PyObject *__pyx_n_s_model;
 static PyObject *__pyx_n_s_modtype;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_name;
@@ -1922,25 +1924,25 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_2__call__(CYTHON_UNUSED
 static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_4get_args_from_redis(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_6update_redis(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_results); /* proto */
 static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_modtype); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model); /* proto */
+static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist); /* proto */
 static PyObject *__pyx_float_0_5;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -2003,12 +2005,12 @@ static PyObject *__pyx_codeobj__52;
  *     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
  *     def __init__(self, geocode, modtype=b'', parallel=True):             # <<<<<<<<<<<<<<
  *         """
- *         defines which models a given site will use
+ *         Defines which models a given site will use
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8Epigrass_9epimodels_8Epimodel_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_8Epigrass_9epimodels_8Epimodel___init__[] = "\n        defines which models a given site will use\n        and set variable names accordingly.\n        :param modtype:\n        ";
+static char __pyx_doc_8Epigrass_9epimodels_8Epimodel___init__[] = "\n        Defines which models a given site will use\n        and set variable names accordingly.\n        :param modtype:\n        ";
 static PyMethodDef __pyx_mdef_8Epigrass_9epimodels_8Epimodel_1__init__ = {"__init__", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_8Epigrass_9epimodels_8Epimodel_1__init__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8Epigrass_9epimodels_8Epimodel___init__};
 static PyObject *__pyx_pw_8Epigrass_9epimodels_8Epimodel_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
@@ -2169,7 +2171,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel___init__(CYTHON_UNUSED 
  *     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
  *     def __init__(self, geocode, modtype=b'', parallel=True):             # <<<<<<<<<<<<<<
  *         """
- *         defines which models a given site will use
+ *         Defines which models a given site will use
  */
 
   /* function exit code */
@@ -2192,7 +2194,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel___init__(CYTHON_UNUSED 
  * 
  *     def __call__(self, *args, **kwargs):             # <<<<<<<<<<<<<<
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  */
 
 /* Python wrapper */
@@ -2273,6 +2275,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_2__call__(CYTHON_UNUSED
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__call__", 0);
   __Pyx_INCREF(__pyx_v_args);
 
@@ -2280,7 +2283,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_2__call__(CYTHON_UNUSED
  * 
  *     def __call__(self, *args, **kwargs):
  *         args = self.get_args_from_redis()             # <<<<<<<<<<<<<<
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  *         self.update_redis(res)
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_args_from_redis); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
@@ -2306,53 +2309,65 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_2__call__(CYTHON_UNUSED
   /* "Epigrass/epimodels.py":63
  *     def __call__(self, *args, **kwargs):
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)             # <<<<<<<<<<<<<<
+ *         res = self.step(*(list(args)+[self]))             # <<<<<<<<<<<<<<
  *         self.update_redis(res)
  *         # return res
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_step); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_2 = PySequence_List(__pyx_v_args); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_INCREF(__pyx_v_self);
+  __Pyx_GIVEREF(__pyx_v_self);
+  PyList_SET_ITEM(__pyx_t_3, 0, __pyx_v_self);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_res = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PySequence_Tuple(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_res = __pyx_t_4;
+  __pyx_t_4 = 0;
 
   /* "Epigrass/epimodels.py":64
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  *         self.update_redis(res)             # <<<<<<<<<<<<<<
  *         # return res
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_redis); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_update_redis); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
     if (likely(__pyx_t_1)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
       __Pyx_INCREF(__pyx_t_1);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_v_res) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_res);
+  __pyx_t_4 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_1, __pyx_v_res) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_res);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "Epigrass/epimodels.py":61
  *         self.parallel = parallel
  * 
  *     def __call__(self, *args, **kwargs):             # <<<<<<<<<<<<<<
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  */
 
   /* function exit code */
@@ -2362,6 +2377,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8Epimodel_2__call__(CYTHON_UNUSED
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("Epigrass.epimodels.Epimodel.__call__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5196,7 +5212,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
 /* "Epigrass/epimodels.py":172
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
  */
@@ -5214,19 +5230,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_3stepFlu(PyObject *__pyx_self, Py
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepFlu (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -5255,13 +5275,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_3stepFlu(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 8, 1); __PYX_ERR(0, 172, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 9, 1); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 8, 2); __PYX_ERR(0, 172, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 9, 2); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -5293,12 +5313,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_3stepFlu(PyObject *__pyx_self, Py
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepFlu") < 0)) __PYX_ERR(0, 172, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -5332,23 +5360,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_3stepFlu(PyObject *__pyx_self, Py
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 172, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepFlu", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 172, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepFlu", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_2stepFlu(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_2stepFlu(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   long __pyx_v_N;
@@ -6949,7 +6978,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
   /* "Epigrass/epimodels.py":172
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
  */
@@ -7049,7 +7078,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
 /* "Epigrass/epimodels.py":271
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
@@ -7067,19 +7096,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIS (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -7108,13 +7141,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 8, 1); __PYX_ERR(0, 271, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 1); __PYX_ERR(0, 271, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 8, 2); __PYX_ERR(0, 271, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 2); __PYX_ERR(0, 271, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -7146,12 +7179,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIS") < 0)) __PYX_ERR(0, 271, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -7185,23 +7226,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 271, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 271, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_4stepSIS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_4stepSIS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -7489,7 +7531,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   /* "Epigrass/epimodels.py":271
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
@@ -7511,7 +7553,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
 /* "Epigrass/epimodels.py":311
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
@@ -7529,21 +7571,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIS_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -7574,13 +7620,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 9, 1); __PYX_ERR(0, 311, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 1); __PYX_ERR(0, 311, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 9, 2); __PYX_ERR(0, 311, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 2); __PYX_ERR(0, 311, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -7615,8 +7661,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -7624,6 +7676,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -7659,24 +7713,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 311, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 311, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_6stepSIS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_6stepSIS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -8120,7 +8175,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   /* "Epigrass/epimodels.py":311
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
@@ -8144,7 +8199,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
 /* "Epigrass/epimodels.py":353
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
@@ -8162,19 +8217,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIR (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -8203,13 +8262,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 8, 1); __PYX_ERR(0, 353, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 1); __PYX_ERR(0, 353, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 8, 2); __PYX_ERR(0, 353, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 2); __PYX_ERR(0, 353, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -8241,12 +8300,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIR") < 0)) __PYX_ERR(0, 353, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -8280,23 +8347,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 353, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 353, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_8stepSIR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_8stepSIR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -8597,7 +8665,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   /* "Epigrass/epimodels.py":353
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
@@ -8619,7 +8687,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
 /* "Epigrass/epimodels.py":390
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -8637,21 +8705,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIR_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -8682,13 +8754,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 9, 1); __PYX_ERR(0, 390, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 1); __PYX_ERR(0, 390, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 9, 2); __PYX_ERR(0, 390, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 2); __PYX_ERR(0, 390, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -8723,8 +8795,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -8732,6 +8810,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -8767,24 +8847,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 390, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 390, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_10stepSIR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_10stepSIR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -9238,7 +9319,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   /* "Epigrass/epimodels.py":390
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -9262,7 +9343,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
 /* "Epigrass/epimodels.py":432
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
@@ -9280,19 +9361,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIS (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -9321,13 +9406,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 8, 1); __PYX_ERR(0, 432, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 1); __PYX_ERR(0, 432, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 8, 2); __PYX_ERR(0, 432, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 2); __PYX_ERR(0, 432, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -9359,12 +9444,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIS") < 0)) __PYX_ERR(0, 432, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -9398,23 +9491,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 432, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 432, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_12stepSEIS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_12stepSEIS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -9753,7 +9847,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   /* "Epigrass/epimodels.py":432
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
@@ -9777,7 +9871,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
 /* "Epigrass/epimodels.py":468
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
@@ -9795,21 +9889,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIS_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -9840,13 +9938,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 9, 1); __PYX_ERR(0, 468, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 1); __PYX_ERR(0, 468, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 9, 2); __PYX_ERR(0, 468, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 2); __PYX_ERR(0, 468, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -9881,8 +9979,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -9890,6 +9994,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -9925,24 +10031,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 468, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 468, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -10437,7 +10544,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   /* "Epigrass/epimodels.py":468
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
@@ -10463,7 +10570,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
 /* "Epigrass/epimodels.py":510
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
@@ -10481,19 +10588,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIR (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -10522,13 +10633,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 8, 1); __PYX_ERR(0, 510, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 1); __PYX_ERR(0, 510, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 8, 2); __PYX_ERR(0, 510, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 2); __PYX_ERR(0, 510, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -10560,12 +10671,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIR") < 0)) __PYX_ERR(0, 510, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -10599,23 +10718,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 510, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 510, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_16stepSEIR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_16stepSEIR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -10983,7 +11103,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   /* "Epigrass/epimodels.py":510
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
@@ -11007,7 +11127,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
 /* "Epigrass/epimodels.py":548
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
@@ -11025,21 +11145,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIR_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -11070,13 +11194,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 9, 1); __PYX_ERR(0, 548, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 1); __PYX_ERR(0, 548, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 9, 2); __PYX_ERR(0, 548, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 2); __PYX_ERR(0, 548, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -11111,8 +11235,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -11120,6 +11250,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -11155,24 +11287,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 548, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 548, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -11696,7 +11829,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   /* "Epigrass/epimodels.py":548
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
@@ -11722,7 +11855,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
 /* "Epigrass/epimodels.py":593
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
@@ -11740,19 +11873,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIpRpS (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -11781,13 +11918,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 8, 1); __PYX_ERR(0, 593, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 593, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 8, 2); __PYX_ERR(0, 593, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 593, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -11819,12 +11956,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpRpS") < 0)) __PYX_ERR(0, 593, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -11858,23 +12003,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 593, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 593, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpRpS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -12226,7 +12372,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   /* "Epigrass/epimodels.py":593
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
@@ -12249,7 +12395,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
 /* "Epigrass/epimodels.py":629
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
@@ -12267,21 +12413,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIpRpS_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -12312,13 +12462,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 9, 1); __PYX_ERR(0, 629, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 629, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 9, 2); __PYX_ERR(0, 629, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 629, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -12353,8 +12503,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -12362,6 +12518,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -12397,24 +12555,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 629, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 629, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpRpS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   CYTHON_UNUSED double __pyx_v_E;
@@ -12922,7 +13081,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   /* "Epigrass/epimodels.py":629
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
@@ -12947,7 +13106,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
 /* "Epigrass/epimodels.py":671
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
@@ -12965,19 +13124,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIpRpS (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -13006,13 +13169,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 8, 1); __PYX_ERR(0, 671, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 671, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 8, 2); __PYX_ERR(0, 671, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 671, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -13044,12 +13207,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpRpS") < 0)) __PYX_ERR(0, 671, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -13083,23 +13254,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 671, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 671, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpRpS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -13517,7 +13689,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   /* "Epigrass/epimodels.py":671
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
@@ -13542,7 +13714,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
 /* "Epigrass/epimodels.py":708
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
@@ -13560,21 +13732,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIpRpS_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -13605,13 +13781,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 9, 1); __PYX_ERR(0, 708, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 708, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 9, 2); __PYX_ERR(0, 708, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 708, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -13646,8 +13822,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -13655,6 +13837,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -13690,24 +13874,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 708, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 708, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpRpS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -14281,7 +14466,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   /* "Epigrass/epimodels.py":708
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
@@ -14308,7 +14493,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
 /* "Epigrass/epimodels.py":750
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
@@ -14326,19 +14511,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIpR (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -14367,13 +14556,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 8, 1); __PYX_ERR(0, 750, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 1); __PYX_ERR(0, 750, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 8, 2); __PYX_ERR(0, 750, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 2); __PYX_ERR(0, 750, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -14405,12 +14594,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpR") < 0)) __PYX_ERR(0, 750, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -14444,23 +14641,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 750, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 750, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_28stepSIpR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_28stepSIpR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -14832,7 +15030,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   /* "Epigrass/epimodels.py":750
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
@@ -14856,7 +15054,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
 /* "Epigrass/epimodels.py":788
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
@@ -14874,21 +15072,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIpR_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -14919,13 +15121,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 9, 1); __PYX_ERR(0, 788, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 788, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 9, 2); __PYX_ERR(0, 788, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 788, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -14960,8 +15162,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -14969,6 +15177,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -15004,24 +15214,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 788, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 788, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -15660,7 +15871,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   /* "Epigrass/epimodels.py":788
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
@@ -15687,7 +15898,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
 /* "Epigrass/epimodels.py":835
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
@@ -15705,19 +15916,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIpR (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -15746,13 +15961,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 8, 1); __PYX_ERR(0, 835, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 1); __PYX_ERR(0, 835, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 8, 2); __PYX_ERR(0, 835, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 2); __PYX_ERR(0, 835, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -15784,12 +15999,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpR") < 0)) __PYX_ERR(0, 835, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -15823,23 +16046,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 835, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 835, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_32stepSEIpR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_32stepSEIpR(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -16258,7 +16482,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   /* "Epigrass/epimodels.py":835
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
@@ -16284,7 +16508,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
 /* "Epigrass/epimodels.py":875
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
@@ -16302,21 +16526,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSEIpR_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -16347,13 +16575,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 9, 1); __PYX_ERR(0, 875, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 875, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 9, 2); __PYX_ERR(0, 875, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 875, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -16388,8 +16616,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -16397,6 +16631,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -16432,24 +16668,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 875, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 875, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -17135,7 +17372,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   /* "Epigrass/epimodels.py":875
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
@@ -17164,7 +17401,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
 /* "Epigrass/epimodels.py":924
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
@@ -17182,19 +17419,23 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIRS (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,0};
-    PyObject* values[8] = {0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,0};
+    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -17223,13 +17464,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 8, 1); __PYX_ERR(0, 924, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 1); __PYX_ERR(0, 924, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 8, 2); __PYX_ERR(0, 924, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 2); __PYX_ERR(0, 924, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -17261,12 +17502,20 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_values);
           if (value) { values[7] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  8:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
+          if (value) { values[8] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIRS") < 0)) __PYX_ERR(0, 924, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
+        CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
         CYTHON_FALLTHROUGH;
         case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
@@ -17300,23 +17549,24 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
+    __pyx_v_model = values[8];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 924, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 924, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIRS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_36stepSIRS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_36stepSIRS(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -17638,7 +17888,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   /* "Epigrass/epimodels.py":924
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
@@ -17660,7 +17910,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
 /* "Epigrass/epimodels.py":961
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -17678,21 +17928,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
   PyObject *__pyx_v_bi = 0;
   PyObject *__pyx_v_bp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_values = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_dist = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("stepSIRS_s (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_dist,0};
-    PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_inits_2,&__pyx_n_s_simstep,&__pyx_n_s_totpop,&__pyx_n_s_theta,&__pyx_n_s_npass,&__pyx_n_s_bi,&__pyx_n_s_bp,&__pyx_n_s_values,&__pyx_n_s_model,&__pyx_n_s_dist,0};
+    PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
     values[5] = ((PyObject *)((PyObject *)Py_None));
     values[6] = ((PyObject *)((PyObject *)Py_None));
     values[7] = ((PyObject *)((PyObject *)Py_None));
-    values[8] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
+    values[8] = ((PyObject *)((PyObject *)Py_None));
+    values[9] = ((PyObject *)((PyObject*)__pyx_n_s_poisson));
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -17723,13 +17977,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 9, 1); __PYX_ERR(0, 961, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 1); __PYX_ERR(0, 961, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 9, 2); __PYX_ERR(0, 961, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 2); __PYX_ERR(0, 961, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -17764,8 +18018,14 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
         CYTHON_FALLTHROUGH;
         case  8:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_model);
           if (value) { values[8] = value; kw_args--; }
+        }
+        CYTHON_FALLTHROUGH;
+        case  9:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist);
+          if (value) { values[9] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
@@ -17773,6 +18033,8 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case 10: values[9] = PyTuple_GET_ITEM(__pyx_args, 9);
+        CYTHON_FALLTHROUGH;
         case  9: values[8] = PyTuple_GET_ITEM(__pyx_args, 8);
         CYTHON_FALLTHROUGH;
         case  8: values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
@@ -17808,24 +18070,25 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
     __pyx_v_bi = values[5];
     __pyx_v_bp = values[6];
     __pyx_v_values = values[7];
-    __pyx_v_dist = values[8];
+    __pyx_v_model = values[8];
+    __pyx_v_dist = values[9];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 961, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 961, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIRS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_dist);
+  __pyx_r = __pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(__pyx_self, __pyx_v_inits, __pyx_v_simstep, __pyx_v_totpop, __pyx_v_theta, __pyx_v_npass, __pyx_v_bi, __pyx_v_bp, __pyx_v_values, __pyx_v_model, __pyx_v_dist);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, PyObject *__pyx_v_dist) {
+static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_inits, long __pyx_v_simstep, long __pyx_v_totpop, double __pyx_v_theta, double __pyx_v_npass, PyObject *__pyx_v_bi, PyObject *__pyx_v_bp, CYTHON_UNUSED PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_model, PyObject *__pyx_v_dist) {
   double __pyx_v_beta;
   double __pyx_v_alpha;
   double __pyx_v_E;
@@ -18301,7 +18564,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   /* "Epigrass/epimodels.py":961
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -18567,6 +18830,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
   {&__pyx_kp_s_migInf, __pyx_k_migInf, sizeof(__pyx_k_migInf), 0, 0, 1, 0},
   {&__pyx_n_s_migInf_2, __pyx_k_migInf_2, sizeof(__pyx_k_migInf_2), 0, 0, 1, 1},
+  {&__pyx_n_s_model, __pyx_k_model, sizeof(__pyx_k_model), 0, 0, 1, 1},
   {&__pyx_n_s_modtype, __pyx_k_modtype, sizeof(__pyx_k_modtype), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -18720,7 +18984,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
  *     def __init__(self, geocode, modtype=b'', parallel=True):             # <<<<<<<<<<<<<<
  *         """
- *         defines which models a given site will use
+ *         Defines which models a given site will use
  */
   __pyx_tuple__5 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_geocode, __pyx_n_s_modtype, __pyx_n_s_parallel); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
@@ -18732,7 +18996,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *     def __call__(self, *args, **kwargs):             # <<<<<<<<<<<<<<
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  */
   __pyx_tuple__7 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_args, __pyx_n_s_kwargs, __pyx_n_s_res); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
@@ -18778,230 +19042,230 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "Epigrass/epimodels.py":172
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
  */
-  __pyx_tuple__15 = PyTuple_Pack(84, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_vnames, __pyx_n_s_S1, __pyx_n_s_E1, __pyx_n_s_Is1, __pyx_n_s_Ic1, __pyx_n_s_Ig1, __pyx_n_s_S2, __pyx_n_s_E2, __pyx_n_s_Is2, __pyx_n_s_Ic2, __pyx_n_s_Ig2, __pyx_n_s_S3, __pyx_n_s_E3, __pyx_n_s_Is3, __pyx_n_s_Ic3, __pyx_n_s_Ig3, __pyx_n_s_S4, __pyx_n_s_E4, __pyx_n_s_Is4, __pyx_n_s_Ic4, __pyx_n_s_Ig4, __pyx_n_s_e, __pyx_n_s_c, __pyx_n_s_g, __pyx_n_s_d, __pyx_n_s_pc1, __pyx_n_s_pc2, __pyx_n_s_pc3, __pyx_n_s_pc4, __pyx_n_s_pp1, __pyx_n_s_pp2, __pyx_n_s_pp3, __pyx_n_s_pp4, __pyx_n_s_vaccineNow, __pyx_n_s_vaccov, __pyx_n_s_Infectantes, __pyx_n_s_L1pos, __pyx_n_s_L2pos, __pyx_n_s_L3pos, __pyx_n_s_L4pos, __pyx_n_s_E1pos, __pyx_n_s_Is1pos, __pyx_n_s_Ic1pos, __pyx_n_s_Ig1pos, __pyx_n_s_S1pos, __pyx_n_s_E2pos, __pyx_n_s_Is2pos, __pyx_n_s_Ic2pos, __pyx_n_s_Ig2pos, __pyx_n_s_S2pos, __pyx_n_s_E3pos, __pyx_n_s_Is3pos, __pyx_n_s_Ic3pos, __pyx_n_s_Ig3pos, __pyx_n_s_S3pos, __pyx_n_s_E4pos, __pyx_n_s_Is4pos, __pyx_n_s_Ic4pos, __pyx_n_s_Ig4pos, __pyx_n_s_S4pos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(85, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_vnames, __pyx_n_s_S1, __pyx_n_s_E1, __pyx_n_s_Is1, __pyx_n_s_Ic1, __pyx_n_s_Ig1, __pyx_n_s_S2, __pyx_n_s_E2, __pyx_n_s_Is2, __pyx_n_s_Ic2, __pyx_n_s_Ig2, __pyx_n_s_S3, __pyx_n_s_E3, __pyx_n_s_Is3, __pyx_n_s_Ic3, __pyx_n_s_Ig3, __pyx_n_s_S4, __pyx_n_s_E4, __pyx_n_s_Is4, __pyx_n_s_Ic4, __pyx_n_s_Ig4, __pyx_n_s_e, __pyx_n_s_c, __pyx_n_s_g, __pyx_n_s_d, __pyx_n_s_pc1, __pyx_n_s_pc2, __pyx_n_s_pc3, __pyx_n_s_pc4, __pyx_n_s_pp1, __pyx_n_s_pp2, __pyx_n_s_pp3, __pyx_n_s_pp4, __pyx_n_s_vaccineNow, __pyx_n_s_vaccov, __pyx_n_s_Infectantes, __pyx_n_s_L1pos, __pyx_n_s_L2pos, __pyx_n_s_L3pos, __pyx_n_s_L4pos, __pyx_n_s_E1pos, __pyx_n_s_Is1pos, __pyx_n_s_Ic1pos, __pyx_n_s_Ig1pos, __pyx_n_s_S1pos, __pyx_n_s_E2pos, __pyx_n_s_Is2pos, __pyx_n_s_Ic2pos, __pyx_n_s_Ig2pos, __pyx_n_s_S2pos, __pyx_n_s_E3pos, __pyx_n_s_Is3pos, __pyx_n_s_Ic3pos, __pyx_n_s_Ig3pos, __pyx_n_s_S3pos, __pyx_n_s_E4pos, __pyx_n_s_Is4pos, __pyx_n_s_Ic4pos, __pyx_n_s_Ig4pos, __pyx_n_s_S4pos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(8, 0, 84, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepFlu, 172, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(9, 0, 85, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepFlu, 172, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 172, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":271
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
-  __pyx_tuple__17 = PyTuple_Pack(24, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 271, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(8, 0, 24, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS, 271, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS, 271, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 271, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":311
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
-  __pyx_tuple__19 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS_s, 311, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS_s, 311, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 311, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":353
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
-  __pyx_tuple__21 = PyTuple_Pack(24, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(8, 0, 24, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR, 353, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR, 353, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 353, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":390
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_tuple__23 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR_s, 390, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR_s, 390, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 390, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":432
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
-  __pyx_tuple__25 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(8, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS, 432, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS, 432, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 432, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":468
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
-  __pyx_tuple__27 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 468, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(9, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS_s, 468, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 468, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS_s, 468, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 468, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":510
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
-  __pyx_tuple__29 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 510, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 510, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(8, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR, 510, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 510, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR, 510, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 510, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":548
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
-  __pyx_tuple__31 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 548, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 548, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(9, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR_s, 548, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 548, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR_s, 548, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 548, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":593
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
-  __pyx_tuple__33 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 593, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 593, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(8, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS, 593, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 593, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS, 593, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 593, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":629
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
-  __pyx_tuple__35 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 629, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 629, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS_s, 629, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 629, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(10, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS_s, 629, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 629, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":671
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
-  __pyx_tuple__37 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 671, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 671, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
-  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(8, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS, 671, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 671, __pyx_L1_error)
+  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(9, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS, 671, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 671, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":708
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
-  __pyx_tuple__39 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 708, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 708, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
-  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(9, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS_s, 708, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 708, __pyx_L1_error)
+  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS_s, 708, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 708, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":750
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
-  __pyx_tuple__41 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 750, __pyx_L1_error)
+  __pyx_tuple__41 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__41);
   __Pyx_GIVEREF(__pyx_tuple__41);
-  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(8, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR, 750, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 750, __pyx_L1_error)
+  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR, 750, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 750, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":788
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
-  __pyx_tuple__43 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 788, __pyx_L1_error)
+  __pyx_tuple__43 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__43);
   __Pyx_GIVEREF(__pyx_tuple__43);
-  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(9, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR_s, 788, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 788, __pyx_L1_error)
+  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR_s, 788, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 788, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":835
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
-  __pyx_tuple__45 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 835, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 835, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(8, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR, 835, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 835, __pyx_L1_error)
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(9, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR, 835, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 835, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":875
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
-  __pyx_tuple__47 = PyTuple_Pack(31, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 875, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(32, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 875, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(9, 0, 31, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR_s, 875, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 875, __pyx_L1_error)
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(10, 0, 32, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR_s, 875, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 875, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":924
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
-  __pyx_tuple__49 = PyTuple_Pack(24, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 924, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 924, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(8, 0, 24, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS, 924, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 924, __pyx_L1_error)
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS, 924, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 924, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":961
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_tuple__51 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 961, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 961, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS_s, 961, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 961, __pyx_L1_error)
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS_s, 961, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 961, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -19827,7 +20091,7 @@ if (!__Pyx_RefNanny) {
  *     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
  *     def __init__(self, geocode, modtype=b'', parallel=True):             # <<<<<<<<<<<<<<
  *         """
- *         defines which models a given site will use
+ *         Defines which models a given site will use
  */
   __pyx_t_3 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -19851,7 +20115,7 @@ if (!__Pyx_RefNanny) {
  * 
  *     def __call__(self, *args, **kwargs):             # <<<<<<<<<<<<<<
  *         args = self.get_args_from_redis()
- *         res = self.step(*args)
+ *         res = self.step(*(list(args)+[self]))
  */
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_8Epimodel_3__call__, 0, __pyx_n_s_Epimodel___call, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -19911,7 +20175,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":172
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
  */
@@ -19919,7 +20183,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -19934,6 +20198,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_3stepFlu, 0, __pyx_n_s_stepFlu, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
@@ -19946,7 +20213,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":271
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
@@ -19954,7 +20221,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -19969,6 +20236,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_5stepSIS, 0, __pyx_n_s_stepSIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
@@ -19981,7 +20251,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":311
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
@@ -19989,7 +20259,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20004,9 +20274,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_7stepSIS_s, 0, __pyx_n_s_stepSIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
@@ -20019,7 +20292,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":353
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
@@ -20027,7 +20300,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20042,6 +20315,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_9stepSIR, 0, __pyx_n_s_stepSIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 353, __pyx_L1_error)
@@ -20054,7 +20330,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":390
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -20062,7 +20338,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 390, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20077,9 +20353,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_11stepSIR_s, 0, __pyx_n_s_stepSIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 390, __pyx_L1_error)
@@ -20092,7 +20371,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":432
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
@@ -20100,7 +20379,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 432, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20115,6 +20394,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_13stepSEIS, 0, __pyx_n_s_stepSEIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 432, __pyx_L1_error)
@@ -20127,7 +20409,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":468
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
@@ -20135,7 +20417,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20150,9 +20432,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_15stepSEIS_s, 0, __pyx_n_s_stepSEIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 468, __pyx_L1_error)
@@ -20165,7 +20450,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":510
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
@@ -20173,7 +20458,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 510, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 510, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 510, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20188,6 +20473,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_17stepSEIR, 0, __pyx_n_s_stepSEIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 510, __pyx_L1_error)
@@ -20200,7 +20488,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":548
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
@@ -20208,7 +20496,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 548, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 548, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 548, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20223,9 +20511,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_19stepSEIR_s, 0, __pyx_n_s_stepSEIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 548, __pyx_L1_error)
@@ -20238,7 +20529,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":593
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
@@ -20246,7 +20537,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 593, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 593, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 593, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20261,6 +20552,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_21stepSIpRpS, 0, __pyx_n_s_stepSIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 593, __pyx_L1_error)
@@ -20273,7 +20567,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":629
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
@@ -20281,7 +20575,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 629, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 629, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 629, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20296,9 +20590,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_23stepSIpRpS_s, 0, __pyx_n_s_stepSIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 629, __pyx_L1_error)
@@ -20311,7 +20608,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":671
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
@@ -20319,7 +20616,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 671, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 671, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 671, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20334,6 +20631,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_25stepSEIpRpS, 0, __pyx_n_s_stepSEIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 671, __pyx_L1_error)
@@ -20346,7 +20646,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":708
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
@@ -20354,7 +20654,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 708, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 708, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 708, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20369,9 +20669,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_27stepSEIpRpS_s, 0, __pyx_n_s_stepSEIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 708, __pyx_L1_error)
@@ -20384,7 +20687,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":750
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
@@ -20392,7 +20695,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 750, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 750, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20407,6 +20710,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_29stepSIpR, 0, __pyx_n_s_stepSIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 750, __pyx_L1_error)
@@ -20419,7 +20725,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":788
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
@@ -20427,7 +20733,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 788, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20442,9 +20748,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_31stepSIpR_s, 0, __pyx_n_s_stepSIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 788, __pyx_L1_error)
@@ -20457,7 +20766,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":835
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
@@ -20465,7 +20774,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 835, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 835, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 835, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20480,6 +20789,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_33stepSEIpR, 0, __pyx_n_s_stepSEIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 835, __pyx_L1_error)
@@ -20492,7 +20804,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":875
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
@@ -20500,7 +20812,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 875, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 875, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 875, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20515,9 +20827,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_35stepSEIpR_s, 0, __pyx_n_s_stepSEIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 875, __pyx_L1_error)
@@ -20530,7 +20845,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":924
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):             # <<<<<<<<<<<<<<
+ * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
@@ -20538,7 +20853,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 924, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 924, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 924, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20553,6 +20868,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_2, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_37stepSIRS, 0, __pyx_n_s_stepSIRS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 924, __pyx_L1_error)
@@ -20565,7 +20883,7 @@ if (!__Pyx_RefNanny) {
   /* "Epigrass/epimodels.py":961
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
- * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):             # <<<<<<<<<<<<<<
+ * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
@@ -20573,7 +20891,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 961, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 961, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 961, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20588,9 +20906,12 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(((PyObject *)Py_None));
   __Pyx_GIVEREF(((PyObject *)Py_None));
   PyTuple_SET_ITEM(__pyx_t_3, 4, ((PyObject *)Py_None));
+  __Pyx_INCREF(((PyObject *)Py_None));
+  __Pyx_GIVEREF(((PyObject *)Py_None));
+  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __Pyx_INCREF(((PyObject*)__pyx_n_s_poisson));
   __Pyx_GIVEREF(((PyObject*)__pyx_n_s_poisson));
-  PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject*)__pyx_n_s_poisson));
+  PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8Epigrass_9epimodels_39stepSIRS_s, 0, __pyx_n_s_stepSIRS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 961, __pyx_L1_error)

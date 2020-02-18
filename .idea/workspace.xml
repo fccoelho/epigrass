@@ -4,7 +4,15 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="minor changes" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="minor changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/CustomModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/demos/CustomModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -360,8 +368,8 @@
       <item itemvalue="Python.dgraph" />
       <item itemvalue="Python.epigrass" />
       <item itemvalue="Python.manager" />
-      <item itemvalue="Python tests.Nosetests in tests.py" />
       <item itemvalue="Python tests.Nosetests in test_models.py" />
+      <item itemvalue="Python tests.Nosetests in tests.py" />
     </list>
     <recent_temporary>
       <list>
@@ -389,7 +397,8 @@
       <workItem from="1567179699140" duration="10388000" />
       <workItem from="1567850490613" duration="8433000" />
       <workItem from="1567864061254" duration="1030000" />
-      <workItem from="1581924649320" duration="1493000" />
+      <workItem from="1581924649320" duration="2342000" />
+      <workItem from="1582050087472" duration="6735000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -447,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567864126546</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="minor changes">
+      <created>1581926166344</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1581926166344</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,6 +501,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom" timestamp="1582054941034">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1582054941034" />
+    <state width="2888" height="444" key="GridCell.Tab.0.center" timestamp="1582054941033">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2888" height="444" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1582054941032" />
+    <state width="2888" height="444" key="GridCell.Tab.0.left" timestamp="1582054941032">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2888" height="444" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1582054941032" />
+    <state width="2888" height="444" key="GridCell.Tab.0.right" timestamp="1582054941033">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582054941033" />
     <state x="924" y="215" key="VCS.ChangeListViewerDialog" timestamp="1581926147333">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -493,6 +525,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
+    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582054685180">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582054685180" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -511,7 +547,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1567183341684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1567187182701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1582053020651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1582054933972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

@@ -50,7 +50,7 @@ class Epimodel(object):
     @cython.locals(geocode='long', modtype='bytes', parallel='bint')
     def __init__(self, geocode, modtype=b'', parallel=True):
         """
-        defines which models a given site will use
+        Defines which models a given site will use
         and set variable names accordingly.
         :param modtype:
         """
@@ -60,7 +60,7 @@ class Epimodel(object):
 
     def __call__(self, *args, **kwargs):
         args = self.get_args_from_redis()
-        res = self.step(*args)
+        res = self.step(*(list(args)+[self]))
         self.update_redis(res)
         # return res
 
@@ -169,7 +169,7 @@ def selectModel(modtype):
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
@@ -268,7 +268,7 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -308,7 +308,7 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
@@ -350,7 +350,7 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -387,7 +387,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
@@ -429,7 +429,7 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     Defines the model SEIS:
     - inits = (E,I,S)
@@ -465,7 +465,7 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -507,7 +507,7 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     Defines the model SEIR:
     - inits = (E,I,S)
@@ -545,7 +545,7 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -590,7 +590,7 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -626,7 +626,7 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
@@ -668,7 +668,7 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
@@ -705,7 +705,7 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
@@ -747,7 +747,7 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -785,7 +785,7 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
@@ -832,7 +832,7 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
@@ -872,7 +872,7 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
@@ -921,7 +921,7 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None):
+def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -958,7 +958,7 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
                beta='double', alpha='double', E='double', I='double', S='double', N='long',
                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
                Ipos='double', Spos='double', Rpos='double')
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, dist='poisson'):
+def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)

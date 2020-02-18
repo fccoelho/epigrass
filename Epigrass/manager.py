@@ -30,8 +30,6 @@ from six.moves import zip
 from six.moves import input
 
 
-
-
 class simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
@@ -156,7 +154,10 @@ class simulate:
         self.inits = OrderedDict()
         self.parms = {}
         for k, v in config.items():
-
+            try:
+                k = k.decode('utf8')
+            except AttributeError:
+                pass
             if k.startswith('initial conditions'):
                 self.inits[k.split('.')[-1]] = v
             elif k.startswith('model parameters'):
@@ -225,9 +226,13 @@ class simulate:
             parms = {}
             # eval parms and inits
             for k, v in self.inits.items():
+                if isinstance(k, bytes):
+                    k = k.decode('utf8')
                 inits[k] = eval(v)
                 inits[k.lower()] = eval(v)
             for k, v in self.parms.items():
+                if isinstance(k, bytes):
+                    k = k.decode('utf8')
                 parms[k] = eval(v)
 
             if self.vaccinate:
@@ -398,7 +403,7 @@ class simulate:
         finally:
             f.close()
 
-        return 'E,I,S\n' #+ tss
+        return 'E,I,S\n'  # + tss
 
     def outToShp(self):
         """
@@ -448,7 +453,8 @@ class simulate:
         if len(site_dict) * len(list(site_dict.values())[0].ts) < 20000:  # Only reasonably sized animations
             for i, v in enumerate(list(site_dict.values())[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
-                data = [(str(site.geocode), t, p[i]) for site in six.itervalues(site_dict) for t, p in enumerate(site.ts)]
+                data = [(str(site.geocode), t, p[i]) for site in six.itervalues(site_dict) for t, p in
+                        enumerate(site.ts)]
                 ka.add_data(data)
                 ka.save(v + '_animation')
                 self.Say(v + '_animation')
@@ -755,7 +761,8 @@ class simulate:
                            -1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
             str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
-            varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + ['Arrivals']
+            varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + [
+                'Arrivals']
             #            print nvar, varnames, str1
             print((nvar, len(varnames)))
             str1 = str1[:-1] % tuple(varnames)  # insert variable names (MySQL)
@@ -917,7 +924,8 @@ class simulate:
         self.Say('Saving Epidemiological results...')
         stats = [str(i) for i in self.g.getEpistats()]
 
-        seed = [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
+        seed = \
+        [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
         stats.pop(1)  # Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
             stf = codecs.open('epistats.csv', 'a', self.encoding)  # append to file
@@ -1173,7 +1181,6 @@ def main():
     if args.backend not in ['mysql', 'sqlite', 'csv']:
         parser.error('"%s" is an invalid backend type.' % args.backend)
     print('==> ', args.epg)
-
 
     if args.upload:  # Only upload model
         upload_model(args)
