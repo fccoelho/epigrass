@@ -12,3 +12,5 @@ PyMySQL
 sqlobject
 cython
 tqdm
+dash
+pandas
