@@ -4,11 +4,9 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed a few bugs and added model reference to models">
-      <change afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Implemented basic dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,6 +375,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SqlCodeAssistantSettings">
     <option name="dbBrowserSelectedConnection" value="epigrassqt4" />
   </component>
@@ -395,7 +405,7 @@
       <workItem from="1567864061254" duration="1030000" />
       <workItem from="1581924649320" duration="2342000" />
       <workItem from="1582050087472" duration="12023000" />
-      <workItem from="1582137993566" duration="583000" />
+      <workItem from="1582137993566" duration="6722000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -467,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582057624767</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Implemented basic dashboard">
+      <created>1582138630383</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1582138630383</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,29 +520,34 @@
     <MESSAGE value="Fixed graph exporting" />
     <MESSAGE value="minor changes" />
     <MESSAGE value="Fixed a few bugs and added model reference to models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a few bugs and added model reference to models" />
+    <MESSAGE value="Implemented basic dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented basic dashboard" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582057624277">
+    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582138629273">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582057624277" />
-    <state width="2888" height="444" key="GridCell.Tab.0.bottom" timestamp="1582137512933">
+    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582138629273" />
+    <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1582137512933" />
-    <state width="2888" height="444" key="GridCell.Tab.0.center" timestamp="1582137512933">
+    <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582191364108" />
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom" timestamp="1582138916027">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1582137512933" />
-    <state width="2888" height="444" key="GridCell.Tab.0.left" timestamp="1582137512932">
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916027" />
+    <state width="2888" height="444" key="GridCell.Tab.0.center" timestamp="1582138916025">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1582137512932" />
-    <state width="2888" height="444" key="GridCell.Tab.0.right" timestamp="1582137512933">
+    <state width="2888" height="444" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916025" />
+    <state width="2888" height="444" key="GridCell.Tab.0.left" timestamp="1582138916023">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582137512933" />
+    <state width="2888" height="444" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916023" />
+    <state width="2888" height="444" key="GridCell.Tab.0.right" timestamp="1582138916026">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916026" />
     <state x="352" y="125" key="SettingsEditor" timestamp="1582137944408">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -568,6 +590,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1582053020651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1582054933972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
