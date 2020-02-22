@@ -6,14 +6,15 @@ import pandas as pd
 import sqlite3
 from sqlalchemy import create_engine
 import os
+from functools import lru_cache
 
 is_epigrass_folder = os.path.exists('Epigrass.sqlite')
 
-
+@lru_cache(5)
 def load_sim(sim):
     if sim is None:
-        return pd.DataFrame(data={'time': range(100), 'name':0})
-    con = create_engine('sqlite:///Epigrass.sqlite').connect()
+        return pd.DataFrame(data={'time': range(2), 'name':0})
+    con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
     data = pd.read_sql_table(sim, con)
     con.close()
     return data
@@ -21,12 +22,9 @@ def load_sim(sim):
 
 def get_sims():
     if is_epigrass_folder:
-        con = sqlite3.connect("Epigrass.sqlite")
-        cur = con.cursor()
-        cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
-        sims = (cur.fetchall())
-        con.close()
-        return [s[0] for s in sims if not s[0].endswith('_meta')]
+        con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
+        sims = con.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+        return [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('_e'))]
     else:
         return ['No simulations found']
 
@@ -59,8 +57,13 @@ app.layout = html.Div(children=[
         options=[{'label': s, 'value': s} for s in get_sims()],
     ),
     html.Div(id='sim-table'),
+    html.Div(children=[
+        html.B('Series:'),
+        dcc.Dropdown(id='columns', multi=True, searchable=True,),
+        html.B('Localities:'),
+        dcc.Dropdown(id='localities', multi=True, searchable=True),
+    ], style={'width': '48%', 'display': 'inline-block'},),
     dcc.Graph(id='series-plot'),
-    dcc.Dropdown(id='columns', multi=True, searchable=True,),
 
 ])
 
@@ -82,13 +85,19 @@ def update_sim_table(sim_name):
 @app.callback(
     Output(component_id='series-plot', component_property='figure'),
     [Input(component_id='columns', component_property='value'),
-     Input(component_id='sim-drop', component_property='value')]
+     Input(component_id='sim-drop', component_property='value'),
+     Input(component_id='localities', component_property='value')]
 )
-def update_series_plot(columns_selected, sim_name):
+def update_series_plot(columns_selected, sim_name, localities):
     df = load_sim(sim_name)
+    if localities and localities[0] is not None:
+        df = df[df.name.isin(localities)]
     tf = df.time.max()
     traces = []
-    for c in df.columns:
+    cols = columns_selected
+    if not cols:
+        cols = df.columns[5:7]
+    for c in cols:
         if c in ['geocode,'    'time', 'name', 'lat', 'longit']:
             continue
         traces.append(dict(
@@ -104,7 +113,7 @@ def update_series_plot(columns_selected, sim_name):
         'layout': dict(
             xaxis={'type': 'linear', 'title': 'time',
                    'range': [0, tf]},
-            yaxis={'title': 'Individuals', 'range': [0, 90]},
+            yaxis={'title': 'Individuals'},
             margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
             legend={'x': 0, 'y': 1},
             hovermode='closest',
@@ -121,7 +130,18 @@ def fill_columns(sim_name):
     try:
         df = load_sim(sim_name)
         return [{'label': c, 'value': c} for c in df.columns if c not in ['geocode,'    'time', 'name', 'lat', 'longit']]
-    except TypeError as e:
+    except (TypeError, ValueError) as e:
+        return []
+
+@app.callback(
+    Output(component_id='localities', component_property='options'),
+    [Input(component_id='sim-drop', component_property='value')]
+)
+def fill_localities(sim_name):
+    try:
+        df = load_sim(sim_name)
+        return [{'label': c, 'value': c} for c in set(df.name)]
+    except (TypeError, ValueError) as e:
         return []
 
 

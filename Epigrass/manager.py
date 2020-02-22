@@ -807,6 +807,7 @@ class simulate:
                     t += 1
             # print(nvalues)
             Cursor.executemany(sql2, nvalues)
+            con.commit()
             # Creating a table for edge data
             self.etable = etable = table + 'e'
             esql = """CREATE TABLE %s(
@@ -841,6 +842,7 @@ class simulate:
 
         finally:
             if con:
+                con.commit()
                 con.close()
         # saving pickle of adjacency matrix
         matname = 'adj_' + self.modelName  # table

@@ -4,9 +4,13 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Implemented basic dashboard">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="added plot to dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/flu.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/spread.graphml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -405,7 +409,8 @@
       <workItem from="1567864061254" duration="1030000" />
       <workItem from="1581924649320" duration="2342000" />
       <workItem from="1582050087472" duration="12023000" />
-      <workItem from="1582137993566" duration="6722000" />
+      <workItem from="1582137993566" duration="7002000" />
+      <workItem from="1582357931297" duration="6348000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -484,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582138630383</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="added plot to dashboard">
+      <created>1582271191369</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1582271191369</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,13 +533,14 @@
     <MESSAGE value="minor changes" />
     <MESSAGE value="Fixed a few bugs and added model reference to models" />
     <MESSAGE value="Implemented basic dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented basic dashboard" />
+    <MESSAGE value="added plot to dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="added plot to dashboard" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582138629273">
+    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582271190959">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582138629273" />
+    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582271190959" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -548,30 +561,30 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916026" />
-    <state x="352" y="125" key="SettingsEditor" timestamp="1582137944408">
+    <state x="352" y="125" key="SettingsEditor" timestamp="1582363180465">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="352" y="125" key="SettingsEditor/0.0.3000.1900@0.0.3000.1900" timestamp="1582137944408" />
+    <state x="352" y="125" key="SettingsEditor/0.0.3000.1900@0.0.3000.1900" timestamp="1582363180465" />
     <state x="924" y="215" key="VCS.ChangeListViewerDialog" timestamp="1581926147333">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582057629243">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582271197660">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582057629243" />
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1582137999733">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582271197660" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1582357934219">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582137999733" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582357934219" />
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581926142605">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
-    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582054685180">
+    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582361283373">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582054685180" />
+    <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582361283373" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

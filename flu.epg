@@ -131,7 +131,7 @@ Ig4 = 0
 #  Quarantine: [(locality1's geocode,time,coverage), (locality2's geocode,time,coverage)]
 #  Keywords may be used instead of the geocode in the vacinate and quarantine variables:
 #  'all': Apply the same values to all sites
-seed = [(355030800,'Ic1',1)] #Sao Paulo
+seed = [(355030800,'Ic1',10)] #Sao Paulo
 Vaccinate = [('all',[20,30],[0.5,0.5])] #Sao Paulo
 Quarantine = []
 
@@ -167,7 +167,7 @@ speed =0 #1440  km/day -- equivalent to 60 km/h
 #==============================================================#
 
 # Number of steps
-steps = 10
+steps = 100
 
 # Output dir. Must be a full path. If empty the output will be generated on the 
 # outdata-<date> sub-directory of same path as the model script.
@@ -176,7 +176,7 @@ outdir =
 
 # Database Output
 # SQLout can be 0 (no database output) or 1
-SQLout = 1
+sqlout = 1
 
 
 # Report Generation

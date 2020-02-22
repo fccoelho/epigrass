@@ -138,7 +138,7 @@ Comp_age4 = 0
 #
 #  Keyword 'all' may be used if all sites are vaccinated:
 
-seed = [(355030800,'Sympt_age1',1)] #Sao Paulo
+seed = [(355030800,'Sympt_age1',100)] #Sao Paulo
 Vaccinate = [('all',[20,30],[0.5,0.5])] #Sao Paulo
 Quarantine = []
 
@@ -173,7 +173,7 @@ speed =0 #1440  km/day -- equivalent to 60 km/h
 #==============================================================#
 
 # Number of steps
-steps = 10
+steps = 100
 
 # Output dir. Must be a full path. If empty the output will be generated on the 
 # outdata-<date> sub-directory of same path as the model script.
