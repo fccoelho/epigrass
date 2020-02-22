@@ -10,7 +10,7 @@ from functools import lru_cache
 
 is_epigrass_folder = os.path.exists('Epigrass.sqlite')
 
-@lru_cache(5)
+@lru_cache(2)
 def load_sim(sim):
     if sim is None:
         return pd.DataFrame(data={'time': range(2), 'name':0})
