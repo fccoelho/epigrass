@@ -1,5 +1,5 @@
 """
-This module uses the GDAL and OGR Library to read maps in vaious formats and
+This module uses the GDAL and OGR Library to read maps in various formats and
 export the results of Epigrass simulations to the formats supported by these libraries
 
 copyright 2007,2012 by Flavio Codeco Coelho
@@ -14,11 +14,26 @@ from matplotlib.colors import rgb2hex, LogNorm
 from matplotlib.colors import Normalize
 from matplotlib import cm
 from numpy import array
+import geopandas as gpd
 from zipfile import ZipFile
 import json
 import six
 from six.moves import range
 from six.moves import zip
+
+class NewWorld:
+    def __init__(self, filename, namefield, geocfield, outdir='.'):
+        """
+        Open Shapefile, and load it into a geopandas dataframe
+        :param filename:
+        :param namefield: name of the field containing locality name
+        :param geocfield: name of the field containing geocode
+        :param outdir: directory for data output
+        """
+        self.geocfield = geocfield
+        self.namefield = namefield
+        self.outdir = outdir
+        self.map = gpd.read_file(filename)
 
 
 class World:
@@ -26,6 +41,8 @@ class World:
         '''
         Instantiate a world object.
         Filename points to a file supported by OGR
+        namefield - name of the field containing polygon name
+        geocfield - name of the field containing geocode
         '''
         self.geocfield = geocfield
         self.namefield = namefield
@@ -125,8 +142,6 @@ class World:
         The node layer will be based on the centroids of the
         polygons belonging to the map layer associated with this
         world instance.
-        namefield - name of the field containing polygon name
-        geocfield - name of the field containing geocode
         """
         # Creates a new shape file to hold the data
         if os.path.exists(os.path.join(self.outdir, 'Nodes.shp')):
@@ -152,8 +167,14 @@ class World:
             x = self.centdict[gc][0]
             y = self.centdict[gc][1]
             fe = ogr.Feature(nl.GetLayerDefn())
-            name = f.GetField(self.namefield)
-            fe.SetField('name', f.GetField(self.namefield))
+            # name =f.GetField(self.namefield).decode('utf8', errors="surrogateescape")
+            # print(type(self.namefield))
+            try:
+                fe.SetField('name', f.GetField(self.namefield).decode('utf8', "surrogateescape"))
+            except AttributeError:
+                fe.SetField('name', '')
+            except UnicodeEncodeError:
+                fe.SetField('name', '')
             fe.SetField('geocode', gc)
             fe.SetField('x', str(x))
             fe.SetField('y', str(y))
@@ -257,7 +278,7 @@ class World:
             try:
                 geom = self.geomdict[gc]
             except KeyError:  # Geocode not in polygon dictionary
-                raise KeyError("Geocode %s not in polygon dictionary\n{}" % gc)
+                raise KeyError("Geocode %s not in polygon dictionary\n" % gc)
             if geom.GetGeometryType() != 3: continue
             # print geom.GetGeometryCount()
             fe = ogr.Feature(dl.GetLayerDefn())

@@ -4,13 +4,18 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="added plot to dashboard">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/flu.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/rio.epg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/spread.graphml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Nodes.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Nodes.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Nodes.shx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +50,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dashboard" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,7 +82,7 @@
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Python.epidash">
+  <component name="RunManager" selected="Python tests.Nosetests in test_epigdal.py">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -177,28 +182,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="epidash" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="epigrass" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Epigrass" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Epigrass/epidash.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="epigrass" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Epigrass_GH" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -262,6 +245,22 @@
       <tasks />
       <arguments />
       <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Nosetests in test_epigdal.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <module name="epigrass" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_epigdal.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Nosetests in test_models.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
@@ -365,15 +364,15 @@
     <list>
       <item itemvalue="Python.epigrass" />
       <item itemvalue="Python.manager" />
-      <item itemvalue="Python.epidash" />
       <item itemvalue="Python tests.Nosetests in test_models.py" />
       <item itemvalue="Python tests.Nosetests in tests.py" />
+      <item itemvalue="Python tests.Nosetests in test_epigdal.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.epidash" />
-        <item itemvalue="Python tests.Nosetests in test_models.py" />
+        <item itemvalue="Python tests.Nosetests in test_epigdal.py" />
         <item itemvalue="Python tests.Nosetests in tests.py" />
+        <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python.manager" />
         <item itemvalue="Python.epigrass" />
       </list>
@@ -410,7 +409,8 @@
       <workItem from="1581924649320" duration="2342000" />
       <workItem from="1582050087472" duration="12023000" />
       <workItem from="1582137993566" duration="7002000" />
-      <workItem from="1582357931297" duration="6348000" />
+      <workItem from="1582357931297" duration="13063000" />
+      <workItem from="1582569191091" duration="6448000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -496,7 +496,21 @@
       <option name="project" value="LOCAL" />
       <updated>1582271191369</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
+      <created>1582367652087</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1582367652087</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
+      <created>1582368099002</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1582368099002</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,33 +548,42 @@
     <MESSAGE value="Fixed a few bugs and added model reference to models" />
     <MESSAGE value="Implemented basic dashboard" />
     <MESSAGE value="added plot to dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="added plot to dashboard" />
+    <MESSAGE value="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582271190959">
+    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582368098540">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582271190959" />
+    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582368098540" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582191364108" />
-    <state width="2888" height="444" key="GridCell.Tab.0.bottom" timestamp="1582138916027">
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom" timestamp="1582573451204">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916027" />
-    <state width="2888" height="444" key="GridCell.Tab.0.center" timestamp="1582138916025">
+    <state width="2888" height="444" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1582573451204" />
+    <state width="2888" height="444" key="GridCell.Tab.0.center" timestamp="1582573451202">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916025" />
-    <state width="2888" height="444" key="GridCell.Tab.0.left" timestamp="1582138916023">
+    <state width="2888" height="444" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1582573451202" />
+    <state width="2888" height="444" key="GridCell.Tab.0.left" timestamp="1582573451200">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916023" />
-    <state width="2888" height="444" key="GridCell.Tab.0.right" timestamp="1582138916026">
+    <state width="2888" height="444" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1582573451200" />
+    <state width="2888" height="444" key="GridCell.Tab.0.right" timestamp="1582573451203">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582138916026" />
+    <state width="2888" height="444" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1582573451203" />
+    <state x="290" y="153" key="MergeDialog" timestamp="1582368047486">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="290" y="153" key="MergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582368047486" />
+    <state x="841" y="307" key="MultipleFileMergeDialog" timestamp="1582368050730">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="841" y="307" key="MultipleFileMergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582368050730" />
     <state x="352" y="125" key="SettingsEditor" timestamp="1582363180465">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -569,33 +592,28 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582271197660">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582368102578">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582271197660" />
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1582357934219">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582368102578" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1582569200625">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582357934219" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582569200625" />
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581926142605">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
+    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog" timestamp="1582368035227">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582368035227" />
     <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582361283373">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582361283373" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/Epigrass/epigdal.py</url>
-          <line>259</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.geomdict.keys()" language="Python" />
@@ -605,6 +623,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1582053020651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1582573263529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1582054933972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>

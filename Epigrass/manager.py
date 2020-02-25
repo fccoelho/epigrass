@@ -16,6 +16,7 @@ import sqlite3
 import os
 import getpass
 from tqdm import tqdm
+import pandas as pd
 import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
@@ -64,7 +65,7 @@ class simulate:
         if not os.path.exists(self.outdir):
             os.mkdir(self.outdir)
         if self.shapefile:  # create world object if a shapefile is provided
-            self.World = epigdal.World(*self.shapefile + [self.outdir])
+            self.World = epigdal.NewWorld(*self.shapefile + [self.outdir])
         self.chkScript()
         self.encoding = 'utf-8'  # default encoding for strings in the sites and edges files
         self.round = 0  # No replicates
@@ -412,31 +413,35 @@ class simulate:
         if not self.World:
             return
         # Initialize world output layers
-        self.Say("REading Nodes from shapefile...")
-        self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
-        self.Say("Done reading nodes!")
-        self.Say("Creating Nodes shapefile...")
-        self.World.create_node_layer()
-        self.Say("Done creating Nodes shapefile!")
-        elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in six.iteritems(self.g.edge_dict)]
-        self.Say("Creating Edges shapefile...")
-        self.World.create_edge_layer(elist)
-        self.Say("Done creating Edges shapefile!")
+        # self.Say("Reading Nodes from shapefile...")
+        # self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
+        # self.Say("Done reading nodes!")
+        # self.Say("Creating Nodes shapefile...")
+        # self.World.create_node_layer()
+        # self.Say("Done creating Nodes shapefile!")
+        # elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in six.iteritems(self.g.edge_dict)]
+        # self.Say("Creating Edges shapefile...")
+        # self.World.create_edge_layer(elist)
+        # self.Say("Done creating Edges shapefile!")
         # Generate site epidemic stats
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
                       float(site.totpop)) for site in six.itervalues(self.g.site_dict)]
-        names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
-
-        self.Say("Creating Data shapefile...")
-        self.World.create_data_layer(varlist, sitestats)
-        self.Say("Done creating Data shapefile!")
-        # Generate the kml too.
-        self.out_to_kml(names)
-
-        self.Say("Done creating KML files!")
-        # close files
-        self.World.close_sources()
+        simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield]+varlist)
+        # print(self.World.map.columns)
+        self.World.map.merge(simdf, on=self.World.geocfield)
+        self.World.map.to_file('Data.shp')
+        # names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
+        #
+        # self.Say("Creating Data shapefile...")
+        # self.World.create_data_layer(varlist, sitestats)
+        # self.Say("Done creating Data shapefile!")
+        # # Generate the kml too.
+        # self.out_to_kml(names)
+        #
+        # self.Say("Done creating KML files!")
+        # # close files
+        # self.World.close_sources()
 
     def out_to_kml(self, names):
         """
@@ -472,7 +477,8 @@ class simulate:
         series = {}
         for gc, s in six.iteritems(self.g.site_dict):
             length = max(map(len, s.ts))
-            y = np.array([xi + [None] * (length - len(xi)) for xi in s.ts])
+            # y = np.array([xi + ([None] * (length - len(xi))) for xi in s.ts])
+            y = np.array([np.pad(xi, length, 'constant', constant_values=np.NaN) for xi in s.ts])
             ts = np.array(y)
             sdict = {}
             for i, vn in enumerate(s.vnames):

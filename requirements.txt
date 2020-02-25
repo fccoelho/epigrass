@@ -14,3 +14,4 @@ cython
 tqdm
 dash
 pandas
+geopandas

@@ -2,572 +2,304 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="edge" attr.name="weight" attr.type="double"/>
 <key id="d1" for="node" attr.name="time" attr.type="long"/>
 <key id="d0" for="node" attr.name="name" attr.type="string"/>
-<graph edgedefault="directed"><node id="355030800">
-  <data key="d0">"SÃO PAULO"</data>
+<graph edgedefault="directed"><node id="4550603">
+  <data key="d0">Rodoviaria</data>
   <data key="d1">1</data>
 </node>
-<node id="330040705">
-  <data key="d0">"BARRA MANSA"</data>
+<node id="4550605">
+  <data key="d0">Praca Maua</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550702">
+  <data key="d0">Mal.Floriano</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550707">
+  <data key="d0">Passeio Publico</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550904">
+  <data key="d0">Sao Salvador</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551106">
+  <data key="d0">Fonte da Saudade</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551107">
+  <data key="d0">Parque Lage</data>
+  <data key="d1">2</data>
+</node>
+<node id="4552601">
+  <data key="d0">Paqueta</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550701">
+  <data key="d0">Av.Passos</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550908">
+  <data key="d0">General Glicerio</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550909">
+  <data key="d0">Cosme Velho</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551001">
+  <data key="d0">Leme</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551108">
+  <data key="d0">Hipica</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551114">
+  <data key="d0">Vidigal</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551309">
+  <data key="d0">Sumare</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551310">
+  <data key="d0">Vista Chinesa</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550705">
+  <data key="d0">Aerop.S.Dumont</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550708">
+  <data key="d0">Av. Chile</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550709">
+  <data key="d0">Cruz Vermelha</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550710">
+  <data key="d0">Praca da Republica</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550801">
+  <data key="d0">Sambodromo</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550802">
+  <data key="d0">Piranhao</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550805">
+  <data key="d0">Rio Comprido 2</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550906">
+  <data key="d0">Morro da Viuva</data>
+  <data key="d1">4</data>
+</node>
+<node id="4551105">
+  <data key="d0">Morro da Catacumba</data>
+  <data key="d1">4</data>
+</node>
+<node id="4552803">
+  <data key="d0">Andre Cavalcanti</data>
+  <data key="d1">4</data>
+</node>
+<node id="4553301">
+  <data key="d0">Rocinha</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550602">
+  <data key="d0">Santo Cristo 2</data>
   <data key="d1">5</data>
 </node>
-<node id="250400905">
-  <data key="d0">"CAMPINA GRANDE"</data>
+<node id="4550704">
+  <data key="d0">1o. de marco</data>
   <data key="d1">5</data>
 </node>
-<node id="350950205">
-  <data key="d0">"CAMPINAS"</data>
+<node id="4550706">
+  <data key="d0">Alm. Barroso</data>
   <data key="d1">5</data>
 </node>
-<node id="500270405">
-  <data key="d0">"CAMPO GRANDE"</data>
+<node id="4550711">
+  <data key="d0">Central do Brasil</data>
   <data key="d1">5</data>
 </node>
-<node id="420540705">
-  <data key="d0">"FLORIANÓPOLIS"</data>
+<node id="4550803">
+  <data key="d0">Estacio</data>
   <data key="d1">5</data>
 </node>
-<node id="260600205">
-  <data key="d0">"Garanhuns"</data>
+<node id="4550804">
+  <data key="d0">Rio Comprido 1</data>
   <data key="d1">5</data>
 </node>
-<node id="520870705">
-  <data key="d0">"GOIANIA"</data>
+<node id="4550806">
+  <data key="d0">Campos da Paz</data>
   <data key="d1">5</data>
 </node>
-<node id="420820305">
-  <data key="d0">"ITAJAÍ"</data>
+<node id="4550902">
+  <data key="d0">Gloria</data>
   <data key="d1">5</data>
 </node>
-<node id="270430205">
-  <data key="d0">"MACEIÓ"</data>
+<node id="4552802">
+  <data key="d0">Santa Tereza</data>
   <data key="d1">5</data>
 </node>
-<node id="330330205">
-  <data key="d0">"Niterói"</data>
-  <data key="d1">5</data>
-</node>
-<node id="431410005">
-  <data key="d0">"PASSO FUNDO"</data>
-  <data key="d1">5</data>
-</node>
-<node id="411990505">
-  <data key="d0">"PONTA GROSSA"</data>
-  <data key="d1">5</data>
-</node>
-<node id="315250105">
-  <data key="d0">"Pouso Alegre"</data>
-  <data key="d1">5</data>
-</node>
-<node id="330420105">
-  <data key="d0">"Resende"</data>
-  <data key="d1">5</data>
-</node>
-<node id="211130005">
-  <data key="d0">"SÃO LUÍS"</data>
-  <data key="d1">5</data>
-</node>
-<node id="293135005">
-  <data key="d0">"Teixeira de Freitas"</data>
-  <data key="d1">5</data>
-</node>
-<node id="317010705">
-  <data key="d0">"UBERABA"</data>
-  <data key="d1">5</data>
-</node>
-<node id="293330705">
-  <data key="d0">"VITÓRIA DA CONQUISTA"</data>
-  <data key="d1">5</data>
-</node>
-<node id="330630505">
-  <data key="d0">"Volta Redonda"</data>
-  <data key="d1">5</data>
-</node>
-<node id="310620005">
-  <data key="d0">"BELO HORIZONTE"</data>
-  <data key="d1">5</data>
-</node>
-<node id="410690205">
-  <data key="d0">"CURITIBA"</data>
-  <data key="d1">5</data>
-</node>
-<node id="431490205">
-  <data key="d0">"PORTO ALEGRE"</data>
-  <data key="d1">5</data>
-</node>
-<node id="292740805">
-  <data key="d0">"SALVADOR"</data>
-  <data key="d1">5</data>
-</node>
-<node id="330455705">
-  <data key="d0">"RIO DE JANEIRO"</data>
-  <data key="d1">5</data>
-</node>
-<node id="330070405">
-  <data key="d0">"Cabo Frio"</data>
-  <data key="d1">5</data>
-</node>
-<node id="520110805">
-  <data key="d0">"ANÁPOLIS"</data>
+<node id="4550604">
+  <data key="d0">Santo Cristo</data>
   <data key="d1">6</data>
 </node>
-<node id="280030805">
-  <data key="d0">"ARACAJU"</data>
+<node id="4551308">
+  <data key="d0">Alto da Boa Vista</data>
   <data key="d1">6</data>
 </node>
-<node id="310350405">
-  <data key="d0">"Araguari"</data>
-  <data key="d1">6</data>
+<node id="4550703">
+  <data key="d0">Candelaria</data>
+  <data key="d1">7</data>
 </node>
-<node id="420240405">
-  <data key="d0">"BLUMENAU"</data>
-  <data key="d1">6</data>
-</node>
-<node id="350760505">
-  <data key="d0">"Bragança Paulista"</data>
-  <data key="d1">6</data>
-</node>
-<node id="260410605">
-  <data key="d0">"CARUARU"</data>
-  <data key="d1">6</data>
-</node>
-<node id="410480805">
-  <data key="d0">"CASCAVEL"</data>
-  <data key="d1">6</data>
-</node>
-<node id="420460805">
-  <data key="d0">"CRICIÚMA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="510340305">
-  <data key="d0">"CUIABÁ"</data>
-  <data key="d1">6</data>
-</node>
-<node id="410830405">
-  <data key="d0">"FOZ DO IGUAÇU"</data>
-  <data key="d1">6</data>
-</node>
-<node id="312770105">
-  <data key="d0">"GOVERNADOR VALADARES"</data>
-  <data key="d1">6</data>
-</node>
-<node id="291480205">
-  <data key="d0">"ITABUNA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="250750705">
-  <data key="d0">"JOÃO PESSOA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="420910205">
-  <data key="d0">"JOINVILLE"</data>
-  <data key="d1">6</data>
-</node>
-<node id="230730405">
-  <data key="d0">"JUAZEIRO DO NORTE"</data>
-  <data key="d1">6</data>
-</node>
-<node id="313670205">
-  <data key="d0">"JUIZ DE FORA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="420930005">
-  <data key="d0">"LAGES"</data>
-  <data key="d1">6</data>
-</node>
-<node id="411370005">
-  <data key="d0">"LONDRINA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="411520005">
-  <data key="d0">"MARINGÁ"</data>
-  <data key="d1">6</data>
-</node>
-<node id="240810205">
-  <data key="d0">"NATAL"</data>
-  <data key="d1">6</data>
-</node>
-<node id="220770205">
-  <data key="d0">"PARNAÍBA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="314800405">
-  <data key="d0">"Patos de Minas"</data>
-  <data key="d1">6</data>
-</node>
-<node id="261110105">
-  <data key="d0">"Petrolina"</data>
-  <data key="d1">6</data>
-</node>
-<node id="354990405">
-  <data key="d0">"SÃO JOSÉ DOS CAMPOS"</data>
-  <data key="d1">6</data>
-</node>
-<node id="316860605">
-  <data key="d0">"Teófilo Otoni"</data>
-  <data key="d1">6</data>
-</node>
-<node id="317020605">
-  <data key="d0">"UBERLÂNDIA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="320530905">
-  <data key="d0">"VITÓRIA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="150140205">
-  <data key="d0">"BELÉM"</data>
-  <data key="d1">6</data>
-</node>
-<node id="230440005">
-  <data key="d0">"FORTALEZA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="530010805">
-  <data key="d0">"BRASÍLIA"</data>
-  <data key="d1">6</data>
-</node>
-<node id="317070105">
-  <data key="d0">"Varginha"</data>
-  <data key="d1">6</data>
-</node>
-<node id="353070605">
-  <data key="d0">"Mogi Guaçu"</data>
-  <data key="d1">6</data>
-</node>
-<node id="310560805">
-  <data key="d0">"Barbacena"</data>
-  <data key="d1">9</data>
-</node>
-<node id="320120905">
-  <data key="d0">"Cachoeiro de Itapemirim"</data>
-  <data key="d1">9</data>
-</node>
-<node id="354980505">
-  <data key="d0">"SÃO JOSÉ DO RIO PRETO"</data>
-  <data key="d1">9</data>
-</node>
-<node id="221100105">
-  <data key="d0">"TERESINA"</data>
-  <data key="d1">9</data>
-</node>
-<node id="350280405">
-  <data key="d0">"ARAÇATUBA"</data>
-  <data key="d1">10</data>
-</node>
-<node id="350550005">
-  <data key="d0">"Barretos"</data>
-  <data key="d1">10</data>
-</node>
-<node id="420420205">
-  <data key="d0">"Chapecó"</data>
-  <data key="d1">10</data>
-</node>
-<node id="320150605">
-  <data key="d0">"Colatina"</data>
-  <data key="d1">10</data>
-</node>
-<node id="240800305">
-  <data key="d0">"Mossoró"</data>
-  <data key="d1">10</data>
-</node>
-<node id="172100005">
-  <data key="d0">"PALMAS"</data>
-  <data key="d1">10</data>
-</node>
-<node id="354140605">
-  <data key="d0">"PRESIDENTE PRUDENTE"</data>
-  <data key="d1">10</data>
-</node>
-<node id="510760205">
-  <data key="d0">"Rondonópolis"</data>
-  <data key="d1">10</data>
-</node>
-<node id="261160605">
-  <data key="d0">"RECIFE"</data>
-  <data key="d1">10</data>
-</node>
-<node id="351620005">
-  <data key="d0">"FRANCA"</data>
-  <data key="d1">10</data>
-</node>
-<node id="291840705">
-  <data key="d0">"Juazeiro"</data>
-  <data key="d1">11</data>
-</node>
-<node id="110020505">
-  <data key="d0">"PORTO VELHO"</data>
-  <data key="d1">11</data>
-</node>
-<node id="230420205">
-  <data key="d0">"Crato"</data>
-  <data key="d1">12</data>
-</node>
-<node id="120040105">
-  <data key="d0">"RIO BRANCO"</data>
-  <data key="d1">13</data>
-</node>
-<edge source="330040705" target="355030800" id="0">
+<edge source="4550605" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="250400905" target="355030800" id="0">
+<edge source="4550702" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="350950205" target="355030800" id="0">
+<edge source="4550707" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="500270405" target="355030800" id="0">
+<edge source="4550904" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551106" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551107" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4552601" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550701" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550908" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550909" target="4550603" id="0">
   <data key="d2">2.0</data>
 </edge>
-<edge source="420540705" target="355030800" id="0">
+<edge source="4551001" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="260600205" target="355030800" id="0">
+<edge source="4551001" target="4551106" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="520870705" target="355030800" id="0">
+<edge source="4551108" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="420820305" target="355030800" id="0">
+<edge source="4551114" target="4550904" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="270430205" target="355030800" id="0">
+<edge source="4551309" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="330330205" target="355030800" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="431410005" target="355030800" id="0">
+<edge source="4551310" target="4550603" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="411990505" target="355030800" id="0">
+<edge source="4551310" target="4551107" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550705" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550708" target="4550707" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550708" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550709" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550710" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550801" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550802" target="4551107" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550805" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550906" target="4550904" id="0">
   <data key="d2">2.0</data>
 </edge>
-<edge source="315250105" target="355030800" id="0">
-  <data key="d2">4.0</data>
-</edge>
-<edge source="330420105" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="211130005" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="293135005" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="317010705" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="293330705" target="355030800" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="330630505" target="355030800" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="310620005" target="355030800" id="0">
-  <data key="d2">6.0</data>
-</edge>
-<edge source="410690205" target="355030800" id="0">
-  <data key="d2">8.0</data>
-</edge>
-<edge source="431490205" target="355030800" id="0">
+<edge source="4551105" target="4550603" id="0">
   <data key="d2">2.0</data>
 </edge>
-<edge source="292740805" target="355030800" id="0">
+<edge source="4551105" target="4550908" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="330455705" target="355030800" id="0">
-  <data key="d2">5.0</data>
-</edge>
-<edge source="330070405" target="355030800" id="0">
+<edge source="4552803" target="4550908" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="520110805" target="355030800" id="0">
+<edge source="4553301" target="4550904" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="280030805" target="355030800" id="0">
+<edge source="4550602" target="4550709" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="310350405" target="355030800" id="0">
+<edge source="4550704" target="4550710" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="420240405" target="355030800" id="0">
-  <data key="d2">4.0</data>
-</edge>
-<edge source="350760505" target="355030800" id="0">
+<edge source="4550704" target="4550904" id="0">
   <data key="d2">1.0</data>
 </edge>
-<edge source="260410605" target="355030800" id="0">
+<edge source="4550706" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550706" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550711" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550711" target="4551001" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550803" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550803" target="4551106" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550804" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550806" target="4550707" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550902" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4552802" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550604" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551308" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551308" target="4551001" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550703" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550703" target="4550908" id="0">
   <data key="d2">2.0</data>
-</edge>
-<edge source="410480805" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="420460805" target="355030800" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="510340305" target="355030800" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="410830405" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="312770105" target="355030800" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="291480205" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="250750705" target="355030800" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="420910205" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="230730405" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="313670205" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="420930005" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="411370005" target="355030800" id="0">
-  <data key="d2">8.0</data>
-</edge>
-<edge source="411520005" target="355030800" id="0">
-  <data key="d2">5.0</data>
-</edge>
-<edge source="240810205" target="355030800" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="220770205" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="314800405" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261110105" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="354990405" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="316860605" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="317020605" target="355030800" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="320530905" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="150140205" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="230440005" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="530010805" target="355030800" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="317070105" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="353070605" target="355030800" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="310560805" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="320120905" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="354980505" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="221100105" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="350280405" target="410690205" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="350280405" target="330455705" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="350550005" target="500270405" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="420420205" target="410690205" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="320150605" target="330455705" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="240800305" target="310620005" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="172100005" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="354140605" target="500270405" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="354140605" target="310620005" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="354140605" target="410690205" id="0">
-  <data key="d2">4.0</data>
-</edge>
-<edge source="354140605" target="330455705" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="510760205" target="500270405" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="510760205" target="310620005" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="250400905" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="250750705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="270430205" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="240810205" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="330455705" id="0">
-  <data key="d2">6.0</data>
-</edge>
-<edge source="261160605" target="310620005" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="410690205" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="292740805" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="261160605" target="230440005" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="351620005" target="330455705" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="291840705" target="261110105" id="0">
-  <data key="d2">3.0</data>
-</edge>
-<edge source="110020505" target="520870705" id="0">
-  <data key="d2">2.0</data>
-</edge>
-<edge source="230420205" target="211130005" id="0">
-  <data key="d2">1.0</data>
-</edge>
-<edge source="120040105" target="510340305" id="0">
-  <data key="d2">1.0</data>
 </edge>
 </graph></graphml>

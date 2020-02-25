@@ -3,9 +3,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import pandas as pd
+import geopandas as gpd
+import plotly.express as px
 import sqlite3
 from sqlalchemy import create_engine
-import os
+import os, glob
 from functools import lru_cache
 
 is_epigrass_folder = os.path.exists('Epigrass.sqlite')
@@ -24,7 +26,7 @@ def get_sims():
     if is_epigrass_folder:
         con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
         sims = con.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
-        return [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('_e'))]
+        return [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
     else:
         return ['No simulations found']
 
@@ -59,11 +61,14 @@ app.layout = html.Div(children=[
     html.Div(id='sim-table'),
     html.Div(children=[
         html.B('Series:'),
-        dcc.Dropdown(id='columns', multi=True, searchable=True,),
+        dcc.Dropdown(id='columns', multi=True, searchable=True,)], style={'width': '48%', 'display': 'inline-block'}),
+    html.Div(children=[
         html.B('Localities:'),
         dcc.Dropdown(id='localities', multi=True, searchable=True),
-    ], style={'width': '48%', 'display': 'inline-block'},),
+    ], style={'width': '48%', 'display': 'inline-block', 'float': 'right'},),
+    html.H4('Series:'),
     dcc.Graph(id='series-plot'),
+    dcc.Graph(id='bubble-map'),
 
 ])
 
@@ -144,9 +149,25 @@ def fill_localities(sim_name):
     except (TypeError, ValueError) as e:
         return []
 
+@app.callback(
+    Output(component_id='bubble-map', component_property='figure'),
+    [Input(component_id='sim-drop', component_property='value')]
+)
+def draw_bubble_map(val):
+    maps = glob.glob('*.shp')
+    if maps:
+        mapdf = gpd.read_file('Data.shp')
+        fig = px.scatter_geo(mapdf, hover_name='name', hover_data=['prevalence'])
+
+    return{'data': [fig],
+           'layout': {}
+           }
 
 def main():
     app.run_server(debug=True)
+
+
+
 
 
 if __name__ == '__main__':
