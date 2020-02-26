@@ -5,6 +5,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import geopandas as gpd
 import plotly.express as px
+import plotly.tools as tls
 import sqlite3
 from sqlalchemy import create_engine
 import os, glob
@@ -154,14 +155,19 @@ def fill_localities(sim_name):
     [Input(component_id='sim-drop', component_property='value')]
 )
 def draw_bubble_map(val):
+    import json
     maps = glob.glob('*.shp')
     if maps:
         mapdf = gpd.read_file('Data.shp')
-        fig = px.scatter_geo(mapdf, hover_name='name', hover_data=['prevalence'])
+        mapjson = json.loads(mapdf.to_json())
+        ax = mapdf.plot(column='prevalence', legend=True)
+        mfig = ax.get_figure()
+        fig_url = tls.mpl_to_plotly(mfig, resize=True)
+        fig = px.choropleth(mapdf, geojson=mapjson, color='prevalence',  hover_name='name', hover_data=['prevalence'],
+                            color_continuous_scale='viridis', scope='south america',
+                             )
 
-    return{'data': [fig],
-           'layout': {}
-           }
+    return fig
 
 def main():
     app.run_server(debug=True)

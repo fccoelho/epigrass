@@ -4,18 +4,9 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated epigdal to use geopandas&#10;fixed bug in json output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/rio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Nodes.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Nodes.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Nodes.shx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -410,7 +401,7 @@
       <workItem from="1582050087472" duration="12023000" />
       <workItem from="1582137993566" duration="7002000" />
       <workItem from="1582357931297" duration="13063000" />
-      <workItem from="1582569191091" duration="6448000" />
+      <workItem from="1582569191091" duration="12875000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -510,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582368099002</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Updated epigdal to use geopandas&#10;fixed bug in json output">
+      <created>1582622174517</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1582622174517</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,13 +547,14 @@
     <MESSAGE value="Implemented basic dashboard" />
     <MESSAGE value="added plot to dashboard" />
     <MESSAGE value="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite" />
-    <option name="LAST_COMMIT_MESSAGE" value="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite" />
+    <MESSAGE value="Updated epigdal to use geopandas&#10;fixed bug in json output" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated epigdal to use geopandas&#10;fixed bug in json output" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582368098540">
+    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1582622173980">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582368098540" />
+    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1582622173980" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -592,10 +591,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582368102578">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1582622177104">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582368102578" />
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1582622177104" />
     <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1582569200625">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
