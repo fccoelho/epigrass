@@ -13,12 +13,12 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   overview
-   install
-   intromodels
-   using
-   analysis
-   scripting
+   overview.rst
+   install.rst
+   intromodels.rst
+   using.rst
+   analysis.rst
+   scripting.rst
 
 
 

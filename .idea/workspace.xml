@@ -5,10 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated documentation">
+      <change afterPath="$PROJECT_DIR$/docs/source/analysis.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/source/install.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/source/intromodels.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/source/overview.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/source/scripting.rst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/install.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/scripting.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/scripting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/using.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/using.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,6 +434,7 @@
       <workItem from="1584814084348" duration="8013000" />
       <workItem from="1585391333309" duration="42000" />
       <workItem from="1586003719943" duration="4978000" />
+      <workItem from="1586009082786" duration="659000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>

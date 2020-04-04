@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Building and Installing {#install} &#8212; Epigrass 2.6.1 documentation</title>
+    <title>Building and Installing &#8212; Epigrass 2.6.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,6 +12,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Epidemic Models" href="intromodels.html" />
@@ -32,47 +33,35 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="building-and-installing-install">
-<h1>Building and Installing {#install}<a class="headerlink" href="#building-and-installing-install" title="Permalink to this headline">¶</a></h1>
-<p>This chapter will walk through all aspects of Epigrass installation.
-From obtaining, building and installing the prerequisites to the
-installation of Epigrass itself.</p>
-<p>Most of the steps will be quite simple and similar since they will make
-use of standard tools for package installation on Debian GNU/Linux and
-derivatives. If you use a different distribution, you should check its
-documentation for package installation instructions.</p>
-<p>If, on your distribution, a package is not available for the required
-version, you can try to obtain an updated version of the package at the
-web-sites provided. On the rare cases where pre-built packages are not
-available, instructions on how to build the software from source should
-also be available from its web-site.</p>
+  <div class="section" id="building-and-installing">
+<span id="install"></span><h1>Building and Installing<a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h1>
+<p>This chapter will walk through all aspects of Epigrass installation. From obtaining, building and installing  the prerequisites to the installation of Epigrass itself.</p>
+<p>Most of the steps will be quite simple and similar since they will make use of standard tools for package installation on Debian GNU/Linux and derivatives. If you use a different distribution, you should check its documentation for package installation instructions.</p>
+<p>If, on your distribution, a package is not available for the required version, you can try to obtain an updated version of the package at the web-sites provided. On the rare cases where pre-built packages are not available, instructions on how to build the software from source should also be available from its web-site.</p>
 <div class="section" id="required-packages">
 <h2>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://www.python.org">http://www.python.org</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;= 2.5 &lt; 3</p>
-<p>Python is a simple yet powerful object-oriented language. Its simplicity
-makes it easy to learn, but its power means that large and complex
-applications can also be created easily. Its interpreted nature means
-that Python programmers are very productive because there is no
-edit/compile/link/run development cycle.</p>
-<p>Python is probably installed automatically by your GNU/Linux
-distribution (it is on Debian). If not, it is best to use your
-distribution’s standard tools for package installation. On Debian for
-example:</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.python.org">http://www.python.org</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;= 2.5 &lt; 3</p>
+</dd>
+</dl>
+<p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.</p>
+<p>Python is probably installed automatically by your GNU/Linux distribution (it is on Debian). If not, it is best to use your distribution’s standard tools for package installation. On Debian for example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python python-dev build-essentials python-setuptools
 </pre></div>
 </div>
 </div>
 <div class="section" id="numeric-python">
 <h3>Numeric Python<a class="headerlink" href="#numeric-python" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;= 1.0</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;= 1.0</p>
+</dd>
+</dl>
 <p>Numeric Python is a module for fast numeric computations in Python.</p>
 <p>Example installation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-numpy
@@ -81,10 +70,12 @@ example:</p>
 </div>
 <div class="section" id="matplotlib">
 <h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;0.9</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;0.9</p>
+</dd>
+</dl>
 <p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
 </pre></div>
@@ -92,16 +83,14 @@ example:</p>
 </div>
 <div class="section" id="pyqt">
 <h3>PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;4.0</p>
-<p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all
-the advantages of Qt and Python. A programmer has all the power of Qt,
-but is able to exploit it with the simplicity of Python.</p>
-<p>PyQt depends on the Qt libraries to run. This dependency will be taken
-care by the package installation tools of most distributions, which will
-automatically install the required version of Qt.</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;4.0</p>
+</dd>
+</dl>
+<p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the simplicity of Python.</p>
+<p>PyQt depends on the Qt libraries to run. This dependency will be taken care by the package installation tools of most distributions, which will automatically install the required version of Qt.</p>
 <p>Example installation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qt4
 </pre></div>
@@ -109,12 +98,13 @@ automatically install the required version of Qt.</p>
 </div>
 <div class="section" id="pyqwt">
 <h3>PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;5.0</p>
-<p>PyQwt is a Python binding for the Qwt5 technical widget library. It is
-necessary for some os Epigrass’ visualizations capabilities.</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;5.0</p>
+</dd>
+</dl>
+<p>PyQwt is a Python binding for the Qwt5 technical widget library. It is necessary for some os Epigrass’ visualizations capabilities.</p>
 <p>Example installation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qwt5-qt4
 </pre></div>
@@ -122,13 +112,13 @@ necessary for some os Epigrass’ visualizations capabilities.</p>
 </div>
 <div class="section" id="mysql">
 <h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
-<p><em>Web-site:</em></p>
-<p>:   <a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;5.0</p>
-<p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you
-have a MySQL server available in your LAN, you may skip this step after
-making sure you have permission to access and use it to store your data.</p>
+<dl class="simple">
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;5.0</p>
+</dd>
+</dl>
+<p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL server available in your LAN, you may skip this step after making sure you have permission to access and use it to store your data.</p>
 <p>Example installation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install mysql-server mysql-client python-mysqldb
 </pre></div>
@@ -136,10 +126,12 @@ making sure you have permission to access and use it to store your data.</p>
 </div>
 <div class="section" id="redis">
 <h3>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
-<p><em>web-site:</em></p>
-<p>:   <a class="reference external" href="http://redis.io">http://redis.io</a></p>
-<p><em>Version required:</em></p>
-<p>:   &gt;=2.8</p>
+<dl class="simple">
+<dt><em>web-site:</em></dt><dd><p><a class="reference external" href="http://redis.io">http://redis.io</a></p>
+</dd>
+<dt><em>Version required:</em></dt><dd><p>&gt;=2.8</p>
+</dd>
+</dl>
 <p>Redis is a persistent Key-value database.</p>
 <p>Example installation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install redis-server
@@ -148,39 +140,27 @@ making sure you have permission to access and use it to store your data.</p>
 </div>
 <div class="section" id="other-requirements">
 <h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
-<p>Some other requirements can be installed directly from the Python
-Package index using the <em>pip</em> tool:</p>
+<p>Some other requirements can be installed directly from the Python Package index using the <em>pip</em> tool:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install networkx redis sqlsoup requests sphinx
 </pre></div>
 </div>
 <div class="section" id="post-install-configuration">
 <h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
-<p>After installing MySQL, you will need to create a new database in the
-server, called <em>epigrass</em> and a user with all priviledges to access and
-modify it. This is the user Epigrass will use to interact with MySQL.</p>
-<p>section{Installing Epigrass} If you got through all the steps above, it
-will be an easy task to install Epigrass. There is a <em>.deb</em> package for
-installing Epirass on Debian and Ubuntu. However, since it is not
-maitained by the developers of Epigrass, It may very well be outdated.
-So please download Epigrass’s source tarball (something named
-<code class="docutils literal notranslate"><span class="pre">Epigrass_someversion.tar.gz</span></code>{.interpreted-text role=”file”}) from
-Sourceforge and, after unpacking it to some temporary directory, install
-it by typing:</p>
+<p>After installing MySQL, you will need to create a new database in the server, called <em>epigrass</em> and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.</p>
+<p>section{Installing Epigrass}
+If you got through all the steps above, it will be an easy task to install Epigrass. There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maitained by the developers of Epigrass, It may very well be outdated.  So please download Epigrass’s source tarball (something named <code class="file docutils literal notranslate"><span class="pre">Epigrass_someversion.tar.gz</span></code>) from Sourceforge and, after unpacking it to some temporary directory, install it by typing:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo python setup.py install
 </pre></div>
 </div>
-<p>If the installation proceeds without errors, you will have three new
-executables available on your system:</p>
-<p><em>epigrass</em></p>
-<p>:   This starts Epigrass graphical user interface (GUI).</p>
-<p><em>epirunner</em></p>
-<p>:   This is a command line version of Epigrass. With it you can run
-models without invoking the GUI. It’s great for batch simulations
-and for remote use. for a quick help, try “epirunner -h”.</p>
-<p><em>epgeditor</em></p>
-<p>:   A graphical editor of .epg models. A easy way to edit already
-existing models. Contains detailed explanations of every section of
-the EPG file. $x_3+y$</p>
+<p>If the installation proceeds without errors, you will have three new executables available on your system:</p>
+<dl class="simple">
+<dt><em>epigrass</em></dt><dd><p>This starts Epigrass graphical user interface (GUI).</p>
+</dd>
+<dt><em>epirunner</em></dt><dd><p>This is a command line version of Epigrass. With it you can run models without invoking the GUI. It’s great for batch simulations and for remote use. for a quick help, try “epirunner -h”.</p>
+</dd>
+<dt><em>epgeditor</em></dt><dd><p>A graphical editor of .epg models. A easy way to edit already existing models. Contains detailed explanations of every section of the EPG file. <span class="math notranslate nohighlight">\(x_3+y\)</span></p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -208,14 +188,14 @@ the EPG file. $x_3+y$</p>
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Building and Installing {#install}</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building and Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#required-packages">Required Packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models {#custom}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a></li>
 </ul>
 
 <div class="relations">
@@ -257,7 +237,7 @@ the EPG file. $x_3+y$</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/install.md.txt"
+      <a href="_sources/install.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
