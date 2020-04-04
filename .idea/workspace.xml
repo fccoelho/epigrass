@@ -4,23 +4,11 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Cleanup of old files&#10;&#10;converted documentation to markdown as per issue #1">
-      <change afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/analysis.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/overview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/scripting.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/scripting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/using.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/using.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/install.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/scripting.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/scripting.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -429,7 +417,7 @@
       <workItem from="1584274848721" duration="46000" />
       <workItem from="1584814084348" duration="8013000" />
       <workItem from="1585391333309" duration="42000" />
-      <workItem from="1586003719943" duration="3673000" />
+      <workItem from="1586003719943" duration="4978000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -557,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586007223564</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated documentation">
+      <created>1586007412458</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1586007412458</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,17 +595,18 @@
     <MESSAGE value="Choropleth map still broken" />
     <MESSAGE value="Cleanup of old files&#10;&#10;converted documentation to markdown as per issue #1" />
     <MESSAGE value="Fixed formatting issues with the documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed formatting issues with the documentation" />
+    <MESSAGE value="Updated documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="619" y="68" key="CommitChangelistDialog2" timestamp="1586007223328">
+    <state x="619" y="68" key="CommitChangelistDialog2" timestamp="1586007412218">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586007223328" />
+    <state x="619" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586007412218" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -651,10 +647,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586005939512">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586007414596">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586005939512" />
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586007414596" />
     <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1585391334929">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -663,10 +659,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
-    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog" timestamp="1582368035227">
+    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog" timestamp="1586008699443">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1582368035227" />
+    <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1586008699443" />
     <state x="959" y="759" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582361283373">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
