@@ -427,10 +427,12 @@ class simulate:
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
                       float(site.totpop)) for site in six.itervalues(self.g.site_dict)]
-        simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield]+varlist)
-        # print(self.World.map.columns)
-        self.World.map.merge(simdf, on=self.World.geocfield)
-        self.World.map.to_file('Data.shp')
+        simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield] + varlist)
+        # print(self.World.map.info())
+        self.World.map[self.World.geocfield] = self.World.map[self.World.geocfield].astype(int)
+        self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
+        self.Say('Saving results in the map Data.gpkg')
+        self.World.map.to_file(os.path.join(self.outdir, 'Data.gpkg'))
         # names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
         #
         # self.Say("Creating Data shapefile...")
@@ -558,146 +560,6 @@ class simulate:
                 t += 1
         g.close()
         os.chdir(self.dir)
-
-    #    def outToODb(self,table,mode='b'):
-    #        """
-    #        Insert simulation results in a database using sqlobject.
-    #        if mode = b, do batch inserts
-    #        if mode = p, do parallel inserts
-    #        """
-    #        #set connection parameters
-    #        try:
-    #            DO.Connect(self.backend.lower(),self.usr,self.passw,self.host,self.port,self.db)
-    #            self.Say('Saving data on %s database...'%self.backend)
-    #        except:
-    #            self.Say('Database Connection Failed')
-    #        #basic connection variables
-    #        name = table+'_'+self.now
-    #        self.outtable = name
-    #
-    #        DO.Site.sqlmeta.table = name
-    #        DO.Edge.sqlmeta.table = name+'e'
-    #        if self.backend.lower()=='sqlite':
-    #            DO.Site.sqlmeta.createSQL = {'sqlite':['PRAGMA synchronous=OFF;','PRAGMA default_cache_size=12000000;']}
-    #            DO.Site._connection.commit()
-    #            DO.Edge.sqlmeta.createSQL = {'sqlite':['PRAGMA synchronous=OFF;','PRAGMA default_cache_size=12000000;']}
-    #            DO.Edge._connection.commit()
-    #        #adding columns to sites table
-    #        try: #Only add if they don't exist. On Batch runs this will catch the add error
-    #            DO.Site.sqlmeta.addColumn(StringCol('incidence'))
-    #            DO.Site.sqlmeta.addColumn(StringCol('arrivals'))
-    #        except: pass
-    #        if self.g.site_list[0].values:#add columns for 'values' variables
-    #            for i in xrange(len(self.g.site_list[0].values)):
-    #                try:
-    #                    DO.Site.sqlmeta.addColumn(StringCol('values%s'%i))
-    #                except: pass
-    #        for s in self.g.site_list[0].vnames: #add columns for state variables
-    #            try:
-    #                DO.Site.sqlmeta.addColumn(StringCol(s))
-    #            except: pass
-    #        #creating tables
-    #        DO.Site.createTable()
-    #        DO.Edge.createTable()
-    #        #saving pickle of adjacency matrix
-    #        matname = 'adj_'+self.modelName # table
-    #        adjfile = open(matname,'w')
-    #        pickle.dump(self.g.getConnMatrix(),adjfile)
-    #        adjfile.close()
-    #        #calling insert function
-    #        if mode == 'b':
-    #            self.batchInsert()
-    #        elif mode == 'p':
-    #            self.parInsert()
-    #
-    #    def batchInsert(self):
-    #        """
-    #        Do the inserts all at once. After the simulation is done
-    #        """
-    #        #inserting data in sites table
-    #        for site in self.g.site_list:
-    #            dicin={
-    #            'geocode':site.geocode,
-    #            'lat':float(site.pos[0]),
-    #            'longit':float(site.pos[1]),
-    #            'name':site.sitename.replace('"','').encode('ascii','replace'),
-    #            'totpop':int(site.totpop)}
-    #            if site.values:
-    #                for n,v in enumerate(site.values):
-    #                    #print v,type(v)
-    #                    dicin['values%s'%n] = str(v)
-    #            ts = array(site.ts[1:]) #remove init conds so that ts and inc are the same size
-    #            t = 0
-    #            for i in ts:
-    #                dicin['incidence']= str(site.incidence[t])
-    #                dicin['arrivals'] = str(site.thetahist[t])
-    #                dicin['time'] = t
-    #                for n,v in enumerate(site.vnames):
-    #                    #print i[n],type( i[n])
-    #                    dicin[v] = str(i[n])
-    #                    DO.Site(**dicin)
-    #                t += 1
-    #        #DO.Site._connection.commit()
-    #        #inserting data in edges table
-    #        for e in self.g.edge_list:
-    #            rlist = []
-    #            edicin={
-    #            'source_code':e.source.geocode,
-    #            'dest_code':e.dest.geocode}
-    #            t=0
-    #            for f,b in zip(e.ftheta,e.btheta):
-    #                edicin['time'] = t
-    #                edicin['ftheta'] = f
-    #                edicin['btheta'] = b
-    #                rlist.append(edicin)
-    #                t += 1
-    #            insobj = DO.sqlbuilder.Insert(DO.Edge.sqlmeta.table,valueList=rlist)
-    #            DO.Edge._connection.queryAll(DO.Edge._connection.sqlrepr(insobj))
-    #            #DO.Edge._connection.commit()
-    #
-    #    def parInsert(self):
-    #        """
-    #        do the insertions in a separate process.
-    #        """
-    #        pid = os.fork()
-    #        if pid:
-    #            #parent process get on with the simulation
-    #            return
-    #        else:
-    #        #child process inserts data in sites table
-    #            time.sleep(1+self.g.simstep)
-    #            for site in self.g.site_list:
-    #                dicin={
-    #                'geocode':site.geocode,
-    #                'lat':float(site.pos[0]),
-    #                'longit':float(site.pos[1]),
-    #                'name':site.sitename.replace('"','').encode('ascii','replace'),
-    #                'totpop':int(site.totpop)}
-    #                if site.values:
-    #                    for n,v in enumerate(site.values):
-    #                        #print v,type(v)
-    #                        dicin['values%s'%n] = str(v)
-    #                ts = array(site.ts[1:]) #remove init conds so that ts and inc are the same size
-    #                t = self.g.simstep
-    #                dicin['incidence']= str(site.incidence[t])
-    #                dicin['arrivals'] = str(site.thetahist[t])
-    #                dicin['time'] = t
-    #                for n,v in enumerate(site.vnames):
-    #                    #print i[n],type( i[n])
-    #                    dicin[v] = str(i[n])
-    #                DO.Site(**dicin)
-    #            DO.Site._connection.commit()
-    #            #inserting data in edges table
-    #            for e in self.g.edge_list:
-    #                edicin={
-    #                'source_code':e.source.geocode,
-    #                'dest_code':e.dest.geocode}
-    #                edicin['time'] = t
-    #                edicin['ftheta'] = e.ftheta[t]
-    #                edicin['btheta'] = e.btheta[t]
-    #                DO.Edge(**edicin)
-    #            DO.Edge._connection.commit()
-    #            sys.exit("commit successful")
 
     def writeMetaTable(self, table):
         """
@@ -933,7 +795,7 @@ class simulate:
         stats = [str(i) for i in self.g.getEpistats()]
 
         seed = \
-        [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
+            [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
         stats.pop(1)  # Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
             stf = codecs.open('epistats.csv', 'a', self.encoding)  # append to file
