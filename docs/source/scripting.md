@@ -176,7 +176,7 @@ same is true for the *Model* function.
 The Environment
 ---------------
 
-![Nesting of the objects inside a Simulate object.](Diagrama1.png)
+
 
 From quickly going through the example Custom model above it probably
 became clear, to the Python-initiated, that Yous can access variables at

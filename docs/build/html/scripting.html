@@ -35,7 +35,7 @@
 <h1>Writing Custom Models {#custom}<a class="headerlink" href="#writing-custom-models-custom" title="Permalink to this headline">¶</a></h1>
 <p>::: {.index}
 custom models
-::</p>
+:::</p>
 <p>The most powerful feature of Epigrass is the ability to use custom
 models. It allows the user to specify intra-node dynamics and, in doing
 so, break away from the limitations imposed by the built-in models.</p>
@@ -48,65 +48,65 @@ any distributed dynamical system taking place on a set of nodes
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>The best way to get started in writing custom models is to look at the
 example distributed with Epigrass. It can be found in
-<a href="#id1"><span class="problematic" id="id2">`</span></a>demos/CustomModel_example.py`{.interpreted-text role=”file”}:</p>
-<blockquote>
-<div><p># This is a custom model to used in place of Epigrass’ built-in models. Custom
-# models must always be on a file named CustomModel.py and contain at least
-# a function named Model. Both the File name and the function Names are case-sensitive,
-# so be careful. Please refer to the manual for intructions on how to write your
-# own custom models.</p>
-<dl>
-<dt>def Model(self,vars,par,theta=0, npass=0):</dt><dd><p>“””
-Calculates the model SIR, and return its values.
-* vars The state variables of the models
-* par  The parameters (Beta, alpha, E,r,delta,B, w, p) see docs.
-* theta = infectious individuals from neighbor sites
-* npass = Total number of people arriving at this node
-“””
-# Get state variables’ current values</p>
-<dl>
-<dt>if self.parentSite.parentGraph.simstep == 1:  # if first step</dt><dd><p># Define variable names to appear in the output
-self.parentSite.vnames = (‘Exposed’,’Infectious’,’Susceptible’)
-# And get state variables’s initial values (stored in dict self.bi)</p>
-<p>E,I,S = (self.bi[‘e’],self.bi[‘i’],self.bi[‘s’])</p>
-</dd>
-<dt>else:   # if nor first step</dt><dd><p>E,I,S = vars</p>
-</dd>
-</dl>
-<p># Get parameter values
-N = self.parentSite.totpop
-beta,alpha,e,r,delta,B,w,p = (self.bp[‘beta’],self.bp[‘alpha’],
-self.bp[‘e’],self.bp[‘r’],self.bp[‘delta’],self.bp[‘b’],
-self.bp[‘w’],self.bp[‘p’])</p>
-<p>#Vacination event (optional)
-if self.parentSite.vaccineNow:</p>
-<blockquote>
-<div><p>S -= self.parentSite.vaccov*S</p>
-</div></blockquote>
-<p># Model
-Lpos = beta*S*((I+theta)/(N+npass))**alpha #Number of new cases
-Ipos = (1-r)*I + Lpos
-Spos = S + B - Lpos
-Rpos = N-(Spos+Ipos)</p>
-<p># Update stats
-self.parentSite.totalcases += Lpos #update number of cases
-self.parentSite.incidence.append(Lpos)</p>
-<p># Raise site infected flag and add parent site to the epidemic history list.
-if not self.parentSite.infected:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>if Lpos &gt; 0:</dt><dd><p>self.parentSite.infected = self.parentSite.parentGraph.simstep
-self.parentSite.parentGraph.epipath.append(
-(self.parentSite.parentGraph.simstep,
-self.parentSite,self.parentSite.infector))</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>self.parentSite.migInf.append(Ipos)</p>
-<p>return [0,Ipos,Spos]</p>
-</dd>
-</dl>
-</div></blockquote>
+<code class="docutils literal notranslate"><span class="pre">demos/CustomModel_example.py</span></code>{.interpreted-text role=”file”}:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a custom model to used in place of Epigrass&#39; built-in models. Custom</span>
+<span class="c1"># models must always be on a file named CustomModel.py and contain at least </span>
+<span class="c1"># a function named Model. Both the File name and the function Names are case-sensitive,</span>
+<span class="c1"># so be careful. Please refer to the manual for intructions on how to write your </span>
+<span class="c1"># own custom models.</span>
+
+<span class="k">def</span> <span class="nf">Model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">vars</span><span class="p">,</span><span class="n">par</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">npass</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the model SIR, and return its values.</span>
+<span class="sd">    * vars The state variables of the models</span>
+<span class="sd">    * par  The parameters (Beta, alpha, E,r,delta,B, w, p) see docs.</span>
+<span class="sd">    * theta = infectious individuals from neighbor sites</span>
+<span class="sd">    * npass = Total number of people arriving at this node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get state variables&#39; current values</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">.</span><span class="n">simstep</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># if first step</span>
+        <span class="c1"># Define variable names to appear in the output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">vnames</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Exposed&#39;</span><span class="p">,</span><span class="s1">&#39;Infectious&#39;</span><span class="p">,</span><span class="s1">&#39;Susceptible&#39;</span><span class="p">)</span>
+        <span class="c1"># And get state variables&#39;s initial values (stored in dict self.bi)</span>
+
+        <span class="n">E</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bi</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>   <span class="c1"># if nor first step</span>
+        <span class="n">E</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="nb">vars</span>
+
+    <span class="c1"># Get parameter values  </span>
+    <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">totpop</span>
+    <span class="n">beta</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">delta</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">],</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;delta&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+
+    <span class="c1">#Vacination event (optional)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">vaccineNow</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">vaccov</span><span class="o">*</span><span class="n">S</span>
+
+    <span class="c1"># Model</span>
+    <span class="n">Lpos</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">S</span><span class="o">*</span><span class="p">((</span><span class="n">I</span><span class="o">+</span><span class="n">theta</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="n">npass</span><span class="p">))</span><span class="o">**</span><span class="n">alpha</span> <span class="c1">#Number of new cases</span>
+    <span class="n">Ipos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">I</span> <span class="o">+</span> <span class="n">Lpos</span>
+    <span class="n">Spos</span> <span class="o">=</span> <span class="n">S</span> <span class="o">+</span> <span class="n">B</span> <span class="o">-</span> <span class="n">Lpos</span>
+    <span class="n">Rpos</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="p">(</span><span class="n">Spos</span><span class="o">+</span><span class="n">Ipos</span><span class="p">)</span>
+
+    <span class="c1"># Update stats</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">totalcases</span> <span class="o">+=</span> <span class="n">Lpos</span> <span class="c1">#update number of cases</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">incidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lpos</span><span class="p">)</span>
+
+    <span class="c1"># Raise site infected flag and add parent site to the epidemic history list.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">infected</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="n">Lpos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">infected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">.</span><span class="n">simstep</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">.</span><span class="n">epipath</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">.</span><span class="n">simstep</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">infector</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">migInf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ipos</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">Ipos</span><span class="p">,</span><span class="n">Spos</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>Let’s analyze the above code. The first thing to notice is that an
 Epigrass custom model is a Python program. So anything you can do with
 Python in your system, you can do in your custom model. Naturally, your
@@ -114,77 +114,69 @@ knowledge of the Python programming language will define how far you can
 go in this customization. There are a few requirements on this Python
 program in order to make it a valid custom model from Epigrass’s
 perspective.</p>
-<ol class="arabic">
-<li><p>It must define a global function named <strong>Model</strong>. This function will be inserted as a method on every node object, at run time.</p>
-<p>:   1.</p>
+<ol class="simple">
+<li></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>It must define a global function named **Model**. This function will be inserted as a method on every node object, at run time.
+
+:   1.  
+
+        This function must declare the following arguments:
+
+        :   -   *self*: reference to the model object.
+            -   *vars*: A list with the values of the model\&#39;s state
+                variables in time t-1 in the same order as returned
+                by this function.
+            -   *par*: The parameters of the model. Listed in the
+                same order as defined in the
+                `.epg`{.interpreted-text role=&quot;file&quot;} file.
+            -   *theta*: Number of infectious individuals arriving
+                from neighboring sites. For disconnected models, it
+                is 0.
+            -   *npass*: The total number of passengers arriving
+                from neighboring sites. For disconnected models, it
+                is 0.
+
+    2.  In the beginning of the function you define a list of
+        strings (self.parentSite.vnames) which will be the names
+        used when storing the resulting time-series in the database.
+        Choose strings that are not very long and are meaningful.
+        You only need to do this once, ate the beginning of the
+        simulation so put it inside an *if* statement, which will be
+        executed only at time-step 1 (see code above).
+    3.  After defining variable names, set their initial values in
+        the same *if* clause. An *else* clause linked to this one
+        will set variables values for the rest of the simulation.
+    4.  Define local names for the total population *N* and fixed
+        parameters.
+    5.  Proceed to implement your model anyway you see fit.
+    6.  
+
+        Feed some site level variables (*incidence*,) with the result of the simulation.
+
+        :   -   *incidence*: list of new cases per time step.
+            -   *infected*: Boolean stating if the site has been
+                infected, i.e., it has had an autoctonous case.
+            -   *epipath*: This variable is at the graph level and
+                contains the path of spread of the simulation.
+            -   *migInf*: Number of infectious individuals in this
+                site per time-step.
+
+    7.  Finally, this function must return a list/tuple with the
+        values of the state variables in the same order as received
+        in vars.
+</pre></div>
+</div>
 <blockquote>
-<div><blockquote>
-<div><p>This function must declare the following arguments:</p>
-<dl class="simple">
-<dt>:   -   <em>self</em>: reference to the model object.</dt><dd><ul class="simple">
-<li><p><em>vars</em>: A list with the values of the model’s state
-variables in time t-1 in the same order as returned
-by this function.</p></li>
-<li><p><em>par</em>: The parameters of the model. Listed in the
-same order as defined in the
-<a href="#id3"><span class="problematic" id="id4">`</span></a>.epg`{.interpreted-text role=”file”} file.</p></li>
-<li><p><em>theta</em>: Number of infectious individuals arriving
-from neighboring sites. For disconnected models, it
-is 0.</p></li>
-<li><p><em>npass</em>: The total number of passengers arriving
-from neighboring sites. For disconnected models, it
-is 0.</p></li>
-</ul>
-</dd>
-</dl>
+<div><p>::: {.warning}
+::: {.admonition-title}
+Warning
+:::</p>
+<p>The strings in self.parentSite.vnames must be valid <em>SQL</em> variable
+names, or else you will have a insert error at the end of the
+simulation.
+:::</p>
 </div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>In the beginning of the function you define a list of
-strings (self.parentSite.vnames) which will be the names
-used when storing the resulting time-series in the database.
-Choose strings that are not very long and are meaningful.
-You only need to do this once, ate the beginning of the
-simulation so put it inside an <em>if</em> statement, which will be
-executed only at time-step 1 (see code above).</p></li>
-<li><p>After defining variable names, set their initial values in
-the same <em>if</em> clause. An <em>else</em> clause linked to this one
-will set variables values for the rest of the simulation.</p></li>
-<li><p>Define local names for the total population <em>N</em> and fixed
-parameters.</p></li>
-</ol>
-<p>5.  Proceed to implement your model anyway you see fit.
-6.</p>
-<blockquote>
-<div><p>Feed some site level variables (<em>incidence</em>,) with the result of the simulation.</p>
-<dl class="simple">
-<dt>:   -   <em>incidence</em>: list of new cases per time step.</dt><dd><ul class="simple">
-<li><p><em>infected</em>: Boolean stating if the site has been
-infected, i.e., it has had an autoctonous case.</p></li>
-<li><p><em>epipath</em>: This variable is at the graph level and
-contains the path of spread of the simulation.</p></li>
-<li><p><em>migInf</em>: Number of infectious individuals in this
-site per time-step.</p></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
-<ol class="arabic simple" start="7">
-<li><p>Finally, this function must return a list/tuple with the
-values of the state variables in the same order as received
-in vars.</p></li>
-</ol>
-</div></blockquote>
-</li>
-</ol>
-<p>&gt; ::: {.warning}
-&gt; ::: {.admonition-title}
-&gt; Warning
-&gt; :::
-&gt;
-&gt; The strings in self.parentSite.vnames must be valid <em>SQL</em> variable
-&gt; names, or else you will have a insert error at the end of the
-&gt; simulation.
-&gt; ::</p>
 <p>After defining this function with all its required features, you can
 continue to develop you custom model, writing other functions classes,
 etc. Note however, that only the <em>Model</em> function will be called by
@@ -193,24 +185,21 @@ within that function.</p>
 <p>::: {.note}
 ::: {.admonition-title}
 Note
-::</p>
-<p>Since <a href="#id5"><span class="problematic" id="id6">`</span></a>CustomModel`{.interpreted-text role=”file”} is imported from
+:::</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">CustomModel</span></code>{.interpreted-text role=”file”} is imported from
 within Epigrass, any global code (unindented) in it is also executed. So
 you may add imports and other initialization code.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">warning</span><span class="p">}</span>
-<span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">admonition</span><span class="o">-</span><span class="n">title</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>Warning
-::</p>
+:::</p>
+<p>::: {.warning}
+::: {.admonition-title}
+Warning
+:::</p>
 <p>The name CustomModel.py is case-sensitive and cannot be changed. The
 same is true for the <em>Model</em> function.
-::</p>
+:::</p>
 </div>
 <div class="section" id="the-environment">
 <h2>The Environment<a class="headerlink" href="#the-environment" title="Permalink to this headline">¶</a></h2>
-<p>![Nesting of the objects inside a Simulate object.](Diagrama1.png)</p>
 <p>From quickly going through the example Custom model above it probably
 became clear, to the Python-initiated, that Yous can access variables at
 the node and graph levels. This is possible because <em>Model</em> becomes a
@@ -222,24 +211,34 @@ introspective abilities of Python the user can access any information at
 any level of the full <em>graph</em> model and use it in the custom model. In
 order to help you do this, Let’s establish an API for developing custom
 models.</p>
-<p>### Model Development API</p>
+<div class="section" id="model-development-api">
+<h3>Model Development API<a class="headerlink" href="#model-development-api" title="Permalink to this headline">¶</a></h3>
 <p>All attributes and methods (functions) from all around the simulation
 must be references from the model’s perspective, denoted by <em>self</em>. The
 parent objects can be accessed through the following notation:</p>
-<ul>
-<li><p><em>self.parentSite</em></p>
-<p>:   Is the Site (node) containing the model.</p>
-</li>
-<li><p><em>self.parentSite.parentGraph</em></p>
-<p>:   Is the Graph containing the parent site of the model.</p>
-</li>
+<ul class="simple">
+<li></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">*</span>
+
+<span class="p">:</span>   <span class="n">Is</span> <span class="n">the</span> <span class="n">Site</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">model</span><span class="o">.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">*</span>
+
+<span class="p">:</span>   <span class="n">Is</span> <span class="n">the</span> <span class="n">Graph</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">parent</span> <span class="n">site</span> <span class="n">of</span> <span class="n">the</span> <span class="n">model</span><span class="o">.</span>
+</pre></div>
+</div>
 <p>The following attributes and methods can be accessed by appending them
 to one one the objects above. For example:</p>
-<blockquote>
-<div><p>self.parentSite.parentGraph.simstep</p>
-</div></blockquote>
-<p>#### Site Attributes and Methods</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">parentSite</span><span class="o">.</span><span class="n">parentGraph</span><span class="o">.</span><span class="n">simstep</span>
+</pre></div>
+</div>
+<div class="section" id="site-attributes-and-methods">
+<h4>Site Attributes and Methods<a class="headerlink" href="#site-attributes-and-methods" title="Permalink to this headline">¶</a></h4>
 <p>Not all attributes and methods are listed, only the most useful. For a
 complete reference, look at the source code documentation.</p>
 <p>::: {.Site}
@@ -248,146 +247,102 @@ self.parentSite. Actually named <em>siteobj</em> in the source code.</p>
 bi</p>
 <p>Dictionary with initial values for all of the model’s state variables.
 Keys are the variable names.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>bp</p>
+:::</p>
+<p>::: {.attribute}
+bp</p>
 <p>Dictionary with initial values for all of the model’s parameters. Keys
 are the parameter names.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>totpop</p>
+:::</p>
+<p>::: {.attribute}
+totpop</p>
 <p>Initial total population
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>ts</p>
+:::</p>
+<p>::: {.attribute}
+ts</p>
 <p>List containing the model output time series (variables in the same
 order of the model)
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>incidence</p>
+:::</p>
+<p>::: {.attribute}
+incidence</p>
 <p>Incidence time series
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>infected</p>
+:::</p>
+<p>::: {.attribute}
+infected</p>
 <p>Has the site been already infected? (logical variable)
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>sitename</p>
+:::</p>
+<p>::: {.attribute}
+sitename</p>
 <p>Site’s name (provided in the .csv)
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>values</p>
+:::</p>
+<p>::: {.attribute}
+values</p>
 <p>Tuple containing extra-variables provided by .csv file
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>parentGraph</p>
+:::</p>
+<p>::: {.attribute}
+parentGraph</p>
 <p>Graph to which Site belongs (see class Graph)
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>edges</p>
+:::</p>
+<p>::: {.attribute}
+edges</p>
 <p>List containing all edge objects connected to Site
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>inedges</p>
+:::</p>
+<p>::: {.attribute}
+inedges</p>
 <p>List containing all inbound edges
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>outedges</p>
+:::</p>
+<p>::: {.attribute}
+outedges</p>
 <p>List containing all outbound edges
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>geocode</p>
+:::</p>
+<p>::: {.attribute}
+geocode</p>
 <p>Site’s geocode
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>modtype</p>
+:::</p>
+<p>::: {.attribute}
+modtype</p>
 <p>Type of dynamic model running in Site
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>vaccination</p>
+:::</p>
+<p>::: {.attribute}
+vaccination</p>
 <p>Time and coverage of vaccination event. Format as in .epg
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>vaccineNow</p>
+:::</p>
+<p>::: {.attribute}
+vaccineNow</p>
 <p>Flag indicating that it is vaccine day (0 or 1)
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>vaccov</p>
+:::</p>
+<p>::: {.attribute}
+vaccov</p>
 <p>Current vaccination coverage
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>vaccinate(cov)</p>
+:::</p>
+<p>::: {.method}
+vaccinate(cov)</p>
 <p>At time t, the population is vaccinated with coverage cov
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getOutEdges()</p>
+:::</p>
+<p>::: {.method}
+getOutEdges()</p>
 <p>Returns list of outbound edges
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getInEdges()</p>
+:::</p>
+<p>::: {.method}
+getInEdges()</p>
 <p>Returns list of inbound edges
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getNeighbors()</p>
+:::</p>
+<p>::: {.method}
+getNeighbors()</p>
 <p>Returns a dictionary of neighbor sites as keys and distances as values
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getDistanceFromNeighbor(site)</p>
+:::</p>
+<p>::: {.method}
+getDistanceFromNeighbor(site)</p>
 <p>Returns the distance in km from a given neighbor
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getDegree(site)</p>
+:::</p>
+<p>::: {.method}
+getDegree(site)</p>
 <p>Returns degree of this site, that is, the number of sites connected to
 it
 :::
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#### Graph Attributes and Methods</span>
-</pre></div>
+:::</p>
 </div>
+<div class="section" id="graph-attributes-and-methods">
+<h4>Graph Attributes and Methods<a class="headerlink" href="#graph-attributes-and-methods" title="Permalink to this headline">¶</a></h4>
 <p>Not all attributes and methods are listed, only the most useful. For a
 complete reference, look at the source code documentation.</p>
 <p>::: {.Graph}
@@ -396,46 +351,36 @@ self.parentSite.parentGraph</p>
 simstep</p>
 <p>Time-step of the simulation. Use it to keep track of the simulation
 progress.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>speed</p>
+:::</p>
+<p>::: {.attribute}
+speed</p>
 <p>The speed of the transportation system
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>maxstep</p>
+:::</p>
+<p>::: {.attribute}
+maxstep</p>
 <p>Final time-step of the simulation
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>episize</p>
+:::</p>
+<p>::: {.attribute}
+episize</p>
 <p>Current size of the epidemic, graph-wise.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>site_list</p>
+:::</p>
+<p>::: {.attribute}
+site_list</p>
 <p>Full list of nodes in the graph. Each element in this list is a real
 node object.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">attribute</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>edge_list</p>
+:::</p>
+<p>::: {.attribute}
+edge_list</p>
 <p>Full list of nodes in the graph. Each element in this list is a real
 node object.
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:::</span> <span class="p">{</span><span class="o">.</span><span class="n">method</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>getSite(name)</p>
+:::</p>
+<p>::: {.method}
+getSite(name)</p>
 <p>Returns an site object named <em>name</em>
 :::
-::</p>
+:::</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -463,7 +408,7 @@ node object.
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing {#install}</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass {#using}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Writing Custom Models {#custom}</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>

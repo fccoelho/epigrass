@@ -14,7 +14,7 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Epigrass {#using}" href="using.html" />
+    <link rel="next" title="Using Epigrass" href="using.html" />
     <link rel="prev" title="Building and Installing {#install}" href="install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -36,12 +36,12 @@
 <h1>Epidemic Models<a class="headerlink" href="#epidemic-models" title="Permalink to this headline">¶</a></h1>
 <p>::: {.index}
 Model
-::</p>
+:::</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>::: {.index}
 Epidemiological models
-::</p>
+:::</p>
 <p>Epidemiological models are implemented in the EpiGrass environment as a
 tool to predict, understand and develop strategies to control the spread
 of infectious diseases at different time/spatial scales. In this
@@ -111,7 +111,8 @@ longrightarrow Susceptible</p>
 boxes represent states (compartments) and arrows indicate the
 transitions. It is the state identity together with the transitions
 allowed that define the type of model in use.</p>
-<p>### Dispersal of infected individuals</p>
+<div class="section" id="dispersal-of-infected-individuals">
+<h3>Dispersal of infected individuals<a class="headerlink" href="#dispersal-of-infected-individuals" title="Permalink to this headline">¶</a></h3>
 <p>A key feature of EpiGrass is to allow the simulation of geographical
 spread of infection from one locality to others. Dispersal of infection
 is modeled as in a ‘forest fire’ model
@@ -125,25 +126,28 @@ Further details about this approach can be found in Grenfell et al
 <p>In all models presented below, new infections in locality $i$ arise from
 the contact between Susceptibles in $i$ and Infectious individuals.
 Infectious individuals are of two types: those residents in $i$ $(I_t)$
-and those visiting $i$ $(theta)$. Mathematically, this is written as:</p>
-<p>$$L_{t+1} = beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}$$</p>
-<p>where $L_{t+1}$ is the number of new cases, $beta$ is the contact rate
+and those visiting $i$ $(\theta)$. Mathematically, this is written as:</p>
+<p>$$L_{t+1} = \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}$$</p>
+<p>where $L_{t+1}$ is the number of new cases, $\beta$ is the contact rate
 between Susceptibles and Infectious individuals, $S_t$ is the number of
 susceptibles, $I_t$ is the number of infectious individuals resident in
-the locality, $theta$ is the number of infectious individuals visiting
+the locality, $\theta$ is the number of infectious individuals visiting
 the locality, $N_t$ is the population residing in the locality and $n_t$
-is the total number of individuals visiting the locality. $alpha$ is a
-mixing parameter. $alpha=1$ corresponds to homogeneous mixing
+is the total number of individuals visiting the locality. $\alpha$ is a
+mixing parameter. $\alpha=1$ corresponds to homogeneous mixing
 (Finkenstadt and Grenfell, 2000).</p>
-<p>### Typology of infectious diseases and corresponding models</p>
+</div>
+<div class="section" id="typology-of-infectious-diseases-and-corresponding-models">
+<h3>Typology of infectious diseases and corresponding models<a class="headerlink" href="#typology-of-infectious-diseases-and-corresponding-models" title="Permalink to this headline">¶</a></h3>
 <p>::: {.index}
 Models;typology
-::</p>
+:::</p>
 <p>Here we present a brief description of the typology of infectious
 diseases models based on the main route of transmission, and type of
 immunity resulting from infection. These models correspond to the types
 of models built into EpiGrass.</p>
-<p>#### SIR-like models</p>
+<div class="section" id="sir-like-models">
+<h4>SIR-like models<a class="headerlink" href="#sir-like-models" title="Permalink to this headline">¶</a></h4>
 <p>The natural history of many directly transmitted infectious diseases can
 be appropriately described by a SIR-like model. <em>SIR</em> stands for
 Susceptible $(S)$, Infected $(I)$ and Recovered $(R)$. Archetypal <em>SIRs</em>
@@ -151,14 +155,16 @@ are measles or chickenpox, i.e., diseases that confer lifelong immunity
 (but see cite{KGlassandBTGrenfell2004}). An individual starts his life
 in the $S$ state and may progress to the $I$ state. The rate of
 progression of individuals from $S$ to $I$ is called the incidence rate
-or force of infection $(lambda)$ which is a function of contact rate,
+or force of infection $(\lambda)$ which is a function of contact rate,
 probability of transmission per contact and density of infectious
 individuals. Individuals stay in the infectious period for a certain
 time and then move to the recovered state where they become immune to
 new infections. Generally, the removal rate from the infectious class is
 the inverse of the infectious period (i.e., it is assumed that the
 duration of infection is exponentially distributed).</p>
-<p>&gt; Figure: SIR-like models</p>
+<blockquote>
+<div><p>Figure: SIR-like models</p>
+</div></blockquote>
 <p>Variations of this model allow cases where infected individuals do not
 acquire immunity after infection, thus returning to the susceptible pool
 (<em>SIS</em> model). Another variation is the inclusion of a latent stage to
@@ -169,55 +175,40 @@ immunity) models.</p>
 deterministic and stochastic versions, as used by EpiGrass.</p>
 <p>::: {.tabularcolumns}
 l|
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--------------------------------------------------------------------
-**Symbol**       **Meaning**
----------------- ---------------------------------------------------
-$L_t$            number of newly infected individuals at time
-
-$E$              number of exposed but not infectious individuals at
-                 time t
-
-$I$              number of infectious individuals at time t
-
-$R$              number of recovered individuals at time t
-
-$\beta$          contact rate ($t^{-1}$)
-
-$\theta$         number of infectious visitors
-
-$\alpha$         mixing parameter ($\alpha = 1$ means homogeneous
-                 mixing)
-
-$n$              number of visitors
-
-$N$              population $(S+E+I+R)$
-
-$B$              susceptible pool replenishment
-
-$r$              fraction of $I$ recovering from infection per unit
-                 of time $([0,1])$
-
-$e$              fraction of $E$ becoming infectious per unit of
-                 time $([0,1])$
-
-$\delta$         probability of acquiring immunity $([0,1])$
-
-$w$              probability of losing immunity $([0,1])$
-
-$p$              probability of recovered individual acquiring
-                 infection, given exposure $([0,1])$
---------------------------------------------------------------------
-</pre></div>
+:::</p>
+<hr class="docutils" />
+<p><strong>Symbol</strong>       <strong>Meaning</strong></p>
+<hr class="docutils" />
+<p>$L_t$            number of newly infected individuals at time</p>
+<p>$E$              number of exposed but not infectious individuals at
+time t</p>
+<p>$I$              number of infectious individuals at time t</p>
+<p>$R$              number of recovered individuals at time t</p>
+<p>$\beta$          contact rate ($t^{-1}$)</p>
+<p>$\theta$         number of infectious visitors</p>
+<p>$\alpha$         mixing parameter ($\alpha = 1$ means homogeneous
+mixing)</p>
+<p>$n$              number of visitors</p>
+<p>$N$              population $(S+E+I+R)$</p>
+<p>$B$              susceptible pool replenishment</p>
+<p>$r$              fraction of $I$ recovering from infection per unit
+of time $([0,1])$</p>
+<p>$e$              fraction of $E$ becoming infectious per unit of
+time $([0,1])$</p>
+<p>$\delta$         probability of acquiring immunity $([0,1])$</p>
+<p>$w$              probability of losing immunity $([0,1])$</p>
 </div>
+</div>
+</div>
+<div class="section" id="p-probability-of-recovered-individual-acquiring-infection-given-exposure-0-1">
+<h2>$p$              probability of recovered individual acquiring
+infection, given exposure $([0,1])$<a class="headerlink" href="#p-probability-of-recovered-individual-acquiring-infection-given-exposure-0-1" title="Permalink to this headline">¶</a></h2>
 <p>::: {.index}
 Models;SIR
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SIR</span> <span class="n">models</span><span class="o">**</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>:   Examples of diseases represented by SIR models are measles,</dt><dd><p>chickenpox. Some diseases that do not confer lifelong immunity may
+:::</p>
+<p><strong>SIR models</strong></p>
+<p>:   Examples of diseases represented by SIR models are measles,
+chickenpox. Some diseases that do not confer lifelong immunity may
 be represented by this model if only short term dynamics is of
 interest. In the scale of a year, influenza and pertussis, for
 example, could be described using SIR. The SIR model is implemented
@@ -228,51 +219,41 @@ step, $L(t)$ (i.e., the incidence). In general, this quantity is
 embedded in the $I$ equation (prevalence), but it is important to
 keep track of the incidence if one wishes to compare prediction with
 notification data.</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><p>L_{t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \
-I_{t+1} &amp;= L_{t+1} + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{t+1}nonumber\
-R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})nonumber</p>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{t+1}\nonumber\
+R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})\nonumber
+\end{align}
+\end{aligned}$$</p>
 <p>This model can be easily extended to include diseases without recovery,
 for example AIDS, the so called SI models. Basically, the recovery rate
 is set to 0.</p>
 <p>::: {.index}
 Models;SIS
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SIS</span> <span class="n">models</span><span class="o">**</span>
+:::</p>
+<p><strong>SIS models</strong></p>
+<p>:   In the SIS model, individuals do not acquire immunity after the
+infection. They return directly to the susceptible class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The only difference between \$SIS\$ and \$SIR\$ models is the
+absence of \$R\$ and the flow of recovered individuals to the
+susceptible stage:
 </pre></div>
 </div>
-<dl>
-<dt>:   In the SIS model, individuals do not acquire immunity after the</dt><dd><p>infection. They return directly to the susceptible class.</p>
-<p>The only difference between $SIS$ and $SIR$ models is the
-absence of $R$ and the flow of recovered individuals to the
-susceptible stage:</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><p>L_{t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t} nonumber\
-I_{t+1} &amp;= L_{t+1} + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{t+1} + r I_{t+1}nonumber</p>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t} \nonumber\
+I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{t+1} + r I_{t+1}\nonumber
+\end{align}
+\end{aligned}$$</p>
 <p>::: {.index}
 Models;SEIR
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SEIR</span> <span class="n">models</span><span class="o">**</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>:   These models have an extra compartment for those individuals who</dt><dd><p>have acquired the infection but are still not infectious to others.
+:::</p>
+<p><strong>SEIR models</strong></p>
+<p>:   These models have an extra compartment for those individuals who
+have acquired the infection but are still not infectious to others.
 This is the latent period and it is often parameterized as the
 inverse of the incubation period. Note, however, that for many
 diseases, initiation of infectiousness does not necessarily
@@ -281,45 +262,30 @@ SIR model can also be described by the SEIR model. The decision
 regarding the use of one or another depends on the magnitude of the
 latent period in relation to the time frame of other events in the
 simulation. The model has the form:</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><blockquote>
-<div><p>L_{t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \</p>
-</div></blockquote>
-<dl class="simple">
-<dt>E_{t+1} &amp;= (1-e) E_t + L_{t+1}nonumber\</dt><dd><p>I_{t+1} &amp;= e E_t + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{t+1}nonumber\
-R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}+E_{t+1})nonumber</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+E_{t+1} &amp;= (1-e) E_t + L_{t+1}\nonumber\
+I_{t+1} &amp;= e E_t + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{t+1}\nonumber\
+R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}+E_{t+1})\nonumber
+\end{align}
+\end{aligned}$$</p>
 <p>::: {.index}
 Models;SEIS
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SEIS</span> <span class="n">models</span><span class="o">**</span>
-</pre></div>
-</div>
+:::</p>
+<p><strong>SEIS models</strong></p>
 <p>:   These are SIS models with the inclusion of the latent stage.</p>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><blockquote>
-<div><p>L_{t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \</p>
-</div></blockquote>
-<dl class="simple">
-<dt>E_{t+1} &amp;= (1-e) E_t + L_{t+1}nonumber\</dt><dd><p>I_{t+1} &amp;= e E_t + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{t+1} + r I_tnonumber</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
-<p>#### SIpR-like models</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+E_{t+1} &amp;= (1-e) E_t + L_{t+1}\nonumber\
+I_{t+1} &amp;= e E_t + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{t+1} + r I_t\nonumber
+\end{align}
+\end{aligned}$$</p>
+<div class="section" id="sipr-like-models">
+<h3>SIpR-like models<a class="headerlink" href="#sipr-like-models" title="Permalink to this headline">¶</a></h3>
 <p>These are <em>SIR</em> models with immunity intermediary between full (<em>SIR</em>)
 and null (<em>SIS</em>). Some possibilities arise here: 1) Infection confers
 full immunity to a fraction of the individuals and the remaining ones
@@ -327,79 +293,61 @@ return to the susceptible class again, after infection. (<em>SIpRpS</em>); 2)
 Infection provides only partial immunity and recovered individuals are
 partially susceptible to new infection (<em>SIpR</em>); 3) Immunity is full
 right after infection but wanes with time (<em>SIRS</em>). Each model is
-presented below. Figure <a href="#id1"><span class="problematic" id="id2">`</span></a>fig:sipr`{.interpreted-text role=”ref”}
+presented below. Figure <code class="docutils literal notranslate"><span class="pre">fig:sipr</span></code>{.interpreted-text role=”ref”}
 illustrates them diagrammatically.</p>
-<p>![SIpR-like models.](SIpRdiagram.png)</p>
+<p><img alt="SIpR-like models." src="_images/SIpRdiagram.png" /></p>
 <p>Related models, that included the latent state $E$ are:
 textit{SEIpRpS}, <em>SEIpR</em>, <em>SEIRS</em>.</p>
 <p>::: {.index}
 Models;SIpRpS
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SIpRpS</span> <span class="n">model</span><span class="o">**</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>:   This model assumes that a fraction $delta$ of infectious</dt><dd><p>individuals acquire full immunity while the remaining $(1-delta)$
+:::</p>
+<p><strong>SIpRpS model</strong></p>
+<p>:   This model assumes that a fraction $delta$ of infectious
+individuals acquire full immunity while the remaining $(1-delta)$
 returns to the susceptible stage. The model is:</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><p>L_{t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \
-I_{t+1} &amp;= L_{t+1} + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{t+1} + (1-delta) r I_tnonumber\
-R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})nonumber</p>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+I_{t+1} &amp;= L_{t+1} + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{t+1} + (1-\delta) r I_t\nonumber\
+R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1})\nonumber
+\end{align}
+\end{aligned}$$</p>
 <p><strong>SIpR model</strong></p>
-<dl class="simple">
-<dt>:   This model assumes that immunity is only partial and recovered</dt><dd><p>individuals may acquire infection again (at a lower rate
-$p lambda$, where $0leq p leq 1$). Two equations calculate the
+<p>:   This model assumes that immunity is only partial and recovered
+individuals may acquire infection again (at a lower rate
+$p \lambda$, where $0\leq p \leq 1$). Two equations calculate the
 number of new infections. $L_S$ calculates the number of
 susceptibles that become infected at $t+1$. $L_R$ calculates the
 number of recovered that become infected at $t+1$. The latter are
 less susceptible to the disease when compared to susceptibles. The
 model is:</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align}</p>
-<blockquote>
-<div><p>L_{S,t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \
-L_{R,t+1} &amp;= p beta R_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber\
-I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_tnonumber\
-S_{t+1} &amp;= S_t + B - L_{S,t+1} nonumber\
-R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) nonumber
-end{align}</p>
-</div></blockquote>
-<p>end{aligned}$$</p>
+<p>$$\begin{aligned}
+\begin{align}
+L_{S,t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+L_{R,t+1} &amp;= p \beta R_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber\
+I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{S,t+1} \nonumber\
+R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) \nonumber
+\end{align}
+\end{aligned}$$</p>
 <p>::: {.index}
 Models;SIRS
-::</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">**</span><span class="n">SIRS</span> <span class="n">model</span><span class="o">**</span>
-</pre></div>
+:::</p>
+<p><strong>SIRS model</strong></p>
+<p>:   Here, the immunity acquired by infection wanes with time. Pertussis
+is an example of this dynamic.</p>
+<p>$$\begin{aligned}
+\begin{align} \label{}
+L_{S,t+1} &amp;= \beta S_t \frac{(I_t+\theta)^\alpha} {N_t+n_t}\nonumber \
+I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_t\nonumber\
+S_{t+1} &amp;= S_t + B - L_{S,t+1} + w R_t\nonumber\
+R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) \nonumber
+\end{align}
+\end{aligned}$$</p>
 </div>
-<dl class="simple">
-<dt>:   Here, the immunity acquired by infection wanes with time. Pertussis</dt><dd><p>is an example of this dynamic.</p>
-</dd>
-</dl>
-<p>$$begin{aligned}
-begin{align} label{}</p>
-<blockquote>
-<div><blockquote>
-<div><p>L_{S,t+1} &amp;= beta S_t frac{(I_t+theta)^alpha} {N_t+n_t}nonumber \</p>
-</div></blockquote>
-<dl class="simple">
-<dt>I_{t+1} &amp;= L_{S,t+1} + L_{R,t+1} + (1-r)I_tnonumber\</dt><dd><p>S_{t+1} &amp;= S_t + B - L_{S,t+1} + w R_tnonumber\
-R_{t+1} &amp;= N_t-(S_{t+1}+I_{t+1}) nonumber</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>end{align}
-end{aligned}$$</p>
-<p>#### SnInRn-like Models</p>
+<div class="section" id="sninrn-like-models">
+<h3>SnInRn-like Models<a class="headerlink" href="#sninrn-like-models" title="Permalink to this headline">¶</a></h3>
 <p>These are models with more than one compartment for susceptibles,
 infected and recovered stages. They are used when infection involves
 more than one distinct populations. Vector borne diseases are classical
@@ -409,27 +357,30 @@ another SIR-like model is used to describe infection in the vector
 Sexually transmitted diseases may also be modeled with SnInRn models if
 male and female populations are distinguished. These models can be
 define by the user as a custom model.</p>
-<p>### Stochastic models</p>
+</div>
+<div class="section" id="stochastic-models">
+<h3>Stochastic models<a class="headerlink" href="#stochastic-models" title="Permalink to this headline">¶</a></h3>
 <p>::: {.index}
 Models;Stochastic
-::</p>
+:::</p>
 <p>All models described so far are deterministic. EpiGrass allows
 simulation of stochastic processes. This is done by assuming that
 $L_{t+1}$ is a random variable with expected value given by the
 expressions found in the deterministic models. The user may choose the
 probability distribution for $L_{t+1}$ between Poisson or Negative
 Binomial to draw realizations of $L_{t+1}$:</p>
-<p>$$l_{t+1} sim Poisson (L_{t+1})$$</p>
+<p>$$l_{t+1} \sim Poisson (L_{t+1})$$</p>
 <p>or</p>
-<p>$$l_{t+1} sim NegBin (I_t, frac{I_t}{I_t+L_{t+1}})$$</p>
+<p>$$l_{t+1} \sim NegBin (I_t, \frac{I_t}{I_t+L_{t+1}})$$</p>
 <p>The Poisson distribution assumes independent events while the negative
 Binomial assume clustering of transmission events.</p>
+</div>
 </div>
 <div class="section" id="network-transportation-models">
 <h2>Network transportation models<a class="headerlink" href="#network-transportation-models" title="Permalink to this headline">¶</a></h2>
 <p>::: {.index}
 Models;transportation
-::</p>
+:::</p>
 <p>The transmission models describe the dynamics of infection in a
 well-mixed population. EpiGrass allows the user to model the movement of
 infectious individuals between well-mixed populations, thus simulating
@@ -447,21 +398,21 @@ ref{fig:artgraphs}. Velocity and direction of disease spread depend on
 the topology and weight of the edges of the transport network and there
 are many properties of networks that may useful when analyzing the
 spread of diseases. EpiGrass calculates a set of these properties as
-described in chapter <a href="#id3"><span class="problematic" id="id4">`</span></a>analysis`{.interpreted-text role=”ref”}.</p>
+described in chapter <code class="docutils literal notranslate"><span class="pre">analysis</span></code>{.interpreted-text role=”ref”}.</p>
 <p>In a transportation network, each edge (or link) is characterized by a
 variable <em>flow</em> which states the number of passengers that travel
 through that link per unit time. EpiGrass uses this information to
 calculate the number of passengers arriving at each city, per time step.
-For example, consider node $N1$ in figure <a href="#id5"><span class="problematic" id="id6">`</span></a>simpnet`{.interpreted-text
+For example, consider node $N1$ in figure <code class="docutils literal notranslate"><span class="pre">simpnet</span></code>{.interpreted-text
 role=”ref”}. At each time step, it receives 10 passengers from $N2$, 5
 from $N5$, 1 from $N4$. Now suppose that, at this time step, 10% of the
 population within each site is infectious ($I$ state), according to the
 epidemic model. Thus, a total of
-$10% times 10 + 10% times 5 + 10% times 1 = 1.6$ infectious
+$10% \times 10 + 10% \times 5 + 10% \times 1 = 1.6$ infectious
 individuals are visiting site $N1$. In the epidemic model embedded in
-$N1$, EpiGrass sets $n = 16$ and $theta = 1.6$. This calculation of
-$theta$ is based on a deterministic argument. The other possibility,
-allowed by Epigrass, is to define $theta$ as a random variable, that
+$N1$, EpiGrass sets $n = 16$ and $\theta = 1.6$. This calculation of
+$\theta$ is based on a deterministic argument. The other possibility,
+allowed by Epigrass, is to define $\theta$ as a random variable, that
 follows a binomial distribution with parameters $n$,$p$, where $n$ is as
 given in the deterministic version and $p$ is the proportion of
 infectious individuals in the source population. From version 1.4 on,
@@ -469,13 +420,13 @@ EpiGrass can also take into account the specific delays of each
 connection. When the average speed of the transportation system is set
 to a value greater than zero, epigrass calculates the time required to
 complete each trip and attributes this delay (in units of time) to the
-parameter $delta$. So, the number of infectious passengers arriving at
+parameter $\delta$. So, the number of infectious passengers arriving at
 any given city, at time $t$ corresponds to the number of infectious
-passengers that left the city of origin at time $t-delta$.</p>
+passengers that left the city of origin at time $t-\delta$.</p>
 <p>Deterministic:</p>
-<p>$$Theta_t=ntimesfrac{I_{t-delta}}{N}$$</p>
+<p>$$\Theta_t=n\times\frac{I_{t-\delta}}{N}$$</p>
 <p>Stochastic:</p>
-<p>$$Theta_t sim Binomial(N,frac{I_{t-delta}}{N})$$$$A simple transportation network$$</p>
+<p>$$\Theta_t \sim Binomial(N,\frac{I_{t-\delta}}{N})$$$$A simple transportation network$$</p>
 </div>
 </div>
 
@@ -505,10 +456,12 @@ passengers that left the city of origin at time $t-delta$.</p>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Epidemic Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disease-models">Disease models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#p-probability-of-recovered-individual-acquiring-infection-given-exposure-0-1">$p$              probability of recovered individual acquiring
+infection, given exposure $([0,1])$</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#network-transportation-models">Network transportation models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass {#using}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models {#custom}</a></li>
 </ul>
@@ -518,7 +471,7 @@ passengers that left the city of origin at time $t-delta$.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="install.html" title="previous chapter">Building and Installing {#install}</a></li>
-      <li>Next: <a href="using.html" title="next chapter">Using Epigrass {#using}</a></li>
+      <li>Next: <a href="using.html" title="next chapter">Using Epigrass</a></li>
   </ul></li>
 </ul>
 </div>

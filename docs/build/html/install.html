@@ -48,9 +48,10 @@ available, instructions on how to build the software from source should
 also be available from its web-site.</p>
 <div class="section" id="required-packages">
 <h2>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h2>
-<p>### Python</p>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://www.python.org">http://www.python.org</a>&gt;</p>
+<p>:   <a class="reference external" href="http://www.python.org">http://www.python.org</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;= 2.5 &lt; 3</p>
 <p>Python is a simple yet powerful object-oriented language. Its simplicity
@@ -62,31 +63,37 @@ edit/compile/link/run development cycle.</p>
 distribution (it is on Debian). If not, it is best to use your
 distribution’s standard tools for package installation. On Debian for
 example:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python</span> <span class="pre">python-dev</span> <span class="pre">build-essentials</span> <span class="pre">python-setuptools</span>
-<span class="pre">`</span></code></p>
-<p>### Numeric Python</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python python-dev build-essentials python-setuptools
+</pre></div>
+</div>
+</div>
+<div class="section" id="numeric-python">
+<h3>Numeric Python<a class="headerlink" href="#numeric-python" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a>&gt;</p>
+<p>:   <a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;= 1.0</p>
 <p>Numeric Python is a module for fast numeric computations in Python.</p>
 <p>Example installation:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python-numpy</span>
-<span class="pre">`</span></code></p>
-<p>### Matplotlib</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-numpy
+</pre></div>
+</div>
+</div>
+<div class="section" id="matplotlib">
+<h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a>&gt;</p>
+<p>:   <a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;0.9</p>
 <p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python-matplotlib</span> <span class="pre">python-matplotlib-data</span> <span class="pre">python-matplotlib-doc</span>
-<span class="pre">`</span></code></p>
-<p>### PyQt</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
+</pre></div>
+</div>
+</div>
+<div class="section" id="pyqt">
+<h3>PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a>&gt;</p>
+<p>:   <a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;4.0</p>
 <p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all
@@ -96,49 +103,58 @@ but is able to exploit it with the simplicity of Python.</p>
 care by the package installation tools of most distributions, which will
 automatically install the required version of Qt.</p>
 <p>Example installation:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python-qt4</span>
-<span class="pre">`</span></code></p>
-<p>### PyQwt</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qt4
+</pre></div>
+</div>
+</div>
+<div class="section" id="pyqwt">
+<h3>PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a>&gt;</p>
+<p>:   <a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;5.0</p>
 <p>PyQwt is a Python binding for the Qwt5 technical widget library. It is
 necessary for some os Epigrass’ visualizations capabilities.</p>
 <p>Example installation:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python-qwt5-qt4</span>
-<span class="pre">`</span></code></p>
-<p>### MySQL</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qwt5-qt4
+</pre></div>
+</div>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
 <p><em>Web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a>&gt;</p>
+<p>:   <a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;5.0</p>
 <p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you
 have a MySQL server available in your LAN, you may skip this step after
 making sure you have permission to access and use it to store your data.</p>
 <p>Example installation:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">mysql-server</span> <span class="pre">mysql-client</span> <span class="pre">python-mysqldb</span>
-<span class="pre">`</span></code></p>
-<p>### Redis</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install mysql-server mysql-client python-mysqldb
+</pre></div>
+</div>
+</div>
+<div class="section" id="redis">
+<h3>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
 <p><em>web-site:</em></p>
-<p>:   &lt;<a class="reference external" href="http://redis.io">http://redis.io</a>&gt;</p>
+<p>:   <a class="reference external" href="http://redis.io">http://redis.io</a></p>
 <p><em>Version required:</em></p>
 <p>:   &gt;=2.8</p>
 <p>Redis is a persistent Key-value database.</p>
 <p>Example installation:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">redis-server</span>
-<span class="pre">`</span></code></p>
-<p>### Other Requirements</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install redis-server
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-requirements">
+<h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
 <p>Some other requirements can be installed directly from the Python
 Package index using the <em>pip</em> tool:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">networkx</span> <span class="pre">redis</span> <span class="pre">sqlsoup</span> <span class="pre">requests</span> <span class="pre">sphinx</span>
-<span class="pre">`</span></code></p>
-<p>#### Post-install configuration</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install networkx redis sqlsoup requests sphinx
+</pre></div>
+</div>
+<div class="section" id="post-install-configuration">
+<h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
 <p>After installing MySQL, you will need to create a new database in the
 server, called <em>epigrass</em> and a user with all priviledges to access and
 modify it. This is the user Epigrass will use to interact with MySQL.</p>
@@ -147,28 +163,26 @@ will be an easy task to install Epigrass. There is a <em>.deb</em> package for
 installing Epirass on Debian and Ubuntu. However, since it is not
 maitained by the developers of Epigrass, It may very well be outdated.
 So please download Epigrass’s source tarball (something named
-<a href="#id1"><span class="problematic" id="id2">`</span></a>Epigrass_someversion.tar.gz`{.interpreted-text role=”file”}) from
+<code class="docutils literal notranslate"><span class="pre">Epigrass_someversion.tar.gz</span></code>{.interpreted-text role=”file”}) from
 Sourceforge and, after unpacking it to some temporary directory, install
 it by typing:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">{.sourceCode</span> <span class="pre">.bash}</span>
-<span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo python setup.py install
+</pre></div>
+</div>
 <p>If the installation proceeds without errors, you will have three new
 executables available on your system:</p>
 <p><em>epigrass</em></p>
 <p>:   This starts Epigrass graphical user interface (GUI).</p>
 <p><em>epirunner</em></p>
-<dl class="simple">
-<dt>:   This is a command line version of Epigrass. With it you can run</dt><dd><p>models without invoking the GUI. It’s great for batch simulations
+<p>:   This is a command line version of Epigrass. With it you can run
+models without invoking the GUI. It’s great for batch simulations
 and for remote use. for a quick help, try “epirunner -h”.</p>
-</dd>
-</dl>
 <p><em>epgeditor</em></p>
-<dl class="simple">
-<dt>:   A graphical editor of .epg models. A easy way to edit already</dt><dd><p>existing models. Contains detailed explanations of every section of
+<p>:   A graphical editor of .epg models. A easy way to edit already
+existing models. Contains detailed explanations of every section of
 the EPG file. $x_3+y$</p>
-</dd>
-</dl>
+</div>
+</div>
 </div>
 </div>
 
@@ -199,7 +213,7 @@ the EPG file. $x_3+y$</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass {#using}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models {#custom}</a></li>
 </ul>

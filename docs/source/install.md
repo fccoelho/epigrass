@@ -40,7 +40,7 @@ distribution (it is on Debian). If not, it is best to use your
 distribution\'s standard tools for package installation. On Debian for
 example:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install python python-dev build-essentials python-setuptools
 ```
 
@@ -58,7 +58,7 @@ Numeric Python is a module for fast numeric computations in Python.
 
 Example installation:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install python-numpy
 ```
 
@@ -74,7 +74,7 @@ $ sudo apt-get install python-numpy
 
 Matplotlib is a Module that provides plotting capabilities to Python.
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
 ```
 
@@ -98,7 +98,7 @@ automatically install the required version of Qt.
 
 Example installation:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install python-qt4
 ```
 
@@ -117,7 +117,7 @@ necessary for some os Epigrass\' visualizations capabilities.
 
 Example installation:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install python-qwt5-qt4
 ```
 
@@ -137,7 +137,7 @@ making sure you have permission to access and use it to store your data.
 
 Example installation:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install mysql-server mysql-client python-mysqldb
 ```
 
@@ -155,7 +155,7 @@ Redis is a persistent Key-value database.
 
 Example installation:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo apt-get install redis-server
 ```
 
@@ -164,7 +164,7 @@ $ sudo apt-get install redis-server
 Some other requirements can be installed directly from the Python
 Package index using the *pip* tool:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo pip install networkx redis sqlsoup requests sphinx
 ```
 
@@ -183,7 +183,7 @@ So please download Epigrass\'s source tarball (something named
 Sourceforge and, after unpacking it to some temporary directory, install
 it by typing:
 
-``` {.sourceCode .bash}
+```bash
 $ sudo python setup.py install
 ```
 

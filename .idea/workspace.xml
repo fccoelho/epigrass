@@ -429,7 +429,7 @@
       <workItem from="1584274848721" duration="46000" />
       <workItem from="1584814084348" duration="8013000" />
       <workItem from="1585391333309" duration="42000" />
-      <workItem from="1586003719943" duration="3419000" />
+      <workItem from="1586003719943" duration="3673000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -550,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586005936543</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixed formatting issues with the documentation">
+      <created>1586007223564</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1586007223564</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,17 +599,18 @@
     <MESSAGE value="Updated epigdal to use geopandas&#10;fixed bug in json output" />
     <MESSAGE value="Choropleth map still broken" />
     <MESSAGE value="Cleanup of old files&#10;&#10;converted documentation to markdown as per issue #1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup of old files&#10;&#10;converted documentation to markdown as per issue #1" />
+    <MESSAGE value="Fixed formatting issues with the documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed formatting issues with the documentation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="619" y="71" key="CommitChangelistDialog2" timestamp="1586005935910">
+    <state x="619" y="68" key="CommitChangelistDialog2" timestamp="1586007223328">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="71" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586005935910" />
+    <state x="619" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586007223328" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
