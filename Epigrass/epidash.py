@@ -5,20 +5,27 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import geopandas as gpd
 import plotly.express as px
-import plotly.tools as tls
-import sqlite3
+import json
 from sqlalchemy import create_engine
 import os, glob
 from functools import lru_cache
+import warnings
+warnings.filterwarnings('ignore')
 
 is_epigrass_folder = os.path.exists('Epigrass.sqlite')
+
+maps = glob.glob('*.shp')
+if maps:
+    mapdf = gpd.read_file('Data.shp')
+    mapdf.to_file('Data.geojson', driver='GeoJSON')
+    mapjson = json.load(open('Data.geojson', 'r'))
 
 @lru_cache(2)
 def load_sim(sim):
     if sim is None:
-        return pd.DataFrame(data={'time': range(2), 'name':0})
+        return pd.DataFrame(data={'time': range(2), 'name': 0})
     con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
-    data = pd.read_sql_table(sim, con)
+    data = pd.read_sql_query(f'select * from {sim} limit 10;', con)
     con.close()
     return data
 
@@ -60,24 +67,34 @@ app.layout = html.Div(children=[
         options=[{'label': s, 'value': s} for s in get_sims()],
     ),
     html.Div(id='sim-table'),
+    dcc.Loading(
+        id="loading-1",
+        type="default",
+        children=html.Div(id="sim-table-loading")
+    ),
     html.Div(children=[
         html.B('Series:'),
-        dcc.Dropdown(id='columns', multi=True, searchable=True,)], style={'width': '48%', 'display': 'inline-block'}),
+        dcc.Dropdown(id='columns', multi=True, searchable=True, )], style={'width': '48%', 'display': 'inline-block'}),
     html.Div(children=[
         html.B('Localities:'),
         dcc.Dropdown(id='localities', multi=True, searchable=True),
-    ], style={'width': '48%', 'display': 'inline-block', 'float': 'right'},),
-    html.H4('Series:'),
+    ], style={'width': '48%', 'display': 'inline-block', 'float': 'right'}, ),
+    html.H3('Series:'),
     dcc.Graph(id='series-plot'),
-    dcc.Graph(id='bubble-map'),
+    html.H3('Map:'),
+    # dcc.Loading(
+    #     id="loading-map",
+    #     type="default",
+    #     children=html.Div(id="map-loading")
+    # ),
+    # dcc.Graph(id='bubble-map'),
 
 ])
 
 
 ## Callbacks
 
-@app.callback(
-    Output(component_id='sim-table', component_property='children'),
+@app.callback(Output(component_id='sim-table', component_property='children'),
     [Input(component_id='sim-drop', component_property='value')]
 )
 def update_sim_table(sim_name):
@@ -87,6 +104,15 @@ def update_sim_table(sim_name):
     except TypeError as e:
         return html.P('No data')
 
+@app.callback(Output("sim-table-loading", "children"),
+              [Input(component_id='sim-drop', component_property='value')])
+def table_spinner(value):
+    pass
+
+@app.callback(Output("map-loading", "children"),
+              [Input(component_id='sim-drop', component_property='value')])
+def map_spinner(value):
+    pass
 
 @app.callback(
     Output(component_id='series-plot', component_property='figure'),
@@ -135,9 +161,11 @@ def update_series_plot(columns_selected, sim_name, localities):
 def fill_columns(sim_name):
     try:
         df = load_sim(sim_name)
-        return [{'label': c, 'value': c} for c in df.columns if c not in ['geocode,'    'time', 'name', 'lat', 'longit']]
+        return [{'label': c, 'value': c} for c in df.columns if
+                c not in ['geocode,'    'time', 'name', 'lat', 'longit']]
     except (TypeError, ValueError) as e:
         return []
+
 
 @app.callback(
     Output(component_id='localities', component_property='options'),
@@ -150,30 +178,25 @@ def fill_localities(sim_name):
     except (TypeError, ValueError) as e:
         return []
 
-@app.callback(
-    Output(component_id='bubble-map', component_property='figure'),
-    [Input(component_id='sim-drop', component_property='value')]
-)
-def draw_bubble_map(val):
-    import json
-    maps = glob.glob('*.shp')
-    if maps:
-        mapdf = gpd.read_file('Data.shp')
-        mapjson = json.loads(mapdf.to_json())
-        ax = mapdf.plot(column='prevalence', legend=True)
-        mfig = ax.get_figure()
-        fig_url = tls.mpl_to_plotly(mfig, resize=True)
-        fig = px.choropleth(mapdf, geojson=mapjson, color='prevalence',  hover_name='name', hover_data=['prevalence'],
-                            color_continuous_scale='viridis', scope='south america',
-                             )
 
-    return fig
+# @app.callback(
+#     Output(component_id='bubble-map', component_property='figure'),
+#     [Input(component_id='sim-drop', component_property='value')]
+# )
+# def draw_bubble_map(val):
+#     fig = None
+#     if maps:
+#         namecol = mapdf.columns[0]
+#         locations = mapdf.columns[1]
+#         fig = px.choropleth(mapdf, geojson=mapjson, locations=locations, color='prevalence', hover_name=namecol,
+#                             hover_data=['prevalence'],
+#                             color_continuous_scale='viridis', scope='south america'
+#                             )
+#     return fig
+
 
 def main():
     app.run_server(debug=True)
-
-
-
 
 
 if __name__ == '__main__':

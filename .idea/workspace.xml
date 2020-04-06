@@ -4,27 +4,12 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated documentation">
-      <change afterPath="$PROJECT_DIR$/docs/source/analysis.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/install.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/intromodels.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/overview.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/scripting.rst" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Reverted source of documentation to restructured text because of support to LaTeX expressions">
+      <change afterPath="$PROJECT_DIR$/demos/Notebooks/mapviz.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/analysis.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/overview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/scripting.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/scripting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/using.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/using.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +68,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/source" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/demos/Notebooks" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -434,7 +419,10 @@
       <workItem from="1584814084348" duration="8013000" />
       <workItem from="1585391333309" duration="42000" />
       <workItem from="1586003719943" duration="4978000" />
-      <workItem from="1586009082786" duration="659000" />
+      <workItem from="1586009082786" duration="1960000" />
+      <workItem from="1586023416412" duration="9161000" />
+      <workItem from="1586171282724" duration="206000" />
+      <workItem from="1586173436922" duration="1281000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -569,7 +557,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586007412458</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Reverted source of documentation to restructured text because of support to LaTeX expressions">
+      <created>1586009833807</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1586009833807</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,17 +608,18 @@
     <MESSAGE value="Cleanup of old files&#10;&#10;converted documentation to markdown as per issue #1" />
     <MESSAGE value="Fixed formatting issues with the documentation" />
     <MESSAGE value="Updated documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
+    <MESSAGE value="Reverted source of documentation to restructured text because of support to LaTeX expressions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reverted source of documentation to restructured text because of support to LaTeX expressions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="619" y="68" key="CommitChangelistDialog2" timestamp="1586008725242">
+    <state x="619" y="68" key="CommitChangelistDialog2" timestamp="1586009833291">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="619" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586008725242" />
+    <state x="619" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586009833291" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -664,14 +660,14 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586007414596">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586009836618">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586007414596" />
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1585391334929">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586009836618" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1586173436806">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391334929" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1586173436806" />
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581926142605">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>

@@ -15,3 +15,4 @@ tqdm
 dash
 pandas
 geopandas
+dash-leaflet
