@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Epidemic Models &#8212; Epigrass 2.6.1 documentation</title>
+    <title>Epidemic Models &#8212; Epigrass 2.6.2 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using Epigrass" href="using.html" />
-    <link rel="prev" title="Building and Installing {#install}" href="install.html" />
+    <link rel="prev" title="Building and Installing" href="install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -265,7 +265,7 @@ illustrated in figure ref{fig:artgraphs}. Velocity and direction of
 disease spread depend on the topology and weight of the edges of the
 transport network and there are many properties of networks that may
 useful when analyzing the spread of diseases. EpiGrass calculates a
-set of these properties as described in chapter <span class="xref std std-ref">analysis</span>.</p>
+set of these properties as described in chapter <a class="reference internal" href="analysis.html#analysis"><span class="std std-ref">Analysis</span></a>.</p>
 <p>In a transportation network, each edge (or link) is characterized by a variable <em>flow</em> which states the number of passengers that travel through that link per unit time. EpiGrass uses this information to calculate the number of passengers arriving at each city, per time step. For example, consider node <span class="math notranslate nohighlight">\(N1\)</span> in figure <a class="reference internal" href="#simpnet"><span class="std std-ref">A simple transportation network</span></a>. At each time step, it receives 10 passengers from <span class="math notranslate nohighlight">\(N2\)</span>, 5 from <span class="math notranslate nohighlight">\(N5\)</span>, 1 from <span class="math notranslate nohighlight">\(N4\)</span>. Now suppose that, at this time step, 10% of the population within each site is infectious (<span class="math notranslate nohighlight">\(I\)</span> state), according to the epidemic model. Thus, a total of <span class="math notranslate nohighlight">\(10\% \times 10 + 10\% \times 5 + 10\% \times 1 = 1.6\)</span> infectious individuals are visiting site <span class="math notranslate nohighlight">\(N1\)</span>. In the epidemic model embedded in <span class="math notranslate nohighlight">\(N1\)</span>, EpiGrass sets <span class="math notranslate nohighlight">\(n = 16\)</span> and <span class="math notranslate nohighlight">\(\theta = 1.6\)</span>. This calculation of <span class="math notranslate nohighlight">\(\theta\)</span> is based on a deterministic argument. The other possibility, allowed by Epigrass, is to define <span class="math notranslate nohighlight">\(\theta\)</span> as a random variable, that follows a binomial distribution with parameters <span class="math notranslate nohighlight">\(n\)</span>,:math:<cite>p</cite>, where <span class="math notranslate nohighlight">\(n\)</span> is as given in the deterministic version and <span class="math notranslate nohighlight">\(p\)</span> is the proportion of infectious individuals in the source population. From version 1.4 on, EpiGrass can also take into account the specific delays of each connection. When the average speed of the transportation system is set to a value greater than zero, epigrass calculates the time required to complete each trip and attributes this delay (in units of time) to the parameter <span class="math notranslate nohighlight">\(\delta\)</span>. So, the number of infectious passengers arriving at any given city, at time <span class="math notranslate nohighlight">\(t\)</span> corresponds to the number of infectious passengers that left the city of origin at time <span class="math notranslate nohighlight">\(t-\delta\)</span>.</p>
 <p>Deterministic:</p>
 <div class="math notranslate nohighlight">
@@ -302,7 +302,7 @@ set of these properties as described in chapter <span class="xref std std-ref">a
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing {#install}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Epidemic Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disease-models">Disease models</a></li>
@@ -311,14 +311,14 @@ set of these properties as described in chapter <span class="xref std std-ref">a
 </li>
 <li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models {#custom}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="install.html" title="previous chapter">Building and Installing {#install}</a></li>
+      <li>Previous: <a href="install.html" title="previous chapter">Building and Installing</a></li>
       <li>Next: <a href="using.html" title="next chapter">Using Epigrass</a></li>
   </ul></li>
 </ul>
