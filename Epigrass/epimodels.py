@@ -112,6 +112,7 @@ def selectModel(modtype):
     """
     Sets the model engine
     """
+    global vnames
     if isinstance(modtype, str):
         modtype = bytes(modtype, 'utf8')
     if modtype == b'SIR':
@@ -157,7 +158,7 @@ def selectModel(modtype):
         try:
             # TODO: move this import to the graph level
             import CustomModel
-
+            vnames['Custom'] = CustomModel.vnames
             return CustomModel.Model
         except ImportError:
             print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")

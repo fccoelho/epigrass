@@ -4,9 +4,13 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues.">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -421,7 +425,11 @@
       <workItem from="1586009082786" duration="1960000" />
       <workItem from="1586023416412" duration="9161000" />
       <workItem from="1586171282724" duration="206000" />
-      <workItem from="1586173436922" duration="1384000" />
+      <workItem from="1586173436922" duration="2151000" />
+      <workItem from="1586259791493" duration="66000" />
+      <workItem from="1586283388389" duration="353000" />
+      <workItem from="1586292027123" duration="606000" />
+      <workItem from="1586347663200" duration="6216000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -570,7 +578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586180711805</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Updated docs">
+      <created>1586180817728</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1586180817728</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,17 +631,18 @@
     <MESSAGE value="Updated documentation" />
     <MESSAGE value="Reverted source of documentation to restructured text because of support to LaTeX expressions" />
     <MESSAGE value="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues." />
+    <MESSAGE value="Updated docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated docs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="536" y="68" key="CommitChangelistDialog2" timestamp="1586180809398">
+    <state x="536" y="68" key="CommitChangelistDialog2" timestamp="1586180817402">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="536" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180809398" />
+    <state x="536" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180817402" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -667,14 +683,14 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586180714205">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586180819545">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180714205" />
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1586173436806">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180819545" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1586343257410">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1586173436806" />
+    <state x="747" y="585" key="com.intellij.ide.util.TipDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1586343257410" />
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581926142605">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>

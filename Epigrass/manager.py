@@ -25,6 +25,7 @@ from Epigrass.data_io import *
 from Epigrass import epigdal
 from Epigrass import __version__
 import requests
+import hashlib
 import six
 from six.moves import range
 from six.moves import zip
@@ -208,14 +209,14 @@ class simulate:
         for site in sitelist:
             if len(site) != ncols:
                 raise ValueError("This line in your sites file has a different number elements:\n%s" % str(site))
-            if ':' in site[0]:
-                lat = self.deg2dec(site[0])
-                longit = self.deg2dec(site[1])
+            if ':' in str(site[0]):
+                lat = self.deg2dec(str(site[0]))
+                longit = self.deg2dec(str(site[1]))
             else:
-                lat = float(site[0])
-                longit = float(site[1])
-            objlist.append(siteobj(site[2], site[3], (lat, longit), int((site[4]).strip()),
-                                   tuple([float(i.strip()) for i in site[5:]])))
+                lat = site[0]
+                longit = site[1]
+            objlist.append(siteobj(site[2], site[3], (lat, longit), int((site[4])),
+                                   tuple([float(i) for i in site[5:]])))
         for o in objlist:
             if self.stochTransp:
                 o.stochtransp = 1
@@ -281,19 +282,19 @@ class simulate:
                 continue
             for site in sitelist:
                 # print site.sitename
-                if str(site.geocode) == edg[5]:
+                if site.geocode == edg[5]:
                     source = site
                     # print 'found source = ',source.sitename
-                elif str(site.geocode) == edg[6]:
+                elif site.geocode == edg[6]:
                     dest = site
                     # print 'found dest = ',dest.sitename
                 if (source and dest):
                     # print 'next edge!'
                     break
             if not (source and dest):
-                # print source ,dest
+                print(type(edg[5]), type(edg[6]))
                 sys.exit(
-                    'One of the vertices on edge ' + edg[0] + '-' + edg[1] + ' could not be found on the site list')
+                    f'One of the vertices on edge {edg[0]}({edg[5]}) - {edg[1]}({edg[6]}) could not be found on the site list')
 
             objlist.append(edge(source, dest, edg[2], edg[3], float(edg[4])))
             source = dest = None
@@ -625,22 +626,22 @@ class simulate:
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(list(self.g.site_dict.values())[0].ts[
-                           -1]) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
+            nvar = len(list(self.g.site_dict.values())[0].vnames) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
             str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
             varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + [
                 'Arrivals']
             #            print nvar, varnames, str1
             print((nvar, len(varnames)))
+            print(varnames)
             str1 = str1[:-1] % tuple(varnames)  # insert variable names (MySQL)
             str1lite = str1lite[:len(str1lite) - 1] % tuple(varnames)  # insert variable names (SQLITE)
             Cursor = con.cursor()
-            str2 = """CREATE TABLE %s(
+            str2 = f"""CREATE TABLE {table}(
             `geocode` INT( 9 )  ,
             `time` INT( 9 ) ,
             `name` varchar(128) ,
-            """ % table
+            """
             str2lite = """CREATE TABLE %s(
             geocode INTEGER  ,
             time INTEGER ,
@@ -659,7 +660,7 @@ class simulate:
                 str3 = str3[:-1] + ')'
             sql2 = 'INSERT INTO %s' % table + ' VALUES(' + str3
             nvalues = []
-            for site in six.itervalues(self.g.site_dict):
+            for site in self.g.site_dict.values():
                 geoc = site.geocode
                 lat = site.pos[0]
                 longit = site.pos[1]
@@ -1027,7 +1028,7 @@ def upload_model(args):
 
 def main():
     # Options and Argument parsing for running model from the command line, without the GUI.
-    usage = "usage: PROG [options] your_model.epg"
+    usage = "usage: epirunner [options] your_model.epg"
     #    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
     parser = ArgumentParser(usage=usage, description="Run epigrass models from the console",
                             prog="epirunner " + __version__.version)

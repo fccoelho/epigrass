@@ -6,7 +6,7 @@ from __future__ import print_function
 from numpy import *
 from string import *
 import codecs
-#from sqlobject import *
+import pandas as pd
 
 from difflib import *
 import sys
@@ -62,20 +62,19 @@ def loadData(fname,sep = ',', encoding='utf-8'):
     Loads from ascii files with separated values
     and returns a list of lists.
     """
-    f = codecs.open(fname,'r',encoding='utf8')
-    linelist = f.readlines()
-    f.close()
+    # f = codecs.open(fname,'r',encoding='utf8')
+    # linelist = f.readlines()
+    # f.close()
+    df = pd.read_csv(fname, sep=sep, encoding=encoding)
     
-    sitelist = []
-    #numCols = None
-    for line in linelist:
-        line = line.strip()
-        #if not len(line): continue
-        row = [elmt.strip() for elmt in line.split(str(sep))]
-        #thisLen = len(row)
-        #if numCols is not None and thisLen != numCols:
-        #    raise ValueError('All rows must have the same number of columns')
-        sitelist.append(row)
+    sitelist = [list(df.columns)] + df.values.tolist()
+
+    # for line in linelist:
+    #     line = line.strip()
+    #
+    #     row = [elmt.strip() for elmt in line.split(str(sep))]
+    #
+    #     sitelist.append(row)
         
     return sitelist
     
