@@ -1198,9 +1198,7 @@ class graph(object):
         self.name = graph_name
         self.digraph = digraph
         self.site_dict = {}  # geocode as keys
-        self.site_list = property(fget=lambda self: list(self.site_dict.values()))  # only for backwards compatibility
         self.edge_dict = {}  # geocode tuple as key
-        self.edge_list = property(fget=lambda self: list(self.edge_dict.values()))  # only for backwards compatibility
         self.speed = 0  # speed of the transportation system
         self.simstep = 1  # current step in the simulation
         self.maxstep = 100  # maximum number of steps in the simulation
@@ -1232,6 +1230,14 @@ class graph(object):
         self.dmap = 0  # draw the map in the background?
         self.printed = 0  # Printed the custom model docstring?
         self.po = multiprocessing.Pool(multiprocessing.cpu_count())
+
+    @property
+    def site_list(self):
+        return list(self.site_dict.values())
+
+    @property
+    def edge_list(self):
+        return list(self.edge_dict.values())
 
     def addSite(self, sitio):
         """
@@ -1296,7 +1302,8 @@ class graph(object):
 
         for v in Q:
             D[v] = Q[v]
-            if v == end: break
+            if v == end:
+                break
 
             for w in G[v]:
                 vwLength = D[v] + G[v][w]
@@ -1304,7 +1311,7 @@ class graph(object):
                     # print vwLength
                     if vwLength < D[w]:
                         raise ValueError("Dijkstra: found better path to already-final vertex")
-                elif w not in Q or vwLength < Q[w]:
+                elif (w not in Q) or (vwLength < Q[w]):
                     Q[w] = vwLength
                     P[w] = v
 
@@ -1438,6 +1445,7 @@ class graph(object):
         """
         from matplotlib.collections import LineCollection
         from matplotlib.colors import ColorConverter
+        from pylab import subplots, savefig
 
         colorConverter = ColorConverter()
         names = [i.sitename for i in self.site_list]
@@ -1450,7 +1458,7 @@ class graph(object):
         yd = array([e.dest.pos[0] for e in self.edge_list])
         edge_list = [((a, b), (c, d)) for a, b, c, d in zip(xs, ys, xd, yd)]
 
-        ax = axes()
+        fig,ax = subplots(1,1)
         ax.set_xticks([])
         ax.set_yticks([])
         # plotting nodes
@@ -1479,7 +1487,6 @@ class graph(object):
 
         # saving
         savefig('graph.png')
-        close()
 
     def getAllPairs(self):
         """

@@ -4,14 +4,11 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed bug saving simulation from custom model">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
@@ -419,7 +416,7 @@
       <workItem from="1586347663200" duration="6925000" />
       <workItem from="1586524308080" duration="6213000" />
       <workItem from="1586786128437" duration="536000" />
-      <workItem from="1586794477360" duration="2997000" />
+      <workItem from="1586794477360" duration="12520000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -582,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586356217852</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv">
+      <created>1586797680542</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1586797680543</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,17 +633,18 @@
     <MESSAGE value="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues." />
     <MESSAGE value="Updated docs" />
     <MESSAGE value="Fixed bug saving simulation from custom model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug saving simulation from custom model" />
+    <MESSAGE value="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="536" y="68" key="CommitChangelistDialog2" timestamp="1586356216863">
+    <state x="536" y="0" width="1998" height="1910" key="CommitChangelistDialog2" timestamp="1586797680062">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="536" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586356216863" />
+    <state x="536" y="0" width="1998" height="1910" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586797680062" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -680,10 +685,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586356222696">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586797690412">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586356222696" />
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586797690412" />
     <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1586343257410">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>

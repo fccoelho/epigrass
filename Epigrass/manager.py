@@ -23,6 +23,7 @@ from Epigrass.simobj import graph, edge, siteobj
 from Epigrass import spread
 from Epigrass.data_io import *
 from Epigrass import epigdal
+from Epigrass import report
 from Epigrass import __version__
 import requests
 import hashlib
@@ -141,8 +142,8 @@ class simulate:
             self.steps = eval(config['simulation and output.steps'])
             self.outdir = config['simulation and output.outdir']
             self.SQLout = eval(config['simulation and output.sqlout'])
-            #            self.Rep = eval(config['simulation and output.report'])
-            #            self.siteRep = eval(config['simulation and output.siterep'])
+            self.Rep = eval(config['simulation and output.report'])
+            self.siteRep = eval(config['simulation and output.siterep'])
             self.replicas = eval(config['simulation and output.replicas'])
             self.randomize_seeds = eval(config['simulation and output.randseed'])
             self.Batch = eval(config['simulation and output.batch'])
@@ -151,7 +152,7 @@ class simulate:
             sys.exit("Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified." % (
                 V[1], V[0]))
         if self.replicas:
-            #            self.Rep = 0 #Turns off reports
+            self.Rep = 0 #Turns off reports
             self.Batch = []  # Turns off Batch mode
             self.round = 0  # Initialize replicate counter
             # generate dictionaries for parameters and inits
@@ -388,7 +389,7 @@ class simulate:
         self.dumpData()
         spread.Spread(self.g, self.outdir, self.encoding)
         # self.saveModel(self.modelName)
-        # pycallgraph.make_dot_graph(self.modelName+'_callgraph.png')
+
 
     def createDataFrame(self, site):
         """
@@ -955,6 +956,8 @@ def onStraightRun(args):
     if not S.replicas:
         S.start()
         spread.Spread(S.g)
+        R = report.Report(S)
+        R.Assemble(type=S.Rep)
     else:
         repRuns(S)
 
@@ -970,7 +973,7 @@ def onStraightRun(args):
             # Generates the simulation object
             T = simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
 
-            S.Say('starting model %s' % i)
+            print('starting model %s' % i)
             T.start()  # Start the simulation
 
 
@@ -987,12 +990,12 @@ def repRuns(S):
     password = S.passw
     backend = S.backend
     nseeds = S.seed[0][2]  # number o individual to be used as seeds
-    S.Say("Replication type: ", randseed)
+    print("Replication type: ", randseed)
     if randseed:
         seeds = S.randomizeSeed(randseed)
     reps = S.replicas
     for i in range(reps):
-        S.Say("Starting replicate number %s" % i)
+        print("Starting replicate number %s" % i)
         S = simulate(fname=fname, host=host, user=user, password=password, backend=backend)
         if randseed:
             S.setSeed(seeds[i], nseeds)
