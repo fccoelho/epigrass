@@ -223,7 +223,7 @@ def Model(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=Non
         # Raises site infected flag and adds parent site to the epidemic history list.
         if not self.parentSite.infected: 
             if Lpos > 0:
-                print 'infected', self.parentSite.sitename
+                # print 'infected', self.parentSite.sitename
                 #if not self.parentSite.infected:
                 self.parentSite.infected = self.parentSite.parentGraph.simstep
                 self.parentSite.parentGraph.epipath.append((self.parentSite.parentGraph.simstep,self.parentSite,self.parentSite.infector))

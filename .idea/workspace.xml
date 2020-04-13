@@ -4,14 +4,16 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated docs">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed bug saving simulation from custom model">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epidash.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +28,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="epigrassqt4" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,7 +62,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -362,6 +360,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
@@ -383,18 +382,6 @@
         <item itemvalue="Python.epigrass" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SqlCodeAssistantSettings">
     <option name="dbBrowserSelectedConnection" value="epigrassqt4" />
@@ -429,7 +416,10 @@
       <workItem from="1586259791493" duration="66000" />
       <workItem from="1586283388389" duration="353000" />
       <workItem from="1586292027123" duration="606000" />
-      <workItem from="1586347663200" duration="6216000" />
+      <workItem from="1586347663200" duration="6925000" />
+      <workItem from="1586524308080" duration="6213000" />
+      <workItem from="1586786128437" duration="536000" />
+      <workItem from="1586794477360" duration="2997000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -585,24 +575,30 @@
       <option name="project" value="LOCAL" />
       <updated>1586180817728</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fixed bug saving simulation from custom model">
+      <created>1586356217852</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1586356217852</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -632,17 +628,18 @@
     <MESSAGE value="Reverted source of documentation to restructured text because of support to LaTeX expressions" />
     <MESSAGE value="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues." />
     <MESSAGE value="Updated docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated docs" />
+    <MESSAGE value="Fixed bug saving simulation from custom model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug saving simulation from custom model" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585391355413">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="1058" y="579" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1585391355413" />
-    <state x="536" y="68" key="CommitChangelistDialog2" timestamp="1586180817402">
+    <state x="536" y="68" key="CommitChangelistDialog2" timestamp="1586356216863">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="536" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180817402" />
+    <state x="536" y="68" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1586356216863" />
     <state x="100" y="100" width="2800" height="1700" key="DiffContextDialog" timestamp="1582191364108">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -683,10 +680,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="924" y="215" key="VCS.ChangeListViewerDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1581926147333" />
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586180819545">
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1586356222696">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586180819545" />
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1586356222696" />
     <state x="747" y="585" key="com.intellij.ide.util.TipDialog" timestamp="1586343257410">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -695,6 +692,10 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="974" y="747" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3000.1900@0.0.3000.1900" timestamp="1581926142605" />
+    <state x="851" y="304" width="1297" height="1292" key="find.popup" timestamp="1586525287225">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="851" y="304" width="1297" height="1292" key="find.popup/0.0.3000.1900@0.0.3000.1900" timestamp="1586525287225" />
     <state x="908" y="205" key="git4idea.branch.GitSmartOperationDialog" timestamp="1586008699443">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
@@ -712,10 +713,10 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1582053020651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1582573263529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1582054933972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1582573263529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1582053020651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

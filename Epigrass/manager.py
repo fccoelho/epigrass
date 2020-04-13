@@ -26,11 +26,13 @@ from Epigrass import epigdal
 from Epigrass import __version__
 import requests
 import hashlib
+import redis
 import six
 from six.moves import range
 from six.moves import zip
 from six.moves import input
 
+redisclient = redis.StrictRedis()
 
 class simulate:
     """
@@ -356,12 +358,12 @@ class simulate:
         for site in site_list:
             if site.geocode == seed.geocode or seed.geocode == 'all':
                 site.bi[seedvar] = n
-                #                site.ts[0][seedpos] = n
+
 
                 self.Say("%s infected case(s) arrived at %s" % (n, seed.sitename))
             else:
                 site.bi[seedvar] = 0
-                #                site.ts[0][seedpos] = 0
+
 
     def start(self):
         """
@@ -393,7 +395,8 @@ class simulate:
         Saves the time series *site.ts* to outfile as specified on the
         model script.
         """
-        data = array(site.ts, float)
+        ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
+        data = array(ts, float)
         inc = site.incidence
         f = open(self.outdir + self.outfile, 'w')
         f.write('time,E,I,S,incidence\n')
@@ -461,8 +464,11 @@ class simulate:
         if len(site_dict) * len(list(site_dict.values())[0].ts) < 20000:  # Only reasonably sized animations
             for i, v in enumerate(list(site_dict.values())[0].vnames):
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
-                data = [(str(site.geocode), t, p[i]) for site in six.itervalues(site_dict) for t, p in
-                        enumerate(site.ts)]
+                data = []
+                for site in site_dict.values():
+                    ts = [eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)]
+                    for t, p in enumerate(ts):
+                        data.append((str(site.geocode), t, p[i]))
                 ka.add_data(data)
                 ka.save(v + '_animation')
                 self.Say(v + '_animation')
@@ -517,7 +523,7 @@ class simulate:
         head = ['geocode', 'time', 'totpop', 'name',
                 'lat', 'longit']
         headerwritten = False
-        for site in six.itervalues(self.g.site_dict):
+        for site in self.g.site_dict.values():
             t = 0
             regb = [str(site.geocode), str(t), str(site.totpop),
                     site.sitename.replace('"', '').encode('ascii', 'replace'),
@@ -528,7 +534,8 @@ class simulate:
                     head.append('values%s' % n)
                     regb.append(str(v))
             # print site.sitename, site.ts
-            ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+            # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+            ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
             head.extend(['incidence', 'arrivals'])
             for n, v in enumerate(site.vnames):
                 head.append(str(v))
@@ -632,8 +639,8 @@ class simulate:
             varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + [
                 'Arrivals']
             #            print nvar, varnames, str1
-            print((nvar, len(varnames)))
-            print(varnames)
+            # print((nvar, len(varnames)))
+            # print(varnames)
             str1 = str1[:-1] % tuple(varnames)  # insert variable names (MySQL)
             str1lite = str1lite[:len(str1lite) - 1] % tuple(varnames)  # insert variable names (SQLITE)
             Cursor = con.cursor()
@@ -665,7 +672,8 @@ class simulate:
                 lat = site.pos[0]
                 longit = site.pos[1]
                 name = site.sitename
-                ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+                # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+                ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts',0,-1)])
                 inc = site.incidence
                 thist = site.thetahist
                 t = 0

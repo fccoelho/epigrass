@@ -25,7 +25,7 @@ def load_sim(sim):
     if sim is None:
         return pd.DataFrame(data={'time': range(2), 'name': 0})
     con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
-    data = pd.read_sql_query(f'select * from {sim} limit 10;', con)
+    data = pd.read_sql_table(sim, con)
     con.close()
     return data
 
@@ -109,10 +109,10 @@ def update_sim_table(sim_name):
 def table_spinner(value):
     pass
 
-@app.callback(Output("map-loading", "children"),
-              [Input(component_id='sim-drop', component_property='value')])
-def map_spinner(value):
-    pass
+# @app.callback(Output("map-loading", "children"),
+#               [Input(component_id='sim-drop', component_property='value')])
+# def map_spinner(value):
+#     pass
 
 @app.callback(
     Output(component_id='series-plot', component_property='figure'),

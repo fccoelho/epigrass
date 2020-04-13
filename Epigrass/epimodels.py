@@ -60,7 +60,7 @@ class Epimodel(object):
 
     def __call__(self, *args, **kwargs):
         args = self.get_args_from_redis()
-        res = self.step(*(list(args)+[self]))
+        res = self.step(*(list(args) + [self]))
         self.update_redis(res)
         # return res
 
@@ -69,7 +69,7 @@ class Epimodel(object):
         """
         Get updated parameters from the redis database.
         """
-        sinits = redisclient.lrange("{}:inits".format(self.geocode),-1,-1)
+        sinits = redisclient.lrange("{}:inits".format(self.geocode), -1, -1)
         # print(sinits)
         inits = eval(sinits[0])
         simstep = int(redisclient.get("simstep"))
@@ -180,10 +180,14 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
               'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
     if simstep == 1:  # get initial values
-        S1, E1, Is1, Ic1, Ig1 = (bi[b'susc_age1'], bi[b'incub_age1'], bi[b'subc_age1'], bi[b'sympt_age1'], bi[b'comp_age1'])
-        S2, E2, Is2, Ic2, Ig2 = (bi[b'susc_age2'], bi[b'incub_age2'], bi[b'subc_age2'], bi[b'sympt_age2'], bi[b'comp_age2'])
-        S3, E3, Is3, Ic3, Ig3 = (bi[b'susc_age3'], bi[b'incub_age3'], bi[b'subc_age3'], bi[b'sympt_age3'], bi[b'comp_age3'])
-        S4, E4, Is4, Ic4, Ig4 = (bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])
+        S1, E1, Is1, Ic1, Ig1 = (
+        bi[b'susc_age1'], bi[b'incub_age1'], bi[b'subc_age1'], bi[b'sympt_age1'], bi[b'comp_age1'])
+        S2, E2, Is2, Ic2, Ig2 = (
+        bi[b'susc_age2'], bi[b'incub_age2'], bi[b'subc_age2'], bi[b'sympt_age2'], bi[b'comp_age2'])
+        S3, E3, Is3, Ic3, Ig3 = (
+        bi[b'susc_age3'], bi[b'incub_age3'], bi[b'subc_age3'], bi[b'sympt_age3'], bi[b'comp_age3'])
+        S4, E4, Is4, Ic4, Ig4 = (
+        bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])
     else:  # get values from last time step
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
     N = totpop

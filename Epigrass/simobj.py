@@ -182,11 +182,15 @@ class siteobj(object):
     #        state, Lpos, migInf = self.model.step(inits=self.ts[-1],simstep=simstep,totpop=self.totpop,theta=theta,npass=npass)
 
     def handle(self, res):
+        """
+        Processes the output of a step updating simulation statistics
+        :param res: Tuple with the output of the simulation model
+        """
         pipe = redisclient.pipeline()
         last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1) \
             .get("{}:Lpos".format(self.geocode)) \
             .get("{}:migInf".format(self.geocode)).execute()
-        self.ts.append(eval(last_state))
+        # self.ts.append(eval(last_state))
         Lpos = float(Lpos)
         migInf = float(migInf)
         self.totalcases += Lpos
@@ -198,26 +202,7 @@ class siteobj(object):
                 # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
 
-    def handle_old(self, res):
-        """
-        Processes the output of a step updating simulation statistics
-        :param res: Tuple with the output of the simulation model
-        """
-        state, Lpos, migInf = res
-        self.ts.append(state)
-        self.totalcases += Lpos
-        self.incidence.append(Lpos)
-        if not self.infected:
-            if Lpos > 0:
-                self.infected = self.parentGraph.simstep
-                self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
-                # TODO: have infector be stated in terms of geocodes
-        self.migInf.append(migInf)
 
-    #        print len(self.migInf)
-    #        self.thetalist = []   # reset self.thetalist (for the new timestep)
-    #        self.passlist = []
-    #        self.parentGraph.sites_done +=1
 
     def vaccinate(self, cov):
         """
