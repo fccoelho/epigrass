@@ -10,14 +10,13 @@ import json
 
 from numpy.random import binomial
 import networkx as NX
+from networkx.exception import NetworkXNoPath
 from networkx.readwrite import json_graph
 import redis
 import six
-from six.moves import range
-from six.moves import zip
+
 from Epigrass.data_io import *
-# import pyximport
-# pyximport.install(pyimport=True)
+
 from Epigrass import epimodels
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
@@ -31,7 +30,7 @@ assert redisclient.ping()  # verify that redis server is running.
 sys.setrecursionlimit(3000)  # to allow pickling of custom models
 
 
-class siteobj(object):
+class siteobj:
     """
     Basic site object containing attributes and methods common to all
     site objects.
@@ -201,8 +200,6 @@ class siteobj(object):
                 self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
                 # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
-
-
 
     def vaccinate(self, cov):
         """
@@ -1126,7 +1123,7 @@ class siteobj(object):
 #
 #        return [0,Ipos,Spos], Lpos, migInf
 
-class edge(object):
+class edge:
     """
     Defines an edge connecting two nodes (node source to node dest).
     with attributes given by value.
@@ -1189,12 +1186,13 @@ class edge(object):
 #        print "B -->", theta,npass
 
 
-class graph(object):
+class graph(NX.MultiDiGraph):
     """
     Defines a graph with sites and edges
     """
 
     def __init__(self, graph_name, digraph=0):
+        super().__init__()
         self.name = graph_name
         self.digraph = digraph
         self.site_dict = {}  # geocode as keys
@@ -1247,75 +1245,10 @@ class graph(object):
         """
 
         if not isinstance(sitio, siteobj):
-            raise Error('add_site received a non siteobj class object')
+            raise Exception('add_site received a non siteobj instance')
         self.site_dict[sitio.geocode] = sitio
-        #        self.site_list.append(sitio)
+        self.add_node(sitio)
         sitio.parentGraph = self
-
-    def dijkstra(self, G, start, end=None):
-        """
-        Find shortest paths from the start vertex to all
-        vertices nearer than or equal to the end.
-
-        The input graph G is assumed to have the following
-        representation: A vertex can be any object that can
-        be used as an index into a dictionary.  G is a
-        dictionary, indexed by vertices.  For any vertex v,
-        G[v] is itself a dictionary, indexed by the neighbors
-        of v.  For any edge v->w, G[v][w] is the length of
-        the edge.  This is related to the representation in
-        <http://www.python.org/doc/essays/graphs.html>
-        where Guido van Rossum suggests representing graphs
-        as dictionaries mapping vertices to lists of neighbors,
-        however dictionaries of edges have many advantages
-        over lists: they can store extra information (here,
-        the lengths), they support fast existence tests,
-        and they allow easy modification of the graph by edge
-        insertion and removal.  Such modifications are not
-        needed here but are important in other graph algorithms.
-        Since dictionaries obey iterator protocol, a graph
-        represented as described here could be handed without
-        modification to an algorithm using Guido's representation.
-
-        Of course, G and G[v] need not be Python dict objects;
-        they can be any other object that obeys dict protocol,
-        for instance a wrapper in which vertices are URLs
-        and a call to G[v] loads the web page and finds its links.
-
-        The output is a pair (D,P) where D[v] is the distance
-        from start to v and P[v] is the predecessor of v along
-        the shortest path from s to v.
-
-        Dijkstra's algorithm is only guaranteed to work correctly
-        when all edge lengths are positive. This code does not
-        verify this property for all edges (only the edges seen
-        before the end vertex is reached), but will correctly
-        compute shortest paths even for some graphs with negative
-        edges, and will raise an exception if it discovers that
-        a negative edge has caused it to make a mistake.
-        """
-
-        D = {}  # dictionary of final distances
-        P = {}  # dictionary of predecessors
-        Q = priorityDictionary()  # est.dist. of non-final vert.
-        Q[start] = 0
-
-        for v in Q:
-            D[v] = Q[v]
-            if v == end:
-                break
-
-            for w in G[v]:
-                vwLength = D[v] + G[v][w]
-                if w in D:
-                    # print vwLength
-                    if vwLength < D[w]:
-                        raise ValueError("Dijkstra: found better path to already-final vertex")
-                elif (w not in Q) or (vwLength < Q[w]):
-                    Q[w] = vwLength
-                    P[w] = v
-
-        return (D, P)
 
     def getSite(self, name):
         """Retrieved a site from the graph.
@@ -1357,6 +1290,8 @@ class graph(object):
             raise KeyError('Edge destination does not belong to the graph')
         #        self.edge_list.append(graph_edge)
         self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = graph_edge
+        self.add_edge(self.site_dict[graph_edge.source.geocode], self.site_dict[graph_edge.dest.geocode],
+                      edgeobj=graph_edge)
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
 
@@ -1365,7 +1300,7 @@ class graph(object):
         Generates a dictionary of the graph for use in the shortest path function.
         """
         G = {}
-        for i in six.itervalues(self.site_dict):
+        for i in self.site_dict.values():
             G[i] = i.getNeighbors()
         self.graphdict = G
         return G
@@ -1429,64 +1364,17 @@ class graph(object):
         The output is a list of the vertices in order along
         the shortest path.
         """
-
-        D, P = self.dijkstra(G, start, end)
-        Path = []
-        while 1:
-            Path.append(end)
-            if end == start: break
-            end = P[end]
-        Path.reverse()
-        return Path
+        try:
+            path = NX.shortest_path(self, start, end)
+        except NetworkXNoPath:
+            path = []
+        return path
 
     def drawGraph(self):
         """
         Draws the network using pylab
         """
-        from matplotlib.collections import LineCollection
-        from matplotlib.colors import ColorConverter
-        from pylab import subplots, savefig
-
-        colorConverter = ColorConverter()
-        names = [i.sitename for i in self.site_list]
-        x = array([i.pos[1] for i in self.site_list])
-        y = array([i.pos[0] for i in self.site_list])
-        # edge data
-        xs = array([e.source.pos[1] for e in self.edge_list])
-        ys = array([e.source.pos[0] for e in self.edge_list])
-        xd = array([e.dest.pos[1] for e in self.edge_list])
-        yd = array([e.dest.pos[0] for e in self.edge_list])
-        edge_list = [((a, b), (c, d)) for a, b, c, d in zip(xs, ys, xd, yd)]
-
-        fig,ax = subplots(1,1)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        # plotting nodes
-        node_plot = ax.scatter(x, y)
-        node_plot.set_zorder(2)
-        # Plotting edges
-        kolor = colorConverter.to_rgba('k')
-        ed_colors = [kolor for i in edge_list]
-        edge_coll = LineCollection(edge_list, colors=ed_colors, linestyle='solid')
-        edge_coll.set_zorder(1)
-        ax.add_collection(edge_coll)
-        # plotting labels
-        ##        for x,y,l in zip(x,y,names):
-        ##            ax.text(x,y,l,transform=ax.transData)
-        minx = amin(x)
-        maxx = amax(x)
-        miny = amin(y)
-        maxy = amax(y)
-        w = maxx - minx
-        h = maxy - miny
-        padx, pady = 0.05 * w, 0.05 * h
-        corners = (minx - padx, miny - pady), (maxx + padx, maxy + pady)
-        ax.update_datalim(corners)
-
-        ax.autoscale_view()
-
-        # saving
-        savefig('graph.png')
+        NX.draw(self)
 
     def getAllPairs(self):
         """
@@ -1505,9 +1393,11 @@ class graph(object):
         dm = zeros((d, d), float)
         ap = zeros((d, d), float)
         i = 0
-        for sitei in six.iterkeys(g):
+        for sitei in self.nodes:
             j = 0
-            for sitej in list(g.keys())[:i]:  # calculates only the lower triangle
+            for sitej in self.nodes:
+                if sitej == sitei:
+                    break  # calculates only the lower triangle
                 sp = self.shortestPath(g, sitei, sitej)
                 lsp = self.getShortestPathLength(sitei, sp)  # length of the shortestpath
                 self.shortPathList.append((sitei, sitej, sp, lsp))
@@ -1544,37 +1434,15 @@ class graph(object):
         is an unconnected pair. The summation of this matrix provides a very
         basic measure of accessibility, also known as the degree of a node.
         """
-        try:
-            if self.connmatrix.any(): return self.connmatrix  # don't run twice
-        except:
-            pass
-        if not self.graphdict:  # this generates site neighbors lists
-            self.getGraphdict()
-        site_list = list(self.site_dict.values())
-        nsites = len(self.site_dict)
-        cm = zeros((nsites, nsites), float)
-        for i, sitei in enumerate(site_list):
-            for j, sitej in enumerate(site_list[:i]):  # calculates only lower triangle
-                if sitei == sitej:
-                    pass
-                else:
-                    cm[i, j] = float(sitej in sitei.neighbors)
-                    # map results to the upper triangle
-                cm[j, i] = cm[i, j]
-            # print sum(cm), type(cm)
-        return cm
+
+        return NX.adjacency_matrix(self)
 
     def getWienerD(self):
         """
         Returns the Wiener distance for a graph.
         """
-        if self.wienerD:  # Check if it has been calculated.
-            return self.wienerD
 
-        if self.allPairs.any():
-            return sum(self.allPairs.flat)
-
-        return sum(self.getAllPairs().flat)
+        return NX.wiener_index(self)
 
     def getMeanD(self):
         """
@@ -1592,13 +1460,7 @@ class graph(object):
         """
         Returns the diameter of the graph: longest shortest path.
         """
-        if self.diameter:
-            return self.diameter
-
-        if self.allPairs.any():
-            return max(self.allPairs.flat)
-
-        return max(self.getAllPairs().flat)
+        return NX.distance_measures.diameter(self)
 
     def getIotaindex(self):
         """
@@ -1627,7 +1489,7 @@ class graph(object):
         The weight of all nodes in the graph (W(G)) is the summation
         of each node's order (o) multiplied by 2 for all orders above 1.
         """
-        degrees = [i.getDegree() for i in six.itervalues(self.site_dict)]
+        degrees = [i.getDegree() for i in self.site_dict.values()]
         W = sum([i * 2 for i in degrees if i > 1]) + sum([i for i in degrees if i < 2])
         return float(W)
 

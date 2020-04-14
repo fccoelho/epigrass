@@ -174,19 +174,19 @@ class simulate:
         """
         Checks the type of the variables on the script
         """
-        self.Say("Checking syntax of model script... NOW")
+        print("Checking syntax of model script... NOW")
 
         if not os.access(self.sites, os.F_OK):
-            self.Say('Sites file %s does not exist, please check your script.' % self.sites)
+            print('Sites file %s does not exist, please check your script.' % self.sites)
             sys.exit()
         if not os.access(self.edges, os.F_OK):
-            self.Say('Egdes file %s does not exist, please check your script.' % self.edges)
+            print('Egdes file %s does not exist, please check your script.' % self.edges)
             sys.exit()
         if not self.modtype in ['SIS', 'SIS_s', 'SIR', 'SIR_s', 'SEIS', 'SEIS_s', 'SEIR', 'SEIR_s', 'SIpRpS',
                                 'SIpRpS_s', 'SIpR,SIpR_s', 'Influenza', 'Custom']:
-            self.Say('Model type %s is invalid, please check your script.' % self.modtype)
+            print('Model type %s is invalid, please check your script.' % self.modtype)
 
-        self.Say('Script %s passed syntax check NOW.' % self.modelName)
+        print('Script %s passed syntax check NOW.' % self.modelName)
 
     def deg2dec(self, coord):
         """
@@ -257,7 +257,7 @@ class simulate:
 
                 for j in self.seed:
                     if int(o.geocode) == j[0] or self.seed[0][0] == "all":
-                        # self.Say("%s infected person(s) arrived at %s"%(j[2],o.sitename))
+                        # print("%s infected person(s) arrived at %s"%(j[2],o.sitename))
                         inits[j[1].lower()] += j[2]
                         o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
                     else:
@@ -352,7 +352,7 @@ class simulate:
         '''
         # inits[self.seed[0][1].lower()] += 1
         seedvar = self.seed[0][1].lower()  # retrieve the name of the variable containing the seeds
-        self.Say('seedvar= %s' % seedvar)
+        print('seedvar= %s' % seedvar)
         site_list = self.g.site_list
         self.seed = [(seed.geocode, seedvar, n)]
 
@@ -361,7 +361,7 @@ class simulate:
                 site.bi[seedvar] = n
 
 
-                self.Say("%s infected case(s) arrived at %s" % (n, seed.sitename))
+                print("%s infected case(s) arrived at %s" % (n, seed.sitename))
             else:
                 site.bi[seedvar] = 0
 
@@ -374,11 +374,11 @@ class simulate:
             self.modelName = os.path.split(self.modelName)[-1]
         #        print "====>", self.gui
         time.sleep(10)
-        self.Say('Simulation starting.')
+        print('Simulation starting.')
         start = time.time()
         self.runGraph(self.g, self.steps, transp=self.doTransp)
         elapsed = time.time() - start
-        self.Say('Simulation lasted %s seconds.' % elapsed)
+        print('Simulation lasted %s seconds.' % elapsed)
         if self.SQLout:
             if self.backend == 'csv':
                 self.outToCsv(self.modelName)
@@ -418,16 +418,16 @@ class simulate:
         if not self.World:
             return
         # Initialize world output layers
-        # self.Say("Reading Nodes from shapefile...")
+        # print("Reading Nodes from shapefile...")
         # self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
-        # self.Say("Done reading nodes!")
-        # self.Say("Creating Nodes shapefile...")
+        # print("Done reading nodes!")
+        # print("Creating Nodes shapefile...")
         # self.World.create_node_layer()
-        # self.Say("Done creating Nodes shapefile!")
+        # print("Done creating Nodes shapefile!")
         # elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in six.iteritems(self.g.edge_dict)]
-        # self.Say("Creating Edges shapefile...")
+        # print("Creating Edges shapefile...")
         # self.World.create_edge_layer(elist)
-        # self.Say("Done creating Edges shapefile!")
+        # print("Done creating Edges shapefile!")
         # Generate site epidemic stats
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
@@ -436,17 +436,17 @@ class simulate:
         # print(self.World.map.info())
         self.World.map[self.World.geocfield] = self.World.map[self.World.geocfield].astype(int)
         self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
-        self.Say('Saving results in the map Data.gpkg')
+        print('Saving results in the map Data.gpkg')
         self.World.map.to_file(os.path.join(self.outdir, 'Data.gpkg'))
         # names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
         #
-        # self.Say("Creating Data shapefile...")
+        # print("Creating Data shapefile...")
         # self.World.create_data_layer(varlist, sitestats)
-        # self.Say("Done creating Data shapefile!")
+        # print("Done creating Data shapefile!")
         # # Generate the kml too.
         # self.out_to_kml(names)
         #
-        # self.Say("Done creating KML files!")
+        # print("Done creating KML files!")
         # # close files
         # self.World.close_sources()
 
@@ -454,7 +454,7 @@ class simulate:
         """
         Generates output to kml files
         """
-        self.Say("Creating KML output files...")
+        print("Creating KML output files...")
         lr = self.World.datasource.GetLayer(0)
         k = epigdal.KmlGenerator()
         k.addNodes(lr, names)
@@ -472,18 +472,18 @@ class simulate:
                         data.append((str(site.geocode), t, p[i]))
                 ka.add_data(data)
                 ka.save(v + '_animation')
-                self.Say(v + '_animation')
+                print(v + '_animation')
                 del ka
         else:
-            self.Say("Simulation too large to export as kml.")
+            print("Simulation too large to export as kml.")
 
-        self.Say("Done creating KML files!")
+        print("Done creating KML files!")
 
     def series_to_JSON(self):
         """
         Saves timeseries to JSON for uploading to epigrass web
         """
-        self.Say('Saving series to JSON')
+        print('Saving series to JSON')
         series = {}
         for gc, s in six.iteritems(self.g.site_dict):
             length = max(map(len, s.ts))
@@ -616,9 +616,9 @@ class simulate:
         """
 
         if self.backend.lower() == "mysql":
-            self.Say('Saving data on MySQL...')
+            print('Saving data on MySQL...')
         elif self.backend.lower() == "sqlite":
-            self.Say('Saving data on SQLite...')
+            print('Saving data on SQLite...')
 
         con = None
         try:
@@ -733,7 +733,7 @@ class simulate:
         # saving the adjacency  matrix
         codeslist = [str(i.geocode) for i in six.itervalues(self.g.site_dict)]
         if not os.path.exists('adjmat.csv'):
-            self.Say('Saving the adjacency  matrix...')
+            print('Saving the adjacency  matrix...')
             am = self.g.getConnMatrix()
             amf = open('adjmat.csv', 'w')
             amf.write(','.join(codeslist) + '\n')
@@ -741,13 +741,13 @@ class simulate:
                 row = [str(i) for i in row]
                 amf.write(','.join(row) + '\n')
             amf.close()
-            self.Say('Done!')
+            print('Done!')
 
     def dumpData(self):
         """
         Dumps data as csv (comma-separated-values)
         """
-        self.Say("Starting simulation Analysis")
+        print("Starting simulation Analysis")
         curdir = os.getcwd()
         if not self.outdir == curdir:
             os.chdir(self.outdir)
@@ -756,7 +756,7 @@ class simulate:
         self.criaAdjMatrix()
         # saving the shortest path matrices
         #        if not os.path.exists('spmat.csv'):
-        #            self.Say('Calculating the shortest path matrices...')
+        #            print('Calculating the shortest path matrices...')
         #            ap = self.g.getAllPairs()
         #            f = open('ap','w')
         #            pickle.dump(ap,f)
@@ -777,7 +777,7 @@ class simulate:
         #            print 'Done!'
 
         # Saving epidemic path
-        self.Say('Saving Epidemic path...')
+        print('Saving Epidemic path...')
         if self.round:
             epp = codecs.open('epipath%s.csv' % str(self.round), 'w', self.encoding)
         else:
@@ -797,11 +797,11 @@ class simulate:
             # print i[1].sitename, type(i[1].sitename), mli
             epp.write(str(i[0]) + ',' + site.sitename + ',' + mli + '\n')
         epp.close()
-        self.Say('Done!')
+        print('Done!')
         self.g.save_topology('network.gexf')
 
         # saving Epistats
-        self.Say('Saving Epidemiological results...')
+        print('Saving Epidemiological results...')
         stats = [str(i) for i in self.g.getEpistats()]
 
         seed = \
@@ -824,10 +824,10 @@ class simulate:
         #        sstats = '%s,%s,%s,%s,%s'%(scent,sbetw,sthidx,sdeg,spop)
         stf.write(str(self.seed[0][0]) + ',' + sname + ',' + ','.join(stats) + ',' + sstats + '\n')
         stf.close()
-        self.Say('Done saving!')
+        print('Done saving!')
 
         # Saving site stats
-        self.Say('Saving site statistics...')
+        print('Saving site statistics...')
         # self.g.getAllPairs()
         if os.path.exists('sitestats.csv'):
             sitef = codecs.open('sitestats.csv', 'a', self.encoding)  # append to file
@@ -859,7 +859,7 @@ class simulate:
         self.series_to_JSON()
         os.chdir(curdir)
 
-        self.Say('Done saving data!')
+        print('Done saving data!')
 
     def saveModel(self, fname):
         """

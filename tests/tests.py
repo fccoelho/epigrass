@@ -39,6 +39,12 @@ class testObjInstantiation(unittest.TestCase):
         self.assertEquals(len(g.site_dict), len(self.sitios))
         self.assertEquals(len(g.edge_dict), len(self.ed))
 
+    def test_getAllPairs(self):
+        l = self.S.instSites(self.sitios)
+        e = self.S.instEdges(l, self.ed)
+        g = self.S.instGraph('grafo', 1, l, e)
+        pairs = g.getAllPairs()
+
 
 #class TestSimulationRuns(unittest.TestCase):
 #    def setUp(self):
