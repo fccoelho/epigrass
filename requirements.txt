@@ -14,3 +14,4 @@ Cython
 dbfread
 pweave
 fiona
+shapely

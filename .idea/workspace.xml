@@ -4,17 +4,11 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Started refactoring Graph class&#10;Now its a subclass of nx.MultiDiGraph&#10;added test to the allPairs method">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Started working on issue #4&#10;plus a number of minor fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_epigdal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -420,7 +414,8 @@
       <workItem from="1586865477075" duration="7543000" />
       <workItem from="1586882928089" duration="1520000" />
       <workItem from="1606379378257" duration="3119000" />
-      <workItem from="1606389962187" duration="1940000" />
+      <workItem from="1606389962187" duration="2500000" />
+      <workItem from="1606407174548" duration="7365000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -604,7 +599,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586869196978</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Started working on issue #4&#10;plus a number of minor fixes">
+      <created>1606391990550</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1606391990550</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,31 +656,78 @@
     <MESSAGE value="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv" />
     <MESSAGE value="Migrated Report module to use pweave&#10;Graph object in simobj.py needs refactoring to fix a bug" />
     <MESSAGE value="Started refactoring Graph class&#10;Now its a subclass of nx.MultiDiGraph&#10;added test to the allPairs method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started refactoring Graph class&#10;Now its a subclass of nx.MultiDiGraph&#10;added test to the allPairs method" />
+    <MESSAGE value="Started working on issue #4&#10;plus a number of minor fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started working on issue #4&#10;plus a number of minor fixes" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2896" height="441" key="GridCell.Tab.0.bottom" timestamp="1606382436559">
+    <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2" timestamp="1606391990434">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606382436559" />
-    <state width="2896" height="441" key="GridCell.Tab.0.center" timestamp="1606382436559">
+    <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1606391990434" />
+    <state width="2896" height="441" key="GridCell.Tab.0.bottom" timestamp="1606414197066">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606382436559" />
-    <state width="2896" height="441" key="GridCell.Tab.0.left" timestamp="1606382436558">
+    <state width="2896" height="441" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="441" key="GridCell.Tab.0.center" timestamp="1606414197066">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606382436558" />
-    <state width="2896" height="441" key="GridCell.Tab.0.right" timestamp="1606382436559">
+    <state width="2896" height="441" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="441" key="GridCell.Tab.0.left" timestamp="1606414197065">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606382436559" />
+    <state width="2896" height="441" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197065" />
+    <state width="2896" height="441" key="GridCell.Tab.0.right" timestamp="1606414197066">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2896" height="441" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="558" key="GridCell.Tab.1.bottom" timestamp="1606413431459">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2896" height="558" key="GridCell.Tab.1.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431459" />
+    <state width="2896" height="558" key="GridCell.Tab.1.center" timestamp="1606413431458">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2896" height="558" key="GridCell.Tab.1.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431458" />
+    <state width="2896" height="558" key="GridCell.Tab.1.left" timestamp="1606413431458">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2896" height="558" key="GridCell.Tab.1.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431458" />
+    <state width="2896" height="558" key="GridCell.Tab.1.right" timestamp="1606413431459">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state width="2896" height="558" key="GridCell.Tab.1.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431459" />
+    <state x="290" y="153" key="MergeDialog" timestamp="1606392056972">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="290" y="153" key="MergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1606392056972" />
+    <state x="684" y="410" key="MultipleFileMergeDialog" timestamp="1606392056976">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="684" y="410" key="MultipleFileMergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1606392056976" />
     <state x="361" y="125" key="SettingsEditor" timestamp="1606379534191">
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="361" y="125" key="SettingsEditor/0.0.3000.1900@0.0.3000.1900" timestamp="1606379534191" />
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2" timestamp="1606391992914">
+      <screen x="0" y="0" width="3000" height="1900" />
+    </state>
+    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1606391992914" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Epigrass/epigdal.py</url>
+          <line>102</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Epigrass/epigdal.py</url>
+          <line>126</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.geomdict.keys()" language="Python" />
@@ -690,7 +739,7 @@
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1586869001135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_for_tests_testObjInstantiation_test_report.coverage" NAME="Nosetests for tests.testObjInstantiation.test_report Coverage Results" MODIFIED="1586872764787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606382436546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606413683384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
   </component>
 </project>

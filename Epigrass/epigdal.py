@@ -17,6 +17,8 @@ import geopandas as gpd
 import fiona
 from zipfile import ZipFile
 import json
+from shapely.geometry import Point, LineString
+
 
 class NewWorld:
     def __init__(self, filename, namefield, geocfield, outdir='.'):
@@ -34,13 +36,15 @@ class NewWorld:
         self.centdict = {}
         self.namedict = {}
         self.nlist = []
+        self.nodesource = None
+        self.edgesource = None
+        self.datasource = None
         self.layers = fiona.listlayers(self.filename)
         with fiona.open(filename) as source:
             self.driver = source.driver
             self.crs = source.crs
             self.map = gpd.read_file(filename, layer=source.name)
 
-        
     def get_layer_list(self):
         return self.layers
 
@@ -52,12 +56,21 @@ class NewWorld:
         else:
             print(f'Layer {l} not available.')
 
-    def get_node_list(self, l):
+    def get_hex_color(self, value, cmap="YlOrRd" ):
+        cols = cm.get_cmap(cmap, 256)
+        rgba = cols(value * 256)
+        bgrcol = list(rgba[:-1])  # rgb(list)
+        bgrcol.reverse()  # turn it into bgr
+        hexcol = "#80" + rgb2hex(bgrcol)[1:]  # abgr Alpha set to 128
+        return hexcol
+
+    def get_node_list(self, l=None):
         '''
         Updates self.centdict with centroid coordinates and self.nlist with layer features
         l is an OGR layer.
         '''
-
+        if l is None:
+            l = self.layers[0]
         df = gpd.read_file(self.filename, layer=l)
         for i, row in df.iterrows():
             self.centdict[row[self.geocfield]] = (row['geometry'].centroid.x, row['geometry'].centroid.y, 0)
@@ -65,6 +78,59 @@ class NewWorld:
             self.nlist.append(row)
         return self.nlist
 
+    def create_node_layer(self):
+        """
+        Creates a new geopackage file to represent network nodes.
+        The node layer will be based on the centroids of the
+        polygons belonging to the map layer associated with this
+        world instance.
+        """
+        if os.path.exists(os.path.join(self.outdir, 'Nodes.gpkg')):
+            os.remove(os.path.join(self.outdir, 'Nodes.gpkg'))
+        if not self.centdict:
+            self.get_node_list()
+        if not self.nodesource:
+            centroids = self.map.geometry.centroid
+            nodes = gpd.GeoDataFrame(columns=[self.geocfield, self.namefield, 'x', 'y'])
+            for gc, xy in self.centdict.items():
+                nodes = nodes.append({self.geocfield: gc,
+                                      self.namefield: self.namedict[gc],
+                                      'x': xy[0],
+                                      'y': xy[1]
+                                      }, ignore_index=True)
+
+            nodes['geometry'] = gpd.points_from_xy(nodes.x, nodes.y)
+            nodes.to_file(os.path.join(self.outdir, 'Nodes.gpkg'), driver='GPKG')
+            dsn = fiona.open(os.path.join(self.outdir, 'Nodes.gpkg'))
+            self.nodesource = dsn
+        else:
+            pass
+
+    def create_edge_layer(self, elist):
+        """
+        Creates a new layer with edge information.
+        elist is a list of tuples:
+        (sgeoc,dgeoc,fsd,fds)
+        """
+        # Creates a new shape file to hold the data
+        if os.path.exists(os.path.join(self.outdir, 'Edges.gpkg')):
+            os.remove(os.path.join(self.outdir, 'Edges.gpkg'))
+
+        if not self.edgesource:
+            edges = gpd.GeoDataFrame(columns=['source_geocode', 'dest_geocode', 'flow_sd', 'flow_ds', 'geometry'])
+            elist = array(elist)
+            edges['source_geocode'] = elist[:, 0].astype(int)
+            edges['dest_geocode'] = elist[:, 1].astype(int)
+            edges['flow_sd'] = elist[:, 2].astype(float)
+            edges['flow_ds'] = elist[:, 3].astype(float)
+            for i, row in edges.iterrows():
+                line = LineString([self.centdict[row.source_geocode], self.centdict[row.dest_geocode]])
+                edges.at[i, 'geometry'] = line
+            edges.to_file(os.path.join(self.outdir, 'Edges.gpkg'),driver='GPKG')
+            self.edgesource = fiona.open(os.path.join(self.outdir, 'Edges.gpkg'))
+
+        else:
+            pass
 
 
 class World:
@@ -81,7 +147,8 @@ class World:
         try:
             self.ds = ogr.Open(filename)
         except AttributeError:
-            raise AttributeError("Could not open the Shapefile {}. Please check if the path is correct.".format(filename))
+            raise AttributeError(
+                "Could not open the Shapefile {}. Please check if the path is correct.".format(filename))
         self.name = self.ds.GetName()
         self.driver = self.ds.GetDriver()
         layer = self.ds.GetLayer()
@@ -496,7 +563,7 @@ class AnimatedKML(object):
             ts.appendChild(w)
             pm_newtime.appendChild(ts)
             self.doc.appendChild(pm_newtime)
-        for pm in six.itervalues(self.pmdict):
+        for pm in self.pmdict.values():
             self.doc.removeChild(pm)
         self.pmdict = {}
 

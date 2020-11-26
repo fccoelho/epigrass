@@ -2,6 +2,8 @@ from __future__ import absolute_import
 import unittest
 from Epigrass.epigdal import NewWorld as World, KmlGenerator
 import os
+import fiona
+import pandas as pd
 
 
 
@@ -20,12 +22,26 @@ class TestWorld(unittest.TestCase):
             self.assertIsInstance(layers[0],str)
 
     def test_create_node_layer(self):
-        pass
+        w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
+        w.get_node_list()
+        w.create_node_layer()
+        self.assertIsInstance(w.nodesource, fiona.Collection)
+        os.remove('Nodes.gpkg')
+
+    def test_create_edge_layer(self):
+        w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
+        w.get_node_list()
+        cols = ['COD_ORIGEM','COD_DESTINO','flowOD','flowDO']
+        edges = pd.read_csv('../edgesRIO.csv', usecols=cols)
+        elist = edges[cols].values.tolist()
+        w.create_edge_layer(elist)
+        self.assertIsInstance(w.edgesource, fiona.Collection)
+        os.remove('Edges.gpkg')
 
 
     @unittest.skip
     def test_kml(self):
-        w = World('../riozonas_LatLong.shp', 'nome_zonas', 'zona_trafe')
+        w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
         layer = w.ds.GetLayerByName(w.layerlist[0])
         w.get_node_list(layer)
         kmlg = KmlGenerator()
