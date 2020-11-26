@@ -191,8 +191,7 @@ Wiener's D $={stats[2]}$
 The mean distance of a network is the mean of of the set of shortest paths, 
 excluding the 0-length paths.""" +\
 r"""
-$\bar{D}={}$ 
-""".format(stats[3]) + \
+$\bar{D}="""+f'{stats[3]}$' + \
 fr"""
 ## Network Diameter
 The diameter of a network is the longest element of the shortest paths set.
@@ -223,7 +222,8 @@ The weight of all nodes in the network (W(N)) is the summation
 of each node's order (o) multiplied by 2 for all orders above 1.
 """ +\
 r"""
-$\iota=\frac{L(N)}{W(N)}={}$
+$\iota=\frac{L(N)}{W(N)}="""+f'{stats[7]}$'+\
+r"""        
 \subsection{Pi ($\Pi$) Index}
 The Pi index represents the relationship between the 
 total length of the network L(N)
@@ -236,8 +236,8 @@ the circumference and the diameter of a circle.
 A high index shows a developed network. It is a measure 
 of distance per units of diameter and an indicator of 
 the  shape of a network.
-""".format(stats[7]) +\
-f"""
+""" +\
+fr"""
 $\Pi=L(N)/D(d)={stats[8]}$
 ## Beta ($\beta$) Index
 The Beta index
@@ -270,7 +270,7 @@ $\beta = {stats[10]}$"""
 
         stats = site.doStats()
         name = [site.sitename]
-        site.plotItself()
+
         section = fr"""
 # {name}
 ## Centrality
@@ -282,7 +282,7 @@ $$\theta={stats[2]}$$
 ## Betweeness 
 $$B={stats[3]}$$
 ```python
-site.plotItself()
+site.doStats()
 ```
         """
         return section
@@ -373,7 +373,7 @@ xlabel('Time')
         return section
 
 
-    def Assemble(self, type):
+    def Assemble(self, type, save=True):
         """
         Assemble the type of report desired
         types:
@@ -381,11 +381,7 @@ xlabel('Time')
         2: epidemiological only
         3: both
         """
-        dirname = self.sim.modelName + r'-report-'
-        Path = dirname + time.ctime()
-        Path = Path.replace(' ', '-')
-        os.system('mkdir ' + Path)
-        os.chdir(Path)
+
         print("Starting report generation...")
 
         sitehead = r"""
@@ -423,7 +419,7 @@ between any other pair of nodes.
             latexsrc += tail
             timer = time.clock() - start
             print('Time to generate Network report: %s seconds.' % timer)
-            self.savenBuild('Netreport', latexsrc)
+            repname = 'net_report'
         elif type == 2:
             start = time.clock()
             latexsrc = header + self.genEpiTitle() + self.genEpi()
@@ -435,7 +431,7 @@ between any other pair of nodes.
             print('Time to generate Epidemiological report: %s seconds.' % timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.' % timer, -1)
-            self.savenBuild('epireport', latexsrc)
+            repname = 'epi_report'
         elif type == 3:
             start = time.clock()
             latexsrc = header + self.genFullTitle() + self.graphDesc()
@@ -451,8 +447,10 @@ between any other pair of nodes.
             latexsrc += tail
             timer = time.clock() - start
             print('Time to generate full report: %s seconds.' % timer)
-
-            self.savenBuild('fullreport', latexsrc)
+            repname = 'full_report'
+        if save:
+            self.savenBuild(repname, latexsrc)
+        return latexsrc
 
 
     def Say(self, string):
@@ -466,9 +464,15 @@ between any other pair of nodes.
         """
         Saves the LaTeX in a newly created directory and builds it.
         """
-        fs = codecs.open(f'{name}.pmd', 'w', self.encoding)
-        fs.write(src)
-        fs.close()
+        dirname = self.sim.modelName + r'-report-'
+        Path = dirname + time.ctime()
+        Path = Path.replace(' ', '-')
+        os.system('mkdir ' + Path)
+        os.chdir(Path)
+        print(f'Saving {name}.pmd')
+        with codecs.open(f'{name}.pmd', 'w', self.encoding) as fs:
+            fs.write(src)
 
         pweave.weave(f"{name}.pmd", doctype='markdown')
+
 

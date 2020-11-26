@@ -7,10 +7,10 @@ import sys
 import multiprocessing
 import time
 import json
-
+import numpy as np
 from numpy.random import binomial
 import networkx as NX
-from networkx.exception import NetworkXNoPath
+from networkx.exception import NetworkXNoPath, NetworkXError
 from networkx.readwrite import json_graph
 import redis
 import six
@@ -1402,8 +1402,11 @@ class graph(NX.MultiDiGraph):
                 lsp = self.getShortestPathLength(sitei, sp)  # length of the shortestpath
                 self.shortPathList.append((sitei, sitej, sp, lsp))
                 # fill the entire allpairs matrix
-                ap[i, j] = ap[j, i] = len(sp) - 1
-                dm[i, j] = dm[j, i] = lsp
+                try:
+                    ap[i, j] = ap[j, i] = len(sp) - 1
+                    dm[i, j] = dm[j, i] = lsp
+                except IndexError:
+                    pass
                 j += 1
             i += 1
         self.shortDistMatrix = dm
@@ -1460,7 +1463,11 @@ class graph(NX.MultiDiGraph):
         """
         Returns the diameter of the graph: longest shortest path.
         """
-        return NX.distance_measures.diameter(self)
+        try:
+            return NX.distance_measures.diameter(self)
+        except NetworkXError:
+            return np.inf
+
 
     def getIotaindex(self):
         """

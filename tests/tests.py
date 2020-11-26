@@ -6,7 +6,7 @@ from __future__ import absolute_import
 import unittest
 from Epigrass.manager import *
 from Epigrass.simobj import siteobj, graph, edge
-from six.moves import range
+from Epigrass.report import Report
 
 
 class testObjInstantiation(unittest.TestCase):
@@ -44,6 +44,12 @@ class testObjInstantiation(unittest.TestCase):
         e = self.S.instEdges(l, self.ed)
         g = self.S.instGraph('grafo', 1, l, e)
         pairs = g.getAllPairs()
+
+    def test_report(self):
+        R = Report(self.S)
+        src = R.Assemble(3, False)
+        self.assertIn('Full Report', src)
+
 
 
 #class TestSimulationRuns(unittest.TestCase):

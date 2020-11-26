@@ -185,7 +185,7 @@ class TestModels(unittest.TestCase):
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
 
         for x, y in zip(res[0], [0, 0.9, 999]):
-            self.assertAlmostEqual(x, y, 0)
+            self.assertAlmostEqual(int(x), y, 1)
         self.assertAlmostEqual(res[1], 0, 1)
         self.assertAlmostEqual(res[2], 0.9, 1)
 

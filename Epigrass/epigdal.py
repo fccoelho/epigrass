@@ -5,8 +5,7 @@ export the results of Epigrass simulations to the formats supported by these lib
 copyright 2007,2012 by Flavio Codeco Coelho
 Licensed under the GPL.
 """
-from __future__ import absolute_import
-from __future__ import print_function
+
 import locale, os, pylab
 from osgeo import ogr, osr, gdal
 from xml.dom import minidom, Node
@@ -15,11 +14,9 @@ from matplotlib.colors import Normalize
 from matplotlib import cm
 from numpy import array
 import geopandas as gpd
+import fiona
 from zipfile import ZipFile
 import json
-import six
-from six.moves import range
-from six.moves import zip
 
 class NewWorld:
     def __init__(self, filename, namefield, geocfield, outdir='.'):
@@ -33,7 +30,41 @@ class NewWorld:
         self.geocfield = geocfield
         self.namefield = namefield
         self.outdir = outdir
-        self.map = gpd.read_file(filename)
+        self.filename = filename
+        self.centdict = {}
+        self.namedict = {}
+        self.nlist = []
+        self.layers = fiona.listlayers(self.filename)
+        with fiona.open(filename) as source:
+            self.driver = source.driver
+            self.crs = source.crs
+            self.map = gpd.read_file(filename, layer=source.name)
+
+        
+    def get_layer_list(self):
+        return self.layers
+
+    def draw_layer(self, l):
+        if l in self.layers:
+            df = gpd.read_file(self.filename, layer=l)
+            df.plot()
+            pylab.show()
+        else:
+            print(f'Layer {l} not available.')
+
+    def get_node_list(self, l):
+        '''
+        Updates self.centdict with centroid coordinates and self.nlist with layer features
+        l is an OGR layer.
+        '''
+
+        df = gpd.read_file(self.filename, layer=l)
+        for i, row in df.iterrows():
+            self.centdict[row[self.geocfield]] = (row['geometry'].centroid.x, row['geometry'].centroid.y, 0)
+            self.namedict[row[self.geocfield]] = row[self.namefield]
+            self.nlist.append(row)
+        return self.nlist
+
 
 
 class World:
