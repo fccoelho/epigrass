@@ -24,8 +24,8 @@
 # The encoding variable can be set to a string stating the encoding of your
 # sites and edges files. If left empty iso-8859-1 (latin-1) is assumed.
 # See Usermanual for acceptable encoding strings.
-#['riozonas_LatLong.shp','nome_zonas','zona_trafe']
-shapefile =['riozonas_LatLong.shp','nome_zonas','zona_trafe']
+#['riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE']
+shapefile =['riozonas_LatLong.shp','NOME_ZONAS','ZONA_TRAFE']
 sites = sites.csv
 edges = edges.csv
 encoding = 

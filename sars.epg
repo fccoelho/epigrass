@@ -140,7 +140,7 @@ outdir =
 
 # Database Output
 # SQLout can be 0 (no database output) or 1
-SQLout = 1
+sqlout = 1
 
 # Report Generation
 # The variable report can take the following values:

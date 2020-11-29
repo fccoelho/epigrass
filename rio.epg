@@ -54,8 +54,8 @@ modtype = SIR
 
 beta = 10   #transmission coefficient (contact rate * transmissibility)
 alpha = 1   # clumping parameter
-e = 0.2           # inverse of incubation period
-r = 0.2         # inverse of infectious period
+e = 0.1           # inverse of incubation period
+r = 0.1         # inverse of infectious period
 delta = 0       # probability of acquiring full immunity [0,1]
 B = 0           # Birth rate
 w = 0           # probability of immunity waning [0,1]
@@ -114,7 +114,7 @@ Quarantine = []
 #==============================================================#
 [TRANSPORTATION MODEL]
 #==============================================================#
-# If doTransp = 1 the transportation dinamics will be included. Use 0 here only for debugging purposes.
+# If doTransp = 1 the transportation dynamics will be included. Use 0 here only for debugging purposes.
 doTransp = 1
 
 # Mechanism can be stochatic (1) or deterministic(0).

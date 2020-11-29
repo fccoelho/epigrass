@@ -181,13 +181,13 @@ class TestModels(unittest.TestCase):
 
     def test_run_SEIpR_s(self):
         model = Epimodel(1, modtype=b'SEIpR_s')
-        res = model.step((0, 1, 999), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
+        res = model.step((0, 10, 990), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
 
-        for x, y in zip(res[0], [0, 0.9, 999]):
-            self.assertAlmostEqual(int(x), y, 1)
+        for x, y in zip(res[0], [0, 9, 990]):
+            self.assertAlmostEqual(x, y, 0)
         self.assertAlmostEqual(res[1], 0, 1)
-        self.assertAlmostEqual(res[2], 0.9, 1)
+        self.assertAlmostEqual(res[2], 9, 1)
 
     def test_run_SIRS(self):
         model = Epimodel(1, modtype=b'SIRS')

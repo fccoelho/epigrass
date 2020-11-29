@@ -12,7 +12,7 @@ from Epigrass.report import Report
 class testObjInstantiation(unittest.TestCase):
     def setUp(self):
         self.sitios = loadData('sitios3.csv', sep=',')
-        self.ed = loadData('edgesout.csv', sep=',')
+        self.edges = loadData('edgesout.csv', sep=',')
         self.S = Simulate('flu.epg')
 
     def tearDown(self):
@@ -26,22 +26,31 @@ class testObjInstantiation(unittest.TestCase):
 
     def testEdges(self):
         l = self.S.instSites(self.sitios)
-        e = self.S.instEdges(l, self.ed)
+        e = self.S.instEdges(l, self.edges)
         j = 0
         for i in e:
-            self.assertEqual((i.source.geocode, i.dest.geocode), (int(self.ed[j][5]), int(self.ed[j][6])))
+            self.assertEqual((i.source.geocode, i.dest.geocode), (int(self.edges[j][5]), int(self.edges[j][6])))
             j += 1
+
+    def test_edge_migration(self):
+        l = self.S.instSites(self.sitios)
+        e = self.S.instEdges(l, self.edges)
+        g = self.S.instGraph('grafo', 1, l, e)
+        g.simstep=100
+        for edge in e:
+            edge.migrate()
+            self.assertGreater(len(edge.dest.thetalist),0)
 
     def testGraph(self):
         l = self.S.instSites(self.sitios)
-        e = self.S.instEdges(l, self.ed)
+        e = self.S.instEdges(l, self.edges)
         g = self.S.instGraph('grafo', 1, l, e)
         self.assertEquals(len(g.site_dict), len(self.sitios))
-        self.assertEquals(len(g.edge_dict), len(self.ed))
+        self.assertEquals(len(g.edge_dict), len(self.edges))
 
     def test_getAllPairs(self):
         l = self.S.instSites(self.sitios)
-        e = self.S.instEdges(l, self.ed)
+        e = self.S.instEdges(l, self.edges)
         g = self.S.instGraph('grafo', 1, l, e)
         pairs = g.getAllPairs()
 

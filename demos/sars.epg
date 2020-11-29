@@ -140,8 +140,10 @@ outdir =
 
 # Database Output
 # MySQLout can be 0 (no database output) or 1
-MySQLout = 1 
+sqlout = 1
 
+report = 2
+siterep = []
 
 #Replicate runs
 #If replicas is set to an integer(n) larger than zero, the model will be run n times and the results will be con-

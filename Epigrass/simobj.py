@@ -166,7 +166,6 @@ class siteobj:
         pipe.execute()
         # ------------------------
         if parallel:
-
             # r = self.parentGraph.po.apply_async(self.model, args=(inits, simstep, totpop, theta, npass, self.bi,
             #                                                       self.bp, self.values), callback=self.handle)
             r = self.parentGraph.po.apply_async(self.model, args=(), callback=self.handle)
@@ -189,7 +188,7 @@ class siteobj:
         last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1) \
             .get("{}:Lpos".format(self.geocode)) \
             .get("{}:migInf".format(self.geocode)).execute()
-        # self.ts.append(eval(last_state))
+        self.ts.append(eval(last_state))
         Lpos = float(Lpos)
         migInf = float(migInf)
         self.totalcases += Lpos

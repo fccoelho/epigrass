@@ -5646,7 +5646,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
  *         S4, E4, Is4, Ic4, Ig4 = (
  *         bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])             # <<<<<<<<<<<<<<
  *     else:  # get values from last time step
- *         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
+ *         # print(len(inits))
  */
     __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_bi, __pyx_n_b_susc_age4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 189, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
@@ -5679,9 +5679,9 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":191
- *         bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])
+  /* "Epigrass/epimodels.py":192
  *     else:  # get values from last time step
+ *         # print(len(inits))
  *         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits             # <<<<<<<<<<<<<<
  *     N = totpop
  * 
@@ -5693,7 +5693,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
       if (unlikely(size != 20)) {
         if (size > 20) __Pyx_RaiseTooManyValuesError(20);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 191, __pyx_L1_error)
+        __PYX_ERR(0, 192, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -5764,7 +5764,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
         Py_ssize_t i;
         PyObject** temps[20] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_4,&__pyx_t_5,&__pyx_t_6,&__pyx_t_7,&__pyx_t_8,&__pyx_t_9,&__pyx_t_10,&__pyx_t_11,&__pyx_t_12,&__pyx_t_13,&__pyx_t_14,&__pyx_t_15,&__pyx_t_16,&__pyx_t_17,&__pyx_t_18,&__pyx_t_19,&__pyx_t_20,&__pyx_t_21};
         for (i=0; i < 20; i++) {
-          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 191, __pyx_L1_error)
+          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 192, __pyx_L1_error)
           __Pyx_GOTREF(item);
           *(temps[i]) = item;
         }
@@ -5773,7 +5773,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
     } else {
       Py_ssize_t index = -1;
       PyObject** temps[20] = {&__pyx_t_2,&__pyx_t_3,&__pyx_t_4,&__pyx_t_5,&__pyx_t_6,&__pyx_t_7,&__pyx_t_8,&__pyx_t_9,&__pyx_t_10,&__pyx_t_11,&__pyx_t_12,&__pyx_t_13,&__pyx_t_14,&__pyx_t_15,&__pyx_t_16,&__pyx_t_17,&__pyx_t_18,&__pyx_t_19,&__pyx_t_20,&__pyx_t_21};
-      __pyx_t_22 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 191, __pyx_L1_error)
+      __pyx_t_22 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 192, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_22);
       __pyx_t_23 = Py_TYPE(__pyx_t_22)->tp_iternext;
       for (index=0; index < 20; index++) {
@@ -5781,7 +5781,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
         __Pyx_GOTREF(item);
         *(temps[index]) = item;
       }
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_23(__pyx_t_22), 20) < 0) __PYX_ERR(0, 191, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_23(__pyx_t_22), 20) < 0) __PYX_ERR(0, 192, __pyx_L1_error)
       __pyx_t_23 = NULL;
       __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
       goto __pyx_L5_unpacking_done;
@@ -5789,7 +5789,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
       __pyx_t_23 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 191, __pyx_L1_error)
+      __PYX_ERR(0, 192, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
     __pyx_v_S1 = __pyx_t_2;
@@ -5835,8 +5835,8 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":192
- *     else:  # get values from last time step
+  /* "Epigrass/epimodels.py":193
+ *         # print(len(inits))
  *         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
  *     N = totpop             # <<<<<<<<<<<<<<
  * 
@@ -5844,298 +5844,298 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":196
+  /* "Epigrass/epimodels.py":197
  *     # for k, v in bp.items():
  *     #     exec ('%s = %s' % (k, v))
  *     alpha = bp[b'alpha']             # <<<<<<<<<<<<<<
  *     beta = bp[b'beta']
  *     r = bp[b'r']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_alpha = __pyx_t_24;
 
-  /* "Epigrass/epimodels.py":197
+  /* "Epigrass/epimodels.py":198
  *     #     exec ('%s = %s' % (k, v))
  *     alpha = bp[b'alpha']
  *     beta = bp[b'beta']             # <<<<<<<<<<<<<<
  *     r = bp[b'r']
  *     e = bp[b'e']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_beta = __pyx_t_24;
 
-  /* "Epigrass/epimodels.py":198
+  /* "Epigrass/epimodels.py":199
  *     alpha = bp[b'alpha']
  *     beta = bp[b'beta']
  *     r = bp[b'r']             # <<<<<<<<<<<<<<
  *     e = bp[b'e']
  *     c = bp[b'c']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_r = __pyx_t_24;
 
-  /* "Epigrass/epimodels.py":199
+  /* "Epigrass/epimodels.py":200
  *     beta = bp[b'beta']
  *     r = bp[b'r']
  *     e = bp[b'e']             # <<<<<<<<<<<<<<
  *     c = bp[b'c']
  *     g = bp[b'g']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_e); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_e); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_e = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":200
+  /* "Epigrass/epimodels.py":201
  *     r = bp[b'r']
  *     e = bp[b'e']
  *     c = bp[b'c']             # <<<<<<<<<<<<<<
  *     g = bp[b'g']
  *     d = bp[b'd']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 201, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_c = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":201
+  /* "Epigrass/epimodels.py":202
  *     e = bp[b'e']
  *     c = bp[b'c']
  *     g = bp[b'g']             # <<<<<<<<<<<<<<
  *     d = bp[b'd']
  *     pc1 = bp[b'pc1']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_g = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":202
+  /* "Epigrass/epimodels.py":203
  *     c = bp[b'c']
  *     g = bp[b'g']
  *     d = bp[b'd']             # <<<<<<<<<<<<<<
  *     pc1 = bp[b'pc1']
  *     pc2 = bp[b'pc2']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_d); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_d); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_d = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":203
+  /* "Epigrass/epimodels.py":204
  *     g = bp[b'g']
  *     d = bp[b'd']
  *     pc1 = bp[b'pc1']             # <<<<<<<<<<<<<<
  *     pc2 = bp[b'pc2']
  *     pc3 = bp[b'pc3']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pc1 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":204
+  /* "Epigrass/epimodels.py":205
  *     d = bp[b'd']
  *     pc1 = bp[b'pc1']
  *     pc2 = bp[b'pc2']             # <<<<<<<<<<<<<<
  *     pc3 = bp[b'pc3']
  *     pc4 = bp[b'pc4']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pc2 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":205
+  /* "Epigrass/epimodels.py":206
  *     pc1 = bp[b'pc1']
  *     pc2 = bp[b'pc2']
  *     pc3 = bp[b'pc3']             # <<<<<<<<<<<<<<
  *     pc4 = bp[b'pc4']
  *     pp1 = bp[b'pp1']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pc3 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":206
+  /* "Epigrass/epimodels.py":207
  *     pc2 = bp[b'pc2']
  *     pc3 = bp[b'pc3']
  *     pc4 = bp[b'pc4']             # <<<<<<<<<<<<<<
  *     pp1 = bp[b'pp1']
  *     pp2 = bp[b'pp2']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pc4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pc4 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":207
+  /* "Epigrass/epimodels.py":208
  *     pc3 = bp[b'pc3']
  *     pc4 = bp[b'pc4']
  *     pp1 = bp[b'pp1']             # <<<<<<<<<<<<<<
  *     pp2 = bp[b'pp2']
  *     pp3 = bp[b'pp3']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pp1 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":208
+  /* "Epigrass/epimodels.py":209
  *     pc4 = bp[b'pc4']
  *     pp1 = bp[b'pp1']
  *     pp2 = bp[b'pp2']             # <<<<<<<<<<<<<<
  *     pp3 = bp[b'pp3']
  *     pp4 = bp[b'pp4']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pp2 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":209
+  /* "Epigrass/epimodels.py":210
  *     pp1 = bp[b'pp1']
  *     pp2 = bp[b'pp2']
  *     pp3 = bp[b'pp3']             # <<<<<<<<<<<<<<
  *     pp4 = bp[b'pp4']
  *     b = bp[b'b']
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pp3 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":210
+  /* "Epigrass/epimodels.py":211
  *     pp2 = bp[b'pp2']
  *     pp3 = bp[b'pp3']
  *     pp4 = bp[b'pp4']             # <<<<<<<<<<<<<<
  *     b = bp[b'b']
  * 
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_pp4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __pyx_v_pp4 = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":211
+  /* "Epigrass/epimodels.py":212
  *     pp3 = bp[b'pp3']
  *     pp4 = bp[b'pp4']
  *     b = bp[b'b']             # <<<<<<<<<<<<<<
  * 
  *     # Vacination event
  */
-  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_b); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_b); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_b = __pyx_t_24;
 
-  /* "Epigrass/epimodels.py":215
+  /* "Epigrass/epimodels.py":216
  *     # Vacination event
  * 
  *     if 'vaccineNow' in bp:  # TODO: add to bp when creating model             # <<<<<<<<<<<<<<
  *         vaccineNow = bp['vaccineNow']
  *         vaccov = bp['vaccov']
  */
-  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_vaccineNow, __pyx_v_bp, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_vaccineNow, __pyx_v_bp, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
   __pyx_t_25 = (__pyx_t_1 != 0);
   if (__pyx_t_25) {
 
-    /* "Epigrass/epimodels.py":216
+    /* "Epigrass/epimodels.py":217
  * 
  *     if 'vaccineNow' in bp:  # TODO: add to bp when creating model
  *         vaccineNow = bp['vaccineNow']             # <<<<<<<<<<<<<<
  *         vaccov = bp['vaccov']
  *         S1 -= vaccov * S1
  */
-    __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_vaccineNow); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 216, __pyx_L1_error)
+    __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_vaccineNow); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
     __pyx_v_vaccineNow = __pyx_t_21;
     __pyx_t_21 = 0;
 
-    /* "Epigrass/epimodels.py":217
+    /* "Epigrass/epimodels.py":218
  *     if 'vaccineNow' in bp:  # TODO: add to bp when creating model
  *         vaccineNow = bp['vaccineNow']
  *         vaccov = bp['vaccov']             # <<<<<<<<<<<<<<
  *         S1 -= vaccov * S1
  *         S2 -= vaccov * S2
  */
-    __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_vaccov); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_vaccov); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
     __pyx_v_vaccov = __pyx_t_21;
     __pyx_t_21 = 0;
 
-    /* "Epigrass/epimodels.py":218
+    /* "Epigrass/epimodels.py":219
  *         vaccineNow = bp['vaccineNow']
  *         vaccov = bp['vaccov']
  *         S1 -= vaccov * S1             # <<<<<<<<<<<<<<
  *         S2 -= vaccov * S2
  *         S3 -= vaccov * S3
  */
-    __pyx_t_21 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_21 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
-    __pyx_t_20 = PyNumber_InPlaceSubtract(__pyx_v_S1, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_20 = PyNumber_InPlaceSubtract(__pyx_v_S1, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_20);
     __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
     __Pyx_DECREF_SET(__pyx_v_S1, __pyx_t_20);
     __pyx_t_20 = 0;
 
-    /* "Epigrass/epimodels.py":219
+    /* "Epigrass/epimodels.py":220
  *         vaccov = bp['vaccov']
  *         S1 -= vaccov * S1
  *         S2 -= vaccov * S2             # <<<<<<<<<<<<<<
  *         S3 -= vaccov * S3
  *         S4 -= vaccov * S4
  */
-    __pyx_t_20 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_20 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_20);
-    __pyx_t_21 = PyNumber_InPlaceSubtract(__pyx_v_S2, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_21 = PyNumber_InPlaceSubtract(__pyx_v_S2, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
     __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
     __Pyx_DECREF_SET(__pyx_v_S2, __pyx_t_21);
     __pyx_t_21 = 0;
 
-    /* "Epigrass/epimodels.py":220
+    /* "Epigrass/epimodels.py":221
  *         S1 -= vaccov * S1
  *         S2 -= vaccov * S2
  *         S3 -= vaccov * S3             # <<<<<<<<<<<<<<
  *         S4 -= vaccov * S4
  * 
  */
-    __pyx_t_21 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_21 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
-    __pyx_t_20 = PyNumber_InPlaceSubtract(__pyx_v_S3, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_20 = PyNumber_InPlaceSubtract(__pyx_v_S3, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_20);
     __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
     __Pyx_DECREF_SET(__pyx_v_S3, __pyx_t_20);
     __pyx_t_20 = 0;
 
-    /* "Epigrass/epimodels.py":221
+    /* "Epigrass/epimodels.py":222
  *         S2 -= vaccov * S2
  *         S3 -= vaccov * S3
  *         S4 -= vaccov * S4             # <<<<<<<<<<<<<<
  * 
  *     # New cases by age class
  */
-    __pyx_t_20 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_20 = PyNumber_Multiply(__pyx_v_vaccov, __pyx_v_S4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_20);
-    __pyx_t_21 = PyNumber_InPlaceSubtract(__pyx_v_S4, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_21 = PyNumber_InPlaceSubtract(__pyx_v_S4, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_21);
     __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
     __Pyx_DECREF_SET(__pyx_v_S4, __pyx_t_21);
     __pyx_t_21 = 0;
 
-    /* "Epigrass/epimodels.py":215
+    /* "Epigrass/epimodels.py":216
  *     # Vacination event
  * 
  *     if 'vaccineNow' in bp:  # TODO: add to bp when creating model             # <<<<<<<<<<<<<<
@@ -6144,798 +6144,798 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
  */
   }
 
-  /* "Epigrass/epimodels.py":226
+  /* "Epigrass/epimodels.py":227
  *     # beta=eval(values[2])
  * 
  *     Infectantes = Ig1 + Ig2 + Ig3 + Ig4 + Ic1 + Ic2 + Ic3 + Ic4 + 0.5 * (Is1 + Is2 + Is3 + Is4) + theta             # <<<<<<<<<<<<<<
  *     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha
  *     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha
  */
-  __pyx_t_21 = PyNumber_Add(__pyx_v_Ig1, __pyx_v_Ig2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_v_Ig1, __pyx_v_Ig2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ig3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ig3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ig4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ig4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ic1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ic1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ic4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_v_Ic4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Add(__pyx_v_Is1, __pyx_v_Is2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_v_Is1, __pyx_v_Is2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_19 = PyNumber_Add(__pyx_t_20, __pyx_v_Is3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_20, __pyx_v_Is3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Add(__pyx_t_19, __pyx_v_Is4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_t_19, __pyx_v_Is4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_float_0_5, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_float_0_5, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_theta); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_theta); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_Infectantes = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":227
+  /* "Epigrass/epimodels.py":228
  * 
  *     Infectantes = Ig1 + Ig2 + Ig3 + Ig4 + Ic1 + Ic2 + Ic3 + Ic4 + 0.5 * (Is1 + Is2 + Is3 + Is4) + theta
  *     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha             # <<<<<<<<<<<<<<
  *     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha
  *     L3pos = float(beta) * S3 * (Infectantes / (N + npass)) ** alpha
  */
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Power(__pyx_t_20, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Power(__pyx_t_20, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_L1pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":228
+  /* "Epigrass/epimodels.py":229
  *     Infectantes = Ig1 + Ig2 + Ig3 + Ig4 + Ic1 + Ic2 + Ic3 + Ic4 + 0.5 * (Is1 + Is2 + Is3 + Is4) + theta
  *     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha
  *     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha             # <<<<<<<<<<<<<<
  *     L3pos = float(beta) * S3 * (Infectantes / (N + npass)) ** alpha
  *     L4pos = float(beta) * S4 * (Infectantes / (N + npass)) ** alpha
  */
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = PyNumber_Power(__pyx_t_19, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Power(__pyx_t_19, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __pyx_v_L2pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":229
+  /* "Epigrass/epimodels.py":230
  *     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha
  *     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha
  *     L3pos = float(beta) * S3 * (Infectantes / (N + npass)) ** alpha             # <<<<<<<<<<<<<<
  *     L4pos = float(beta) * S4 * (Infectantes / (N + npass)) ** alpha
  * 
  */
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Power(__pyx_t_18, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Power(__pyx_t_18, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_L3pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":230
+  /* "Epigrass/epimodels.py":231
  *     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha
  *     L3pos = float(beta) * S3 * (Infectantes / (N + npass)) ** alpha
  *     L4pos = float(beta) * S4 * (Infectantes / (N + npass)) ** alpha             # <<<<<<<<<<<<<<
  * 
  *     ######################
  */
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_S4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble((__pyx_v_N + __pyx_v_npass)); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyNumber_Divide(__pyx_v_Infectantes, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Power(__pyx_t_20, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Power(__pyx_t_20, __pyx_t_21, Py_None); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_L4pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":233
+  /* "Epigrass/epimodels.py":234
  * 
  *     ######################
  *     Lpos = L1pos + L2pos + L3pos + L4pos             # <<<<<<<<<<<<<<
  *     # Model
  *     # 0-2 years old
  */
-  __pyx_t_21 = PyNumber_Add(__pyx_v_L1pos, __pyx_v_L2pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_v_L1pos, __pyx_v_L2pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_v_L3pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_v_L3pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_v_L4pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_v_L4pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_21); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_Lpos = __pyx_t_24;
 
-  /* "Epigrass/epimodels.py":236
+  /* "Epigrass/epimodels.py":237
  *     # Model
  *     # 0-2 years old
  *     E1pos = L1pos + (1 - e) * E1             # <<<<<<<<<<<<<<
  *     Is1pos = (1 - (pc1 * c + (1 - pc1) * r)) * Is1 + e * E1
  *     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1
  */
-  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_E1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_E1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_v_L1pos, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_v_L1pos, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_E1pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":237
+  /* "Epigrass/epimodels.py":238
  *     # 0-2 years old
  *     E1pos = L1pos + (1 - e) * E1
  *     Is1pos = (1 - (pc1 * c + (1 - pc1) * r)) * Is1 + e * E1             # <<<<<<<<<<<<<<
  *     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1
  *     Ig1pos = (1 - d) * Ig1 + pp1 * g * Ic1
  */
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc1, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc1, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc1, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc1, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_20 = PyNumber_Multiply(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __pyx_v_Is1pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":238
+  /* "Epigrass/epimodels.py":239
  *     E1pos = L1pos + (1 - e) * E1
  *     Is1pos = (1 - (pc1 * c + (1 - pc1) * r)) * Is1 + e * E1
  *     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1             # <<<<<<<<<<<<<<
  *     Ig1pos = (1 - d) * Ig1 + pp1 * g * Ic1
  *     S1pos = b + S1 - L1pos
  */
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp1, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp1, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp1, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp1, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc1, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc1, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Is1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Is1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_Ic1pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":239
+  /* "Epigrass/epimodels.py":240
  *     Is1pos = (1 - (pc1 * c + (1 - pc1) * r)) * Is1 + e * E1
  *     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1
  *     Ig1pos = (1 - d) * Ig1 + pp1 * g * Ic1             # <<<<<<<<<<<<<<
  *     S1pos = b + S1 - L1pos
  *     # 3-14 years old
  */
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ig1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ig1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp1, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp1, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_Ig1pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":240
+  /* "Epigrass/epimodels.py":241
  *     Ic1pos = (1 - (pp1 * g + (1 - pp1) * r)) * Ic1 + pc1 * c * Is1
  *     Ig1pos = (1 - d) * Ig1 + pp1 * g * Ic1
  *     S1pos = b + S1 - L1pos             # <<<<<<<<<<<<<<
  *     # 3-14 years old
  *     E2pos = L2pos + (1 - e) * E2
  */
-  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_S1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_S1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Subtract(__pyx_t_19, __pyx_v_L1pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Subtract(__pyx_t_19, __pyx_v_L1pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_S1pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":242
+  /* "Epigrass/epimodels.py":243
  *     S1pos = b + S1 - L1pos
  *     # 3-14 years old
  *     E2pos = L2pos + (1 - e) * E2             # <<<<<<<<<<<<<<
  *     Is2pos = (1 - (pc2 * c + (1 - pc2) * r)) * Is2 + e * E2
  *     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2
  */
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_E2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_E2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_v_L2pos, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_v_L2pos, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_E2pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":243
+  /* "Epigrass/epimodels.py":244
  *     # 3-14 years old
  *     E2pos = L2pos + (1 - e) * E2
  *     Is2pos = (1 - (pc2 * c + (1 - pc2) * r)) * Is2 + e * E2             # <<<<<<<<<<<<<<
  *     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2
  *     Ig2pos = (1 - d) * Ig2 + pp2 * g * Ic2
  */
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc2, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc2, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc2, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc2, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = PyNumber_Multiply(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_21, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_21, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __pyx_v_Is2pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":244
+  /* "Epigrass/epimodels.py":245
  *     E2pos = L2pos + (1 - e) * E2
  *     Is2pos = (1 - (pc2 * c + (1 - pc2) * r)) * Is2 + e * E2
  *     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2             # <<<<<<<<<<<<<<
  *     Ig2pos = (1 - d) * Ig2 + pp2 * g * Ic2
  *     S2pos = b + S2 - L2pos
  */
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp2, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp2, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp2, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp2, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_21, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_21, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pc2, __pyx_v_c); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pc2, __pyx_v_c); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Is2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Is2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_Ic2pos = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":245
+  /* "Epigrass/epimodels.py":246
  *     Is2pos = (1 - (pc2 * c + (1 - pc2) * r)) * Is2 + e * E2
  *     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2
  *     Ig2pos = (1 - d) * Ig2 + pp2 * g * Ic2             # <<<<<<<<<<<<<<
  *     S2pos = b + S2 - L2pos
  *     # 15-59 years old
  */
-  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ig2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ig2); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pp2, __pyx_v_g); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pp2, __pyx_v_g); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_Ic2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_Ig2pos = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":246
+  /* "Epigrass/epimodels.py":247
  *     Ic2pos = (1 - (pp2 * g + (1 - pp2) * r)) * Ic2 + pc2 * c * Is2
  *     Ig2pos = (1 - d) * Ig2 + pp2 * g * Ic2
  *     S2pos = b + S2 - L2pos             # <<<<<<<<<<<<<<
  *     # 15-59 years old
  *     E3pos = L3pos + (1 - e) * E3
  */
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_v_S2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_v_S2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Subtract(__pyx_t_21, __pyx_v_L2pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 246, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Subtract(__pyx_t_21, __pyx_v_L2pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_S2pos = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":248
+  /* "Epigrass/epimodels.py":249
  *     S2pos = b + S2 - L2pos
  *     # 15-59 years old
  *     E3pos = L3pos + (1 - e) * E3             # <<<<<<<<<<<<<<
  *     Is3pos = (1 - (pc3 * c + (1 - pc3) * r)) * Is3 + e * E3
  *     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3
  */
-  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_E3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_19, __pyx_v_E3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_v_L3pos, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_v_L3pos, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_E3pos = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":249
+  /* "Epigrass/epimodels.py":250
  *     # 15-59 years old
  *     E3pos = L3pos + (1 - e) * E3
  *     Is3pos = (1 - (pc3 * c + (1 - pc3) * r)) * Is3 + e * E3             # <<<<<<<<<<<<<<
  *     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3
  *     Ig3pos = (1 - d) * Ig3 + pp3 * g * Ic3
  */
-  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pc3, __pyx_v_c); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pc3, __pyx_v_c); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc3, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc3, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_20 = PyNumber_Multiply(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_18, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_18, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __pyx_v_Is3pos = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":250
+  /* "Epigrass/epimodels.py":251
  *     E3pos = L3pos + (1 - e) * E3
  *     Is3pos = (1 - (pc3 * c + (1 - pc3) * r)) * Is3 + e * E3
  *     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3             # <<<<<<<<<<<<<<
  *     Ig3pos = (1 - d) * Ig3 + pp3 * g * Ic3
  *     S3pos = b + S3 - L3pos
  */
-  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pp3, __pyx_v_g); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_v_pp3, __pyx_v_g); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp3, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp3, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_20, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_18, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_18, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc3, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc3, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Is3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Is3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_Ic3pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":251
+  /* "Epigrass/epimodels.py":252
  *     Is3pos = (1 - (pc3 * c + (1 - pc3) * r)) * Is3 + e * E3
  *     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3
  *     Ig3pos = (1 - d) * Ig3 + pp3 * g * Ic3             # <<<<<<<<<<<<<<
  *     S3pos = b + S3 - L3pos
  *     # >60 years old
  */
-  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ig3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ig3); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp3, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp3, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_Ic3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_Ig3pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":252
+  /* "Epigrass/epimodels.py":253
  *     Ic3pos = (1 - (pp3 * g + (1 - pp3) * r)) * Ic3 + pc3 * c * Is3
  *     Ig3pos = (1 - d) * Ig3 + pp3 * g * Ic3
  *     S3pos = b + S3 - L3pos             # <<<<<<<<<<<<<<
  *     # >60 years old
  *     E4pos = L4pos + (1 - e) * E4
  */
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_v_S3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_v_S3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Subtract(__pyx_t_18, __pyx_v_L3pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Subtract(__pyx_t_18, __pyx_v_L3pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_S3pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":254
+  /* "Epigrass/epimodels.py":255
  *     S3pos = b + S3 - L3pos
  *     # >60 years old
  *     E4pos = L4pos + (1 - e) * E4             # <<<<<<<<<<<<<<
  *     Is4pos = (1 - (pc4 * c + (1 - pc4) * r)) * Is4 + e * E4
  *     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4
  */
-  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_E4); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_21, __pyx_v_E4); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-  __pyx_t_21 = PyNumber_Add(__pyx_v_L4pos, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_v_L4pos, __pyx_t_18); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __pyx_v_E4pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":255
+  /* "Epigrass/epimodels.py":256
  *     # >60 years old
  *     E4pos = L4pos + (1 - e) * E4
  *     Is4pos = (1 - (pc4 * c + (1 - pc4) * r)) * Is4 + e * E4             # <<<<<<<<<<<<<<
  *     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4
  *     Ig4pos = (1 - d) * Ig4 + pp4 * g * Ic4
  */
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc4, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pc4, __pyx_v_c); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc4, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pc4, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_20 = PyNumber_Multiply(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_t_18, __pyx_t_19); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_20, __pyx_v_Is4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_20 = PyNumber_Multiply(__pyx_v_e, __pyx_v_E4); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 255, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_t_20); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __pyx_v_Is4pos = __pyx_t_21;
   __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":256
+  /* "Epigrass/epimodels.py":257
  *     E4pos = L4pos + (1 - e) * E4
  *     Is4pos = (1 - (pc4 * c + (1 - pc4) * r)) * Is4 + e * E4
  *     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4             # <<<<<<<<<<<<<<
  *     Ig4pos = (1 - d) * Ig4 + pp4 * g * Ic4
  *     S4pos = b + S4 - L4pos
  */
-  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp4, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_v_pp4, __pyx_v_g); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
-  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp4, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_pp4, 1, 0, 0); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
-  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_19 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_t_20, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_t_18); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_19, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc4, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pc4, __pyx_v_c); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Is4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Is4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_t_21); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_Ic4pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":257
+  /* "Epigrass/epimodels.py":258
  *     Is4pos = (1 - (pc4 * c + (1 - pc4) * r)) * Is4 + e * E4
  *     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4
  *     Ig4pos = (1 - d) * Ig4 + pp4 * g * Ic4             # <<<<<<<<<<<<<<
  *     S4pos = b + S4 - L4pos
  * 
  */
-  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_d, 1, 0, 0); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ig4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ig4); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp4, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Multiply(__pyx_v_pp4, __pyx_v_g); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Multiply(__pyx_t_18, __pyx_v_Ic4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_21, __pyx_t_19); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_Ig4pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":258
+  /* "Epigrass/epimodels.py":259
  *     Ic4pos = (1 - (pp4 * g + (1 - pp4) * r)) * Ic4 + pc4 * c * Is4
  *     Ig4pos = (1 - d) * Ig4 + pp4 * g * Ic4
  *     S4pos = b + S4 - L4pos             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_S4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_S4); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Subtract(__pyx_t_19, __pyx_v_L4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Subtract(__pyx_t_19, __pyx_v_L4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
   __pyx_v_S4pos = __pyx_t_18;
   __pyx_t_18 = 0;
 
-  /* "Epigrass/epimodels.py":262
+  /* "Epigrass/epimodels.py":263
  *     # Migrating infecctious
  *     migInf = (
  *             Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (             # <<<<<<<<<<<<<<
  *             Is1pos + Is2pos + Is3pos + Is4pos))
  *     # Return variable values
  */
-  __pyx_t_18 = PyNumber_Add(__pyx_v_Ig1pos, __pyx_v_Ig2pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_v_Ig1pos, __pyx_v_Ig2pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ig3pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ig3pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ig4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 262, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_18);
-  __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ic1pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 262, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_19);
-  __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ic2pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ig4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ic3pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ic1pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ic4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ic2pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_18);
+  __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_v_Ic3pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_19);
+  __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
+  __pyx_t_18 = PyNumber_Add(__pyx_t_19, __pyx_v_Ic4pos); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":263
+  /* "Epigrass/epimodels.py":264
  *     migInf = (
  *             Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
  *             Is1pos + Is2pos + Is3pos + Is4pos))             # <<<<<<<<<<<<<<
  *     # Return variable values
  * 
  */
-  __pyx_t_19 = PyNumber_Add(__pyx_v_Is1pos, __pyx_v_Is2pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_v_Is1pos, __pyx_v_Is2pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
-  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_v_Is3pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Add(__pyx_t_19, __pyx_v_Is3pos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_v_Is4pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_21, __pyx_v_Is4pos); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-  /* "Epigrass/epimodels.py":262
+  /* "Epigrass/epimodels.py":263
  *     # Migrating infecctious
  *     migInf = (
  *             Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (             # <<<<<<<<<<<<<<
  *             Is1pos + Is2pos + Is3pos + Is4pos))
  *     # Return variable values
  */
-  __pyx_t_21 = PyNumber_Multiply(__pyx_float_0_5, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_21 = PyNumber_Multiply(__pyx_float_0_5, __pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
   __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_t_19 = PyNumber_Add(__pyx_t_18, __pyx_t_21); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   __pyx_v_migInf = __pyx_t_19;
   __pyx_t_19 = 0;
 
-  /* "Epigrass/epimodels.py":266
+  /* "Epigrass/epimodels.py":267
  *     # Return variable values
  * 
  *     return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,             # <<<<<<<<<<<<<<
@@ -6944,14 +6944,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "Epigrass/epimodels.py":268
+  /* "Epigrass/epimodels.py":269
  *     return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,
  *             Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
  *             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_19 = PyList_New(20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_t_19 = PyList_New(20); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
   __Pyx_INCREF(__pyx_v_S1pos);
   __Pyx_GIVEREF(__pyx_v_S1pos);
@@ -7013,17 +7013,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
   __Pyx_INCREF(__pyx_v_Ig4pos);
   __Pyx_GIVEREF(__pyx_v_Ig4pos);
   PyList_SET_ITEM(__pyx_t_19, 19, __pyx_v_Ig4pos);
-  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
 
-  /* "Epigrass/epimodels.py":266
+  /* "Epigrass/epimodels.py":267
  *     # Return variable values
  * 
  *     return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,             # <<<<<<<<<<<<<<
  *             Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
  *             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
  */
-  __pyx_t_18 = PyTuple_New(3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_t_18 = PyTuple_New(3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_GIVEREF(__pyx_t_19);
   PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_19);
@@ -7138,7 +7138,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_2stepFlu(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":275
+/* "Epigrass/epimodels.py":276
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -7207,13 +7207,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 1); __PYX_ERR(0, 275, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 1); __PYX_ERR(0, 276, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 2); __PYX_ERR(0, 275, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, 2); __PYX_ERR(0, 276, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -7253,7 +7253,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIS") < 0)) __PYX_ERR(0, 275, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIS") < 0)) __PYX_ERR(0, 276, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -7277,15 +7277,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -7296,7 +7296,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_5stepSIS(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 275, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 276, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7338,7 +7338,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIS", 0);
 
-  /* "Epigrass/epimodels.py":290
+  /* "Epigrass/epimodels.py":291
  *     :return:
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -7348,30 +7348,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":291
+    /* "Epigrass/epimodels.py":292
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":290
+    /* "Epigrass/epimodels.py":291
  *     :return:
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -7381,7 +7381,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":293
+  /* "Epigrass/epimodels.py":294
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -7395,7 +7395,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 293, __pyx_L1_error)
+        __PYX_ERR(0, 294, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -7411,16 +7411,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 293, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 294, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 293, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 294, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 293, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 294, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -7429,7 +7429,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 294, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -7437,14 +7437,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 293, __pyx_L1_error)
+      __PYX_ERR(0, 294, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 293, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 294, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 293, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 294, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 293, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 294, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -7452,7 +7452,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":294
+  /* "Epigrass/epimodels.py":295
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -7461,59 +7461,59 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":296
+  /* "Epigrass/epimodels.py":297
  *     N = totpop
  * 
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 297, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 297, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":297
+  /* "Epigrass/epimodels.py":298
  * 
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     b = bp['b']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 298, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":298
+  /* "Epigrass/epimodels.py":299
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     b = bp['b']
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 298, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 299, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 298, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 299, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":299
+  /* "Epigrass/epimodels.py":300
  *     alpha = bp['alpha'];
  *     r = bp['r'];
  *     b = bp['b']             # <<<<<<<<<<<<<<
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 300, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 300, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":301
+  /* "Epigrass/epimodels.py":302
  *     b = bp['b']
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -7524,11 +7524,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 301, __pyx_L1_error)
+    __PYX_ERR(0, 302, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":303
+  /* "Epigrass/epimodels.py":304
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -7537,7 +7537,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":304
+  /* "Epigrass/epimodels.py":305
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + r * I             # <<<<<<<<<<<<<<
@@ -7546,7 +7546,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_r * __pyx_v_I));
 
-  /* "Epigrass/epimodels.py":307
+  /* "Epigrass/epimodels.py":308
  * 
  *     # Migrating infecctious
  *     migInf = (Ipos)             # <<<<<<<<<<<<<<
@@ -7555,7 +7555,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":308
+  /* "Epigrass/epimodels.py":309
  *     # Migrating infecctious
  *     migInf = (Ipos)
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -7563,11 +7563,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -7578,11 +7578,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   PyList_SET_ITEM(__pyx_t_2, 2, __pyx_t_6);
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2);
@@ -7597,7 +7597,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":275
+  /* "Epigrass/epimodels.py":276
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -7619,7 +7619,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_4stepSIS(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":315
+/* "Epigrass/epimodels.py":316
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -7692,13 +7692,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 1); __PYX_ERR(0, 315, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 1); __PYX_ERR(0, 316, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 2); __PYX_ERR(0, 315, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, 2); __PYX_ERR(0, 316, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -7744,7 +7744,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIS_s") < 0)) __PYX_ERR(0, 315, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIS_s") < 0)) __PYX_ERR(0, 316, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -7770,15 +7770,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 315, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 316, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -7790,7 +7790,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_7stepSIS_s(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 315, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 316, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7837,7 +7837,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIS_s", 0);
 
-  /* "Epigrass/epimodels.py":321
+  /* "Epigrass/epimodels.py":322
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -7847,30 +7847,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":322
+    /* "Epigrass/epimodels.py":323
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":321
+    /* "Epigrass/epimodels.py":322
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -7880,7 +7880,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":324
+  /* "Epigrass/epimodels.py":325
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -7894,7 +7894,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 324, __pyx_L1_error)
+        __PYX_ERR(0, 325, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -7910,16 +7910,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 324, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 324, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 324, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 324, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -7928,7 +7928,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 325, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -7936,14 +7936,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 324, __pyx_L1_error)
+      __PYX_ERR(0, 325, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 324, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 325, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 324, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 325, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 324, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 325, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -7951,7 +7951,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":326
+  /* "Epigrass/epimodels.py":327
  *         E, I, S = inits
  * 
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -7960,59 +7960,59 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":327
+  /* "Epigrass/epimodels.py":328
  * 
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 328, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":328
+  /* "Epigrass/epimodels.py":329
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 329, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":330
+  /* "Epigrass/epimodels.py":331
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 330, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 330, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":332
+  /* "Epigrass/epimodels.py":333
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":335
+  /* "Epigrass/epimodels.py":336
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -8023,30 +8023,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 335, __pyx_L1_error)
+    __PYX_ERR(0, 336, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":337
+  /* "Epigrass/epimodels.py":338
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 338, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":338
+    /* "Epigrass/epimodels.py":339
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 339, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -8061,14 +8061,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 338, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 339, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 338, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 339, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":337
+    /* "Epigrass/epimodels.py":338
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -8078,17 +8078,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":339
+  /* "Epigrass/epimodels.py":340
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 339, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 340, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":340
+    /* "Epigrass/epimodels.py":341
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -8098,22 +8098,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 340, __pyx_L1_error)
+      __PYX_ERR(0, 341, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":341
+    /* "Epigrass/epimodels.py":342
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 341, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 341, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 341, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -8130,7 +8130,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8140,7 +8140,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8148,7 +8148,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -8159,16 +8159,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 341, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":339
+    /* "Epigrass/epimodels.py":340
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -8178,7 +8178,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":344
+  /* "Epigrass/epimodels.py":345
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -8187,7 +8187,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":345
+  /* "Epigrass/epimodels.py":346
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + r * I             # <<<<<<<<<<<<<<
@@ -8196,7 +8196,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_r * __pyx_v_I));
 
-  /* "Epigrass/epimodels.py":348
+  /* "Epigrass/epimodels.py":349
  * 
  *     # Migrating infecctious
  *     migInf = (Ipos)             # <<<<<<<<<<<<<<
@@ -8205,7 +8205,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":350
+  /* "Epigrass/epimodels.py":351
  *     migInf = (Ipos)
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -8213,11 +8213,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -8228,11 +8228,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_6);
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_12);
@@ -8247,7 +8247,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":315
+  /* "Epigrass/epimodels.py":316
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -8271,7 +8271,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_6stepSIS_s(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":357
+/* "Epigrass/epimodels.py":358
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -8340,13 +8340,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 1); __PYX_ERR(0, 357, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 1); __PYX_ERR(0, 358, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 2); __PYX_ERR(0, 357, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, 2); __PYX_ERR(0, 358, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -8386,7 +8386,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIR") < 0)) __PYX_ERR(0, 357, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIR") < 0)) __PYX_ERR(0, 358, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -8410,15 +8410,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 357, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -8429,7 +8429,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_9stepSIR(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 357, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 358, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -8472,7 +8472,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIR", 0);
 
-  /* "Epigrass/epimodels.py":364
+  /* "Epigrass/epimodels.py":365
  *     """
  *     # print(inits)
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -8482,33 +8482,33 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":365
+    /* "Epigrass/epimodels.py":366
  *     # print(inits)
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi.get(b'e', 0), bi[b'i'], bi[b's'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_bi, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_bi, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_bi, __pyx_n_b_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_bi, __pyx_n_b_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_bi, __pyx_n_b_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_bi, __pyx_n_b_s); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_E = __pyx_t_4;
     __pyx_v_I = __pyx_t_5;
     __pyx_v_S = __pyx_t_6;
 
-    /* "Epigrass/epimodels.py":364
+    /* "Epigrass/epimodels.py":365
  *     """
  *     # print(inits)
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -8518,7 +8518,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":367
+  /* "Epigrass/epimodels.py":368
  *         E, I, S = (bi.get(b'e', 0), bi[b'i'], bi[b's'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -8532,7 +8532,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 367, __pyx_L1_error)
+        __PYX_ERR(0, 368, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -8548,16 +8548,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_3 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_3)) goto __pyx_L4_unpacking_failed;
@@ -8566,7 +8566,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
       __Pyx_GOTREF(__pyx_t_2);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 367, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 368, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -8574,14 +8574,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 367, __pyx_L1_error)
+      __PYX_ERR(0, 368, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 367, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 367, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 367, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 368, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_6;
     __pyx_v_I = __pyx_t_5;
@@ -8589,7 +8589,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":368
+  /* "Epigrass/epimodels.py":369
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -8598,59 +8598,59 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":369
+  /* "Epigrass/epimodels.py":370
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp[b'beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp[b'alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 369, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 370, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 369, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 370, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":370
+  /* "Epigrass/epimodels.py":371
  *     N = totpop
  *     beta = bp[b'beta'];
  *     alpha = bp[b'alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp[b'r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 370, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 371, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 370, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 371, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":372
+  /* "Epigrass/epimodels.py":373
  *     alpha = bp[b'alpha'];
  *     # e = bp['e'];
  *     r = bp[b'r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp[b'b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 372, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 372, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":374
+  /* "Epigrass/epimodels.py":375
  *     r = bp[b'r'];
  *     # delta = bp['delta'];
  *     b = bp[b'b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_v_bp, __pyx_n_b_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 374, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":377
+  /* "Epigrass/epimodels.py":378
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -8661,11 +8661,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   __pyx_t_5 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_5 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 377, __pyx_L1_error)
+    __PYX_ERR(0, 378, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_4 / __pyx_t_5), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":380
+  /* "Epigrass/epimodels.py":381
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -8674,7 +8674,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":381
+  /* "Epigrass/epimodels.py":382
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -8683,7 +8683,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":382
+  /* "Epigrass/epimodels.py":383
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos)             # <<<<<<<<<<<<<<
@@ -8692,7 +8692,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  */
   __pyx_v_Rpos = (__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos));
 
-  /* "Epigrass/epimodels.py":385
+  /* "Epigrass/epimodels.py":386
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -8701,7 +8701,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":387
+  /* "Epigrass/epimodels.py":388
  *     migInf = Ipos
  * 
  *     return (0, Ipos, Spos), Lpos, migInf             # <<<<<<<<<<<<<<
@@ -8709,11 +8709,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -8724,11 +8724,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_t_2);
   __pyx_t_7 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 387, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3);
@@ -8743,7 +8743,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":357
+  /* "Epigrass/epimodels.py":358
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -8765,7 +8765,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_8stepSIR(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":394
+/* "Epigrass/epimodels.py":395
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -8838,13 +8838,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 1); __PYX_ERR(0, 394, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 1); __PYX_ERR(0, 395, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 2); __PYX_ERR(0, 394, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, 2); __PYX_ERR(0, 395, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -8890,7 +8890,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIR_s") < 0)) __PYX_ERR(0, 394, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIR_s") < 0)) __PYX_ERR(0, 395, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -8916,15 +8916,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 395, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 395, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 395, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 395, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -8936,7 +8936,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_11stepSIR_s(PyObject *__pyx_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 394, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 395, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -8984,7 +8984,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIR_s", 0);
 
-  /* "Epigrass/epimodels.py":400
+  /* "Epigrass/epimodels.py":401
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -8994,30 +8994,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":401
+    /* "Epigrass/epimodels.py":402
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":400
+    /* "Epigrass/epimodels.py":401
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -9027,7 +9027,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":403
+  /* "Epigrass/epimodels.py":404
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -9041,7 +9041,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 403, __pyx_L1_error)
+        __PYX_ERR(0, 404, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -9057,16 +9057,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 404, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 403, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 404, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 403, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 404, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -9075,7 +9075,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 403, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 404, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -9083,14 +9083,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 403, __pyx_L1_error)
+      __PYX_ERR(0, 404, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -9098,7 +9098,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":404
+  /* "Epigrass/epimodels.py":405
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -9107,59 +9107,59 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":405
+  /* "Epigrass/epimodels.py":406
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 405, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":406
+  /* "Epigrass/epimodels.py":407
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":408
+  /* "Epigrass/epimodels.py":409
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 409, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":410
+  /* "Epigrass/epimodels.py":411
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":413
+  /* "Epigrass/epimodels.py":414
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -9170,30 +9170,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 413, __pyx_L1_error)
+    __PYX_ERR(0, 414, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":415
+  /* "Epigrass/epimodels.py":416
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 416, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":416
+    /* "Epigrass/epimodels.py":417
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 416, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 417, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 416, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 417, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -9208,14 +9208,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 416, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 417, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":415
+    /* "Epigrass/epimodels.py":416
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -9225,17 +9225,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":417
+  /* "Epigrass/epimodels.py":418
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 417, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 418, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":418
+    /* "Epigrass/epimodels.py":419
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -9245,22 +9245,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 418, __pyx_L1_error)
+      __PYX_ERR(0, 419, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":419
+    /* "Epigrass/epimodels.py":420
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 419, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 420, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 419, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 419, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 420, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -9277,7 +9277,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 420, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -9287,7 +9287,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 420, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -9295,7 +9295,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 420, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -9306,16 +9306,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 419, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 420, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 419, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 420, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":417
+    /* "Epigrass/epimodels.py":418
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -9325,7 +9325,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":422
+  /* "Epigrass/epimodels.py":423
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -9334,7 +9334,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":423
+  /* "Epigrass/epimodels.py":424
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -9343,7 +9343,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":424
+  /* "Epigrass/epimodels.py":425
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos)             # <<<<<<<<<<<<<<
@@ -9352,7 +9352,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  */
   __pyx_v_Rpos = (__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos));
 
-  /* "Epigrass/epimodels.py":427
+  /* "Epigrass/epimodels.py":428
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -9361,7 +9361,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":429
+  /* "Epigrass/epimodels.py":430
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -9369,11 +9369,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -9384,11 +9384,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_6);
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 430, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_12);
@@ -9403,7 +9403,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":394
+  /* "Epigrass/epimodels.py":395
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -9427,7 +9427,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_10stepSIR_s(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":436
+/* "Epigrass/epimodels.py":437
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -9496,13 +9496,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 1); __PYX_ERR(0, 436, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 1); __PYX_ERR(0, 437, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 2); __PYX_ERR(0, 436, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, 2); __PYX_ERR(0, 437, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -9542,7 +9542,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIS") < 0)) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIS") < 0)) __PYX_ERR(0, 437, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -9566,15 +9566,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 437, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 437, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 437, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 436, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 437, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -9585,7 +9585,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_13stepSEIS(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 436, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 437, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9629,7 +9629,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIS", 0);
 
-  /* "Epigrass/epimodels.py":442
+  /* "Epigrass/epimodels.py":443
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -9639,30 +9639,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":443
+    /* "Epigrass/epimodels.py":444
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 443, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 444, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":442
+    /* "Epigrass/epimodels.py":443
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -9672,7 +9672,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":445
+  /* "Epigrass/epimodels.py":446
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -9686,7 +9686,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 445, __pyx_L1_error)
+        __PYX_ERR(0, 446, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -9702,16 +9702,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 445, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 446, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 445, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 446, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 445, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 446, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 445, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 446, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -9720,7 +9720,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 445, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 446, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -9728,14 +9728,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 445, __pyx_L1_error)
+      __PYX_ERR(0, 446, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 445, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 446, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 445, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 446, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 445, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 446, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -9743,7 +9743,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":446
+  /* "Epigrass/epimodels.py":447
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -9752,71 +9752,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":447
+  /* "Epigrass/epimodels.py":448
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 448, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":448
+  /* "Epigrass/epimodels.py":449
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 449, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 448, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 449, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":449
+  /* "Epigrass/epimodels.py":450
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 450, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":450
+  /* "Epigrass/epimodels.py":451
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 450, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 451, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":452
+  /* "Epigrass/epimodels.py":453
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 453, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 453, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":455
+  /* "Epigrass/epimodels.py":456
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -9827,57 +9827,57 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 455, __pyx_L1_error)
+    __PYX_ERR(0, 456, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":458
+  /* "Epigrass/epimodels.py":459
  * 
  *     # Model
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + r * I
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 459, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":459
+  /* "Epigrass/epimodels.py":460
  *     # Model
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos + r * I
  * 
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 459, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 460, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":460
+  /* "Epigrass/epimodels.py":461
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + r * I             # <<<<<<<<<<<<<<
@@ -9886,7 +9886,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_r * __pyx_v_I));
 
-  /* "Epigrass/epimodels.py":463
+  /* "Epigrass/epimodels.py":464
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -9895,7 +9895,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":465
+  /* "Epigrass/epimodels.py":466
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -9903,11 +9903,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -9918,11 +9918,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   PyList_SET_ITEM(__pyx_t_6, 2, __pyx_t_7);
   __pyx_t_2 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6);
@@ -9937,7 +9937,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":436
+  /* "Epigrass/epimodels.py":437
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -9961,7 +9961,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_12stepSEIS(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":472
+/* "Epigrass/epimodels.py":473
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -10034,13 +10034,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 1); __PYX_ERR(0, 472, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 1); __PYX_ERR(0, 473, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 2); __PYX_ERR(0, 472, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, 2); __PYX_ERR(0, 473, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -10086,7 +10086,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIS_s") < 0)) __PYX_ERR(0, 472, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIS_s") < 0)) __PYX_ERR(0, 473, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -10112,15 +10112,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 473, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 473, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 473, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 473, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -10132,7 +10132,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_15stepSEIS_s(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 472, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 473, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10181,7 +10181,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIS_s", 0);
 
-  /* "Epigrass/epimodels.py":479
+  /* "Epigrass/epimodels.py":480
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -10191,30 +10191,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":480
+    /* "Epigrass/epimodels.py":481
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 480, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":479
+    /* "Epigrass/epimodels.py":480
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -10224,7 +10224,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":482
+  /* "Epigrass/epimodels.py":483
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -10238,7 +10238,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 482, __pyx_L1_error)
+        __PYX_ERR(0, 483, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -10254,16 +10254,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 483, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 482, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 483, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -10272,7 +10272,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 483, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -10280,14 +10280,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 482, __pyx_L1_error)
+      __PYX_ERR(0, 483, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 483, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -10295,7 +10295,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":483
+  /* "Epigrass/epimodels.py":484
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -10304,71 +10304,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":484
+  /* "Epigrass/epimodels.py":485
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 485, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":485
+  /* "Epigrass/epimodels.py":486
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 485, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":486
+  /* "Epigrass/epimodels.py":487
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 487, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":487
+  /* "Epigrass/epimodels.py":488
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 487, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 487, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":489
+  /* "Epigrass/epimodels.py":490
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 489, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 489, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":492
+  /* "Epigrass/epimodels.py":493
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -10379,30 +10379,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 492, __pyx_L1_error)
+    __PYX_ERR(0, 493, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":494
+  /* "Epigrass/epimodels.py":495
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 494, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 495, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":495
+    /* "Epigrass/epimodels.py":496
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 496, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 496, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -10417,14 +10417,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 495, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 496, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 495, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 496, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":494
+    /* "Epigrass/epimodels.py":495
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -10434,17 +10434,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":496
+  /* "Epigrass/epimodels.py":497
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 496, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 497, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":497
+    /* "Epigrass/epimodels.py":498
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations             # <<<<<<<<<<<<<<
@@ -10454,22 +10454,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 497, __pyx_L1_error)
+      __PYX_ERR(0, 498, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":498
+    /* "Epigrass/epimodels.py":499
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     Epos = (1 - e) * E + Lpos
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 498, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 498, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 498, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -10486,7 +10486,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 498, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 499, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -10496,7 +10496,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 498, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 499, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -10504,7 +10504,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 498, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 499, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -10515,16 +10515,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 498, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 499, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 498, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":496
+    /* "Epigrass/epimodels.py":497
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -10534,53 +10534,53 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":500
+  /* "Epigrass/epimodels.py":501
  *         Lpos = negative_binomial(I, prob)
  * 
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + r * I
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 500, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":501
+  /* "Epigrass/epimodels.py":502
  * 
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos + r * I
  * 
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 501, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":502
+  /* "Epigrass/epimodels.py":503
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + r * I             # <<<<<<<<<<<<<<
@@ -10589,7 +10589,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_r * __pyx_v_I));
 
-  /* "Epigrass/epimodels.py":505
+  /* "Epigrass/epimodels.py":506
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -10598,7 +10598,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":507
+  /* "Epigrass/epimodels.py":508
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -10606,11 +10606,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -10621,11 +10621,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   PyList_SET_ITEM(__pyx_t_6, 2, __pyx_t_7);
   __pyx_t_12 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6);
@@ -10640,7 +10640,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":472
+  /* "Epigrass/epimodels.py":473
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -10666,7 +10666,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_14stepSEIS_s(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":514
+/* "Epigrass/epimodels.py":515
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -10735,13 +10735,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 1); __PYX_ERR(0, 514, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 1); __PYX_ERR(0, 515, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 2); __PYX_ERR(0, 514, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, 2); __PYX_ERR(0, 515, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -10781,7 +10781,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIR") < 0)) __PYX_ERR(0, 514, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIR") < 0)) __PYX_ERR(0, 515, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -10805,15 +10805,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 514, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 514, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 515, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 515, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 514, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 515, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 514, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 515, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -10824,7 +10824,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_17stepSEIR(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 514, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 515, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10869,7 +10869,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIR", 0);
 
-  /* "Epigrass/epimodels.py":521
+  /* "Epigrass/epimodels.py":522
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -10879,30 +10879,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":522
+    /* "Epigrass/epimodels.py":523
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 522, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 523, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":521
+    /* "Epigrass/epimodels.py":522
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -10912,7 +10912,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":524
+  /* "Epigrass/epimodels.py":525
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -10926,7 +10926,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 524, __pyx_L1_error)
+        __PYX_ERR(0, 525, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -10942,16 +10942,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 524, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 524, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 524, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 524, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -10960,7 +10960,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 524, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 525, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -10968,14 +10968,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 524, __pyx_L1_error)
+      __PYX_ERR(0, 525, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 524, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 525, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -10983,7 +10983,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":525
+  /* "Epigrass/epimodels.py":526
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -10992,71 +10992,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":526
+  /* "Epigrass/epimodels.py":527
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 526, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 526, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":527
+  /* "Epigrass/epimodels.py":528
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 527, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 527, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 528, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":528
+  /* "Epigrass/epimodels.py":529
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 528, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 529, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":529
+  /* "Epigrass/epimodels.py":530
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 529, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 530, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 529, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 530, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":531
+  /* "Epigrass/epimodels.py":532
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 531, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 531, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":534
+  /* "Epigrass/epimodels.py":535
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -11067,57 +11067,57 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 534, __pyx_L1_error)
+    __PYX_ERR(0, 535, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":537
+  /* "Epigrass/epimodels.py":538
  * 
  *     # Model
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 537, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 538, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":538
+  /* "Epigrass/epimodels.py":539
  *     # Model
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Epos + Ipos)
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 539, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":539
+  /* "Epigrass/epimodels.py":540
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -11126,35 +11126,35 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":540
+  /* "Epigrass/epimodels.py":541
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Epos + Ipos)             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_2, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_2, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 541, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":543
+  /* "Epigrass/epimodels.py":544
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -11163,7 +11163,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":545
+  /* "Epigrass/epimodels.py":546
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -11171,11 +11171,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -11186,11 +11186,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   PyList_SET_ITEM(__pyx_t_2, 2, __pyx_t_8);
   __pyx_t_7 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 545, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2);
@@ -11205,7 +11205,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":514
+  /* "Epigrass/epimodels.py":515
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -11229,7 +11229,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_16stepSEIR(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":552
+/* "Epigrass/epimodels.py":553
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -11302,13 +11302,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 1); __PYX_ERR(0, 552, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 1); __PYX_ERR(0, 553, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 2); __PYX_ERR(0, 552, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, 2); __PYX_ERR(0, 553, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -11354,7 +11354,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIR_s") < 0)) __PYX_ERR(0, 552, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIR_s") < 0)) __PYX_ERR(0, 553, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -11380,15 +11380,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 552, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 552, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 553, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 553, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 552, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 553, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 552, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 553, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -11400,7 +11400,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_19stepSEIR_s(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 552, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 553, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -11450,7 +11450,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIR_s", 0);
 
-  /* "Epigrass/epimodels.py":559
+  /* "Epigrass/epimodels.py":560
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -11460,30 +11460,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":560
+    /* "Epigrass/epimodels.py":561
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 560, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 561, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":559
+    /* "Epigrass/epimodels.py":560
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -11493,7 +11493,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":562
+  /* "Epigrass/epimodels.py":563
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -11507,7 +11507,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 562, __pyx_L1_error)
+        __PYX_ERR(0, 563, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -11523,16 +11523,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 562, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 563, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 562, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 563, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 562, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 563, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -11541,7 +11541,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 562, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 563, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -11549,14 +11549,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 562, __pyx_L1_error)
+      __PYX_ERR(0, 563, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 562, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 563, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 562, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 563, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 562, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 563, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -11564,7 +11564,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":563
+  /* "Epigrass/epimodels.py":564
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -11573,71 +11573,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":564
+  /* "Epigrass/epimodels.py":565
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 565, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 565, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":565
+  /* "Epigrass/epimodels.py":566
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 566, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 565, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 566, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":566
+  /* "Epigrass/epimodels.py":567
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 566, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 567, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":567
+  /* "Epigrass/epimodels.py":568
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 568, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 568, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":569
+  /* "Epigrass/epimodels.py":570
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 569, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 570, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 569, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 570, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":572
+  /* "Epigrass/epimodels.py":573
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -11648,30 +11648,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 572, __pyx_L1_error)
+    __PYX_ERR(0, 573, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":574
+  /* "Epigrass/epimodels.py":575
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)  # poisson(Lpos_esp)
  *     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 575, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":575
+    /* "Epigrass/epimodels.py":576
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)  # poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
  *     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 575, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 576, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 575, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 576, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -11686,14 +11686,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 575, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 576, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 575, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 576, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":574
+    /* "Epigrass/epimodels.py":575
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -11703,17 +11703,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":578
+  /* "Epigrass/epimodels.py":579
  *     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
  *     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 578, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 579, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":579
+    /* "Epigrass/epimodels.py":580
  *     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -11723,22 +11723,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 579, __pyx_L1_error)
+      __PYX_ERR(0, 580, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":580
+    /* "Epigrass/epimodels.py":581
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     Epos = (1 - e) * E + Lpos
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 580, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 580, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 580, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -11755,7 +11755,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 580, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 581, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11765,7 +11765,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 580, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 581, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11773,7 +11773,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 580, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 581, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -11784,16 +11784,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 580, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 581, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 580, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 581, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":578
+    /* "Epigrass/epimodels.py":579
  *     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
  *     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -11803,53 +11803,53 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":582
+  /* "Epigrass/epimodels.py":583
  *         Lpos = negative_binomial(I, prob)
  * 
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 583, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":583
+  /* "Epigrass/epimodels.py":584
  * 
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Epos + Ipos)
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 583, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 584, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":584
+  /* "Epigrass/epimodels.py":585
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -11858,35 +11858,35 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":585
+  /* "Epigrass/epimodels.py":586
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Epos + Ipos)             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_12 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_12, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_12, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 585, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 586, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":588
+  /* "Epigrass/epimodels.py":589
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -11895,7 +11895,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":590
+  /* "Epigrass/epimodels.py":591
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -11903,11 +11903,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -11918,11 +11918,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_8);
   __pyx_t_7 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_12);
@@ -11937,7 +11937,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":552
+  /* "Epigrass/epimodels.py":553
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -11963,7 +11963,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_18stepSEIR_s(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":597
+/* "Epigrass/epimodels.py":598
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -12032,13 +12032,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 597, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 598, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 597, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 598, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -12078,7 +12078,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpRpS") < 0)) __PYX_ERR(0, 597, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpRpS") < 0)) __PYX_ERR(0, 598, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -12102,15 +12102,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 597, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 597, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 598, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 598, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 597, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 598, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 597, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 598, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -12121,7 +12121,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_21stepSIpRpS(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 597, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 598, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpRpS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -12165,7 +12165,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIpRpS", 0);
 
-  /* "Epigrass/epimodels.py":603
+  /* "Epigrass/epimodels.py":604
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -12175,30 +12175,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":604
+    /* "Epigrass/epimodels.py":605
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 604, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 605, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":603
+    /* "Epigrass/epimodels.py":604
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -12208,7 +12208,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":606
+  /* "Epigrass/epimodels.py":607
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -12222,7 +12222,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 606, __pyx_L1_error)
+        __PYX_ERR(0, 607, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -12238,16 +12238,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 606, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 607, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 606, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 607, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 606, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 607, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 606, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 607, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -12256,7 +12256,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 606, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 607, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -12264,14 +12264,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 606, __pyx_L1_error)
+      __PYX_ERR(0, 607, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 606, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 607, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 606, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 607, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 606, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 607, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -12279,7 +12279,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":607
+  /* "Epigrass/epimodels.py":608
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -12288,71 +12288,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":608
+  /* "Epigrass/epimodels.py":609
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 608, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 609, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 608, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 609, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":609
+  /* "Epigrass/epimodels.py":610
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 609, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 609, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 610, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":611
+  /* "Epigrass/epimodels.py":612
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 611, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 612, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 611, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 612, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":612
+  /* "Epigrass/epimodels.py":613
  *     # e = bp['e'];
  *     r = bp['r'];
  *     delta = bp['delta'];             # <<<<<<<<<<<<<<
  *     b = bp['b'];
  *     # w = bp['w'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 612, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 613, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_delta = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":613
+  /* "Epigrass/epimodels.py":614
  *     r = bp['r'];
  *     delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 613, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 614, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 613, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 614, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":616
+  /* "Epigrass/epimodels.py":617
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -12363,11 +12363,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 616, __pyx_L1_error)
+    __PYX_ERR(0, 617, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":619
+  /* "Epigrass/epimodels.py":620
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -12376,66 +12376,66 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":620
+  /* "Epigrass/epimodels.py":621
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + (1 - delta) * r * I             # <<<<<<<<<<<<<<
  *     Rpos = N - (Spos + Ipos) + delta * r * I
  * 
  */
-  __pyx_t_7 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_8, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_8, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 620, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Spos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":621
+  /* "Epigrass/epimodels.py":622
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Ipos) + delta * r * I             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 621, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 622, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":624
+  /* "Epigrass/epimodels.py":625
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -12444,7 +12444,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":626
+  /* "Epigrass/epimodels.py":627
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -12452,11 +12452,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -12467,11 +12467,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   PyList_SET_ITEM(__pyx_t_2, 2, __pyx_t_8);
   __pyx_t_6 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 626, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 627, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_2);
@@ -12486,7 +12486,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":597
+  /* "Epigrass/epimodels.py":598
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -12509,7 +12509,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_20stepSIpRpS(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":633
+/* "Epigrass/epimodels.py":634
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -12582,13 +12582,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 633, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 634, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 633, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 634, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -12634,7 +12634,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpRpS_s") < 0)) __PYX_ERR(0, 633, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpRpS_s") < 0)) __PYX_ERR(0, 634, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -12660,15 +12660,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 633, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 633, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 634, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 634, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 633, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 634, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 633, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 634, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -12680,7 +12680,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_23stepSIpRpS_s(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 633, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 634, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpRpS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -12729,7 +12729,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIpRpS_s", 0);
 
-  /* "Epigrass/epimodels.py":639
+  /* "Epigrass/epimodels.py":640
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -12739,30 +12739,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":640
+    /* "Epigrass/epimodels.py":641
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 640, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 641, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":639
+    /* "Epigrass/epimodels.py":640
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -12772,7 +12772,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":642
+  /* "Epigrass/epimodels.py":643
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -12786,7 +12786,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 642, __pyx_L1_error)
+        __PYX_ERR(0, 643, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -12802,16 +12802,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 642, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 643, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 642, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 643, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 642, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 643, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 642, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 643, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -12820,7 +12820,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 642, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 643, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -12828,14 +12828,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 642, __pyx_L1_error)
+      __PYX_ERR(0, 643, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 642, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 643, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 642, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 643, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 642, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 643, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -12843,7 +12843,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":643
+  /* "Epigrass/epimodels.py":644
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -12852,71 +12852,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":644
+  /* "Epigrass/epimodels.py":645
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 644, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 645, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 644, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 645, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":645
+  /* "Epigrass/epimodels.py":646
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 645, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 646, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 645, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 646, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":647
+  /* "Epigrass/epimodels.py":648
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 647, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 648, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 647, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 648, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":648
+  /* "Epigrass/epimodels.py":649
  *     # e = bp['e'];
  *     r = bp['r'];
  *     delta = bp['delta'];             # <<<<<<<<<<<<<<
  *     b = bp['b'];
  *     # w = bp['w'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 648, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 649, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_delta = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":649
+  /* "Epigrass/epimodels.py":650
  *     r = bp['r'];
  *     delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 649, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 650, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 649, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 650, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":652
+  /* "Epigrass/epimodels.py":653
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -12927,30 +12927,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 652, __pyx_L1_error)
+    __PYX_ERR(0, 653, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":654
+  /* "Epigrass/epimodels.py":655
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 654, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 655, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":655
+    /* "Epigrass/epimodels.py":656
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 655, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 656, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 655, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 656, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -12965,14 +12965,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 655, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 656, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 655, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 656, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":654
+    /* "Epigrass/epimodels.py":655
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -12982,17 +12982,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":656
+  /* "Epigrass/epimodels.py":657
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 656, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 657, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":657
+    /* "Epigrass/epimodels.py":658
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -13002,22 +13002,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 657, __pyx_L1_error)
+      __PYX_ERR(0, 658, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":658
+    /* "Epigrass/epimodels.py":659
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 658, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 659, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 658, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 659, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 658, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 659, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -13034,7 +13034,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 658, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 659, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -13044,7 +13044,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 658, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 659, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -13052,7 +13052,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 658, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -13063,16 +13063,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 658, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 658, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 659, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":656
+    /* "Epigrass/epimodels.py":657
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -13082,7 +13082,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":661
+  /* "Epigrass/epimodels.py":662
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -13091,66 +13091,66 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":662
+  /* "Epigrass/epimodels.py":663
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + (1 - delta) * r * I             # <<<<<<<<<<<<<<
  *     Rpos = N - (Spos + Ipos) + delta * r * I
  * 
  */
-  __pyx_t_7 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_8, __pyx_t_12); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_8, __pyx_t_12); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyNumber_Add(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Add(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 662, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 663, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_Spos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":663
+  /* "Epigrass/epimodels.py":664
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Ipos) + delta * r * I             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_12 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_t_12, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_12, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 663, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 664, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":666
+  /* "Epigrass/epimodels.py":667
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -13159,7 +13159,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":668
+  /* "Epigrass/epimodels.py":669
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -13167,11 +13167,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -13182,11 +13182,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_8);
   __pyx_t_6 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 668, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_12);
@@ -13201,7 +13201,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":633
+  /* "Epigrass/epimodels.py":634
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -13226,7 +13226,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_22stepSIpRpS_s(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":675
+/* "Epigrass/epimodels.py":676
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -13295,13 +13295,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 675, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 1); __PYX_ERR(0, 676, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 675, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, 2); __PYX_ERR(0, 676, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -13341,7 +13341,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpRpS") < 0)) __PYX_ERR(0, 675, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpRpS") < 0)) __PYX_ERR(0, 676, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -13365,15 +13365,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 675, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 675, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 675, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 675, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 676, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -13384,7 +13384,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_25stepSEIpRpS(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 675, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 676, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpRpS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -13430,7 +13430,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIpRpS", 0);
 
-  /* "Epigrass/epimodels.py":681
+  /* "Epigrass/epimodels.py":682
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -13440,30 +13440,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":682
+    /* "Epigrass/epimodels.py":683
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 682, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 683, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":681
+    /* "Epigrass/epimodels.py":682
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -13473,7 +13473,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":684
+  /* "Epigrass/epimodels.py":685
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -13487,7 +13487,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 684, __pyx_L1_error)
+        __PYX_ERR(0, 685, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -13503,16 +13503,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 684, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 685, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 684, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 685, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 684, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 685, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 684, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 685, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -13521,7 +13521,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 684, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 685, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -13529,14 +13529,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 684, __pyx_L1_error)
+      __PYX_ERR(0, 685, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 684, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 684, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 684, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 685, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -13544,7 +13544,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":685
+  /* "Epigrass/epimodels.py":686
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -13553,83 +13553,83 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":686
+  /* "Epigrass/epimodels.py":687
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 686, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 687, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 686, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 687, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":687
+  /* "Epigrass/epimodels.py":688
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 687, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 688, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 687, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 688, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":688
+  /* "Epigrass/epimodels.py":689
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 688, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 689, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":689
+  /* "Epigrass/epimodels.py":690
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 690, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 689, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 690, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":690
+  /* "Epigrass/epimodels.py":691
  *     e = bp['e'];
  *     r = bp['r'];
  *     delta = bp['delta'];             # <<<<<<<<<<<<<<
  *     b = bp['b'];
  *     # w = bp['w'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 690, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 691, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_delta = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":691
+  /* "Epigrass/epimodels.py":692
  *     r = bp['r'];
  *     delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 691, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 692, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 691, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 692, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":695
+  /* "Epigrass/epimodels.py":696
  *     # p = bp['p']
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -13640,131 +13640,131 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 695, __pyx_L1_error)
+    __PYX_ERR(0, 696, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":697
+  /* "Epigrass/epimodels.py":698
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 698, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":698
+  /* "Epigrass/epimodels.py":699
  * 
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 698, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 699, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 698, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 699, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 698, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 699, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 698, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 699, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 698, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 699, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":699
+  /* "Epigrass/epimodels.py":700
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I             # <<<<<<<<<<<<<<
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
  * 
  */
-  __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Multiply(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Multiply(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 699, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 700, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Spos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":700
+  /* "Epigrass/epimodels.py":701
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 700, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 701, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":703
+  /* "Epigrass/epimodels.py":704
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -13773,7 +13773,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":705
+  /* "Epigrass/epimodels.py":706
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -13781,11 +13781,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -13796,11 +13796,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_2);
   __pyx_t_8 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
@@ -13815,7 +13815,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":675
+  /* "Epigrass/epimodels.py":676
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -13840,7 +13840,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_24stepSEIpRpS(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":712
+/* "Epigrass/epimodels.py":713
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -13913,13 +13913,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 712, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 1); __PYX_ERR(0, 713, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 712, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, 2); __PYX_ERR(0, 713, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -13965,7 +13965,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpRpS_s") < 0)) __PYX_ERR(0, 712, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpRpS_s") < 0)) __PYX_ERR(0, 713, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -13991,15 +13991,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 712, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 712, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 713, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 713, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 712, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 713, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 712, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 713, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -14011,7 +14011,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_27stepSEIpRpS_s(PyObject *__pyx_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 712, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpRpS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 713, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpRpS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -14062,7 +14062,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIpRpS_s", 0);
 
-  /* "Epigrass/epimodels.py":718
+  /* "Epigrass/epimodels.py":719
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -14072,30 +14072,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":719
+    /* "Epigrass/epimodels.py":720
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 719, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 720, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":718
+    /* "Epigrass/epimodels.py":719
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -14105,7 +14105,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":721
+  /* "Epigrass/epimodels.py":722
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -14119,7 +14119,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 721, __pyx_L1_error)
+        __PYX_ERR(0, 722, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -14135,16 +14135,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 721, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 722, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 721, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 722, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 721, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 722, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 721, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 722, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -14153,7 +14153,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 721, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 722, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -14161,14 +14161,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 721, __pyx_L1_error)
+      __PYX_ERR(0, 722, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 721, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 722, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 721, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 722, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 721, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 722, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -14176,7 +14176,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":722
+  /* "Epigrass/epimodels.py":723
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -14185,83 +14185,83 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":723
+  /* "Epigrass/epimodels.py":724
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 723, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 724, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 723, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 724, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":724
+  /* "Epigrass/epimodels.py":725
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 724, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 725, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 724, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 725, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":725
+  /* "Epigrass/epimodels.py":726
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 725, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 726, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":726
+  /* "Epigrass/epimodels.py":727
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 726, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 727, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 726, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 727, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":727
+  /* "Epigrass/epimodels.py":728
  *     e = bp['e'];
  *     r = bp['r'];
  *     delta = bp['delta'];             # <<<<<<<<<<<<<<
  *     b = bp['b'];
  *     # w = bp['w'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 727, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_delta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 728, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_delta = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":728
+  /* "Epigrass/epimodels.py":729
  *     r = bp['r'];
  *     delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 728, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 729, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 728, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 729, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":731
+  /* "Epigrass/epimodels.py":732
  *     # w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -14272,30 +14272,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 731, __pyx_L1_error)
+    __PYX_ERR(0, 732, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":733
+  /* "Epigrass/epimodels.py":734
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 733, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 734, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":734
+    /* "Epigrass/epimodels.py":735
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 734, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 735, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 734, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 735, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -14310,14 +14310,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 734, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 735, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 734, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 735, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":733
+    /* "Epigrass/epimodels.py":734
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -14327,17 +14327,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":735
+  /* "Epigrass/epimodels.py":736
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 735, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 736, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":736
+    /* "Epigrass/epimodels.py":737
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -14347,22 +14347,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 736, __pyx_L1_error)
+      __PYX_ERR(0, 737, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":737
+    /* "Epigrass/epimodels.py":738
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     Epos = (1 - e) * E + Lpos
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 737, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 738, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 737, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 738, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 737, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 738, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -14379,7 +14379,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 737, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 738, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14389,7 +14389,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 737, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 738, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -14397,7 +14397,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 737, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 738, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -14408,16 +14408,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 737, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 738, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 737, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 738, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":735
+    /* "Epigrass/epimodels.py":736
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -14427,127 +14427,127 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":739
+  /* "Epigrass/epimodels.py":740
  *         Lpos = negative_binomial(I, prob)
  * 
  *     Epos = (1 - e) * E + Lpos             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 739, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 740, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 739, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 740, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 739, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 740, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 739, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 740, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 739, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_12, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 740, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":740
+  /* "Epigrass/epimodels.py":741
  * 
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 740, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 741, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 740, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 741, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 740, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 741, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 740, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 741, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 740, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 741, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_Ipos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":741
+  /* "Epigrass/epimodels.py":742
  *     Epos = (1 - e) * E + Lpos
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I             # <<<<<<<<<<<<<<
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I
  * 
  */
-  __pyx_t_12 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_delta, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Multiply(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Multiply(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_t_12, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_12, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 741, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 742, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Spos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":742
+  /* "Epigrass/epimodels.py":743
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos + (1 - delta) * r * I
  *     Rpos = N - (Spos + Epos + Ipos) + delta * r * I             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_long(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_12 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Add(__pyx_t_7, __pyx_v_Epos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyNumber_Add(__pyx_t_12, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_12, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_delta, __pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_6, __pyx_t_8); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_12); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_12); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 742, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 743, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_Rpos = __pyx_t_4;
 
-  /* "Epigrass/epimodels.py":745
+  /* "Epigrass/epimodels.py":746
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -14556,7 +14556,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":747
+  /* "Epigrass/epimodels.py":748
  *     migInf = Ipos
  * 
  *     return [Epos, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -14564,11 +14564,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_v_Epos);
@@ -14579,11 +14579,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_12);
   __pyx_t_8 = 0;
   __pyx_t_12 = 0;
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 747, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 748, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
@@ -14598,7 +14598,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":712
+  /* "Epigrass/epimodels.py":713
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -14625,7 +14625,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_26stepSEIpRpS_s(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":754
+/* "Epigrass/epimodels.py":755
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -14694,13 +14694,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 1); __PYX_ERR(0, 754, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 1); __PYX_ERR(0, 755, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 2); __PYX_ERR(0, 754, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, 2); __PYX_ERR(0, 755, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -14740,7 +14740,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpR") < 0)) __PYX_ERR(0, 754, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpR") < 0)) __PYX_ERR(0, 755, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -14764,15 +14764,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 754, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 754, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 755, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 755, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 754, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 755, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 754, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 755, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -14783,7 +14783,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_29stepSIpR(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 754, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 755, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -14829,7 +14829,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIpR", 0);
 
-  /* "Epigrass/epimodels.py":760
+  /* "Epigrass/epimodels.py":761
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -14839,30 +14839,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":761
+    /* "Epigrass/epimodels.py":762
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 761, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 762, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":760
+    /* "Epigrass/epimodels.py":761
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -14872,7 +14872,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":763
+  /* "Epigrass/epimodels.py":764
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -14886,7 +14886,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 763, __pyx_L1_error)
+        __PYX_ERR(0, 764, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -14902,16 +14902,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 763, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 764, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 763, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 764, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 763, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 764, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 763, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 764, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -14920,7 +14920,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 763, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 764, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -14928,14 +14928,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 763, __pyx_L1_error)
+      __PYX_ERR(0, 764, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 763, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 764, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 763, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 764, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 763, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 764, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -14943,7 +14943,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":764
+  /* "Epigrass/epimodels.py":765
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -14952,7 +14952,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":765
+  /* "Epigrass/epimodels.py":766
  *         E, I, S = inits
  *     N = totpop
  *     R = N - E - I - S             # <<<<<<<<<<<<<<
@@ -14961,71 +14961,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
  */
   __pyx_v_R = (((__pyx_v_N - __pyx_v_E) - __pyx_v_I) - __pyx_v_S);
 
-  /* "Epigrass/epimodels.py":766
+  /* "Epigrass/epimodels.py":767
  *     N = totpop
  *     R = N - E - I - S
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 766, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 767, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 766, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 767, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":767
+  /* "Epigrass/epimodels.py":768
  *     R = N - E - I - S
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 767, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 768, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 767, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 768, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":769
+  /* "Epigrass/epimodels.py":770
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 769, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 770, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 769, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 770, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":771
+  /* "Epigrass/epimodels.py":772
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 771, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 772, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 771, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 772, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":773
+  /* "Epigrass/epimodels.py":774
  *     b = bp['b'];
  *     # w = bp['w'];
  *     p = bp['p']             # <<<<<<<<<<<<<<
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 773, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 774, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_p = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":774
+  /* "Epigrass/epimodels.py":775
  *     # w = bp['w'];
  *     p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -15036,25 +15036,25 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 774, __pyx_L1_error)
+    __PYX_ERR(0, 775, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":775
+  /* "Epigrass/epimodels.py":776
  *     p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -15062,34 +15062,34 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   __pyx_t_3 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_3 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 775, __pyx_L1_error)
+    __PYX_ERR(0, 776, __pyx_L1_error)
   }
-  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 775, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 776, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Lpos2 = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "Epigrass/epimodels.py":778
+  /* "Epigrass/epimodels.py":779
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos + Lpos2             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2
  */
-  __pyx_t_6 = PyFloat_FromDouble((((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 778, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble((((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 779, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 778, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 779, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 778, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 779, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Ipos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":779
+  /* "Epigrass/epimodels.py":780
  *     # Model
  *     Ipos = (1 - r) * I + Lpos + Lpos2
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -15098,23 +15098,23 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":780
+  /* "Epigrass/epimodels.py":781
  *     Ipos = (1 - r) * I + Lpos + Lpos2
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_7 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 780, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 781, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Subtract(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 780, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Subtract(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 781, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 780, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 781, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Rpos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":783
+  /* "Epigrass/epimodels.py":784
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -15123,7 +15123,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":785
+  /* "Epigrass/epimodels.py":786
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
@@ -15131,11 +15131,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -15146,14 +15146,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   PyList_SET_ITEM(__pyx_t_2, 2, __pyx_t_7);
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 785, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 786, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2);
@@ -15168,7 +15168,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":754
+  /* "Epigrass/epimodels.py":755
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -15192,7 +15192,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_28stepSIpR(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":792
+/* "Epigrass/epimodels.py":793
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -15265,13 +15265,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 792, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 793, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 792, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 793, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -15317,7 +15317,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpR_s") < 0)) __PYX_ERR(0, 792, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIpR_s") < 0)) __PYX_ERR(0, 793, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -15343,15 +15343,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 792, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 792, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 793, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 793, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 792, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 793, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 792, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 793, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -15363,7 +15363,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_31stepSIpR_s(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 792, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 793, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIpR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -15414,7 +15414,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIpR_s", 0);
 
-  /* "Epigrass/epimodels.py":798
+  /* "Epigrass/epimodels.py":799
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -15424,30 +15424,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":799
+    /* "Epigrass/epimodels.py":800
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 799, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 800, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":798
+    /* "Epigrass/epimodels.py":799
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -15457,7 +15457,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":801
+  /* "Epigrass/epimodels.py":802
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -15471,7 +15471,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 801, __pyx_L1_error)
+        __PYX_ERR(0, 802, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -15487,16 +15487,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 801, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 802, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 801, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 802, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 801, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 802, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 801, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 802, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -15505,7 +15505,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 801, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 802, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -15513,14 +15513,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 801, __pyx_L1_error)
+      __PYX_ERR(0, 802, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 802, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 802, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 802, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -15528,7 +15528,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":802
+  /* "Epigrass/epimodels.py":803
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -15537,71 +15537,71 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":803
+  /* "Epigrass/epimodels.py":804
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 803, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 804, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 803, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 804, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":804
+  /* "Epigrass/epimodels.py":805
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 804, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 805, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 804, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 805, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":806
+  /* "Epigrass/epimodels.py":807
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 806, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 807, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 806, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 807, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":808
+  /* "Epigrass/epimodels.py":809
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 808, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 809, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 808, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 809, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":810
+  /* "Epigrass/epimodels.py":811
  *     b = bp['b'];
  *     # w = bp['w'];
  *     p = bp['p']             # <<<<<<<<<<<<<<
  *     R = N - E - I - S
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 810, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 811, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_p = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":811
+  /* "Epigrass/epimodels.py":812
  *     # w = bp['w'];
  *     p = bp['p']
  *     R = N - E - I - S             # <<<<<<<<<<<<<<
@@ -15610,7 +15610,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_R = (((__pyx_v_N - __pyx_v_E) - __pyx_v_I) - __pyx_v_S);
 
-  /* "Epigrass/epimodels.py":813
+  /* "Epigrass/epimodels.py":814
  *     R = N - E - I - S
  * 
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -15621,25 +15621,25 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 813, __pyx_L1_error)
+    __PYX_ERR(0, 814, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":814
+  /* "Epigrass/epimodels.py":815
  * 
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections             # <<<<<<<<<<<<<<
  * 
  *     if dist == 'poisson':
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -15647,37 +15647,37 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   __pyx_t_3 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_3 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 814, __pyx_L1_error)
+    __PYX_ERR(0, 815, __pyx_L1_error)
   }
-  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 814, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 815, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Lpos2_esp = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "Epigrass/epimodels.py":816
+  /* "Epigrass/epimodels.py":817
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 816, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 817, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":817
+    /* "Epigrass/epimodels.py":818
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 817, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 818, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 817, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 818, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -15692,21 +15692,21 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 817, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 818, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 817, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 818, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_Lpos = __pyx_t_3;
 
-    /* "Epigrass/epimodels.py":818
+    /* "Epigrass/epimodels.py":819
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 818, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 819, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_2 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -15720,13 +15720,13 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     }
     __pyx_t_6 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_2, __pyx_v_Lpos2_esp) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_Lpos2_esp);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 818, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 819, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos2 = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "Epigrass/epimodels.py":816
+    /* "Epigrass/epimodels.py":817
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -15736,17 +15736,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":819
+  /* "Epigrass/epimodels.py":820
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 819, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 820, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":820
+    /* "Epigrass/epimodels.py":821
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -15756,23 +15756,23 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     __pyx_t_3 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_3 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 820, __pyx_L1_error)
+      __PYX_ERR(0, 821, __pyx_L1_error)
     }
-    __pyx_t_6 = PyFloat_FromDouble((__pyx_v_I / __pyx_t_3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 820, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble((__pyx_v_I / __pyx_t_3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 821, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_v_prob = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "Epigrass/epimodels.py":821
+    /* "Epigrass/epimodels.py":822
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos2_esp)  # convertin between parameterizations
  *         Lpos2 = negative_binomial(I, prob)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 821, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 822, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 821, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 822, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     __pyx_t_10 = 0;
@@ -15789,7 +15789,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_t_2, __pyx_v_prob};
-      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 821, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 822, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -15798,14 +15798,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_t_2, __pyx_v_prob};
-      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 821, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 822, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 821, __pyx_L1_error)
+      __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 822, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       if (__pyx_t_8) {
         __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -15816,46 +15816,46 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       __Pyx_GIVEREF(__pyx_v_prob);
       PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_10, __pyx_v_prob);
       __pyx_t_2 = 0;
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 821, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 822, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 821, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 822, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_Lpos = __pyx_t_3;
 
-    /* "Epigrass/epimodels.py":822
+    /* "Epigrass/epimodels.py":823
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  *         prob = I / (I + Lpos2_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
  *         Lpos2 = negative_binomial(I, prob)
  * 
  */
-    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 822, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 822, __pyx_L1_error)
+    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2_esp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 822, __pyx_L1_error)
+    __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2_esp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 822, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF_SET(__pyx_v_prob, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "Epigrass/epimodels.py":823
+    /* "Epigrass/epimodels.py":824
  *         Lpos = negative_binomial(I, prob)
  *         prob = I / (I + Lpos2_esp)  # convertin between parameterizations
  *         Lpos2 = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 823, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 824, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 823, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 824, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_2 = NULL;
     __pyx_t_10 = 0;
@@ -15872,7 +15872,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_6, __pyx_v_prob};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 823, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 824, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -15881,14 +15881,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_6, __pyx_v_prob};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 823, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 824, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 823, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 824, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -15899,7 +15899,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
       __Pyx_GIVEREF(__pyx_v_prob);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_10, __pyx_v_prob);
       __pyx_t_6 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 823, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 824, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -15907,7 +15907,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
     __pyx_v_Lpos2 = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "Epigrass/epimodels.py":819
+    /* "Epigrass/epimodels.py":820
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -15917,24 +15917,24 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":826
+  /* "Epigrass/epimodels.py":827
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos + Lpos2             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2
  */
-  __pyx_t_7 = PyFloat_FromDouble((((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 826, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble((((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 827, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 826, __pyx_L1_error) }
-  __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 826, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 827, __pyx_L1_error) }
+  __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 827, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 826, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 827, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_Ipos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":827
+  /* "Epigrass/epimodels.py":828
  *     # Model
  *     Ipos = (1 - r) * I + Lpos + Lpos2
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -15943,24 +15943,24 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":828
+  /* "Epigrass/epimodels.py":829
  *     Ipos = (1 - r) * I + Lpos + Lpos2
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_11 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 828, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 829, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 828, __pyx_L1_error) }
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_11, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 828, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 829, __pyx_L1_error) }
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_11, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 829, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 828, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 829, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Rpos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":831
+  /* "Epigrass/epimodels.py":832
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -15969,7 +15969,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":832
+  /* "Epigrass/epimodels.py":833
  *     # Migrating infecctious
  *     migInf = Ipos
  *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
@@ -15977,11 +15977,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_8 = PyList_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_8 = PyList_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -15992,15 +15992,15 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   PyList_SET_ITEM(__pyx_t_8, 2, __pyx_t_11);
   __pyx_t_7 = 0;
   __pyx_t_11 = 0;
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 832, __pyx_L1_error) }
-  __pyx_t_7 = PyNumber_Add(__pyx_t_11, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 832, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 833, __pyx_L1_error) }
+  __pyx_t_7 = PyNumber_Add(__pyx_t_11, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 832, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 833, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_8);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_8);
@@ -16015,7 +16015,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":792
+  /* "Epigrass/epimodels.py":793
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -16042,7 +16042,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_30stepSIpR_s(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":839
+/* "Epigrass/epimodels.py":840
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -16111,13 +16111,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 1); __PYX_ERR(0, 839, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 1); __PYX_ERR(0, 840, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 2); __PYX_ERR(0, 839, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, 2); __PYX_ERR(0, 840, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -16157,7 +16157,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpR") < 0)) __PYX_ERR(0, 839, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpR") < 0)) __PYX_ERR(0, 840, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -16181,15 +16181,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 839, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 839, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 840, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 840, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 839, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 840, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 839, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 840, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -16200,7 +16200,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_33stepSEIpR(PyObject *__pyx_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 839, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpR", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 840, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpR", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -16248,7 +16248,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIpR", 0);
 
-  /* "Epigrass/epimodels.py":845
+  /* "Epigrass/epimodels.py":846
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -16258,30 +16258,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":846
+    /* "Epigrass/epimodels.py":847
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 846, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 847, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":845
+    /* "Epigrass/epimodels.py":846
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -16291,7 +16291,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":848
+  /* "Epigrass/epimodels.py":849
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -16305,7 +16305,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 848, __pyx_L1_error)
+        __PYX_ERR(0, 849, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -16321,16 +16321,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 848, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 849, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 848, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 849, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 848, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 849, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 848, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 849, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -16339,7 +16339,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 848, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 849, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -16347,14 +16347,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 848, __pyx_L1_error)
+      __PYX_ERR(0, 849, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 848, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 849, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 848, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 849, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 848, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 849, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -16362,7 +16362,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":849
+  /* "Epigrass/epimodels.py":850
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -16371,7 +16371,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":850
+  /* "Epigrass/epimodels.py":851
  *         E, I, S = inits
  *     N = totpop
  *     R = N - E - I - S             # <<<<<<<<<<<<<<
@@ -16380,83 +16380,83 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  */
   __pyx_v_R = (((__pyx_v_N - __pyx_v_E) - __pyx_v_I) - __pyx_v_S);
 
-  /* "Epigrass/epimodels.py":851
+  /* "Epigrass/epimodels.py":852
  *     N = totpop
  *     R = N - E - I - S
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 851, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 852, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 851, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 852, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":852
+  /* "Epigrass/epimodels.py":853
  *     R = N - E - I - S
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 852, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 853, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 852, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 853, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":853
+  /* "Epigrass/epimodels.py":854
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 853, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 854, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":854
+  /* "Epigrass/epimodels.py":855
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 854, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 855, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 854, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 855, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":856
+  /* "Epigrass/epimodels.py":857
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 856, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 857, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 856, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 857, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":858
+  /* "Epigrass/epimodels.py":859
  *     b = bp['b'];
  *     # w = bp['w'];
  *     p = bp['p']             # <<<<<<<<<<<<<<
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 858, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 859, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_p = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":860
+  /* "Epigrass/epimodels.py":861
  *     p = bp['p']
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -16467,25 +16467,25 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 860, __pyx_L1_error)
+    __PYX_ERR(0, 861, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":861
+  /* "Epigrass/epimodels.py":862
  * 
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -16493,67 +16493,67 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   __pyx_t_3 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_3 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 861, __pyx_L1_error)
+    __PYX_ERR(0, 862, __pyx_L1_error)
   }
-  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 861, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 862, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Lpos2 = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "Epigrass/epimodels.py":864
+  /* "Epigrass/epimodels.py":865
  * 
  *     # Model
  *     Epos = (1 - e) * E + Lpos + Lpos2             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  */
-  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 864, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_6, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 865, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_Epos = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":865
+  /* "Epigrass/epimodels.py":866
  *     # Model
  *     Epos = (1 - e) * E + Lpos + Lpos2
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 865, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 866, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 865, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_e, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 866, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 865, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 866, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 865, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 866, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 865, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 866, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Ipos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":866
+  /* "Epigrass/epimodels.py":867
  *     Epos = (1 - e) * E + Lpos + Lpos2
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -16562,23 +16562,23 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":867
+  /* "Epigrass/epimodels.py":868
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 868, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_2, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 867, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_2, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 868, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 867, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 868, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Rpos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":870
+  /* "Epigrass/epimodels.py":871
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -16587,7 +16587,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":872
+  /* "Epigrass/epimodels.py":873
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
@@ -16595,11 +16595,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -16610,14 +16610,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   PyList_SET_ITEM(__pyx_t_6, 2, __pyx_t_2);
   __pyx_t_7 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_2, __pyx_v_Lpos2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6);
@@ -16632,7 +16632,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":839
+  /* "Epigrass/epimodels.py":840
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -16658,7 +16658,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":879
+/* "Epigrass/epimodels.py":880
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -16731,13 +16731,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 879, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 1); __PYX_ERR(0, 880, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 879, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, 2); __PYX_ERR(0, 880, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -16783,7 +16783,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpR_s") < 0)) __PYX_ERR(0, 879, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSEIpR_s") < 0)) __PYX_ERR(0, 880, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -16809,15 +16809,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 879, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 879, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 880, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 880, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 879, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 880, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 879, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 880, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -16829,7 +16829,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_35stepSEIpR_s(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 879, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSEIpR_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 880, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSEIpR_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -16882,7 +16882,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSEIpR_s", 0);
 
-  /* "Epigrass/epimodels.py":885
+  /* "Epigrass/epimodels.py":886
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -16892,30 +16892,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":886
+    /* "Epigrass/epimodels.py":887
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 886, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 887, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":885
+    /* "Epigrass/epimodels.py":886
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -16925,7 +16925,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":888
+  /* "Epigrass/epimodels.py":889
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -16939,7 +16939,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 888, __pyx_L1_error)
+        __PYX_ERR(0, 889, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -16955,16 +16955,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 888, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 889, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 888, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 889, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 888, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 889, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 888, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 889, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -16973,7 +16973,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 888, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 889, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -16981,14 +16981,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 888, __pyx_L1_error)
+      __PYX_ERR(0, 889, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 888, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 889, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 888, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 889, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 888, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 889, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -16996,7 +16996,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":889
+  /* "Epigrass/epimodels.py":890
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -17005,83 +17005,83 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":890
+  /* "Epigrass/epimodels.py":891
  *         E, I, S = inits
  *     N = totpop
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 890, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 891, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 890, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 891, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":891
+  /* "Epigrass/epimodels.py":892
  *     N = totpop
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 891, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 892, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 891, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 892, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":892
+  /* "Epigrass/epimodels.py":893
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];
  *     e = bp['e'];             # <<<<<<<<<<<<<<
  *     r = bp['r'];
  *     # delta = bp['delta'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 892, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_e); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 893, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_e = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":893
+  /* "Epigrass/epimodels.py":894
  *     alpha = bp['alpha'];
  *     e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 893, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 894, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 893, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 894, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":895
+  /* "Epigrass/epimodels.py":896
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     # w = bp['w'];
  *     p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 895, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 895, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":897
+  /* "Epigrass/epimodels.py":898
  *     b = bp['b'];
  *     # w = bp['w'];
  *     p = bp['p']             # <<<<<<<<<<<<<<
  *     R = N - E - I - S
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 897, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_p); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 898, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_p = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "Epigrass/epimodels.py":898
+  /* "Epigrass/epimodels.py":899
  *     # w = bp['w'];
  *     p = bp['p']
  *     R = N - E - I - S             # <<<<<<<<<<<<<<
@@ -17090,7 +17090,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  */
   __pyx_v_R = (((__pyx_v_N - __pyx_v_E) - __pyx_v_I) - __pyx_v_S);
 
-  /* "Epigrass/epimodels.py":900
+  /* "Epigrass/epimodels.py":901
  *     R = N - E - I - S
  * 
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -17101,25 +17101,25 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 900, __pyx_L1_error)
+    __PYX_ERR(0, 901, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":901
+  /* "Epigrass/epimodels.py":902
  * 
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections             # <<<<<<<<<<<<<<
  * 
  *     if dist == 'poisson':
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_v_p, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_R); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -17127,37 +17127,37 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   __pyx_t_3 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_3 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 901, __pyx_L1_error)
+    __PYX_ERR(0, 902, __pyx_L1_error)
   }
-  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(pow((__pyx_t_4 / __pyx_t_3), __pyx_v_alpha)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 901, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 902, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Lpos2_esp = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "Epigrass/epimodels.py":903
+  /* "Epigrass/epimodels.py":904
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 903, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 904, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":904
+    /* "Epigrass/epimodels.py":905
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 904, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 905, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 904, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 905, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -17172,21 +17172,21 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 904, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 905, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 904, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 905, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_Lpos = __pyx_t_3;
 
-    /* "Epigrass/epimodels.py":905
+    /* "Epigrass/epimodels.py":906
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 905, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_poisson); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 906, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_2 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -17200,13 +17200,13 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     }
     __pyx_t_6 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_2, __pyx_v_Lpos2_esp) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_Lpos2_esp);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 905, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 906, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos2 = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "Epigrass/epimodels.py":903
+    /* "Epigrass/epimodels.py":904
  *     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -17216,17 +17216,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":906
+  /* "Epigrass/epimodels.py":907
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 906, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 907, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":907
+    /* "Epigrass/epimodels.py":908
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations             # <<<<<<<<<<<<<<
@@ -17236,23 +17236,23 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     __pyx_t_3 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_3 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 907, __pyx_L1_error)
+      __PYX_ERR(0, 908, __pyx_L1_error)
     }
-    __pyx_t_6 = PyFloat_FromDouble((__pyx_v_I / __pyx_t_3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble((__pyx_v_I / __pyx_t_3)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 908, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_v_prob = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "Epigrass/epimodels.py":908
+    /* "Epigrass/epimodels.py":909
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos2_esp)  # converting between parameterizations
  *         Lpos2 = negative_binomial(I, prob)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 908, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 908, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     __pyx_t_10 = 0;
@@ -17269,7 +17269,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_t_2, __pyx_v_prob};
-      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 908, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -17278,14 +17278,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
       PyObject *__pyx_temp[3] = {__pyx_t_8, __pyx_t_2, __pyx_v_prob};
-      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 908, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 908, __pyx_L1_error)
+      __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       if (__pyx_t_8) {
         __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -17296,46 +17296,46 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       __Pyx_GIVEREF(__pyx_v_prob);
       PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_10, __pyx_v_prob);
       __pyx_t_2 = 0;
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 908, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 908, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_Lpos = __pyx_t_3;
 
-    /* "Epigrass/epimodels.py":909
+    /* "Epigrass/epimodels.py":910
  *         prob = I / (I + Lpos_esp)  # converting between parameterizations
  *         Lpos = negative_binomial(I, prob)
  *         prob = I / (I + Lpos2_esp)  # converting between parameterizations             # <<<<<<<<<<<<<<
  *         Lpos2 = negative_binomial(I, prob)
  * 
  */
-    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 909, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 910, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 909, __pyx_L1_error)
+    __pyx_t_7 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 910, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2_esp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 909, __pyx_L1_error)
+    __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2_esp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 910, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 909, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 910, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF_SET(__pyx_v_prob, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "Epigrass/epimodels.py":910
+    /* "Epigrass/epimodels.py":911
  *         Lpos = negative_binomial(I, prob)
  *         prob = I / (I + Lpos2_esp)  # converting between parameterizations
  *         Lpos2 = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 910, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 911, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 910, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 911, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_2 = NULL;
     __pyx_t_10 = 0;
@@ -17352,7 +17352,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_6, __pyx_v_prob};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 910, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 911, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -17361,14 +17361,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
       PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_t_6, __pyx_v_prob};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 910, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_10, 2+__pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 911, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 910, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 911, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -17379,7 +17379,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
       __Pyx_GIVEREF(__pyx_v_prob);
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_10, __pyx_v_prob);
       __pyx_t_6 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 910, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_8, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 911, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
@@ -17387,7 +17387,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
     __pyx_v_Lpos2 = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "Epigrass/epimodels.py":906
+    /* "Epigrass/epimodels.py":907
  *         Lpos = poisson(Lpos_esp)
  *         Lpos2 = poisson(Lpos2_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -17397,57 +17397,57 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":913
+  /* "Epigrass/epimodels.py":914
  * 
  *     # Model
  *     Epos = (1 - e) * E + Lpos + Lpos2             # <<<<<<<<<<<<<<
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  */
-  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 913, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_v_e, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 913, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 913, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Multiply(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 913, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_8, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 913, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Add(__pyx_t_8, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 913, __pyx_L1_error) }
-  __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 913, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 914, __pyx_L1_error) }
+  __pyx_t_11 = PyNumber_Add(__pyx_t_7, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_Epos = __pyx_t_11;
   __pyx_t_11 = 0;
 
-  /* "Epigrass/epimodels.py":914
+  /* "Epigrass/epimodels.py":915
  *     # Model
  *     Epos = (1 - e) * E + Lpos + Lpos2
  *     Ipos = e * E + (1 - r) * I             # <<<<<<<<<<<<<<
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2
  */
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 914, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 915, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_7 = PyNumber_Multiply(__pyx_v_e, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 914, __pyx_L1_error)
+  __pyx_t_7 = PyNumber_Multiply(__pyx_v_e, __pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 915, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_11 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 914, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(((1.0 - __pyx_v_r) * __pyx_v_I)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 915, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 914, __pyx_L1_error)
+  __pyx_t_8 = PyNumber_Add(__pyx_t_7, __pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 915, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 914, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 915, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_Ipos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":915
+  /* "Epigrass/epimodels.py":916
  *     Epos = (1 - e) * E + Lpos + Lpos2
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos             # <<<<<<<<<<<<<<
@@ -17456,24 +17456,24 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  */
   __pyx_v_Spos = ((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":916
+  /* "Epigrass/epimodels.py":917
  *     Ipos = e * E + (1 - r) * I
  *     Spos = S + b - Lpos
  *     Rpos = N - (Spos + Ipos) - Lpos2             # <<<<<<<<<<<<<<
  * 
  *     # Migrating infecctious
  */
-  __pyx_t_8 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 916, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 917, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 916, __pyx_L1_error) }
-  __pyx_t_11 = PyNumber_Subtract(__pyx_t_8, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 916, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 917, __pyx_L1_error) }
+  __pyx_t_11 = PyNumber_Subtract(__pyx_t_8, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 917, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 916, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 917, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_Rpos = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":919
+  /* "Epigrass/epimodels.py":920
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -17482,7 +17482,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":921
+  /* "Epigrass/epimodels.py":922
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
@@ -17490,11 +17490,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -17505,15 +17505,15 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_8);
   __pyx_t_11 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 921, __pyx_L1_error) }
-  __pyx_t_11 = PyNumber_Add(__pyx_t_8, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 921, __pyx_L1_error)
+  if (unlikely(!__pyx_v_Lpos2)) { __Pyx_RaiseUnboundLocalError("Lpos2"); __PYX_ERR(0, 922, __pyx_L1_error) }
+  __pyx_t_11 = PyNumber_Add(__pyx_t_8, __pyx_v_Lpos2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
@@ -17528,7 +17528,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":879
+  /* "Epigrass/epimodels.py":880
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -17557,7 +17557,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":928
+/* "Epigrass/epimodels.py":929
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -17626,13 +17626,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 1); __PYX_ERR(0, 928, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 1); __PYX_ERR(0, 929, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 2); __PYX_ERR(0, 928, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, 2); __PYX_ERR(0, 929, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -17672,7 +17672,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIRS") < 0)) __PYX_ERR(0, 928, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIRS") < 0)) __PYX_ERR(0, 929, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -17696,15 +17696,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 928, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 928, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 929, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 929, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 928, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 929, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 928, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 929, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -17715,7 +17715,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_37stepSIRS(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 928, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIRS", 0, 3, 9, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 929, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIRS", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -17760,7 +17760,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIRS", 0);
 
-  /* "Epigrass/epimodels.py":934
+  /* "Epigrass/epimodels.py":935
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -17770,30 +17770,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":935
+    /* "Epigrass/epimodels.py":936
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 935, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 936, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":934
+    /* "Epigrass/epimodels.py":935
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -17803,7 +17803,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":937
+  /* "Epigrass/epimodels.py":938
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -17817,7 +17817,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 937, __pyx_L1_error)
+        __PYX_ERR(0, 938, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -17833,16 +17833,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 937, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 938, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 937, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 938, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 937, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 938, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 937, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 938, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -17851,7 +17851,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 937, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 938, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -17859,14 +17859,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 937, __pyx_L1_error)
+      __PYX_ERR(0, 938, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 937, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 938, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 937, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 938, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 937, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 938, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -17874,7 +17874,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":938
+  /* "Epigrass/epimodels.py":939
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -17883,7 +17883,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":939
+  /* "Epigrass/epimodels.py":940
  *         E, I, S = inits
  *     N = totpop
  *     R = N - (E + I + S)             # <<<<<<<<<<<<<<
@@ -17892,72 +17892,72 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_R = (__pyx_v_N - ((__pyx_v_E + __pyx_v_I) + __pyx_v_S));
 
-  /* "Epigrass/epimodels.py":940
+  /* "Epigrass/epimodels.py":941
  *     N = totpop
  *     R = N - (E + I + S)
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 941, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 940, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 941, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":941
+  /* "Epigrass/epimodels.py":942
  *     R = N - (E + I + S)
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 941, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 941, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":943
+  /* "Epigrass/epimodels.py":944
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 943, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 944, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 943, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 944, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":945
+  /* "Epigrass/epimodels.py":946
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 945, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 945, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":946
+  /* "Epigrass/epimodels.py":947
  *     # delta = bp['delta'];
  *     b = bp['b'];
  *     w = bp['w'];             # <<<<<<<<<<<<<<
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_w); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 946, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_w); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 947, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 946, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 947, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_w = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":948
+  /* "Epigrass/epimodels.py":949
  *     w = bp['w'];
  *     # p = bp['p']
  *     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -17968,11 +17968,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 948, __pyx_L1_error)
+    __PYX_ERR(0, 949, __pyx_L1_error)
   }
   __pyx_v_Lpos = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":951
+  /* "Epigrass/epimodels.py":952
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -17981,7 +17981,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":952
+  /* "Epigrass/epimodels.py":953
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + w * R             # <<<<<<<<<<<<<<
@@ -17990,7 +17990,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_w * __pyx_v_R));
 
-  /* "Epigrass/epimodels.py":953
+  /* "Epigrass/epimodels.py":954
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + w * R
  *     Rpos = N - (Spos + Ipos) - w * R             # <<<<<<<<<<<<<<
@@ -17999,7 +17999,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_Rpos = ((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos)) - (__pyx_v_w * __pyx_v_R));
 
-  /* "Epigrass/epimodels.py":956
+  /* "Epigrass/epimodels.py":957
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -18008,7 +18008,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":958
+  /* "Epigrass/epimodels.py":959
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
@@ -18016,11 +18016,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -18031,11 +18031,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   PyList_SET_ITEM(__pyx_t_2, 2, __pyx_t_6);
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 958, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 959, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_2);
@@ -18050,7 +18050,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":928
+  /* "Epigrass/epimodels.py":929
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
@@ -18072,7 +18072,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_36stepSIRS(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "Epigrass/epimodels.py":965
+/* "Epigrass/epimodels.py":966
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -18145,13 +18145,13 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_simstep)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 1); __PYX_ERR(0, 965, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 1); __PYX_ERR(0, 966, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_totpop)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 2); __PYX_ERR(0, 965, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, 2); __PYX_ERR(0, 966, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -18197,7 +18197,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIRS_s") < 0)) __PYX_ERR(0, 965, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "stepSIRS_s") < 0)) __PYX_ERR(0, 966, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -18223,15 +18223,15 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
       }
     }
     __pyx_v_inits = values[0];
-    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 965, __pyx_L3_error)
-    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 965, __pyx_L3_error)
+    __pyx_v_simstep = __Pyx_PyInt_As_long(values[1]); if (unlikely((__pyx_v_simstep == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 966, __pyx_L3_error)
+    __pyx_v_totpop = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_totpop == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 966, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 965, __pyx_L3_error)
+      __pyx_v_theta = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 966, __pyx_L3_error)
     } else {
       __pyx_v_theta = ((double)((double)0.0));
     }
     if (values[4]) {
-      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 965, __pyx_L3_error)
+      __pyx_v_npass = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_npass == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 966, __pyx_L3_error)
     } else {
       __pyx_v_npass = ((double)((double)0.0));
     }
@@ -18243,7 +18243,7 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_39stepSIRS_s(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 965, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("stepSIRS_s", 0, 3, 10, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 966, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Epigrass.epimodels.stepSIRS_s", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -18293,7 +18293,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("stepSIRS_s", 0);
 
-  /* "Epigrass/epimodels.py":971
+  /* "Epigrass/epimodels.py":972
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -18303,30 +18303,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   __pyx_t_1 = ((__pyx_v_simstep == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":972
+    /* "Epigrass/epimodels.py":973
  *     """
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi['e'], bi['i'], bi['s'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_e); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_i); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bi, __pyx_n_s_s); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 972, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 973, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_E = __pyx_t_3;
     __pyx_v_I = __pyx_t_4;
     __pyx_v_S = __pyx_t_5;
 
-    /* "Epigrass/epimodels.py":971
+    /* "Epigrass/epimodels.py":972
  *     - theta = infectious individuals from neighbor sites
  *     """
  *     if simstep == 1:  # get initial values             # <<<<<<<<<<<<<<
@@ -18336,7 +18336,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     goto __pyx_L3;
   }
 
-  /* "Epigrass/epimodels.py":974
+  /* "Epigrass/epimodels.py":975
  *         E, I, S = (bi['e'], bi['i'], bi['s'])
  *     else:
  *         E, I, S = inits             # <<<<<<<<<<<<<<
@@ -18350,7 +18350,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
       if (unlikely(size != 3)) {
         if (size > 3) __Pyx_RaiseTooManyValuesError(3);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 974, __pyx_L1_error)
+        __PYX_ERR(0, 975, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -18366,16 +18366,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_7);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 975, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 975, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_7 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 975, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       #endif
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_8 = PyObject_GetIter(__pyx_v_inits); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 975, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
       index = 0; __pyx_t_2 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_2)) goto __pyx_L4_unpacking_failed;
@@ -18384,7 +18384,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
       __Pyx_GOTREF(__pyx_t_6);
       index = 2; __pyx_t_7 = __pyx_t_9(__pyx_t_8); if (unlikely(!__pyx_t_7)) goto __pyx_L4_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_7);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 974, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 3) < 0) __PYX_ERR(0, 975, __pyx_L1_error)
       __pyx_t_9 = NULL;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L5_unpacking_done;
@@ -18392,14 +18392,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 974, __pyx_L1_error)
+      __PYX_ERR(0, 975, __pyx_L1_error)
       __pyx_L5_unpacking_done:;
     }
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 974, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 975, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 974, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 975, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 974, __pyx_L1_error)
+    __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 975, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_E = __pyx_t_5;
     __pyx_v_I = __pyx_t_4;
@@ -18407,7 +18407,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "Epigrass/epimodels.py":975
+  /* "Epigrass/epimodels.py":976
  *     else:
  *         E, I, S = inits
  *     N = totpop             # <<<<<<<<<<<<<<
@@ -18416,7 +18416,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_N = __pyx_v_totpop;
 
-  /* "Epigrass/epimodels.py":976
+  /* "Epigrass/epimodels.py":977
  *         E, I, S = inits
  *     N = totpop
  *     R = N - (E + I + S)             # <<<<<<<<<<<<<<
@@ -18425,72 +18425,72 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_R = (__pyx_v_N - ((__pyx_v_E + __pyx_v_I) + __pyx_v_S));
 
-  /* "Epigrass/epimodels.py":977
+  /* "Epigrass/epimodels.py":978
  *     N = totpop
  *     R = N - (E + I + S)
  *     beta = bp['beta'];             # <<<<<<<<<<<<<<
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 977, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_beta); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 978, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 977, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 978, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_beta = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":978
+  /* "Epigrass/epimodels.py":979
  *     R = N - (E + I + S)
  *     beta = bp['beta'];
  *     alpha = bp['alpha'];             # <<<<<<<<<<<<<<
  *     # e = bp['e'];
  *     r = bp['r'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 978, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_alpha); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 979, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 978, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 979, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_alpha = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":980
+  /* "Epigrass/epimodels.py":981
  *     alpha = bp['alpha'];
  *     # e = bp['e'];
  *     r = bp['r'];             # <<<<<<<<<<<<<<
  *     # delta = bp['delta'];
  *     b = bp['b'];
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 980, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_r); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 981, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 980, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 981, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_r = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":982
+  /* "Epigrass/epimodels.py":983
  *     r = bp['r'];
  *     # delta = bp['delta'];
  *     b = bp['b'];             # <<<<<<<<<<<<<<
  *     w = bp['w'];
  *     # p = bp['p']
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 982, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_b); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 983, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 982, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 983, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_b = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":983
+  /* "Epigrass/epimodels.py":984
  *     # delta = bp['delta'];
  *     b = bp['b'];
  *     w = bp['w'];             # <<<<<<<<<<<<<<
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  */
-  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_w); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 983, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_bp, __pyx_n_s_w); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 984, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 983, __pyx_L1_error)
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 984, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_w = __pyx_t_3;
 
-  /* "Epigrass/epimodels.py":985
+  /* "Epigrass/epimodels.py":986
  *     w = bp['w'];
  *     # p = bp['p']
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases             # <<<<<<<<<<<<<<
@@ -18501,30 +18501,30 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   __pyx_t_4 = (__pyx_v_N + __pyx_v_npass);
   if (unlikely(__pyx_t_4 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 985, __pyx_L1_error)
+    __PYX_ERR(0, 986, __pyx_L1_error)
   }
   __pyx_v_Lpos_esp = ((__pyx_v_beta * __pyx_v_S) * pow((__pyx_t_3 / __pyx_t_4), __pyx_v_alpha));
 
-  /* "Epigrass/epimodels.py":987
+  /* "Epigrass/epimodels.py":988
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 987, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_poisson, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 988, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":988
+    /* "Epigrass/epimodels.py":989
  * 
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)             # <<<<<<<<<<<<<<
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 988, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_poisson); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 989, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 988, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Lpos_esp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 989, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -18539,14 +18539,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2);
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 988, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 989, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 988, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 989, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":987
+    /* "Epigrass/epimodels.py":988
  *     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
  * 
  *     if dist == 'poisson':             # <<<<<<<<<<<<<<
@@ -18556,17 +18556,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     goto __pyx_L6;
   }
 
-  /* "Epigrass/epimodels.py":989
+  /* "Epigrass/epimodels.py":990
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)
  */
-  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 989, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_dist, __pyx_n_s_negbin, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 990, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "Epigrass/epimodels.py":990
+    /* "Epigrass/epimodels.py":991
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations             # <<<<<<<<<<<<<<
@@ -18576,22 +18576,22 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     __pyx_t_4 = (__pyx_v_I + __pyx_v_Lpos_esp);
     if (unlikely(__pyx_t_4 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 990, __pyx_L1_error)
+      __PYX_ERR(0, 991, __pyx_L1_error)
     }
     __pyx_v_prob = (__pyx_v_I / __pyx_t_4);
 
-    /* "Epigrass/epimodels.py":991
+    /* "Epigrass/epimodels.py":992
  *     elif dist == 'negbin':
  *         prob = I / (I + Lpos_esp)  # convertin between parameterizations
  *         Lpos = negative_binomial(I, prob)             # <<<<<<<<<<<<<<
  * 
  *     # Model
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 991, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_negative_binomial); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 992, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 991, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_I); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 992, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 991, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(__pyx_v_prob); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 992, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -18608,7 +18608,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 991, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 992, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -18618,7 +18618,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_t_2, __pyx_t_8};
-      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 991, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 992, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -18626,7 +18626,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
     } else
     #endif
     {
-      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 991, __pyx_L1_error)
+      __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 992, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -18637,16 +18637,16 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
       PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_8);
       __pyx_t_2 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 991, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 992, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 991, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 992, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_v_Lpos = __pyx_t_4;
 
-    /* "Epigrass/epimodels.py":989
+    /* "Epigrass/epimodels.py":990
  *     if dist == 'poisson':
  *         Lpos = poisson(Lpos_esp)
  *     elif dist == 'negbin':             # <<<<<<<<<<<<<<
@@ -18656,7 +18656,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   }
   __pyx_L6:;
 
-  /* "Epigrass/epimodels.py":994
+  /* "Epigrass/epimodels.py":995
  * 
  *     # Model
  *     Ipos = (1 - r) * I + Lpos             # <<<<<<<<<<<<<<
@@ -18665,7 +18665,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Ipos = (((1.0 - __pyx_v_r) * __pyx_v_I) + __pyx_v_Lpos);
 
-  /* "Epigrass/epimodels.py":995
+  /* "Epigrass/epimodels.py":996
  *     # Model
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + w * R             # <<<<<<<<<<<<<<
@@ -18674,7 +18674,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Spos = (((__pyx_v_S + __pyx_v_b) - __pyx_v_Lpos) + (__pyx_v_w * __pyx_v_R));
 
-  /* "Epigrass/epimodels.py":996
+  /* "Epigrass/epimodels.py":997
  *     Ipos = (1 - r) * I + Lpos
  *     Spos = S + b - Lpos + w * R
  *     Rpos = N - (Spos + Ipos) - w * R             # <<<<<<<<<<<<<<
@@ -18683,7 +18683,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_Rpos = ((__pyx_v_N - (__pyx_v_Spos + __pyx_v_Ipos)) - (__pyx_v_w * __pyx_v_R));
 
-  /* "Epigrass/epimodels.py":999
+  /* "Epigrass/epimodels.py":1000
  * 
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
@@ -18692,17 +18692,17 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
-  /* "Epigrass/epimodels.py":1001
+  /* "Epigrass/epimodels.py":1002
  *     migInf = Ipos
  * 
  *     return [0, Ipos, Spos], Lpos, migInf             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_Ipos); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Spos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_12 = PyList_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -18713,11 +18713,11 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_6);
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Lpos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_migInf); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1001, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_12);
   PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_12);
@@ -18732,7 +18732,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_38stepSIRS_s(CYTHON_UNUSED PyObje
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "Epigrass/epimodels.py":965
+  /* "Epigrass/epimodels.py":966
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
@@ -19128,14 +19128,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "Epigrass/epimodels.py":365
+  /* "Epigrass/epimodels.py":366
  *     # print(inits)
  *     if simstep == 1:  # get initial values
  *         E, I, S = (bi.get(b'e', 0), bi[b'i'], bi[b's'])             # <<<<<<<<<<<<<<
  *     else:
  *         E, I, S = inits
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_b_e, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_b_e, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
@@ -19222,221 +19222,221 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__15);
   __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(9, 0, 85, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepFlu, 172, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 172, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":275
+  /* "Epigrass/epimodels.py":276
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
-  __pyx_tuple__17 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS, 275, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS, 276, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 276, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":315
+  /* "Epigrass/epimodels.py":316
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
-  __pyx_tuple__19 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS_s, 315, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIS_s, 316, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 316, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":357
+  /* "Epigrass/epimodels.py":358
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
-  __pyx_tuple__21 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR, 357, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR, 358, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 358, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":394
+  /* "Epigrass/epimodels.py":395
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_tuple__23 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR_s, 394, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIR_s, 395, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 395, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":436
+  /* "Epigrass/epimodels.py":437
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
-  __pyx_tuple__25 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS, 436, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS, 437, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 437, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":472
+  /* "Epigrass/epimodels.py":473
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
-  __pyx_tuple__27 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS_s, 472, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIS_s, 473, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 473, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":514
+  /* "Epigrass/epimodels.py":515
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
-  __pyx_tuple__29 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR, 514, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR, 515, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 515, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":552
+  /* "Epigrass/epimodels.py":553
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
-  __pyx_tuple__31 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR_s, 552, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(10, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIR_s, 553, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 553, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":597
+  /* "Epigrass/epimodels.py":598
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
-  __pyx_tuple__33 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(26, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS, 597, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(9, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS, 598, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 598, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":633
+  /* "Epigrass/epimodels.py":634
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
-  __pyx_tuple__35 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(10, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS_s, 633, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(10, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpRpS_s, 634, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 634, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":675
+  /* "Epigrass/epimodels.py":676
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
-  __pyx_tuple__37 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(28, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
-  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(9, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS, 675, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(9, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS, 676, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 676, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":712
+  /* "Epigrass/epimodels.py":713
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
-  __pyx_tuple__39 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_delta, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
-  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS_s, 712, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpRpS_s, 713, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 713, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":754
+  /* "Epigrass/epimodels.py":755
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
-  __pyx_tuple__41 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_tuple__41 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__41);
   __Pyx_GIVEREF(__pyx_tuple__41);
-  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR, 754, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(9, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR, 755, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 755, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":792
+  /* "Epigrass/epimodels.py":793
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
-  __pyx_tuple__43 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_tuple__43 = PyTuple_Pack(30, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__43);
   __Pyx_GIVEREF(__pyx_tuple__43);
-  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR_s, 792, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(10, 0, 30, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIpR_s, 793, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 793, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":839
+  /* "Epigrass/epimodels.py":840
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
-  __pyx_tuple__45 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(29, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(9, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR, 839, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(9, 0, 29, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR, 840, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 840, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":879
+  /* "Epigrass/epimodels.py":880
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
-  __pyx_tuple__47 = PyTuple_Pack(32, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(32, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_e, __pyx_n_s_p, __pyx_n_s_Lpos2_esp, __pyx_n_s_Lpos2, __pyx_n_s_prob, __pyx_n_s_Epos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(10, 0, 32, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR_s, 879, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(10, 0, 32, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSEIpR_s, 880, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 880, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":928
+  /* "Epigrass/epimodels.py":929
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
-  __pyx_tuple__49 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(25, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS, 928, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(9, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS, 929, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 929, __pyx_L1_error)
 
-  /* "Epigrass/epimodels.py":965
+  /* "Epigrass/epimodels.py":966
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_tuple__51 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(27, __pyx_n_s_inits_2, __pyx_n_s_simstep, __pyx_n_s_totpop, __pyx_n_s_theta, __pyx_n_s_npass, __pyx_n_s_bi, __pyx_n_s_bp, __pyx_n_s_values, __pyx_n_s_model, __pyx_n_s_dist, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_E, __pyx_n_s_I, __pyx_n_s_S, __pyx_n_s_N, __pyx_n_s_r, __pyx_n_s_b, __pyx_n_s_w, __pyx_n_s_Lpos_2, __pyx_n_s_Lpos_esp, __pyx_n_s_R, __pyx_n_s_Ipos, __pyx_n_s_Spos, __pyx_n_s_Rpos, __pyx_n_s_prob, __pyx_n_s_migInf_2); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS_s, 965, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(10, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_stepSIRS_s, 966, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -20386,18 +20386,18 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepFlu, __pyx_t_2) < 0) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":275
+  /* "Epigrass/epimodels.py":276
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIS, and return its values (no demographics)
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20417,25 +20417,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_5stepSIS, 0, __pyx_n_s_stepSIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_5stepSIS, 0, __pyx_n_s_stepSIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIS, __pyx_t_3) < 0) __PYX_ERR(0, 275, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIS, __pyx_t_3) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":315
+  /* "Epigrass/epimodels.py":316
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIS:
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20458,25 +20458,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_7stepSIS_s, 0, __pyx_n_s_stepSIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_7stepSIS_s, 0, __pyx_n_s_stepSIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIS_s, __pyx_t_1) < 0) __PYX_ERR(0, 315, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIS_s, __pyx_t_1) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":357
+  /* "Epigrass/epimodels.py":358
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIR, and return its values (no demographics)
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20496,25 +20496,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_9stepSIR, 0, __pyx_n_s_stepSIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_9stepSIR, 0, __pyx_n_s_stepSIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIR, __pyx_t_2) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIR, __pyx_t_2) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":394
+  /* "Epigrass/epimodels.py":395
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20537,25 +20537,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_11stepSIR_s, 0, __pyx_n_s_stepSIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_11stepSIR_s, 0, __pyx_n_s_stepSIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIR_s, __pyx_t_3) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIR_s, __pyx_t_3) < 0) __PYX_ERR(0, 395, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":436
+  /* "Epigrass/epimodels.py":437
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIS:
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20575,25 +20575,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_13stepSEIS, 0, __pyx_n_s_stepSEIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_13stepSEIS, 0, __pyx_n_s_stepSEIS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIS, __pyx_t_1) < 0) __PYX_ERR(0, 436, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIS, __pyx_t_1) < 0) __PYX_ERR(0, 437, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":472
+  /* "Epigrass/epimodels.py":473
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIS:
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20616,25 +20616,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_15stepSEIS_s, 0, __pyx_n_s_stepSEIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_15stepSEIS_s, 0, __pyx_n_s_stepSEIS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIS_s, __pyx_t_2) < 0) __PYX_ERR(0, 472, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIS_s, __pyx_t_2) < 0) __PYX_ERR(0, 473, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":514
+  /* "Epigrass/epimodels.py":515
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIR:
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20654,25 +20654,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_17stepSEIR, 0, __pyx_n_s_stepSEIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 514, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_17stepSEIR, 0, __pyx_n_s_stepSEIR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIR, __pyx_t_3) < 0) __PYX_ERR(0, 514, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIR, __pyx_t_3) < 0) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":552
+  /* "Epigrass/epimodels.py":553
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIR:
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20695,25 +20695,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_19stepSEIR_s, 0, __pyx_n_s_stepSEIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 552, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_19stepSEIR_s, 0, __pyx_n_s_stepSEIR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIR_s, __pyx_t_1) < 0) __PYX_ERR(0, 552, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIR_s, __pyx_t_1) < 0) __PYX_ERR(0, 553, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":597
+  /* "Epigrass/epimodels.py":598
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpRpS, and return its values (no demographics)
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20733,25 +20733,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_21stepSIpRpS, 0, __pyx_n_s_stepSIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_21stepSIpRpS, 0, __pyx_n_s_stepSIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpRpS, __pyx_t_2) < 0) __PYX_ERR(0, 597, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpRpS, __pyx_t_2) < 0) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":633
+  /* "Epigrass/epimodels.py":634
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRpS:
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20774,25 +20774,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_23stepSIpRpS_s, 0, __pyx_n_s_stepSIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 633, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_23stepSIpRpS_s, 0, __pyx_n_s_stepSIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__36)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpRpS_s, __pyx_t_3) < 0) __PYX_ERR(0, 633, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpRpS_s, __pyx_t_3) < 0) __PYX_ERR(0, 634, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":675
+  /* "Epigrass/epimodels.py":676
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     Defines the model SEIpRpS:
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20812,25 +20812,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_25stepSEIpRpS, 0, __pyx_n_s_stepSEIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 675, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_25stepSEIpRpS, 0, __pyx_n_s_stepSEIpRpS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpRpS, __pyx_t_1) < 0) __PYX_ERR(0, 675, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpRpS, __pyx_t_1) < 0) __PYX_ERR(0, 676, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":712
+  /* "Epigrass/epimodels.py":713
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRpS:
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20853,25 +20853,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_27stepSEIpRpS_s, 0, __pyx_n_s_stepSEIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 712, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_27stepSEIpRpS_s, 0, __pyx_n_s_stepSEIpRpS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpRpS_s, __pyx_t_2) < 0) __PYX_ERR(0, 712, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpRpS_s, __pyx_t_2) < 0) __PYX_ERR(0, 713, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":754
+  /* "Epigrass/epimodels.py":755
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIpR, and return its values (no demographics)
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -20891,25 +20891,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 5, ((PyObject *)Py_None));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_29stepSIpR, 0, __pyx_n_s_stepSIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 754, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_29stepSIpR, 0, __pyx_n_s_stepSIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpR, __pyx_t_3) < 0) __PYX_ERR(0, 754, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpR, __pyx_t_3) < 0) __PYX_ERR(0, 755, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":792
+  /* "Epigrass/epimodels.py":793
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIpRs:
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -20932,25 +20932,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_31stepSIpR_s, 0, __pyx_n_s_stepSIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 792, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_31stepSIpR_s, 0, __pyx_n_s_stepSIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__44)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpR_s, __pyx_t_1) < 0) __PYX_ERR(0, 792, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIpR_s, __pyx_t_1) < 0) __PYX_ERR(0, 793, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":839
+  /* "Epigrass/epimodels.py":840
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SEIpR, and return its values (no demographics)
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -20970,25 +20970,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 5, ((PyObject *)Py_None));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_33stepSEIpR, 0, __pyx_n_s_stepSEIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 839, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_33stepSEIpR, 0, __pyx_n_s_stepSEIpR, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__46)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpR, __pyx_t_2) < 0) __PYX_ERR(0, 839, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpR, __pyx_t_2) < 0) __PYX_ERR(0, 840, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "Epigrass/epimodels.py":879
+  /* "Epigrass/epimodels.py":880
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SEIpRs:
  */
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -21011,25 +21011,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_1, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_35stepSEIpR_s, 0, __pyx_n_s_stepSEIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 879, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_35stepSEIpR_s, 0, __pyx_n_s_stepSEIpR_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__48)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpR_s, __pyx_t_3) < 0) __PYX_ERR(0, 879, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSEIpR_s, __pyx_t_3) < 0) __PYX_ERR(0, 880, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "Epigrass/epimodels.py":928
+  /* "Epigrass/epimodels.py":929
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):             # <<<<<<<<<<<<<<
  *     """
  *     calculates the model SIRS, and return its values (no demographics)
  */
-  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -21049,25 +21049,25 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_2, 5, ((PyObject *)Py_None));
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_37stepSIRS, 0, __pyx_n_s_stepSIRS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 928, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_37stepSIRS, 0, __pyx_n_s_stepSIRS, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__50)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIRS, __pyx_t_1) < 0) __PYX_ERR(0, 928, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIRS, __pyx_t_1) < 0) __PYX_ERR(0, 929, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Epigrass/epimodels.py":965
+  /* "Epigrass/epimodels.py":966
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
  *                Ipos='double', Spos='double', Rpos='double')
  * def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):             # <<<<<<<<<<<<<<
  *     """
  *     Defines an stochastic model SIR:
  */
-  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -21090,11 +21090,11 @@ if (!__Pyx_RefNanny) {
   PyTuple_SET_ITEM(__pyx_t_3, 6, ((PyObject*)__pyx_n_s_poisson));
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_39stepSIRS_s, 0, __pyx_n_s_stepSIRS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 965, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8Epigrass_9epimodels_39stepSIRS_s, 0, __pyx_n_s_stepSIRS_s, NULL, __pyx_n_s_Epigrass_epimodels, __pyx_d, ((PyObject *)__pyx_codeobj__52)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIRS_s, __pyx_t_2) < 0) __PYX_ERR(0, 965, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_stepSIRS_s, __pyx_t_2) < 0) __PYX_ERR(0, 966, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "Epigrass/epimodels.py":1

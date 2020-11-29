@@ -183,6 +183,16 @@ outdir =
 # MySQLout can be 0 (no database output) or 1
 sqlout = 1
 
+# Report Generation
+# The variable report can take the following values:
+# 0 - No report is generated.
+# 1 - A network analysis report is generated in PDF Format.
+# 2 - An epidemiological report is generated in PDF Format.
+# 3 - A full report is generated in PDF Format.
+# siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
+report = 2
+siteRep = []
+
 
 # Replicate runs
 # If replicas is set to an integer(n) larger than zero, the model will be run

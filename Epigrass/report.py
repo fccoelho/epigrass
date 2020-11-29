@@ -409,6 +409,7 @@ the greater the load of the network.
  - **Betweeness:** Is the number of times any node figures in the the shortest path
 between any other pair of nodes.
 """
+        from time import time
         tail = r""
         if type == 1:
             start = time()

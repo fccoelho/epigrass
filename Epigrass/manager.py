@@ -769,7 +769,7 @@ class Simulate:
             else:
                 mli = 'NA'
             # print i[1].sitename, type(i[1].sitename), mli
-            epp.write(str(i[0]) + ',' + site.sitename + ',' + mli + '\n')
+            epp.write(f"{i[0]},{site.sitename},{mli}\n")
         epp.close()
         print('Done!')
         self.g.save_topology('network.gexf')
@@ -829,7 +829,7 @@ class Simulate:
             sitef.write(f"{self.round},{s.geocode} ,{s.sitename} ,{it}, {degree}, {seedgc}, {seedname}\n")
 
         # Saving series to JSON
-        self.series_to_JSON()
+        # self.series_to_JSON()
         os.chdir(curdir)
 
         print('Done saving data!')
@@ -849,7 +849,7 @@ class Simulate:
         g = pickle.load(fname)
         return g
 
-    def runGraph(self, graphobj, iterations=1, transp=0):
+    def runGraph(self, graphobj, iterations=1, transp=1):
         """
         Starts the simulation on a graph.
         """
