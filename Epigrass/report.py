@@ -3,7 +3,8 @@ This module generates a report of the network simulation model
 using LaTeX.
 """
 
-import os, sys, string, time, matplotlib, codecs
+import os, sys, string, matplotlib, codecs
+from time import time, ctime
 import pweave
 import datetime
 
@@ -377,6 +378,7 @@ xlabel('Time')
         """
         Assemble the type of report desired
         types:
+        0: None
         1: network only
         2: epidemiological only
         3: both
@@ -409,7 +411,7 @@ between any other pair of nodes.
 """
         tail = r""
         if type == 1:
-            start = time.clock()
+            start = time()
             latexsrc = header + self.genNetTitle() + self.graphDesc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
@@ -417,23 +419,23 @@ between any other pair of nodes.
                 for site in self.sim.siteRep:
                     latexsrc += self.siteReport(site)
             latexsrc += tail
-            timer = time.clock() - start
+            timer = time() - start
             print('Time to generate Network report: %s seconds.' % timer)
             repname = 'net_report'
         elif type == 2:
-            start = time.clock()
+            start = time()
             latexsrc = header + self.genEpiTitle() + self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
                     latexsrc += self.genSiteEpi(site)
             latexsrc += tail
-            timer = time.clock() - start
+            timer = time() - start
             print('Time to generate Epidemiological report: %s seconds.' % timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.' % timer, -1)
             repname = 'epi_report'
         elif type == 3:
-            start = time.clock()
+            start = time()
             latexsrc = header + self.genFullTitle() + self.graphDesc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
@@ -445,9 +447,11 @@ between any other pair of nodes.
                 for site in self.sim.siteRep:
                     latexsrc += self.genSiteEpi(site)
             latexsrc += tail
-            timer = time.clock() - start
+            timer = time() - start
             print('Time to generate full report: %s seconds.' % timer)
             repname = 'full_report'
+        else:
+            return
         if save:
             self.savenBuild(repname, latexsrc)
         return latexsrc
@@ -465,7 +469,7 @@ between any other pair of nodes.
         Saves the LaTeX in a newly created directory and builds it.
         """
         dirname = self.sim.modelName + r'-report-'
-        Path = dirname + time.ctime()
+        Path = dirname + ctime()
         Path = Path.replace(' ', '-')
         os.system('mkdir ' + Path)
         os.chdir(Path)

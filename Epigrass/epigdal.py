@@ -41,10 +41,12 @@ class NewWorld:
         self.edgesource = None
         self.datasource = None
         self.layers = fiona.listlayers(self.filename)
+        self.get_node_list()
         with fiona.open(filename) as source:
             self.driver = source.driver
             self.crs = source.crs
             self.map = gpd.read_file(filename, layer=source.name)
+        # self._check_map()
 
     @property
     def nodes(self):
@@ -63,6 +65,16 @@ class NewWorld:
         if not self.datasource:
             self.create_data_layer()
         return gpd.read_file(os.path.join(self.outdir, 'Data.gpkg'))
+
+    def _check_map(self):
+        map_size = len(self.map)
+        unique_gcs = len(self.map[self.geocfield].value_counts())
+        try:
+            assert map_size == unique_gcs
+        except AssertionError as e:
+            print(f"Column {self.geocfield} should have {map_size} unique values, but it has {unique_gcs}.")
+            raise(e)
+
 
     def get_layer_list(self):
         return self.layers
@@ -91,6 +103,7 @@ class NewWorld:
         if l is None:
             l = self.layers[0]
         df = gpd.read_file(self.filename, layer=l)
+        df[self.geocfield] = df[self.geocfield].astype(int)
         for i, row in df.iterrows():
             self.centdict[row[self.geocfield]] = (row['geometry'].centroid.x, row['geometry'].centroid.y, 0)
             self.namedict[row[self.geocfield]] = row[self.namefield]
@@ -104,7 +117,6 @@ class NewWorld:
         polygons belonging to the map layer associated with this
         world instance.
         """
-        self.get_node_list()
         if os.path.exists(os.path.join(self.outdir, 'Nodes.gpkg')):
             os.remove(os.path.join(self.outdir, 'Nodes.gpkg'))
         if not self.centdict:
@@ -146,7 +158,7 @@ class NewWorld:
             for i, row in edges.iterrows():
                 line = LineString([self.centdict[row.source_geocode], self.centdict[row.dest_geocode]])
                 edges.at[i, 'geometry'] = line
-            edges.to_file(os.path.join(self.outdir, 'Edges.gpkg'),driver='GPKG')
+            edges.to_file(os.path.join(self.outdir, 'Edges.gpkg'), driver='GPKG')
             self.edgesource = fiona.open(os.path.join(self.outdir, 'Edges.gpkg'))
 
         else:
@@ -169,13 +181,16 @@ class NewWorld:
             os.remove(os.path.join(self.outdir, 'Data.gpkg'))
         # Creates a new shape file to hold the data
         if not self.datasource:
-            dsd = gpd.GeoDataFrame(columns=['geocode', 'name', 'colors']+varlist)
+            dsd = gpd.GeoDataFrame(columns=['geocode', 'name', 'colors']+varlist+['geometry'])
 
             dsd['geocode'] = data[:, 0]
-            dsd['name'] = [self.namefield[gc] for gc in data[:, 0]]
+            dsd['name'] = [self.namedict[int(gc)] for gc in data[:, 0]]
             dsd['colors'] = [str([self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]) for l in data]
             for i, v in enumerate(varlist):
-                dsd[v] = data[:, i+3]
+                dsd[v] = data[:, i+1]
+            for i, row in dsd.iterrows():
+                geom = self.map[self.map[self.geocfield] == row.geocode].geometry.values[0]
+                dsd.at[i, 'geometry'] = geom
             dsd.to_file(os.path.join(self.outdir, 'Data.gpkg'), driver='GPKG')
             self.datasource = fiona.open(os.path.join(self.outdir, 'Data.gpkg'))
         else:

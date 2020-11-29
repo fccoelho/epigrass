@@ -4,10 +4,8 @@ Model Management and simulation objects.
 """
 from __future__ import absolute_import
 from __future__ import print_function
-import pickle
 import time
 from copy import deepcopy
-from numpy import *
 from collections import OrderedDict
 from argparse import ArgumentParser
 import six.moves.configparser
@@ -28,12 +26,10 @@ from Epigrass import __version__
 import requests
 import hashlib
 import redis
-# import six
-# from six.moves import range
-# from six.moves import zip
-# from six.moves import input
+import pickle
 
 redisclient = redis.StrictRedis()
+
 
 class Simulate:
     """
@@ -152,7 +148,7 @@ class Simulate:
             sys.exit("Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified." % (
                 V[1], V[0]))
         if self.replicas:
-            self.Rep = 0 #Turns off reports
+            self.Rep = 0  # Turns off reports
             self.Batch = []  # Turns off Batch mode
             self.round = 0  # Initialize replicate counter
             # generate dictionaries for parameters and inits
@@ -360,11 +356,9 @@ class Simulate:
             if site.geocode == seed.geocode or seed.geocode == 'all':
                 site.bi[seedvar] = n
 
-
                 print("%s infected case(s) arrived at %s" % (n, seed.sitename))
             else:
                 site.bi[seedvar] = 0
-
 
     def start(self):
         """
@@ -389,7 +383,6 @@ class Simulate:
         self.dumpData()
         spread.Spread(self.g, self.outdir, self.encoding)
         # self.saveModel(self.modelName)
-
 
     def createDataFrame(self, site):
         """
@@ -417,38 +410,18 @@ class Simulate:
         """
         if not self.World:
             return
-        # Initialize world output layers
-        # print("Reading Nodes from shapefile...")
-        # self.World.get_node_list(self.World.ds.GetLayerByName(self.World.layerlist[0]))
-        # print("Done reading nodes!")
-        # print("Creating Nodes shapefile...")
-        # self.World.create_node_layer()
-        # print("Done creating Nodes shapefile!")
-        # elist = [(gcs[0], gcs[1], sum(e.ftheta), sum(e.btheta)) for gcs, e in six.iteritems(self.g.edge_dict)]
-        # print("Creating Edges shapefile...")
-        # self.World.create_edge_layer(elist)
-        # print("Done creating Edges shapefile!")
-        # Generate site epidemic stats
+
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
                       float(site.totpop)) for site in six.itervalues(self.g.site_dict)]
-        simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield] + varlist)
+        # simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield] + varlist)
         # print(self.World.map.info())
         self.World.map[self.World.geocfield] = self.World.map[self.World.geocfield].astype(int)
-        self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
+        # self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
         print('Saving results in the map Data.gpkg')
-        self.World.map.to_file(os.path.join(self.outdir, 'Data.gpkg'))
-        # names = {k: v.sitename for k, v in six.iteritems(self.g.site_dict)}
-        #
-        # print("Creating Data shapefile...")
-        # self.World.create_data_layer(varlist, sitestats)
-        # print("Done creating Data shapefile!")
-        # # Generate the kml too.
-        # self.out_to_kml(names)
-        #
-        # print("Done creating KML files!")
-        # # close files
-        # self.World.close_sources()
+        self.World.create_data_layer(varlist, sitestats)
+
+
 
     def out_to_kml(self, names):
         """
@@ -634,7 +607,8 @@ class Simulate:
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(list(self.g.site_dict.values())[0].vnames) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
+            nvar = len(list(self.g.site_dict.values())[
+                           0].vnames) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
             str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
             str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
             varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + [
@@ -674,7 +648,7 @@ class Simulate:
                 longit = site.pos[1]
                 name = site.sitename
                 # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
-                ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts',0,-1)])
+                ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
                 inc = site.incidence
                 thist = site.thetahist
                 t = 0
@@ -852,8 +826,7 @@ class Simulate:
                 it = 'NA'
 
             #            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+central+','+bet+','+thidx+','+distseed+','+seedgc+','+seedname+'\n')
-            sitef.write(str(self.round) + ',' + str(
-                s.geocode) + ',' + s.sitename + ',' + it + ',' + degree + ',' + seedgc + ',' + seedname + '\n')
+            sitef.write(f"{self.round},{s.geocode} ,{s.sitename} ,{it}, {degree}, {seedgc}, {seedname}\n")
 
         # Saving series to JSON
         self.series_to_JSON()

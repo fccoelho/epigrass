@@ -4,7 +4,6 @@ Library of discrete time Epidemic models
 copyright 2012 Flávio Codeco Coelho
 License: GPL-v3
 """
-
 __author__ = 'fccoelho'
 
 from numpy.random import poisson, negative_binomial
