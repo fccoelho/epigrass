@@ -13,7 +13,7 @@ class testObjInstantiation(unittest.TestCase):
     def setUp(self):
         self.sitios = loadData('sitios3.csv', sep=',')
         self.ed = loadData('edgesout.csv', sep=',')
-        self.S = simulate('flu.epg')
+        self.S = Simulate('flu.epg')
 
     def tearDown(self):
         if os.path.exists('demos/outdata-flu'):
@@ -61,10 +61,10 @@ class testObjInstantiation(unittest.TestCase):
 #        pass
 #
 #    def test_mesh_epg(self):
-#        S = simulate('mesh.epg',silent=True)
+#        S = Simulate('mesh.epg',silent=True)
 #        S.start()
 #    def test_custom_model(self):
-#        S = simulate('sars.epg',silent=True)
+#        S = Simulate('sars.epg',silent=True)
 #        S.start()
 #    def tearDown(self):
 #        if os.path.exists('outdata-mesh'):

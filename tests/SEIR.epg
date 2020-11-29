@@ -22,6 +22,7 @@
 sites = sitios3.csv
 edges = edgesout.csv
 encoding = utf-8
+shapefile = ['riozonas_LatLong.gpkg','NOME_ZONAS','ZONA_TRAFE']
 
 #==============================================================#
 [EPIDEMIOLOGICAL MODEL]
@@ -132,8 +133,8 @@ outdir =
 
 
 # Database Output
-# MySQLout can be 0 (no database output) or 1
-MySQLout = 1 
+# sqlout can be 0 (no database output) or 1
+sqlout = 1
 
 
 # Report Generation

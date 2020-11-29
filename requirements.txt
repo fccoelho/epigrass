@@ -13,5 +13,6 @@ tqdm
 Cython
 dbfread
 pweave
+pymysql
 fiona
 shapely

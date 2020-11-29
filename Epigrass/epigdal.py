@@ -17,6 +17,7 @@ import geopandas as gpd
 import fiona
 from zipfile import ZipFile
 import json
+import copy
 from shapely.geometry import Point, LineString
 
 
@@ -44,6 +45,24 @@ class NewWorld:
             self.driver = source.driver
             self.crs = source.crs
             self.map = gpd.read_file(filename, layer=source.name)
+
+    @property
+    def nodes(self):
+        if not self.nodesource:
+            self.create_node_layer()
+        return gpd.read_file(os.path.join(self.outdir, 'Nodes.gpkg'))
+
+    @property
+    def edges(self):
+        if not self.edgesource:
+            self.create_edge_layer()
+        return gpd.read_file(os.path.join(self.outdir, 'Edges.gpkg'))
+
+    @property
+    def data(self):
+        if not self.datasource:
+            self.create_data_layer()
+        return gpd.read_file(os.path.join(self.outdir, 'Data.gpkg'))
 
     def get_layer_list(self):
         return self.layers
@@ -85,6 +104,7 @@ class NewWorld:
         polygons belonging to the map layer associated with this
         world instance.
         """
+        self.get_node_list()
         if os.path.exists(os.path.join(self.outdir, 'Nodes.gpkg')):
             os.remove(os.path.join(self.outdir, 'Nodes.gpkg'))
         if not self.centdict:
@@ -131,6 +151,50 @@ class NewWorld:
 
         else:
             pass
+
+    def create_data_layer(self, varlist, data):
+        """
+        Creates a new layer to contain data about nodes, and saves it as a GPKG file
+
+        :param varlist: List of fields names associated with
+        the nodes: `['field1', field2, ...]`
+        :param data: List of lists whose first element is the geocode
+        and the remaining elements are values of the fields, in the
+        same order as they appear in varlist: `[[geocode, 'field1', field2, ...],...]`
+        """
+        data = array(data)
+        # building normalizers for each variable, except geocode
+        norms = [Normalize(c.min(), c.max()) for c in data[:, 1:].T]
+        if os.path.exists(os.path.join(self.outdir, 'Data.gpkg')):
+            os.remove(os.path.join(self.outdir, 'Data.gpkg'))
+        # Creates a new shape file to hold the data
+        if not self.datasource:
+            dsd = gpd.GeoDataFrame(columns=['geocode', 'name', 'colors']+varlist)
+
+            dsd['geocode'] = data[:, 0]
+            dsd['name'] = [self.namefield[gc] for gc in data[:, 0]]
+            dsd['colors'] = [str([self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]) for l in data]
+            for i, v in enumerate(varlist):
+                dsd[v] = data[:, i+3]
+            dsd.to_file(os.path.join(self.outdir, 'Data.gpkg'), driver='GPKG')
+            self.datasource = fiona.open(os.path.join(self.outdir, 'Data.gpkg'))
+        else:
+            pass
+
+    def gen_sites_file(self, fname):
+        """
+        This method generate a sites
+        csv file from the nodes extracted from the
+        map.
+        """
+        if not self.nodesource:
+            self.create_node_layer()
+        df = copy.copy(self.nodes)
+        fields = copy.copy(self.data)
+        del df['geometry']
+        field_list = [c for c in fields.columns if c not in ['geocode', 'name', 'colors']]
+        gpd.concat([df, fields[field_list]], axis=1)
+        df.to_csv(fname, index=False)
 
 
 class World:

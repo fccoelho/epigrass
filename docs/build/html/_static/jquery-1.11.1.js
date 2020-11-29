@@ -4861,7 +4861,7 @@ jQuery.event = {
 	},
 
 	simulate: function( type, elem, event, bubble ) {
-		// Piggyback on a donor event to simulate a different one.
+		// Piggyback on a donor event to Simulate a different one.
 		// Fake originalEvent to avoid donor's stopPropagation, but if the
 		// simulated event prevents default then we do the same on the donor.
 		var e = jQuery.extend(
@@ -8913,7 +8913,7 @@ jQuery.extend({
 	// Main method
 	ajax: function( url, options ) {
 
-		// If url is an object, simulate pre-1.5 signature
+		// If url is an object, Simulate pre-1.5 signature
 		if ( typeof url === "object" ) {
 			options = url;
 			url = undefined;

@@ -6,7 +6,6 @@ import fiona
 import pandas as pd
 
 
-
 class TestWorld(unittest.TestCase):
     def test_instantiation(self):
         w = World('../riozonas_LatLong.shp', 'nome_zonas', 'zona_trafe')
@@ -19,7 +18,7 @@ class TestWorld(unittest.TestCase):
         layers = w.get_layer_list()
         self.assertIsInstance(layers, list)
         if len(layers):
-            self.assertIsInstance(layers[0],str)
+            self.assertIsInstance(layers[0], str)
 
     def test_create_node_layer(self):
         w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
@@ -31,13 +30,22 @@ class TestWorld(unittest.TestCase):
     def test_create_edge_layer(self):
         w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
         w.get_node_list()
-        cols = ['COD_ORIGEM','COD_DESTINO','flowOD','flowDO']
+        cols = ['COD_ORIGEM', 'COD_DESTINO', 'flowOD', 'flowDO']
         edges = pd.read_csv('../edgesRIO.csv', usecols=cols)
         elist = edges[cols].values.tolist()
         w.create_edge_layer(elist)
         self.assertIsInstance(w.edgesource, fiona.Collection)
         os.remove('Edges.gpkg')
 
+    def test_create_data_layer(self):
+        w = World('../riozonas_LatLong.shp', 'nome_zonas'.upper(), 'zona_trafe'.upper())
+        w.get_node_list()
+        cols = ['COD_ORIGEM', 'COD_DESTINO', 'flowOD', 'flowDO']
+        edges = pd.read_csv('../edgesRIO.csv', usecols=cols)
+        elist = edges[cols].values.tolist()
+        w.create_edge_layer(elist)
+        self.assertIsInstance(w.edgesource, fiona.Collection)
+        os.remove('Edges.gpkg')
 
     @unittest.skip
     def test_kml(self):

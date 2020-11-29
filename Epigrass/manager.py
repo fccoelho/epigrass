@@ -28,14 +28,14 @@ from Epigrass import __version__
 import requests
 import hashlib
 import redis
-import six
-from six.moves import range
-from six.moves import zip
-from six.moves import input
+# import six
+# from six.moves import range
+# from six.moves import zip
+# from six.moves import input
 
 redisclient = redis.StrictRedis()
 
-class simulate:
+class Simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
     """
@@ -949,9 +949,9 @@ def onStraightRun(args):
     Runs the model from the commandline
     """
     if args.backend == "mysql":
-        S = simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
+        S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
     else:
-        S = simulate(fname=args.epg[0], backend=args.backend)
+        S = Simulate(fname=args.epg[0], backend=args.backend)
     S.parallel = args.parallel
     if not S.replicas:
         S.start()
@@ -971,7 +971,7 @@ def onStraightRun(args):
             # delete the old graph object to save memory
             S.graph = None
             # Generates the simulation object
-            T = simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
+            T = Simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
 
             print('starting model %s' % i)
             T.start()  # Start the simulation
@@ -996,7 +996,7 @@ def repRuns(S):
     reps = S.replicas
     for i in range(reps):
         print("Starting replicate number %s" % i)
-        S = simulate(fname=fname, host=host, user=user, password=password, backend=backend)
+        S = Simulate(fname=fname, host=host, user=user, password=password, backend=backend)
         if randseed:
             S.setSeed(seeds[i], nseeds)
         S.round = i
@@ -1012,7 +1012,7 @@ def upload_model(args):
     """
     username = input("Enter your epigrass Web User id:")
     passwd = getpass("Enter your Epigrass Web password:")
-    S = simulate(fname=args.epg[0], backend=args.backend)
+    S = Simulate(fname=args.epg[0], backend=args.backend)
 
     app_url = "http://app.epigrass.net/simulations/view/new/"  # creating the app id
     r = requests.get(app_url, auth=(username, passwd))
