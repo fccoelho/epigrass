@@ -28,9 +28,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed some extra bugs">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added parellelism to edge migration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/mesh.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/mesh.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -434,7 +440,8 @@
       <workItem from="1606407174548" duration="7991000" />
       <workItem from="1606659770643" duration="19948000" />
       <workItem from="1606740259026" duration="23000" />
-      <workItem from="1606824584672" duration="2271000" />
+      <workItem from="1606824584672" duration="5628000" />
+      <workItem from="1606906540052" duration="1075000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -653,7 +660,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606679818246</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Added parellelism to edge migration">
+      <created>1606899929470</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1606899929470</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +694,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed more bugs related with porting to python3" />
     <MESSAGE value="Fixed redis issues arisen from migration to python3" />
     <MESSAGE value="Fixed graph exporting" />
     <MESSAGE value="minor changes" />
@@ -705,37 +718,38 @@
     <MESSAGE value="Finished implementing NewWorld class&#10;resolves #4" />
     <MESSAGE value="Fixed remaining bugs associated with the NewWorld class" />
     <MESSAGE value="Fixed some extra bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some extra bugs" />
+    <MESSAGE value="Added parellelism to edge migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added parellelism to edge migration" />
   </component>
   <component name="WindowStateProjectService">
     <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606663967567">
       <screen x="72" y="27" width="1428" height="973" />
     </state>
     <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1428.973@72.27.1428.973" timestamp="1606663967567" />
-    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2" timestamp="1606679818112">
-      <screen x="72" y="27" width="1428" height="973" />
+    <state x="588" y="31" width="713" height="887" key="CommitChangelistDialog2" timestamp="1606899929355">
+      <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1606414557580" />
+    <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1606899929355" />
     <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2/72.27.1428.973@72.27.1428.973" timestamp="1606679818112" />
-    <state width="1382" height="239" key="GridCell.Tab.0.bottom" timestamp="1606676924576">
-      <screen x="72" y="27" width="1428" height="973" />
+    <state width="2896" height="439" key="GridCell.Tab.0.bottom" timestamp="1606906820595">
+      <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="439" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606906820595" />
     <state width="1382" height="239" key="GridCell.Tab.0.bottom/72.27.1428.973@72.27.1428.973" timestamp="1606676924576" />
-    <state width="1382" height="239" key="GridCell.Tab.0.center" timestamp="1606676924575">
-      <screen x="72" y="27" width="1428" height="973" />
+    <state width="2896" height="439" key="GridCell.Tab.0.center" timestamp="1606906820594">
+      <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="439" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606906820594" />
     <state width="1382" height="239" key="GridCell.Tab.0.center/72.27.1428.973@72.27.1428.973" timestamp="1606676924575" />
-    <state width="1382" height="239" key="GridCell.Tab.0.left" timestamp="1606676924574">
-      <screen x="72" y="27" width="1428" height="973" />
+    <state width="2896" height="439" key="GridCell.Tab.0.left" timestamp="1606906820593">
+      <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197065" />
+    <state width="2896" height="439" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606906820593" />
     <state width="1382" height="239" key="GridCell.Tab.0.left/72.27.1428.973@72.27.1428.973" timestamp="1606676924574" />
-    <state width="1382" height="239" key="GridCell.Tab.0.right" timestamp="1606676924575">
-      <screen x="72" y="27" width="1428" height="973" />
+    <state width="2896" height="439" key="GridCell.Tab.0.right" timestamp="1606906820595">
+      <screen x="0" y="0" width="3000" height="1900" />
     </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
+    <state width="2896" height="439" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606906820595" />
     <state width="1382" height="239" key="GridCell.Tab.0.right/72.27.1428.973@72.27.1428.973" timestamp="1606676924575" />
     <state width="1382" height="301" key="GridCell.Tab.1.bottom" timestamp="1606669025883">
       <screen x="72" y="27" width="1428" height="973" />
@@ -802,7 +816,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1606676911512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1606675452857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1606906679920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_for_tests_testObjInstantiation_test_report.coverage" NAME="Nosetests for tests.testObjInstantiation.test_report Coverage Results" MODIFIED="1586872764787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606668720181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1606664406873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />

@@ -1,2 +1,323 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><graph edgedefault="directed"></graph></graphml>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d1" for="node" attr.name="time" attr.type="long"/>
+<key id="d0" for="node" attr.name="name" attr.type="string"/>
+<graph edgedefault="directed"><node id="4550603">
+  <data key="d0">Rodoviaria</data>
+  <data key="d1">1</data>
+</node>
+<node id="4550708">
+  <data key="d0">Av. Chile</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550803">
+  <data key="d0">Estacio</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550904">
+  <data key="d0">Sao Salvador</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550906">
+  <data key="d0">Morro da Viuva</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550908">
+  <data key="d0">General Glicerio</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551001">
+  <data key="d0">Leme</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551108">
+  <data key="d0">Hipica</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551114">
+  <data key="d0">Vidigal</data>
+  <data key="d1">2</data>
+</node>
+<node id="4551309">
+  <data key="d0">Sumare</data>
+  <data key="d1">2</data>
+</node>
+<node id="4550702">
+  <data key="d0">Mal.Floriano</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550704">
+  <data key="d0">1o. de marco</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550705">
+  <data key="d0">Aerop.S.Dumont</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550706">
+  <data key="d0">Alm. Barroso</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550709">
+  <data key="d0">Cruz Vermelha</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550801">
+  <data key="d0">Sambodromo</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550804">
+  <data key="d0">Rio Comprido 1</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550805">
+  <data key="d0">Rio Comprido 2</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550909">
+  <data key="d0">Cosme Velho</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551106">
+  <data key="d0">Fonte da Saudade</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551107">
+  <data key="d0">Parque Lage</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551308">
+  <data key="d0">Alto da Boa Vista</data>
+  <data key="d1">3</data>
+</node>
+<node id="4551310">
+  <data key="d0">Vista Chinesa</data>
+  <data key="d1">3</data>
+</node>
+<node id="4552601">
+  <data key="d0">Paqueta</data>
+  <data key="d1">3</data>
+</node>
+<node id="4550701">
+  <data key="d0">Av.Passos</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550703">
+  <data key="d0">Candelaria</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550707">
+  <data key="d0">Passeio Publico</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550710">
+  <data key="d0">Praca da Republica</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550711">
+  <data key="d0">Central do Brasil</data>
+  <data key="d1">4</data>
+</node>
+<node id="4551105">
+  <data key="d0">Morro da Catacumba</data>
+  <data key="d1">4</data>
+</node>
+<node id="4553301">
+  <data key="d0">Rocinha</data>
+  <data key="d1">4</data>
+</node>
+<node id="4550602">
+  <data key="d0">Santo Cristo 2</data>
+  <data key="d1">5</data>
+</node>
+<node id="4550604">
+  <data key="d0">Santo Cristo</data>
+  <data key="d1">5</data>
+</node>
+<node id="4550605">
+  <data key="d0">Praca Maua</data>
+  <data key="d1">5</data>
+</node>
+<node id="4550802">
+  <data key="d0">Piranhao</data>
+  <data key="d1">5</data>
+</node>
+<node id="4550806">
+  <data key="d0">Campos da Paz</data>
+  <data key="d1">5</data>
+</node>
+<node id="4552802">
+  <data key="d0">Santa Tereza</data>
+  <data key="d1">5</data>
+</node>
+<node id="4550902">
+  <data key="d0">Gloria</data>
+  <data key="d1">6</data>
+</node>
+<node id="4552803">
+  <data key="d0">Andre Cavalcanti</data>
+  <data key="d1">7</data>
+</node>
+<edge source="4550708" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550803" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550904" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550906" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550908" target="4550603" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4551001" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551108" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551114" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551309" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550702" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550704" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550704" target="4551001" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550705" target="4550603" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4550705" target="4551114" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550706" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550709" target="4550906" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550801" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550804" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550805" target="4551114" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550909" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550909" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551106" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551107" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551308" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551310" target="4550603" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4552601" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4552601" target="4550803" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4550701" target="4550709" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550701" target="4550803" id="0">
+  <data key="d2">4.0</data>
+</edge>
+<edge source="4550701" target="4550805" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550701" target="4550906" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550703" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550703" target="4550709" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550703" target="4551114" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550707" target="4550709" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550707" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550710" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550711" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551105" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4551105" target="4550904" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4553301" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550602" target="4550709" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550602" target="4550804" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550604" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550604" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550604" target="4550804" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550605" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550802" target="4550908" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550806" target="4550803" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4552802" target="4550603" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4552802" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4550902" target="4550803" id="0">
+  <data key="d2">1.0</data>
+</edge>
+<edge source="4552803" target="4550803" id="0">
+  <data key="d2">2.0</data>
+</edge>
+<edge source="4552803" target="4551106" id="0">
+  <data key="d2">1.0</data>
+</edge>
+</graph></graphml>

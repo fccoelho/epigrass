@@ -18,6 +18,7 @@ import pandas as pd
 import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
+from Epigrass import simobj
 from Epigrass import spread
 from Epigrass.data_io import *
 from Epigrass import epigdal
@@ -27,8 +28,11 @@ import requests
 import hashlib
 import redis
 import pickle
+import multiprocessing
 
 redisclient = redis.StrictRedis()
+
+
 
 
 class Simulate:
@@ -856,11 +860,12 @@ class Simulate:
         :param iterations: how many time steps to simulate
         :param transp: include the flow in the simulation
         """
+
         g = graphobj
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-        migrate = lambda e: e.migrate()
+
 
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
@@ -869,7 +874,9 @@ class Simulate:
                 results = [i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
-                    g.po.map(migrate, edges)
+                    # flows = PO.map(migrate, edges)
+                    for j in edges:
+                        j.migrate()
                 else:
                     for j in edges:
                         j.migrate()
@@ -886,6 +893,9 @@ class Simulate:
 
                 g.simstep += 1
 
+
+
+
     def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
@@ -893,6 +903,9 @@ class Simulate:
         if self.silent:
             return
         print(string + '\r')
+
+def migrate(edge):
+    return edge.migrate()
 
 
 def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
@@ -1038,6 +1051,14 @@ def main():
     else:
         onStraightRun(args)
 
+def end_pools():
+    PO.close()
+    PO.terminate()
+    simobj.PO.close()
+    simobj.PO.terminate()
 
+PO = multiprocessing.Pool()
 if __name__ == '__main__':
+    import atexit
+    atexit.register(end_pools)
     main()
