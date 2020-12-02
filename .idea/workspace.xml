@@ -28,23 +28,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed remaining bugs associated with the NewWorld class">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed some extra bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/sars.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/sars.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/rio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sars.epg" beforeDir="false" afterPath="$PROJECT_DIR$/sars.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +62,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dashboard" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="JupyterTrust" id="5508c583-bdd6-4285-9ebf-e35235bb520e" />
   <component name="MacroExpansionManager">
@@ -118,7 +103,7 @@
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Nosetests in test_models.py">
+  <component name="RunManager" selected="Python tests.Nosetests in tests.py">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -395,8 +380,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python tests.Nosetests in tests.py" />
+        <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python tests.Nosetests in test_epigdal.py" />
         <item itemvalue="Python tests.Nosetests in test_manager.py" />
         <item itemvalue="Python tests.Nosetests for tests.testObjInstantiation.test_report" />
@@ -447,7 +432,9 @@
       <workItem from="1606379378257" duration="3119000" />
       <workItem from="1606389962187" duration="2500000" />
       <workItem from="1606407174548" duration="7991000" />
-      <workItem from="1606659770643" duration="19610000" />
+      <workItem from="1606659770643" duration="19948000" />
+      <workItem from="1606740259026" duration="23000" />
+      <workItem from="1606824584672" duration="2271000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -659,7 +646,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606673631401</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Fixed some extra bugs">
+      <created>1606679818246</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1606679818246</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,7 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed bugs in dgraph" />
     <MESSAGE value="fixed more bugs related with porting to python3" />
     <MESSAGE value="Fixed redis issues arisen from migration to python3" />
     <MESSAGE value="Fixed graph exporting" />
@@ -711,18 +704,19 @@
     <MESSAGE value="More work on issue #4" />
     <MESSAGE value="Finished implementing NewWorld class&#10;resolves #4" />
     <MESSAGE value="Fixed remaining bugs associated with the NewWorld class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed remaining bugs associated with the NewWorld class" />
+    <MESSAGE value="Fixed some extra bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some extra bugs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606663967567">
       <screen x="72" y="27" width="1428" height="973" />
     </state>
     <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1428.973@72.27.1428.973" timestamp="1606663967567" />
-    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2" timestamp="1606673631137">
+    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2" timestamp="1606679818112">
       <screen x="72" y="27" width="1428" height="973" />
     </state>
     <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1606414557580" />
-    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2/72.27.1428.973@72.27.1428.973" timestamp="1606673631137" />
+    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2/72.27.1428.973@72.27.1428.973" timestamp="1606679818112" />
     <state width="1382" height="239" key="GridCell.Tab.0.bottom" timestamp="1606676924576">
       <screen x="72" y="27" width="1428" height="973" />
     </state>
@@ -775,11 +769,11 @@
       <screen x="0" y="0" width="3000" height="1900" />
     </state>
     <state x="361" y="125" key="SettingsEditor/0.0.3000.1900@0.0.3000.1900" timestamp="1606379534191" />
-    <state x="353" y="185" width="800" height="532" key="Vcs.Push.Dialog.v2" timestamp="1606673634289">
+    <state x="353" y="174" width="800" height="532" key="Vcs.Push.Dialog.v2" timestamp="1606679824249">
       <screen x="72" y="27" width="1428" height="973" />
     </state>
     <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1606414559986" />
-    <state x="353" y="185" width="800" height="532" key="Vcs.Push.Dialog.v2/72.27.1428.973@72.27.1428.973" timestamp="1606673634289" />
+    <state x="353" y="174" width="800" height="532" key="Vcs.Push.Dialog.v2/72.27.1428.973@72.27.1428.973" timestamp="1606679824249" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

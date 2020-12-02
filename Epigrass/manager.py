@@ -852,12 +852,15 @@ class Simulate:
     def runGraph(self, graphobj, iterations=1, transp=1):
         """
         Starts the simulation on a graph.
+        :param graphobj: The graph to run
+        :param iterations: how many time steps to simulate
+        :param transp: include the flow in the simulation
         """
         g = graphobj
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-        #        g.sites_done = 0
+        migrate = lambda e: e.migrate()
 
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
@@ -866,37 +869,30 @@ class Simulate:
                 results = [i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
-                for j in edges:
-                    j.migrate()
-                if self.gui:
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
+                    g.po.map(migrate, edges)
+                else:
+                    for j in edges:
+                        j.migrate()
+
                 g.simstep += 1
                 g.sites_done = 0
         else:
             for n in tqdm(range(iterations), desc='Simulation steps'):
+                results = []
                 for i in tqdm(sites, desc='Sites'):
-                    i.runModel(self.parallel)
-                if self.gui:
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
-                    self.gui.RT.mutex.lock()
-                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep,
-                                     dict([(s.geocode, s.incidence[-1]) for s in sites]))
-                    self.gui.RT.mutex.unlock()
+                    results.append(i.runModel(self.parallel))
+                if self.parallel:
+                    [r.wait() for r in results]
+
                 g.simstep += 1
 
     def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
         """
-        if self.gui:
-            self.gui.textEdit1.insertPlainText(string + '\n''')
-        else:
-            if self.silent:
-                return
-            print()
-            string + '\n'
+        if self.silent:
+            return
+        print(string + '\r')
 
 
 def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
