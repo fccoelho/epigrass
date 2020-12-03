@@ -371,7 +371,7 @@ class Simulate:
         if '/' in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
         #        print "====>", self.gui
-        time.sleep(10)
+        # time.sleep(10)
         print('Simulation starting.')
         start = time.time()
         self.runGraph(self.g, self.steps, transp=self.doTransp)

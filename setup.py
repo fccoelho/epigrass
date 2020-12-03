@@ -2,7 +2,8 @@ from setuptools import setup
 from Cython.Build import cythonize
 from Epigrass.__version__ import version
 
-
+with open('requirements.txt') as f:
+    reqs = [p.strip() for p in f.readlines()]
 
 setup(name='epigrass',
       version=version,
@@ -17,8 +18,7 @@ setup(name='epigrass',
       license='GPL',
       packages=['Epigrass'],
       setup_requires=['cython'],
-      install_requires=["numpy >= 1.2", "networkx >= 1.1", "SQLAlchemy >= 0.7", "sqlsoup", "redis >= 2.4", "requests",
-                        "dbfread"],
+      install_requires=reqs,
       entry_points={
           'console_scripts': [
               'epirunner = Epigrass.manager:main',
