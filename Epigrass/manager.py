@@ -8,7 +8,7 @@ import time
 from copy import deepcopy
 from collections import OrderedDict
 from argparse import ArgumentParser
-import six.moves.configparser
+from configparser import ConfigParser
 import json
 import sqlite3
 import os
@@ -87,7 +87,7 @@ class Simulate:
         """
         config = {}
         config = config.copy()
-        cp = six.moves.configparser.SafeConfigParser()
+        cp = ConfigParser()
         cp.read(fname)
         for sec in cp.sections():
             name = sec.lower()
@@ -102,7 +102,7 @@ class Simulate:
         try:
             # WORLD
             # load Shapefile if specified
-            if config['the world.shapefile']:
+            if config.get('the world.shapefile', False):
                 self.shapefile = eval(config['the world.shapefile'])
             else:
                 self.shapefile = []

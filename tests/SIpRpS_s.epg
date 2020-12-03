@@ -22,6 +22,7 @@
 sites = sitios3.csv
 edges = edgesout.csv
 encoding = utf-8
+shapefile = []
 
 #==============================================================#
 [EPIDEMIOLOGICAL MODEL]
