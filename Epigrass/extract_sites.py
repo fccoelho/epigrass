@@ -4,9 +4,12 @@ This script generates a sites file compatible with the shapefile used in the pro
 
 from argparse import ArgumentParser
 from dbfread import DBF
+import pandas as pd
 
-def extract_data(**args):
+def extract_data(shapefile, **args):
     table = DBF(shapefile.split('.')[0]+'.dbf')
+    sites = pd.DataFrame(list(table))
+    return sites
 
 
 

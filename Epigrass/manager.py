@@ -8,7 +8,7 @@ import time
 from copy import deepcopy
 from collections import OrderedDict
 from argparse import ArgumentParser
-import six.moves.configparser
+from configparser import ConfigParser
 import json
 import sqlite3
 import os
@@ -18,6 +18,7 @@ import pandas as pd
 import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
+from Epigrass import simobj
 from Epigrass import spread
 from Epigrass.data_io import *
 from Epigrass import epigdal
@@ -27,8 +28,11 @@ import requests
 import hashlib
 import redis
 import pickle
+import multiprocessing
 
 redisclient = redis.StrictRedis()
+
+
 
 
 class Simulate:
@@ -83,7 +87,7 @@ class Simulate:
         """
         config = {}
         config = config.copy()
-        cp = six.moves.configparser.SafeConfigParser()
+        cp = ConfigParser()
         cp.read(fname)
         for sec in cp.sections():
             name = sec.lower()
@@ -98,7 +102,7 @@ class Simulate:
         try:
             # WORLD
             # load Shapefile if specified
-            if config['the world.shapefile']:
+            if config.get('the world.shapefile', False):
                 self.shapefile = eval(config['the world.shapefile'])
             else:
                 self.shapefile = []
@@ -367,7 +371,7 @@ class Simulate:
         if '/' in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
         #        print "====>", self.gui
-        time.sleep(10)
+        # time.sleep(10)
         print('Simulation starting.')
         start = time.time()
         self.runGraph(self.g, self.steps, transp=self.doTransp)
@@ -852,12 +856,16 @@ class Simulate:
     def runGraph(self, graphobj, iterations=1, transp=1):
         """
         Starts the simulation on a graph.
+        :param graphobj: The graph to run
+        :param iterations: how many time steps to simulate
+        :param transp: include the flow in the simulation
         """
+
         g = graphobj
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-        #        g.sites_done = 0
+
 
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
@@ -866,37 +874,38 @@ class Simulate:
                 results = [i.runModel(self.parallel) for i in sites]
                 if self.parallel:
                     [r.wait() for r in results]
-                for j in edges:
-                    j.migrate()
-                if self.gui:
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
+                    # flows = PO.map(migrate, edges)
+                    for j in edges:
+                        j.migrate()
+                else:
+                    for j in edges:
+                        j.migrate()
+
                 g.simstep += 1
                 g.sites_done = 0
         else:
             for n in tqdm(range(iterations), desc='Simulation steps'):
+                results = []
                 for i in tqdm(sites, desc='Sites'):
-                    i.runModel(self.parallel)
-                if self.gui:
-                    self.gui.stepLCD.display(g.simstep)
-                    self.gui.app.processEvents()
-                    self.gui.RT.mutex.lock()
-                    self.gui.RT.emit(self.gui.QtCore.SIGNAL("drawStep"), g.simstep,
-                                     dict([(s.geocode, s.incidence[-1]) for s in sites]))
-                    self.gui.RT.mutex.unlock()
+                    results.append(i.runModel(self.parallel))
+                if self.parallel:
+                    [r.wait() for r in results]
+
                 g.simstep += 1
+
+
+
 
     def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
         """
-        if self.gui:
-            self.gui.textEdit1.insertPlainText(string + '\n''')
-        else:
-            if self.silent:
-                return
-            print()
-            string + '\n'
+        if self.silent:
+            return
+        print(string + '\r')
+
+def migrate(edge):
+    return edge.migrate()
 
 
 def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
@@ -1042,6 +1051,14 @@ def main():
     else:
         onStraightRun(args)
 
+def end_pools():
+    PO.close()
+    PO.terminate()
+    simobj.PO.close()
+    simobj.PO.terminate()
 
+PO = multiprocessing.Pool()
 if __name__ == '__main__':
+    import atexit
+    atexit.register(end_pools)
     main()

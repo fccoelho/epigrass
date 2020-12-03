@@ -61,24 +61,26 @@ class testObjInstantiation(unittest.TestCase):
 
 
 
-#class TestSimulationRuns(unittest.TestCase):
-#    def setUp(self):
-#        os.chdir('demos/')
-##        self.sitios3 = loadData('sitios3.csv',sep=',')
-##        self.nodes = loadData('nodes.csv',sep=',')
-##        self.edgesout = loadData('edgesout.csv',sep=',')
-#        pass
-#
-#    def test_mesh_epg(self):
-#        S = Simulate('mesh.epg',silent=True)
-#        S.start()
-#    def test_custom_model(self):
-#        S = Simulate('sars.epg',silent=True)
-#        S.start()
-#    def tearDown(self):
-#        if os.path.exists('outdata-mesh'):
-#            os.system('rm -rf outdata-mesh')
-#        os.chdir('..')
+class TestSimulationRuns(unittest.TestCase):
+   def setUp(self):
+       os.chdir('demos/')
+#        self.sitios3 = loadData('sitios3.csv',sep=',')
+#        self.nodes = loadData('nodes.csv',sep=',')
+#        self.edgesout = loadData('edgesout.csv',sep=',')
+       pass
+
+   def test_mesh_epg(self):
+       S = Simulate('mesh.epg',silent=True)
+       S.start()
+   def test_custom_model(self):
+       S = Simulate('sars.epg',silent=True)
+       S.start()
+   def tearDown(self):
+       if os.path.exists('outdata-mesh'):
+           os.system('rm -rf outdata-mesh')
+       if os.path.exists('outdata-sars'):
+           os.system('rm -rf outdata-sars')
+       os.chdir('..')
 
 
 if __name__ == '__main__':

@@ -210,6 +210,7 @@ class NewWorld:
         field_list = [c for c in fields.columns if c not in ['geocode', 'name', 'colors']]
         gpd.concat([df, fields[field_list]], axis=1)
         df.to_csv(fname, index=False)
+        return df
 
 
 class World:
