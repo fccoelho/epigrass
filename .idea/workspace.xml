@@ -28,10 +28,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed remaining bugs associated with the NewWorld class">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Minor tweaking of the docs">
+      <change afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/Notebooks/Panelviz.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/overview.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/overview.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/Notebooks/mapviz.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/demos/Notebooks/mapviz.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +64,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dashboard" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="JupyterTrust" id="5508c583-bdd6-4285-9ebf-e35235bb520e" />
   <component name="MacroExpansionManager">
@@ -105,7 +105,7 @@
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Nosetests in test_models.py">
+  <component name="RunManager" selected="Python.epipanel">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -205,6 +205,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="epipanel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="epigrass" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Epigrass" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Epigrass/epipanel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="epigrass-code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -224,22 +246,6 @@
       <tasks />
       <arguments />
       <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="Nosetests for tests.testObjInstantiation.test_report" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <module name="epigrass" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_regexPattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.testObjInstantiation.test_report&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Nosetests in test_epigdal.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
@@ -374,19 +380,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Nosetests for tests.testObjInstantiation.test_report" />
       <item itemvalue="Python tests.Nosetests in test_epigdal.py" />
       <item itemvalue="Python tests.Nosetests in test_manager.py" />
       <item itemvalue="Python tests.Nosetests in test_models.py" />
       <item itemvalue="Python tests.Nosetests in tests.py" />
+      <item itemvalue="Python.epipanel" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.epipanel" />
         <item itemvalue="Python tests.Nosetests in tests.py" />
         <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python tests.Nosetests in test_manager.py" />
         <item itemvalue="Python tests.Nosetests in test_epigdal.py" />
-        <item itemvalue="Python tests.Nosetests for tests.testObjInstantiation.test_report" />
       </list>
     </recent_temporary>
   </component>
@@ -436,7 +442,7 @@
       <workItem from="1606407174548" duration="7991000" />
       <workItem from="1606659770643" duration="19610000" />
       <workItem from="1607092476336" duration="1525000" />
-      <workItem from="1607154405465" duration="634000" />
+      <workItem from="1607154405465" duration="41014000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -648,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606673631401</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Minor tweaking of the docs">
+      <created>1607155486705</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1607155486705</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +688,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed bugs in dgraph" />
     <MESSAGE value="fixed more bugs related with porting to python3" />
     <MESSAGE value="Fixed redis issues arisen from migration to python3" />
     <MESSAGE value="Fixed graph exporting" />
@@ -700,75 +712,8 @@
     <MESSAGE value="More work on issue #4" />
     <MESSAGE value="Finished implementing NewWorld class&#10;resolves #4" />
     <MESSAGE value="Fixed remaining bugs associated with the NewWorld class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed remaining bugs associated with the NewWorld class" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606663967567">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state x="495" y="307" width="577" height="400" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1428.973@72.27.1428.973" timestamp="1606663967567" />
-    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2" timestamp="1606673631137">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state x="588" y="31" width="1833" height="1869" key="CommitChangelistDialog2/0.0.3000.1900@0.0.3000.1900" timestamp="1606414557580" />
-    <state x="352" y="16" width="713" height="887" key="CommitChangelistDialog2/72.27.1428.973@72.27.1428.973" timestamp="1606673631137" />
-    <state width="1382" height="239" key="GridCell.Tab.0.bottom" timestamp="1606676924576">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
-    <state width="1382" height="239" key="GridCell.Tab.0.bottom/72.27.1428.973@72.27.1428.973" timestamp="1606676924576" />
-    <state width="1382" height="239" key="GridCell.Tab.0.center" timestamp="1606676924575">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
-    <state width="1382" height="239" key="GridCell.Tab.0.center/72.27.1428.973@72.27.1428.973" timestamp="1606676924575" />
-    <state width="1382" height="239" key="GridCell.Tab.0.left" timestamp="1606676924574">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197065" />
-    <state width="1382" height="239" key="GridCell.Tab.0.left/72.27.1428.973@72.27.1428.973" timestamp="1606676924574" />
-    <state width="1382" height="239" key="GridCell.Tab.0.right" timestamp="1606676924575">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="441" key="GridCell.Tab.0.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606414197066" />
-    <state width="1382" height="239" key="GridCell.Tab.0.right/72.27.1428.973@72.27.1428.973" timestamp="1606676924575" />
-    <state width="1382" height="301" key="GridCell.Tab.1.bottom" timestamp="1606669025883">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="558" key="GridCell.Tab.1.bottom/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431459" />
-    <state width="1382" height="301" key="GridCell.Tab.1.bottom/72.27.1428.973@72.27.1428.973" timestamp="1606669025883" />
-    <state width="1382" height="301" key="GridCell.Tab.1.center" timestamp="1606669025881">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="558" key="GridCell.Tab.1.center/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431458" />
-    <state width="1382" height="301" key="GridCell.Tab.1.center/72.27.1428.973@72.27.1428.973" timestamp="1606669025881" />
-    <state width="1382" height="301" key="GridCell.Tab.1.left" timestamp="1606669025881">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="558" key="GridCell.Tab.1.left/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431458" />
-    <state width="1382" height="301" key="GridCell.Tab.1.left/72.27.1428.973@72.27.1428.973" timestamp="1606669025881" />
-    <state width="1382" height="301" key="GridCell.Tab.1.right" timestamp="1606669025882">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state width="2896" height="558" key="GridCell.Tab.1.right/0.0.3000.1900@0.0.3000.1900" timestamp="1606413431459" />
-    <state width="1382" height="301" key="GridCell.Tab.1.right/72.27.1428.973@72.27.1428.973" timestamp="1606669025882" />
-    <state x="290" y="153" key="MergeDialog" timestamp="1606392056972">
-      <screen x="0" y="0" width="3000" height="1900" />
-    </state>
-    <state x="290" y="153" key="MergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1606392056972" />
-    <state x="684" y="410" key="MultipleFileMergeDialog" timestamp="1606392056976">
-      <screen x="0" y="0" width="3000" height="1900" />
-    </state>
-    <state x="684" y="410" key="MultipleFileMergeDialog/0.0.3000.1900@0.0.3000.1900" timestamp="1606392056976" />
-    <state x="361" y="125" key="SettingsEditor" timestamp="1606379534191">
-      <screen x="0" y="0" width="3000" height="1900" />
-    </state>
-    <state x="361" y="125" key="SettingsEditor/0.0.3000.1900@0.0.3000.1900" timestamp="1606379534191" />
-    <state x="353" y="185" width="800" height="532" key="Vcs.Push.Dialog.v2" timestamp="1606673634289">
-      <screen x="72" y="27" width="1428" height="973" />
-    </state>
-    <state x="590" y="351" key="Vcs.Push.Dialog.v2/0.0.3000.1900@0.0.3000.1900" timestamp="1606414559986" />
-    <state x="353" y="185" width="800" height="532" key="Vcs.Push.Dialog.v2/72.27.1428.973@72.27.1428.973" timestamp="1606673634289" />
+    <MESSAGE value="Minor tweaking of the docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor tweaking of the docs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -799,6 +744,7 @@
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606668720181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1606664406873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1607156827215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1606676911512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1606675452857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
