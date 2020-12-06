@@ -33,8 +33,6 @@ import multiprocessing
 redisclient = redis.StrictRedis()
 
 
-
-
 class Simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
@@ -328,7 +326,7 @@ class Simulate:
         option: if 1 randomize; if 2, return unrundomized sequence
         """
         if option == 1:
-            poplist = [log10(site.totpop) for site in six.itervalues(self.g.site_dict)]
+            poplist = [log10(site.totpop) for site in self.g.site_dict.values()]
             lpl = len(poplist)
             popprob = array(poplist) / sum(poplist)  # acceptance probability
             u = floor(np.random.uniform(0, lpl, self.replicas))
@@ -417,15 +415,13 @@ class Simulate:
 
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
         sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
-                      float(site.totpop)) for site in six.itervalues(self.g.site_dict)]
+                      float(site.totpop)) for site in self.g.site_dict.values()]
         # simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield] + varlist)
         # print(self.World.map.info())
         self.World.map[self.World.geocfield] = self.World.map[self.World.geocfield].astype(int)
         # self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
         print('Saving results in the map Data.gpkg')
         self.World.create_data_layer(varlist, sitestats)
-
-
 
     def out_to_kml(self, names):
         """
@@ -462,7 +458,7 @@ class Simulate:
         """
         print('Saving series to JSON')
         series = {}
-        for gc, s in six.iteritems(self.g.site_dict):
+        for gc, s in self.g.site_dict.items():
             length = max(map(len, s.ts))
             # y = np.array([xi + ([None] * (length - len(xi))) for xi in s.ts])
             y = np.array([np.pad(xi, length, 'constant', constant_values=np.NaN) for xi in s.ts])
@@ -628,11 +624,11 @@ class Simulate:
             `time` INT( 9 ) ,
             `name` varchar(128) ,
             """
-            str2lite = """CREATE TABLE %s(
-            geocode INTEGER  ,
-            time INTEGER ,
-            name TEXT ,
-            """ % table
+            str2lite = f"""CREATE TABLE {table}(
+            geocode INTEGER,
+            time INTEGER,
+            name TEXT,
+            """
             sql = str2 + str1 + ');'
             sqlite = str2lite + str1lite + ');'
 
@@ -661,7 +657,7 @@ class Simulate:
                     flow = float(thist[t])
                     nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
                     t += 1
-            # print(nvalues)
+            print(nvalues[-1], len(ts[t]))
             Cursor.executemany(sql2, nvalues)
             con.commit()
             # Creating a table for edge data
@@ -686,7 +682,7 @@ class Simulate:
                 Cursor.execute(esqlite)
                 esql2 = 'INSERT INTO %s' % etable + ' VALUES(?,?,?,?,?)'
             values = []
-            for gcs, e in six.iteritems(self.g.edge_dict):
+            for gcs, e in self.g.edge_dict.items():
                 s = gcs[0]
                 d = gcs[1]
                 t = 0
@@ -709,7 +705,7 @@ class Simulate:
 
     def criaAdjMatrix(self):
         # saving the adjacency  matrix
-        codeslist = [str(i.geocode) for i in six.itervalues(self.g.site_dict)]
+        codeslist = [str(i.geocode) for i in self.g.site_dict.values()]
         if not os.path.exists('adjmat.csv'):
             print('Saving the adjacency  matrix...')
             am = self.g.getConnMatrix()
@@ -783,7 +779,7 @@ class Simulate:
         stats = [str(i) for i in self.g.getEpistats()]
 
         seed = \
-            [s for s in six.itervalues(self.g.site_dict) if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
+            [s for s in self.g.site_dict.values() if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
         stats.pop(1)  # Remove epispeed which is a vector
         if os.path.exists('epistats.csv'):
             stf = codecs.open('epistats.csv', 'a', self.encoding)  # append to file
@@ -814,7 +810,7 @@ class Simulate:
 
         # sitef.write('round,geocode,name,infection_time,degree,centrality,betweeness,theta_index,distance,seed,seedname\n')
         sitef.write('round,geocode,name,infection_time,degree,seed,seedname\n')
-        for s in six.itervalues(self.g.site_dict):
+        for s in self.g.site_dict.values():
             degree = str(s.getDegree())
             # central = str(s.getCentrality())
             # bet = str(s.getBetweeness())
@@ -866,7 +862,6 @@ class Simulate:
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
 
-
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
                 # print()
@@ -893,9 +888,6 @@ class Simulate:
 
                 g.simstep += 1
 
-
-
-
     def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
@@ -903,6 +895,7 @@ class Simulate:
         if self.silent:
             return
         print(string + '\r')
+
 
 def migrate(edge):
     return edge.migrate()
@@ -930,6 +923,10 @@ def onStraightRun(args):
     """
     Runs the model from the commandline
     """
+    from Epigrass import epipanel
+    if args.view_only:
+        pth = os.path.join(os.getcwd() + f'outdata-{args.epg[0].split(".")[0]}')
+        epipanel.show(pth)
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
     else:
@@ -942,7 +939,8 @@ def onStraightRun(args):
         R.Assemble(type=S.Rep)
     else:
         repRuns(S)
-
+    if args.dashboard:
+        epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
     if S.Batch:
         S.Say('Simulation Started.')
 
@@ -1036,6 +1034,10 @@ def main():
     parser.add_argument("--upload", help="Upload your models and latest simulation to Epigrass Web")
     parser.add_argument("-P", "--parallel", action="store_true", default=False,
                         dest="parallel", help="use multiprocessing to run the simulation")
+    parser.add_argument("-D", "--dashboard", action="store_true", default=False,
+                        dest="dashboard", help="Open dashboard on browser after th run is done.")
+    parser.add_argument("-V", "--view-only", action="store_true", default=False,
+                        dest="view_only", help="Only Open dashboard.")
     parser.add_argument("epg", metavar='EPG', nargs=1,
                         help='Epigrass model definition file (.epg).')
 
@@ -1046,10 +1048,8 @@ def main():
         parser.error('"%s" is an invalid backend type.' % args.backend)
     print('==> ', args.epg)
 
-    if args.upload:  # Only upload model
-        upload_model(args)
-    else:
-        onStraightRun(args)
+    onStraightRun(args)
+
 
 def end_pools():
     PO.close()
@@ -1057,8 +1057,10 @@ def end_pools():
     simobj.PO.close()
     simobj.PO.terminate()
 
+
 PO = multiprocessing.Pool()
 if __name__ == '__main__':
     import atexit
+
     atexit.register(end_pools)
     main()

@@ -31,20 +31,26 @@ def get_sims(fname):
 
 
 @lru_cache(maxsize=10)
-def read_simulation(fname, simulation_name):
+def read_simulation(fname, simulation_name, locality):
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
         return pd.DataFrame()
 
-    # print(f'sqlite:///{full_path}?check_same_thread=False', simulation_name)
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-    # con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
-    simdf = pd.read_sql_query(f'select * from {simulation_name}', con)
+    simdf = pd.read_sql_query(f"select * from {simulation_name} where name='{locality}'", con)
     simdf.fillna(0, inplace=True)
-    # print(simdf.head())
     return simdf
 
+@lru_cache(maxsize=10)
+def get_localities(fname, simulation_name):
+    full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
+    if not os.path.exists(full_path):
+        print(f'==> File {full_path} not found')
+        return []
+    con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
+    locs = pd.read_sql_query(f'select distinct name from {simulation_name}', con)
+    return [l[0] for l in locs.values]
 
 @lru_cache(maxsize=10)
 def read_map(fname):
@@ -84,13 +90,10 @@ class SeriesViewer(param.Parameterized):
 
     @param.depends('simulation_run', watch=True)
     def update_localities(self):
-        self.df = read_simulation(self.model_path, self.simulation_run)
-        if len(self.df) > 0:
-            self.param['time_slider'].bounds = (self.df.time.min(), self.df.time.max())
-            locs = self.df.name.unique()
-            self.param['localities'].objects = list(locs)
-            if locs.any():
-                self.localities = locs[0]
+        locs = get_localities(self.model_path, self.simulation_run)
+        self.param['localities'].objects = list(locs)
+        if locs:
+            self.localities = locs[0]
 
     @param.depends('map_selector')
     def view_map(self):
@@ -112,15 +115,14 @@ class SeriesViewer(param.Parameterized):
         if self.simulation_run is None:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         mapdf = read_map(os.path.join(self.model_path, 'Data.gpkg'))
-        df = read_simulation(self.model_path, self.simulation_run)
-
+        df = read_simulation(self.model_path, self.simulation_run, self.localities)
         if len(df) == 0:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         time = df.time.min()
-
+        self.param['time_slider'].bounds = (df.time.min(), df.time.max())
         variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
 
-        print('==> ', mapdf.columns)
+
         name_col = [c for c in mapdf if df.name[0] in list(mapdf[c])][0]
         mapa_t = pd.merge(mapdf, df[df.time == self.time_slider][['name', 'time'] + variables],
                           left_on=name_col, right_on='name')
@@ -168,7 +170,7 @@ material.main.append(
 material.servable();
 
 def show(pth):
-    series_viewer.model_path=pth
+    series_viewer.model_path = pth
     pn.serve(material, port=5006)
 
 if __name__ == "__main__":
