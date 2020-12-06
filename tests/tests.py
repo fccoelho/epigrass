@@ -11,11 +11,14 @@ from Epigrass.report import Report
 
 class testObjInstantiation(unittest.TestCase):
     def setUp(self):
+        self.curdir = os.getcwd()
+        os.chdir('./demos/')
         self.sitios = loadData('sitios3.csv', sep=',')
         self.edges = loadData('edgesout.csv', sep=',')
         self.S = Simulate('flu.epg')
 
     def tearDown(self):
+        os.chdir(self.curdir)
         if os.path.exists('demos/outdata-flu'):
             os.system('rm -rf demos/outdata-flu')
 
@@ -36,10 +39,10 @@ class testObjInstantiation(unittest.TestCase):
         l = self.S.instSites(self.sitios)
         e = self.S.instEdges(l, self.edges)
         g = self.S.instGraph('grafo', 1, l, e)
-        g.simstep=100
+        g.simstep = 100
         for edge in e:
             edge.migrate()
-            self.assertGreater(len(edge.dest.thetalist),0)
+            self.assertGreater(len(edge.dest.thetalist), 0)
 
     def testGraph(self):
         l = self.S.instSites(self.sitios)
@@ -60,27 +63,37 @@ class testObjInstantiation(unittest.TestCase):
         self.assertIn('Full Report', src)
 
 
-
 class TestSimulationRuns(unittest.TestCase):
-   def setUp(self):
-       os.chdir('demos/')
-#        self.sitios3 = loadData('sitios3.csv',sep=',')
-#        self.nodes = loadData('nodes.csv',sep=',')
-#        self.edgesout = loadData('edgesout.csv',sep=',')
-       pass
+    def setUp(self):
+        self.curdir = os.getcwd()
+        os.chdir('demos/')
+        #        self.sitios3 = loadData('sitios3.csv',sep=',')
+        #        self.nodes = loadData('nodes.csv',sep=',')
+        #        self.edgesout = loadData('edgesout.csv',sep=',')
+        pass
 
-   def test_mesh_epg(self):
-       S = Simulate('mesh.epg',silent=True)
-       S.start()
-   def test_custom_model(self):
-       S = Simulate('sars.epg',silent=True)
-       S.start()
-   def tearDown(self):
-       if os.path.exists('outdata-mesh'):
-           os.system('rm -rf outdata-mesh')
-       if os.path.exists('outdata-sars'):
-           os.system('rm -rf outdata-sars')
-       os.chdir('..')
+
+
+    def test_mesh_epg(self):
+        S = Simulate('mesh.epg', silent=True)
+        S.start()
+
+    def test_custom_model(self):
+        S = Simulate('sars.epg', silent=True)
+        S.start()
+
+
+    def test_custom_model_parallel(self):
+        S = Simulate('sars.epg', silent=True)
+        S.parallel = True
+        S.start()
+
+    def tearDown(self):
+        if os.path.exists('outdata-mesh'):
+            os.system('rm -rf outdata-mesh')
+        if os.path.exists('outdata-sars'):
+            os.system('rm -rf outdata-sars')
+        os.chdir('..')
 
 
 if __name__ == '__main__':

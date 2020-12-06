@@ -7,16 +7,22 @@ import sys
 import multiprocessing
 import time
 import json
-import numpy as np
+import os
 from numpy.random import binomial
 import networkx as NX
 from networkx.exception import NetworkXNoPath, NetworkXError
 from networkx.readwrite import json_graph
 import redis
-import six
 
 from Epigrass.data_io import *
 from Epigrass import epimodels
+
+try:
+    sys.path.insert(0, os.getcwd())
+    import CustomModel
+except ImportError as exc:
+    print("No Custom Model Available.")
+    CustomModel = None
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
 redisclient = redis.Redis(host='localhost', port=6379)
@@ -29,6 +35,7 @@ assert redisclient.ping()  # verify that redis server is running.
 sys.setrecursionlimit(3000)  # to allow pickling of custom models
 
 PO = multiprocessing.Pool(multiprocessing.cpu_count())
+
 
 class siteobj:
     """
@@ -71,7 +78,6 @@ class siteobj:
         self.thetahist = []  # infected arriving per time step
         self.passlist = []
         self.totalcases = 0
-
         self.vaccination = [[], []]  # time and coverage of vaccination event
         self.vaccineNow = 0  # flag to indicate that it is vaccination day
         self.vaccov = 0  # current vaccination coverage
@@ -112,8 +118,15 @@ class siteobj:
         self.values = v
         self.bi = bi
         self.bp = bp
-        self.model = epimodels.Epimodel(self.geocode, self.modtype)
-        self.vnames = epimodels.vnames[modtype]
+        if modtype in ['Custom', 'custom']:
+            if CustomModel is None:
+                raise ImportError(
+                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type")
+            self.model = CustomModel.Model
+            self.vnames = CustomModel.vnames
+        else:
+            self.model = epimodels.Epimodel(self.geocode, self.modtype)
+            self.vnames = epimodels.vnames[modtype]
         try:
             # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
             self.ts.append(list(bi.values()))  # This is fine since bi is an OrderedDict
@@ -419,7 +432,6 @@ class siteobj:
         return B
 
 
-
 class edge:
     """
     Defines an edge connecting two nodes (node source to node dest).
@@ -527,7 +539,6 @@ class graph(NX.MultiDiGraph):
         self.totQuarantined = 0
         self.dmap = 0  # draw the map in the background?
         self.printed = 0  # Printed the custom model docstring?
-        # self.po = multiprocessing.Pool(multiprocessing.cpu_count())
 
     @property
     def site_list(self):
@@ -633,7 +644,7 @@ class graph(NX.MultiDiGraph):
         """
         returns list of site names for a given graph.
         """
-        sitenames = [s.sitename for s in six.itervalues(self.site_dict)]
+        sitenames = [s.sitename for s in self.site_dict.values()]
 
         return sitenames
 
@@ -767,7 +778,6 @@ class graph(NX.MultiDiGraph):
             return NX.distance_measures.diameter(self)
         except NetworkXError:
             return np.inf
-
 
     def getIotaindex(self):
         """
@@ -942,14 +952,14 @@ class graph(NX.MultiDiGraph):
         """
         Returns the total number of vaccinated.
         """
-        tot = sum([i.nVaccinated for i in six.itervalues(self.site_dict)])
+        tot = sum([i.nVaccinated for i in self.site_dict.values()])
         return tot
 
     def getTotQuarantined(self):
         """
         Returns the total number of quarantined individuals.
         """
-        tot = sum([i.nQuarantined for i in six.itervalues(self.site_dict)])
+        tot = sum([i.nQuarantined for i in self.site_dict.values()])
         return tot
 
     def getEpistats(self):
@@ -978,7 +988,7 @@ class graph(NX.MultiDiGraph):
         """
         Returns the size of the epidemic
         """
-        N = sum([site.totalcases for site in six.itervalues(self.site_dict)])
+        N = sum([site.totalcases for site in self.site_dict.values()])
 
         return N
 
@@ -1012,9 +1022,9 @@ class graph(NX.MultiDiGraph):
         """
 
         g = NX.MultiDiGraph()
-        for gc, n in six.iteritems(self.site_dict):
+        for gc, n in self.site_dict.items():
             g.add_node(gc, name=n.sitename)
-        for ed, e in six.iteritems(self.edge_dict):
+        for ed, e in self.edge_dict.items():
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
         # print(g.nodes)
         # NX.write_graphml_lxml(g, pa)
@@ -1100,7 +1110,7 @@ class priorityDictionary(dict):
         dict.__setitem__(self, key, val)
         heap = self.__heap
         if len(heap) > 2 * len(self):
-            self.__heap = [(v, k) for k, v in six.iteritems(self)]
+            self.__heap = [(v, k) for k, v in self.items()]
             self.__heap.sort()  # builtin sort likely faster than O(n) heapify
         else:
             newPair = (val, key)

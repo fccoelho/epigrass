@@ -1090,52 +1090,6 @@ static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
 /* BytesEquals.proto */
 static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
 
-/* Import.proto */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
-
-/* GetTopmostException.proto */
-#if CYTHON_USE_EXC_INFO_STACK
-static _PyErr_StackItem * __Pyx_PyErr_GetTopmostException(PyThreadState *tstate);
-#endif
-
-/* PyThreadStateGet.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
-#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
-#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
-#else
-#define __Pyx_PyThreadState_declare
-#define __Pyx_PyThreadState_assign
-#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
-#endif
-
-/* SaveResetException.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_ExceptionSave(type, value, tb)  __Pyx__ExceptionSave(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#define __Pyx_ExceptionReset(type, value, tb)  __Pyx__ExceptionReset(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
-#else
-#define __Pyx_ExceptionSave(type, value, tb)   PyErr_GetExcInfo(type, value, tb)
-#define __Pyx_ExceptionReset(type, value, tb)  PyErr_SetExcInfo(type, value, tb)
-#endif
-
-/* PyErrExceptionMatches.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
-static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err);
-#else
-#define __Pyx_PyErr_ExceptionMatches(err)  PyErr_ExceptionMatches(err)
-#endif
-
-/* GetException.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_GetException(type, value, tb)  __Pyx__GetException(__pyx_tstate, type, value, tb)
-static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#else
-static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
-#endif
-
 /* ObjectGetItem.proto */
 #if CYTHON_USE_TYPE_SLOTS
 static CYTHON_INLINE PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject* key);
@@ -1180,6 +1134,9 @@ static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int 
 
 /* None.proto */
 static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname);
+
+/* Import.proto */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
 /* ImportFrom.proto */
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
@@ -1267,6 +1224,17 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
+/* PyThreadStateGet.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
+#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
+#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
+#else
+#define __Pyx_PyThreadState_declare
+#define __Pyx_PyThreadState_assign
+#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
+#endif
+
 /* PyErrFetchRestore.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
@@ -1321,21 +1289,11 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
-/* Print.proto */
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 /* GetAttr.proto */
 static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *, PyObject *);
-
-/* PrintOne.proto */
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
 
 /* Globals.proto */
 static PyObject* __Pyx_Globals(void);
@@ -1373,7 +1331,6 @@ int __pyx_module_is_main_Epigrass__epimodels = 0;
 /* Implementation of 'Epigrass.epimodels' */
 static PyObject *__pyx_builtin_object;
 static PyObject *__pyx_builtin_eval;
-static PyObject *__pyx_builtin_ImportError;
 static const char __pyx_k_[] = "";
 static const char __pyx_k_E[] = "E";
 static const char __pyx_k_I[] = "I";
@@ -1418,7 +1375,6 @@ static const char __pyx_k_Is4[] = "Is4";
 static const char __pyx_k_SIR[] = "SIR";
 static const char __pyx_k_SIS[] = "SIS";
 static const char __pyx_k_doc[] = "__doc__";
-static const char __pyx_k_end[] = "end";
 static const char __pyx_k_get[] = "get";
 static const char __pyx_k_inf[] = "inf";
 static const char __pyx_k_nan[] = "nan";
@@ -1451,7 +1407,6 @@ static const char __pyx_k_call[] = "__call__";
 static const char __pyx_k_dist[] = "dist";
 static const char __pyx_k_eval[] = "eval";
 static const char __pyx_k_exit[] = "exit";
-static const char __pyx_k_file[] = "file";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1470,7 +1425,6 @@ static const char __pyx_k_L2pos[] = "L2pos";
 static const char __pyx_k_L3pos[] = "L3pos";
 static const char __pyx_k_L4pos[] = "L4pos";
 static const char __pyx_k_Lpos2[] = "Lpos2";
-static const char __pyx_k_Model[] = "Model";
 static const char __pyx_k_S1pos[] = "S1pos";
 static const char __pyx_k_S2pos[] = "S2pos";
 static const char __pyx_k_S3pos[] = "S3pos";
@@ -1485,7 +1439,6 @@ static const char __pyx_k_items[] = "items";
 static const char __pyx_k_model[] = "model";
 static const char __pyx_k_npass[] = "npass";
 static const char __pyx_k_numpy[] = "numpy";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_redis[] = "redis";
 static const char __pyx_k_rpush[] = "rpush";
 static const char __pyx_k_state[] = "state";
@@ -1611,8 +1564,6 @@ static const char __pyx_k_sympt_age3[] = "sympt_age3";
 static const char __pyx_k_sympt_age4[] = "sympt_age4";
 static const char __pyx_k_totalcases[] = "{}:totalcases";
 static const char __pyx_k_vaccineNow[] = "vaccineNow";
-static const char __pyx_k_CustomModel[] = "CustomModel";
-static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_Infectantes[] = "Infectantes";
 static const char __pyx_k_StrictRedis[] = "StrictRedis";
 static const char __pyx_k_Susceptible[] = "Susceptible";
@@ -1636,15 +1587,12 @@ static const char __pyx_k_Epimodel_get_args_from_redis[] = "Epimodel.get_args_fr
 static const char __pyx_k_Defines_a_library_of_discrete_t[] = "\n    Defines a library of discrete time population models\n    ";
 static const char __pyx_k_Library_of_discrete_time_Epidem[] = "\nLibrary of discrete time Epidemic models\n\ncopyright 2012 Fl\303\241vio Codeco Coelho\nLicense: GPL-v3\n";
 static const char __pyx_k_Model_type_specified_in_epg_file[] = "Model type specified in .epg file is invalid";
-static const char __pyx_k_You_have_to_Create_a_CustomModel[] = "You have to Create a CustomModel.py file before you can select\nthe Custom model type";
 static PyObject *__pyx_kp_b_;
 static PyObject *__pyx_n_s_Comp_age1;
 static PyObject *__pyx_n_s_Comp_age2;
 static PyObject *__pyx_n_s_Comp_age3;
 static PyObject *__pyx_n_s_Comp_age4;
-static PyObject *__pyx_n_b_Custom;
 static PyObject *__pyx_n_s_Custom;
-static PyObject *__pyx_n_s_CustomModel;
 static PyObject *__pyx_kp_s_Defines_a_library_of_discrete_t;
 static PyObject *__pyx_n_s_E;
 static PyObject *__pyx_n_s_E1;
@@ -1681,7 +1629,6 @@ static PyObject *__pyx_n_s_Ig3;
 static PyObject *__pyx_n_s_Ig3pos;
 static PyObject *__pyx_n_s_Ig4;
 static PyObject *__pyx_n_s_Ig4pos;
-static PyObject *__pyx_n_s_ImportError;
 static PyObject *__pyx_n_s_Incub_age1;
 static PyObject *__pyx_n_s_Incub_age2;
 static PyObject *__pyx_n_s_Incub_age3;
@@ -1708,7 +1655,6 @@ static PyObject *__pyx_n_s_Lpos2;
 static PyObject *__pyx_n_s_Lpos2_esp;
 static PyObject *__pyx_n_s_Lpos_2;
 static PyObject *__pyx_n_s_Lpos_esp;
-static PyObject *__pyx_n_s_Model;
 static PyObject *__pyx_kp_s_Model_type_specified_in_epg_file;
 static PyObject *__pyx_n_s_N;
 static PyObject *__pyx_n_s_R;
@@ -1774,7 +1720,6 @@ static PyObject *__pyx_n_s_Sympt_age2;
 static PyObject *__pyx_n_s_Sympt_age3;
 static PyObject *__pyx_n_s_Sympt_age4;
 static PyObject *__pyx_n_s_Type;
-static PyObject *__pyx_kp_s_You_have_to_Create_a_CustomModel;
 static PyObject *__pyx_n_b_alpha;
 static PyObject *__pyx_n_s_alpha;
 static PyObject *__pyx_n_s_args;
@@ -1802,12 +1747,10 @@ static PyObject *__pyx_n_s_dist;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_b_e;
 static PyObject *__pyx_n_s_e;
-static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_epipath;
 static PyObject *__pyx_n_s_eval;
 static PyObject *__pyx_n_s_exit;
 static PyObject *__pyx_n_s_fccoelho;
-static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_b_g;
 static PyObject *__pyx_n_s_g;
@@ -1869,7 +1812,6 @@ static PyObject *__pyx_n_s_pp3;
 static PyObject *__pyx_n_b_pp4;
 static PyObject *__pyx_n_s_pp4;
 static PyObject *__pyx_n_s_prepare;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_prob;
 static PyObject *__pyx_n_s_qualname;
 static PyObject *__pyx_n_b_r;
@@ -4378,7 +4320,6 @@ static PyObject *__pyx_pw_8Epigrass_9epimodels_1selectModel(PyObject *__pyx_self
 }
 
 static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_modtype) {
-  PyObject *__pyx_v_CustomModel = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -4386,10 +4327,6 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  int __pyx_t_8;
-  PyObject *__pyx_t_9 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5036,7 +4973,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
  *         return stepSIRS_s
  *     elif modtype == b'Influenza':             # <<<<<<<<<<<<<<
  *         return stepFlu
- *     elif modtype == b'Custom':
+ *     # elif modtype == b'Custom':
  */
   __pyx_t_2 = (__Pyx_PyBytes_Equals(__pyx_v_modtype, __pyx_n_b_Influenza, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 153, __pyx_L1_error)
   if (__pyx_t_2) {
@@ -5045,8 +4982,8 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
  *         return stepSIRS_s
  *     elif modtype == b'Influenza':
  *         return stepFlu             # <<<<<<<<<<<<<<
- *     elif modtype == b'Custom':
- *         # adds the user model as a method of instance self
+ *     # elif modtype == b'Custom':
+ *     #     # adds the user model as a method of instance self
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_stepFlu); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
@@ -5060,157 +4997,12 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
  *         return stepSIRS_s
  *     elif modtype == b'Influenza':             # <<<<<<<<<<<<<<
  *         return stepFlu
- *     elif modtype == b'Custom':
+ *     # elif modtype == b'Custom':
  */
-  }
-
-  /* "Epigrass/epimodels.py":155
- *     elif modtype == b'Influenza':
- *         return stepFlu
- *     elif modtype == b'Custom':             # <<<<<<<<<<<<<<
- *         # adds the user model as a method of instance self
- *         try:
- */
-  __pyx_t_2 = (__Pyx_PyBytes_Equals(__pyx_v_modtype, __pyx_n_b_Custom, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
-  if (__pyx_t_2) {
-
-    /* "Epigrass/epimodels.py":157
- *     elif modtype == b'Custom':
- *         # adds the user model as a method of instance self
- *         try:             # <<<<<<<<<<<<<<
- *             # TODO: move this import to the graph level
- *             import CustomModel
- */
-    {
-      __Pyx_PyThreadState_declare
-      __Pyx_PyThreadState_assign
-      __Pyx_ExceptionSave(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7);
-      __Pyx_XGOTREF(__pyx_t_5);
-      __Pyx_XGOTREF(__pyx_t_6);
-      __Pyx_XGOTREF(__pyx_t_7);
-      /*try:*/ {
-
-        /* "Epigrass/epimodels.py":159
- *         try:
- *             # TODO: move this import to the graph level
- *             import CustomModel             # <<<<<<<<<<<<<<
- *             vnames['Custom'] = CustomModel.vnames
- *             return CustomModel.Model
- */
-        __pyx_t_4 = __Pyx_Import(__pyx_n_s_CustomModel, 0, -1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 159, __pyx_L5_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_v_CustomModel = __pyx_t_4;
-        __pyx_t_4 = 0;
-
-        /* "Epigrass/epimodels.py":160
- *             # TODO: move this import to the graph level
- *             import CustomModel
- *             vnames['Custom'] = CustomModel.vnames             # <<<<<<<<<<<<<<
- *             return CustomModel.Model
- *         except ImportError:
- */
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_CustomModel, __pyx_n_s_vnames); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 160, __pyx_L5_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_vnames); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L5_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        if (unlikely(PyObject_SetItem(__pyx_t_3, __pyx_n_s_Custom, __pyx_t_4) < 0)) __PYX_ERR(0, 160, __pyx_L5_error)
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-        /* "Epigrass/epimodels.py":161
- *             import CustomModel
- *             vnames['Custom'] = CustomModel.vnames
- *             return CustomModel.Model             # <<<<<<<<<<<<<<
- *         except ImportError:
- *             print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
- */
-        __Pyx_XDECREF(__pyx_r);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_CustomModel, __pyx_n_s_Model); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 161, __pyx_L5_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_r = __pyx_t_4;
-        __pyx_t_4 = 0;
-        goto __pyx_L9_try_return;
-
-        /* "Epigrass/epimodels.py":157
- *     elif modtype == b'Custom':
- *         # adds the user model as a method of instance self
- *         try:             # <<<<<<<<<<<<<<
- *             # TODO: move this import to the graph level
- *             import CustomModel
- */
-      }
-      __pyx_L5_error:;
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-      /* "Epigrass/epimodels.py":162
- *             vnames['Custom'] = CustomModel.vnames
- *             return CustomModel.Model
- *         except ImportError:             # <<<<<<<<<<<<<<
- *             print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
- *     else:
- */
-      __pyx_t_8 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ImportError);
-      if (__pyx_t_8) {
-        __Pyx_AddTraceback("Epigrass.epimodels.selectModel", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_3, &__pyx_t_9) < 0) __PYX_ERR(0, 162, __pyx_L7_except_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_GOTREF(__pyx_t_9);
-
-        /* "Epigrass/epimodels.py":163
- *             return CustomModel.Model
- *         except ImportError:
- *             print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")             # <<<<<<<<<<<<<<
- *     else:
- *         sys.exit('Model type specified in .epg file is invalid')
- */
-        if (__Pyx_PrintOne(0, __pyx_kp_s_You_have_to_Create_a_CustomModel) < 0) __PYX_ERR(0, 163, __pyx_L7_except_error)
-        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-        goto __pyx_L6_exception_handled;
-      }
-      goto __pyx_L7_except_error;
-      __pyx_L7_except_error:;
-
-      /* "Epigrass/epimodels.py":157
- *     elif modtype == b'Custom':
- *         # adds the user model as a method of instance self
- *         try:             # <<<<<<<<<<<<<<
- *             # TODO: move this import to the graph level
- *             import CustomModel
- */
-      __Pyx_XGIVEREF(__pyx_t_5);
-      __Pyx_XGIVEREF(__pyx_t_6);
-      __Pyx_XGIVEREF(__pyx_t_7);
-      __Pyx_ExceptionReset(__pyx_t_5, __pyx_t_6, __pyx_t_7);
-      goto __pyx_L1_error;
-      __pyx_L9_try_return:;
-      __Pyx_XGIVEREF(__pyx_t_5);
-      __Pyx_XGIVEREF(__pyx_t_6);
-      __Pyx_XGIVEREF(__pyx_t_7);
-      __Pyx_ExceptionReset(__pyx_t_5, __pyx_t_6, __pyx_t_7);
-      goto __pyx_L0;
-      __pyx_L6_exception_handled:;
-      __Pyx_XGIVEREF(__pyx_t_5);
-      __Pyx_XGIVEREF(__pyx_t_6);
-      __Pyx_XGIVEREF(__pyx_t_7);
-      __Pyx_ExceptionReset(__pyx_t_5, __pyx_t_6, __pyx_t_7);
-    }
-
-    /* "Epigrass/epimodels.py":155
- *     elif modtype == b'Influenza':
- *         return stepFlu
- *     elif modtype == b'Custom':             # <<<<<<<<<<<<<<
- *         # adds the user model as a method of instance self
- *         try:
- */
-    goto __pyx_L4;
   }
 
   /* "Epigrass/epimodels.py":165
- *             print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
+ *     #         print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
  *     else:
  *         sys.exit('Model type specified in .epg file is invalid')             # <<<<<<<<<<<<<<
  * 
@@ -5219,27 +5011,26 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
   /*else*/ {
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_sys); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_exit); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_5);
       if (likely(__pyx_t_3)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
         __Pyx_INCREF(__pyx_t_3);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_9 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_kp_s_Model_type_specified_in_epg_file) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_s_Model_type_specified_in_epg_file);
+    __pyx_t_4 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_3, __pyx_kp_s_Model_type_specified_in_epg_file) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_kp_s_Model_type_specified_in_epg_file);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 165, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
-  __pyx_L4:;
 
   /* "Epigrass/epimodels.py":110
  * 
@@ -5255,11 +5046,10 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_selectModel(CYTHON_UNUSED PyObjec
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("Epigrass.epimodels.selectModel", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_CustomModel);
   __Pyx_XDECREF(__pyx_v_modtype);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -18807,9 +18597,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Comp_age2, __pyx_k_Comp_age2, sizeof(__pyx_k_Comp_age2), 0, 0, 1, 1},
   {&__pyx_n_s_Comp_age3, __pyx_k_Comp_age3, sizeof(__pyx_k_Comp_age3), 0, 0, 1, 1},
   {&__pyx_n_s_Comp_age4, __pyx_k_Comp_age4, sizeof(__pyx_k_Comp_age4), 0, 0, 1, 1},
-  {&__pyx_n_b_Custom, __pyx_k_Custom, sizeof(__pyx_k_Custom), 0, 0, 0, 1},
   {&__pyx_n_s_Custom, __pyx_k_Custom, sizeof(__pyx_k_Custom), 0, 0, 1, 1},
-  {&__pyx_n_s_CustomModel, __pyx_k_CustomModel, sizeof(__pyx_k_CustomModel), 0, 0, 1, 1},
   {&__pyx_kp_s_Defines_a_library_of_discrete_t, __pyx_k_Defines_a_library_of_discrete_t, sizeof(__pyx_k_Defines_a_library_of_discrete_t), 0, 0, 1, 0},
   {&__pyx_n_s_E, __pyx_k_E, sizeof(__pyx_k_E), 0, 0, 1, 1},
   {&__pyx_n_s_E1, __pyx_k_E1, sizeof(__pyx_k_E1), 0, 0, 1, 1},
@@ -18846,7 +18634,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Ig3pos, __pyx_k_Ig3pos, sizeof(__pyx_k_Ig3pos), 0, 0, 1, 1},
   {&__pyx_n_s_Ig4, __pyx_k_Ig4, sizeof(__pyx_k_Ig4), 0, 0, 1, 1},
   {&__pyx_n_s_Ig4pos, __pyx_k_Ig4pos, sizeof(__pyx_k_Ig4pos), 0, 0, 1, 1},
-  {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
   {&__pyx_n_s_Incub_age1, __pyx_k_Incub_age1, sizeof(__pyx_k_Incub_age1), 0, 0, 1, 1},
   {&__pyx_n_s_Incub_age2, __pyx_k_Incub_age2, sizeof(__pyx_k_Incub_age2), 0, 0, 1, 1},
   {&__pyx_n_s_Incub_age3, __pyx_k_Incub_age3, sizeof(__pyx_k_Incub_age3), 0, 0, 1, 1},
@@ -18873,7 +18660,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Lpos2_esp, __pyx_k_Lpos2_esp, sizeof(__pyx_k_Lpos2_esp), 0, 0, 1, 1},
   {&__pyx_n_s_Lpos_2, __pyx_k_Lpos_2, sizeof(__pyx_k_Lpos_2), 0, 0, 1, 1},
   {&__pyx_n_s_Lpos_esp, __pyx_k_Lpos_esp, sizeof(__pyx_k_Lpos_esp), 0, 0, 1, 1},
-  {&__pyx_n_s_Model, __pyx_k_Model, sizeof(__pyx_k_Model), 0, 0, 1, 1},
   {&__pyx_kp_s_Model_type_specified_in_epg_file, __pyx_k_Model_type_specified_in_epg_file, sizeof(__pyx_k_Model_type_specified_in_epg_file), 0, 0, 1, 0},
   {&__pyx_n_s_N, __pyx_k_N, sizeof(__pyx_k_N), 0, 0, 1, 1},
   {&__pyx_n_s_R, __pyx_k_R, sizeof(__pyx_k_R), 0, 0, 1, 1},
@@ -18939,7 +18725,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Sympt_age3, __pyx_k_Sympt_age3, sizeof(__pyx_k_Sympt_age3), 0, 0, 1, 1},
   {&__pyx_n_s_Sympt_age4, __pyx_k_Sympt_age4, sizeof(__pyx_k_Sympt_age4), 0, 0, 1, 1},
   {&__pyx_n_s_Type, __pyx_k_Type, sizeof(__pyx_k_Type), 0, 0, 1, 1},
-  {&__pyx_kp_s_You_have_to_Create_a_CustomModel, __pyx_k_You_have_to_Create_a_CustomModel, sizeof(__pyx_k_You_have_to_Create_a_CustomModel), 0, 0, 1, 0},
   {&__pyx_n_b_alpha, __pyx_k_alpha, sizeof(__pyx_k_alpha), 0, 0, 0, 1},
   {&__pyx_n_s_alpha, __pyx_k_alpha, sizeof(__pyx_k_alpha), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
@@ -18967,12 +18752,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_b_e, __pyx_k_e, sizeof(__pyx_k_e), 0, 0, 0, 1},
   {&__pyx_n_s_e, __pyx_k_e, sizeof(__pyx_k_e), 0, 0, 1, 1},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_epipath, __pyx_k_epipath, sizeof(__pyx_k_epipath), 0, 0, 1, 1},
   {&__pyx_n_s_eval, __pyx_k_eval, sizeof(__pyx_k_eval), 0, 0, 1, 1},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
   {&__pyx_n_s_fccoelho, __pyx_k_fccoelho, sizeof(__pyx_k_fccoelho), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_b_g, __pyx_k_g, sizeof(__pyx_k_g), 0, 0, 0, 1},
   {&__pyx_n_s_g, __pyx_k_g, sizeof(__pyx_k_g), 0, 0, 1, 1},
@@ -19034,7 +18817,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_b_pp4, __pyx_k_pp4, sizeof(__pyx_k_pp4), 0, 0, 0, 1},
   {&__pyx_n_s_pp4, __pyx_k_pp4, sizeof(__pyx_k_pp4), 0, 0, 1, 1},
   {&__pyx_n_s_prepare, __pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_prob, __pyx_k_prob, sizeof(__pyx_k_prob), 0, 0, 1, 1},
   {&__pyx_n_s_qualname, __pyx_k_qualname, sizeof(__pyx_k_qualname), 0, 0, 1, 1},
   {&__pyx_n_b_r, __pyx_k_r, sizeof(__pyx_k_r), 0, 0, 0, 1},
@@ -19107,7 +18889,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 44, __pyx_L1_error)
   __pyx_builtin_eval = __Pyx_GetBuiltinName(__pyx_n_s_eval); if (!__pyx_builtin_eval) __PYX_ERR(0, 73, __pyx_L1_error)
-  __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(0, 162, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -19205,10 +18986,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     """
  *     Sets the model engine
  */
-  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_n_s_modtype, __pyx_n_s_Type, __pyx_n_s_CustomModel); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_modtype, __pyx_n_s_Type); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_selectModel, 110, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Epigrass_epimodels_py, __pyx_n_s_selectModel, 110, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 110, __pyx_L1_error)
 
   /* "Epigrass/epimodels.py":172
  *                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
@@ -21885,226 +21666,6 @@ static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int eq
 #endif
 }
 
-/* Import */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
-    PyObject *empty_list = 0;
-    PyObject *module = 0;
-    PyObject *global_dict = 0;
-    PyObject *empty_dict = 0;
-    PyObject *list;
-    #if PY_MAJOR_VERSION < 3
-    PyObject *py_import;
-    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
-    if (!py_import)
-        goto bad;
-    #endif
-    if (from_list)
-        list = from_list;
-    else {
-        empty_list = PyList_New(0);
-        if (!empty_list)
-            goto bad;
-        list = empty_list;
-    }
-    global_dict = PyModule_GetDict(__pyx_m);
-    if (!global_dict)
-        goto bad;
-    empty_dict = PyDict_New();
-    if (!empty_dict)
-        goto bad;
-    {
-        #if PY_MAJOR_VERSION >= 3
-        if (level == -1) {
-            if ((1) && (strchr(__Pyx_MODULE_NAME, '.'))) {
-                module = PyImport_ImportModuleLevelObject(
-                    name, global_dict, empty_dict, list, 1);
-                if (!module) {
-                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
-                        goto bad;
-                    PyErr_Clear();
-                }
-            }
-            level = 0;
-        }
-        #endif
-        if (!module) {
-            #if PY_MAJOR_VERSION < 3
-            PyObject *py_level = PyInt_FromLong(level);
-            if (!py_level)
-                goto bad;
-            module = PyObject_CallFunctionObjArgs(py_import,
-                name, global_dict, empty_dict, list, py_level, (PyObject *)NULL);
-            Py_DECREF(py_level);
-            #else
-            module = PyImport_ImportModuleLevelObject(
-                name, global_dict, empty_dict, list, level);
-            #endif
-        }
-    }
-bad:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(py_import);
-    #endif
-    Py_XDECREF(empty_list);
-    Py_XDECREF(empty_dict);
-    return module;
-}
-
-/* GetTopmostException */
-#if CYTHON_USE_EXC_INFO_STACK
-static _PyErr_StackItem *
-__Pyx_PyErr_GetTopmostException(PyThreadState *tstate)
-{
-    _PyErr_StackItem *exc_info = tstate->exc_info;
-    while ((exc_info->exc_type == NULL || exc_info->exc_type == Py_None) &&
-           exc_info->previous_item != NULL)
-    {
-        exc_info = exc_info->previous_item;
-    }
-    return exc_info;
-}
-#endif
-
-/* SaveResetException */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx__ExceptionSave(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    #if CYTHON_USE_EXC_INFO_STACK
-    _PyErr_StackItem *exc_info = __Pyx_PyErr_GetTopmostException(tstate);
-    *type = exc_info->exc_type;
-    *value = exc_info->exc_value;
-    *tb = exc_info->exc_traceback;
-    #else
-    *type = tstate->exc_type;
-    *value = tstate->exc_value;
-    *tb = tstate->exc_traceback;
-    #endif
-    Py_XINCREF(*type);
-    Py_XINCREF(*value);
-    Py_XINCREF(*tb);
-}
-static CYTHON_INLINE void __Pyx__ExceptionReset(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    #if CYTHON_USE_EXC_INFO_STACK
-    _PyErr_StackItem *exc_info = tstate->exc_info;
-    tmp_type = exc_info->exc_type;
-    tmp_value = exc_info->exc_value;
-    tmp_tb = exc_info->exc_traceback;
-    exc_info->exc_type = type;
-    exc_info->exc_value = value;
-    exc_info->exc_traceback = tb;
-    #else
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = type;
-    tstate->exc_value = value;
-    tstate->exc_traceback = tb;
-    #endif
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-#endif
-
-/* PyErrExceptionMatches */
-#if CYTHON_FAST_THREAD_STATE
-static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
-    Py_ssize_t i, n;
-    n = PyTuple_GET_SIZE(tuple);
-#if PY_MAJOR_VERSION >= 3
-    for (i=0; i<n; i++) {
-        if (exc_type == PyTuple_GET_ITEM(tuple, i)) return 1;
-    }
-#endif
-    for (i=0; i<n; i++) {
-        if (__Pyx_PyErr_GivenExceptionMatches(exc_type, PyTuple_GET_ITEM(tuple, i))) return 1;
-    }
-    return 0;
-}
-static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tstate, PyObject* err) {
-    PyObject *exc_type = tstate->curexc_type;
-    if (exc_type == err) return 1;
-    if (unlikely(!exc_type)) return 0;
-    if (unlikely(PyTuple_Check(err)))
-        return __Pyx_PyErr_ExceptionMatchesTuple(exc_type, err);
-    return __Pyx_PyErr_GivenExceptionMatches(exc_type, err);
-}
-#endif
-
-/* GetException */
-#if CYTHON_FAST_THREAD_STATE
-static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb)
-#else
-static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb)
-#endif
-{
-    PyObject *local_type, *local_value, *local_tb;
-#if CYTHON_FAST_THREAD_STATE
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    local_type = tstate->curexc_type;
-    local_value = tstate->curexc_value;
-    local_tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-#else
-    PyErr_Fetch(&local_type, &local_value, &local_tb);
-#endif
-    PyErr_NormalizeException(&local_type, &local_value, &local_tb);
-#if CYTHON_FAST_THREAD_STATE
-    if (unlikely(tstate->curexc_type))
-#else
-    if (unlikely(PyErr_Occurred()))
-#endif
-        goto bad;
-    #if PY_MAJOR_VERSION >= 3
-    if (local_tb) {
-        if (unlikely(PyException_SetTraceback(local_value, local_tb) < 0))
-            goto bad;
-    }
-    #endif
-    Py_XINCREF(local_tb);
-    Py_XINCREF(local_type);
-    Py_XINCREF(local_value);
-    *type = local_type;
-    *value = local_value;
-    *tb = local_tb;
-#if CYTHON_FAST_THREAD_STATE
-    #if CYTHON_USE_EXC_INFO_STACK
-    {
-        _PyErr_StackItem *exc_info = tstate->exc_info;
-        tmp_type = exc_info->exc_type;
-        tmp_value = exc_info->exc_value;
-        tmp_tb = exc_info->exc_traceback;
-        exc_info->exc_type = local_type;
-        exc_info->exc_value = local_value;
-        exc_info->exc_traceback = local_tb;
-    }
-    #else
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = local_type;
-    tstate->exc_value = local_value;
-    tstate->exc_traceback = local_tb;
-    #endif
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-#else
-    PyErr_SetExcInfo(local_type, local_value, local_tb);
-#endif
-    return 0;
-bad:
-    *type = 0;
-    *value = 0;
-    *tb = 0;
-    Py_XDECREF(local_type);
-    Py_XDECREF(local_value);
-    Py_XDECREF(local_tb);
-    return -1;
-}
-
 /* ObjectGetItem */
 #if CYTHON_USE_TYPE_SLOTS
 static PyObject *__Pyx_PyObject_GetIndex(PyObject *obj, PyObject* index) {
@@ -22387,6 +21948,71 @@ return_ne:
 /* None */
 static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname) {
     PyErr_Format(PyExc_UnboundLocalError, "local variable '%s' referenced before assignment", varname);
+}
+
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    PyObject *empty_list = 0;
+    PyObject *module = 0;
+    PyObject *global_dict = 0;
+    PyObject *empty_dict = 0;
+    PyObject *list;
+    #if PY_MAJOR_VERSION < 3
+    PyObject *py_import;
+    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
+    if (!py_import)
+        goto bad;
+    #endif
+    if (from_list)
+        list = from_list;
+    else {
+        empty_list = PyList_New(0);
+        if (!empty_list)
+            goto bad;
+        list = empty_list;
+    }
+    global_dict = PyModule_GetDict(__pyx_m);
+    if (!global_dict)
+        goto bad;
+    empty_dict = PyDict_New();
+    if (!empty_dict)
+        goto bad;
+    {
+        #if PY_MAJOR_VERSION >= 3
+        if (level == -1) {
+            if ((1) && (strchr(__Pyx_MODULE_NAME, '.'))) {
+                module = PyImport_ImportModuleLevelObject(
+                    name, global_dict, empty_dict, list, 1);
+                if (!module) {
+                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
+                        goto bad;
+                    PyErr_Clear();
+                }
+            }
+            level = 0;
+        }
+        #endif
+        if (!module) {
+            #if PY_MAJOR_VERSION < 3
+            PyObject *py_level = PyInt_FromLong(level);
+            if (!py_level)
+                goto bad;
+            module = PyObject_CallFunctionObjArgs(py_import,
+                name, global_dict, empty_dict, list, py_level, (PyObject *)NULL);
+            Py_DECREF(py_level);
+            #else
+            module = PyImport_ImportModuleLevelObject(
+                name, global_dict, empty_dict, list, level);
+            #endif
+        }
+    }
+bad:
+    #if PY_MAJOR_VERSION < 3
+    Py_XDECREF(py_import);
+    #endif
+    Py_XDECREF(empty_list);
+    Py_XDECREF(empty_dict);
+    return module;
 }
 
 /* ImportFrom */
@@ -23449,112 +23075,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     }
 }
 
-/* Print */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
-#endif
-
 /* CIntFromPy */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
@@ -23756,43 +23276,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *o, PyObject *n) {
 #endif
     return PyObject_GetAttr(o, n);
 }
-
-/* PrintOne */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
-#endif
 
 /* Globals */
 static PyObject* __Pyx_Globals(void) {

@@ -152,15 +152,15 @@ def selectModel(modtype):
         return stepSIRS_s
     elif modtype == b'Influenza':
         return stepFlu
-    elif modtype == b'Custom':
-        # adds the user model as a method of instance self
-        try:
-            # TODO: move this import to the graph level
-            import CustomModel
-            vnames['Custom'] = CustomModel.vnames
-            return CustomModel.Model
-        except ImportError:
-            print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
+    # elif modtype == b'Custom':
+    #     # adds the user model as a method of instance self
+    #     try:
+    #         # TODO: move this import to the graph level
+    #         import CustomModel
+    #         vnames['Custom'] = CustomModel.vnames
+    #         return CustomModel.Model
+    #     except ImportError:
+    #         print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
     else:
         sys.exit('Model type specified in .epg file is invalid')
 

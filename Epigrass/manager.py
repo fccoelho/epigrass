@@ -30,6 +30,7 @@ import redis
 import pickle
 import multiprocessing
 
+
 redisclient = redis.StrictRedis()
 
 
@@ -657,7 +658,7 @@ class Simulate:
                     flow = float(thist[t])
                     nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
                     t += 1
-            print(nvalues[-1], len(ts[t]))
+            # print(nvalues[-1], len(ts[t]))
             Cursor.executemany(sql2, nvalues)
             con.commit()
             # Creating a table for edge data
