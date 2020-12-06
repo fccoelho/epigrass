@@ -1,14 +1,9 @@
 import pandas as pd
 import geopandas as gpd
-import numpy as np
 import os
-import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 import panel as pn
 import panel.widgets as pnw
 import hvplot.pandas
-import holoviews as hv
-import geoviews as gv
 import param
 from sqlalchemy import create_engine
 import glob
@@ -18,44 +13,30 @@ material = pn.template.MaterialTemplate(title='Epigrass Dashboard')
 
 pn.config.sizing_mode = 'stretch_width'
 
-xs = np.linspace(0, np.pi)
-freq = pn.widgets.FloatSlider(name="Frequency", start=0, end=10, value=2)
-phase = pn.widgets.FloatSlider(name="Phase", start=0, end=np.pi)
 
-
-@pn.depends(freq=freq, phase=phase)
-def sine(freq, phase):
-    return hv.Curve((xs, np.sin(xs * freq + phase))).opts(
-        responsive=True, min_height=400)
-
-
-@pn.depends(freq=freq, phase=phase)
-def cosine(freq, phase):
-    return hv.Curve((xs, np.cos(xs * freq + phase))).opts(
-        responsive=True, min_height=400)
-
-
-pth = pn.widgets.TextInput(name='Directory', default='./demos/outdata-rio')
-
-
-def get_sims(pth):
+def get_sims(fname):
     """
     Get list of simulations available on SQLite database
     :param pth: Database file
     :return: List of tables. list of str
     """
-    full_path = os.path.join(pth, 'Epigrass.sqlite')
+    full_path = os.path.join(fname, 'Epigrass.sqlite')
     if os.path.exists(full_path):
         con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
         sims = con.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
         return [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
     else:
+        print(f'==> File {full_path} not found')
         return []
 
 
-# @lru_cache(maxsize=10)
-def read_simulation(pth, simulation_name):
-    full_path = os.path.join(os.path.abspath(pth), 'Epigrass.sqlite')
+@lru_cache(maxsize=10)
+def read_simulation(fname, simulation_name):
+    full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
+    if not os.path.exists(full_path):
+        print(f'==> File {full_path} not found')
+        return pd.DataFrame()
+
     # print(f'sqlite:///{full_path}?check_same_thread=False', simulation_name)
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
     # con = create_engine('sqlite:///Epigrass.sqlite?check_same_thread=False').connect()
@@ -65,132 +46,133 @@ def read_simulation(pth, simulation_name):
     return simdf
 
 
-# @lru_cache(maxsize=10)
-def read_map(pth):
-    return gpd.read_file(pth)
+@lru_cache(maxsize=10)
+def read_map(fname):
+    if os.path.exists(fname):
+        return gpd.read_file(fname)
+    else:
+        gpd.GeoDataFrame()
 
 
-pipeline = pn.pipeline.Pipeline()
+# pipeline = pn.pipeline.Pipeline()
 
+class SeriesViewer(param.Parameterized):
+    model_path = param.String(default='../demos/outdata-rio')
+    map_selector = param.ObjectSelector()
+    simulation_run = param.ObjectSelector()
+    localities = param.ObjectSelector(default='Pick a Locality', objects=[])
+    time_slider = param.Integer(default=1, bounds=(1, 300))
 
-class SimMap(param.Parameterized):
-    name = 'Simulation Map'
-    pth = './demos/outdata-rio'
-    model_path = param.String(pth)
-    maps = glob.glob(os.path.join(pth, '*.gpkg'))
-    selector = param.ObjectSelector(default=None if not maps else maps[0], objects=maps)
-    sims = get_sims(pth)
-    simulation_run = param.ObjectSelector(default=None if not sims else sims[-1], objects=sims)
-    localities = param.ObjectSelector(default='Locality', objects=[])
-    df = None
-    mapdf = None
+    def __init__(self, **params):
+        self.update()
+        self.update_sims()
+        super(SeriesViewer, self).__init__(**params)
 
     @param.depends('model_path', watch=True)
-    def _dir_update(self):
+    def update(self):
         maps = glob.glob(os.path.join(self.model_path, '*.gpkg'))
-        self.param['selector'].objects = maps
-        self.selector = maps[0]
+        self.param['map_selector'].objects = maps
+        if maps:
+            self.map_selector = maps[0]
+
+    @param.depends('map_selector', 'model_path', watch=True)
+    def update_sims(self):
         sims = get_sims(self.model_path)
         self.param['simulation_run'].objects = sims
         if sims:
             self.simulation_run = sims[0]
 
     @param.depends('simulation_run', watch=True)
-    def _sim_update(self):
+    def update_localities(self):
         self.df = read_simulation(self.model_path, self.simulation_run)
-        locs = self.df.name.unique()
-        # print(locs)
-        self.param['localities'].objects = list(locs)
-        if locs.any():
-            self.localities = locs[0]
+        if len(self.df) > 0:
+            self.param['time_slider'].bounds = (self.df.time.min(), self.df.time.max())
+            locs = self.df.name.unique()
+            self.param['localities'].objects = list(locs)
+            if locs.any():
+                self.localities = locs[0]
 
-    @param.depends('selector', 'localities')
-    def view(self):
-        # print(self.selector, type(self.selector), self.sims, os.getcwd())
-        if self.selector:
-            self.mapdf = read_map(self.selector)
+    @param.depends('map_selector')
+    def view_map(self):
+        if self.map_selector:
+            self.mapdf = read_map(self.map_selector)
             f = self.mapdf.hvplot.polygons(geo=True, c='prevalence',
-                                           width=800,
+                                           alpha=0.7,
+                                           responsive=True,
                                            colorbar=True,
-                                           clabel='Prevalence'
+                                           tiles=True
                                            )
 
             return f
         else:
-            return hv.DynamicMap(sine)
+            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
 
-    @param.output(model_path=param.String, sim_run=param.String, locality=param.String)
-    def output(self):
-        return self.model_path, self.simulation_run, self.localities
-
-    def panel(self):
-        return pn.Row(self.param, self.view)
-
-
-sm = SimMap()
-
-pipeline.add_stage('SimMap', sm)
-
-
-class SeriesViewer(param.Parameterized):
-    model_path = param.String(precedence=-1)
-    sim_run = param.String(precedence=-1)
-    locality = param.String(default='Rodoviaria')
-    time_slider = param.Integer(default=1, bounds=(1, 300))
-
-    @param.depends('sim_run', 'locality', 'time_slider')
-    def view(self):
+    @param.depends('localities', 'time_slider')
+    def view_series(self):
+        if self.simulation_run is None:
+            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         mapdf = read_map(os.path.join(self.model_path, 'Data.gpkg'))
-        df = read_simulation(self.model_path, self.sim_run)
-        # print('==>mapdf: ', df.name[0], mapdf['name'], self.sim_run)
+        df = read_simulation(self.model_path, self.simulation_run)
+
         if len(df) == 0:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         time = df.time.min()
-        # self.time_slider.bounds = (1, df.time.max())
+
         variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
-        # values = self.df[(self.df.name == locality) & (self.df.time == time)][variables].iloc[0]
+
         print('==> ', mapdf.columns)
         name_col = [c for c in mapdf if df.name[0] in list(mapdf[c])][0]
         mapa_t = pd.merge(mapdf, df[df.time == self.time_slider][['name', 'time'] + variables],
                           left_on=name_col, right_on='name')
-        series = df[df.name == self.locality].hvplot.line(
+        series = df[df.name == self.localities].hvplot.line(
             width=400,
             x='time',
             y=variables,
+            responsive=True,
             subplots=True,
-            value_label='Cases'
+            shared_axes=False,
+            value_label=f'Cases at {self.localities}'
         ).cols(3)
         mapa = mapa_t.hvplot.polygons(
             geo=True,
             hover_cols=variables,
+            alpha=0.7,
+            responsive=True,
             title=f'State at time {self.time_slider}',
             c=variables[-2],
-            colorbar=True
+            colorbar=True,
+            tiles=True
         )
-        return (series + mapa).cols(1)
+        return (mapa + series).cols(1)
 
     def panel(self):
         return pn.Row(self.param, self.view)
 
 
-series_viewer = SeriesViewer(model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
-pipeline.add_stage('Series Viewer', series_viewer)
-# print(pipeline)
+series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
 
-material.sidebar.append(pn.Param(sm, name='Simulation Parameters'))
+material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
 
 # material.sidebar.append(pn.widgets.StaticText(sm.simulation_run.path))
 material.main.append(
     pn.Column(
         pn.Row(
-            pn.Card(sm.view)
+            pn.Card(series_viewer.view_map, title='Final State')
         ),
         pn.Row(
-            pn.Card(series_viewer.view, title='Series')
+            pn.Card(series_viewer.view_series, title='Series')
         ),
-        pn.Row(
-            pn.Card(pn.Param(series_viewer), title='Controls')
-        )
+
     )
 )
 material.servable();
+
+def show(pth):
+    series_viewer.model_path=pth
+    pn.serve(material, port=5006)
+
+if __name__ == "__main__":
+    pn.serve(material, port=5006)
+    # M = MetaInfo()
+    # S = SimMap()
+    # SV = SeriesViewer()
