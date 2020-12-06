@@ -28,14 +28,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="First implementation of a Panel based dashboard proposed on issue #7&#10;still a few bugs remaining.">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epipanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/CustomModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/demos/CustomModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -446,7 +441,7 @@
       <workItem from="1606659770643" duration="19610000" />
       <workItem from="1607092476336" duration="1525000" />
       <workItem from="1607154405465" duration="56264000" />
-      <workItem from="1607255741933" duration="8924000" />
+      <workItem from="1607255741933" duration="9457000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -679,7 +674,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607257520377</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs">
+      <created>1607265023984</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1607265023984</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -706,7 +708,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed graph exporting" />
     <MESSAGE value="minor changes" />
     <MESSAGE value="Fixed a few bugs and added model reference to models" />
     <MESSAGE value="Implemented basic dashboard" />
@@ -731,7 +732,8 @@
     <MESSAGE value="Minor tweaking of the docs" />
     <MESSAGE value="First implementation of a Panel based dashboard proposed on issue #7&#10;still a few bugs remaining." />
     <MESSAGE value="Epipanel working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Epipanel working." />
+    <MESSAGE value="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

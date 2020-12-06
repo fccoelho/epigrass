@@ -95,7 +95,7 @@ class SeriesViewer(param.Parameterized):
         if locs:
             self.localities = locs[0]
 
-    @param.depends('map_selector')
+    @param.depends('map_selector', 'simulation_run')
     def view_map(self):
         if self.map_selector:
             self.mapdf = read_map(self.map_selector)
