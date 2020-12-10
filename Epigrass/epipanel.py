@@ -13,7 +13,7 @@ material = pn.template.MaterialTemplate(title='Epigrass Dashboard')
 
 pn.config.sizing_mode = 'stretch_width'
 
-
+@lru_cache(maxsize=10)
 def get_sims(fname):
     """
     Get list of simulations available on SQLite database
@@ -24,23 +24,30 @@ def get_sims(fname):
     if os.path.exists(full_path):
         con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
         sims = con.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
-        return [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
+        sim_names = [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
+        con.close()
+        return sim_names
     else:
         print(f'==> File {full_path} not found')
         return []
 
 
 @lru_cache(maxsize=10)
-def read_simulation(fname, simulation_name, locality):
+def read_simulation(fname, simulation_name, locality=None):
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
         return pd.DataFrame()
 
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-    simdf = pd.read_sql_query(f"select * from {simulation_name} where name='{locality}'", con)
+    if locality is None:
+        simdf = pd.read_sql_query(f"select * from {simulation_name}", con)
+    else:
+        simdf = pd.read_sql_query(f"select * from {simulation_name} where name='{locality}'", con)
     simdf.fillna(0, inplace=True)
+    con.close()
     return simdf
+
 
 @lru_cache(maxsize=10)
 def get_localities(fname, simulation_name):
@@ -50,7 +57,10 @@ def get_localities(fname, simulation_name):
         return []
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
     locs = pd.read_sql_query(f'select distinct name from {simulation_name}', con)
-    return [l[0] for l in locs.values]
+    localities = [l[0] for l in locs.values]
+    con.close()
+    return localities
+
 
 @lru_cache(maxsize=10)
 def read_map(fname):
@@ -80,6 +90,7 @@ class SeriesViewer(param.Parameterized):
         self.param['map_selector'].objects = maps
         if maps:
             self.map_selector = maps[0]
+        self.mapdf = read_map(os.path.join(self.model_path, 'Data.gpkg'))
 
     @param.depends('map_selector', 'model_path', watch=True)
     def update_sims(self):
@@ -87,6 +98,7 @@ class SeriesViewer(param.Parameterized):
         self.param['simulation_run'].objects = sims
         if sims:
             self.simulation_run = sims[0]
+        self.df = read_simulation(self.model_path, self.simulation_run)
 
     @param.depends('simulation_run', watch=True)
     def update_localities(self):
@@ -98,7 +110,7 @@ class SeriesViewer(param.Parameterized):
     @param.depends('map_selector', 'simulation_run')
     def view_map(self):
         if self.map_selector:
-            self.mapdf = read_map(self.map_selector)
+            # self.mapdf = read_map(self.map_selector)
             f = self.mapdf.hvplot.polygons(geo=True, c='prevalence',
                                            alpha=0.7,
                                            responsive=True,
@@ -110,18 +122,18 @@ class SeriesViewer(param.Parameterized):
         else:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
 
-    @param.depends('localities', 'time_slider')
+    @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
         if self.simulation_run is None:
-            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
-        mapdf = read_map(os.path.join(self.model_path, 'Data.gpkg'))
-        df = read_simulation(self.model_path, self.simulation_run, self.localities)
+            return pn.pane.Alert('## No data\nPlease select a simulation from the `Simulation run` widget on the left.')
+        mapdf = self.mapdf
+        df = self.df = read_simulation(self.model_path, self.simulation_run)
+        # df = self.df[self.df.name==self.localities]
         if len(df) == 0:
-            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
+            return pn.pane.Alert(f'## No data for "{self.localities}"\nPlease select a locality.')
         time = df.time.min()
         self.param['time_slider'].bounds = (df.time.min(), df.time.max())
         variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
-
 
         name_col = [c for c in mapdf if df.name[0] in list(mapdf[c])][0]
         mapa_t = pd.merge(mapdf, df[df.time == self.time_slider][['name', 'time'] + variables],
@@ -162,16 +174,18 @@ material.main.append(
             pn.Card(series_viewer.view_map, title='Final State')
         ),
         pn.Row(
-            pn.Card(series_viewer.view_series, title='Series')
+            pn.Card(series_viewer.view_series, title='Time Series')
         ),
 
     )
 )
 material.servable();
 
+
 def show(pth):
     series_viewer.model_path = pth
     pn.serve(material, port=5006)
+
 
 if __name__ == "__main__":
     pn.serve(material, port=5006)
