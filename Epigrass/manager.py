@@ -927,6 +927,8 @@ def onStraightRun(args):
     from Epigrass import epipanel
     if args.view_only:
         pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
+        os.chdir(os.path.abspath(pth))
+        print(os.path.abspath(pth))
         epipanel.show(pth)
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)

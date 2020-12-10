@@ -1,4 +1,5 @@
 import pandas as pd
+import altair as alt
 import geopandas as gpd
 import os
 import panel as pn
@@ -7,11 +8,14 @@ import hvplot.pandas
 import param
 from sqlalchemy import create_engine
 import glob
+# import gpdvega
 from functools import lru_cache
 
-material = pn.template.MaterialTemplate(title='Epigrass Dashboard')
+material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='../egicon.png', logo='../egicon.png')
 
 pn.config.sizing_mode = 'stretch_width'
+
+
 
 @lru_cache(maxsize=10)
 def get_sims(fname):
@@ -30,6 +34,19 @@ def get_sims(fname):
     else:
         print(f'==> File {full_path} not found')
         return []
+
+
+@lru_cache(maxsize=10)
+def get_meta_table(fname, simname):
+    full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
+    if os.path.exists(full_path):
+        mname = simname + '_meta'
+        con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
+        df = pd.read_sql_query(f"select * from {mname}", con)
+        con.close()
+    else:
+        df = pd.DataFrame()
+    return df
 
 
 @lru_cache(maxsize=10)
@@ -71,7 +88,6 @@ def read_map(fname):
 
 
 # pipeline = pn.pipeline.Pipeline()
-
 class SeriesViewer(param.Parameterized):
     model_path = param.String(default='../demos/outdata-rio')
     map_selector = param.ObjectSelector()
@@ -108,15 +124,47 @@ class SeriesViewer(param.Parameterized):
             self.localities = locs[0]
 
     @param.depends('map_selector', 'simulation_run')
+    def view_meta(self):
+        df = get_meta_table(self.model_path, self.simulation_run)
+        if len(df) > 0:
+            dfpars = df[[c for c in df.columns if 'parameters' in c]]
+            dfpars.columns = [c.split('$')[-1] for c in dfpars.columns]
+            return pn.pane.Markdown(
+                f"""
+## Simulation Info
+### Map File
+{df['the_world$shapefile'].iloc[0].split(',')[0].strip("['")}
+### Sites File
+{df['the_world$sites'].iloc[0]}
+### Edges File
+{df['the_world$sites'].iloc[0]}
+### Model Type
+{df['epidemiological_model$modtype'].iloc[0]}
+
+"""
+            )
+        else:
+            return pn.pane.Markdown("")
+
+    @param.depends('map_selector', 'simulation_run')
     def view_map(self):
-        if self.map_selector:
+        if self.map_selector and self.mapdf is not None:
             # self.mapdf = read_map(self.map_selector)
-            f = self.mapdf.hvplot.polygons(geo=True, c='prevalence',
-                                           alpha=0.7,
-                                           responsive=True,
-                                           colorbar=True,
-                                           tiles=True
-                                           )
+            f = alt.Chart(self.mapdf).mark_geoshape(
+            ).encode(
+                color='prevalence',
+                tooltip=['name', 'prevalence']
+            ).properties(
+                width='container',
+                height='container'
+            )
+            # f = self.mapdf[self.mapdf.totalcases>0].hvplot.polygons(geo=True, c='prevalence',
+            #                                alpha=0.7,
+            #                                colormap='BuPu',
+            #                                responsive=True,
+            #                                colorbar=True,
+            #                                tiles=True,
+            #                                )
 
             return f
         else:
@@ -134,7 +182,8 @@ class SeriesViewer(param.Parameterized):
         time = df.time.min()
         self.param['time_slider'].bounds = (df.time.min(), df.time.max())
         variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
-
+        if mapdf is None:
+            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         name_col = [c for c in mapdf if df.name[0] in list(mapdf[c])][0]
         mapa_t = pd.merge(mapdf, df[df.time == self.time_slider][['name', 'time'] + variables],
                           left_on=name_col, right_on='name')
@@ -145,17 +194,26 @@ class SeriesViewer(param.Parameterized):
             responsive=True,
             subplots=True,
             shared_axes=False,
-            value_label=f'Cases at {self.localities}'
+            value_label=f'Cases at {self.localities}',
         ).cols(3)
-        mapa = mapa_t.hvplot.polygons(
+        # mapa = alt.Chart(self.mapdf).mark_geoshape(
+        #     ).encode(
+        #         color='incidence',
+        #         tooltip=['name']+variables,
+        #     ).properties(
+        #         width=500,
+        #         height=300
+        #     )
+        mapa = mapa_t[self.mapdf.totalcases>0].hvplot.polygons(
             geo=True,
             hover_cols=variables,
             alpha=0.7,
+            colormap='BuPu',
             responsive=True,
             title=f'State at time {self.time_slider}',
             c=variables[-2],
             colorbar=True,
-            tiles=True
+            tiles=True,
         )
         return (mapa + series).cols(1)
 
@@ -166,6 +224,8 @@ class SeriesViewer(param.Parameterized):
 series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
 
 material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
+material.sidebar.append(pn.layout.Divider())
+material.sidebar.append(series_viewer.view_meta)
 
 # material.sidebar.append(pn.widgets.StaticText(sm.simulation_run.path))
 material.main.append(
