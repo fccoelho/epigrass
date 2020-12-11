@@ -6,12 +6,16 @@ import panel as pn
 import panel.widgets as pnw
 import hvplot.pandas
 import param
+import base64
 from sqlalchemy import create_engine
 import glob
 # import gpdvega
 from functools import lru_cache
 
-material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='../egicon.png', logo='../egicon.png')
+enc_icon = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3ElEQVRYhe2WWQ7DIAxEH1XvVR+dmzkfVSJngWIW0VYZKV8EZgzDmABARFkhBDxomQs8z+tFvfoxBUG8nHkBgnircAlOwlt5LzxmkN4CbgFfJeB950vSrDHxUihOwtbEKxaQScKxQTUrCU87YJE5jnEeOJJfkdkxNUcTaDCnrbb0OCJRFbavmtySer3QVcAMI/5GEmaN1utNqAIhpjwghm8/Lsg2twbTd8CsU2/AlrnTTbhDbSX/swPgr2ZIeHl6QStX8tqsi79MBqxXMNcpu+LY7Ub0i48VdOv3CSxJ9X3LgJP02QAAAABJRU5ErkJggg=='
+with open('egicon.png', 'wb') as f:
+    f.write(base64.b64decode(enc_icon))
+material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='egicon.png', logo='egicon.png')
 
 pn.config.sizing_mode = 'stretch_width'
 alt.renderers.set_embed_options(actions=True)
@@ -89,7 +93,7 @@ def read_map(fname):
 
 # pipeline = pn.pipeline.Pipeline()
 class SeriesViewer(param.Parameterized):
-    model_path = param.String()#default='../demos/outdata-rio')
+    model_path = param.String()  # default='../demos/outdata-rio')
     map_selector = param.ObjectSelector()
     simulation_run = param.ObjectSelector()
     localities = param.ObjectSelector(default='Pick a Locality', objects=[])
@@ -260,7 +264,7 @@ class SeriesViewer(param.Parameterized):
             row = alt.hconcat()
             row |= base.encode(x='time', y=y_enc)
             if i < len(variables):
-                row |= base.encode(x='time', y=variables[i+1])
+                row |= base.encode(x='time', y=variables[i + 1])
 
             chart &= row
         return chart
