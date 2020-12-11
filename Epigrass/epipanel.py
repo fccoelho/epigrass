@@ -14,7 +14,7 @@ from functools import lru_cache
 material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='../egicon.png', logo='../egicon.png')
 
 pn.config.sizing_mode = 'stretch_width'
-
+alt.renderers.set_embed_options(actions=True)
 
 
 @lru_cache(maxsize=10)
@@ -89,7 +89,7 @@ def read_map(fname):
 
 # pipeline = pn.pipeline.Pipeline()
 class SeriesViewer(param.Parameterized):
-    model_path = param.String(default='../demos/outdata-rio')
+    model_path = param.String()#default='../demos/outdata-rio')
     map_selector = param.ObjectSelector()
     simulation_run = param.ObjectSelector()
     localities = param.ObjectSelector(default='Pick a Locality', objects=[])
@@ -149,14 +149,35 @@ class SeriesViewer(param.Parameterized):
     @param.depends('map_selector', 'simulation_run')
     def view_map(self):
         if self.map_selector and self.mapdf is not None:
-            # self.mapdf = read_map(self.map_selector)
-            f = alt.Chart(self.mapdf).mark_geoshape(
-            ).encode(
-                color='prevalence',
-                tooltip=['name', 'prevalence']
-            ).properties(
-                width='container',
-                height='container'
+            mapdf = self.mapdf
+            map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
+            brush = alt.selection_single(encodings=["y"], on="mouseover", empty='none')
+            color = alt.Color('prevalence', scale=alt.Scale(type='pow', exponent=0.4))
+            f = alt.hconcat(
+                alt.Chart(map10).mark_bar().encode(
+                    x=alt.X('totalcases', scale=alt.Scale(nice=True)),
+                    y=alt.Y('name', sort=alt.EncodingSortField(field='totalcases',
+                                                               op='sum', order='descending')),
+                    tooltip=['name', 'prevalence', 'totalcases'],
+                    color=alt.condition(brush, alt.value('lightgray'), color)
+                ).add_selection(
+                    brush
+                ).properties(
+                    width=200,
+                    height='container'
+                ),
+                alt.Chart(self.mapdf).mark_geoshape(
+                ).encode(
+                    color=alt.condition(
+                        brush,
+                        alt.value('lightgray'),
+                        color,
+                    ),
+                    tooltip=['name', 'prevalence', 'totalcases', 'arrivals']
+                ).properties(
+                    width=600,
+                    height='container'
+                )
             )
             # f = self.mapdf[self.mapdf.totalcases>0].hvplot.polygons(geo=True, c='prevalence',
             #                                alpha=0.7,
@@ -187,38 +208,62 @@ class SeriesViewer(param.Parameterized):
         name_col = [c for c in mapdf if df.name[0] in list(mapdf[c])][0]
         mapa_t = pd.merge(mapdf, df[df.time == self.time_slider][['name', 'time'] + variables],
                           left_on=name_col, right_on='name')
-        series = df[df.name == self.localities].hvplot.line(
-            width=400,
-            x='time',
-            y=variables,
-            responsive=True,
-            subplots=True,
-            shared_axes=False,
-            value_label=f'Cases at {self.localities}',
-        ).cols(3)
-        # mapa = alt.Chart(self.mapdf).mark_geoshape(
-        #     ).encode(
-        #         color='incidence',
-        #         tooltip=['name']+variables,
-        #     ).properties(
-        #         width=500,
-        #         height=300
-        #     )
-        mapa = mapa_t[self.mapdf.totalcases>0].hvplot.polygons(
-            geo=True,
-            hover_cols=variables,
-            alpha=0.7,
-            colormap='BuPu',
-            responsive=True,
-            title=f'State at time {self.time_slider}',
-            c=variables[-2],
-            colorbar=True,
-            tiles=True,
+        # series = df[df.name == self.localities].hvplot.line(
+        #     width=400,
+        #     x='time',
+        #     y=variables,
+        #     responsive=True,
+        #     subplots=True,
+        #     shared_axes=False,
+        #     value_label=f'Cases at {self.localities}',
+        # ).cols(3)
+        mapa = alt.Chart(mapa_t).mark_geoshape(
+        ).encode(
+            color='incidence',
+            tooltip=['name'] + variables,
+        ).properties(
+            width='container',
+            height='container'
         )
-        return (mapa + series).cols(1)
+        # mapa = mapa_t[self.mapdf.totalcases > 0].hvplot.polygons(
+        #     geo=True,
+        #     hover_cols=variables,
+        #     alpha=0.7,
+        #     colormap='BuPu',
+        #     responsive=True,
+        #     title=f'State at time {self.time_slider}',
+        #     c=variables[-2],
+        #     colorbar=True,
+        #     tiles=True,
+        # )
+        # f = (mapa + series).cols(1)
 
-    def panel(self):
-        return pn.Row(self.param, self.view)
+        return mapa
+
+    @param.depends('localities', 'time_slider', 'simulation_run')
+    def altair_series(self):
+        if len(self.df) == 0:
+            return
+        df = self.df[self.df.name == self.localities]
+        variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
+
+        base = alt.Chart(df).mark_line(interpolate='step-after').encode(
+            x='time:Q',
+            y='incidence:Q',
+        ).properties(
+            width='container',
+            height=300
+        )
+
+        chart = alt.vconcat()
+        for i, y_enc in enumerate(variables[::2]):
+            row = alt.hconcat()
+            row |= base.encode(x='time', y=y_enc)
+            if i < len(variables):
+                row |= base.encode(x='time', y=variables[i+1])
+
+            chart &= row
+        return chart
 
 
 series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
@@ -234,7 +279,10 @@ material.main.append(
             pn.Card(series_viewer.view_map, title='Final State')
         ),
         pn.Row(
-            pn.Card(series_viewer.view_series, title='Time Series')
+            pn.Card(series_viewer.view_series, title='Time Map')
+        ),
+        pn.Row(
+            pn.Card(series_viewer.altair_series, title='Time Series')
         ),
 
     )
