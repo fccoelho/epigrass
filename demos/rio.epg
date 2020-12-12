@@ -35,7 +35,7 @@ encoding =
 #==============================================================#
 #model types available: SIS, SIS_s ,SIR, SIR_s, SEIS, SEIS_s, SEIR, SEIR_s,
 # SIpRpS, SIpRpS_s,SIpR,SIpR_s,Influenza or Custom (see documentation for description).
-modtype = SIR
+modtype = SEIpRpS
 
 #==============================================================#
 [MODEL PARAMETERS]

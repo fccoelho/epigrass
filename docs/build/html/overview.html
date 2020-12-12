@@ -148,12 +148,18 @@ of Epigrass. A step-by-step tutorial on how to edit the model script can be foun
 <p>All aspects of the simulation such as number of passengers traveling on each edge, number of infected/susceptible on each node and etc., are recorded in a step-by-step basis. This complete record allows for the model to be analyzed after the simulation has been completed without having to recalculate it.</p>
 <div class="section" id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<p>The output of a simulation in Epigrass is three-fold: A graphical display which the animated outcome of the simulation,
+<p>The output of a simulation in Epigrass is three-fold: A web-based graphical dashboard to interact with outcome of the simulation,
 a written report, and a database table with numeric results.</p>
 <div class="section" id="graphical-display">
 <h4>Graphical display<a class="headerlink" href="#graphical-display" title="Permalink to this headline">¶</a></h4>
-<p>During a simulation, selected epidemiological variables are animated in a 3-dimensional rendering over the map of the
-region containing the network.</p>
+<p>Epigrass’s Dashboard can be set to open immediately after the simulation has been completed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ epirunner -D mymodel.epg
+</pre></div>
+</div>
+<p>or it can be invoked to explore simulations of a model already stored in the database, withou simulating it first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ epirunner -V mymodel
+</pre></div>
+</div>
 </div>
 <div class="section" id="report-generation">
 <h4>Report Generation<a class="headerlink" href="#report-generation" title="Permalink to this headline">¶</a></h4>

@@ -862,7 +862,7 @@ class Simulate:
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-
+        # redisclient.flushall()
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
                 # print()

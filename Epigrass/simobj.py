@@ -8,6 +8,7 @@ import multiprocessing
 import time
 import json
 import os
+import numpy as np
 from numpy.random import binomial
 import networkx as NX
 from networkx.exception import NetworkXNoPath, NetworkXError
@@ -171,7 +172,8 @@ class siteobj:
         pipe = redisclient.pipeline()
         pipe.set("simstep", simstep)
         pipe.set("{}:totpop".format(self.geocode), totpop)
-        pipe.rpush("{}:inits".format(self.geocode), str(inits))
+        # pipe.rpush("{}:inits".format(self.geocode), str(inits))
+        pipe.rpush("{}:ts".format(self.geocode), str(inits))
         pipe.set("{}:npass".format(self.geocode), float(npass))
         pipe.set("{}:theta".format(self.geocode), int(nan_to_num(theta)))
         pipe.hmset("{}:bi".format(self.geocode), self.bi)
@@ -197,10 +199,10 @@ class siteobj:
         Processes the output of a step updating simulation statistics
         :param res: Tuple with the output of the simulation model
         """
-        pipe = redisclient.pipeline()
-        last_state, Lpos, migInf = pipe.lindex("{}:ts".format(self.geocode), -1) \
-            .get("{}:Lpos".format(self.geocode)) \
-            .get("{}:migInf".format(self.geocode)).execute()
+        # pipe = redisclient.pipeline()
+        last_state = redisclient.lindex("{}:ts".format(self.geocode), -1)
+        Lpos = redisclient.lindex(f"{self.geocode}:incidence", -1)
+        migInf = redisclient.get("{}:migInf".format(self.geocode))
         self.ts.append(eval(last_state))
         Lpos = float(Lpos)
         migInf = float(migInf)
@@ -510,7 +512,7 @@ class graph(NX.MultiDiGraph):
         self.site_dict = {}  # geocode as keys
         self.edge_dict = {}  # geocode tuple as key
         self.speed = 0  # speed of the transportation system
-        self.simstep = 1  # current step in the simulation
+        self.simstep = 0  # current step in the simulation
         self.maxstep = 100  # maximum number of steps in the simulation
         self.epipath = []
         self.graphdict = {}
@@ -1023,12 +1025,11 @@ class graph(NX.MultiDiGraph):
 
         g = NX.MultiDiGraph()
         for gc, n in self.site_dict.items():
-            g.add_node(gc, name=n.sitename)
+            g.add_node(gc, name=str(n.sitename), pos=n.pos)
         for ed, e in self.edge_dict.items():
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
         # print(g.nodes)
         # NX.write_graphml_lxml(g, pa)
-        NX.write_gexf(g, pa)
         NX.write_gml(g, pa.replace('gexf', 'gml'))
         nl = json_graph.node_link_data(g)
         jsonpath = pa.replace('gexf', 'json')

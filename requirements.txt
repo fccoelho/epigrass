@@ -16,3 +16,4 @@ pweave
 pymysql
 fiona
 shapely
+altair

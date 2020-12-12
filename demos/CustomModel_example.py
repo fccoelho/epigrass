@@ -17,7 +17,7 @@ def Model(inits,simstep, totpop,theta=0, npass=0,bi={},bp={},values=()):
         """
         
         ##### Get state variables' current values
-        if simstep == 1: #get initial values
+        if simstep == 0: #get initial values
             E,I,S = (bi['e'], bi['i'], bi['s'])
         else: # get last value
             E,I,S = inits

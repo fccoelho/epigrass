@@ -137,14 +137,23 @@ All aspects of the simulation such as number of passengers traveling on each edg
 
 Output
 ------
-The output of a simulation in Epigrass is three-fold: A graphical display which the animated outcome of the simulation,
+The output of a simulation in Epigrass is three-fold: A web-based graphical dashboard to interact with outcome of the simulation,
 a written report, and a database table with numeric results.
 
 Graphical display
 ^^^^^^^^^^^^^^^^^
 
-During a simulation, selected epidemiological variables are animated in a 3-dimensional rendering over the map of the
-region containing the network.
+Epigrass's Dashboard can be set to open immediately after the simulation has been completed:
+
+.. code-block:: bash
+
+    $ epirunner -D mymodel.epg
+
+or it can be invoked to explore simulations of a model already stored in the database, withou simulating it first:
+
+.. code-block:: bash
+
+    $ epirunner -V mymodel
 
 Report Generation
 ^^^^^^^^^^^^^^^^^

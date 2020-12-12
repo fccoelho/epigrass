@@ -1,16 +1,20 @@
 import pandas as pd
 import altair as alt
+import networkx as NX
+import nx_altair as nxa
 import geopandas as gpd
 import os
 import panel as pn
 import panel.widgets as pnw
 import hvplot.pandas
+import holoviews as hv
+from holoviews.operation.datashader import datashade, bundle_graph
+from holoviews import opts
 from bokeh.resources import INLINE
 import param
 import base64
 from sqlalchemy import create_engine
 import glob
-# import gpdvega
 from functools import lru_cache
 
 enc_icon = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3ElEQVRYhe2WWQ7DIAxEH1XvVR+dmzkfVSJngWIW0VYZKV8EZgzDmABARFkhBDxomQs8z+tFvfoxBUG8nHkBgnircAlOwlt5LzxmkN4CbgFfJeB950vSrDHxUihOwtbEKxaQScKxQTUrCU87YJE5jnEeOJJfkdkxNUcTaDCnrbb0OCJRFbavmtySer3QVcAMI/5GEmaN1utNqAIhpjwghm8/Lsg2twbTd8CsU2/AlrnTTbhDbSX/swPgr2ZIeHl6QStX8tqsi79MBqxXMNcpu+LY7Ub0i48VdOv3CSxJ9X3LgJP02QAAAABJRU5ErkJggg=='
@@ -41,6 +45,13 @@ def get_sims(fname):
         get_sims.cache_clear()
         return []
 
+def get_graph(pth):
+    full_path = os.path.join(os.path.abspath(pth), 'network.gml')
+    if os.path.exists(full_path):
+        G = NX.read_gml(full_path)
+    else:
+        G = NX.MultiDiGraph()
+    return G
 
 @lru_cache(maxsize=10)
 def get_meta_table(fname, simname):
@@ -123,7 +134,7 @@ class SeriesViewer(param.Parameterized):
         sims = get_sims(self.model_path)
         self.param['simulation_run'].objects = sims
         if sims:
-            self.simulation_run = sims[0]
+            self.simulation_run = sims[-1]
         self.df = read_simulation(self.model_path, self.simulation_run)
 
     @param.depends('simulation_run', watch=True)
@@ -156,7 +167,7 @@ class SeriesViewer(param.Parameterized):
         else:
             return pn.pane.Markdown("")
 
-    @param.depends('map_selector', 'simulation_run')
+    @param.depends('model_path', 'map_selector', 'simulation_run')
     def view_map(self):
         if self.map_selector and self.mapdf is not None:
             mapdf = self.mapdf
@@ -200,6 +211,38 @@ class SeriesViewer(param.Parameterized):
             return f
         else:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
+
+    @param.depends('model_path')
+    def view_network(self):
+        G = get_graph(self.model_path)
+        if G.order == 0:
+            return pn.pane.Alert(f'## No network file found on {self.model_path}')
+
+        # Draw the graph using Altair
+        pos = NX.get_node_attributes(G, 'pos')
+        # print(pos)
+        # viz = nxa.draw_networkx(
+        #     G, pos=pos,
+        #     node_color='weight',
+        #     cmap='viridis',
+        #     width='weight',
+        #     edge_color='black',
+        # )
+
+        kwargs = dict(width=800, height=800, xaxis=None, yaxis=None)
+        hv.opts.defaults(opts.Nodes(**kwargs), opts.Graph(**kwargs))
+        colors = ['#000000'] + hv.Cycle('Category20').values
+        epi_graph = hv.Graph.from_networkx(G, positions=pos)
+
+        epi_graph.opts(cmap=colors, node_size=10, edge_line_width=1,
+                       directed=True,
+                       node_line_color='gray',
+                       edge_color='gray',
+                       node_color='circle'
+                       )
+
+        f = epi_graph
+        return f
 
     @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
@@ -276,8 +319,9 @@ class SeriesViewer(param.Parameterized):
         return chart
 
 
-series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
-button = pnw.Button(name='Refresh', button_type='primary')
+
+
+
 def refresh(e):
     # Clear caches
     get_sims.cache_clear()
@@ -289,46 +333,53 @@ def refresh(e):
     series_viewer.update_sims()
     series_viewer.update_localities()
 
-button.on_click(refresh)
 
-# def save(fname='dashboard.html'):
-#     material.save(fname, resources=INLINE)
-# save_button = pnw.Button(name="Save as HTML", button_type='warning')
-# save_fname = pnw.TextInput(name="File name", value='Dashboard.html')
-# save_button.on_click(save(save_fname.value))
+def main():
+    global series_viewer
+    series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
+    button = pnw.Button(name='Refresh', button_type='primary')
+    button.on_click(refresh)
+    # Assembling the panel
+    material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
+    material.sidebar.append(button)
+    material.sidebar.append(pn.layout.Divider())
+    material.sidebar.append(series_viewer.view_meta)
+    # material.sidebar.append(pn.Row(save_fname, save_button))
+    # material.sidebar.append(pn.widgets.StaticText(sm.simulation_run.path))
+    material.main.append(
+        pn.Column(
+            pn.Row(
+                pn.Card(series_viewer.view_map, title='Final State')
+            ),
+            # pn.Row(
+            #     pn.Card(series_viewer.view_network, title='Network')
+            # ),
+            pn.Row(
+                pn.Card(series_viewer.view_series, title='Time Map')
+            ),
+            pn.Row(
+                pn.Card(series_viewer.altair_series, title='Time Series')
+            ),
 
-# Assembling the panel
-material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
-material.sidebar.append(button)
-material.sidebar.append(pn.layout.Divider())
-material.sidebar.append(series_viewer.view_meta)
-# material.sidebar.append(pn.Row(save_fname, save_button))
-
-# material.sidebar.append(pn.widgets.StaticText(sm.simulation_run.path))
-material.main.append(
-    pn.Column(
-        pn.Row(
-            pn.Card(series_viewer.view_map, title='Final State')
-        ),
-        pn.Row(
-            pn.Card(series_viewer.view_series, title='Time Map')
-        ),
-        pn.Row(
-            pn.Card(series_viewer.altair_series, title='Time Series')
-        ),
-
+        )
     )
-)
+    return material, series_viewer
+
+
+
+
+
 # material.servable();
 
 
 def show(pth):
+    material, series_viewer = main()
     series_viewer.model_path = pth
     pn.serve(material, port=5006)
 
 
 if __name__ == "__main__":
+    material, series_viewer = main()
     series_viewer.model_path = '../demos/outdata-rio'
     refresh(None)
     pn.serve(material, port=5006, threaded=False)
-
