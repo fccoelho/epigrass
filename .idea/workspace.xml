@@ -30,8 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Minor improvements to epipanel&#10;Updated installation documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epigdal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epigdal.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +104,7 @@
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.epipanel">
+  <component name="RunManager" selected="Python tests.Nosetests in tests.py">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -389,11 +388,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.epipanel" />
         <item itemvalue="Python tests.Nosetests in tests.py" />
-        <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
-        <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python tests.Nosetests in test_manager.py" />
+        <item itemvalue="Python tests.Nosetests in test_models.py" />
+        <item itemvalue="Python.epipanel" />
+        <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
       </list>
     </recent_temporary>
   </component>
@@ -452,7 +451,7 @@
       <workItem from="1607627278690" duration="2891000" />
       <workItem from="1607631596807" duration="2061000" />
       <workItem from="1607696556875" duration="13194000" />
-      <workItem from="1607779284854" duration="23393000" />
+      <workItem from="1607779284854" duration="24888000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -762,7 +761,21 @@
       <option name="project" value="LOCAL" />
       <updated>1607804743047</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="minor fixes in epimodels">
+      <created>1607805703888</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1607805703888</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Updated installation instructions">
+      <created>1607806257703</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1607806257703</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,8 +802,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed formatting issues with the documentation" />
-    <MESSAGE value="Updated documentation" />
     <MESSAGE value="Reverted source of documentation to restructured text because of support to LaTeX expressions" />
     <MESSAGE value="Added simulation visualization notebook&#10;removed map plotting from epidash due to performance issues." />
     <MESSAGE value="Updated docs" />
@@ -814,7 +825,9 @@
     <MESSAGE value="Added encoded favicon in the code." />
     <MESSAGE value="Fixed multiple minor bugs and updated documentation" />
     <MESSAGE value="Minor improvements to epipanel&#10;Updated installation documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor improvements to epipanel&#10;Updated installation documentation" />
+    <MESSAGE value="minor fixes in epimodels" />
+    <MESSAGE value="Updated installation instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated installation instructions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -851,12 +864,12 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_for_tests_testObjInstantiation_test_report.coverage" NAME="Nosetests for tests.testObjInstantiation.test_report Coverage Results" MODIFIED="1586872764787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606668720181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1606664406873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1607810077587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1607804761025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1606676911512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1607810072937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_tests_TestSimulationRuns_test_mesh_epg.coverage" NAME="pytest for tests.TestSimulationRuns.test_mesh_epg Coverage Results" MODIFIED="1607799845656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607800716620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607810099963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
