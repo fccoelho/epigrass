@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Writing Custom Models &#8212; Epigrass 2.6.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Custom Models &#8212; Epigrass 2.6.3 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,7 +13,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Analysis" href="analysis.html" />
@@ -186,145 +187,145 @@ example distributed with Epigrass. It can be found in
 <div class="section" id="site-attributes-and-methods">
 <h4>Site Attributes and Methods<a class="headerlink" href="#site-attributes-and-methods" title="Permalink to this headline">¶</a></h4>
 <p>Not all attributes and methods are listed, only the most useful. For a complete reference, look at the source code documentation.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="Site">
 <em class="property">class </em><code class="sig-name descname">Site</code><a class="headerlink" href="#Site" title="Permalink to this definition">¶</a></dt>
 <dd><p>self.parentSite. Actually named <em>siteobj</em> in the source code.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.bi">
 <code class="sig-name descname">bi</code><a class="headerlink" href="#Site.bi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary with initial values for all of the model’s state variables. Keys are the variable names.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.bp">
 <code class="sig-name descname">bp</code><a class="headerlink" href="#Site.bp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary with initial values for all of the model’s parameters. Keys are the parameter names.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.totpop">
 <code class="sig-name descname">totpop</code><a class="headerlink" href="#Site.totpop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial total population</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.ts">
 <code class="sig-name descname">ts</code><a class="headerlink" href="#Site.ts" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing the model output time series (variables in the same order of the model)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.incidence">
 <code class="sig-name descname">incidence</code><a class="headerlink" href="#Site.incidence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Incidence time series</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.infected">
 <code class="sig-name descname">infected</code><a class="headerlink" href="#Site.infected" title="Permalink to this definition">¶</a></dt>
 <dd><p>Has the site been already infected? (logical variable)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.sitename">
 <code class="sig-name descname">sitename</code><a class="headerlink" href="#Site.sitename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Site’s name (provided in the .csv)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.values">
 <code class="sig-name descname">values</code><a class="headerlink" href="#Site.values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tuple containing extra-variables provided by .csv file</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.parentGraph">
 <code class="sig-name descname">parentGraph</code><a class="headerlink" href="#Site.parentGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph to which Site belongs (see class Graph)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.edges">
 <code class="sig-name descname">edges</code><a class="headerlink" href="#Site.edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing all edge objects connected to Site</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.inedges">
 <code class="sig-name descname">inedges</code><a class="headerlink" href="#Site.inedges" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing all inbound edges</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.outedges">
 <code class="sig-name descname">outedges</code><a class="headerlink" href="#Site.outedges" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing all outbound edges</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.geocode">
 <code class="sig-name descname">geocode</code><a class="headerlink" href="#Site.geocode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Site’s geocode</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.modtype">
 <code class="sig-name descname">modtype</code><a class="headerlink" href="#Site.modtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Type of dynamic model running in Site</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.vaccination">
 <code class="sig-name descname">vaccination</code><a class="headerlink" href="#Site.vaccination" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time and coverage of vaccination event. Format as in .epg</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.vaccineNow">
 <code class="sig-name descname">vaccineNow</code><a class="headerlink" href="#Site.vaccineNow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flag indicating that it is vaccine day (0 or 1)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Site.vaccov">
 <code class="sig-name descname">vaccov</code><a class="headerlink" href="#Site.vaccov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current vaccination coverage</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.vaccinate">
-<code class="sig-name descname">vaccinate</code><span class="sig-paren">(</span><em class="sig-param">cov</em><span class="sig-paren">)</span><a class="headerlink" href="#Site.vaccinate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">vaccinate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Site.vaccinate" title="Permalink to this definition">¶</a></dt>
 <dd><p>At time t, the population is vaccinated with coverage cov</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.getOutEdges">
 <code class="sig-name descname">getOutEdges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Site.getOutEdges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of outbound edges</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.getInEdges">
 <code class="sig-name descname">getInEdges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Site.getInEdges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of inbound edges</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.getNeighbors">
 <code class="sig-name descname">getNeighbors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Site.getNeighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary of neighbor sites as keys and distances as values</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.getDistanceFromNeighbor">
-<code class="sig-name descname">getDistanceFromNeighbor</code><span class="sig-paren">(</span><em class="sig-param">site</em><span class="sig-paren">)</span><a class="headerlink" href="#Site.getDistanceFromNeighbor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getDistanceFromNeighbor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">site</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Site.getDistanceFromNeighbor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the distance in km from a given neighbor</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Site.getDegree">
-<code class="sig-name descname">getDegree</code><span class="sig-paren">(</span><em class="sig-param">site</em><span class="sig-paren">)</span><a class="headerlink" href="#Site.getDegree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">site</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Site.getDegree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns degree of this site, that is, the number of sites connected to it</p>
 </dd></dl>
 
@@ -334,49 +335,49 @@ example distributed with Epigrass. It can be found in
 <div class="section" id="graph-attributes-and-methods">
 <h4>Graph Attributes and Methods<a class="headerlink" href="#graph-attributes-and-methods" title="Permalink to this headline">¶</a></h4>
 <p>Not all attributes and methods are listed, only the most useful. For a complete reference, look at the source code documentation.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="Graph">
 <em class="property">class </em><code class="sig-name descname">Graph</code><a class="headerlink" href="#Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>self.parentSite.parentGraph</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.simstep">
 <code class="sig-name descname">simstep</code><a class="headerlink" href="#Graph.simstep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time-step of the simulation. Use it to keep track of the simulation progress.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.speed">
 <code class="sig-name descname">speed</code><a class="headerlink" href="#Graph.speed" title="Permalink to this definition">¶</a></dt>
 <dd><p>The speed of the transportation system</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.maxstep">
 <code class="sig-name descname">maxstep</code><a class="headerlink" href="#Graph.maxstep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Final time-step of the simulation</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.episize">
 <code class="sig-name descname">episize</code><a class="headerlink" href="#Graph.episize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current size of the epidemic, graph-wise.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.site_list">
 <code class="sig-name descname">site_list</code><a class="headerlink" href="#Graph.site_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Full list of nodes in the graph. Each element in this list is a real node object.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="Graph.edge_list">
 <code class="sig-name descname">edge_list</code><a class="headerlink" href="#Graph.edge_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Full list of nodes in the graph. Each element in this list is a real node object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="Graph.getSite">
-<code class="sig-name descname">getSite</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.getSite" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getSite</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Graph.getSite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an site object named <em>name</em></p>
 </dd></dl>
 
@@ -454,7 +455,7 @@ example distributed with Epigrass. It can be found in
       &copy;2008, Flávio Codeço Coelho.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

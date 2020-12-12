@@ -93,7 +93,7 @@ I = 0
 #  Quarantine: [(locality1's geocode,time,coverage), (locality2's geocode,time,coverage)]
 #  Keywords may be used instead of the geocode in the vacinate and quarantine variables:
 #  all: Apply the same values to all sites
-seed = [(4550603,'I',1)] #Rodoviaria 4550603
+seed = [(4550603,'I',100)] #Rodoviaria 4550603
 Vaccinate = []
 Quarantine = []
 
@@ -118,7 +118,7 @@ Quarantine = []
 doTransp = 1
 
 # Mechanism can be stochatic (1) or deterministic(0).
-stochastic = 1
+stochastic = 0
 
 #Average speed of transportation system in km per time step. Enter 0 for instantaneous travel.
 #Distance unit must be the same specified in edges files

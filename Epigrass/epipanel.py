@@ -5,6 +5,7 @@ import os
 import panel as pn
 import panel.widgets as pnw
 import hvplot.pandas
+from bokeh.resources import INLINE
 import param
 import base64
 from sqlalchemy import create_engine
@@ -37,6 +38,7 @@ def get_sims(fname):
         return sim_names
     else:
         print(f'==> File {full_path} not found')
+        get_sims.cache_clear()
         return []
 
 
@@ -50,6 +52,7 @@ def get_meta_table(fname, simname):
         con.close()
     else:
         df = pd.DataFrame()
+        get_meta_table.cache_clear()
     return df
 
 
@@ -58,6 +61,7 @@ def read_simulation(fname, simulation_name, locality=None):
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
+        read_simulation.cache_clear()
         return pd.DataFrame()
 
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
@@ -75,6 +79,7 @@ def get_localities(fname, simulation_name):
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
+        get_localities.cache_clear()
         return []
     con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
     locs = pd.read_sql_query(f'select distinct name from {simulation_name}', con)
@@ -89,11 +94,12 @@ def read_map(fname):
         return gpd.read_file(fname)
     else:
         gpd.GeoDataFrame()
+        read_map.cache_clear()
 
 
 # pipeline = pn.pipeline.Pipeline()
 class SeriesViewer(param.Parameterized):
-    model_path = param.String()  # default='../demos/outdata-rio')
+    model_path = param.String(default='../demos/outdata-rio')
     map_selector = param.ObjectSelector()
     simulation_run = param.ObjectSelector()
     localities = param.ObjectSelector(default='Pick a Locality', objects=[])
@@ -271,10 +277,32 @@ class SeriesViewer(param.Parameterized):
 
 
 series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
+button = pnw.Button(name='Refresh', button_type='primary')
+def refresh(e):
+    # Clear caches
+    get_sims.cache_clear()
+    get_localities.cache_clear()
+    read_map.cache_clear()
+    read_simulation.cache_clear()
+    # Update the Panel
+    series_viewer.update()
+    series_viewer.update_sims()
+    series_viewer.update_localities()
 
+button.on_click(refresh)
+
+# def save(fname='dashboard.html'):
+#     material.save(fname, resources=INLINE)
+# save_button = pnw.Button(name="Save as HTML", button_type='warning')
+# save_fname = pnw.TextInput(name="File name", value='Dashboard.html')
+# save_button.on_click(save(save_fname.value))
+
+# Assembling the panel
 material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
+material.sidebar.append(button)
 material.sidebar.append(pn.layout.Divider())
 material.sidebar.append(series_viewer.view_meta)
+# material.sidebar.append(pn.Row(save_fname, save_button))
 
 # material.sidebar.append(pn.widgets.StaticText(sm.simulation_run.path))
 material.main.append(
@@ -291,7 +319,7 @@ material.main.append(
 
     )
 )
-material.servable();
+# material.servable();
 
 
 def show(pth):
@@ -300,7 +328,7 @@ def show(pth):
 
 
 if __name__ == "__main__":
-    pn.serve(material, port=5006)
-    # M = MetaInfo()
-    # S = SimMap()
-    # SV = SeriesViewer()
+    series_viewer.model_path = '../demos/outdata-rio'
+    refresh(None)
+    pn.serve(material, port=5006, threaded=False)
+

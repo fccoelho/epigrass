@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Building and Installing &#8212; Epigrass 2.6.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building and Installing &#8212; Epigrass 2.6.3 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,7 +13,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Epidemic Models" href="intromodels.html" />
@@ -45,68 +46,26 @@
 <dl class="simple">
 <dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.python.org">http://www.python.org</a></p>
 </dd>
-<dt><em>Version required:</em></dt><dd><p>&gt;= 2.5 &lt; 3</p>
+<dt><em>Version required:</em></dt><dd><p>&gt;= 3.6</p>
 </dd>
 </dl>
 <p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.</p>
 <p>Python is probably installed automatically by your GNU/Linux distribution (it is on Debian). If not, it is best to use your distribution’s standard tools for package installation. On Debian for example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python python-dev build-essentials python-setuptools
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python build-essentials python3-pip
 </pre></div>
 </div>
 </div>
-<div class="section" id="numeric-python">
-<h3>Numeric Python<a class="headerlink" href="#numeric-python" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="redis-database">
+<h3>Redis database<a class="headerlink" href="#redis-database" title="Permalink to this headline">¶</a></h3>
 <dl class="simple">
-<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.scipy.org/numpy">http://www.scipy.org/numpy</a></p>
+<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="https://redis.io">https://redis.io</a></p>
 </dd>
-<dt><em>Version required:</em></dt><dd><p>&gt;= 1.0</p>
+<dt><em>Version required:</em></dt><dd><p>&gt;= 6.0</p>
 </dd>
 </dl>
-<p>Numeric Python is a module for fast numeric computations in Python.</p>
-<p>Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-numpy
-</pre></div>
-</div>
-</div>
-<div class="section" id="matplotlib">
-<h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a></p>
-</dd>
-<dt><em>Version required:</em></dt><dd><p>&gt;0.9</p>
-</dd>
-</dl>
-<p>Matplotlib is a Module that provides plotting capabilities to Python.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-matplotlib python-matplotlib-data python-matplotlib-doc
-</pre></div>
-</div>
-</div>
-<div class="section" id="pyqt">
-<h3>PyQt<a class="headerlink" href="#pyqt" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.riverbankcomputing.co.uk/pyqt">http://www.riverbankcomputing.co.uk/pyqt</a></p>
-</dd>
-<dt><em>Version required:</em></dt><dd><p>&gt;4.0</p>
-</dd>
-</dl>
-<p>PyQt is a set of Python bindings for the Qt toolkit. PyQt combines all the advantages of Qt and Python. A programmer has all the power of Qt, but is able to exploit it with the simplicity of Python.</p>
-<p>PyQt depends on the Qt libraries to run. This dependency will be taken care by the package installation tools of most distributions, which will automatically install the required version of Qt.</p>
-<p>Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qt4
-</pre></div>
-</div>
-</div>
-<div class="section" id="pyqwt">
-<h3>PyQwt<a class="headerlink" href="#pyqwt" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://pyqwt.sourceforge.net/">http://pyqwt.sourceforge.net/</a></p>
-</dd>
-<dt><em>Version required:</em></dt><dd><p>&gt;5.0</p>
-</dd>
-</dl>
-<p>PyQwt is a Python binding for the Qwt5 technical widget library. It is necessary for some os Epigrass’ visualizations capabilities.</p>
-<p>Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python-qwt5-qt4
+<p>Redis is an in-memory database that Epigrass uses as a message broker for parallel execution.
+Example installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install redis-server
 </pre></div>
 </div>
 </div>
@@ -141,28 +100,27 @@
 <div class="section" id="other-requirements">
 <h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
 <p>Some other requirements can be installed directly from the Python Package index using the <em>pip</em> tool:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install networkx redis sqlsoup requests sphinx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install  cython networkx redis sqlsoup requests sphinx
 </pre></div>
 </div>
 <div class="section" id="post-install-configuration">
 <h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
 <p>After installing MySQL, you will need to create a new database in the server, called <em>epigrass</em> and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.</p>
-<p>section{Installing Epigrass}
-If you got through all the steps above, it will be an easy task to install Epigrass. There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maitained by the developers of Epigrass, It may very well be outdated.  So please download Epigrass’s source tarball (something named <code class="file docutils literal notranslate"><span class="pre">Epigrass_someversion.tar.gz</span></code>) from Sourceforge and, after unpacking it to some temporary directory, install it by typing:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo python setup.py install
+</div>
+</div>
+</div>
+<div class="section" id="installing-epigrass">
+<h2>Installing Epigrass<a class="headerlink" href="#installing-epigrass" title="Permalink to this headline">¶</a></h2>
+<p>If you got through all the steps above, it will be an easy task to install Epigrass.
+There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maintained by the developers of Epigrass, It may very well be outdated.  So we recommend that you install the latest version from PyPI,  by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip3 install -U epigrass
 </pre></div>
 </div>
 <p>If the installation proceeds without errors, you will have three new executables available on your system:</p>
 <dl class="simple">
-<dt><em>epigrass</em></dt><dd><p>This starts Epigrass graphical user interface (GUI).</p>
-</dd>
 <dt><em>epirunner</em></dt><dd><p>This is a command line version of Epigrass. With it you can run models without invoking the GUI. It’s great for batch simulations and for remote use. for a quick help, try “epirunner -h”.</p>
 </dd>
-<dt><em>epgeditor</em></dt><dd><p>A graphical editor of .epg models. A easy way to edit already existing models. Contains detailed explanations of every section of the EPG file. <span class="math notranslate nohighlight">\(x_3+y\)</span></p>
-</dd>
 </dl>
-</div>
-</div>
 </div>
 </div>
 
@@ -190,6 +148,7 @@ If you got through all the steps above, it will be an easy task to install Epigr
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Building and Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#required-packages">Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-epigrass">Installing Epigrass</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
@@ -233,7 +192,7 @@ If you got through all the steps above, it will be an easy task to install Epigr
       &copy;2008, Flávio Codeço Coelho.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
