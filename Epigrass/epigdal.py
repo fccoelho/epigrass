@@ -7,7 +7,7 @@ Licensed under the GPL.
 """
 
 import locale, os, pylab
-from osgeo import ogr, osr, gdal
+# from osgeo import ogr, osr, gdal
 from xml.dom import minidom, Node
 from matplotlib.colors import rgb2hex, LogNorm
 from matplotlib.colors import Normalize
@@ -213,355 +213,355 @@ class NewWorld:
         return df
 
 
-class World:
-    def __init__(self, filename, namefield, geocfield, outdir='.'):
-        '''
-        Instantiate a world object.
-        Filename points to a file supported by OGR
-        namefield - name of the field containing polygon name
-        geocfield - name of the field containing geocode
-        '''
-        self.geocfield = geocfield
-        self.namefield = namefield
-        self.outdir = outdir
-        try:
-            self.ds = ogr.Open(filename)
-        except AttributeError:
-            raise AttributeError(
-                "Could not open the Shapefile {}. Please check if the path is correct.".format(filename))
-        self.name = self.ds.GetName()
-        self.driver = self.ds.GetDriver()
-        layer = self.ds.GetLayer()
-        if layer.GetSpatialRef() is None:
-            self.in_spatial_ref = osr.SpatialReference()
-            self.in_spatial_ref.ImportFromEPSG(4326)
-        else:
-            epsg = layer.GetEPSG()
-            self.in_spatial_ref = osr.SpatialReference()
-            self.in_spatial_ref.ImportFromEPSG(epsg)
-
-        self.out_spatial_ref = osr.SpatialReference()
-        self.out_spatial_ref.ImportFromEPSG(4326)
-        self.coord_trans = osr.CoordinateTransformation(self.in_spatial_ref, self.out_spatial_ref)
-        self.centroids = []  # centroid list (x,y,z) tuples
-        self.centdict = {}  # keys are geocode, values are (x,y,z) tuples
-        self.geomdict = {}  # keys are geocode, values are geometries
-        self.namedict = {}  # keys are geocode, values are locality names
-        self.nlist = []  # nodelist: feature objects
-        self.nodesource = False  # True if Node datasource has been created
-        self.edgesource = False  # True if Edge datasource has been created
-        self.datasource = False  # True if Data datasource has been created
-        self.layerlist = self.get_layer_list()
-
-    def get_layer_list(self):
-        """
-        returns a list with the
-        available layers by name
-        """
-        nlay = self.ds.GetLayerCount()
-        ln = []
-        for i in range(nlay):
-            l = self.ds.GetLayer(i)
-            ln.append(l.GetName())
-        return ln
-
-    def draw_layer(self, L):
-        '''
-        Draws a polygon layer using pylab
-        '''
-        N = 0
-        L.ResetReading()
-        feat = L.GetNextFeature()
-        while feat is not None:
-            field_count = L.GetLayerDefn().GetFieldCount()
-            geo = feat.GetGeometryRef()
-            if geo.GetGeometryCount() < 2:
-                g1 = geo.GetGeometryRef(0)
-                x = [g1.GetX(i) for i in range(g1.GetPointCount())]
-                y = [g1.GetY(i) for i in range(g1.GetPointCount())]
-                pylab.plot(x, y, '-', hold=True)
-            for c in range(geo.GetGeometryCount()):
-                ring = geo.GetGeometryRef(c)
-                for cnt in range(ring.GetGeometryCount()):
-                    g1 = ring.GetGeometryRef(cnt)
-                    x = [g1.GetX(i) for i in range(g1.GetPointCount())]
-                    y = [g1.GetY(i) for i in range(g1.GetPointCount())]
-                    pylab.plot(x, y, '-', hold=True)
-            feat = L.GetNextFeature()
-        pylab.xlabel("Longitude")
-        pylab.ylabel("Latitude")
-        pylab.grid(True)
-        pylab.show()
-
-    def get_node_list(self, l):
-        '''
-        Updates self.centdict with centroid coordinates and self.nlist with layer features
-        l is an OGR layer.
-        '''
-        self.nlist = []
-        f = l.GetNextFeature()
-        while f is not None:
-            g = f.GetGeometryRef()
-            g.Transform(self.coord_trans)  # Transforming to EPSG4326 coordinate system
-            self.geomdict[f.GetFieldAsInteger(self.geocfield)] = g
-            try:
-                c = g.Centroid()
-                self.nlist.append(f)
-                self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(), c.GetY(), c.GetZ())
-                self.namedict[f.GetFieldAsInteger(self.geocfield)] = f.GetField(self.namefield)
-            except:  # in case feature is not a polygon
-                print(f.GetFID(), g.GetGeometryType())
-            f = l.GetNextFeature()
-            # print (2600501 in self.centdict)
-
-    def create_node_layer(self):
-        """
-        Creates a new shape file to represent network nodes.
-        The node layer will be based on the centroids of the
-        polygons belonging to the map layer associated with this
-        world instance.
-        """
-        # Creates a new shape file to hold the data
-        if os.path.exists(os.path.join(self.outdir, 'Nodes.shp')):
-            os.remove(os.path.join(self.outdir, 'Nodes.shp'))
-            os.remove(os.path.join(self.outdir, 'Nodes.shx'))
-            os.remove(os.path.join(self.outdir, 'Nodes.dbf'))
-        if not self.nodesource:
-            dsn = self.driver.CreateDataSource(os.path.join(self.outdir, 'Nodes.shp'))
-            self.nodesource = dsn
-            nl = dsn.CreateLayer("nodes", geom_type=ogr.wkbPoint)
-            # Create the fields
-        fi1 = ogr.FieldDefn("name")
-        fi2 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
-        fi3 = ogr.FieldDefn("x", field_type=ogr.OFTString)
-        fi4 = ogr.FieldDefn("y", field_type=ogr.OFTString)
-        nl.CreateField(fi1)
-        nl.CreateField(fi2)
-        nl.CreateField(fi3)
-        nl.CreateField(fi4)
-        # Add the features (points)
-        for f in self.nlist:
-            gc = f.GetFieldAsInteger(self.geocfield)
-            x = self.centdict[gc][0]
-            y = self.centdict[gc][1]
-            fe = ogr.Feature(nl.GetLayerDefn())
-            # name =f.GetField(self.namefield).decode('utf8', errors="surrogateescape")
-            # print(type(self.namefield))
-            try:
-                fe.SetField('name', f.GetField(self.namefield).decode('utf8', "surrogateescape"))
-            except AttributeError:
-                fe.SetField('name', '')
-            except UnicodeEncodeError:
-                fe.SetField('name', '')
-            fe.SetField('geocode', gc)
-            fe.SetField('x', str(x))
-            fe.SetField('y', str(y))
-            pt = ogr.Geometry(type=ogr.wkbPoint)
-            pt.AddPoint(x, y)
-            fe.SetGeometryDirectly(pt)
-            nl.CreateFeature(fe)
-        nl.SyncToDisk()
-        self.out_spatial_ref.MorphToESRI()
-        with open('Nodes.prj', 'w') as fobj:
-            fobj.write(self.out_spatial_ref.ExportToWkt())
-
-    def create_edge_layer(self, elist):
-        """
-        Creates a new layer with edge information.
-        elist is a list of tuples:
-        (sgeoc,dgeoc,fsd,fds)
-        """
-        # Creates a new shape file to hold the data
-        if os.path.exists(os.path.join(self.outdir, 'Edges.shp')):
-            os.remove(os.path.join(self.outdir, 'Edges.shp'))
-            os.remove(os.path.join(self.outdir, 'Edges.shx'))
-            os.remove(os.path.join(self.outdir, 'Edges.dbf'))
-        if not self.edgesource:
-            dse = self.driver.CreateDataSource(os.path.join(self.outdir, 'Edges.shp'))
-            self.edgesource = dse
-            el = dse.CreateLayer("edges", geom_type=ogr.wkbLineString)
-            # Create the fields
-        fi1 = ogr.FieldDefn("s_geocode", field_type=ogr.OFTInteger)
-        fi2 = ogr.FieldDefn("d_geocode", field_type=ogr.OFTInteger)
-        fi3 = ogr.FieldDefn("flowSD", field_type=ogr.OFTReal)
-        fi3.SetPrecision(12)
-        fi4 = ogr.FieldDefn("flowDS", field_type=ogr.OFTReal)
-        fi4.SetPrecision(12)
-        el.CreateField(fi1)
-        el.CreateField(fi2)
-        el.CreateField(fi3)
-        el.CreateField(fi4)
-        # Add the features (lines)
-        for e in elist:
-            # print "setting edge fields"
-            fe = ogr.Feature(el.GetLayerDefn())
-            fe.SetField('s_geocode', e[0])
-            fe.SetField('d_geocode', e[1])
-            fe.SetField('flowSD', float(e[2]))
-            fe.SetField('flowSD', float(e[3]))
-            line = ogr.Geometry(type=ogr.wkbLineString)
-            try:
-                # print "creating edge lines"
-                line.AddPoint(self.centdict[int(e[0])][0], self.centdict[int(e[0])][1])
-                line.AddPoint(self.centdict[int(e[1])][0], self.centdict[int(e[1])][1])
-                fe.SetGeometryDirectly(line)
-                el.CreateFeature(fe)
-            except:  # node not in centdict
-                pass
-        el.SyncToDisk()
-        self.out_spatial_ref.MorphToESRI()
-        with open('Edges.prj', 'w') as fobj:
-            fobj.write(self.out_spatial_ref.ExportToWkt())
-
-    def create_data_layer(self, varlist, data):
-        """
-        Creates a new shape to contain data about nodes.
-        varlist is the list of fields names associated with
-        the nodes.
-        data is a list of lists whose first element is the geocode
-        and the remaining elements are values of the fields, in the
-        same order as they appear in varlist.
-        """
-        data = array(data)
-        # building normalizers for each variable, except geocode
-        norms = [Normalize(c.min(), c.max()) for c in data[:, 1:].T]
-        if os.path.exists(os.path.join(self.outdir, 'Data.shp')):
-            os.remove(os.path.join(self.outdir, 'Data.shp'))
-            os.remove(os.path.join(self.outdir, 'Data.shx'))
-            os.remove(os.path.join(self.outdir, 'Data.dbf'))
-            # Creates a new shape file to hold the data
-        if not self.datasource:
-            dsd = self.driver.CreateDataSource(os.path.join(self.outdir, 'Data.shp'))
-            self.datasource = dsd
-            dl = dsd.CreateLayer("sim_results", geom_type=ogr.wkbPolygon)
-            # Create the fields
-        fi1 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
-        fin = ogr.FieldDefn("name", field_type=ogr.OFTString)
-        fic = ogr.FieldDefn("colors", field_type=ogr.OFTString)
-        dl.CreateField(fi1)
-        dl.CreateField(fin)
-        dl.CreateField(fic)  # json array with colors
-        for v in varlist:
-            # print "creating data fields"
-            fi = ogr.FieldDefn(v, field_type=ogr.OFTReal)
-            fi.SetPrecision(12)
-            dl.CreateField(fi)
-
-        # Add the features (points)
-        for l in data:
-            #            print l
-            # Iterate over the lines of the data matrix.
-            hexcolors = [self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]
-            gc = int(l[0])
-            try:
-                geom = self.geomdict[gc]
-            except KeyError:  # Geocode not in polygon dictionary
-                raise KeyError("Geocode %s not in polygon dictionary\n" % gc)
-            if geom.GetGeometryType() != 3: continue
-            # print geom.GetGeometryCount()
-            fe = ogr.Feature(dl.GetLayerDefn())
-            fe.SetField('geocode', gc)
-            fe.SetField('name', self.namedict[gc])
-            fe.SetField('colors', str(hexcolors))
-            for v, d in zip(varlist, l[1:]):
-                # print v,d
-                fe.SetField(v, float(d))
-                # Add the geometry
-                # print "cloning geometry"
-            clone = geom.Clone()
-            # print geom
-            # print "setting geometry"
-            fe.SetGeometry(clone)
-            # print "creating geom"
-            dl.CreateFeature(fe)
-
-        dl.SyncToDisk()
-        self.out_spatial_ref.MorphToESRI()
-        with open('Data.prj', 'w') as fobj:
-            fobj.write(self.out_spatial_ref.ExportToWkt())
-        self.save_data_geojson(dl)
-
-    def get_hex_color(self, value):
-        cols = cm.get_cmap("YlOrRd", 256)
-        rgba = cols(value * 256)
-        bgrcol = list(rgba[:-1])  # rgb(list)
-        bgrcol.reverse()  # turn it into bgr
-        hexcol = "#80" + rgb2hex(bgrcol)[1:]  # abgr Alpha set to 128
-        return hexcol
-
-    def save_data_geojson(self, dl, namefield=None):
-        """
-        Creates a GeoJSON file containin the polygon layer and results of the simulation
-        :Parameters:
-        :parameter dl: datalayer to save
-        """
-        print("==> saving to GeoJSON")
-        spatial_reference = dl.GetSpatialRef()
-
-        feature_collection = {"type": "FeatureCollection",
-                              "features": []
-                              }
-
-        #        if spatial_reference is not None:
-        #            with open("data.crs", "wb") as f:
-        #                f.write(spatial_reference.ExportToProj4())
-        #
-        #        feature_collection["crs"] = {"type": "link",
-        #                                     "properties": {
-        #                                         "href": "data.crs",
-        #                                         "type": "proj4"
-        #                                     }
-        #        }
-        if namefield is None:
-            namefield = self.namefield
-        dl.ResetReading()
-        fe = dl.GetNextFeature()
-        #        print fe
-        while fe is not None:
-            #            print namefield
-            fi = fe.GetField(namefield)
-            #            print fi,type(fi)
-            try:
-                fi = fi.decode('utf8', 'ignore')
-            except AttributeError:
-                fi = ''  # name is None
-            fe.SetField(namefield, str(fi))
-            feature = json.loads(fe.ExportToJson())
-            feature['properties']['colors'] = eval(feature['properties']['colors'])
-            feature_collection["features"].append(feature)
-            fe = dl.GetNextFeature()
-
-        with open(os.path.join(self.outdir, 'data.json'), 'w') as f:
-            json.dump(feature_collection, f)
-
-    def gen_sites_file(self, fname):
-        """
-        This method generate a sites
-        csv file from the nodes extracted from the
-        map.
-        """
-        with open(fname, "w") as f:
-            for fe in self.nlist:
-                gc = fe.GetFieldAsInteger(self.geocfield)
-                x = self.centdict[gc][0]
-                y = self.centdict[gc][1]
-                name = fe.GetField(self.namefield)
-                line = "%s,%s,%s,%s\n" % (x, y, name, gc)
-                # fe.SetField('name',f.GetField(self.namefield))
-                f.write(line)
-
-    def close_sources(self):
-        """
-        Close the data sources so that data is flushed and and files are closed
-        """
-        if self.nodesource:
-            self.nodesource.Destroy()
-
-        if self.edgesource:
-            self.edgesource.Destroy()
-
-        if self.datasource:
-            self.datasource.Destroy()
+# class World:
+#     def __init__(self, filename, namefield, geocfield, outdir='.'):
+#         '''
+#         Instantiate a world object.
+#         Filename points to a file supported by OGR
+#         namefield - name of the field containing polygon name
+#         geocfield - name of the field containing geocode
+#         '''
+#         self.geocfield = geocfield
+#         self.namefield = namefield
+#         self.outdir = outdir
+#         try:
+#             self.ds = ogr.Open(filename)
+#         except AttributeError:
+#             raise AttributeError(
+#                 "Could not open the Shapefile {}. Please check if the path is correct.".format(filename))
+#         self.name = self.ds.GetName()
+#         self.driver = self.ds.GetDriver()
+#         layer = self.ds.GetLayer()
+#         if layer.GetSpatialRef() is None:
+#             self.in_spatial_ref = osr.SpatialReference()
+#             self.in_spatial_ref.ImportFromEPSG(4326)
+#         else:
+#             epsg = layer.GetEPSG()
+#             self.in_spatial_ref = osr.SpatialReference()
+#             self.in_spatial_ref.ImportFromEPSG(epsg)
+#
+#         self.out_spatial_ref = osr.SpatialReference()
+#         self.out_spatial_ref.ImportFromEPSG(4326)
+#         self.coord_trans = osr.CoordinateTransformation(self.in_spatial_ref, self.out_spatial_ref)
+#         self.centroids = []  # centroid list (x,y,z) tuples
+#         self.centdict = {}  # keys are geocode, values are (x,y,z) tuples
+#         self.geomdict = {}  # keys are geocode, values are geometries
+#         self.namedict = {}  # keys are geocode, values are locality names
+#         self.nlist = []  # nodelist: feature objects
+#         self.nodesource = False  # True if Node datasource has been created
+#         self.edgesource = False  # True if Edge datasource has been created
+#         self.datasource = False  # True if Data datasource has been created
+#         self.layerlist = self.get_layer_list()
+#
+#     def get_layer_list(self):
+#         """
+#         returns a list with the
+#         available layers by name
+#         """
+#         nlay = self.ds.GetLayerCount()
+#         ln = []
+#         for i in range(nlay):
+#             l = self.ds.GetLayer(i)
+#             ln.append(l.GetName())
+#         return ln
+#
+#     def draw_layer(self, L):
+#         '''
+#         Draws a polygon layer using pylab
+#         '''
+#         N = 0
+#         L.ResetReading()
+#         feat = L.GetNextFeature()
+#         while feat is not None:
+#             field_count = L.GetLayerDefn().GetFieldCount()
+#             geo = feat.GetGeometryRef()
+#             if geo.GetGeometryCount() < 2:
+#                 g1 = geo.GetGeometryRef(0)
+#                 x = [g1.GetX(i) for i in range(g1.GetPointCount())]
+#                 y = [g1.GetY(i) for i in range(g1.GetPointCount())]
+#                 pylab.plot(x, y, '-', hold=True)
+#             for c in range(geo.GetGeometryCount()):
+#                 ring = geo.GetGeometryRef(c)
+#                 for cnt in range(ring.GetGeometryCount()):
+#                     g1 = ring.GetGeometryRef(cnt)
+#                     x = [g1.GetX(i) for i in range(g1.GetPointCount())]
+#                     y = [g1.GetY(i) for i in range(g1.GetPointCount())]
+#                     pylab.plot(x, y, '-', hold=True)
+#             feat = L.GetNextFeature()
+#         pylab.xlabel("Longitude")
+#         pylab.ylabel("Latitude")
+#         pylab.grid(True)
+#         pylab.show()
+#
+#     def get_node_list(self, l):
+#         '''
+#         Updates self.centdict with centroid coordinates and self.nlist with layer features
+#         l is an OGR layer.
+#         '''
+#         self.nlist = []
+#         f = l.GetNextFeature()
+#         while f is not None:
+#             g = f.GetGeometryRef()
+#             g.Transform(self.coord_trans)  # Transforming to EPSG4326 coordinate system
+#             self.geomdict[f.GetFieldAsInteger(self.geocfield)] = g
+#             try:
+#                 c = g.Centroid()
+#                 self.nlist.append(f)
+#                 self.centdict[f.GetFieldAsInteger(self.geocfield)] = (c.GetX(), c.GetY(), c.GetZ())
+#                 self.namedict[f.GetFieldAsInteger(self.geocfield)] = f.GetField(self.namefield)
+#             except:  # in case feature is not a polygon
+#                 print(f.GetFID(), g.GetGeometryType())
+#             f = l.GetNextFeature()
+#             # print (2600501 in self.centdict)
+#
+#     def create_node_layer(self):
+#         """
+#         Creates a new shape file to represent network nodes.
+#         The node layer will be based on the centroids of the
+#         polygons belonging to the map layer associated with this
+#         world instance.
+#         """
+#         # Creates a new shape file to hold the data
+#         if os.path.exists(os.path.join(self.outdir, 'Nodes.shp')):
+#             os.remove(os.path.join(self.outdir, 'Nodes.shp'))
+#             os.remove(os.path.join(self.outdir, 'Nodes.shx'))
+#             os.remove(os.path.join(self.outdir, 'Nodes.dbf'))
+#         if not self.nodesource:
+#             dsn = self.driver.CreateDataSource(os.path.join(self.outdir, 'Nodes.shp'))
+#             self.nodesource = dsn
+#             nl = dsn.CreateLayer("nodes", geom_type=ogr.wkbPoint)
+#             # Create the fields
+#         fi1 = ogr.FieldDefn("name")
+#         fi2 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
+#         fi3 = ogr.FieldDefn("x", field_type=ogr.OFTString)
+#         fi4 = ogr.FieldDefn("y", field_type=ogr.OFTString)
+#         nl.CreateField(fi1)
+#         nl.CreateField(fi2)
+#         nl.CreateField(fi3)
+#         nl.CreateField(fi4)
+#         # Add the features (points)
+#         for f in self.nlist:
+#             gc = f.GetFieldAsInteger(self.geocfield)
+#             x = self.centdict[gc][0]
+#             y = self.centdict[gc][1]
+#             fe = ogr.Feature(nl.GetLayerDefn())
+#             # name =f.GetField(self.namefield).decode('utf8', errors="surrogateescape")
+#             # print(type(self.namefield))
+#             try:
+#                 fe.SetField('name', f.GetField(self.namefield).decode('utf8', "surrogateescape"))
+#             except AttributeError:
+#                 fe.SetField('name', '')
+#             except UnicodeEncodeError:
+#                 fe.SetField('name', '')
+#             fe.SetField('geocode', gc)
+#             fe.SetField('x', str(x))
+#             fe.SetField('y', str(y))
+#             pt = ogr.Geometry(type=ogr.wkbPoint)
+#             pt.AddPoint(x, y)
+#             fe.SetGeometryDirectly(pt)
+#             nl.CreateFeature(fe)
+#         nl.SyncToDisk()
+#         self.out_spatial_ref.MorphToESRI()
+#         with open('Nodes.prj', 'w') as fobj:
+#             fobj.write(self.out_spatial_ref.ExportToWkt())
+#
+#     def create_edge_layer(self, elist):
+#         """
+#         Creates a new layer with edge information.
+#         elist is a list of tuples:
+#         (sgeoc,dgeoc,fsd,fds)
+#         """
+#         # Creates a new shape file to hold the data
+#         if os.path.exists(os.path.join(self.outdir, 'Edges.shp')):
+#             os.remove(os.path.join(self.outdir, 'Edges.shp'))
+#             os.remove(os.path.join(self.outdir, 'Edges.shx'))
+#             os.remove(os.path.join(self.outdir, 'Edges.dbf'))
+#         if not self.edgesource:
+#             dse = self.driver.CreateDataSource(os.path.join(self.outdir, 'Edges.shp'))
+#             self.edgesource = dse
+#             el = dse.CreateLayer("edges", geom_type=ogr.wkbLineString)
+#             # Create the fields
+#         fi1 = ogr.FieldDefn("s_geocode", field_type=ogr.OFTInteger)
+#         fi2 = ogr.FieldDefn("d_geocode", field_type=ogr.OFTInteger)
+#         fi3 = ogr.FieldDefn("flowSD", field_type=ogr.OFTReal)
+#         fi3.SetPrecision(12)
+#         fi4 = ogr.FieldDefn("flowDS", field_type=ogr.OFTReal)
+#         fi4.SetPrecision(12)
+#         el.CreateField(fi1)
+#         el.CreateField(fi2)
+#         el.CreateField(fi3)
+#         el.CreateField(fi4)
+#         # Add the features (lines)
+#         for e in elist:
+#             # print "setting edge fields"
+#             fe = ogr.Feature(el.GetLayerDefn())
+#             fe.SetField('s_geocode', e[0])
+#             fe.SetField('d_geocode', e[1])
+#             fe.SetField('flowSD', float(e[2]))
+#             fe.SetField('flowSD', float(e[3]))
+#             line = ogr.Geometry(type=ogr.wkbLineString)
+#             try:
+#                 # print "creating edge lines"
+#                 line.AddPoint(self.centdict[int(e[0])][0], self.centdict[int(e[0])][1])
+#                 line.AddPoint(self.centdict[int(e[1])][0], self.centdict[int(e[1])][1])
+#                 fe.SetGeometryDirectly(line)
+#                 el.CreateFeature(fe)
+#             except:  # node not in centdict
+#                 pass
+#         el.SyncToDisk()
+#         self.out_spatial_ref.MorphToESRI()
+#         with open('Edges.prj', 'w') as fobj:
+#             fobj.write(self.out_spatial_ref.ExportToWkt())
+#
+#     def create_data_layer(self, varlist, data):
+#         """
+#         Creates a new shape to contain data about nodes.
+#         varlist is the list of fields names associated with
+#         the nodes.
+#         data is a list of lists whose first element is the geocode
+#         and the remaining elements are values of the fields, in the
+#         same order as they appear in varlist.
+#         """
+#         data = array(data)
+#         # building normalizers for each variable, except geocode
+#         norms = [Normalize(c.min(), c.max()) for c in data[:, 1:].T]
+#         if os.path.exists(os.path.join(self.outdir, 'Data.shp')):
+#             os.remove(os.path.join(self.outdir, 'Data.shp'))
+#             os.remove(os.path.join(self.outdir, 'Data.shx'))
+#             os.remove(os.path.join(self.outdir, 'Data.dbf'))
+#             # Creates a new shape file to hold the data
+#         if not self.datasource:
+#             dsd = self.driver.CreateDataSource(os.path.join(self.outdir, 'Data.shp'))
+#             self.datasource = dsd
+#             dl = dsd.CreateLayer("sim_results", geom_type=ogr.wkbPolygon)
+#             # Create the fields
+#         fi1 = ogr.FieldDefn("geocode", field_type=ogr.OFTInteger)
+#         fin = ogr.FieldDefn("name", field_type=ogr.OFTString)
+#         fic = ogr.FieldDefn("colors", field_type=ogr.OFTString)
+#         dl.CreateField(fi1)
+#         dl.CreateField(fin)
+#         dl.CreateField(fic)  # json array with colors
+#         for v in varlist:
+#             # print "creating data fields"
+#             fi = ogr.FieldDefn(v, field_type=ogr.OFTReal)
+#             fi.SetPrecision(12)
+#             dl.CreateField(fi)
+#
+#         # Add the features (points)
+#         for l in data:
+#             #            print l
+#             # Iterate over the lines of the data matrix.
+#             hexcolors = [self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]
+#             gc = int(l[0])
+#             try:
+#                 geom = self.geomdict[gc]
+#             except KeyError:  # Geocode not in polygon dictionary
+#                 raise KeyError("Geocode %s not in polygon dictionary\n" % gc)
+#             if geom.GetGeometryType() != 3: continue
+#             # print geom.GetGeometryCount()
+#             fe = ogr.Feature(dl.GetLayerDefn())
+#             fe.SetField('geocode', gc)
+#             fe.SetField('name', self.namedict[gc])
+#             fe.SetField('colors', str(hexcolors))
+#             for v, d in zip(varlist, l[1:]):
+#                 # print v,d
+#                 fe.SetField(v, float(d))
+#                 # Add the geometry
+#                 # print "cloning geometry"
+#             clone = geom.Clone()
+#             # print geom
+#             # print "setting geometry"
+#             fe.SetGeometry(clone)
+#             # print "creating geom"
+#             dl.CreateFeature(fe)
+#
+#         dl.SyncToDisk()
+#         self.out_spatial_ref.MorphToESRI()
+#         with open('Data.prj', 'w') as fobj:
+#             fobj.write(self.out_spatial_ref.ExportToWkt())
+#         self.save_data_geojson(dl)
+#
+#     def get_hex_color(self, value):
+#         cols = cm.get_cmap("YlOrRd", 256)
+#         rgba = cols(value * 256)
+#         bgrcol = list(rgba[:-1])  # rgb(list)
+#         bgrcol.reverse()  # turn it into bgr
+#         hexcol = "#80" + rgb2hex(bgrcol)[1:]  # abgr Alpha set to 128
+#         return hexcol
+#
+#     def save_data_geojson(self, dl, namefield=None):
+#         """
+#         Creates a GeoJSON file containin the polygon layer and results of the simulation
+#         :Parameters:
+#         :parameter dl: datalayer to save
+#         """
+#         print("==> saving to GeoJSON")
+#         spatial_reference = dl.GetSpatialRef()
+#
+#         feature_collection = {"type": "FeatureCollection",
+#                               "features": []
+#                               }
+#
+#         #        if spatial_reference is not None:
+#         #            with open("data.crs", "wb") as f:
+#         #                f.write(spatial_reference.ExportToProj4())
+#         #
+#         #        feature_collection["crs"] = {"type": "link",
+#         #                                     "properties": {
+#         #                                         "href": "data.crs",
+#         #                                         "type": "proj4"
+#         #                                     }
+#         #        }
+#         if namefield is None:
+#             namefield = self.namefield
+#         dl.ResetReading()
+#         fe = dl.GetNextFeature()
+#         #        print fe
+#         while fe is not None:
+#             #            print namefield
+#             fi = fe.GetField(namefield)
+#             #            print fi,type(fi)
+#             try:
+#                 fi = fi.decode('utf8', 'ignore')
+#             except AttributeError:
+#                 fi = ''  # name is None
+#             fe.SetField(namefield, str(fi))
+#             feature = json.loads(fe.ExportToJson())
+#             feature['properties']['colors'] = eval(feature['properties']['colors'])
+#             feature_collection["features"].append(feature)
+#             fe = dl.GetNextFeature()
+#
+#         with open(os.path.join(self.outdir, 'data.json'), 'w') as f:
+#             json.dump(feature_collection, f)
+#
+#     def gen_sites_file(self, fname):
+#         """
+#         This method generate a sites
+#         csv file from the nodes extracted from the
+#         map.
+#         """
+#         with open(fname, "w") as f:
+#             for fe in self.nlist:
+#                 gc = fe.GetFieldAsInteger(self.geocfield)
+#                 x = self.centdict[gc][0]
+#                 y = self.centdict[gc][1]
+#                 name = fe.GetField(self.namefield)
+#                 line = "%s,%s,%s,%s\n" % (x, y, name, gc)
+#                 # fe.SetField('name',f.GetField(self.namefield))
+#                 f.write(line)
+#
+#     def close_sources(self):
+#         """
+#         Close the data sources so that data is flushed and and files are closed
+#         """
+#         if self.nodesource:
+#             self.nodesource.Destroy()
+#
+#         if self.edgesource:
+#             self.edgesource.Destroy()
+#
+#         if self.datasource:
+#             self.datasource.Destroy()
 
 
 class AnimatedKML(object):
@@ -822,33 +822,33 @@ class KmlGenerator:
         f.close()
 
 
-def gdal_error_handler(err_class, err_num, err_msg):
-    errtype = {
-        gdal.CE_None: 'None',
-        gdal.CE_Debug: 'Debug',
-        gdal.CE_Warning: 'Warning',
-        gdal.CE_Failure: 'Failure',
-        gdal.CE_Fatal: 'Fatal'
-    }
-    err_msg = err_msg.replace('\n', ' ')
-    err_class = errtype.get(err_class, 'None')
-    print('Error Number: %s' % (err_num))
-    print('Error Type: %s' % (err_class))
-    print('Error Message: %s' % (err_msg))
-
-
-# install error handler
-gdal.PushErrorHandler(gdal_error_handler)
-
-if __name__ == "__main__":
-    # opening data source
-    w = World('riozonas_LatLong.shp', 'nome_zonas', 'zona_trafe')
-    layer = w.ds.GetLayerByName(w.layerlist[0])
-    w.get_node_list(layer)
-    w.draw_layer(layer)
-    w.save_data_geojson(layer)
-    w.create_node_layer()
-    w.nodesource.Destroy()  # flush data to disk
+# def gdal_error_handler(err_class, err_num, err_msg):
+#     errtype = {
+#         gdal.CE_None: 'None',
+#         gdal.CE_Debug: 'Debug',
+#         gdal.CE_Warning: 'Warning',
+#         gdal.CE_Failure: 'Failure',
+#         gdal.CE_Fatal: 'Fatal'
+#     }
+#     err_msg = err_msg.replace('\n', ' ')
+#     err_class = errtype.get(err_class, 'None')
+#     print('Error Number: %s' % (err_num))
+#     print('Error Type: %s' % (err_class))
+#     print('Error Message: %s' % (err_msg))
+#
+#
+# # install error handler
+# gdal.PushErrorHandler(gdal_error_handler)
+#
+# if __name__ == "__main__":
+#     # opening data source
+#     w = World('riozonas_LatLong.shp', 'nome_zonas', 'zona_trafe')
+#     layer = w.ds.GetLayerByName(w.layerlist[0])
+#     w.get_node_list(layer)
+#     w.draw_layer(layer)
+#     w.save_data_geojson(layer)
+#     w.create_node_layer()
+#     w.nodesource.Destroy()  # flush data to disk
 ##    k = KmlGenerator()
 ##    k.addNodes(w.datasource.GetLayer(0))
 ##    k.writeToFile()
