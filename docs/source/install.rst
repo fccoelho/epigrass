@@ -88,7 +88,8 @@ Some other requirements can be installed directly from the Python Package index 
 
 .. code-block:: bash
 
-    $ sudo pip install  cython networkx redis sqlsoup requests sphinx
+    $ sudo pip install  cython networkx redis sqlsoup requests sphinx osgeo ogr
+    $ sudo apt install libgdal-dev
 
 
 Post-install configuration

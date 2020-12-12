@@ -17,3 +17,4 @@ pymysql
 fiona
 shapely
 altair
+redis

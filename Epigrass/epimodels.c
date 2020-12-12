@@ -15918,7 +15918,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   PyObject *__pyx_v_e = NULL;
   PyObject *__pyx_v_p = NULL;
   PyObject *__pyx_v_Lpos2 = NULL;
-  CYTHON_UNUSED PyObject *__pyx_v_Epos = NULL;
+  PyObject *__pyx_v_Epos = NULL;
   double __pyx_v_migInf;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -16271,14 +16271,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
  * 
- *     return [0, Ipos, Spos], Lpos + Lpos2, migInf
+ *     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
   /* "Epigrass/epimodels.py":873
  *     migInf = Ipos
  * 
- *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
+ *     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -16289,9 +16289,9 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_32stepSEIpR(CYTHON_UNUSED PyObjec
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 873, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_INCREF(__pyx_int_0);
-  __Pyx_GIVEREF(__pyx_int_0);
-  PyList_SET_ITEM(__pyx_t_6, 0, __pyx_int_0);
+  __Pyx_INCREF(__pyx_v_Epos);
+  __Pyx_GIVEREF(__pyx_v_Epos);
+  PyList_SET_ITEM(__pyx_t_6, 0, __pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_t_7);
   PyList_SET_ITEM(__pyx_t_6, 1, __pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_2);
@@ -16550,7 +16550,7 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   PyObject *__pyx_v_Lpos2_esp = NULL;
   PyObject *__pyx_v_Lpos2 = NULL;
   PyObject *__pyx_v_prob = NULL;
-  CYTHON_UNUSED PyObject *__pyx_v_Epos = NULL;
+  PyObject *__pyx_v_Epos = NULL;
   double __pyx_v_migInf;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -17166,14 +17166,14 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
  *     # Migrating infecctious
  *     migInf = Ipos             # <<<<<<<<<<<<<<
  * 
- *     return [0, Ipos, Spos], Lpos + Lpos2, migInf
+ *     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
  */
   __pyx_v_migInf = __pyx_v_Ipos;
 
   /* "Epigrass/epimodels.py":922
  *     migInf = Ipos
  * 
- *     return [0, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
+ *     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -17184,9 +17184,9 @@ static PyObject *__pyx_pf_8Epigrass_9epimodels_34stepSEIpR_s(CYTHON_UNUSED PyObj
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 922, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_INCREF(__pyx_int_0);
-  __Pyx_GIVEREF(__pyx_int_0);
-  PyList_SET_ITEM(__pyx_t_7, 0, __pyx_int_0);
+  __Pyx_INCREF(__pyx_v_Epos);
+  __Pyx_GIVEREF(__pyx_v_Epos);
+  PyList_SET_ITEM(__pyx_t_7, 0, __pyx_v_Epos);
   __Pyx_GIVEREF(__pyx_t_11);
   PyList_SET_ITEM(__pyx_t_7, 1, __pyx_t_11);
   __Pyx_GIVEREF(__pyx_t_8);

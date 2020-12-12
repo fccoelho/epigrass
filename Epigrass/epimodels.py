@@ -870,7 +870,7 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     # Migrating infecctious
     migInf = Ipos
 
-    return [0, Ipos, Spos], Lpos + Lpos2, migInf
+    return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
 
 
 @cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
@@ -919,7 +919,7 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     # Migrating infecctious
     migInf = Ipos
 
-    return [0, Ipos, Spos], Lpos + Lpos2, migInf
+    return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
 
 
 @cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
