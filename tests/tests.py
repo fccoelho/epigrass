@@ -72,16 +72,18 @@ class TestSimulationRuns(unittest.TestCase):
         #        self.edgesout = loadData('edgesout.csv',sep=',')
         pass
 
-
-
     def test_mesh_epg(self):
         S = Simulate('mesh.epg', silent=True)
+        S.start()
+
+    def test_backend_csv(self):
+        S = Simulate('mesh.epg', silent=True)
+        S.backend = 'csv'
         S.start()
 
     def test_custom_model(self):
         S = Simulate('sars.epg', silent=True)
         S.start()
-
 
     def test_custom_model_parallel(self):
         S = Simulate('sars.epg', silent=True)

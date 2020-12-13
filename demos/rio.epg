@@ -76,7 +76,7 @@ p = 0           # Probability of a recovered become infected per time step [0,1]
 #   S,E,I = 0.5*N, 0.01*N, 0.05*N
 #   S,E,I = N-1, 1, 0
 S = N
-E = 0
+E = 100
 I = 0
 
 #=============================================================#

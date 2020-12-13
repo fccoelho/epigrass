@@ -107,6 +107,17 @@ def read_map(fname):
         gpd.GeoDataFrame()
         read_map.cache_clear()
 
+def get_subgraph(G, node):
+    """
+    return subgraph containing `node` and its direct neighboors
+    :param G: full graph
+    :param node: node defining the subgraph
+    """
+    nodes = [node]
+    nodes.extend(list(G.neighbors(node)))
+    H = G.subgraph(nodes).copy()
+    return H
+
 
 # pipeline = pn.pipeline.Pipeline()
 class SeriesViewer(param.Parameterized):
@@ -161,6 +172,8 @@ class SeriesViewer(param.Parameterized):
 {df['the_world$sites'].iloc[0]}
 ### Model Type
 {df['epidemiological_model$modtype'].iloc[0]}
+### Epidemic Events
+Seed: {df['epidemic_events$seed']}
 
 """
             )
@@ -212,14 +225,19 @@ class SeriesViewer(param.Parameterized):
         else:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
 
-    @param.depends('model_path')
+    @param.depends('model_path','localities')
     def view_network(self):
         G = get_graph(self.model_path)
         if G.order == 0:
             return pn.pane.Alert(f'## No network file found on {self.model_path}')
+        nodeloc = list(filter(lambda n: n[1]['name'] == self.localities, G.nodes(data=True)))
+        # print(nodeloc, self.localities)
+        if nodeloc == []:
+            return pn.pane.Alert(f'## Please select a locality.')
+        H = get_subgraph(G, nodeloc[0][0])
 
         # Draw the graph using Altair
-        pos = NX.get_node_attributes(G, 'pos')
+        pos = NX.get_node_attributes(H, 'pos')
         # print(pos)
         # viz = nxa.draw_networkx(
         #     G, pos=pos,
@@ -232,17 +250,22 @@ class SeriesViewer(param.Parameterized):
         kwargs = dict(width=800, height=800, xaxis=None, yaxis=None)
         hv.opts.defaults(opts.Nodes(**kwargs), opts.Graph(**kwargs))
         colors = ['#000000'] + hv.Cycle('Category20').values
-        epi_graph = hv.Graph.from_networkx(G, positions=pos)
+        epi_graph = hv.Graph.from_networkx(H, positions=pos)
 
-        epi_graph.opts(cmap=colors, node_size=10, edge_line_width=1,
+        epi_graph.opts(
+                       cmap=colors, node_size=10, edge_line_width=1,
                        directed=True,
                        node_line_color='gray',
                        edge_color='gray',
                        node_color='circle'
                        )
 
-        f = epi_graph
-        return f
+        f = bundle_graph(epi_graph)
+        source = epi_graph.nodes.clone()
+        # print(epi_graph.nodes.data.iloc[0])
+        source.data = epi_graph.nodes.data[epi_graph.nodes.data.name==self.localities]
+
+        return f*source.opts(color='red')
 
     @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
@@ -351,9 +374,9 @@ def main():
             pn.Row(
                 pn.Card(series_viewer.view_map, title='Final State')
             ),
-            # pn.Row(
-            #     pn.Card(series_viewer.view_network, title='Network')
-            # ),
+            pn.Row(
+                pn.Card(series_viewer.view_network, title='Network')
+            ),
             pn.Row(
                 pn.Card(series_viewer.view_series, title='Time Map')
             ),

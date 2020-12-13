@@ -10,7 +10,9 @@ from numpy.random import poisson, negative_binomial
 from numpy import inf, nan, nan_to_num
 import sys
 import redis
-import cython
+# import cython
+import numba
+from numba.typed import List
 
 redisclient = redis.StrictRedis()
 
@@ -40,31 +42,34 @@ vnames = {
                   'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',),
 }
 
-
+# @cython.cclass
 class Epimodel(object):
     """
     Defines a library of discrete time population models
     """
 
-    @cython.locals(geocode='long', modtype='bytes', parallel='bint')
+    # @cython.locals(geocode='long', modtype='bytes', parallel='bint')
     def __init__(self, geocode, modtype=b'', parallel=True):
         """
         Defines which models a given site will use
         and set variable names accordingly.
         :param modtype:
         """
+        print(selectModel(modtype))
         self.step = selectModel(modtype)
         self.geocode = geocode
         self.parallel = parallel
 
     def __call__(self, *args, **kwargs):
         args = self.get_args_from_redis()
-        res = self.step(*(list(args) + [self]))
+        args = list(args)
+        args.append(self)
+        res = self.step(*args)
         self.update_redis(res)
         # return res
 
-    @cython.locals(simstep='long', totpop='long', theta='double', npass='double')
-    def get_args_from_redis(self):
+    # @cython.locals(simstep='long', totpop='long', theta='double', npass='double')
+    def get_args_from_redis(self) -> tuple:
         """
         Get updated parameters from the redis database.
         """
@@ -106,7 +111,7 @@ class Epimodel(object):
             # TODO: have infector be stated in terms of geocodes
 
 
-@cython.locals(Type='bytes')
+# @cython.locals(Type='bytes')
 def selectModel(modtype):
     """
     Sets the model engine
@@ -157,7 +162,7 @@ def selectModel(modtype):
     #     try:
     #         # TODO: move this import to the graph level
     #         import CustomModel
-    #         vnames[b'Custom'] = CustomModel.vnames
+    #         vnames['Custom'] = CustomModel.vnames
     #         return CustomModel.Model
     #     except ImportError:
     #         print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
@@ -165,11 +170,12 @@ def selectModel(modtype):
         sys.exit('Model type specified in .epg file is invalid')
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
@@ -180,13 +186,13 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
     if simstep == 0:  # get initial values
         S1, E1, Is1, Ic1, Ig1 = (
-            bi[b'susc_age1'], bi[b'incub_age1'], bi[b'subc_age1'], bi[b'sympt_age1'], bi[b'comp_age1'])
+            bi['susc_age1'], bi['incub_age1'], bi['subc_age1'], bi['sympt_age1'], bi['comp_age1'])
         S2, E2, Is2, Ic2, Ig2 = (
-            bi[b'susc_age2'], bi[b'incub_age2'], bi[b'subc_age2'], bi[b'sympt_age2'], bi[b'comp_age2'])
+            bi['susc_age2'], bi['incub_age2'], bi['subc_age2'], bi['sympt_age2'], bi['comp_age2'])
         S3, E3, Is3, Ic3, Ig3 = (
-            bi[b'susc_age3'], bi[b'incub_age3'], bi[b'subc_age3'], bi[b'sympt_age3'], bi[b'comp_age3'])
+            bi['susc_age3'], bi['incub_age3'], bi['subc_age3'], bi['sympt_age3'], bi['comp_age3'])
         S4, E4, Is4, Ic4, Ig4 = (
-            bi[b'susc_age4'], bi[b'incub_age4'], bi[b'subc_age4'], bi[b'sympt_age4'], bi[b'comp_age4'])
+            bi['susc_age4'], bi['incub_age4'], bi['subc_age4'], bi['sympt_age4'], bi['comp_age4'])
     else:  # get values from last time step
         # print(len(inits))
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
@@ -194,28 +200,28 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 
     # for k, v in bp.items():
     #     exec ('%s = %s' % (k, v))
-    alpha = bp[b'alpha']
-    beta = bp[b'beta']
-    r = bp[b'r']
-    e = bp[b'e']
-    c = bp[b'c']
-    g = bp[b'g']
-    d = bp[b'd']
-    pc1 = bp[b'pc1']
-    pc2 = bp[b'pc2']
-    pc3 = bp[b'pc3']
-    pc4 = bp[b'pc4']
-    pp1 = bp[b'pp1']
-    pp2 = bp[b'pp2']
-    pp3 = bp[b'pp3']
-    pp4 = bp[b'pp4']
-    b = bp[b'b']
+    alpha = bp.get('alpha', bp[b'alpha'])
+    beta = bp.get('beta', bp[b'beta'])
+    r = bp.get('r', bp[b'r'])
+    e = bp.get('e', bp[b'e'])
+    c = bp.get('c', bp[b'c'])
+    g = bp.get('g', bp[b'g'])
+    d = bp.get('d', bp[b'd'])
+    pc1 = bp.get('pc1', bp[b'pc1'])
+    pc2 = bp.get('pc2', bp[b'pc2'])
+    pc3 = bp.get('pc3', bp[b'pc3'])
+    pc4 = bp.get('pc4', bp[b'pc4'])
+    pp1 = bp.get('pp1', bp[b'pp1'])
+    pp2 = bp.get('pp2', bp[b'pp2'])
+    pp3 = bp.get('pp3', bp[b'pp3'])
+    pp4 = bp.get('pp4', bp[b'pp4'])
+    b = bp.get('b', bp[b'b'])
 
     # Vacination event
 
     if 'vaccineNow' in bp:  # TODO: add to bp when creating model
-        vaccineNow = bp[b'vaccineNow']
-        vaccov = bp[b'vaccov']
+        vaccineNow = bp['vaccineNow']
+        vaccov = bp['vaccov']
         S1 -= vaccov * S1
         S2 -= vaccov * S2
         S3 -= vaccov * S3
@@ -269,11 +275,12 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -289,15 +296,15 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     :return:
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
 
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    r = bp[b'r'];
-    b = bp[b'b']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    r = bp.get('r', bp[b'r']);
+    b = bp.get('b', bp[b'b'])
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     # Model
@@ -309,30 +316,31 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
 
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -351,11 +359,9 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+
+@numba.jit(forceobj=True, cache=True)
+def stepSIR(inits: list, simstep: int, totpop: int , theta: float=0, npass: float=0, bi: dict=None, bp: dict=None, values: list=None, model: object=None) -> tuple:
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = current state (E,I,S)
@@ -363,18 +369,18 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     """
     # print(inits)
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get(b'e', 0), bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
@@ -388,29 +394,30 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     return (0, Ipos, Spos), Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -430,29 +437,30 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Defines the model SEIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
@@ -466,11 +474,12 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -478,18 +487,18 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -508,11 +517,12 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Defines the model SEIR:
     - inits = (E,I,S)
@@ -520,18 +530,18 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
@@ -546,11 +556,12 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -558,18 +569,18 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -591,29 +602,30 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
@@ -627,29 +639,30 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -669,29 +682,28 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double',
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True)
+def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
@@ -706,29 +718,30 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':
@@ -748,30 +761,31 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
 
@@ -786,29 +800,30 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    p = bp.get('p', bp[b'p'])
     R = N - E - I - S
 
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -833,30 +848,31 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     return [0, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    p = bp.get('p', bp[b'p'])
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
@@ -873,29 +889,30 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    # w = bp[b'w'];
-    p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    # w = bp.get('w', bp[b'w']);
+    p = bp.get('p', bp[b'p'])
     R = N - E - I - S
 
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -922,30 +939,31 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     return [Epos, Ipos, Spos], Lpos + Lpos2, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     # Model
@@ -959,30 +977,31 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     return [0, Ipos, Spos], Lpos, migInf
 
 
-@cython.locals(inits='object', simstep='long', totpop='long', theta='double', npass='double',
-               beta='double', alpha='double', E='double', I='double', S='double', N='long',
-               r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-               Ipos='double', Spos='double', Rpos='double')
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson'):
+# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
+#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
+#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
+#                Ipos='double', Spos='double', Rpos='double')
+@numba.jit(forceobj=True, cache=True)
+def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi.get('e', bi[b'e']), bi.get('i', bi[b'i']), bi.get('s', bi[b's']))
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp[b'beta'];
-    alpha = bp[b'alpha'];
-    # e = bp[b'e'];
-    r = bp[b'r'];
-    # delta = bp[b'delta'];
-    b = bp[b'b'];
-    w = bp[b'w'];
-    # p = bp[b'p']
+    beta = bp.get('beta', bp[b'beta']);
+    alpha = bp.get('alpha', bp[b'alpha']);
+    # e = bp.get('e', bp[b'e']);
+    r = bp.get('r', bp[b'r']);
+    # delta = bp.get('delta', bp[b'delta']);
+    b = bp.get('b', bp[b'b']);
+    w = bp.get('w', bp[b'w']);
+    # p = bp.get('p', bp[b'p'])
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
     if dist == 'poisson':

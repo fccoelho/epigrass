@@ -163,7 +163,7 @@ class Simulate:
             except AttributeError:
                 pass
             if k.startswith('initial conditions'):
-                self.inits[k.split('.')[-1]] = v
+                self.inits[k.split('.')[-1].lower()] = v
             elif k.startswith('model parameters'):
                 self.parms[k.split('.')[-1]] = v
             else:
@@ -232,7 +232,7 @@ class Simulate:
             for k, v in self.inits.items():
                 if isinstance(k, bytes):
                     k = k.decode('utf8')
-                inits[k] = eval(v)
+                # inits[k.upper()] = eval(v)
                 inits[k.lower()] = eval(v)
             for k, v in self.parms.items():
                 if isinstance(k, bytes):
@@ -492,56 +492,48 @@ class Simulate:
         """
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
-        tablee = table + "_" + self.now + "_e.tab"  # edgetable name
-        table += "_" + self.now + ".tab"  # sitetable name
-        f = open(table, "w")
+        tablee = table + "_" + self.now + "_e.csv.gz"  # edgetable name
+        table += "_" + self.now + ".csv.gz"  # sitetable name
+
         head = ['geocode', 'time', 'totpop', 'name',
                 'lat', 'longit']
-        headerwritten = False
+
+        records = []
         for site in self.g.site_dict.values():
             t = 0
             regb = [str(site.geocode), str(t), str(site.totpop),
-                    site.sitename.replace('"', '').encode('ascii', 'replace'),
+                    str(site.sitename).strip('"').encode('utf8', 'replace'),
                     str(site.pos[0]), str(site.pos[1])
                     ]
             if site.values:
                 for n, v in enumerate(site.values):
-                    head.append('values%s' % n)
                     regb.append(str(v))
             # print site.sitename, site.ts
             # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
             ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
-            head.extend(['incidence', 'arrivals'])
-            for n, v in enumerate(site.vnames):
-                head.append(str(v))
+
             for i in ts:
                 reg = deepcopy(regb)
-                reg.extend([str(site.incidence[t]), str(site.thetahist[t])])
+                try:
+                    reg.extend([str(site.incidence[t]), str(site.thetahist[t])])
+                except IndexError:
+                    print(len(site.incidence),len(site.thetahist),t)
                 reg[1] = str(t)
                 for n, v in enumerate(site.vnames):
                     reg.append(str(i[n]))
-                if not headerwritten:
-                    h = ",".join(head)
-                    f.write(h + '\n')
-                    headerwritten = True
-                f.write(','.join(reg) + '\n')
+                records.append(reg)
                 t += 1
-        f.close()
-        # inserting data in edges file
-        g = open(tablee, 'w')
-        t = 0
+        values = [f'value{n}' for n in range(len(site.values))]
+        site_df = pd.DataFrame(columns=head+values+['incidence', 'arrivals']+site.vnames, data=records)
+        site_df.to_csv(table)
+
         head = ['source_code', 'dest_code', 'time', 'ftheta', 'btheta']
-        ehw = False
-        for e in self.g.edge_list:
-            for f, b in zip(e.ftheta, e.btheta):
-                if not ehw:
-                    g.write(','.join(head) + '\n')
-                    ehw = True
-                ereg = [e.source.geocode, e.dest.geocode, t, f, b]
-                ereg = [str(i) for i in ereg]
-                g.write(','.join(ereg) + '\n')
-                t += 1
-        g.close()
+
+        records = [[e.source.geocode, e.dest.geocode, t, f, b] for t, e in enumerate(self.g.edge_list) for f, b in zip(e.ftheta, e.btheta)]
+        edge_df = pd.DataFrame(columns=head, data=records)
+
+        edge_df.to_csv(tablee)
+
         os.chdir(self.dir)
 
     def writeMetaTable(self, table):
@@ -930,6 +922,7 @@ def onStraightRun(args):
         os.chdir(os.path.abspath(pth))
         print(os.path.abspath(pth))
         epipanel.show(pth)
+    redisclient.flushall()
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
     else:

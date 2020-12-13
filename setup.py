@@ -25,7 +25,7 @@ setup(name='epigrass',
               'epidash = Epigrass.epidash:main'
           ],
       },
-      ext_modules=cythonize('Epigrass/epimodels.py'),
+      # ext_modules=cythonize('Epigrass/epimodels.py'),
       zip_safe=False,
       include_package_data=True,
       package_data={'': ['COPYING', 'epigrass.desktop', '*.rst', '*.tex', '*.png', '*.jpg']},
