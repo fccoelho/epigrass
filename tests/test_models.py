@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from six.moves import zip
+
 __author__ = 'fccoelho'
 
 import unittest
+import numpy as np
 # from Epigrass.manager import *
 from Epigrass.simobj import siteobj, graph, edge
 from Epigrass.epimodels import Epimodel
@@ -21,7 +23,8 @@ class TestModels(unittest.TestCase):
             self.assertAlmostEqual(x, y, 0)
         self.assertAlmostEqual(res[1], 0, 1)
         self.assertAlmostEqual(res[2], 0.9, 1)
-        #TOdo: add asserts with the expected results of the models
+
+        # TOdo: add asserts with the expected results of the models
 
     def test_run_SIS_s(self):
         model = Epimodel(1, modtype=b'SIS_s')
@@ -113,10 +116,10 @@ class TestModels(unittest.TestCase):
     #                          b'delta': 0.1, b'vaccineNow': 1, b'vaccov': 0.3})
     #     # print res
 
-        # for x, y in zip(res[0], [999.3065035, 0.0049949993999999996, 0.9, 0.010000000000000002, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0]):
-        #     self.assertAlmostEqual(x, y, 0)
-        # self.assertAlmostEqual(res[1], 0.003496, 3)
-        # self.assertAlmostEqual(res[2], 0.46, 2)
+    # for x, y in zip(res[0], [999.3065035, 0.0049949993999999996, 0.9, 0.010000000000000002, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0]):
+    #     self.assertAlmostEqual(x, y, 0)
+    # self.assertAlmostEqual(res[1], 0.003496, 3)
+    # self.assertAlmostEqual(res[2], 0.46, 2)
 
     def test_run_SIpRpS_s(self):
         model = Epimodel(1, modtype=b'SIpRpS_s')
@@ -207,3 +210,207 @@ class TestModels(unittest.TestCase):
             self.assertAlmostEqual(x, y, 0)
         self.assertAlmostEqual(res[1], 0, 1)
         self.assertAlmostEqual(res[2], 0.9, 1)
+
+
+import pylab as P
+
+
+def run(model, args, n):
+    res = []
+    for i in range(n):
+        args[1] = i
+        out = model.step(*tuple(args))
+        res.append(
+            out[0]
+        )
+        args[0] = out[0]
+    return np.array(res)
+
+
+class test_model_run(unittest.TestCase):
+    def setUp(self):
+        self.bi = {'e': 0, 'i': 10, 's': 999}
+        self.bp = {'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 1, 'alpha': 1., 'delta': 0.1, 'p': 0.1, 'w': 0.1}
+
+    def tearDown(self):
+        P.show()
+
+    def test_run_SIRS_s(self):
+        model = Epimodel(1, modtype=b'SIRS_s')
+        res = run(model, [(0, 10, 999), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIRS_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIRS(self):
+        model = Epimodel(1, modtype=b'SIRS')
+        res = run(model, [(0, 1, 999), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIRS$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIpR_s(self):
+        model = Epimodel(1, modtype=b'SEIpR_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIpR_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIpR(self):
+        model = Epimodel(1, modtype=b'SEIpR')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIpR$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIpR_s(self):
+        model = Epimodel(1, modtype=b'SEIpR_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIpR_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIpR(self):
+        model = Epimodel(1, modtype=b'SIpR')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIpR$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIpRpS_s(self):
+        model = Epimodel(1, modtype=b'SEIpRpS_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIpRpS_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIpRpS(self):
+        model = Epimodel(1, modtype=b'SEIpRpS')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIpRpS$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIpRpS_s(self):
+        model = Epimodel(1, modtype=b'SIpRpS_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIpRpS_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIpRpS(self):
+        model = Epimodel(1, modtype=b'SIpRpS')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIpRpS$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIR_s(self):
+        model = Epimodel(1, modtype=b'SEIR_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIR_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIR(self):
+        model = Epimodel(1, modtype=b'SEIR')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIR$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIS_s(self):
+        model = Epimodel(1, modtype=b'SEIS_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIS_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SEIS(self):
+        model = Epimodel(1, modtype=b'SEIS')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIS$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIR_s(self):
+        model = Epimodel(1, modtype=b'SIR_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIR_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIR(self):
+        model = Epimodel(1, modtype=b'SIR')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIR$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIS_s(self):
+        model = Epimodel(1, modtype=b'SIS_s')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIS_s$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIS(self):
+        model = Epimodel(1, modtype=b'SIS')
+        res = run(model, [(0, 10, 990), 0, 1000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIS$')
+        P.legend(['E', 'I', 'S'])

@@ -199,11 +199,14 @@ class siteobj:
         Processes the output of a step updating simulation statistics
         :param res: Tuple with the output of the simulation model
         """
-        # pipe = redisclient.pipeline()
-        last_state = redisclient.lindex("{}:ts".format(self.geocode), -1)
+        last_state = eval(redisclient.lindex("{}:ts".format(self.geocode), -1))
+        # try:
+        #     assert res[0] == last_state
+        # except:
+        #     pass
         Lpos = redisclient.lindex(f"{self.geocode}:incidence", -1)
         migInf = redisclient.get("{}:migInf".format(self.geocode))
-        self.ts.append(eval(last_state))
+        self.ts.append(last_state)
         Lpos = float(Lpos)
         migInf = float(migInf)
         self.totalcases += Lpos

@@ -28,18 +28,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed dependdencies on gdal">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.c" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epipanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demos/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +106,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="prop_add_unversioned_files" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
@@ -128,7 +123,7 @@
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Nosetests in tests.py">
+  <component name="RunManager" selected="Python tests.pytest for test_models.test_model_run">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
@@ -220,28 +215,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="epipanel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="epigrass" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Epigrass" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Epigrass/epipanel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -386,6 +359,23 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest for test_models.test_model_run" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="epigrass" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_models.test_model_run&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="pytest for tests.TestSimulationRuns.test_mesh_epg" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="epigrass" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -404,19 +394,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.epipanel" />
       <item itemvalue="Python tests.Nosetests in test_manager.py" />
       <item itemvalue="Python tests.Nosetests in test_models.py" />
       <item itemvalue="Python tests.Nosetests in tests.py" />
       <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
+      <item itemvalue="Python tests.pytest for test_models.test_model_run" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Nosetests in tests.py" />
-        <item itemvalue="Python.epipanel" />
-        <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
-        <item itemvalue="Python tests.Nosetests in test_manager.py" />
+        <item itemvalue="Python tests.pytest for test_models.test_model_run" />
         <item itemvalue="Python tests.Nosetests in test_models.py" />
+        <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
+        <item itemvalue="Python tests.Nosetests in tests.py" />
+        <item itemvalue="Python tests.Nosetests in test_manager.py" />
       </list>
     </recent_temporary>
   </component>
@@ -478,7 +468,8 @@
       <workItem from="1607779284854" duration="27093000" />
       <workItem from="1607855688530" duration="114000" />
       <workItem from="1607861769715" duration="19179000" />
-      <workItem from="1607895384298" duration="951000" />
+      <workItem from="1607895384298" duration="1156000" />
+      <workItem from="1607962637570" duration="13305000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
       <created>1369673229297</created>
@@ -816,7 +807,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607810315762</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output">
+      <created>1607896576628</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1607896576628</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -843,7 +841,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated docs" />
     <MESSAGE value="Fixed bug saving simulation from custom model" />
     <MESSAGE value="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv" />
     <MESSAGE value="Migrated Report module to use pweave&#10;Graph object in simobj.py needs refactoring to fix a bug" />
@@ -868,7 +865,8 @@
     <MESSAGE value="Updated installation instructions" />
     <MESSAGE value="Commented out dependencies on gdal and OGR" />
     <MESSAGE value="removed dependdencies on gdal" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed dependdencies on gdal" />
+    <MESSAGE value="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -889,9 +887,9 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Epigrass/simobj.py</url>
-          <line>128</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/Epigrass/manager.py</url>
+          <line>644</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -901,6 +899,7 @@
         <watch expression="CustomModel.vnames" language="Python" />
         <watch expression="redisclient.lindex(f&quot;8:ts&quot;,-1)" language="Python" />
         <watch expression="redisclient.lrange(&quot;8:ts&quot;, 0, -1)" language="Python" />
+        <watch expression="bi.get('e', bi['e'])" language="Python" />
       </configuration>
       <configuration name="PythonConfigurationType">
         <watch expression="self.geomdict.keys()" language="Python" />
@@ -912,10 +911,11 @@
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606668720181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1607882272029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1607888619037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1607882218620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1607970132992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1607970974017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1607976347329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_tests_TestSimulationRuns_test_mesh_epg.coverage" NAME="pytest for tests.TestSimulationRuns.test_mesh_epg Coverage Results" MODIFIED="1607885142908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607892937930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607969667280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

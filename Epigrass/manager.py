@@ -509,8 +509,8 @@ class Simulate:
                 for n, v in enumerate(site.values):
                     regb.append(str(v))
             # print site.sitename, site.ts
-            # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
-            ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
+            ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+            # ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
 
             for i in ts:
                 reg = deepcopy(regb)
@@ -640,8 +640,8 @@ class Simulate:
                 lat = site.pos[0]
                 longit = site.pos[1]
                 name = site.sitename
-                # ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
-                ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
+                ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+                # ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
                 inc = site.incidence
                 thist = site.thetahist
                 t = 0
