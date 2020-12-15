@@ -28,19 +28,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added background tiles for the dashboard graph">
-      <change afterPath="$PROJECT_DIR$/docs/source/dashboard1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/dashboard2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/source/dashboard3.png" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Updated documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epipanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/using.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/using.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/intromodels.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/intromodels.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/using.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/using.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,14 +473,7 @@
       <workItem from="1607861769715" duration="19179000" />
       <workItem from="1607895384298" duration="1156000" />
       <workItem from="1607962637570" duration="17797000" />
-      <workItem from="1608025614231" duration="15695000" />
-    </task>
-    <task id="LOCAL-00004" summary="Fixed bugs in dgraph">
-      <created>1465906135603</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1465906135603</updated>
+      <workItem from="1608025614231" duration="16450000" />
     </task>
     <task id="LOCAL-00005" summary="fixed more bugs related with porting to python3">
       <created>1567183249473</created>
@@ -827,7 +811,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608039445605</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Updated documentation">
+      <created>1608045795086</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1608045795086</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -854,7 +845,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started refactoring Graph class&#10;Now its a subclass of nx.MultiDiGraph&#10;added test to the allPairs method" />
     <MESSAGE value="Started working on issue #4&#10;plus a number of minor fixes" />
     <MESSAGE value="More work on issue #4" />
     <MESSAGE value="Finished implementing NewWorld class&#10;resolves #4" />
@@ -879,7 +869,8 @@
     <MESSAGE value="Added tests to visually validate the models" />
     <MESSAGE value="Finshed visual tests for builtin model's dynamics.&#10;added guarantees against underflow to builtin models." />
     <MESSAGE value="Added background tiles for the dashboard graph" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added background tiles for the dashboard graph" />
+    <MESSAGE value="Updated documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
