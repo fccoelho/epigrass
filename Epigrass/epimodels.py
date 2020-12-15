@@ -43,6 +43,7 @@ vnames = {
                   'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',),
 }
 
+
 # @cython.cclass
 class Epimodel(object):
     """
@@ -187,13 +188,13 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
     if simstep == 0:  # get initial values
         S1, E1, Is1, Ic1, Ig1 = (
-            bi['susc_age1'], bi['incub_age1'], bi['subc_age1'], bi['sympt_age1'], bi['comp_age1'])
+            bi.get('susc_age1',  bi.get(b'susc_age1')), bi.get('incub_age1',  bi.get(b'incub_age1')), bi.get('subc_age1',  bi.get(b'subc_age1')), bi.get('sympt_age1',  bi.get(b'sympt_age1')), bi.get('comp_age1',  bi.get(b'comp_age1')))
         S2, E2, Is2, Ic2, Ig2 = (
-            bi['susc_age2'], bi['incub_age2'], bi['subc_age2'], bi['sympt_age2'], bi['comp_age2'])
+            bi.get('susc_age2',  bi.get(b'susc_age2')), bi.get('incub_age2',  bi.get(b'incub_age2')), bi.get('subc_age2',  bi.get(b'subc_age2')), bi.get('sympt_age2',  bi.get(b'sympt_age2')), bi.get('comp_age2',  bi.get(b'comp_age2')))
         S3, E3, Is3, Ic3, Ig3 = (
-            bi['susc_age3'], bi['incub_age3'], bi['subc_age3'], bi['sympt_age3'], bi['comp_age3'])
+            bi.get('susc_age3',  bi.get(b'susc_age3')), bi.get('incub_age3',  bi.get(b'incub_age3')), bi.get('subc_age3',  bi.get(b'subc_age3')), bi.get('sympt_age3',  bi.get(b'sympt_age3')), bi.get('comp_age3',  bi.get(b'comp_age3')))
         S4, E4, Is4, Ic4, Ig4 = (
-            bi['susc_age4'], bi['incub_age4'], bi['subc_age4'], bi['sympt_age4'], bi['comp_age4'])
+            bi.get('susc_age4',  bi.get(b'susc_age4')), bi.get('incub_age4',  bi.get(b'incub_age4')), bi.get('subc_age4',  bi.get(b'subc_age4')), bi.get('sympt_age4',  bi.get(b'sympt_age4')), bi.get('comp_age4',  bi.get(b'comp_age4')))
     else:  # get values from last time step
         # print(len(inits))
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
@@ -308,6 +309,8 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     b = bp.get('b', bp.get(b'b'))
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + r * I
@@ -322,7 +325,8 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 @numba.jit(forceobj=True, cache=True)
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+              dist='poisson') -> tuple:
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
@@ -350,6 +354,7 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + r * I
@@ -358,7 +363,6 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     migInf = (Ipos)
 
     return [0, Ipos, Spos], Lpos, migInf
-
 
 
 # @numba.jit(['UniTuple(float64,float64,float64)', 'uint64', 'uint64','double', 'double','dict', 'dict', 'UniTuple(double)', 'object'],cache=True)
@@ -384,10 +388,11 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos
-    Rpos = N - (Spos + Ipos)
+    Rpos = R + r*I
 
     # Migrating infecctious
     migInf = Ipos
@@ -400,7 +405,8 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+              dist='poisson') -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
@@ -427,6 +433,7 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos
@@ -464,6 +471,7 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -480,7 +488,8 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 @numba.jit(forceobj=True, cache=True)
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+               dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -507,6 +516,8 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     elif dist == 'negbin':
         prob = I / (I + Lpos_esp)  # converting between parameterizations
         Lpos = negative_binomial(I, prob)
+
+    Lpos = min(S, Lpos)  # to avoid underflow
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -545,6 +556,7 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -562,7 +574,8 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+               dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -591,6 +604,8 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     elif dist == 'negbin':
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
+
+    Lpos = min(S, Lpos)  # to avoid underflow
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -628,6 +643,7 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos = min(S, Lpos)  # to avoid underflow
 
     # Model
     Ipos = (1 - r) * I + Lpos
@@ -645,7 +661,8 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 @numba.jit(forceobj=True, cache=True)
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+                 dist='poisson') -> tuple:
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
@@ -672,6 +689,7 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + (1 - delta) * r * I
@@ -708,6 +726,7 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     b = bp.get('b', bp.get(b'b'));
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos = min(S, Lpos)  # to avoid underflow
 
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
@@ -725,7 +744,8 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 @numba.jit(forceobj=True, cache=True)
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+                  dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
@@ -752,6 +772,7 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     Epos = (1 - e) * E + Lpos
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos + (1 - delta) * r * I
@@ -791,6 +812,8 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
 
+    Lpos = min(S, Lpos)  # to avoid underflow
+    Lpos2 = min(R, Lpos2)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos + Lpos2
     Spos = S + b - Lpos
@@ -807,7 +830,8 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+               dist='poisson') -> tuple:
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
@@ -826,7 +850,7 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     b = bp.get('b', bp.get(b'b'));
     # w = bp.get('w', bp.get(b'w'));
     p = bp.get('p', bp.get(b'p'))
-    R = N - E - I - S
+    R = max(0, N - E - I - S)
 
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
@@ -840,10 +864,12 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
         prob = I / (I + Lpos2_esp)  # convertin between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
+    Lpos2 = min(R, Lpos2)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos + Lpos2
     Spos = S + b - Lpos
-    Rpos = N - (Spos + Ipos) - Lpos2
+    Rpos = R + r * I - Lpos2
 
     # Migrating infecctious
     migInf = Ipos
@@ -879,6 +905,8 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
 
+    Lpos = min(S, Lpos)  # to avoid underflow
+    Lpos2 = min(R, Lpos2)  # to avoid underflow
     # Model
     Epos = (1 - e) * E + Lpos + Lpos2
     Ipos = e * E + (1 - r) * I
@@ -896,7 +924,8 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+                dist='poisson') -> tuple:
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
@@ -915,7 +944,7 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     b = bp.get('b', bp.get(b'b'));
     # w = bp.get('w', bp.get(b'w'));
     p = bp.get('p', bp.get(b'p'))
-    R = N - E - I - S
+    R = max(0, N - E - I - S)
 
     Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
@@ -929,11 +958,14 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
         prob = I / (I + Lpos2_esp)  # converting between parameterizations
         Lpos2 = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
+    Lpos2 = min(R, Lpos2)  # to avoid underflow
+
     # Model
     Epos = (1 - e) * E + Lpos + Lpos2
     Ipos = e * E + (1 - r) * I
     Spos = S + b - Lpos
-    Rpos = N - (Spos + Ipos) - Lpos2
+    Rpos = R + r * I - Lpos2
 
     # Migrating infecctious
     migInf = Ipos
@@ -967,7 +999,7 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
-
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + w * R
@@ -983,8 +1015,9 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None, dist='poisson') -> tuple:
+# @numba.jit(forceobj=True, cache=True)
+def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
+               dist='poisson') -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
@@ -1012,6 +1045,7 @@ def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
+    Lpos = min(S, Lpos)  # to avoid underflow
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos + w * R

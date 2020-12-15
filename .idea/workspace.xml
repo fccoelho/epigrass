@@ -28,12 +28,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added tests to visually validate the models">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/epimodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epimodels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio.epg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -469,14 +466,8 @@
       <workItem from="1607855688530" duration="114000" />
       <workItem from="1607861769715" duration="19179000" />
       <workItem from="1607895384298" duration="1156000" />
-      <workItem from="1607962637570" duration="13305000" />
-    </task>
-    <task id="LOCAL-00001" summary="Fixed bug in startup of neteditor;&#10;fixed bug with import of sql soup;&#10;bumped up minor version number;">
-      <created>1369673229297</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1369673229297</updated>
+      <workItem from="1607962637570" duration="17797000" />
+      <workItem from="1608025614231" duration="3766000" />
     </task>
     <task id="LOCAL-00002" summary="Fixed bug in neteditor &quot;open edges file&quot;;&#10;added dependencies to setup.py">
       <created>1371058702589</created>
@@ -814,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607896576628</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Added tests to visually validate the models">
+      <created>1607976766425</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1607976766426</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -841,7 +839,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed bug saving simulation from custom model" />
     <MESSAGE value="removed double storage for time series. &#10;Now series are stored only on Redis, until they are dumped into SQLite or csv" />
     <MESSAGE value="Migrated Report module to use pweave&#10;Graph object in simobj.py needs refactoring to fix a bug" />
     <MESSAGE value="Started refactoring Graph class&#10;Now its a subclass of nx.MultiDiGraph&#10;added test to the allPairs method" />
@@ -866,7 +863,8 @@
     <MESSAGE value="Commented out dependencies on gdal and OGR" />
     <MESSAGE value="removed dependdencies on gdal" />
     <MESSAGE value="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed dependency on cython&#10;minor changes to the panel&#10;minor bug fixes&#10;refactored csv output" />
+    <MESSAGE value="Added tests to visually validate the models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tests to visually validate the models" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -914,7 +912,7 @@
     <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1607970132992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1607970974017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1607976347329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1608029937327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_tests_TestSimulationRuns_test_mesh_epg.coverage" NAME="pytest for tests.TestSimulationRuns.test_mesh_epg Coverage Results" MODIFIED="1607885142908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607969667280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
