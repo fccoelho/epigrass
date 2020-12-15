@@ -8,6 +8,7 @@ import panel as pn
 import panel.widgets as pnw
 import hvplot.pandas
 import holoviews as hv
+import geoviews as gv
 from holoviews.operation.datashader import datashade, bundle_graph
 from holoviews import opts
 from bokeh.resources import INLINE
@@ -45,6 +46,7 @@ def get_sims(fname):
         get_sims.cache_clear()
         return []
 
+
 def get_graph(pth):
     full_path = os.path.join(os.path.abspath(pth), 'network.gml')
     if os.path.exists(full_path):
@@ -52,6 +54,7 @@ def get_graph(pth):
     else:
         G = NX.MultiDiGraph()
     return G
+
 
 @lru_cache(maxsize=10)
 def get_meta_table(fname, simname):
@@ -106,6 +109,7 @@ def read_map(fname):
     else:
         gpd.GeoDataFrame()
         read_map.cache_clear()
+
 
 def get_subgraph(G, node):
     """
@@ -186,7 +190,7 @@ Seed: {df['epidemic_events$seed']}
             mapdf = self.mapdf
             map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
             brush = alt.selection_single(encodings=["y"], on="mouseover", empty='none')
-            color = alt.Color('prevalence', scale=alt.Scale(type='pow', exponent=0.4))
+            color = alt.Color('totalcases', scale=alt.Scale(type='pow', exponent=0.4))
             f = alt.hconcat(
                 alt.Chart(map10).mark_bar().encode(
                     x=alt.X('totalcases', scale=alt.Scale(nice=True)),
@@ -225,7 +229,7 @@ Seed: {df['epidemic_events$seed']}
         else:
             return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
 
-    @param.depends('model_path','localities')
+    @param.depends('model_path', 'localities')
     def view_network(self):
         G = get_graph(self.model_path)
         if G.order == 0:
@@ -235,10 +239,14 @@ Seed: {df['epidemic_events$seed']}
         if nodeloc == []:
             return pn.pane.Alert(f'## Please select a locality.')
         H = get_subgraph(G, nodeloc[0][0])
-
+        partial_map = self.mapdf[self.mapdf.geocode.isin(H.nodes)]
+        partial_map = partial_map.set_crs(4326)
+        partial_map = partial_map.to_crs(3857)  # Converting to web mercator
+        centroids = [(c.x, c.y) for c in partial_map.centroid]
         # Draw the graph using Altair
-        pos = NX.get_node_attributes(H, 'pos')
-        # print(pos)
+        gcs = [str(int(gc)) for gc in partial_map.geocode]
+        pos = dict(zip(gcs, centroids))
+
         # viz = nxa.draw_networkx(
         #     G, pos=pos,
         #     node_color='weight',
@@ -253,19 +261,20 @@ Seed: {df['epidemic_events$seed']}
         epi_graph = hv.Graph.from_networkx(H, positions=pos)
 
         epi_graph.opts(
-                       cmap=colors, node_size=10, edge_line_width=1,
-                       directed=True,
-                       node_line_color='gray',
-                       edge_color='gray',
-                       node_color='circle'
-                       )
+            cmap=colors, node_size=10, edge_line_width=1,
+            directed=True,
+            node_line_color='gray',
+            edge_color='gray',
+            node_color='circle'
+        )
+        tiles = gv.tile_sources.Wikipedia
 
-        f = bundle_graph(epi_graph)
+        f = bundle_graph(epi_graph) * tiles
         source = epi_graph.nodes.clone()
         # print(epi_graph.nodes.data.iloc[0])
-        source.data = epi_graph.nodes.data[epi_graph.nodes.data.name==self.localities]
+        source.data = epi_graph.nodes.data[epi_graph.nodes.data.name == self.localities]
 
-        return f*source.opts(color='red')
+        return f * source.opts(color='red')
 
     @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
@@ -295,7 +304,7 @@ Seed: {df['epidemic_events$seed']}
         # ).cols(3)
         mapa = alt.Chart(mapa_t).mark_geoshape(
         ).encode(
-            color='incidence',
+            color='Infectious',
             tooltip=['name'] + variables,
         ).properties(
             width='container',
@@ -342,9 +351,6 @@ Seed: {df['epidemic_events$seed']}
         return chart
 
 
-
-
-
 def refresh(e):
     # Clear caches
     get_sims.cache_clear()
@@ -387,9 +393,6 @@ def main():
         )
     )
     return material, series_viewer
-
-
-
 
 
 # material.servable();
