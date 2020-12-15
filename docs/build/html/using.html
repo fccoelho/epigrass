@@ -440,15 +440,26 @@
 </div>
 <p>where,</p>
 <dl class="simple">
-<dt><strong>shapefile</strong></dt><dd><p>Is a list with 3 elements: the first is  the path, relative to the working directory, of the shapefile file; the second  is the variable, in the shapefile, which contains the names of the localities (polygons of the map); the third and last is the variable, in the shapefile, which contains the geocode of the localities. If you don’t have a map for you simulation, leave the list empty: <em>location = []</em> ).</p>
-</dd>
-<dt><strong>edges</strong></dt><dd><p>This is the name of the .CSV (comma-separated-values) file containing the list of edges and their attributes.</p>
-</dd>
-<dt><strong>sites</strong></dt><dd><p>This is the name of the .CSV file containing the list of sites and their attributes.</p>
-</dd>
-<dt><strong>encoding</strong></dt><dd><p>This is the encoding used in your sites and edges files. This is very important when you use location names which include non-ascii characters. The default encoding is <em>latin-1</em>. If you use any other encoding, please specify it here. Example: <em>utf-8</em>.</p>
+<dt><strong>shapefile</strong></dt><dd><p>Is a list with 3 elements: the first is  the path, relative to the working directory, of the shapefile file;</p>
 </dd>
 </dl>
+<p>the second  is the variable, in the shapefile, which contains the names of the localities (polygons of the map);
+the third and last is the variable, in the shapefile, which contains the geocode of the localities.
+If you don’t have a map for you simulation, leave the list empty: <em>location = []</em> ). Epigrass also accepts Maps in the
+<em>Geopackage</em> format. Epigrass assume that maps use the <em>EPSG:4326</em> projection. Using other projection may result in
+errors related to the visualizaton of results.
+<strong>edges</strong></p>
+<blockquote>
+<div><p>This is the name of the .CSV (comma-separated-values) file containing the list of edges and their attributes.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>sites</strong></dt><dd><p>This is the name of the .CSV file containing the list of sites and their attributes.</p>
+</dd>
+<dt><strong>encoding</strong></dt><dd><p>This is the encoding used in your sites and edges files. This is very important when you use location names</p>
+</dd>
+</dl>
+<p>which include non-ascii characters. The default encoding is <em>latin-1</em>. If you use any other encoding, please
+specify it here. Example: <em>utf-8</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>All paths in the <code class="file docutils literal notranslate"><span class="pre">.epg</span></code> file are relative to the working directory.</p>
@@ -461,7 +472,8 @@ The script reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">modtype</span> <span class="o">=</span> <span class="n">SIR</span>
 </pre></div>
 </div>
-<p>Here, the type of epidemiological model is defined, in this case is a deterministic <em>SIR</em> model. Epigrass has some built-in models:</p>
+<p>Here, the type of epidemiological model is defined, in this case is a deterministic <em>SIR</em> model.
+Epigrass has some built-in models:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 67%" />
@@ -513,7 +525,9 @@ The script reads:</p>
 </tr>
 </tbody>
 </table>
-<p>A description of these models can be found in the chapter <em>Epidemiological modeling</em>. The stochastic models use <em>Poisson</em> distribution as default for the number of new cases (<em>L(t+1)</em>). Besides these, the user may define his/her own model and access by the protect word Custom.</p>
+<p>A description of these models can be found in the chapter <em>Epidemiological modeling</em>. The stochastic versions of models use
+<em>Poisson</em> distribution as default for the number of new cases (<em>L(t+1)</em>), They are not full stochastic models. Besides these,
+the user may define his/her own model and access it by setting <strong>modtype = Custom</strong>.</p>
 </div>
 <div class="section" id="part-3-model-parameters">
 <h3>Part 3: MODEL PARAMETERS<a class="headerlink" href="#part-3-model-parameters" title="Permalink to this headline">¶</a></h3>
@@ -666,53 +680,18 @@ remove the line, however because that will cause an error. We recommend that, if
 </dd>
 <dt><strong>outfile</strong></dt><dd><p>.csv filename that can be imported into R as a dataframe. This .csv file contains the simulated timeseries for all nodes.</p>
 </dd>
-<dt><strong>MySQLout</strong></dt><dd><p>Use <em>MySQLout = 1</em> if simulated time series are to be stored in MySQL database. Time series of <em>L</em>, <em>S</em>, <em>E</em>, and <em>I</em>, from simulations, are stored in a MySQL database named <em>epigrass</em>. The results of each individual simulation is stored in a different table named after the model’s script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named <code class="file docutils literal notranslate"><span class="pre">script.epg</span></code>, then at the end of the simulation, a new table in the epigrass database will be created with the following name: <em>script_Wed_Jan_26_154411_2005</em>. Thus, the results of multiple runs from the same model get stored independently.</p>
-</dd>
-<dt><strong>Batch=[]</strong></dt><dd><p>Script files included in this list are executed after the currently file is finished.</p>
+<dt><strong>sqlout</strong></dt><dd><p>Use <em>sqlout = 1</em> if simulated time series are to be stored. Time series of <em>L</em>, <em>S</em>, <em>E</em>, and <em>I</em>, from simulations,</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="the-graphical-user-interface-gui">
-<h2>The Graphical User Interface(GUI)<a class="headerlink" href="#the-graphical-user-interface-gui" title="Permalink to this headline">¶</a></h2>
-<p>Epigrass comes with a simple but effective GUI, that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (<code class="file docutils literal notranslate"><span class="pre">.csv</span></code> and   <code class="file docutils literal notranslate"><span class="pre">.epg</span></code> files).</p>
-<p>All the information that is entered via the GUI gets  stored in a hidden file called texttt{.epigrassrc} stored in the home folder of the user. Every time the GUI is invoked, the data stored in the texttt{.epigrassrc} file is used to fill the forms in the GUI. The gui is designed as a tabbed notebook with four tabs (Run Options, Settings, Utilities, and Visualization).</p>
-<p>At the bottom of the Gui there are three buttons <span class="guilabel">Help</span>, <span class="guilabel">Start</span> and <span class="guilabel">Exit</span>. Their functions will be explained below. Immediately above the <span class="guilabel">Run</span> and <span class="guilabel">Exit</span> buttons, there is a small numeric display that will display the simulation progress after it has been started.</p>
-<div class="figure align-default" id="id1">
-<img alt="_images/epigrass1.png" src="_images/epigrass1.png" />
-<p class="caption"><span class="caption-text">First tab of Epigrass GUI. This is where you setup your database output settings and the model to be run.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-<div class="section" id="run-options">
-<h3>Run Options<a class="headerlink" href="#run-options" title="Permalink to this headline">¶</a></h3>
-<p>The first tab of the GUI, contains a number of variables that, with the exception of the model script filename, should remain the same for most simulations you are going to run.</p>
-<p>On the top of the first tab is a text box to enter the file name of the model script (<code class="file docutils literal notranslate"><span class="pre">something.epg</span></code>). By clicking on the <span class="guilabel">Choose</span> button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the <span class="guilabel">Edit</span> button below to edit the script file with your favorite text editor.</p>
-<p>Below, you can enter details about the MySQL database that will store the output of your simulations. Here you can enter the server IP, port, user and password. On the first time you run the GUI these input boxes will be filled with the default values for these variables (server on localhost, port 3306, user epigrass and password epigrass)</p>
-</div>
-<div class="section" id="settings">
-<h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
-<p>On the settings page, you can enter personal details such as user name (To be used in the simulation report), preferred text editor and preferred PDF reader. The preferred text editor will be used to open your script from the GUI, when you click on the edit button in the first tab. The PDF reader specified, will be used to open the report file, when requested (Utilities tab) and the user manual, when the user clicks on the help button on the bottom-left corner of the GUI.</p>
-<p>On this tab, the language of the GUI can also be selected from a list of available translations. The effects of language changes will only take place when the next time the GUI is started.</p>
-<div class="figure align-default" id="id2">
-<img alt="_images/epigrass2.png" src="_images/epigrass2.png" />
-<p class="caption"><span class="caption-text">Settings tab of the Epigrass GUI. This is wher you configure the behavior os the GUI. Values set here will be remembered on future runs.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="utilities">
-<h3>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h3>
-<p>In the Utilities tab, you can get feed back from the simulator. Especially during long simulation runs, it is good to know how it is progressing. During the simulation, text messages regarding the status of the simulation are written to the text box on the left.</p>
-<p>On the right, there is a button for backing up the data base and another for opening the report generated by the last simulation. Since report PDFs ar stored in folder directly below the ones on which the simulation is started, older reports should still be accessible and can be opened directly by selecting the desired report using the operating system’s file manager.</p>
-</div>
-<div class="section" id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
-<p>The fourth tab of the GUI is the visualization Tab. This tab was designed for playing animations of any simulation data that is stored in the database. Pressin the <span class="guilabel">Scan DB</span> button, causes the available tables in the  epigrass database to be listed in the <em>Simulations stored</em> combo box. The user can then select one of these simulations to visualize. Once the simulation is selected the <em>Variable to display</em> combo-box will fill-up with the variables in the table devoted to the simulation. Select a variable.</p>
-<div class="figure align-default" id="id3">
-<img alt="_images/epigrass4.png" src="_images/epigrass4.png" />
-<p class="caption"><span class="caption-text">Visualization tab of the Epigrass GUI. The simulations and varibales to inspect are chosen here.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<p>Once the <span class="guilabel">Start animation</span> button is pressed, a graphical display window pops up, and the simulation results will be displayed as a map or a graph (if no map was specified at the <code class="file docutils literal notranslate"><span class="pre">.epg</span></code>). The animation can be replayed or moved to any timestep by dragging on the slider under the display widget. When the user moved the mouse over a polygon in the map(or node in the graph) its name and geocode appears as a tooltip. Polygons (nodes) can be selected with the mouse to display their full time series in the plot below the top display widget.</p>
-<div class="figure align-default">
-<img alt="_images/simuview.png" src="_images/simuview.png" />
-</div>
+<p>are stored in a SQLite database named <em>Epigrass.sqlite</em>. The results of each individual simulation is stored in a different
+table named after the model’s script name, the date and time the simulation has been run. For instance, suppose you run
+a simulation of a model stored in a file named <code class="file docutils literal notranslate"><span class="pre">script.epg</span></code>, then at the end of the simulation, a new table in the
+epigrass database will be created with the following name: <em>script_Wed_Jan_26_154411_2005</em>. Thus, the results of
+multiple runs from the same model get stored independently.
+<strong>Batch=[]</strong></p>
+<blockquote>
+<div><p>Script files included in this list are executed after the currently file is finished.</p>
+</div></blockquote>
 </div>
 <div class="section" id="operation">
 <h3>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h3>
@@ -722,21 +701,58 @@ remove the line, however because that will cause an error. We recommend that, if
 </pre></div>
 </div>
 <p>and the model will executed with the settings specified in the <code class="file docutils literal notranslate"><span class="pre">~/.epigrassrc</span></code> file. for help with <em>epirunner</em>, type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ epirunner -h
-Usage: epirunner [options] your_model.epg
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    $ epirunner -h
+    No Custom Model Available.
+usage: epirunner [options] your_model.epg
 
-Options:
-  --version             show program&#39;s version number and exit
+Run epigrass models from the console
+
+positional arguments:
+  EPG                   Epigrass model definition file (.epg).
+
+optional arguments:
   -h, --help            show this help message and exit
-  -b &lt;mysql|sqlite|csv&gt;, --backend=&lt;mysql|sqlite|csv&gt;
-                                                Define which datastorage backend to use
-  -u DBUSER, --dbusername=DBUSER
-                                                MySQL user name
-  -p DBPASS, --password=DBPASS
-                                                MySQL password for user
-  -H DBHOST, --dbhost=DBHOST
-                                                MySQL hostname or IP address
+  -b &lt;mysql|sqlite|csv&gt;, --backend &lt;mysql|sqlite|csv&gt;
+                        Define which datastorage backend to use
+  -u DBUSER, --dbusername DBUSER
+                        MySQL user name
+  -p DBPASS, --password DBPASS
+                        MySQL password for user
+  -H DBHOST, --dbhost DBHOST
+                        MySQL hostname or IP address
+  --upload UPLOAD       Upload your models and latest simulation to Epigrass Web
+  -P, --parallel        use multiprocessing to run the simulation
+  -D, --dashboard       Open dashboard on browser after th run is done.
+  -V, --view-only       Only Open dashboard.
 </pre></div>
+</div>
+</div>
+<div class="section" id="the-web-dashboard">
+<h3>The Web Dashboard<a class="headerlink" href="#the-web-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>To interact and explore the simulations stored in the database, Epigrass offers an interactive dashboard. It allows you to
+navigate to any simulation previously done for a given model, and inspect it interactively.
+You can ask for it to open right after a simulation is done:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ epirunner -D mymodel.epg
+</pre></div>
+</div>
+<p>or you can open it for a given model by typing from the directory where the <em>epg</em> file is located:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ epirunner -V mymodel.epg
+</pre></div>
+</div>
+<p>The Dashboard shows various aspects of the Model output, such as Choroplectic map with the final state of the simulation,</p>
+<div class="figure align-default" id="id1">
+<img alt="_images/dashboard1.png" src="_images/dashboard1.png" />
+<p class="caption"><span class="caption-text">Figure: Dashboard showing map with the final state of the model.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>It also shows the network neighborhood of any of the localities of the models</p>
+<div class="figure align-default" id="id2">
+<img alt="_images/dashboard2.png" src="_images/dashboard2.png" />
+<p class="caption"><span class="caption-text">Figure: Dashboard showing network neighborhood of a locality marked in <em>red</em>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>It also shows a map which can be animated and timeseries plots of all the state variables</p>
+<div class="figure align-default" id="id3">
+<img alt="_images/dashboard3.png" src="_images/dashboard3.png" />
+<p class="caption"><span class="caption-text">Figure: Dashboard showing timeseries visualizations.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -769,7 +785,6 @@ Options:
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Using Epigrass</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-a-model-the-script">Specifying a model: the script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-graphical-user-interface-gui">The Graphical User Interface(GUI)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>

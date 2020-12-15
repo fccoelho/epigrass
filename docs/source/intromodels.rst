@@ -67,7 +67,15 @@ types of models built into EpiGrass.
 SIR-like models
 ^^^^^^^^^^^^^^^
 
-The natural history of many directly transmitted infectious diseases can be appropriately described by a SIR-like model. *SIR* stands for Susceptible :math:`(S)`, Infected :math:`(I)` and Recovered :math:`(R)`. Archetypal *SIRs* are measles or chickenpox, i.e., diseases that confer lifelong immunity (but see \cite{KGlassandBTGrenfell2004}). An individual starts his life in the :math:`S` state and may progress to the :math:`I` state. The rate of progression of individuals from :math:`S` to :math:`I` is called the incidence rate or force of infection :math:`(\lambda)` which is a function of contact rate, probability of transmission per contact and density of infectious individuals. Individuals stay in the infectious period for a certain time and then move to the recovered state where they become immune to new infections. Generally, the removal rate from the infectious class is the inverse of the infectious period (i.e., it is assumed that the duration of infection is exponentially distributed).   
+The natural history of many directly transmitted infectious diseases can be appropriately described by a SIR-like model.
+*SIR* stands for Susceptible :math:`(S)`, Infected :math:`(I)` and Recovered :math:`(R)`. Archetypal *SIRs* are measles
+or chickenpox, i.e., diseases that confer lifelong immunity (but see \cite{KGlassandBTGrenfell2004}).
+An individual starts his life in the :math:`S` state and may progress to the :math:`I` state. The rate of progression of
+individuals from :math:`S` to :math:`I` is called the incidence rate or force of infection :math:`(\lambda)` which is a
+function of contact rate, probability of transmission per contact and density of infectious individuals. Individuals
+stay in the infectious period for a certain time and then move to the recovered state where they become immune to new
+infections. Generally, the removal rate from the infectious class is the inverse of the infectious
+period (i.e., it is assumed that the duration of infection is exponentially distributed).
 
 .. _fig:sir:
 .. figure:: SIRdiagram.png

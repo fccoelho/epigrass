@@ -231,6 +231,8 @@ Seed: {df['epidemic_events$seed']}
 
     @param.depends('model_path', 'localities')
     def view_network(self):
+        if self.mapdf is None:
+            return pn.indicators.LoadingSpinner(value=True, width=100, height=100)
         G = get_graph(self.model_path)
         if G.order == 0:
             return pn.pane.Alert(f'## No network file found on {self.model_path}')
@@ -370,7 +372,7 @@ def main():
     button.on_click(refresh)
     # Assembling the panel
     material.sidebar.append(pn.Param(series_viewer, name='Control Panel'))
-    material.sidebar.append(button)
+    # material.sidebar.append(button)
     material.sidebar.append(pn.layout.Divider())
     material.sidebar.append(series_viewer.view_meta)
     # material.sidebar.append(pn.Row(save_fname, save_button))

@@ -157,13 +157,20 @@ where,
 
 
 **shapefile**
-    Is a list with 3 elements: the first is  the path, relative to the working directory, of the shapefile file; the second  is the variable, in the shapefile, which contains the names of the localities (polygons of the map); the third and last is the variable, in the shapefile, which contains the geocode of the localities. If you don't have a map for you simulation, leave the list empty: *location = []* ).
+    Is a list with 3 elements: the first is  the path, relative to the working directory, of the shapefile file;
+the second  is the variable, in the shapefile, which contains the names of the localities (polygons of the map);
+the third and last is the variable, in the shapefile, which contains the geocode of the localities.
+If you don't have a map for you simulation, leave the list empty: *location = []* ). Epigrass also accepts Maps in the
+*Geopackage* format. Epigrass assume that maps use the *EPSG:4326* projection. Using other projection may result in
+errors related to the visualizaton of results.
 **edges**
     This is the name of the .CSV (comma-separated-values) file containing the list of edges and their attributes.
 **sites**
     This is the name of the .CSV file containing the list of sites and their attributes.
 **encoding**
-	This is the encoding used in your sites and edges files. This is very important when you use location names which include non-ascii characters. The default encoding is *latin-1*. If you use any other encoding, please specify it here. Example: *utf-8*.
+	This is the encoding used in your sites and edges files. This is very important when you use location names
+which include non-ascii characters. The default encoding is *latin-1*. If you use any other encoding, please
+specify it here. Example: *utf-8*.
 
 .. note::
 
@@ -182,7 +189,8 @@ The script reads::
 
 
 
-Here, the type of epidemiological model is defined, in this case is a deterministic *SIR* model. Epigrass has some built-in models:
+Here, the type of epidemiological model is defined, in this case is a deterministic *SIR* model.
+Epigrass has some built-in models:
 
 ======================================== ========= ===========
 Name                                     Determ.   Stochastic
@@ -198,7 +206,9 @@ SEIR with partial immunity for all       *SEIpR*   *SEIpR_s*
 SIR with immunity wane                   *SIRS*    *SIRS_s*
 ======================================== ========= ===========
 
-A description of these models can be found in the chapter *Epidemiological modeling*. The stochastic models use *Poisson* distribution as default for the number of new cases (*L(t+1)*). Besides these, the user may define his/her own model and access by the protect word Custom.
+A description of these models can be found in the chapter *Epidemiological modeling*. The stochastic versions of models use
+*Poisson* distribution as default for the number of new cases (*L(t+1)*), They are not full stochastic models. Besides these,
+the user may define his/her own model and access it by setting **modtype = Custom**.
 
 Part 3: MODEL PARAMETERS
 ------------------------
@@ -374,66 +384,15 @@ where,
     Directory for data output (currently not in use)
 **outfile**
     .csv filename that can be imported into R as a dataframe. This .csv file contains the simulated timeseries for all nodes.
-**MySQLout**
-    Use *MySQLout = 1* if simulated time series are to be stored in MySQL database. Time series of *L*, *S*, *E*, and *I*, from simulations, are stored in a MySQL database named *epigrass*. The results of each individual simulation is stored in a different table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of multiple runs from the same model get stored independently.
+**sqlout**
+    Use *sqlout = 1* if simulated time series are to be stored. Time series of *L*, *S*, *E*, and *I*, from simulations,
+are stored in a SQLite database named *Epigrass.sqlite*. The results of each individual simulation is stored in a different
+table named after the model's script name, the date and time the simulation has been run. For instance, suppose you run
+a simulation of a model stored in a file named :file:`script.epg`, then at the end of the simulation, a new table in the
+epigrass database will be created with the following name: *script\_Wed\_Jan\_26\_154411\_2005*. Thus, the results of
+multiple runs from the same model get stored independently.
 **Batch=[]**
     Script files included in this list are executed after the currently file is finished.
-
-
-The Graphical User Interface(GUI)
-=================================
-
-Epigrass comes with a simple but effective GUI, that allows the user to control some aspects of the run-time behavior of the system. The Gui can be invoked by typing \texttt{epigrass} in prompt of a console. We suggest the user to start Epigrass from the same directory where his/her model definition is located (:file:`.csv` and   :file:`.epg` files).
-
-All the information that is entered via the GUI gets  stored in a hidden file called \texttt{.epigrassrc} stored in the home folder of the user. Every time the GUI is invoked, the data stored in the \texttt{.epigrassrc} file is used to fill the forms in the GUI. The gui is designed as a tabbed notebook with four tabs (Run Options, Settings, Utilities, and Visualization).
-
-At the bottom of the Gui there are three buttons :guilabel:`Help`, :guilabel:`Start` and :guilabel:`Exit`. Their functions will be explained below. Immediately above the :guilabel:`Run` and :guilabel:`Exit` buttons, there is a small numeric display that will display the simulation progress after it has been started.
-
-.. figure:: epigrass1.png
-
-	First tab of Epigrass GUI. This is where you setup your database output settings and the model to be run.
-
-Run Options
------------
-The first tab of the GUI, contains a number of variables that, with the exception of the model script filename, should remain the same for most simulations you are going to run.
-
-On the top of the first tab is a text box to enter the file name of the model script (:file:`something.epg`). By clicking on the :guilabel:`Choose` button at the right of this box, you get a file selection dialog to select your script file. If you need you can click on the :guilabel:`Edit` button below to edit the script file with your favorite text editor.
-
-Below, you can enter details about the MySQL database that will store the output of your simulations. Here you can enter the server IP, port, user and password. On the first time you run the GUI these input boxes will be filled with the default values for these variables (server on localhost, port 3306, user epigrass and password epigrass)
-
-Settings
---------
-
-On the settings page, you can enter personal details such as user name (To be used in the simulation report), preferred text editor and preferred PDF reader. The preferred text editor will be used to open your script from the GUI, when you click on the edit button in the first tab. The PDF reader specified, will be used to open the report file, when requested (Utilities tab) and the user manual, when the user clicks on the help button on the bottom-left corner of the GUI.
-
-On this tab, the language of the GUI can also be selected from a list of available translations. The effects of language changes will only take place when the next time the GUI is started.
-
-.. figure:: epigrass2.png
-
-	Settings tab of the Epigrass GUI. This is wher you configure the behavior os the GUI. Values set here will be remembered on future runs.
-
-Utilities
----------
-
-In the Utilities tab, you can get feed back from the simulator. Especially during long simulation runs, it is good to know how it is progressing. During the simulation, text messages regarding the status of the simulation are written to the text box on the left.
-
-
-On the right, there is a button for backing up the data base and another for opening the report generated by the last simulation. Since report PDFs ar stored in folder directly below the ones on which the simulation is started, older reports should still be accessible and can be opened directly by selecting the desired report using the operating system's file manager.
-
-Visualization
--------------
-
-The fourth tab of the GUI is the visualization Tab. This tab was designed for playing animations of any simulation data that is stored in the database. Pressin the :guilabel:`Scan DB` button, causes the available tables in the  epigrass database to be listed in the *Simulations stored* combo box. The user can then select one of these simulations to visualize. Once the simulation is selected the *Variable to display* combo-box will fill-up with the variables in the table devoted to the simulation. Select a variable.
-
-.. figure:: epigrass4.png
-
-	Visualization tab of the Epigrass GUI. The simulations and varibales to inspect are chosen here.
-
-Once the :guilabel:`Start animation` button is pressed, a graphical display window pops up, and the simulation results will be displayed as a map or a graph (if no map was specified at the :file:`.epg`). The animation can be replayed or moved to any timestep by dragging on the slider under the display widget. When the user moved the mouse over a polygon in the map(or node in the graph) its name and geocode appears as a tooltip. Polygons (nodes) can be selected with the mouse to display their full time series in the plot below the top display widget.
-
-.. figure:: simuview.png
-
-
 
 Operation
 ---------
@@ -447,17 +406,58 @@ Epigrass also allows running simulation straight from the command line, with the
 and the model will executed with the settings specified in the :file:`~/.epigrassrc` file. for help with *epirunner*, type::
 
 	$ epirunner -h
-	Usage: epirunner [options] your_model.epg
+	No Custom Model Available.
+    usage: epirunner [options] your_model.epg
 
-	Options:
-	  --version             show program's version number and exit
-	  -h, --help            show this help message and exit
-	  -b <mysql|sqlite|csv>, --backend=<mysql|sqlite|csv>
-							Define which datastorage backend to use
-	  -u DBUSER, --dbusername=DBUSER
-							MySQL user name
-	  -p DBPASS, --password=DBPASS
-							MySQL password for user
-	  -H DBHOST, --dbhost=DBHOST
-							MySQL hostname or IP address
+    Run epigrass models from the console
 
+    positional arguments:
+      EPG                   Epigrass model definition file (.epg).
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -b <mysql|sqlite|csv>, --backend <mysql|sqlite|csv>
+                            Define which datastorage backend to use
+      -u DBUSER, --dbusername DBUSER
+                            MySQL user name
+      -p DBPASS, --password DBPASS
+                            MySQL password for user
+      -H DBHOST, --dbhost DBHOST
+                            MySQL hostname or IP address
+      --upload UPLOAD       Upload your models and latest simulation to Epigrass Web
+      -P, --parallel        use multiprocessing to run the simulation
+      -D, --dashboard       Open dashboard on browser after th run is done.
+      -V, --view-only       Only Open dashboard.
+
+
+
+The Web Dashboard
+-----------------
+
+To interact and explore the simulations stored in the database, Epigrass offers an interactive dashboard. It allows you to
+navigate to any simulation previously done for a given model, and inspect it interactively.
+You can ask for it to open right after a simulation is done::
+
+  $ epirunner -D mymodel.epg
+
+or you can open it for a given model by typing from the directory where the *epg* file is located::
+
+  $ epirunner -V mymodel.epg
+
+The Dashboard shows various aspects of the Model output, such as Choroplectic map with the final state of the simulation,
+
+.. figure:: dashboard1.png
+
+    Figure: Dashboard showing map with the final state of the model.
+
+It also shows the network neighborhood of any of the localities of the models
+
+.. figure:: dashboard2.png
+
+    Figure: Dashboard showing network neighborhood of a locality marked in *red*.
+
+It also shows a map which can be animated and timeseries plots of all the state variables
+
+.. figure:: dashboard3.png
+
+    Figure: Dashboard showing timeseries visualizations.
