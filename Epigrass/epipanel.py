@@ -177,7 +177,7 @@ class SeriesViewer(param.Parameterized):
 ### Model Type
 {df['epidemiological_model$modtype'].iloc[0]}
 ### Epidemic Events
-Seed: {df['epidemic_events$seed']}
+Seed: {df['epidemic_events$seed'].iloc[0]}
 
 """
             )
@@ -336,7 +336,7 @@ Seed: {df['epidemic_events$seed']}
 
         base = alt.Chart(df).mark_line(interpolate='step-after').encode(
             x='time:Q',
-            y='incidence:Q',
+            y='incidence:Q'
         ).properties(
             width='container',
             height=300
@@ -347,7 +347,7 @@ Seed: {df['epidemic_events$seed']}
             row = alt.hconcat()
             row |= base.encode(x='time', y=y_enc)
             if i < len(variables):
-                row |= base.encode(x='time', y=variables[i + 1])
+                row |= base.encode(x='time', y=variables[i + 1], tooltip=['time', 'incidence', 'Infectious'])
 
             chart &= row
         return chart

@@ -18,3 +18,4 @@ fiona
 shapely
 altair
 redis
+epimodels
