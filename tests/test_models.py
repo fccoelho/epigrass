@@ -355,6 +355,16 @@ class test_model_run(unittest.TestCase):
         P.title('$SEIR$')
         P.legend(['E', 'I', 'S'])
 
+    def test_run_SEIR_cont(self):
+        model = Epimodel(1, modtype=b'SEIR_cont')
+        res = run(model, [(0, 10, 990), 0, 10000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SEIR_{cont}$')
+        P.legend(['E', 'I', 'S'])
+
     def test_run_SEIS_s(self):
         model = Epimodel(1, modtype=b'SEIS_s')
         res = run(model, [(0, 10, 990), 0, 10000, 0, 0,

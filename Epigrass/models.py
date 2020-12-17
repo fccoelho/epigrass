@@ -11,7 +11,7 @@ from numpy import inf, nan, nan_to_num
 import numpy as np
 import sys
 import redis
-from epimodels.continuous.models import SIR
+from epimodels.continuous.models import SIR, SEIR
 import numba
 from numba.typed import List
 
@@ -20,12 +20,14 @@ redisclient = redis.StrictRedis()
 vnames = {
     'SIR': ['Exposed', 'Infectious', 'Susceptible'],
     'SIR_s': ['Exposed', 'Infectious', 'Susceptible'],
+    'SIR_cont': ['Exposed', 'Infectious', 'Susceptible'],
     'SIS': ['Exposed', 'Infectious', 'Susceptible'],
     'SIS_s': ['Exposed', 'Infectious', 'Susceptible'],
     'SEIS': ['Exposed', 'Infectious', 'Susceptible'],
     'SEIS_s': ['Exposed', 'Infectious', 'Susceptible'],
     'SEIR': ['Exposed', 'Infectious', 'Susceptible'],
     'SEIR_s': ['Exposed', 'Infectious', 'Susceptible'],
+    'SEIR_cont': ['Exposed', 'Infectious', 'Susceptible'],
     'SIpRpS': ['Exposed', 'Infectious', 'Susceptible'],
     'SIpRpS_s': ['Exposed', 'Infectious', 'Susceptible'],
     'SEIpRpS': ['Exposed', 'Infectious', 'Susceptible'],
@@ -139,6 +141,8 @@ def selectModel(modtype):
         return stepSEIR
     elif modtype == b'SEIR_s':
         return stepSEIR_s
+    elif modtype == b'SEIR_cont':
+        return stepSEIR_cont
     elif modtype == b'SIpRpS':
         return stepSIpRpS
     elif modtype == b'SIpRpS_s':
@@ -659,6 +663,42 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 
     return [Epos, Ipos, Spos], Lpos, migInf
 
+
+def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+    """
+    ODE SIR without births and deaths
+    :param inits:
+    :param simstep:
+    :param totpop:
+    :param theta:
+    :param npass:
+    :param bi:
+    :param bp:
+    :param values:
+    :param model:
+    :return:
+    """
+    seir = SEIR()
+    if simstep == 0:  # get initial values
+        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+    else:
+        E, I, S = inits
+    N = totpop
+    R = N - (E + I + S)
+    beta = bp.get('beta', bp.get(b'beta'));
+    alpha = bp.get('alpha', bp.get(b'alpha'));
+    e = bp.get('e', bp.get(b'e'))
+    r = bp.get('r', bp.get(b'r'));
+    b = bp.get('b', bp.get(b'b'));
+
+    seir([S, E, I, R], [0, 1], N, {'beta': beta, 'gamma': r, 'epsilon': e})
+
+    Spos = seir.traces['S'][-1]
+    Epos = seir.traces['E'][-1]
+    Ipos = seir.traces['I'][-1]
+    Lpos = seir.traces['I'][-1] - seir.traces['I'][0]
+
+    return [Epos, Ipos, Spos], Lpos, Ipos
 
 # @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
