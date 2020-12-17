@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 # from Epigrass.manager import *
 from Epigrass.simobj import siteobj, graph, edge
-from Epigrass.epimodels import Epimodel
+from Epigrass.models import Epimodel
 
 
 class TestModels(unittest.TestCase):
@@ -393,6 +393,16 @@ class test_model_run(unittest.TestCase):
                   100)
         P.plot(res)
         P.title('$SIR$')
+        P.legend(['E', 'I', 'S'])
+
+    def test_run_SIR_cont(self):
+        model = Epimodel(1, modtype=b'SIR_cont')
+        res = run(model, [(0, 10, 990), 0, 10000, 0, 0,
+                          self.bi,
+                          self.bp],
+                  100)
+        P.plot(res)
+        P.title('$SIR_{cont}$')
         P.legend(['E', 'I', 'S'])
 
     def test_run_SIS_s(self):

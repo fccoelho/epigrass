@@ -16,7 +16,7 @@ from networkx.readwrite import json_graph
 import redis
 
 from Epigrass.data_io import *
-from Epigrass import epimodels
+from Epigrass import models
 
 try:
     sys.path.insert(0, os.getcwd())
@@ -126,8 +126,8 @@ class siteobj:
             self.model = CustomModel.Model
             self.vnames = CustomModel.vnames
         else:
-            self.model = epimodels.Epimodel(self.geocode, self.modtype)
-            self.vnames = epimodels.vnames[modtype]
+            self.model = models.Epimodel(self.geocode, self.modtype)
+            self.vnames = models.vnames[modtype]
         try:
             # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
             self.ts.append(list(bi.values()))  # This is fine since bi is an OrderedDict

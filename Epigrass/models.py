@@ -11,7 +11,7 @@ from numpy import inf, nan, nan_to_num
 import numpy as np
 import sys
 import redis
-# import cython
+from epimodels.continuous.models import SIR
 import numba
 from numba.typed import List
 
@@ -125,6 +125,8 @@ def selectModel(modtype):
         return stepSIR
     elif modtype == b'SIR_s':
         return stepSIR_s
+    elif modtype == b'SIR_cont':
+        return stepSIR_cont
     elif modtype == b'SIS':
         return stepSIS
     elif modtype == b'SIS_s':
@@ -188,13 +190,21 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
               'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
     if simstep == 0:  # get initial values
         S1, E1, Is1, Ic1, Ig1 = (
-            bi.get('susc_age1',  bi.get(b'susc_age1')), bi.get('incub_age1',  bi.get(b'incub_age1')), bi.get('subc_age1',  bi.get(b'subc_age1')), bi.get('sympt_age1',  bi.get(b'sympt_age1')), bi.get('comp_age1',  bi.get(b'comp_age1')))
+            bi.get('susc_age1', bi.get(b'susc_age1')), bi.get('incub_age1', bi.get(b'incub_age1')),
+            bi.get('subc_age1', bi.get(b'subc_age1')), bi.get('sympt_age1', bi.get(b'sympt_age1')),
+            bi.get('comp_age1', bi.get(b'comp_age1')))
         S2, E2, Is2, Ic2, Ig2 = (
-            bi.get('susc_age2',  bi.get(b'susc_age2')), bi.get('incub_age2',  bi.get(b'incub_age2')), bi.get('subc_age2',  bi.get(b'subc_age2')), bi.get('sympt_age2',  bi.get(b'sympt_age2')), bi.get('comp_age2',  bi.get(b'comp_age2')))
+            bi.get('susc_age2', bi.get(b'susc_age2')), bi.get('incub_age2', bi.get(b'incub_age2')),
+            bi.get('subc_age2', bi.get(b'subc_age2')), bi.get('sympt_age2', bi.get(b'sympt_age2')),
+            bi.get('comp_age2', bi.get(b'comp_age2')))
         S3, E3, Is3, Ic3, Ig3 = (
-            bi.get('susc_age3',  bi.get(b'susc_age3')), bi.get('incub_age3',  bi.get(b'incub_age3')), bi.get('subc_age3',  bi.get(b'subc_age3')), bi.get('sympt_age3',  bi.get(b'sympt_age3')), bi.get('comp_age3',  bi.get(b'comp_age3')))
+            bi.get('susc_age3', bi.get(b'susc_age3')), bi.get('incub_age3', bi.get(b'incub_age3')),
+            bi.get('subc_age3', bi.get(b'subc_age3')), bi.get('sympt_age3', bi.get(b'sympt_age3')),
+            bi.get('comp_age3', bi.get(b'comp_age3')))
         S4, E4, Is4, Ic4, Ig4 = (
-            bi.get('susc_age4',  bi.get(b'susc_age4')), bi.get('incub_age4',  bi.get(b'incub_age4')), bi.get('subc_age4',  bi.get(b'subc_age4')), bi.get('sympt_age4',  bi.get(b'sympt_age4')), bi.get('comp_age4',  bi.get(b'comp_age4')))
+            bi.get('susc_age4', bi.get(b'susc_age4')), bi.get('incub_age4', bi.get(b'incub_age4')),
+            bi.get('subc_age4', bi.get(b'subc_age4')), bi.get('sympt_age4', bi.get(b'sympt_age4')),
+            bi.get('comp_age4', bi.get(b'comp_age4')))
     else:  # get values from last time step
         # print(len(inits))
         S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
@@ -378,6 +388,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     else:
         E, I, S = inits
     N = totpop
+    R = N - (E + I + S)
     beta = bp.get('beta', bp.get(b'beta'));
     alpha = bp.get('alpha', bp.get(b'alpha'));
     # e = bp.get('e', bp.get(b'e'));
@@ -392,7 +403,7 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos
-    Rpos = R + r*I
+    Rpos = R + r * I
 
     # Migrating infecctious
     migInf = Ipos
@@ -400,11 +411,6 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     return (0, Ipos, Spos), Lpos, migInf
 
 
-# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
-#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
-#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-#                Ipos='double', Spos='double', Rpos='double')
-# @numba.jit(forceobj=True, cache=True)
 def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
               dist='poisson') -> tuple:
     """
@@ -417,6 +423,7 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     else:
         E, I, S = inits
     N = totpop
+    R = N - (E + I + S)
     beta = bp.get('beta', bp.get(b'beta'));
     alpha = bp.get('alpha', bp.get(b'alpha'));
     # e = bp.get('e', bp.get(b'e'));
@@ -437,12 +444,47 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     # Model
     Ipos = (1 - r) * I + Lpos
     Spos = S + b - Lpos
-    Rpos = N - (Spos + Ipos)
+    Rpos = R + r * I
 
     # Migrating infecctious
     migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
+
+
+def stepSIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+    """
+    ODE SIR without births and deaths
+    :param inits:
+    :param simstep:
+    :param totpop:
+    :param theta:
+    :param npass:
+    :param bi:
+    :param bp:
+    :param values:
+    :param model:
+    :return:
+    """
+    sir = SIR()
+    if simstep == 0:  # get initial values
+        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+    else:
+        E, I, S = inits
+    N = totpop
+    R = N - (E + I + S)
+    beta = bp.get('beta', bp.get(b'beta'));
+    alpha = bp.get('alpha', bp.get(b'alpha'));
+    r = bp.get('r', bp.get(b'r'));
+    b = bp.get('b', bp.get(b'b'));
+
+    sir([S, I, R], [0, 1], N, {'beta': beta, 'gamma': r})
+
+    Spos = sir.traces['S'][-1]
+    Ipos = sir.traces['I'][-1]
+    Lpos = sir.traces['I'][-1] - sir.traces['I'][0]
+
+    return [0, Ipos, Spos], Lpos, Ipos
 
 
 # @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
