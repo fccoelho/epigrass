@@ -1048,15 +1048,18 @@ def main():
 
 
 def end_pools():
-    PO.close()
-    PO.terminate()
-    simobj.PO.close()
-    simobj.PO.terminate()
+    # PO.close()
+    # PO.terminate()
+    # simobj.PO.close()
+    # simobj.PO.terminate()
+
+    # kill all subprocesses
+    os.killpg(os.getpid(), signal.SIGTERM)
 
 
 PO = multiprocessing.Pool()
 if __name__ == '__main__':
-    import atexit
+    import atexit, signal
 
     atexit.register(end_pools)
     main()

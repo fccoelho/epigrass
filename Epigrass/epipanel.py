@@ -10,6 +10,7 @@ import hvplot.pandas
 import holoviews as hv
 import geoviews as gv
 from holoviews.operation.datashader import datashade, bundle_graph
+from datashader.bundling import hammer_bundle
 from holoviews import opts
 from bokeh.resources import INLINE
 import param
@@ -50,9 +51,10 @@ def get_sims(fname):
 def get_graph(pth):
     full_path = os.path.join(os.path.abspath(pth), 'network.gml')
     if os.path.exists(full_path):
-        G = NX.read_gml(full_path)
+        G = NX.read_gml(full_path,destringizer=int)
     else:
         G = NX.MultiDiGraph()
+
     return G
 
 
@@ -118,7 +120,7 @@ def get_subgraph(G, node):
     :param node: node defining the subgraph
     """
     nodes = [node]
-    nodes.extend(list(G.neighbors(node)))
+    nodes.extend([int(n) for n in G.neighbors(node)])
     H = G.subgraph(nodes).copy()
     return H
 
@@ -246,7 +248,7 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         partial_map = partial_map.to_crs(3857)  # Converting to web mercator
         centroids = [(c.x, c.y) for c in partial_map.centroid]
         # Draw the graph using Altair
-        gcs = [str(int(gc)) for gc in partial_map.geocode]
+        gcs = [int(gc) for gc in partial_map.geocode]
         pos = dict(zip(gcs, centroids))
 
         # viz = nxa.draw_networkx(

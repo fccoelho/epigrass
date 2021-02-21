@@ -436,11 +436,11 @@ The Web Dashboard
 
 To interact and explore the simulations stored in the database, Epigrass offers an interactive dashboard. It allows you to
 navigate to any simulation previously done for a given model, and inspect it interactively.
-You can ask for it to open right after a simulation is done::
+You can ask for it to open **right after a simulation is done**::
 
   $ epirunner -D mymodel.epg
 
-or you can open it for a given model by typing from the directory where the *epg* file is located::
+or you can simplu open it to inspect previous simulations of given model by typing from the directory where the *epg* file is located::
 
   $ epirunner -V mymodel.epg
 
