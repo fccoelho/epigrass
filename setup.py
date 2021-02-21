@@ -22,7 +22,6 @@ setup(name='epigrass',
       entry_points={
           'console_scripts': [
               'epirunner = Epigrass.manager:main',
-              'epidash = Epigrass.epipanel:main'
           ],
       },
       # ext_modules=cythonize('Epigrass/models.py'),

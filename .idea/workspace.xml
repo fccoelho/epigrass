@@ -28,32 +28,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Eliminated epidash module and dependencies on plotly and plotly dash&#10;&#10;updated requirements file&#10;fixed entrypoint on setup.py">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epipanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_static/basic.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/doctools.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_static/doctools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/pygments.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_static/pygments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/searchtools.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_static/searchtools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/analysis.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/intromodels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/intromodels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/overview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/scripting.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/scripting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/using.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/using.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/latex/Epigrass.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/latex/Epigrass.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/latex/Epigrass.tex" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/latex/Epigrass.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/using.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/using.rst" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation">
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -501,14 +477,7 @@
       <workItem from="1608025614231" duration="17304000" />
       <workItem from="1608197988257" duration="6600000" />
       <workItem from="1608401847529" duration="81000" />
-      <workItem from="1613904327797" duration="7251000" />
-    </task>
-    <task id="LOCAL-00010" summary="Fixed a few bugs and added model reference to models">
-      <created>1582057624767</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1582057624767</updated>
+      <workItem from="1613904327797" duration="7455000" />
     </task>
     <task id="LOCAL-00011" summary="Implemented basic dashboard">
       <created>1582138630383</created>
@@ -846,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613906237404</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation">
+      <created>1613911718711</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1613911718711</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -873,7 +849,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First implementation of a Panel based dashboard proposed on issue #7&#10;still a few bugs remaining." />
     <MESSAGE value="Epipanel working." />
     <MESSAGE value="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs" />
     <MESSAGE value="Fixed import bug of Custom models" />
@@ -898,7 +873,8 @@
     <MESSAGE value="Added continuous version of SEIR." />
     <MESSAGE value="Added tooltip for time series." />
     <MESSAGE value="Eliminated epidash module and dependencies on plotly and plotly dash&#10;&#10;updated requirements file&#10;fixed entrypoint on setup.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Eliminated epidash module and dependencies on plotly and plotly dash&#10;&#10;updated requirements file&#10;fixed entrypoint on setup.py" />
+    <MESSAGE value="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
