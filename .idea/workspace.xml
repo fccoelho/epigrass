@@ -28,13 +28,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added continuous version of SEIR.">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added tooltip for time series.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/epipanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/epipanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.gml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" afterPath="$PROJECT_DIR$/demos/spread.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/epidash.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +83,9 @@
   <component name="JupyterTrust" id="5508c583-bdd6-4285-9ebf-e35235bb520e" />
   <component name="MacroExpansionManager">
     <option name="directoryName" value="jZcaGZUS" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1Q9PACfz950Hmw7id8gkPEq5TWz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -403,16 +404,16 @@
       <item itemvalue="Python.epipanel" />
       <item itemvalue="Python tests.Nosetests in test_models.py" />
       <item itemvalue="Python tests.Nosetests in tests.py" />
-      <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
       <item itemvalue="Python tests.pytest for test_models.test_model_run" />
+      <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.epipanel" />
-        <item itemvalue="Python tests.pytest for test_models.test_model_run" />
-        <item itemvalue="Python tests.Nosetests in test_models.py" />
         <item itemvalue="Python tests.pytest for tests.TestSimulationRuns.test_mesh_epg" />
+        <item itemvalue="Python tests.pytest for test_models.test_model_run" />
         <item itemvalue="Python tests.Nosetests in tests.py" />
+        <item itemvalue="Python tests.Nosetests in test_models.py" />
       </list>
     </recent_temporary>
   </component>
@@ -477,14 +478,9 @@
       <workItem from="1607895384298" duration="1156000" />
       <workItem from="1607962637570" duration="17797000" />
       <workItem from="1608025614231" duration="17304000" />
-      <workItem from="1608197988257" duration="5256000" />
-    </task>
-    <task id="LOCAL-00008" summary="minor changes">
-      <created>1567864126546</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1567864126546</updated>
+      <workItem from="1608197988257" duration="6600000" />
+      <workItem from="1608401847529" duration="81000" />
+      <workItem from="1613904327797" duration="1684000" />
     </task>
     <task id="LOCAL-00009" summary="minor changes">
       <created>1581926166344</created>
@@ -822,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608202195186</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Added tooltip for time series.">
+      <created>1608203519482</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1608203519482</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -849,7 +852,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed remaining bugs associated with the NewWorld class" />
     <MESSAGE value="Minor tweaking of the docs" />
     <MESSAGE value="First implementation of a Panel based dashboard proposed on issue #7&#10;still a few bugs remaining." />
     <MESSAGE value="Epipanel working." />
@@ -874,7 +876,8 @@
     <MESSAGE value="3.0 release" />
     <MESSAGE value="Added continuous version of SIR." />
     <MESSAGE value="Added continuous version of SEIR." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added continuous version of SEIR." />
+    <MESSAGE value="Added tooltip for time series." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tooltip for time series." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -919,7 +922,7 @@
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_epigdal_py.coverage" NAME="Nosetests in test_epigdal.py Coverage Results" MODIFIED="1606668720181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_manager_py.coverage" NAME="Nosetests in test_manager.py Coverage Results" MODIFIED="1607882272029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
-    <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1608202689492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
+    <SUITE FILE_PATH="coverage/epigrass$epipanel.coverage" NAME="epipanel Coverage Results" MODIFIED="1613905883691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1608198200451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1608202074402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />

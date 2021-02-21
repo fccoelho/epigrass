@@ -1,12 +1,8 @@
 pandas
 geopandas
 numpy
-dash
 matplotlib
-dash_html_components
-dash_core_components
 networkx
-plotly
 SQLAlchemy
 SQLObject
 tqdm
@@ -19,3 +15,8 @@ shapely
 altair
 redis
 epimodels
+panel
+holoviews
+geoviews
+scikit-image
+datashader
