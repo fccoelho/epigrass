@@ -28,8 +28,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed cython import from setup.py">
-      <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="bumped up minor version">
+      <change afterPath="$PROJECT_DIR$/condarecipe/epigrass/meta.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +99,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -478,14 +485,7 @@
       <workItem from="1608197988257" duration="6600000" />
       <workItem from="1608401847529" duration="81000" />
       <workItem from="1613904327797" duration="8348000" />
-      <workItem from="1615726523518" duration="637000" />
-    </task>
-    <task id="LOCAL-00013" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
-      <created>1582367652087</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1582367652087</updated>
+      <workItem from="1615726523518" duration="5251000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
@@ -823,7 +823,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615727120729</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="bumped up minor version">
+      <created>1615727183521</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1615727183521</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -850,7 +857,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed import bug of Custom models" />
     <MESSAGE value="Minor bug-fix&#10;minor version bump-up" />
     <MESSAGE value="Optimization of the call sequence of epipanel" />
     <MESSAGE value="Switched map drawing to altair for performance reasons.&#10;&#10;Added panel with simulation metadata." />
@@ -875,7 +881,8 @@
     <MESSAGE value="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation" />
     <MESSAGE value="removed `epidash` entrypoint." />
     <MESSAGE value="removed cython import from setup.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed cython import from setup.py" />
+    <MESSAGE value="bumped up minor version" />
+    <option name="LAST_COMMIT_MESSAGE" value="bumped up minor version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
