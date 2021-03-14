@@ -1,5 +1,5 @@
 from setuptools import setup
-from Cython.Build import cythonize
+# from Cython.Build import cythonize
 from Epigrass.__version__ import version
 
 with open('requirements.txt') as f:

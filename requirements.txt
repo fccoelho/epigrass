@@ -6,7 +6,7 @@ networkx
 SQLAlchemy
 SQLObject
 tqdm
-Cython
+cython
 dbfread
 pweave
 pymysql
