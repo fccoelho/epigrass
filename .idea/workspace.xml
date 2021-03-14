@@ -28,11 +28,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed `epidash` entrypoint.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed cython import from setup.py">
       <change beforePath="$PROJECT_DIR$/Epigrass/__version__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/__version__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -481,14 +478,7 @@
       <workItem from="1608197988257" duration="6600000" />
       <workItem from="1608401847529" duration="81000" />
       <workItem from="1613904327797" duration="8348000" />
-      <workItem from="1615726523518" duration="329000" />
-    </task>
-    <task id="LOCAL-00012" summary="added plot to dashboard">
-      <created>1582271191369</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1582271191369</updated>
+      <workItem from="1615726523518" duration="637000" />
     </task>
     <task id="LOCAL-00013" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582367652087</created>
@@ -826,7 +816,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613911842140</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="removed cython import from setup.py">
+      <created>1615727120728</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1615727120729</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -853,7 +850,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Integrated dashboard into epirunner's interface&#10;fixed some extra bugs" />
     <MESSAGE value="Fixed import bug of Custom models" />
     <MESSAGE value="Minor bug-fix&#10;minor version bump-up" />
     <MESSAGE value="Optimization of the call sequence of epipanel" />
@@ -878,7 +874,8 @@
     <MESSAGE value="Eliminated epidash module and dependencies on plotly and plotly dash&#10;&#10;updated requirements file&#10;fixed entrypoint on setup.py" />
     <MESSAGE value="Fixed bug in the network edge bundling&#10;&#10;minor update to documentation" />
     <MESSAGE value="removed `epidash` entrypoint." />
-    <option name="LAST_COMMIT_MESSAGE" value="removed `epidash` entrypoint." />
+    <MESSAGE value="removed cython import from setup.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed cython import from setup.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
