@@ -21,7 +21,11 @@ Epigrass is a Python Library aimed at making the simulation of metapopulation mo
 Documentation is available [here](https://epigrass.readthedocs.io/en/latest/).
 
 ## Installation
-You can install Epigrass directly from PyPi, the Python Package Index.
+### External dependencies
+Besides installing epigrass from the PyPI, as described below you will need to install the following external dependencies:
+- redis server you need to have a redis server running. You can install it from the [redis website](https://redis.io/download)  
+- 
+You can install Epigrass directly from PyPI, the Python Package Index.
 For mode details, check the [docs](https://epigrass.readthedocs.io/en/latest/install.html#)
 
 

@@ -12,8 +12,8 @@ import numpy as np
 import sys
 import redis
 from epimodels.continuous.models import SIR, SEIR
-import numba
-from numba.typed import List
+# import numba
+# from numba.typed import List
 
 redisclient = redis.StrictRedis()
 
@@ -182,7 +182,7 @@ def selectModel(modtype):
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
@@ -295,7 +295,7 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIS, and return its values (no demographics)
@@ -338,7 +338,7 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
               dist='poisson') -> tuple:
     """
@@ -495,7 +495,7 @@ def stepSIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Defines the model SEIS:
@@ -533,7 +533,7 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
                dist='poisson') -> tuple:
     """
@@ -704,7 +704,7 @@ def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIpRpS, and return its values (no demographics)
@@ -742,7 +742,7 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
                  dist='poisson') -> tuple:
     """
@@ -787,7 +787,7 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True)
+# @numba.jit(forceobj=True)
 def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     Defines the model SEIpRpS:
@@ -825,7 +825,7 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
                   dist='poisson') -> tuple:
     """
@@ -870,7 +870,7 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIpR, and return its values (no demographics)
@@ -962,7 +962,7 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SEIpR, and return its values (no demographics)
@@ -1059,7 +1059,7 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
-@numba.jit(forceobj=True, cache=True)
+# @numba.jit(forceobj=True, cache=True)
 def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIRS, and return its values (no demographics)

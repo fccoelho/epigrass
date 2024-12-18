@@ -73,8 +73,7 @@ class NewWorld:
             assert map_size == unique_gcs
         except AssertionError as e:
             print(f"Column {self.geocfield} should have {map_size} unique values, but it has {unique_gcs}.")
-            raise(e)
-
+            raise (e)
 
     def get_layer_list(self):
         return self.layers
@@ -87,7 +86,7 @@ class NewWorld:
         else:
             print(f'Layer {l} not available.')
 
-    def get_hex_color(self, value, cmap="YlOrRd" ):
+    def get_hex_color(self, value, cmap="YlOrRd"):
         cols = cm.get_cmap(cmap, 256)
         rgba = cols(value * 256)
         bgrcol = list(rgba[:-1])  # rgb(list)
@@ -123,13 +122,11 @@ class NewWorld:
             self.get_node_list()
         if not self.nodesource:
             centroids = self.map.geometry.centroid
-            nodes = gpd.GeoDataFrame(columns=[self.geocfield, self.namefield, 'x', 'y'])
-            for gc, xy in self.centdict.items():
-                nodes = nodes.append({self.geocfield: gc,
-                                      self.namefield: self.namedict[gc],
-                                      'x': xy[0],
-                                      'y': xy[1]
-                                      }, ignore_index=True)
+            nodes = gpd.GeoDataFrame(columns=[self.geocfield, self.namefield, 'x', 'y'],
+                                     data=[
+                                         {self.geocfield: gc, self.namefield: self.namedict[gc], 'x': xy[0], 'y': xy[1]}
+                                         for gc, xy in self.centdict.items()]
+                                     )
 
             nodes['geometry'] = gpd.points_from_xy(nodes.x, nodes.y)
             nodes.to_file(os.path.join(self.outdir, 'Nodes.gpkg'), driver='GPKG')
@@ -181,13 +178,13 @@ class NewWorld:
             os.remove(os.path.join(self.outdir, 'Data.gpkg'))
         # Creates a new shape file to hold the data
         if not self.datasource:
-            dsd = gpd.GeoDataFrame(columns=['geocode', 'name', 'colors']+varlist+['geometry'])
+            dsd = gpd.GeoDataFrame(columns=['geocode', 'name', 'colors'] + varlist + ['geometry'])
 
             dsd['geocode'] = data[:, 0]
             dsd['name'] = [self.namedict[int(gc)] for gc in data[:, 0]]
             dsd['colors'] = [str([self.get_hex_color(norms[i](v)) for i, v in enumerate(l[1:])]) for l in data]
             for i, v in enumerate(varlist):
-                dsd[v] = data[:, i+1]
+                dsd[v] = data[:, i + 1]
             for i, row in dsd.iterrows():
                 geom = self.map[self.map[self.geocfield] == row.geocode].geometry.values[0]
                 dsd.at[i, 'geometry'] = geom
@@ -820,7 +817,6 @@ class KmlGenerator:
         f = open(fullpath, "w")
         f.write(self.kmldoc.toxml())
         f.close()
-
 
 # def gdal_error_handler(err_class, err_num, err_msg):
 #     errtype = {

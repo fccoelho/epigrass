@@ -176,8 +176,8 @@ class siteobj:
         pipe.rpush("{}:ts".format(self.geocode), str(inits))
         pipe.set("{}:npass".format(self.geocode), float(npass))
         pipe.set("{}:theta".format(self.geocode), int(nan_to_num(theta)))
-        pipe.hmset("{}:bi".format(self.geocode), self.bi)
-        pipe.hmset("{}:bp".format(self.geocode), self.bp)
+        pipe.hset("{}:bi".format(self.geocode), mapping=self.bi)
+        pipe.hset("{}:bp".format(self.geocode), mapping=self.bp)
         pipe.execute()
         # ------------------------
         if parallel:
