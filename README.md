@@ -28,7 +28,20 @@ Besides installing epigrass from the PyPI, as described below you will need to i
 You can install Epigrass directly from PyPI, the Python Package Index.
 For mode details, check the [docs](https://epigrass.readthedocs.io/en/latest/install.html#)
 
+## Installing from the repository
+If you clone the repository, you can install Epigrass with the following command:
+```bash
+$ uv sync
+```
 
-## Getting Started
+## Running demos
+The source distribution comes with a few demos.
+```bash
+$ cd demos
+$ uv run epirunner rio.epg
+```
+This will run the demo for the city of Rio de Janeiro. 
+
+## Getting started building your own models
 
 Folow [these instructions](https://epigrass.readthedocs.io/en/latest/using.html).
