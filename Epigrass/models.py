@@ -65,7 +65,8 @@ class Epimodel(object):
         self.parallel = parallel
 
     def __call__(self, *args, **kwargs):
-        args = self.get_args_from_redis()
+        if not args:
+            args = self.get_args_from_redis()
         args = [e if not isinstance(e, list) else tuple(e) for e in args]
         args.append(self)
         res = self.step(*tuple(args))
@@ -102,7 +103,10 @@ class Epimodel(object):
         # redisclient.rpush("{}:inits".format(self.geocode), str(state))  # updating inits
         redisclient.rpush('{}:ts'.format(self.geocode), str(state))
         redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
-        totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
+        try:
+            totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
+        except ValueError:
+            totc = int(nan_to_num(eval(redisclient.get('{}:totalcases'.format(self.geocode)))))
         redisclient.set('{}:totalcases'.format(self.geocode), Lpos + totc)
         redisclient.rpush('{}:incidence'.format(self.geocode), Lpos)
         redisclient.set('{}:migInf'.format(self.geocode), migInf)
@@ -680,16 +684,16 @@ def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
     """
     seir = SEIR()
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (bi.get('e', bi.get('e')), bi.get('i', bi.get('i')), bi.get('s', bi.get('s')))
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'))
-    r = bp.get('r', bp.get(b'r'));
-    b = bp.get('b', bp.get(b'b'));
+    beta = bp.get('beta', bp.get('beta'));
+    alpha = bp.get('alpha', bp.get('alpha'));
+    e = bp.get('e', bp.get('e'))
+    r = bp.get('r', bp.get('r'));
+    b = bp.get('b', bp.get('b'));
 
     seir([S, E, I, R], [0, 1], N, {'beta': beta, 'gamma': r, 'epsilon': e})
 

@@ -104,7 +104,7 @@ class siteobj:
         print("Time to runModel: ", time.time() - t0)
         return self
 
-    def createModel(self, modtype='', name='model1', v=[], bi=None, bp=None):
+    def createModel(self, modtype='', modelname='name',v=[], bi=None, bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total
@@ -114,6 +114,7 @@ class siteobj:
         bi, bp -- dictionaries containing all the inits and parms defined in the .epg model
         """
         # Init = init  # deprecated
+        self.modename = modelname
         N = self.totpop
         self.modtype = bytes(modtype, 'utf8')
         self.values = v
@@ -207,8 +208,14 @@ class siteobj:
         Lpos = redisclient.lindex(f"{self.geocode}:incidence", -1)
         migInf = redisclient.get("{}:migInf".format(self.geocode))
         self.ts.append(last_state)
-        Lpos = float(Lpos)
-        migInf = float(migInf)
+        try:
+            Lpos = 0 if not Lpos else float(Lpos)
+        except ValueError:
+            Lpos = eval(Lpos)
+        try:
+            migInf = 0 if not migInf else  float(migInf)
+        except ValueError:
+            migInf = eval(migInf)
         self.totalcases += Lpos
         self.incidence.append(Lpos)
         if not self.infected:

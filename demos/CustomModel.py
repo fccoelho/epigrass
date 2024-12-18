@@ -29,7 +29,7 @@ def Model(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), mod
 
     ##### Get state variables' current values
     if simstep == 0:  # get initial values
-        E, I, S = (bi[b'e'], bi[b'i'], bi[b's'])
+        E, I, S = (bi['e'], bi['i'], bi['s'])
     else:  # get last value
         E, I, S = inits
 
@@ -38,11 +38,11 @@ def Model(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=(), mod
 
     ##### Getting values for the model parameters
     beta, alpha, e, r, delta, B, w, p = (
-    bp[b'beta'], bp[b'alpha'], bp[b'e'], bp[b'r'], bp[b'delta'], bp[b'b'], bp[b'w'], bp[b'p'])
+    bp['beta'], bp['alpha'], bp['e'], bp['r'], bp['delta'], bp['b'], bp['w'], bp['p'])
 
     ##### Defining a Vacination event (optional)
-    if bp[b'vaccineNow']:
-        S -= bp[b'vaccov'] * S
+    if bp['vaccineNow']:
+        S -= bp['vaccov'] * S
 
     ##### Modeling the number of new cases (incidence function)
     Lpos = beta * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases

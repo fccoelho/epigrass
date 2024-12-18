@@ -52,14 +52,22 @@ modtype = SEIR_cont
 #   beta=values[0] #assigns the first element of values to beta
 #   beta=0.001*values[1]
 
-beta = 1   #transmission coefficient (contact rate * transmissibility)
-alpha = 1   # clumping parameter
-e = 0.2           # inverse of incubation period
-r = 0.2         # inverse of infectious period
-delta = 0       # probability of acquiring full immunity [0,1]
-B = 0           # Birth rate
-w = 0           # probability of immunity waning [0,1]
-p = 0           # Probability of a recovered become infected per time step [0,1]
+#transmission coefficient (contact rate * transmissibility)
+beta = 1
+# clumping parameter
+alpha = 1
+# inverse of incubation period
+e = 0.2
+# inverse of infectious period
+r = 0.2
+# probability of acquiring full immunity [0,1]
+delta = 0
+# Birth rate
+B = 0
+# probability of immunity waning [0,1]
+w = 0
+# Probability of a recovered become infected per time step [0,1]
+p = 0
 
 
 #==============================================================#

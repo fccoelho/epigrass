@@ -15,7 +15,7 @@ from holoviews import opts
 from bokeh.resources import INLINE
 import param
 import base64
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import glob
 from functools import lru_cache
 
@@ -38,7 +38,7 @@ def get_sims(fname):
     full_path = os.path.join(fname, 'Epigrass.sqlite')
     if os.path.exists(full_path):
         con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-        sims = con.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+        sims = con.execute(text("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"))
         sim_names = [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
         con.close()
         return sim_names
@@ -271,7 +271,7 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
             edge_color='gray',
             node_color='circle'
         )
-        tiles = gv.tile_sources.Wikipedia
+        tiles = gv.tile_sources.OSM
 
         f = bundle_graph(epi_graph) * tiles
         source = epi_graph.nodes.clone()

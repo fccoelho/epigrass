@@ -19,6 +19,7 @@ import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
 from Epigrass import simobj
+from Epigrass import models
 from Epigrass import spread
 from Epigrass.data_io import *
 from Epigrass import epigdal
@@ -181,8 +182,7 @@ class Simulate:
         if not os.access(self.edges, os.F_OK):
             print('Egdes file %s does not exist, please check your script.' % self.edges)
             sys.exit()
-        if not self.modtype in ['SIS', 'SIS_s', 'SIR', 'SIR_s', 'SEIS', 'SEIS_s', 'SEIR', 'SEIR_s', 'SIpRpS',
-                                'SIpRpS_s', 'SIpR,SIpR_s', 'Influenza', 'Custom']:
+        if not self.modtype in dir(models):  # ['SIS', 'SIS_s', 'SIR', 'SIR_s', 'SEIS', 'SEIS_s', 'SEIR', 'SEIR_s', 'SIpRpS','SIpRpS_s', 'SIpR,SIpR_s', 'Influenza', 'Custom']:
             print('Model type %s is invalid, please check your script.' % self.modtype)
 
         print('Script %s passed syntax check NOW.' % self.modelName)
