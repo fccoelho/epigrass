@@ -22,7 +22,7 @@ from functools import lru_cache
 enc_icon = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3ElEQVRYhe2WWQ7DIAxEH1XvVR+dmzkfVSJngWIW0VYZKV8EZgzDmABARFkhBDxomQs8z+tFvfoxBUG8nHkBgnircAlOwlt5LzxmkN4CbgFfJeB950vSrDHxUihOwtbEKxaQScKxQTUrCU87YJE5jnEeOJJfkdkxNUcTaDCnrbb0OCJRFbavmtySer3QVcAMI/5GEmaN1utNqAIhpjwghm8/Lsg2twbTd8CsU2/AlrnTTbhDbSX/swPgr2ZIeHl6QStX8tqsi79MBqxXMNcpu+LY7Ub0i48VdOv3CSxJ9X3LgJP02QAAAABJRU5ErkJggg=='
 with open('egicon.png', 'wb') as f:
     f.write(base64.b64decode(enc_icon))
-material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='egicon.png', logo='egicon.png')
+material = pn.template.MaterialTemplate(title='Epigrass Dashboard', favicon='../egicon.png', logo='../egicon.png')
 
 pn.config.sizing_mode = 'stretch_width'
 alt.renderers.set_embed_options(actions=True)
@@ -91,7 +91,7 @@ def read_simulation(fname, simulation_name, locality=None):
 
 
 @lru_cache(maxsize=10)
-def get_localities(fname, simulation_name):
+def get_localities(fname, simulation_name)->list:
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
@@ -191,7 +191,7 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         if self.map_selector and self.mapdf is not None:
             mapdf = self.mapdf
             map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
-            brush = alt.selection_single(encodings=["y"], on="mouseover", empty='none')
+            brush = alt.selection_point(encodings=["y"], on="mouseover", empty='none')
             color = alt.Color('totalcases', scale=alt.Scale(type='pow', exponent=0.4))
             f = alt.hconcat(
                 alt.Chart(map10).mark_bar().encode(
@@ -200,7 +200,7 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
                                                                op='sum', order='descending')),
                     tooltip=['name', 'prevalence', 'totalcases'],
                     color=alt.condition(brush, alt.value('lightgray'), color)
-                ).add_selection(
+                ).add_params(
                     brush
                 ).properties(
                     width=200,
@@ -410,6 +410,6 @@ def show(pth):
 
 if __name__ == "__main__":
     material, series_viewer = main()
-    series_viewer.model_path = '../demos/outdata-rio'
+    series_viewer.model_path = '../demos/Florida/outdata-florida'
     refresh(None)
     pn.serve(material, port=5006, threaded=False)

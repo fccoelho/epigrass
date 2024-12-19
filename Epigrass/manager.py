@@ -1060,5 +1060,5 @@ PO = multiprocessing.Pool()
 if __name__ == '__main__':
     import atexit, signal
 
-    atexit.register(end_pools)
+    # atexit.register(end_pools)
     main()
