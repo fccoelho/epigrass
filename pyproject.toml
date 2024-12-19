@@ -9,6 +9,17 @@ description = "Epidemiological Geo-Referenced Analysis and Simulation System"
 readme = "README.md"
 license = {text="GPLv3"}
 requires-python = ">=3.12"
+classifiers = [
+    "License :: OSI Approved :: GPLv3 License",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: researchers",
+    "Natural Language :: English",
+    "Topic :: Scientific/Epidemiology",
+]
 dependencies = [
     "altair>=5.5.0",
     "cython>=3.0.11",
@@ -34,6 +45,13 @@ dependencies = [
     "sqlobject>=3.11.0",
     "tqdm>=4.67.1",
 ]
+
+[project.urls]
+Homepage = "https://epigrass.readthedocs.io"
+Source = "https://github.com/fccoelho/epigrass"
+
+[tool.setuptools]
+packages = ["Epigrass"]
 
 [tool.uv]
 package = true
