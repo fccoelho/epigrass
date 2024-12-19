@@ -3,15 +3,12 @@ This module generates a report of the network simulation model
 using LaTeX.
 """
 
-import os, sys, string, matplotlib, codecs
-from time import time, ctime
+import codecs
+from time import ctime
+import os
+
 import pweave
-import datetime
-
-# matplotlib.use("Agg")
-
 from pylab import *
-# from matplotlib.mlab import *
 
 header = """
 """
@@ -190,10 +187,10 @@ Wiener's D $={stats[2]}$
 
 ## Mean Distance
 The mean distance of a network is the mean of of the set of shortest paths, 
-excluding the 0-length paths.""" +\
-r"""
-$\bar{D}="""+f'{stats[3]}$' + \
-fr"""
+excluding the 0-length paths.""" + \
+                  r"""
+                  $\bar{D}=""" + f'{stats[3]}$' + \
+                  fr"""
 ## Network Diameter
 The diameter of a network is the longest element of the shortest paths set.
 
@@ -221,24 +218,24 @@ large amounts of traffic.
 
 The weight of all nodes in the network (W(N)) is the summation 
 of each node's order (o) multiplied by 2 for all orders above 1.
-""" +\
-r"""
-$\iota=\frac{L(N)}{W(N)}="""+f'{stats[7]}$'+\
-r"""        
-\subsection{Pi ($\Pi$) Index}
-The Pi index represents the relationship between the 
-total length of the network L(N)
-and the distance along the diameter D(d). 
-
-It is labeled as Pi because of its similarity with the 
-trigonometric $\Pi$ (3.14), which is expressing the ratio between 
-the circumference and the diameter of a circle. 
-
-A high index shows a developed network. It is a measure 
-of distance per units of diameter and an indicator of 
-the  shape of a network.
-""" +\
-fr"""
+""" + \
+                  r"""
+                  $\iota=\frac{L(N)}{W(N)}=""" + f'{stats[7]}$' + \
+                  r"""        
+                  \subsection{Pi ($\Pi$) Index}
+                  The Pi index represents the relationship between the 
+                  total length of the network L(N)
+                  and the distance along the diameter D(d). 
+                  
+                  It is labeled as Pi because of its similarity with the 
+                  trigonometric $\Pi$ (3.14), which is expressing the ratio between 
+                  the circumference and the diameter of a circle. 
+                  
+                  A high index shows a developed network. It is a measure 
+                  of distance per units of diameter and an indicator of 
+                  the  shape of a network.
+                  """ + \
+                  fr"""
 $\Pi=L(N)/D(d)={stats[8]}$
 ## Beta ($\beta$) Index
 The Beta index
@@ -256,7 +253,6 @@ the network. Complex networks have a high value of Beta.
 $\beta = {stats[10]}$"""
         section = matrix + indices
         return section
-
 
     def siteReport(self, geoc):
         """
@@ -287,7 +283,6 @@ site.doStats()
 ```
         """
         return section
-
 
     def genSiteEpi(self, geoc):
         """
@@ -324,14 +319,12 @@ ylabel('Infectious individuous')
         """
         return section
 
-
     def genEpi(self):
         """
         Generate epidemiological report.
         """
         epistats = self.sim.g.getEpistats()
         cumcities = [sum(epistats[1][:i]) for i in range(len(epistats[1]))]
-
 
         # print (epistats[0],average(epistats[1]),epistats[2],epistats[3],epistats[4],'sp')
         section = rf"""
@@ -372,7 +365,6 @@ xlabel('Time')
 ```
             """
         return section
-
 
     def Assemble(self, type, save=True):
         """
@@ -433,7 +425,8 @@ between any other pair of nodes.
             timer = time() - start
             print('Time to generate Epidemiological report: %s seconds.' % timer)
             if self.sim.gui:
-                self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.' % timer, -1)
+                self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.' % timer,
+                                                       -1)
             repname = 'epi_report'
         elif type == 3:
             start = time()
@@ -457,13 +450,11 @@ between any other pair of nodes.
             self.savenBuild(repname, latexsrc)
         return latexsrc
 
-
     def Say(self, string):
         """
         Exits outputs messages to the console or the gui accordingly
         """
         print(string)
-
 
     def savenBuild(self, name, src):
         """
@@ -479,5 +470,3 @@ between any other pair of nodes.
             fs.write(src)
 
         pweave.weave(f"{name}.pmd", doctype='markdown')
-
-

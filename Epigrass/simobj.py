@@ -1,8 +1,6 @@
 """
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
-from __future__ import absolute_import
-from __future__ import print_function
 import sys
 import multiprocessing
 import time

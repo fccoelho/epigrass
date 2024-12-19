@@ -31,21 +31,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="improved pyproject.toml">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="repo cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/age.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/age02.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/age10.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/age15.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/age20.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/age40.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/antt2002.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/antt2002.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antt2002TODOS.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/antt2002TODOS.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centroides.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/centroides.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codigos_sitios.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/codigos_sitios.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edges.dot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,31 +102,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests in test_epigdal.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in test_manager.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in test_simobj.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in tests.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Epigrass.manager:main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.epipanel.executor&quot;: &quot;Run&quot;,
-    &quot;Python.epirunner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rio.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/fccoelho/Documentos/Projects_Software/epigrass/.venv/bin/epirunner&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests in test_epigdal.py.executor": "Run",
+    "Python tests.Python tests in test_manager.py.executor": "Run",
+    "Python tests.Python tests in test_simobj.py.executor": "Run",
+    "Python tests.Python tests in tests.executor": "Run",
+    "Python.Epigrass.manager:main.executor": "Run",
+    "Python.epipanel.executor": "Run",
+    "Python.epirunner.executor": "Run",
+    "Python.rio.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/fccoelho/Documentos/Projects_Software/epigrass/.venv/bin/epirunner",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  "keyToStringList": {
+    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
-}</component>
+}]]></component>
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
     <option name="myDropIntoDebuggerOnFailedTests" value="true" />
@@ -149,6 +139,7 @@
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/demos/ANTT2002" />
       <recent name="$PROJECT_DIR$/docs/source" />
     </key>
   </component>
@@ -287,13 +278,13 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="SDK_NAME" value="Python 3.12 virtualenv at ~/Documentos/Projects_Software/epigrass/.venv" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/demos" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/demos/Florida" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.venv/bin/epirunner" />
-      <option name="PARAMETERS" value="-P rio.epg" />
+      <option name="PARAMETERS" value="florida.epg" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -550,7 +541,7 @@
       <workItem from="1613904327797" duration="8348000" />
       <workItem from="1615726523518" duration="5251000" />
       <workItem from="1734520183776" duration="15312000" />
-      <workItem from="1734600114757" duration="2268000" />
+      <workItem from="1734600114757" duration="3350000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
@@ -895,7 +886,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -927,7 +918,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added encoded favicon in the code." />
     <MESSAGE value="Fixed multiple minor bugs and updated documentation" />
     <MESSAGE value="Minor improvements to epipanel&#10;Updated installation documentation" />
     <MESSAGE value="minor fixes in epimodels" />
@@ -952,9 +942,19 @@
     <MESSAGE value="fixed many bugs" />
     <MESSAGE value="updated the READme" />
     <MESSAGE value="improved pyproject.toml" />
-    <option name="LAST_COMMIT_MESSAGE" value="improved pyproject.toml" />
+    <MESSAGE value="repo cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="repo cleanup" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Epigrass/report.py</url>
+          <line>267</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
         <watch expression="CustomModel" />
@@ -977,6 +977,7 @@
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607969667280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/epigrass$rio.coverage" NAME="rio Coverage Results" MODIFIED="1734603351797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/demos/Florida" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1608202074402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1608198200451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$.coverage" NAME=" Coverage Results" MODIFIED="1734541253992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
