@@ -164,9 +164,9 @@ class Simulate:
             except AttributeError:
                 pass
             if k.startswith('initial conditions'):
-                self.inits[k.split('.')[-1].lower()] = v
+                self.inits[k.split('.')[-1].lower()] = v.split('#')[0]
             elif k.startswith('model parameters'):
-                self.parms[k.split('.')[-1]] = v
+                self.parms[k.split('.')[-1]] = v.split('#')[0]
             else:
                 pass
 

@@ -31,12 +31,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="updated the READme">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="improved pyproject.toml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/condarecipe/epigrass/meta.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/age.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/age02.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/age10.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/age15.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/age20.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/age40.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/antt2002.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/antt2002.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/antt2002TODOS.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/antt2002TODOS.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centroides.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/centroides.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/codigos_sitios.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/codigos_sitios.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edges.dot" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -541,7 +550,7 @@
       <workItem from="1613904327797" duration="8348000" />
       <workItem from="1615726523518" duration="5251000" />
       <workItem from="1734520183776" duration="15312000" />
-      <workItem from="1734600114757" duration="1143000" />
+      <workItem from="1734600114757" duration="2268000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
@@ -886,7 +895,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -918,7 +927,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Further improvements on Altair visualizations" />
     <MESSAGE value="Added encoded favicon in the code." />
     <MESSAGE value="Fixed multiple minor bugs and updated documentation" />
     <MESSAGE value="Minor improvements to epipanel&#10;Updated installation documentation" />
@@ -943,7 +951,8 @@
     <MESSAGE value="fixed many bugs and started migrating to pyproject.toml" />
     <MESSAGE value="fixed many bugs" />
     <MESSAGE value="updated the READme" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated the READme" />
+    <MESSAGE value="improved pyproject.toml" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved pyproject.toml" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
