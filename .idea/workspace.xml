@@ -31,11 +31,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="repo cleanup">
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="code cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Epigrass/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Epigrass/simobj.py" beforeDir="false" afterPath="$PROJECT_DIR$/Epigrass/simobj.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +109,7 @@
     "Python.Epigrass.manager:main.executor": "Run",
     "Python.epipanel.executor": "Run",
     "Python.epirunner.executor": "Run",
-    "Python.rio.executor": "Debug",
+    "Python.rio.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -284,7 +282,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/.venv/bin/epirunner" />
-      <option name="PARAMETERS" value="florida.epg" />
+      <option name="PARAMETERS" value="-P florida.epg" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -541,7 +539,7 @@
       <workItem from="1613904327797" duration="8348000" />
       <workItem from="1615726523518" duration="5251000" />
       <workItem from="1734520183776" duration="15312000" />
-      <workItem from="1734600114757" duration="3350000" />
+      <workItem from="1734600114757" duration="7813000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
@@ -886,7 +884,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -918,7 +916,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed multiple minor bugs and updated documentation" />
     <MESSAGE value="Minor improvements to epipanel&#10;Updated installation documentation" />
     <MESSAGE value="minor fixes in epimodels" />
     <MESSAGE value="Updated installation instructions" />
@@ -943,7 +940,8 @@
     <MESSAGE value="updated the READme" />
     <MESSAGE value="improved pyproject.toml" />
     <MESSAGE value="repo cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="repo cleanup" />
+    <MESSAGE value="code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="code cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -977,7 +975,7 @@
     <SUITE FILE_PATH="coverage/epigrass$epidash.coverage" NAME="epidash Coverage Results" MODIFIED="1582138905704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$dash.coverage" NAME="epidash Coverage Results" MODIFIED="1582137512912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Epigrass" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_tests_py.coverage" NAME="Nosetests in tests.py Coverage Results" MODIFIED="1607969667280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/epigrass$rio.coverage" NAME="rio Coverage Results" MODIFIED="1734603351797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/demos/Florida" />
+    <SUITE FILE_PATH="coverage/epigrass$rio.coverage" NAME="rio Coverage Results" MODIFIED="1734609910135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/demos/Florida" />
     <SUITE FILE_PATH="coverage/epigrass$pytest_for_test_models_test_model_run.coverage" NAME="pytest for test_models.test_model_run Coverage Results" MODIFIED="1608202074402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$Nosetests_in_test_models_py.coverage" NAME="Nosetests in test_models.py Coverage Results" MODIFIED="1608198200451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/epigrass$.coverage" NAME=" Coverage Results" MODIFIED="1734541253992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
