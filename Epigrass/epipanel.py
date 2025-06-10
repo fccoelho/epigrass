@@ -1,7 +1,7 @@
 import pandas as pd
 import altair as alt
 import networkx as NX
-import nx_altair as nxa
+from netgraph import Graph
 import geopandas as gpd
 import os
 import panel as pn
@@ -249,24 +249,18 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         gcs = [int(gc) for gc in partial_map.geocode]
         pos = dict(zip(gcs, centroids))
 
-        # viz = nxa.draw_networkx(
-        #     G, pos=pos,
-        #     node_color='weight',
-        #     cmap='viridis',
-        #     width='weight',
-        #     edge_color='black',
-        # )
+
 
         # Create basic networkx plot
         import matplotlib.pyplot as plt
         plt.figure(figsize=(10,10))
-        NX.draw(H, pos=pos, node_size=100, node_color='lightblue', 
-               edge_color='gray', width=1, arrows=True)
-        
+        NX.draw(H, pos=pos, node_size=100, node_color='lightblue',
+               edge_color='gray', width=.1, arrows=True)
+
         # Highlight selected locality
-        NX.draw_networkx_nodes(H, pos=pos, nodelist=[nodeloc[0][0]], 
+        NX.draw_networkx_nodes(H, pos=pos, nodelist=[nodeloc[0][0]],
                              node_color='red', node_size=200)
-        
+
         plt.axis('off')
         plt.tight_layout()
         return plt.gcf()
