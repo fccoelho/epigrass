@@ -259,26 +259,19 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         #     edge_color='black',
         # )
 
-        kwargs = dict(width=800, height=800, xaxis=None, yaxis=None)
-        hv.opts.defaults(opts.Nodes(**kwargs), opts.Graph(**kwargs))
-        colors = ['#000000'] + hv.Cycle('Category20').values
-        epi_graph = hv.Graph.from_networkx(H, positions=pos)
-
-        epi_graph.opts(
-            cmap=colors, node_size=10, edge_line_width=1,
-            directed=True,
-            node_line_color='gray',
-            edge_color='gray',
-            node_color='circle'
-        )
-        tiles = gv.tile_sources.OSM
-
-        f = bundle_graph(epi_graph) * tiles
-        source = epi_graph.nodes.clone()
-        # print(epi_graph.nodes.data.iloc[0])
-        source.data = epi_graph.nodes.data[epi_graph.nodes.data.name == self.localities]
-
-        return f * source.opts(color='red')
+        # Create basic networkx plot
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(10,10))
+        NX.draw(H, pos=pos, node_size=100, node_color='lightblue', 
+               edge_color='gray', width=1, arrows=True)
+        
+        # Highlight selected locality
+        NX.draw_networkx_nodes(H, pos=pos, nodelist=[nodeloc[0][0]], 
+                             node_color='red', node_size=200)
+        
+        plt.axis('off')
+        plt.tight_layout()
+        return plt.gcf()
 
     @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
