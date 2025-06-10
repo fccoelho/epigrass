@@ -9,8 +9,6 @@ import panel.widgets as pnw
 import hvplot.pandas
 import holoviews as hv
 import geoviews as gv
-from holoviews.operation.datashader import datashade, bundle_graph
-from datashader.bundling import hammer_bundle
 from holoviews import opts
 from bokeh.resources import INLINE
 import param
