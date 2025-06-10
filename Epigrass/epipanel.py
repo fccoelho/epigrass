@@ -236,7 +236,6 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         if G.order == 0:
             return pn.pane.Alert(f'## No network file found on {self.model_path}')
         nodeloc = list(filter(lambda n: n[1]['name'] == self.localities, G.nodes(data=True)))
-        # print(nodeloc, self.localities)
         if nodeloc == []:
             return pn.pane.Alert(f'## Please select a locality.')
         H = get_subgraph(G, nodeloc[0][0])
@@ -244,25 +243,110 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         partial_map = partial_map.set_crs(4326)
         partial_map = partial_map.to_crs(3857)  # Converting to web mercator
         centroids = [(c.x, c.y) for c in partial_map.centroid]
-        # Draw the graph using Altair
         gcs = [int(gc) for gc in partial_map.geocode]
         pos = dict(zip(gcs, centroids))
 
+        # Prepare node data
+        nodes_data = []
+        for node in H.nodes(data=True):
+            node_id = node[0]
+            node_attrs = node[1]
+            if node_id in pos:
+                x, y = pos[node_id]
+                nodes_data.append({
+                    'id': node_id,
+                    'x': x,
+                    'y': y,
+                    'name': node_attrs.get('name', str(node_id)),
+                    'is_selected': node_id == nodeloc[0][0]
+                })
 
+        # Prepare edge data
+        edges_data = []
+        for edge in H.edges():
+            source, target = edge
+            if source in pos and target in pos:
+                x1, y1 = pos[source]
+                x2, y2 = pos[target]
+                edges_data.append({
+                    'source': source,
+                    'target': target,
+                    'x1': x1,
+                    'y1': y1,
+                    'x2': x2,
+                    'y2': y2
+                })
 
-        # Create basic networkx plot
-        import matplotlib.pyplot as plt
-        plt.figure(figsize=(10,10))
-        NX.draw(H, pos=pos, node_size=100, node_color='lightblue',
-               edge_color='gray', width=.1, arrows=True)
+        nodes_df = pd.DataFrame(nodes_data)
+        edges_df = pd.DataFrame(edges_data)
 
-        # Highlight selected locality
-        NX.draw_networkx_nodes(H, pos=pos, nodelist=[nodeloc[0][0]],
-                             node_color='red', node_size=200)
+        if len(nodes_df) == 0:
+            return pn.pane.Alert('## No nodes to display')
 
-        plt.axis('off')
-        plt.tight_layout()
-        return plt.gcf()
+        # Create selection for mouseover
+        hover = alt.selection_point(on='mouseover', empty='none')
+
+        # Base chart
+        base = alt.Chart().resolve_scale(color='independent')
+
+        # Edges chart - only show when hovering over connected nodes
+        if len(edges_df) > 0:
+            edges_chart = alt.Chart(edges_df).mark_rule(
+                color='gray',
+                strokeWidth=2,
+                opacity=0.6
+            ).encode(
+                x=alt.X('x1:Q', scale=alt.Scale(nice=False)),
+                y=alt.Y('y1:Q', scale=alt.Scale(nice=False)),
+                x2='x2:Q',
+                y2='y2:Q',
+                opacity=alt.condition(
+                    alt.expr(f'datum.source == {hover.name}.id || datum.target == {hover.name}.id'),
+                    alt.value(0.8),
+                    alt.value(0.0)
+                )
+            ).transform_lookup(
+                lookup='source',
+                from_=alt.LookupData(data=nodes_df, key='id', fields=['id'])
+            ).transform_lookup(
+                lookup='target', 
+                from_=alt.LookupData(data=nodes_df, key='id', fields=['id'])
+            )
+        else:
+            edges_chart = alt.Chart(pd.DataFrame()).mark_point()
+
+        # Nodes chart
+        nodes_chart = alt.Chart(nodes_df).mark_circle(
+            size=200,
+            stroke='black',
+            strokeWidth=1
+        ).encode(
+            x=alt.X('x:Q', scale=alt.Scale(nice=False), axis=None),
+            y=alt.Y('y:Q', scale=alt.Scale(nice=False), axis=None),
+            color=alt.condition(
+                alt.datum.is_selected,
+                alt.value('red'),
+                alt.value('lightblue')
+            ),
+            size=alt.condition(
+                alt.datum.is_selected,
+                alt.value(400),
+                alt.value(200)
+            ),
+            tooltip=['name:N', 'id:O']
+        ).add_params(hover)
+
+        # Combine charts
+        chart = (edges_chart + nodes_chart).resolve_scale(
+            x='shared',
+            y='shared'
+        ).properties(
+            width=600,
+            height=400,
+            title=f'Network around {self.localities}'
+        )
+
+        return chart
 
     @param.depends('localities', 'time_slider', 'simulation_run')
     def view_series(self):
