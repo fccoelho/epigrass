@@ -301,7 +301,7 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
                 x2='x2:Q',
                 y2='y2:Q',
                 opacity=alt.condition(
-                    alt.expr(f'datum.source == {hover.name}.id || datum.target == {hover.name}.id'),
+                    (alt.datum.source == hover.name) | (alt.datum.target == hover.name),
                     alt.value(0.8),
                     alt.value(0.0)
                 )
@@ -450,16 +450,16 @@ def main():
     material.main.append(
         pn.Column(
             pn.Row(
-                pn.Card(series_viewer.view_map, title='Final State')
+                pn.Card(series_viewer.view_map, title='Final State', sizing_mode='stretch_width')
             ),
             pn.Row(
-                pn.Card(series_viewer.view_network, title='Network')
+                pn.Card(series_viewer.view_network, title='Network', sizing_mode='stretch_width')
             ),
             pn.Row(
-                pn.Card(series_viewer.view_series, title='Time Map')
+                pn.Card(series_viewer.view_series, title='Time Map', sizing_mode='stretch_width')
             ),
             pn.Row(
-                pn.Card(series_viewer.altair_series, title='Time Series')
+                pn.Card(series_viewer.altair_series, title='Time Series', sizing_mode='stretch_width')
             ),
 
         )
