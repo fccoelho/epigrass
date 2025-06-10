@@ -7,7 +7,6 @@ import codecs
 from time import ctime
 import os
 
-import pweave
 from pylab import *
 
 header = """
@@ -458,15 +457,14 @@ between any other pair of nodes.
 
     def savenBuild(self, name, src):
         """
-        Saves the LaTeX in a newly created directory and builds it.
+        Saves the report in markdown format in a new directory.
         """
-        dirname = self.sim.modelName + r'-report-'
-        Path = dirname + ctime()
-        Path = Path.replace(' ', '-')
-        os.system('mkdir ' + Path)
-        os.chdir(Path)
-        print(f'Saving {name}.pmd')
-        with codecs.open(f'{name}.pmd', 'w', self.encoding) as fs:
-            fs.write(src)
-
-        pweave.weave(f"{name}.pmd", doctype='markdown')
+        dirname = self.sim.modelName + '-report-'
+        path = dirname + ctime().replace(' ', '-')
+        os.makedirs(path, exist_ok=True)
+        os.chdir(path)
+        md_file = f"{name}.md"
+        print(f'Saving {md_file}')
+        with codecs.open(md_file, 'w', self.encoding) as f:
+            f.write(src)
+        print(f'Successfully generated markdown report at: {os.path.join(path, md_file)}')
