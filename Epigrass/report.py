@@ -4,13 +4,12 @@ using LaTeX.
 """
 
 import codecs
-from time import ctime
+from time import ctime, time
 import os
 
 from pylab import *
 
-header = """
-"""
+
 
 
 class Report:
@@ -30,6 +29,18 @@ class Report:
             enc = 'utf8'
         self.header = r"""
         """
+        self.title_template = """
+        # Epigrass Report
+
+        Model {modname} Network Report
+        John Doe
+        {data}
+
+
+                **Abstract**
+                Edit the report.md file and add your model's description here.
+
+        """
 
     def genNetTitle(self):
         """
@@ -37,16 +48,7 @@ class Report:
         data extracted from the simulation.
         """
         modname = self.sim.modelName
-        title = f"""
-% Model {modname} Network Report
-% John Doe
-% {datetime.date.today()}
-    
-
-        **Abstract**
-        Edit the report.pmd file and add your model's description here.
-        
-"""
+        title = self.title_template.format(modname=modname, data=datetime.date.today())
 
         return title
 
@@ -56,16 +58,7 @@ class Report:
         data extracted from the simulation.
         """
         modname = self.sim.modelName
-        title = f"""
-        % Model {modname} Epidemiological Report
-        % John Doe
-        % {datetime.date.today()}
-
-
-                **Abstract**
-                Edit the report.pmd file and add your model's description here.
-
-        """
+        title = self.title_template.format(modname=modname, data=datetime.date.today())
 
         return title
 
@@ -75,16 +68,7 @@ class Report:
         data extracted from the simulation.
         """
         modname = self.sim.modelName
-        title = f"""
-        % Model {modname} Full Report
-        % John Doe
-        % {datetime.date.today()}
-
-
-                **Abstract**
-                Edit the report.pmd file and add your model's description here.
-
-        """
+        title = self.title_template.format(modname=modname, data=datetime.date.today())
         return title
 
     def graphDesc(self):
@@ -93,6 +77,8 @@ class Report:
         """
         stats = tuple(self.sim.g.doStats())
         nodd = sum([1 for i in self.sim.g.site_list if len(i.neighbors) % 2 != 0])
+        Trav = 'No'
+        Eul = 'No'
         if nodd:  # check if Graph is Eulerian and/or traversable
             Eul = 'No'
             if nodd == 2:
@@ -182,7 +168,7 @@ Cycles(u) $={stats[1]}$
 ## Wiener Distance
 The Wiener distance is the sum of all the shortest distances in the network.
 
-Wiener's D $={stats[2]}$
+Wiener's $D ={stats[2]}$
 
 ## Mean Distance
 The mean distance of a network is the mean of of the set of shortest paths, 
@@ -365,7 +351,7 @@ xlabel('Time')
             """
         return section
 
-    def Assemble(self, type, save=True):
+    def Assemble(self, reporttype, save=True):
         """
         Assemble the type of report desired
         types:
@@ -400,54 +386,54 @@ the greater the load of the network.
  - **Betweeness:** Is the number of times any node figures in the the shortest path
 between any other pair of nodes.
 """
-        from time import time
+
         tail = r""
-        if type == 1:
-            start = time()
-            latexsrc = header + self.genNetTitle() + self.graphDesc()
+        if reporttype == 1:
+            start = time.time()
+            markdownsrc = self.header + self.genNetTitle() + self.graphDesc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
-                latexsrc += sitehead
+                markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    latexsrc += self.siteReport(site)
-            latexsrc += tail
-            timer = time() - start
+                    markdownsrc += self.siteReport(site)
+            markdownsrc += tail
+            timer = time.time() - start
             print('Time to generate Network report: %s seconds.' % timer)
             repname = 'net_report'
-        elif type == 2:
-            start = time()
-            latexsrc = header + self.genEpiTitle() + self.genEpi()
+        elif reporttype == 2:
+            start = time.time()
+            markdownsrc = self.header + self.genEpiTitle() + self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
-                    latexsrc += self.genSiteEpi(site)
-            latexsrc += tail
-            timer = time() - start
+                    markdownsrc += self.genSiteEpi(site)
+            markdownsrc += tail
+            timer = time.time() - start
             print('Time to generate Epidemiological report: %s seconds.' % timer)
             if self.sim.gui:
                 self.sim.gui.textEdit1.insertParagraph('Time to generate epidemiological report: %s seconds.' % timer,
                                                        -1)
             repname = 'epi_report'
-        elif type == 3:
-            start = time()
-            latexsrc = header + self.genFullTitle() + self.graphDesc()
+        elif reporttype == 3:
+            start = time.time()
+            markdownsrc = self.header + self.genFullTitle() + self.graphDesc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
-                latexsrc += sitehead
+                markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    latexsrc += self.siteReport(site)
-            latexsrc += self.genEpi()
+                    markdownsrc += self.siteReport(site)
+            markdownsrc += self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
-                    latexsrc += self.genSiteEpi(site)
-            latexsrc += tail
-            timer = time() - start
+                    markdownsrc += self.genSiteEpi(site)
+            markdownsrc += tail
+            timer = time.time() - start
             print('Time to generate full report: %s seconds.' % timer)
             repname = 'full_report'
         else:
             return
         if save:
-            self.savenBuild(repname, latexsrc)
-        return latexsrc
+            self.savenBuild(repname, markdownsrc)
+        return markdownsrc
 
     def Say(self, string):
         """
