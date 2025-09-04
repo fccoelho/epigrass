@@ -210,7 +210,8 @@ def create_simulation_table(model_path, simulation_run):
         'Susceptible': 'Suscetíveis',
         'Exposed': 'Expostos',
         'Infectious': 'Infecciosos',
-        'Recovered': 'Recuperados'
+        'Recovered': 'Recuperados',
+        'totalcases': 'Casos Totais',
     }
     
     # Apply column mapping where columns exist
