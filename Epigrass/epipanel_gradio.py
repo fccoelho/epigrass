@@ -318,7 +318,7 @@ def zoom_to_location(model_path, location_name):
         showlegend=False,
         annotations=[
             dict(
-                text=f"📍 Casos Totais: {selected_location['totalcases'].iloc[0]}<br>"
+                text=f"📍 Casos Totais: {int(selected_location['totalcases'].iloc[0])}<br>"
                      f"📊 Prevalência: {selected_location['prevalence'].iloc[0]:.4f}",
                 showarrow=False,
                 xref="paper", yref="paper",
@@ -374,7 +374,7 @@ def create_final_map(model_path, map_selector, simulation_run):
                 colorscale='YlOrRd',
                 showscale=False
             ),
-            hovertemplate='<b>%{y}</b><br>Casos: %{x}<br><i>Use o seletor à direita para focar</i><extra></extra>',
+            hovertemplate='<b>%{y}</b><br>Casos Totais: %{x:,.0f}<br><i>Use o seletor à direita para focar</i><extra></extra>',
             name="Top Localidades",
             showlegend=False
         ),
