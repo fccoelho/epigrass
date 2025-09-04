@@ -554,6 +554,13 @@ def create_dashboard(pth:str):
             outputs=[map_selector, simulation_run, localities, meta_info]
         )
         
+        # Auto-refresh on load
+        demo.load(
+            fn=refresh_data,
+            inputs=[model_path],
+            outputs=[map_selector, simulation_run, localities, meta_info]
+        )
+        
         simulation_run.change(
             fn=update_localities,
             inputs=[model_path, simulation_run],
