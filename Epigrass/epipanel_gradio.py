@@ -701,21 +701,7 @@ def create_dashboard(pth:str):
             with gr.Column(scale=3):
                 with gr.Tabs():
                     with gr.Tab("🗺️ Estado Final"):
-                        with gr.Row():
-                            with gr.Column(scale=4):
-                                final_map = gr.Plot(label="Mapa do Estado Final")
-                            with gr.Column(scale=1):
-                                gr.Markdown("### 🎯 Controles do Mapa")
-                                location_selector = gr.Dropdown(
-                                    label="Selecionar Localidade",
-                                    choices=[],
-                                    value=None,
-                                    info="Selecione para focar no mapa"
-                                )
-                                with gr.Row():
-                                    zoom_btn = gr.Button("🔍 Focar", variant="primary", size="sm")
-                                    reset_btn = gr.Button("🔄 Reset", variant="secondary", size="sm")
-                                gr.Markdown("**💡 Dica:** Use os controles do mapa para navegar manualmente")
+                        final_map = gr.Plot(label="Mapa do Estado Final")
                         
                         with gr.Row():
                             with gr.Column():
@@ -783,37 +769,10 @@ def create_dashboard(pth:str):
             outputs=[simulation_table]
         )
         
-        # Update location selector when simulation changes
-        def update_location_choices(mp, sr):
-            if sr:
-                choices = get_localities(mp, sr)
-                return gr.Dropdown(choices=choices, value=None)
-            return gr.Dropdown(choices=[], value=None)
-        
-        simulation_run.change(
-            fn=update_location_choices,
-            inputs=[model_path, simulation_run],
-            outputs=[location_selector]
-        )
-        
-        # Zoom functionality
-        zoom_btn.click(
+        # Auto-zoom when locality is selected from left column
+        localities.change(
             fn=zoom_to_location,
-            inputs=[model_path, location_selector],
-            outputs=[final_map]
-        )
-        
-        # Reset map functionality
-        reset_btn.click(
-            fn=create_final_map,
-            inputs=[model_path, map_selector, simulation_run],
-            outputs=[final_map]
-        )
-        
-        # Auto-zoom when location is selected from dropdown
-        location_selector.change(
-            fn=zoom_to_location,
-            inputs=[model_path, location_selector],
+            inputs=[model_path, localities],
             outputs=[final_map]
         )
         
