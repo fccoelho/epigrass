@@ -235,16 +235,41 @@ def create_final_map(model_path, map_selector, simulation_run):
         row=1, col=2
     )
     
-    # Update geo layout
-    fig.update_geos(
-        projection_type="natural earth",
-        showland=True,
-        landcolor="lightgray",
-        showocean=True,
-        oceancolor="lightblue",
-        showlakes=True,
-        lakecolor="lightblue"
-    )
+    # Calculate bounds for centering the map
+    if len(mapdf) > 0:
+        lat_center = mapdf['lat'].mean()
+        lon_center = mapdf['lon'].mean()
+        lat_range = mapdf['lat'].max() - mapdf['lat'].min()
+        lon_range = mapdf['lon'].max() - mapdf['lon'].min()
+        
+        # Add padding (20% of range)
+        lat_padding = lat_range * 0.2
+        lon_padding = lon_range * 0.2
+        
+        # Update geo layout with calculated bounds
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True,
+            landcolor="lightgray",
+            showocean=True,
+            oceancolor="lightblue",
+            showlakes=True,
+            lakecolor="lightblue",
+            center=dict(lat=lat_center, lon=lon_center),
+            lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
+            lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding]
+        )
+    else:
+        # Fallback for empty data
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True,
+            landcolor="lightgray",
+            showocean=True,
+            oceancolor="lightblue",
+            showlakes=True,
+            lakecolor="lightblue"
+        )
     
     fig.update_layout(
         title="Estado Final da Epidemia",
