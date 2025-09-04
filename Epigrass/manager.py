@@ -915,12 +915,19 @@ def onStraightRun(args):
     """
     Runs the model from the commandline
     """
-    from Epigrass import epipanel
+    if args.gradio:
+        from Epigrass import epipanel_gradio
+    else:
+        from Epigrass import epipanel
+    
     if args.view_only:
         pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
         os.chdir(os.path.abspath(pth))
         print(os.path.abspath(pth))
-        epipanel.show(pth)
+        if args.gradio:
+            epipanel_gradio.show(pth)
+        else:
+            epipanel.show(pth)
     redisclient.flushall()
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
@@ -935,7 +942,11 @@ def onStraightRun(args):
     else:
         repRuns(S)
     if args.dashboard:
-        epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
+        if args.gradio:
+            from Epigrass import epipanel_gradio
+            epipanel_gradio.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
+        else:
+            epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
     if S.Batch:
         S.Say('Simulation Started.')
 
@@ -1033,6 +1044,8 @@ def main():
                         dest="dashboard", help="Open dashboard on browser after th run is done.")
     parser.add_argument("-V", "--view-only", action="store_true", default=False,
                         dest="view_only", help="Only Open dashboard.")
+    parser.add_argument("-G", "--gradio", action="store_true", default=False,
+                        dest="gradio", help="Open Gradio dashboard instead of Panel.")
     parser.add_argument("epg", metavar='EPG', nargs=1,
                         help='Epigrass model definition file (.epg).')
 
