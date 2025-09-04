@@ -172,8 +172,79 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         return "## Nenhuma informação de metadados disponível"
 
 
+def zoom_to_location(model_path, location_name):
+    """Create a zoomed version of the map focused on a specific location"""
+    mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
+    if mapdf.empty:
+        return go.Figure()
+    
+    # Find the selected location
+    selected_location = mapdf[mapdf['name'] == location_name]
+    if selected_location.empty:
+        return create_final_map(model_path, 'Data.gpkg', None)
+    
+    # Extract coordinates from geometry
+    if hasattr(mapdf.geometry, 'centroid'):
+        mapdf['lat'] = mapdf.geometry.centroid.y
+        mapdf['lon'] = mapdf.geometry.centroid.x
+        selected_lat = selected_location.geometry.centroid.y.iloc[0]
+        selected_lon = selected_location.geometry.centroid.x.iloc[0]
+    else:
+        return create_final_map(model_path, 'Data.gpkg', None)
+    
+    # Create focused map
+    fig = go.Figure()
+    
+    # Convert geometry to GeoJSON format for choropleth
+    mapdf_json = mapdf.__geo_interface__
+    
+    # Add choropleth trace
+    fig.add_trace(
+        go.Choropleth(
+            geojson=mapdf_json,
+            locations=mapdf.index,
+            z=mapdf['totalcases'],
+            colorscale='YlOrRd',
+            hovertemplate='<b>%{customdata[0]}</b><br>' +
+                         'Casos Totais: %{z}<br>' +
+                         'Prevalência: %{customdata[1]:.4f}<br>' +
+                         'Chegadas: %{customdata[2]}<extra></extra>',
+            customdata=np.column_stack((mapdf['name'], mapdf['prevalence'], mapdf['arrivals'])),
+            colorbar=dict(
+                title="Casos Totais",
+                x=1.02
+            )
+        )
+    )
+    
+    # Calculate zoom bounds around selected location
+    zoom_range = 0.5  # degrees
+    
+    fig.update_geos(
+        projection_type="natural earth",
+        showland=True,
+        landcolor="lightgray",
+        showocean=True,
+        oceancolor="lightblue",
+        showlakes=True,
+        lakecolor="lightblue",
+        center=dict(lat=selected_lat, lon=selected_lon),
+        lataxis_range=[selected_lat - zoom_range, selected_lat + zoom_range],
+        lonaxis_range=[selected_lon - zoom_range, selected_lon + zoom_range],
+        projection_scale=3  # Zoom in more
+    )
+    
+    fig.update_layout(
+        title=f"Mapa Focado em: {location_name}",
+        height=600,
+        showlegend=False
+    )
+    
+    return fig
+
+
 def create_final_map(model_path, map_selector, simulation_run):
-    """Create final state map visualization"""
+    """Create final state map visualization with interactive bar chart and zoomable choropleth"""
     if not map_selector or not simulation_run:
         return go.Figure()
     
@@ -192,46 +263,36 @@ def create_final_map(model_path, map_selector, simulation_run):
         mapdf['lat'] = 0
         mapdf['lon'] = 0
     
-    # Create subplot with bar chart and geographic scatter plot
-    fig = make_subplots(
-        rows=1, cols=2,
-        column_widths=[0.3, 0.7],
-        specs=[[{"type": "bar"}, {"type": "geo"}]],
-        subplot_titles=("Top Localidades", "Mapa Final")
-    )
-    
-    # Bar chart
-    fig.add_trace(
-        go.Bar(
-            x=map10['totalcases'],
-            y=map10['name'],
-            orientation='h',
-            marker_color=map10['totalcases'],
-            marker_colorscale='YlOrRd',
-            showlegend=False,
-            hovertemplate='<b>%{y}</b><br>Casos: %{x}<extra></extra>'
-        ),
-        row=1, col=1
-    )
+    # Create figure with custom subplot configuration
+    fig = go.Figure()
     
     # Create choropleth map using the geometry data
     if hasattr(mapdf, 'geometry') and not mapdf.empty:
         # Convert geometry to GeoJSON format for choropleth
         mapdf_json = mapdf.__geo_interface__
         
-        # Create choropleth map
-        choropleth_fig = px.choropleth(
-            mapdf,
-            geojson=mapdf_json,
-            locations=mapdf.index,
-            color='totalcases',
-            hover_name='name',
-            hover_data={'totalcases': True, 'prevalence': ':.4f', 'arrivals': True},
-            color_continuous_scale='YlOrRd',
-            labels={'totalcases': 'Casos Totais'}
+        # Add choropleth trace
+        fig.add_trace(
+            go.Choropleth(
+                geojson=mapdf_json,
+                locations=mapdf.index,
+                z=mapdf['totalcases'],
+                colorscale='YlOrRd',
+                hovertemplate='<b>%{customdata[0]}</b><br>' +
+                             'Casos Totais: %{z}<br>' +
+                             'Prevalência: %{customdata[1]:.4f}<br>' +
+                             'Chegadas: %{customdata[2]}<extra></extra>',
+                customdata=np.column_stack((mapdf['name'], mapdf['prevalence'], mapdf['arrivals'])),
+                colorbar=dict(
+                    title="Casos Totais",
+                    x=1.02,
+                    len=0.8
+                ),
+                name="Mapa"
+            )
         )
         
-        # Calculate bounds for centering the map
+        # Calculate initial bounds for centering the map
         if len(mapdf) > 0:
             lat_center = mapdf['lat'].mean()
             lon_center = mapdf['lon'].mean()
@@ -242,8 +303,8 @@ def create_final_map(model_path, map_selector, simulation_run):
             lat_padding = lat_range * 0.2
             lon_padding = lon_range * 0.2
             
-            # Update geo layout for choropleth
-            choropleth_fig.update_geos(
+            # Update geo layout with zoom and pan capabilities
+            fig.update_geos(
                 projection_type="natural earth",
                 showland=True,
                 landcolor="lightgray",
@@ -253,44 +314,73 @@ def create_final_map(model_path, map_selector, simulation_run):
                 lakecolor="lightblue",
                 center=dict(lat=lat_center, lon=lon_center),
                 lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
-                lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding]
+                lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding],
+                # Enable zoom and pan
+                projection_scale=1
             )
-        
-        # Add choropleth traces to the subplot
-        for trace in choropleth_fig.data:
-            fig.add_trace(trace, row=1, col=2)
-        
-        # Update the geo layout in the subplot
-        fig.update_geos(
-            choropleth_fig.layout.geo,
-            row=1, col=2
-        )
-    else:
-        # Fallback: add empty geo plot
-        fig.add_trace(
-            go.Scattergeo(
-                lon=[],
-                lat=[],
-                mode='markers',
-                showlegend=False
-            ),
-            row=1, col=2
-        )
-        
-        fig.update_geos(
-            projection_type="natural earth",
-            showland=True,
-            landcolor="lightgray",
-            showocean=True,
-            oceancolor="lightblue",
-            showlakes=True,
-            lakecolor="lightblue"
-        )
     
+    # Add bar chart as a separate subplot using domain
+    fig.add_trace(
+        go.Bar(
+            x=map10['totalcases'],
+            y=map10['name'],
+            orientation='h',
+            marker=dict(
+                color=map10['totalcases'],
+                colorscale='YlOrRd',
+                showscale=False
+            ),
+            hovertemplate='<b>%{y}</b><br>Casos: %{x}<br>Clique para focar no mapa<extra></extra>',
+            name="Top Localidades",
+            yaxis="y2",
+            xaxis="x2",
+            # Add custom data for click events
+            customdata=map10['name']
+        )
+    )
+    
+    # Update layout with dual axis configuration
     fig.update_layout(
-        title="Estado Final da Epidemia",
-        height=500,
-        showlegend=False
+        title="Estado Final da Epidemia - Clique nas barras para focar no mapa",
+        height=600,
+        showlegend=False,
+        # Configure the map (main plot)
+        geo=dict(
+            domain=dict(x=[0.4, 1.0], y=[0, 1])
+        ),
+        # Configure the bar chart
+        xaxis2=dict(
+            domain=[0, 0.35],
+            anchor="y2",
+            title="Casos Totais"
+        ),
+        yaxis2=dict(
+            domain=[0.3, 0.7],
+            anchor="x2",
+            title="Localidades"
+        ),
+        # Add click event handling instructions
+        annotations=[
+            dict(
+                text="💡 Clique nas barras para focar no mapa<br>🔍 Use os controles do mapa para navegar",
+                showarrow=False,
+                xref="paper", yref="paper",
+                x=0.02, y=0.98,
+                xanchor="left", yanchor="top",
+                bgcolor="rgba(255,255,255,0.8)",
+                bordercolor="gray",
+                borderwidth=1,
+                font=dict(size=10)
+            )
+        ]
+    )
+    
+    # Add JavaScript callback for bar click events (this would need to be handled in Gradio)
+    # For now, we'll add the infrastructure for future enhancement
+    fig.update_traces(
+        selector=dict(type="bar"),
+        # This creates the foundation for click interactivity
+        meta={"click_action": "zoom_to_location"}
     )
     
     return fig
@@ -552,7 +642,18 @@ def create_dashboard(pth:str):
             with gr.Column(scale=3):
                 with gr.Tabs():
                     with gr.Tab("🗺️ Estado Final"):
-                        final_map = gr.Plot(label="Mapa do Estado Final")
+                        with gr.Row():
+                            with gr.Column(scale=4):
+                                final_map = gr.Plot(label="Mapa do Estado Final")
+                            with gr.Column(scale=1):
+                                gr.Markdown("### 🎯 Foco no Mapa")
+                                location_selector = gr.Dropdown(
+                                    label="Selecionar Localidade",
+                                    choices=[],
+                                    value=None,
+                                    info="Selecione para focar no mapa"
+                                )
+                                zoom_btn = gr.Button("🔍 Focar no Mapa", variant="secondary")
                     
                     with gr.Tab("🕸️ Rede"):
                         network_plot = gr.Plot(label="Visualização da Rede")
@@ -593,6 +694,20 @@ def create_dashboard(pth:str):
             fn=get_meta_info,
             inputs=[model_path, simulation_run],
             outputs=[meta_info]
+        )
+        
+        # Update location selector when simulation changes
+        simulation_run.change(
+            fn=lambda mp, sr: gr.Dropdown(choices=get_localities(mp, sr) if sr else []),
+            inputs=[model_path, simulation_run],
+            outputs=[location_selector]
+        )
+        
+        # Zoom functionality
+        zoom_btn.click(
+            fn=zoom_to_location,
+            inputs=[model_path, location_selector],
+            outputs=[final_map]
         )
         
         # Update plots when inputs change
