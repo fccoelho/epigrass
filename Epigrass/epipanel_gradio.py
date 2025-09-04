@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import networkx as NX
 import geopandas as gpd
 import os
@@ -133,9 +134,9 @@ def refresh_data(model_path):
     sim_value = sims[-1] if sims else None
     
     return (
-        gr.Dropdown.update(choices=map_choices, value=map_value),
-        gr.Dropdown.update(choices=sim_choices, value=sim_value),
-        gr.Dropdown.update(choices=[], value=None),
+        gr.Dropdown(choices=map_choices, value=map_value),
+        gr.Dropdown(choices=sim_choices, value=sim_value),
+        gr.Dropdown(choices=[], value=None),
         ""
     )
 
@@ -143,10 +144,10 @@ def refresh_data(model_path):
 def update_localities(model_path, simulation_run):
     """Update localities dropdown based on selected simulation"""
     if not simulation_run:
-        return gr.Dropdown.update(choices=[], value=None)
+        return gr.Dropdown(choices=[], value=None)
     
     locs = get_localities(model_path, simulation_run)
-    return gr.Dropdown.update(choices=locs, value=locs[0] if locs else None)
+    return gr.Dropdown(choices=locs, value=locs[0] if locs else None)
 
 
 def get_meta_info(model_path, simulation_run):
@@ -198,7 +199,7 @@ def create_final_map(model_path, map_selector, simulation_run):
             y=map10['name'],
             orientation='h',
             marker_color=map10['totalcases'],
-            colorscale='YlOrRd',
+            # colorscale='YlOrRd',
             showlegend=False,
             hovertemplate='<b>%{y}</b><br>Casos: %{x}<extra></extra>'
         ),
@@ -212,7 +213,7 @@ def create_final_map(model_path, map_selector, simulation_run):
             y=mapdf.geometry.centroid.y if hasattr(mapdf.geometry, 'centroid') else [0],
             mode='markers',
             marker=dict(
-                size=mapdf['totalcases'] / mapdf['totalcases'].max() * 20 + 5,
+                size=[max(0,c) for c in mapdf['totalcases'] / mapdf['totalcases'].max() * 20 + 5], #make sure no negative numbers break the plot
                 color=mapdf['totalcases'],
                 colorscale='YlOrRd',
                 showscale=True,
@@ -301,7 +302,6 @@ def create_network_viz(model_path, localities):
     fig = go.Figure(data=[edge_trace, node_trace],
                    layout=go.Layout(
                        title=f'Rede ao redor de {localities}',
-                       titlefont_size=16,
                        showlegend=False,
                        hovermode='closest',
                        margin=dict(b=20,l=5,r=5,t=40),
@@ -349,8 +349,8 @@ def create_temporal_map(model_path, simulation_run, time_slider):
             y=mapa_t.geometry.centroid.y,
             mode='markers',
             marker=dict(
-                size=mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 0)) / 
-                     mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 1)).max() * 30 + 5,
+                size=np.nan_to_num(mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 0)) /
+                     mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 1)).max() * 30 + 5),
                 color=mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 0)),
                 colorscale='Reds',
                 showscale=True,
@@ -424,31 +424,35 @@ def create_time_series(model_path, simulation_run, localities):
 def update_time_bounds(model_path, simulation_run):
     """Update time slider bounds based on simulation data"""
     if not simulation_run:
-        return gr.Slider.update()
+        return gr.Slider()
     
     df = read_simulation(model_path, simulation_run)
     if df.empty:
-        return gr.Slider.update()
+        return gr.Slider()
     
     min_time = int(df.time.min())
     max_time = int(df.time.max())
     
-    return gr.Slider.update(minimum=min_time, maximum=max_time, value=min_time)
+    return gr.Slider(minimum=min_time, maximum=max_time, value=min_time)
 
 
-def create_dashboard():
-    """Create the main Gradio dashboard"""
+def create_dashboard(pth:str):
+    """
+     Create the main Gradio dashboard
+    :param pth: Path to the model data
+    :return: Gradio interface
+    """
     
     with gr.Blocks(title="Epigrass Dashboard", theme=gr.themes.Soft()) as demo:
-        gr.Markdown("# 🦠 Epigrass Dashboard")
-        gr.Markdown("Dashboard interativo para visualização de dados epidemiológicos")
+        gr.HTML("""<img src="assets/egicon.png> <h1 align="center">Epigrass Dashboard</h1>""")
+        gr.Markdown("Dashboard interativo para visualização de Simulações")
         
         with gr.Row():
             with gr.Column(scale=1):
                 gr.Markdown("## 🎛️ Controles")
                 
                 model_path = gr.Textbox(
-                    value="../demos/outdata-rio",
+                    value=pth,
                     label="Caminho do Modelo",
                     placeholder="Digite o caminho para os dados do modelo"
                 )
@@ -556,8 +560,11 @@ def create_dashboard():
 
 def show(pth):
     """Launch the dashboard with a specific path"""
-    demo = create_dashboard()
-    demo.launch(server_port=5006, share=False)
+    demo = create_dashboard(pth)
+    demo.launch(server_port=5006,
+                allowed_paths=['assets/egicon.png', pth],
+                share=False,
+                )
 
 
 if __name__ == "__main__":
