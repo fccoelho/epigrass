@@ -172,6 +172,60 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         return "## Nenhuma informação de metadados disponível"
 
 
+def create_simulation_table(model_path, simulation_run):
+    """Create a paginated table with simulation data"""
+    if not simulation_run:
+        return pd.DataFrame()
+    
+    df = read_simulation(model_path, simulation_run)
+    if df.empty:
+        return pd.DataFrame()
+    
+    # Get final time step data for summary
+    max_time = df['time'].max()
+    final_data = df[df['time'] == max_time].copy()
+    
+    # Select relevant columns for the table
+    display_columns = ['name', 'geocode']
+    
+    # Add coordinate columns if they exist
+    if 'lat' in df.columns:
+        display_columns.append('lat')
+    if 'longit' in df.columns:
+        display_columns.append('longit')
+    
+    # Add epidemiological variables
+    epi_vars = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
+    display_columns.extend(epi_vars)
+    
+    # Filter and format the data
+    table_data = final_data[display_columns].copy()
+    
+    # Round numeric columns to 2 decimal places
+    numeric_columns = table_data.select_dtypes(include=[np.number]).columns
+    table_data[numeric_columns] = table_data[numeric_columns].round(2)
+    
+    # Rename columns for better display
+    column_mapping = {
+        'name': 'Localidade',
+        'geocode': 'Código',
+        'lat': 'Latitude',
+        'longit': 'Longitude',
+        'incidence': 'Incidência',
+        'arrivals': 'Chegadas',
+        'Susceptible': 'Suscetíveis',
+        'Exposed': 'Expostos',
+        'Infectious': 'Infecciosos',
+        'Recovered': 'Recuperados'
+    }
+    
+    # Apply column mapping where columns exist
+    existing_mapping = {k: v for k, v in column_mapping.items() if k in table_data.columns}
+    table_data = table_data.rename(columns=existing_mapping)
+    
+    return table_data
+
+
 def zoom_to_location(model_path, location_name):
     """Create a zoomed version of the map focused on a specific location"""
     if not location_name:
@@ -667,6 +721,17 @@ def create_dashboard(pth:str):
                                     zoom_btn = gr.Button("🔍 Focar", variant="primary", size="sm")
                                     reset_btn = gr.Button("🔄 Reset", variant="secondary", size="sm")
                                 gr.Markdown("**💡 Dica:** Use os controles do mapa para navegar manualmente")
+                        
+                        with gr.Row():
+                            with gr.Column():
+                                gr.Markdown("### 📊 Dados da Simulação (Estado Final)")
+                                simulation_table = gr.Dataframe(
+                                    label="Tabela de Dados",
+                                    interactive=False,
+                                    wrap=True,
+                                    max_rows=10,
+                                    overflow_row_behaviour="paginate"
+                                )
                     
                     with gr.Tab("🕸️ Rede"):
                         network_plot = gr.Plot(label="Visualização da Rede")
@@ -691,6 +756,13 @@ def create_dashboard(pth:str):
             outputs=[map_selector, simulation_run, localities, meta_info]
         )
         
+        # Update table on load
+        demo.load(
+            fn=create_simulation_table,
+            inputs=[model_path, simulation_run],
+            outputs=[simulation_table]
+        )
+        
         simulation_run.change(
             fn=update_localities,
             inputs=[model_path, simulation_run],
@@ -707,6 +779,13 @@ def create_dashboard(pth:str):
             fn=get_meta_info,
             inputs=[model_path, simulation_run],
             outputs=[meta_info]
+        )
+        
+        # Update simulation table when simulation changes
+        simulation_run.change(
+            fn=create_simulation_table,
+            inputs=[model_path, simulation_run],
+            outputs=[simulation_table]
         )
         
         # Update location selector when simulation changes
@@ -769,6 +848,14 @@ def create_dashboard(pth:str):
                 fn=create_time_series,
                 inputs=[model_path, simulation_run, localities],
                 outputs=[time_series]
+            )
+        
+        # Update table when relevant inputs change
+        for inp in [model_path, simulation_run]:
+            inp.change(
+                fn=create_simulation_table,
+                inputs=[model_path, simulation_run],
+                outputs=[simulation_table]
             )
     
     return demo
