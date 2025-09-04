@@ -10,3 +10,4 @@ outdata*/*
 *.kml
 .idea/*
 
+.aider*
