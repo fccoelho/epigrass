@@ -690,7 +690,7 @@ def create_dashboard(pth:str):
     """
     
     with gr.Blocks(title="Epigrass Dashboard", theme=gr.themes.Soft()) as demo:
-        gr.HTML("""<img src="assets/egicon.png> <h1 align="center">Epigrass Dashboard</h1>""")
+        gr.HTML("""<img src="/assets/egicon.png> <h1 align="center">Epigrass Dashboard</h1>""")
         gr.Markdown("Dashboard interativo para visualização de Simulações")
         
         with gr.Row():
@@ -855,7 +855,8 @@ def show(pth):
     """Launch the dashboard with a specific path"""
     demo = create_dashboard(pth)
     demo.launch(server_port=5006,
-                allowed_paths=['assets/egicon.png', pth],
+                root_path='/Epigrass',
+                allowed_paths=['/assets', pth],
                 share=False,
                 )
 
