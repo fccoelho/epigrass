@@ -188,14 +188,10 @@ def create_simulation_table(model_path, simulation_run):
     # Select relevant columns for the table
     display_columns = ['name', 'geocode']
     
-    # Add coordinate columns if they exist
-    if 'lat' in df.columns:
-        display_columns.append('lat')
-    if 'longit' in df.columns:
-        display_columns.append('longit')
+
     
     # Add epidemiological variables
-    epi_vars = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
+    epi_vars = [c for c in df.columns if c not in ['name', 'time','geocode', 'lat', 'longit']]
     display_columns.extend(epi_vars)
     
     # Filter and format the data
@@ -209,8 +205,6 @@ def create_simulation_table(model_path, simulation_run):
     column_mapping = {
         'name': 'Localidade',
         'geocode': 'Código',
-        'lat': 'Latitude',
-        'longit': 'Longitude',
         'incidence': 'Incidência',
         'arrivals': 'Chegadas',
         'Susceptible': 'Suscetíveis',
@@ -729,8 +723,8 @@ def create_dashboard(pth:str):
                                     label="Tabela de Dados",
                                     interactive=False,
                                     wrap=True,
-                                    max_rows=10,
-                                    overflow_row_behaviour="paginate"
+                                    row_count=10,
+
                                 )
                     
                     with gr.Tab("🕸️ Rede"):
