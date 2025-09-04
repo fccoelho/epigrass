@@ -446,7 +446,7 @@ def create_final_map(model_path, map_selector, simulation_run):
 
 
 def create_network_viz(model_path, localities):
-    """Create network visualization around selected locality"""
+    """Create network visualization around selected locality using geographic coordinates"""
     if not localities:
         return go.Figure()
     
@@ -463,66 +463,102 @@ def create_network_viz(model_path, localities):
     
     H = get_subgraph(G, nodeloc[0][0])
     
-    # Create layout
-    pos = NX.spring_layout(H, seed=42)
+    # Load map data to get geographic coordinates
+    mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
+    if mapdf.empty:
+        return go.Figure().add_annotation(text="Arquivo de mapa não encontrado", 
+                                        xref="paper", yref="paper", x=0.5, y=0.5)
     
-    # Prepare edge traces
+    # Extract coordinates from geometry
+    if hasattr(mapdf.geometry, 'centroid'):
+        mapdf['lat'] = mapdf.geometry.centroid.y
+        mapdf['lon'] = mapdf.geometry.centroid.x
+    else:
+        return go.Figure().add_annotation(text="Coordenadas não disponíveis no mapa", 
+                                        xref="paper", yref="paper", x=0.5, y=0.5)
+    
+    # Create position dictionary using geographic coordinates
+    pos = {}
+    for node in H.nodes(data=True):
+        node_name = node[1].get('name', str(node[0]))
+        # Find coordinates for this node in the map data
+        node_coords = mapdf[mapdf['name'] == node_name]
+        if not node_coords.empty:
+            pos[node[0]] = (node_coords['lon'].iloc[0], node_coords['lat'].iloc[0])
+        else:
+            # Fallback: use a default position if coordinates not found
+            pos[node[0]] = (0, 0)
+    
+    # Prepare edge traces using geographic coordinates
     edge_x = []
     edge_y = []
     for edge in H.edges():
-        x0, y0 = pos[edge[0]]
-        x1, y1 = pos[edge[1]]
-        edge_x.extend([x0, x1, None])
-        edge_y.extend([y0, y1, None])
+        if edge[0] in pos and edge[1] in pos:
+            x0, y0 = pos[edge[0]]
+            x1, y1 = pos[edge[1]]
+            edge_x.extend([x0, x1, None])
+            edge_y.extend([y0, y1, None])
     
     edge_trace = go.Scatter(
         x=edge_x, y=edge_y,
         line=dict(width=2, color='gray'),
         hoverinfo='none',
-        mode='lines'
+        mode='lines',
+        name='Conexões'
     )
     
-    # Prepare node traces
+    # Prepare node traces using geographic coordinates
     node_x = []
     node_y = []
     node_text = []
     node_colors = []
+    node_info = []
     
     for node in H.nodes(data=True):
-        x, y = pos[node[0]]
-        node_x.append(x)
-        node_y.append(y)
-        node_text.append(node[1].get('name', str(node[0])))
-        # Highlight selected node
-        node_colors.append('red' if node[0] == nodeloc[0][0] else 'lightblue')
+        if node[0] in pos:
+            x, y = pos[node[0]]
+            node_x.append(x)
+            node_y.append(y)
+            node_name = node[1].get('name', str(node[0]))
+            node_text.append(node_name)
+            node_info.append(f"<b>{node_name}</b><br>Lon: {x:.4f}<br>Lat: {y:.4f}")
+            # Highlight selected node
+            node_colors.append('red' if node[0] == nodeloc[0][0] else 'lightblue')
     
     node_trace = go.Scatter(
         x=node_x, y=node_y,
         mode='markers+text',
         text=node_text,
         textposition="middle center",
-        hoverinfo='text',
+        hovertemplate='%{customdata}<extra></extra>',
+        customdata=node_info,
         marker=dict(
             size=20,
             color=node_colors,
             line=dict(width=2, color='black')
-        )
+        ),
+        name='Localidades'
     )
     
-    fig = go.Figure(data=[edge_trace, node_trace],
-                   layout=go.Layout(
-                       title=f'Rede ao redor de {localities}',
-                       showlegend=False,
-                       hovermode='closest',
-                       margin=dict(b=20,l=5,r=5,t=40),
-                       annotations=[ dict(
-                           text="",
-                           showarrow=False,
-                           xref="paper", yref="paper",
-                           x=0.005, y=-0.002 ) ],
-                       xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                       yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
-                   )
+    fig = go.Figure(data=[edge_trace, node_trace])
+    
+    fig.update_layout(
+        title=f'🕸️ Rede Geográfica ao redor de {localities}',
+        showlegend=False,
+        hovermode='closest',
+        margin=dict(b=20,l=5,r=5,t=40),
+        xaxis=dict(
+            title="Longitude",
+            showgrid=True,
+            zeroline=False
+        ),
+        yaxis=dict(
+            title="Latitude", 
+            showgrid=True,
+            zeroline=False
+        ),
+        plot_bgcolor='lightgray'
+    )
     
     return fig
 
