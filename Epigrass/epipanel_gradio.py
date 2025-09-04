@@ -184,7 +184,15 @@ def create_final_map(model_path, map_selector, simulation_run):
     # Get top 15 locations by total cases
     map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
     
-    # Create subplot with bar chart and map
+    # Extract coordinates from geometry
+    if hasattr(mapdf.geometry, 'centroid'):
+        mapdf['lat'] = mapdf.geometry.centroid.y
+        mapdf['lon'] = mapdf.geometry.centroid.x
+    else:
+        mapdf['lat'] = 0
+        mapdf['lon'] = 0
+    
+    # Create subplot with bar chart and geographic scatter plot
     fig = make_subplots(
         rows=1, cols=2,
         column_widths=[0.3, 0.7],
@@ -199,31 +207,43 @@ def create_final_map(model_path, map_selector, simulation_run):
             y=map10['name'],
             orientation='h',
             marker_color=map10['totalcases'],
-            # colorscale='YlOrRd',
+            marker_colorscale='YlOrRd',
             showlegend=False,
             hovertemplate='<b>%{y}</b><br>Casos: %{x}<extra></extra>'
         ),
         row=1, col=1
     )
     
-    # Map (simplified representation)
+    # Geographic scatter plot
     fig.add_trace(
-        go.Scatter(
-            x=mapdf.geometry.centroid.x if hasattr(mapdf.geometry, 'centroid') else [0],
-            y=mapdf.geometry.centroid.y if hasattr(mapdf.geometry, 'centroid') else [0],
+        go.Scattergeo(
+            lon=mapdf['lon'],
+            lat=mapdf['lat'],
             mode='markers',
             marker=dict(
-                size=[max(0,c) for c in mapdf['totalcases'] / mapdf['totalcases'].max() * 20 + 5], #make sure no negative numbers break the plot
+                size=[max(5, c / mapdf['totalcases'].max() * 30 + 5) for c in mapdf['totalcases']],
                 color=mapdf['totalcases'],
                 colorscale='YlOrRd',
                 showscale=True,
-                colorbar=dict(title="Casos Totais")
+                colorbar=dict(title="Casos Totais", x=1.02),
+                line=dict(width=1, color='white')
             ),
             text=mapdf['name'],
-            hovertemplate='<b>%{text}</b><br>Casos: %{marker.color}<extra></extra>',
+            hovertemplate='<b>%{text}</b><br>Casos: %{marker.color}<br>Lat: %{lat}<br>Lon: %{lon}<extra></extra>',
             showlegend=False
         ),
         row=1, col=2
+    )
+    
+    # Update geo layout
+    fig.update_geos(
+        projection_type="natural earth",
+        showland=True,
+        landcolor="lightgray",
+        showocean=True,
+        oceancolor="lightblue",
+        showlakes=True,
+        lakecolor="lightblue"
     )
     
     fig.update_layout(
