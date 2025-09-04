@@ -240,7 +240,7 @@ def zoom_to_location(model_path, location_name):
         return go.Figure().add_annotation(
             text=f"Localidade '{location_name}' não encontrada",
             xref="paper", yref="paper", x=0.5, y=0.5,
-            showarrow=False, font=dict(size=16)
+            showarrow=True, font=dict(size=16)
         )
     
     # Extract coordinates from geometry
