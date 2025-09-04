@@ -174,6 +174,13 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
 
 def zoom_to_location(model_path, location_name):
     """Create a zoomed version of the map focused on a specific location"""
+    if not location_name:
+        return go.Figure().add_annotation(
+            text="Selecione uma localidade para focar no mapa",
+            xref="paper", yref="paper", x=0.5, y=0.5,
+            showarrow=False, font=dict(size=16)
+        )
+    
     mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
     if mapdf.empty:
         return go.Figure()
@@ -181,7 +188,11 @@ def zoom_to_location(model_path, location_name):
     # Find the selected location
     selected_location = mapdf[mapdf['name'] == location_name]
     if selected_location.empty:
-        return create_final_map(model_path, 'Data.gpkg', None)
+        return go.Figure().add_annotation(
+            text=f"Localidade '{location_name}' não encontrada",
+            xref="paper", yref="paper", x=0.5, y=0.5,
+            showarrow=False, font=dict(size=16)
+        )
     
     # Extract coordinates from geometry
     if hasattr(mapdf.geometry, 'centroid'):
@@ -190,9 +201,9 @@ def zoom_to_location(model_path, location_name):
         selected_lat = selected_location.geometry.centroid.y.iloc[0]
         selected_lon = selected_location.geometry.centroid.x.iloc[0]
     else:
-        return create_final_map(model_path, 'Data.gpkg', None)
+        return go.Figure()
     
-    # Create focused map
+    # Create focused map with both choropleth and highlighted location
     fig = go.Figure()
     
     # Convert geometry to GeoJSON format for choropleth
@@ -213,12 +224,31 @@ def zoom_to_location(model_path, location_name):
             colorbar=dict(
                 title="Casos Totais",
                 x=1.02
-            )
+            ),
+            showlegend=False
+        )
+    )
+    
+    # Add a marker to highlight the selected location
+    fig.add_trace(
+        go.Scattergeo(
+            lon=[selected_lon],
+            lat=[selected_lat],
+            mode='markers',
+            marker=dict(
+                size=20,
+                color='red',
+                symbol='star',
+                line=dict(width=2, color='white')
+            ),
+            text=[location_name],
+            hovertemplate='<b>🎯 %{text}</b><br>Localidade Selecionada<extra></extra>',
+            showlegend=False
         )
     )
     
     # Calculate zoom bounds around selected location
-    zoom_range = 0.5  # degrees
+    zoom_range = 1.0  # degrees - increased for better visibility
     
     fig.update_geos(
         projection_type="natural earth",
@@ -231,13 +261,27 @@ def zoom_to_location(model_path, location_name):
         center=dict(lat=selected_lat, lon=selected_lon),
         lataxis_range=[selected_lat - zoom_range, selected_lat + zoom_range],
         lonaxis_range=[selected_lon - zoom_range, selected_lon + zoom_range],
-        projection_scale=3  # Zoom in more
+        projection_scale=2  # Moderate zoom level
     )
     
     fig.update_layout(
-        title=f"Mapa Focado em: {location_name}",
+        title=f"🎯 Mapa Focado em: {location_name}",
         height=600,
-        showlegend=False
+        showlegend=False,
+        annotations=[
+            dict(
+                text=f"📍 Casos Totais: {selected_location['totalcases'].iloc[0]}<br>"
+                     f"📊 Prevalência: {selected_location['prevalence'].iloc[0]:.4f}",
+                showarrow=False,
+                xref="paper", yref="paper",
+                x=0.02, y=0.02,
+                xanchor="left", yanchor="bottom",
+                bgcolor="rgba(255,255,255,0.9)",
+                bordercolor="red",
+                borderwidth=2,
+                font=dict(size=12)
+            )
+        ]
     )
     
     return fig
@@ -263,8 +307,31 @@ def create_final_map(model_path, map_selector, simulation_run):
         mapdf['lat'] = 0
         mapdf['lon'] = 0
     
-    # Create figure with custom subplot configuration
-    fig = go.Figure()
+    # Create subplot with bar chart and choropleth map
+    fig = make_subplots(
+        rows=1, cols=2,
+        column_widths=[0.3, 0.7],
+        specs=[[{"type": "bar"}, {"type": "geo"}]],
+        subplot_titles=("🏆 Top 15 Localidades", "🗺️ Mapa Coroplético")
+    )
+    
+    # Add bar chart
+    fig.add_trace(
+        go.Bar(
+            x=map10['totalcases'],
+            y=map10['name'],
+            orientation='h',
+            marker=dict(
+                color=map10['totalcases'],
+                colorscale='YlOrRd',
+                showscale=False
+            ),
+            hovertemplate='<b>%{y}</b><br>Casos: %{x}<br><i>Use o seletor à direita para focar</i><extra></extra>',
+            name="Top Localidades",
+            showlegend=False
+        ),
+        row=1, col=1
+    )
     
     # Create choropleth map using the geometry data
     if hasattr(mapdf, 'geometry') and not mapdf.empty:
@@ -288,8 +355,9 @@ def create_final_map(model_path, map_selector, simulation_run):
                     x=1.02,
                     len=0.8
                 ),
-                name="Mapa"
-            )
+                showlegend=False
+            ),
+            row=1, col=2
         )
         
         # Calculate initial bounds for centering the map
@@ -315,72 +383,14 @@ def create_final_map(model_path, map_selector, simulation_run):
                 center=dict(lat=lat_center, lon=lon_center),
                 lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
                 lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding],
-                # Enable zoom and pan
                 projection_scale=1
             )
     
-    # Add bar chart as a separate subplot using domain
-    fig.add_trace(
-        go.Bar(
-            x=map10['totalcases'],
-            y=map10['name'],
-            orientation='h',
-            marker=dict(
-                color=map10['totalcases'],
-                colorscale='YlOrRd',
-                showscale=False
-            ),
-            hovertemplate='<b>%{y}</b><br>Casos: %{x}<br>Clique para focar no mapa<extra></extra>',
-            name="Top Localidades",
-            yaxis="y2",
-            xaxis="x2",
-            # Add custom data for click events
-            customdata=map10['name']
-        )
-    )
-    
-    # Update layout with dual axis configuration
+    # Update layout
     fig.update_layout(
-        title="Estado Final da Epidemia - Clique nas barras para focar no mapa",
+        title="Estado Final da Epidemia",
         height=600,
-        showlegend=False,
-        # Configure the map (main plot)
-        geo=dict(
-            domain=dict(x=[0.4, 1.0], y=[0, 1])
-        ),
-        # Configure the bar chart
-        xaxis2=dict(
-            domain=[0, 0.35],
-            anchor="y2",
-            title="Casos Totais"
-        ),
-        yaxis2=dict(
-            domain=[0.3, 0.7],
-            anchor="x2",
-            title="Localidades"
-        ),
-        # Add click event handling instructions
-        annotations=[
-            dict(
-                text="💡 Clique nas barras para focar no mapa<br>🔍 Use os controles do mapa para navegar",
-                showarrow=False,
-                xref="paper", yref="paper",
-                x=0.02, y=0.98,
-                xanchor="left", yanchor="top",
-                bgcolor="rgba(255,255,255,0.8)",
-                bordercolor="gray",
-                borderwidth=1,
-                font=dict(size=10)
-            )
-        ]
-    )
-    
-    # Add JavaScript callback for bar click events (this would need to be handled in Gradio)
-    # For now, we'll add the infrastructure for future enhancement
-    fig.update_traces(
-        selector=dict(type="bar"),
-        # This creates the foundation for click interactivity
-        meta={"click_action": "zoom_to_location"}
+        showlegend=False
     )
     
     return fig
@@ -646,14 +656,17 @@ def create_dashboard(pth:str):
                             with gr.Column(scale=4):
                                 final_map = gr.Plot(label="Mapa do Estado Final")
                             with gr.Column(scale=1):
-                                gr.Markdown("### 🎯 Foco no Mapa")
+                                gr.Markdown("### 🎯 Controles do Mapa")
                                 location_selector = gr.Dropdown(
                                     label="Selecionar Localidade",
                                     choices=[],
                                     value=None,
                                     info="Selecione para focar no mapa"
                                 )
-                                zoom_btn = gr.Button("🔍 Focar no Mapa", variant="secondary")
+                                with gr.Row():
+                                    zoom_btn = gr.Button("🔍 Focar", variant="primary", size="sm")
+                                    reset_btn = gr.Button("🔄 Reset", variant="secondary", size="sm")
+                                gr.Markdown("**💡 Dica:** Use os controles do mapa para navegar manualmente")
                     
                     with gr.Tab("🕸️ Rede"):
                         network_plot = gr.Plot(label="Visualização da Rede")
@@ -697,14 +710,34 @@ def create_dashboard(pth:str):
         )
         
         # Update location selector when simulation changes
+        def update_location_choices(mp, sr):
+            if sr:
+                choices = get_localities(mp, sr)
+                return gr.Dropdown(choices=choices, value=None)
+            return gr.Dropdown(choices=[], value=None)
+        
         simulation_run.change(
-            fn=lambda mp, sr: gr.Dropdown(choices=get_localities(mp, sr) if sr else []),
+            fn=update_location_choices,
             inputs=[model_path, simulation_run],
             outputs=[location_selector]
         )
         
         # Zoom functionality
         zoom_btn.click(
+            fn=zoom_to_location,
+            inputs=[model_path, location_selector],
+            outputs=[final_map]
+        )
+        
+        # Reset map functionality
+        reset_btn.click(
+            fn=create_final_map,
+            inputs=[model_path, map_selector, simulation_run],
+            outputs=[final_map]
+        )
+        
+        # Auto-zoom when location is selected from dropdown
+        location_selector.change(
             fn=zoom_to_location,
             inputs=[model_path, location_selector],
             outputs=[final_map]
