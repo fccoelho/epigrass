@@ -214,53 +214,69 @@ def create_final_map(model_path, map_selector, simulation_run):
         row=1, col=1
     )
     
-    # Geographic scatter plot
-    fig.add_trace(
-        go.Scattergeo(
-            lon=mapdf['lon'],
-            lat=mapdf['lat'],
-            mode='markers',
-            marker=dict(
-                size=[max(5, c / mapdf['totalcases'].max() * 30 + 5) for c in mapdf['totalcases']],
-                color=mapdf['totalcases'],
-                colorscale='YlOrRd',
-                showscale=True,
-                colorbar=dict(title="Casos Totais", x=1.02),
-                line=dict(width=1, color='white')
-            ),
-            text=mapdf['name'],
-            hovertemplate='<b>%{text}</b><br>Casos: %{marker.color}<br>Lat: %{lat}<br>Lon: %{lon}<extra></extra>',
-            showlegend=False
-        ),
-        row=1, col=2
-    )
-    
-    # Calculate bounds for centering the map
-    if len(mapdf) > 0:
-        lat_center = mapdf['lat'].mean()
-        lon_center = mapdf['lon'].mean()
-        lat_range = mapdf['lat'].max() - mapdf['lat'].min()
-        lon_range = mapdf['lon'].max() - mapdf['lon'].min()
+    # Create choropleth map using the geometry data
+    if hasattr(mapdf, 'geometry') and not mapdf.empty:
+        # Convert geometry to GeoJSON format for choropleth
+        mapdf_json = mapdf.__geo_interface__
         
-        # Add padding (20% of range)
-        lat_padding = lat_range * 0.2
-        lon_padding = lon_range * 0.2
+        # Create choropleth map
+        choropleth_fig = px.choropleth(
+            mapdf,
+            geojson=mapdf_json,
+            locations=mapdf.index,
+            color='totalcases',
+            hover_name='name',
+            hover_data={'totalcases': True, 'prevalence': ':.4f', 'arrivals': True},
+            color_continuous_scale='YlOrRd',
+            labels={'totalcases': 'Casos Totais'}
+        )
         
-        # Update geo layout with calculated bounds
+        # Calculate bounds for centering the map
+        if len(mapdf) > 0:
+            lat_center = mapdf['lat'].mean()
+            lon_center = mapdf['lon'].mean()
+            lat_range = mapdf['lat'].max() - mapdf['lat'].min()
+            lon_range = mapdf['lon'].max() - mapdf['lon'].min()
+            
+            # Add padding (20% of range)
+            lat_padding = lat_range * 0.2
+            lon_padding = lon_range * 0.2
+            
+            # Update geo layout for choropleth
+            choropleth_fig.update_geos(
+                projection_type="natural earth",
+                showland=True,
+                landcolor="lightgray",
+                showocean=True,
+                oceancolor="lightblue",
+                showlakes=True,
+                lakecolor="lightblue",
+                center=dict(lat=lat_center, lon=lon_center),
+                lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
+                lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding]
+            )
+        
+        # Add choropleth traces to the subplot
+        for trace in choropleth_fig.data:
+            fig.add_trace(trace, row=1, col=2)
+        
+        # Update the geo layout in the subplot
         fig.update_geos(
-            projection_type="natural earth",
-            showland=True,
-            landcolor="lightgray",
-            showocean=True,
-            oceancolor="lightblue",
-            showlakes=True,
-            lakecolor="lightblue",
-            center=dict(lat=lat_center, lon=lon_center),
-            lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
-            lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding]
+            choropleth_fig.layout.geo,
+            row=1, col=2
         )
     else:
-        # Fallback for empty data
+        # Fallback: add empty geo plot
+        fig.add_trace(
+            go.Scattergeo(
+                lon=[],
+                lat=[],
+                mode='markers',
+                showlegend=False
+            ),
+            row=1, col=2
+        )
+        
         fig.update_geos(
             projection_type="natural earth",
             showland=True,
