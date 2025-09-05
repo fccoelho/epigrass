@@ -652,6 +652,21 @@ class Simulate:
             # print(nvalues[-1], len(ts[t]))
             Cursor.executemany(sql2, nvalues)
             con.commit()
+            
+            # Create indexes on time and geocode columns for better query performance
+            print('Creating indexes on time and geocode columns...')
+            try:
+                if self.backend.lower() == "mysql":
+                    Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                elif self.backend.lower() == "sqlite":
+                    Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                con.commit()
+                print('Indexes created successfully.')
+            except Exception as e:
+                print(f'Warning: Could not create indexes: {e}')
+            
             # Creating a table for edge data
             self.etable = etable = table + 'e'
             esql = """CREATE TABLE %s(
@@ -682,6 +697,22 @@ class Simulate:
                     values.append((s, d, t, f, b))
                     t += 1
             Cursor.executemany(esql2, values)
+            
+            # Create indexes on edge table columns for better query performance
+            print('Creating indexes on edge table columns...')
+            try:
+                if self.backend.lower() == "mysql":
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                elif self.backend.lower() == "sqlite":
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                con.commit()
+                print('Edge table indexes created successfully.')
+            except Exception as e:
+                print(f'Warning: Could not create edge table indexes: {e}')
 
 
         finally:
