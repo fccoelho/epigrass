@@ -6,6 +6,14 @@ using LaTeX.
 import codecs
 from time import ctime, time
 import os
+import re
+import io
+import sys
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+import base64
+import datetime
 
 from pylab import *
 
@@ -438,16 +446,109 @@ between any other pair of nodes.
         """
         print(string)
 
+    def execute_code_blocks(self, markdown_content):
+        """
+        Execute Python code blocks in markdown and replace them with their output.
+        """
+        # Pattern to match ```python code blocks
+        code_block_pattern = r'```python\n(.*?)\n```'
+        
+        def execute_and_replace(match):
+            code = match.group(1)
+            
+            # Create a string buffer to capture output
+            old_stdout = sys.stdout
+            old_stderr = sys.stderr
+            stdout_buffer = io.StringIO()
+            stderr_buffer = io.StringIO()
+            
+            try:
+                # Redirect stdout and stderr
+                sys.stdout = stdout_buffer
+                sys.stderr = stderr_buffer
+                
+                # Create execution context with simulation data
+                exec_globals = {
+                    'self': self,
+                    'sim': self.sim,
+                    'plt': plt,
+                    'figure': plt.figure,
+                    'plot': plt.plot,
+                    'bar': plt.bar,
+                    'hist': plt.hist,
+                    'xlabel': plt.xlabel,
+                    'ylabel': plt.ylabel,
+                    'title': plt.title,
+                    'colorbar': plt.colorbar,
+                    'pcolor': plt.pcolor,
+                    'show': plt.show,
+                    'savefig': plt.savefig,
+                    'mean': lambda x: sum(x) / len(x) if len(x) > 0 else 0,
+                    'sum': sum,
+                    'len': len,
+                    'range': range,
+                    'list': list,
+                }
+                
+                # Execute the code
+                exec(code, exec_globals)
+                
+                # Get any text output
+                output = stdout_buffer.getvalue()
+                error_output = stderr_buffer.getvalue()
+                
+                # Check if a plot was created
+                fig = plt.gcf()
+                plot_output = ""
+                
+                if fig.get_axes():  # If there are axes, a plot was created
+                    # Save plot to base64 string
+                    img_buffer = io.BytesIO()
+                    fig.savefig(img_buffer, format='png', dpi=150, bbox_inches='tight')
+                    img_buffer.seek(0)
+                    img_base64 = base64.b64encode(img_buffer.getvalue()).decode()
+                    plot_output = f"\n![Plot](data:image/png;base64,{img_base64})\n"
+                    plt.close(fig)  # Close the figure to free memory
+                
+                # Combine text output and plot
+                result = ""
+                if output.strip():
+                    result += f"```\n{output.strip()}\n```\n"
+                if error_output.strip():
+                    result += f"```\nError: {error_output.strip()}\n```\n"
+                result += plot_output
+                
+                return result if result.strip() else "```\n# Code executed successfully\n```"
+                
+            except Exception as e:
+                return f"```\nError executing code: {str(e)}\n```"
+            
+            finally:
+                # Restore stdout and stderr
+                sys.stdout = old_stdout
+                sys.stderr = old_stderr
+        
+        # Replace all code blocks with their executed results
+        processed_content = re.sub(code_block_pattern, execute_and_replace, markdown_content, flags=re.DOTALL)
+        
+        return processed_content
+
     def savenBuild(self, name, src):
         """
         Saves the report in markdown format in a new directory.
+        Executes Python code blocks and replaces them with their output.
         """
         dirname = self.sim.modelName + '-report-'
         path = dirname + ctime().replace(' ', '-')
         os.makedirs(path, exist_ok=True)
         os.chdir(path)
+        
+        # Execute code blocks and replace them with results
+        print("Executing code blocks in markdown...")
+        processed_src = self.execute_code_blocks(src)
+        
         md_file = f"{name}.md"
         print(f'Saving {md_file}')
         with codecs.open(md_file, 'w', self.encoding) as f:
-            f.write(src)
+            f.write(processed_src)
         print(f'Successfully generated markdown report at: {os.path.join(path, md_file)}')
