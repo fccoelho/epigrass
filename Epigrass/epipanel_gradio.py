@@ -690,7 +690,7 @@ def create_dashboard(pth:str):
     """
     
     with gr.Blocks(title="Epigrass Dashboard", theme=gr.themes.Soft()) as demo:
-        gr.HTML("""<img src="/assets/egicon.png> <h1 align="center">Epigrass Dashboard</h1>""")
+        gr.HTML("""<img src="https://github.com/fccoelho/epigrass/blob/master/Epigrass/egicon.png?raw=true"> <h1 align="center">Epigrass Dashboard</h1>""")
         gr.Markdown("Dashboard interativo para visualização de Simulações")
         
         with gr.Row():
@@ -816,11 +816,12 @@ def create_dashboard(pth:str):
         inputs_list = [model_path, map_selector, simulation_run, localities, time_slider]
         
         for inp in inputs_list:
-            inp.change(
-                fn=create_final_map,
-                inputs=[model_path, map_selector, simulation_run],
-                outputs=[final_map]
-            )
+            if not inp == time_slider:  # Do not update final map when time_slider changes
+                inp.change(
+                    fn=create_final_map,
+                    inputs=[model_path, map_selector, simulation_run],
+                    outputs=[final_map]
+                )
             
             inp.change(
                 fn=create_network_viz,
