@@ -700,7 +700,7 @@ def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
     Spos = seir.traces['S'][-1]
     Epos = seir.traces['E'][-1]
     Ipos = seir.traces['I'][-1]
-    Lpos = seir.traces['I'][-1] - seir.traces['I'][0]
+    Lpos = beta * seir.traces['S'][-1]*seir.traces['I'][-1]/N
 
     return [Epos, Ipos, Spos], Lpos, Ipos
 

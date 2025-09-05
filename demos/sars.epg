@@ -78,8 +78,8 @@ p = 0           # Probability of a recovered become infected per time step [0,1]
 #   S,E,I = 0.5*N, 0.01*N, 0.05*N
 #   S,E,I = N-1, 1, 0
 S = N
-E = 0
-I = 0
+E = 10
+I = 10
 
 #=============================================================#
 [EPIDEMIC EVENTS]
@@ -142,7 +142,7 @@ outdir =
 # MySQLout can be 0 (no database output) or 1
 sqlout = 1
 
-report = 2
+report = 3
 siterep = []
 
 #Replicate runs

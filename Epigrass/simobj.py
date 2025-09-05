@@ -76,7 +76,7 @@ class siteobj:
         self.thetalist = []
         self.thetahist = []  # infected arriving per time step
         self.passlist = []
-        self.totalcases = 0
+        self.totalcases = 0 # Cumulative total cases up to current time step
         self.vaccination = [[], []]  # time and coverage of vaccination event
         self.vaccineNow = 0  # flag to indicate that it is vaccination day
         self.vaccov = 0  # current vaccination coverage

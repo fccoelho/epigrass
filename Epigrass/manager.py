@@ -652,6 +652,21 @@ class Simulate:
             # print(nvalues[-1], len(ts[t]))
             Cursor.executemany(sql2, nvalues)
             con.commit()
+            
+            # Create indexes on time and geocode columns for better query performance
+            print('Creating indexes on time and geocode columns...')
+            try:
+                if self.backend.lower() == "mysql":
+                    Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                elif self.backend.lower() == "sqlite":
+                    Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                con.commit()
+                print('Indexes created successfully.')
+            except Exception as e:
+                print(f'Warning: Could not create indexes: {e}')
+            
             # Creating a table for edge data
             self.etable = etable = table + 'e'
             esql = """CREATE TABLE %s(
@@ -682,6 +697,22 @@ class Simulate:
                     values.append((s, d, t, f, b))
                     t += 1
             Cursor.executemany(esql2, values)
+            
+            # Create indexes on edge table columns for better query performance
+            print('Creating indexes on edge table columns...')
+            try:
+                if self.backend.lower() == "mysql":
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                elif self.backend.lower() == "sqlite":
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
+                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                con.commit()
+                print('Edge table indexes created successfully.')
+            except Exception as e:
+                print(f'Warning: Could not create edge table indexes: {e}')
 
 
         finally:
@@ -915,12 +946,19 @@ def onStraightRun(args):
     """
     Runs the model from the commandline
     """
-    from Epigrass import epipanel
+    if args.gradio:
+        from Epigrass import epipanel_gradio
+    else:
+        from Epigrass import epipanel
+    
     if args.view_only:
         pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
         os.chdir(os.path.abspath(pth))
         print(os.path.abspath(pth))
-        epipanel.show(pth)
+        if args.gradio:
+            epipanel_gradio.show(pth)
+        else:
+            epipanel.show(pth)
     redisclient.flushall()
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
@@ -929,13 +967,17 @@ def onStraightRun(args):
     S.parallel = args.parallel
     if not S.replicas:
         S.start()
-        # spread.Spread(S.g)
-        # R = report.Report(S)
-        # R.Assemble(type=S.Rep)
+        spread.Spread(S.g)
+        R = report.Report(S)
+        R.Assemble(reporttype=S.Rep)
     else:
         repRuns(S)
     if args.dashboard:
-        epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
+        if args.gradio:
+            from Epigrass import epipanel_gradio
+            epipanel_gradio.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
+        else:
+            epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
     if S.Batch:
         S.Say('Simulation Started.')
 
@@ -1033,6 +1075,8 @@ def main():
                         dest="dashboard", help="Open dashboard on browser after th run is done.")
     parser.add_argument("-V", "--view-only", action="store_true", default=False,
                         dest="view_only", help="Only Open dashboard.")
+    parser.add_argument("-G", "--gradio", action="store_true", default=False,
+                        dest="gradio", help="Open Gradio dashboard instead of Panel.")
     parser.add_argument("epg", metavar='EPG', nargs=1,
                         help='Epigrass model definition file (.epg).')
 

@@ -6,6 +6,14 @@ using LaTeX.
 import codecs
 from time import ctime, time
 import os
+import re
+import io
+import sys
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+import base64
+import datetime
 
 from pylab import *
 
@@ -30,15 +38,17 @@ class Report:
         self.header = r"""
         """
         self.title_template = """
-        # Epigrass Report
+# Epigrass Report
 
-        Model {modname} Network Report
-        John Doe
-        {data}
+Model {modname} Network Report
+ 
+John Doe
+ 
+{data}
 
 
-                **Abstract**
-                Edit the report.md file and add your model's description here.
+### Abstract
+Edit the report.md file and add your model's description here.
 
         """
 
@@ -71,7 +81,7 @@ class Report:
         title = self.title_template.format(modname=modname, data=datetime.date.today())
         return title
 
-    def graphDesc(self):
+    def gen_graph_desc(self):
         """
         Generates the Graph description section.
         """
@@ -204,23 +214,23 @@ large amounts of traffic.
 The weight of all nodes in the network (W(N)) is the summation 
 of each node's order (o) multiplied by 2 for all orders above 1.
 """ + \
-                  r"""
-                  $\iota=\frac{L(N)}{W(N)}=""" + f'{stats[7]}$' + \
-                  r"""        
-                  \subsection{Pi ($\Pi$) Index}
-                  The Pi index represents the relationship between the 
-                  total length of the network L(N)
-                  and the distance along the diameter D(d). 
-                  
-                  It is labeled as Pi because of its similarity with the 
-                  trigonometric $\Pi$ (3.14), which is expressing the ratio between 
-                  the circumference and the diameter of a circle. 
-                  
-                  A high index shows a developed network. It is a measure 
-                  of distance per units of diameter and an indicator of 
-                  the  shape of a network.
-                  """ + \
-                  fr"""
+r"""
+$\iota=\frac{L(N)}{W(N)}=""" + f'{stats[7]}$' + \
+r"""        
+\subsection{Pi ($\Pi$) Index}
+The Pi index represents the relationship between the 
+total length of the network L(N)
+and the distance along the diameter D(d). 
+
+It is labeled as Pi because of its similarity with the 
+trigonometric $\Pi$ (3.14), which is expressing the ratio between 
+the circumference and the diameter of a circle. 
+
+A high index shows a developed network. It is a measure 
+of distance per units of diameter and an indicator of 
+the  shape of a network.
+""" + \
+fr"""
 $\Pi=L(N)/D(d)={stats[8]}$
 ## Beta ($\beta$) Index
 The Beta index
@@ -237,9 +247,18 @@ the network. Complex networks have a high value of Beta.
 
 $\beta = {stats[10]}$"""
         section = matrix + indices
-        return section
+        context = {
+            'stats': stats,
+            'nnodes': nnodes,
+            'nedges': nedges,
+            'Eul': Eul,
+            'Trav': Trav,
+            'Ham': Ham
+        }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
-    def siteReport(self, geoc):
+    def site_report(self, geoc):
         """
         Puts together a report for a given site.
         """
@@ -262,11 +281,8 @@ $$D={stats[1]}$$
 ## Theta Index
 $$\theta={stats[2]}$$
 ## Betweeness 
-$$B={stats[3]}$$
-```python
-site.doStats()
-```
-        """
+$$B={stats[3]}$$\
+"""
         return section
 
     def genSiteEpi(self, geoc):
@@ -302,11 +318,22 @@ xlabel('Time')
 ylabel('Infectious individuous')
 ```  
         """
-        return section
+        context = {
+            'name': name,
+            'cuminc': cuminc,
+            'incidence': incidence,
+            'totcases': totcases,
+            'infc': infc
+        }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
     def genEpi(self):
         """
         Generate epidemiological report.
+        :Returns:
+        section: The markdown text of the section
+        context: A dictionary with variables to be used in the section
         """
         epistats = self.sim.g.getEpistats()
         cumcities = [sum(epistats[1][:i]) for i in range(len(epistats[1]))]
@@ -327,21 +354,16 @@ per unit of time, during the epidemic.
  - **Epidemic duration** The total number of units of time, the epidemic lasted.
 - **Median survival time** The time it took for fifty percent of the cities to become infected.
 
-
+ | Metric | Value   |
  |---------------|---------------|
  | Size (people) | {epistats[0]} |
- |---------------|---------------|
  | Speed         | {mean(epistats[1])} |
- |---------------|---------------|
  | Size (sites)  | {epistats[2]} |
- |---------------|---------------|
  | Duration      | {epistats[3]} |
- |---------------|---------------|
  | Survival      | {epistats[4]} |
- |---------------|---------------|
  | Total vaccines| {epistats[5]} |
- |---------------|---------------|
  |Total Quarantined | {epistats[6]}|
+  
 
 ```python
 bar(list(range(len(cumcities))), cumcities)
@@ -349,7 +371,11 @@ ylabel('Number of infected cities')
 xlabel('Time')
 ```
             """
-        return section
+        context = {'epistats': epistats,
+                    'cumcities': cumcities
+                   }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
     def Assemble(self, reporttype, save=True):
         """
@@ -390,12 +416,12 @@ between any other pair of nodes.
         tail = r""
         if reporttype == 1:
             start = time.time()
-            markdownsrc = self.header + self.genNetTitle() + self.graphDesc()
+            markdownsrc = self.header + self.genNetTitle() + self.gen_graph_desc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
                 markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    markdownsrc += self.siteReport(site)
+                    markdownsrc += self.site_report(site)
             markdownsrc += tail
             timer = time.time() - start
             print('Time to generate Network report: %s seconds.' % timer)
@@ -405,7 +431,8 @@ between any other pair of nodes.
             markdownsrc = self.header + self.genEpiTitle() + self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
-                    markdownsrc += self.genSiteEpi(site)
+                    sesrc = self.genSiteEpi(site)
+                    markdownsrc += sesrc
             markdownsrc += tail
             timer = time.time() - start
             print('Time to generate Epidemiological report: %s seconds.' % timer)
@@ -415,12 +442,13 @@ between any other pair of nodes.
             repname = 'epi_report'
         elif reporttype == 3:
             start = time.time()
-            markdownsrc = self.header + self.genFullTitle() + self.graphDesc()
+            gsrc = self.gen_graph_desc()
+            markdownsrc = self.header + self.genFullTitle() + gsrc
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
                 markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    markdownsrc += self.siteReport(site)
+                    markdownsrc += self.site_report(site)
             markdownsrc += self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
@@ -441,16 +469,109 @@ between any other pair of nodes.
         """
         print(string)
 
+    def execute_code_blocks(self, markdown_content, context={}):
+        """
+        Execute Python code blocks in markdown and replace them with their output.
+        """
+        # Pattern to match ```python code blocks
+        code_block_pattern = r'```python\n(.*?)\n```'
+        
+        def execute_and_replace(match):
+            code = match.group(1)
+            
+            # Create a string buffer to capture output
+            old_stdout = sys.stdout
+            old_stderr = sys.stderr
+            stdout_buffer = io.StringIO()
+            stderr_buffer = io.StringIO()
+            
+            try:
+                # Redirect stdout and stderr
+                sys.stdout = stdout_buffer
+                sys.stderr = stderr_buffer
+                
+                # Create execution context with simulation data
+                exec_globals = {
+                    'self': self,
+                    'sim': self.sim,
+                    'plt': plt,
+                    'figure': plt.figure,
+                    'plot': plt.plot,
+                    'bar': plt.bar,
+                    'hist': plt.hist,
+                    'xlabel': plt.xlabel,
+                    'ylabel': plt.ylabel,
+                    'title': plt.title,
+                    'colorbar': plt.colorbar,
+                    'pcolor': plt.pcolor,
+                    'show': plt.show,
+                    'savefig': plt.savefig,
+                    'mean': lambda x: sum(x) / len(x) if len(x) > 0 else 0,
+                    'sum': sum,
+                    'len': len,
+                    'range': range,
+                    'list': list,
+                }
+                exec_globals.update(context)
+                # Execute the code
+                exec(code, exec_globals)
+                
+                # Get any text output
+                output = stdout_buffer.getvalue()
+                error_output = stderr_buffer.getvalue()
+                
+                # Check if a plot was created
+                fig = plt.gcf()
+                plot_output = ""
+                
+                if fig.get_axes():  # If there are axes, a plot was created
+                    # Save plot to base64 string
+                    img_buffer = io.BytesIO()
+                    fig.savefig(img_buffer, format='png', dpi=150, bbox_inches='tight')
+                    img_buffer.seek(0)
+                    img_base64 = base64.b64encode(img_buffer.getvalue()).decode()
+                    plot_output = f"\n![Plot](data:image/png;base64,{img_base64})\n"
+                    plt.close(fig)  # Close the figure to free memory
+                
+                # Combine text output and plot
+                result = ""
+                if output.strip():
+                    result += f"```\n{output.strip()}\n```\n"
+                if error_output.strip():
+                    result += f"```\nError: {error_output.strip()}\n```\n"
+                result += plot_output
+                
+                return result if result.strip() else "```\n# Code executed successfully\n```"
+                
+            except Exception as e:
+                return f"```\nError executing code: {str(e)}\n```"
+            
+            finally:
+                # Restore stdout and stderr
+                sys.stdout = old_stdout
+                sys.stderr = old_stderr
+        
+        # Replace all code blocks with their executed results
+        processed_content = re.sub(code_block_pattern, execute_and_replace, markdown_content, flags=re.DOTALL)
+        
+        return processed_content
+
     def savenBuild(self, name, src):
         """
         Saves the report in markdown format in a new directory.
+        Executes Python code blocks and replaces them with their output.
         """
         dirname = self.sim.modelName + '-report-'
         path = dirname + ctime().replace(' ', '-')
         os.makedirs(path, exist_ok=True)
         os.chdir(path)
+        
+        # Execute code blocks and replace them with results
+        print("Executing code blocks in markdown...")
+        processed_src = self.execute_code_blocks(src)
+        
         md_file = f"{name}.md"
         print(f'Saving {md_file}')
         with codecs.open(md_file, 'w', self.encoding) as f:
-            f.write(src)
+            f.write(processed_src)
         print(f'Successfully generated markdown report at: {os.path.join(path, md_file)}')
