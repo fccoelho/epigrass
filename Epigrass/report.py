@@ -81,7 +81,7 @@ Edit the report.md file and add your model's description here.
         title = self.title_template.format(modname=modname, data=datetime.date.today())
         return title
 
-    def graphDesc(self):
+    def gen_graph_desc(self):
         """
         Generates the Graph description section.
         """
@@ -214,23 +214,23 @@ large amounts of traffic.
 The weight of all nodes in the network (W(N)) is the summation 
 of each node's order (o) multiplied by 2 for all orders above 1.
 """ + \
-                  r"""
-                  $\iota=\frac{L(N)}{W(N)}=""" + f'{stats[7]}$' + \
-                  r"""        
-                  \subsection{Pi ($\Pi$) Index}
-                  The Pi index represents the relationship between the 
-                  total length of the network L(N)
-                  and the distance along the diameter D(d). 
-                  
-                  It is labeled as Pi because of its similarity with the 
-                  trigonometric $\Pi$ (3.14), which is expressing the ratio between 
-                  the circumference and the diameter of a circle. 
-                  
-                  A high index shows a developed network. It is a measure 
-                  of distance per units of diameter and an indicator of 
-                  the  shape of a network.
-                  """ + \
-                  fr"""
+r"""
+$\iota=\frac{L(N)}{W(N)}=""" + f'{stats[7]}$' + \
+r"""        
+\subsection{Pi ($\Pi$) Index}
+The Pi index represents the relationship between the 
+total length of the network L(N)
+and the distance along the diameter D(d). 
+
+It is labeled as Pi because of its similarity with the 
+trigonometric $\Pi$ (3.14), which is expressing the ratio between 
+the circumference and the diameter of a circle. 
+
+A high index shows a developed network. It is a measure 
+of distance per units of diameter and an indicator of 
+the  shape of a network.
+""" + \
+fr"""
 $\Pi=L(N)/D(d)={stats[8]}$
 ## Beta ($\beta$) Index
 The Beta index
@@ -247,9 +247,18 @@ the network. Complex networks have a high value of Beta.
 
 $\beta = {stats[10]}$"""
         section = matrix + indices
-        return section
+        context = {
+            'stats': stats,
+            'nnodes': nnodes,
+            'nedges': nedges,
+            'Eul': Eul,
+            'Trav': Trav,
+            'Ham': Ham
+        }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
-    def siteReport(self, geoc):
+    def site_report(self, geoc):
         """
         Puts together a report for a given site.
         """
@@ -272,11 +281,8 @@ $$D={stats[1]}$$
 ## Theta Index
 $$\theta={stats[2]}$$
 ## Betweeness 
-$$B={stats[3]}$$
-```python
-site.doStats()
-```
-        """
+$$B={stats[3]}$$\
+"""
         return section
 
     def genSiteEpi(self, geoc):
@@ -312,11 +318,22 @@ xlabel('Time')
 ylabel('Infectious individuous')
 ```  
         """
-        return section
+        context = {
+            'name': name,
+            'cuminc': cuminc,
+            'incidence': incidence,
+            'totcases': totcases,
+            'infc': infc
+        }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
     def genEpi(self):
         """
         Generate epidemiological report.
+        :Returns:
+        section: The markdown text of the section
+        context: A dictionary with variables to be used in the section
         """
         epistats = self.sim.g.getEpistats()
         cumcities = [sum(epistats[1][:i]) for i in range(len(epistats[1]))]
@@ -354,7 +371,11 @@ ylabel('Number of infected cities')
 xlabel('Time')
 ```
             """
-        return section
+        context = {'epistats': epistats,
+                    'cumcities': cumcities
+                   }
+        processed_section = self.execute_code_blocks(section, context)
+        return processed_section
 
     def Assemble(self, reporttype, save=True):
         """
@@ -395,12 +416,12 @@ between any other pair of nodes.
         tail = r""
         if reporttype == 1:
             start = time.time()
-            markdownsrc = self.header + self.genNetTitle() + self.graphDesc()
+            markdownsrc = self.header + self.genNetTitle() + self.gen_graph_desc()
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
                 markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    markdownsrc += self.siteReport(site)
+                    markdownsrc += self.site_report(site)
             markdownsrc += tail
             timer = time.time() - start
             print('Time to generate Network report: %s seconds.' % timer)
@@ -410,7 +431,8 @@ between any other pair of nodes.
             markdownsrc = self.header + self.genEpiTitle() + self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
-                    markdownsrc += self.genSiteEpi(site)
+                    sesrc = self.genSiteEpi(site)
+                    markdownsrc += sesrc
             markdownsrc += tail
             timer = time.time() - start
             print('Time to generate Epidemiological report: %s seconds.' % timer)
@@ -420,12 +442,13 @@ between any other pair of nodes.
             repname = 'epi_report'
         elif reporttype == 3:
             start = time.time()
-            markdownsrc = self.header + self.genFullTitle() + self.graphDesc()
+            gsrc = self.gen_graph_desc()
+            markdownsrc = self.header + self.genFullTitle() + gsrc
             # Generate reports for every site specified in the script, if any.
             if self.sim.siteRep:
                 markdownsrc += sitehead
                 for site in self.sim.siteRep:
-                    markdownsrc += self.siteReport(site)
+                    markdownsrc += self.site_report(site)
             markdownsrc += self.genEpi()
             if self.sim.siteRep:
                 for site in self.sim.siteRep:
@@ -446,7 +469,7 @@ between any other pair of nodes.
         """
         print(string)
 
-    def execute_code_blocks(self, markdown_content):
+    def execute_code_blocks(self, markdown_content, context={}):
         """
         Execute Python code blocks in markdown and replace them with their output.
         """
@@ -489,7 +512,7 @@ between any other pair of nodes.
                     'range': range,
                     'list': list,
                 }
-                
+                exec_globals.update(context)
                 # Execute the code
                 exec(code, exec_globals)
                 

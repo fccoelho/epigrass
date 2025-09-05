@@ -52,7 +52,7 @@ class TestReport(unittest.TestCase):
         self.assertIn(str(date.today()), title)
 
     def test_graphDesc(self):
-        desc = self.report.graphDesc()
+        desc = self.report.gen_graph_desc()
         self.assertIn("General Network Analyses", desc)
         self.assertIn("Basic statistics", desc)
         self.assertGreaterEqual(desc.find("Order (Number of Nodes):** 0"), 1)  # From empty site_list

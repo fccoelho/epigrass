@@ -936,9 +936,9 @@ def onStraightRun(args):
     S.parallel = args.parallel
     if not S.replicas:
         S.start()
-        # spread.Spread(S.g)
-        # R = report.Report(S)
-        # R.Assemble(type=S.Rep)
+        spread.Spread(S.g)
+        R = report.Report(S)
+        R.Assemble(reporttype=S.Rep)
     else:
         repRuns(S)
     if args.dashboard:
