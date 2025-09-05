@@ -30,15 +30,17 @@ class Report:
         self.header = r"""
         """
         self.title_template = """
-        # Epigrass Report
+# Epigrass Report
 
-        Model {modname} Network Report
-        John Doe
-        {data}
+Model {modname} Network Report
+ 
+John Doe
+ 
+{data}
 
 
-                **Abstract**
-                Edit the report.md file and add your model's description here.
+### Abstract
+Edit the report.md file and add your model's description here.
 
         """
 
@@ -327,21 +329,16 @@ per unit of time, during the epidemic.
  - **Epidemic duration** The total number of units of time, the epidemic lasted.
 - **Median survival time** The time it took for fifty percent of the cities to become infected.
 
-
+ | Metric | Value   |
  |---------------|---------------|
  | Size (people) | {epistats[0]} |
- |---------------|---------------|
  | Speed         | {mean(epistats[1])} |
- |---------------|---------------|
  | Size (sites)  | {epistats[2]} |
- |---------------|---------------|
  | Duration      | {epistats[3]} |
- |---------------|---------------|
  | Survival      | {epistats[4]} |
- |---------------|---------------|
  | Total vaccines| {epistats[5]} |
- |---------------|---------------|
  |Total Quarantined | {epistats[6]}|
+  
 
 ```python
 bar(list(range(len(cumcities))), cumcities)
