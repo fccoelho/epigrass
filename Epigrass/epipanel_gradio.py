@@ -564,7 +564,7 @@ def create_network_viz(model_path, localities):
 
 
 def create_temporal_map(model_path, simulation_run, time_slider):
-    """Create temporal map at specific time"""
+    """Create temporal choropleth map at specific time"""
     if not simulation_run:
         return go.Figure()
     
@@ -586,31 +586,88 @@ def create_temporal_map(model_path, simulation_run, time_slider):
     mapa_t = pd.merge(mapdf, df_time[['name', 'time'] + variables], 
                       left_on=name_col, right_on='name', how='left')
     
-    # Create scatter plot on map coordinates
+    # Fill NaN values with 0 for visualization
+    for var in variables:
+        if var in mapa_t.columns:
+            mapa_t[var] = mapa_t[var].fillna(0)
+    
+    # Choose the main variable to display (prefer 'Infectious', then first available variable)
+    main_var = 'Infectious' if 'Infectious' in variables else (variables[0] if variables else 'incidence')
+    if main_var not in mapa_t.columns:
+        main_var = variables[0] if variables else 'incidence'
+    
+    # Extract coordinates from geometry for centering
+    if hasattr(mapdf.geometry, 'centroid'):
+        mapdf['lat'] = mapdf.geometry.centroid.y
+        mapdf['lon'] = mapdf.geometry.centroid.x
+        mapa_t['lat'] = mapa_t.geometry.centroid.y
+        mapa_t['lon'] = mapa_t.geometry.centroid.x
+    else:
+        mapa_t['lat'] = 0
+        mapa_t['lon'] = 0
+    
+    # Create choropleth map
     fig = go.Figure()
     
-    if hasattr(mapdf.geometry, 'centroid'):
-        fig.add_trace(go.Scatter(
-            x=mapa_t.geometry.centroid.x,
-            y=mapa_t.geometry.centroid.y,
-            mode='markers',
-            marker=dict(
-                size=np.nan_to_num(mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 0)) /
-                     mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 1)).max() * 30 + 5),
-                color=mapa_t.get('Infectious', mapa_t.get(variables[0] if variables else 'totalcases', 0)),
-                colorscale='Reds',
-                showscale=True,
-                colorbar=dict(title="Casos")
+    # Convert geometry to GeoJSON format for choropleth
+    mapa_t_json = mapa_t.__geo_interface__
+    
+    # Prepare hover data with all available variables
+    hover_data = []
+    for idx, row in mapa_t.iterrows():
+        hover_info = f"<b>{row['name']}</b><br>Tempo: {time_slider}<br>"
+        for var in variables:
+            if var in row and pd.notna(row[var]):
+                hover_info += f"{var}: {row[var]:.2f}<br>"
+        hover_data.append(hover_info)
+    
+    # Add choropleth trace
+    fig.add_trace(
+        go.Choropleth(
+            geojson=mapa_t_json,
+            locations=mapa_t.index,
+            z=mapa_t[main_var],
+            colorscale='YlOrRd',
+            hovertemplate='%{customdata}<extra></extra>',
+            customdata=hover_data,
+            colorbar=dict(
+                title=main_var.capitalize(),
+                x=1.02
             ),
-            text=mapa_t['name'],
-            hovertemplate='<b>%{text}</b><br>Tempo: ' + str(time_slider) + '<br>Casos: %{marker.color}<extra></extra>'
-        ))
+            showlegend=False
+        )
+    )
+    
+    # Calculate bounds for centering the map
+    if len(mapa_t) > 0 and 'lat' in mapa_t.columns and 'lon' in mapa_t.columns:
+        lat_center = mapa_t['lat'].mean()
+        lon_center = mapa_t['lon'].mean()
+        lat_range = mapa_t['lat'].max() - mapa_t['lat'].min()
+        lon_range = mapa_t['lon'].max() - mapa_t['lon'].min()
+        
+        # Add padding (20% of range)
+        lat_padding = lat_range * 0.2 if lat_range > 0 else 1
+        lon_padding = lon_range * 0.2 if lon_range > 0 else 1
+        
+        # Update geo layout
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True,
+            landcolor="lightgray",
+            showocean=True,
+            oceancolor="lightblue",
+            showlakes=True,
+            lakecolor="lightblue",
+            center=dict(lat=lat_center, lon=lon_center),
+            lataxis_range=[mapa_t['lat'].min() - lat_padding, mapa_t['lat'].max() + lat_padding],
+            lonaxis_range=[mapa_t['lon'].min() - lon_padding, mapa_t['lon'].max() + lon_padding],
+            projection_scale=1
+        )
     
     fig.update_layout(
-        title=f'Estado no Tempo {time_slider}',
-        height=500,
-        xaxis_title="Longitude",
-        yaxis_title="Latitude"
+        title=f'🌍 Mapa Coroplético - Tempo {time_slider} ({main_var.capitalize()})',
+        height=600,
+        showlegend=False
     )
     
     return fig
