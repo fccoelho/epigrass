@@ -953,7 +953,12 @@ def onStraightRun(args):
     
     if args.view_only:
         pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
-        os.chdir(os.path.abspath(pth))
+        try:
+            os.chdir(os.path.abspath(pth))
+        except FileNotFoundError as exc:
+            print(f"Error: The directory {pth} does not exist. Please run a simulation first.")
+            return
+
         print(os.path.abspath(pth))
         if args.gradio:
             epipanel_gradio.show(pth)
