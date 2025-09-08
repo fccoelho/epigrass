@@ -52,7 +52,7 @@ modtype = SEIR
 #   beta=values[0] #assigns the first element of values to beta
 #   beta=0.001*values[1]
 
-beta = 0.45   #transmission coefficient (contact rate * transmissibility)
+beta = 0.65   #transmission coefficient (contact rate * transmissibility)
 alpha = 1     # clumping parameter
 e = 0.14           # inverse of incubation period (7 days)
 r = 0.1         # inverse of infectious period (10 days)
