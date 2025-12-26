@@ -17,6 +17,7 @@ Contents:
    install.rst
    intromodels.rst
    using.rst
+   gui.rst
    analysis.rst
    scripting.rst
 

@@ -1,0 +1,103 @@
+DEBUG:fiona.session:Could not import boto3, continuing with reduced functionality.
+DEBUG:fiona.env:GDAL data found in package: path='/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/fiona/gdal_data'.
+DEBUG:fiona.env:PROJ data found in package: path='/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/fiona/proj_data'.
+DEBUG:fiona._env:GDAL data found in package: path='/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/fiona/gdal_data'.
+DEBUG:fiona._env:PROJ data found in package: path='/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/fiona/proj_data'.
+DEBUG:matplotlib.pyplot:Loaded backend Agg version v2.2.
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:bokeh.server.server:Starting Bokeh server version 3.8.1 (running on Tornado 6.5.4)
+INFO:bokeh.server.tornado:User authentication hooks NOT provided (default user enabled)
+DEBUG:bokeh.server.tornado:These host origins can connect to the websocket: ['localhost:5006']
+DEBUG:bokeh.server.tornado:Patterns are:
+DEBUG:bokeh.server.tornado:  [('/favicon.ico',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.ico_handler.IcoHandler'>,
+DEBUG:bokeh.server.tornado:    {'app': <bokeh.server.tornado.BokehTornado object at 0x70866dee4bf0>}),
+DEBUG:bokeh.server.tornado:   ('/?',
+DEBUG:bokeh.server.tornado:    <class 'panel.io.server.DocHandler'>,
+DEBUG:bokeh.server.tornado:    {'application_context': <bokeh.server.contexts.ApplicationContext object at 0x70866dee40e0>,
+DEBUG:bokeh.server.tornado:     'bokeh_websocket_path': '/ws'}),
+DEBUG:bokeh.server.tornado:   ('/ws',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.ws.WSHandler'>,
+DEBUG:bokeh.server.tornado:    {'application_context': <bokeh.server.contexts.ApplicationContext object at 0x70866dee40e0>,
+DEBUG:bokeh.server.tornado:     'bokeh_websocket_path': '/ws',
+DEBUG:bokeh.server.tornado:     'compression_level': None,
+DEBUG:bokeh.server.tornado:     'mem_level': None}),
+DEBUG:bokeh.server.tornado:   ('/metadata',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.metadata_handler.MetadataHandler'>,
+DEBUG:bokeh.server.tornado:    {'application_context': <bokeh.server.contexts.ApplicationContext object at 0x70866dee40e0>,
+DEBUG:bokeh.server.tornado:     'bokeh_websocket_path': '/ws'}),
+DEBUG:bokeh.server.tornado:   ('/autoload.js',
+DEBUG:bokeh.server.tornado:    <class 'panel.io.server.AutoloadJsHandler'>,
+DEBUG:bokeh.server.tornado:    {'application_context': <bokeh.server.contexts.ApplicationContext object at 0x70866dee40e0>,
+DEBUG:bokeh.server.tornado:     'bokeh_websocket_path': '/ws'}),
+DEBUG:bokeh.server.tornado:   ('/__patchedroot/static/(.*)',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.static_handler.StaticHandler'>,
+DEBUG:bokeh.server.tornado:    {}),
+DEBUG:bokeh.server.tornado:   ('/components/(.*)',
+DEBUG:bokeh.server.tornado:    <class 'panel.io.server.ComponentResourceHandler'>,
+DEBUG:bokeh.server.tornado:    {}),
+DEBUG:bokeh.server.tornado:   ('/?',
+DEBUG:bokeh.server.tornado:    <class 'panel.io.server.RootHandler'>,
+DEBUG:bokeh.server.tornado:    {'applications': {'/': <bokeh.server.contexts.ApplicationContext object at 0x70866dee40e0>},
+DEBUG:bokeh.server.tornado:     'index': '/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/panel/io/../_templates/index.html',
+DEBUG:bokeh.server.tornado:     'prefix': '',
+DEBUG:bokeh.server.tornado:     'use_redirect': True}),
+DEBUG:bokeh.server.tornado:   ('/static/extensions/(.*)',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.multi_root_static_handler.MultiRootStaticHandler'>,
+DEBUG:bokeh.server.tornado:    {'root': {'panel': PosixPath('/home/fccoelho/Documentos/Software_projects/epigrass/.venv/lib/python3.12/site-packages/panel/dist')}}),
+DEBUG:bokeh.server.tornado:   ('/static/(.*)',
+DEBUG:bokeh.server.tornado:    <class 'bokeh.server.views.static_handler.StaticHandler'>)]
+DEBUG:markdown_it.rules_block.code:entering code: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.fence:entering fence: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.blockquote:entering blockquote: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.hr:entering hr: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.list:entering list: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.reference:entering reference: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.html_block:entering html_block: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.heading:entering heading: StateBlock(line=0,level=0,tokens=0), 0, 2, False
+DEBUG:markdown_it.rules_block.code:entering code: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.fence:entering fence: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.blockquote:entering blockquote: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.hr:entering hr: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.list:entering list: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.reference:entering reference: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.html_block:entering html_block: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.heading:entering heading: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.lheading:entering lheading: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+DEBUG:markdown_it.rules_block.paragraph:entering paragraph: StateBlock(line=1,level=0,tokens=3), 1, 2, False
+WARNING:bokeh.core.validation.check:W-1005 (FIXED_SIZING_MODE): 'fixed' sizing mode requires width and height to be set: Column(id='p1054', ...)
+WARNING:bokeh.core.validation.check:W-1005 (FIXED_SIZING_MODE): 'fixed' sizing mode requires width and height to be set: Column(id='p1048', ...)
+INFO:tornado.access:200 GET / (::1) 273.09ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/reactiveesm/es-module-shims@%5E1.10.0/dist/es-module-shims.min.js (::1) 1.37ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/loadingspinner.css?v=1.8.4 (::1) 1.36ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/listpanel.css?v=1.8.4 (::1) 1.48ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/select.css?v=1.8.4 (::1) 1.56ms
+INFO:tornado.access:200 GET /static/js/bokeh-gl.min.js?v=8882693126e3145429ede3b51aded6eb4c91608d91bae50e68b4217efae53d4091caefc2f1f3056bb6bcd0c84e8ffd9c058040868e7ac6460a6979d6496cf9b5 (::1) 1.96ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/divider.css?v=1.8.4 (::1) 0.59ms
+INFO:tornado.access:200 GET /static/js/bokeh.min.js?v=252a5ba3eb0dd0a829f353618c6f540fab27c761d8942f48d414a086946d9761c94c31b76524f7028bc0f0f422e19bcb7de5394646c47e600211d7faf4e988ed (::1) 1.31ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/markdown.css?v=1.8.4 (::1) 0.73ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/alerts.css?v=1.8.4 (::1) 0.43ms
+INFO:tornado.access:200 GET /static/extensions/panel/css/loading.css?v=1.8.4 (::1) 0.42ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/material-components-web@7.0.0/dist/material-components-web.min.css (::1) 1.07ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/theme/default.css?v=1.8.4 (::1) 0.67ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/theme/material_variables.css?v=1.8.4 (::1) 0.60ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/materialtemplate/material.css?v=1.8.4 (::1) 0.56ms
+INFO:tornado.access:200 GET /static/js/bokeh-widgets.min.js?v=dd913837e24d6d0abe50267a00ff1cc20312c04eb656c256997b52178433cc61da2f66396ecd0cf7d32594a9c0cb06f58ef17115c817b691ba6156c9fba4d8f6 (::1) 0.53ms
+INFO:tornado.access:200 GET /static/js/bokeh-tables.min.js?v=813d5dd9d19c4a638766ea6741345ba25bdc9fda244e2ea1cd49169dfc7858e097154eed5140421f8df0404665258d791c67062f54e0200d4e39b50d78745b9a (::1) 0.98ms
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/material-components-web@7.0.0/dist/material-components-web.min.js (::1) 1.74ms
+INFO:tornado.access:200 GET /static/extensions/panel/panel.min.js?v=6ff43122fbf672035ceb986cf032c43e155d9475b21af906f67ee88a49f26ffc (::1) 3.79ms
+INFO:tornado.access:200 GET /static/extensions/geoviews/geoviews.min.js?v=f90d85f640e80639ced60d5d65c3706c8e29bbdf462c90ef74793198f754e095 (::1) 0.96ms
+DEBUG:bokeh.server.views.ws:Subprotocol header received
+INFO:tornado.access:101 GET /ws (::1) 0.66ms
+INFO:bokeh.server.views.ws:WebSocket connection opened
+DEBUG:bokeh.server.views.ws:Receiver created for Protocol()
+DEBUG:bokeh.server.views.ws:ProtocolHandler created for Protocol()
+INFO:bokeh.server.views.ws:ServerConnection created
+DEBUG:bokeh.server.session:Sending pull-doc-reply from session 'JymsVekTKgmklglYoB8k0qSd3XTtxH1kVXrdutTPQFM5'
+INFO:tornado.access:200 GET /static/extensions/panel/bundled/theme/material.css?v=1.8.4 (::1) 0.89ms
+DEBUG:bokeh.server.tornado:[pid 70510] 1 clients connected
+DEBUG:bokeh.server.tornado:[pid 70510]   / has 1 sessions with 0 unused
+DEBUG:bokeh.server.tornado:[pid 70510] 1 clients connected
+DEBUG:bokeh.server.tornado:[pid 70510]   / has 1 sessions with 0 unused
+DEBUG:bokeh.server.tornado:[pid 70510] 1 clients connected
+DEBUG:bokeh.server.tornado:[pid 70510]   / has 1 sessions with 0 unused

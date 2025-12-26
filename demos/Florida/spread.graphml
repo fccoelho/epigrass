@@ -1,0 +1,546 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d1" for="node" attr.name="time" attr.type="long" />
+  <key id="d0" for="node" attr.name="name" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="86">
+      <data key="d0">Miami-Dade</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="1">
+      <data key="d0">Alachua</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="3">
+      <data key="d0">Baker</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="5">
+      <data key="d0">Bay</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="7">
+      <data key="d0">Bradford</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="9">
+      <data key="d0">Brevard</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="11">
+      <data key="d0">Broward</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="13">
+      <data key="d0">Calhoun</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="15">
+      <data key="d0">Charlotte</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="17">
+      <data key="d0">Citrus</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="19">
+      <data key="d0">Clay</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="21">
+      <data key="d0">Collier</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="23">
+      <data key="d0">Columbia</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="27">
+      <data key="d0">DeSoto</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="31">
+      <data key="d0">Duval</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="33">
+      <data key="d0">Escambia</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="35">
+      <data key="d0">Flagler</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="37">
+      <data key="d0">Franklin</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="39">
+      <data key="d0">Gadsden</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="41">
+      <data key="d0">Gilchrist</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="43">
+      <data key="d0">Glades</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="45">
+      <data key="d0">Gulf</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="47">
+      <data key="d0">Hamilton</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="49">
+      <data key="d0">Hardee</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="51">
+      <data key="d0">Hendry</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="53">
+      <data key="d0">Hernando</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="55">
+      <data key="d0">Highlands</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="57">
+      <data key="d0">Hillsborough</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="59">
+      <data key="d0">Holmes</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="61">
+      <data key="d0">Indian River</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="63">
+      <data key="d0">Jackson</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="65">
+      <data key="d0">Jefferson</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="67">
+      <data key="d0">Lafayette</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="69">
+      <data key="d0">Lake</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="71">
+      <data key="d0">Lee</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="73">
+      <data key="d0">Leon</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="75">
+      <data key="d0">Levy</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="77">
+      <data key="d0">Liberty</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="79">
+      <data key="d0">Madison</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="81">
+      <data key="d0">Manatee</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="83">
+      <data key="d0">Marion</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="85">
+      <data key="d0">Martin</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="87">
+      <data key="d0">Monroe</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="89">
+      <data key="d0">Nassau</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="91">
+      <data key="d0">Okaloosa</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="93">
+      <data key="d0">Okeechobee</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="95">
+      <data key="d0">Orange</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="97">
+      <data key="d0">Osceola</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="99">
+      <data key="d0">Palm Beach</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="101">
+      <data key="d0">Pasco</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="103">
+      <data key="d0">Pinellas</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="105">
+      <data key="d0">Polk</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="107">
+      <data key="d0">Putnam</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="113">
+      <data key="d0">Santa Rosa</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="115">
+      <data key="d0">Sarasota</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="117">
+      <data key="d0">Seminole</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="109">
+      <data key="d0">St. Johns</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="111">
+      <data key="d0">St. Lucie</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="119">
+      <data key="d0">Sumter</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="121">
+      <data key="d0">Suwannee</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="123">
+      <data key="d0">Taylor</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="125">
+      <data key="d0">Union</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="127">
+      <data key="d0">Volusia</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="129">
+      <data key="d0">Wakulla</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="131">
+      <data key="d0">Walton</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="133">
+      <data key="d0">Washington</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="29">
+      <data key="d0">Dixie</data>
+      <data key="d1">3</data>
+    </node>
+    <edge source="1" target="86" id="0">
+      <data key="d2">0.004697931633265412</data>
+    </edge>
+    <edge source="3" target="86" id="0">
+      <data key="d2">6.7596138608135425e-06</data>
+    </edge>
+    <edge source="5" target="86" id="0">
+      <data key="d2">0.0002095480296852198</data>
+    </edge>
+    <edge source="7" target="86" id="0">
+      <data key="d2">0.00037853837620555834</data>
+    </edge>
+    <edge source="9" target="86" id="0">
+      <data key="d2">0.0014228987177012506</data>
+    </edge>
+    <edge source="11" target="86" id="0">
+      <data key="d2">0.08179132771584385</data>
+    </edge>
+    <edge source="13" target="86" id="0">
+      <data key="d2">0.00021968745047644013</data>
+    </edge>
+    <edge source="15" target="86" id="0">
+      <data key="d2">0.0007874950147847776</data>
+    </edge>
+    <edge source="17" target="86" id="0">
+      <data key="d2">0.0002703845544325417</data>
+    </edge>
+    <edge source="19" target="86" id="0">
+      <data key="d2">0.0012944660543457932</data>
+    </edge>
+    <edge source="21" target="86" id="0">
+      <data key="d2">0.00477228738573436</data>
+    </edge>
+    <edge source="23" target="86" id="0">
+      <data key="d2">0.0010680189900085396</data>
+    </edge>
+    <edge source="27" target="86" id="0">
+      <data key="d2">0.0010071824652612177</data>
+    </edge>
+    <edge source="31" target="86" id="0">
+      <data key="d2">0.00345416268287572</data>
+    </edge>
+    <edge source="33" target="86" id="0">
+      <data key="d2">0.0014566967870053183</data>
+    </edge>
+    <edge source="35" target="86" id="0">
+      <data key="d2">0.00021968745047644013</data>
+    </edge>
+    <edge source="37" target="86" id="0">
+      <data key="d2">8.11153663297625e-05</data>
+    </edge>
+    <edge source="39" target="86" id="0">
+      <data key="d2">0.00011153362870342345</data>
+    </edge>
+    <edge source="41" target="86" id="0">
+      <data key="d2">1.0139420791220313e-05</data>
+    </edge>
+    <edge source="43" target="86" id="0">
+      <data key="d2">0.0006489229306381</data>
+    </edge>
+    <edge source="45" target="86" id="0">
+      <data key="d2">7.097594553854219e-05</data>
+    </edge>
+    <edge source="47" target="86" id="0">
+      <data key="d2">0.0003278412722494568</data>
+    </edge>
+    <edge source="49" target="86" id="0">
+      <data key="d2">0.00013519227721627084</data>
+    </edge>
+    <edge source="51" target="86" id="0">
+      <data key="d2">0.0006759613860813542</data>
+    </edge>
+    <edge source="53" target="86" id="0">
+      <data key="d2">0.0006692017722205407</data>
+    </edge>
+    <edge source="55" target="86" id="0">
+      <data key="d2">0.001152514163268709</data>
+    </edge>
+    <edge source="57" target="86" id="0">
+      <data key="d2">0.0049649363807675465</data>
+    </edge>
+    <edge source="59" target="86" id="0">
+      <data key="d2">6.421633167772865e-05</data>
+    </edge>
+    <edge source="61" target="86" id="0">
+      <data key="d2">0.0009531055543747094</data>
+    </edge>
+    <edge source="63" target="86" id="0">
+      <data key="d2">0.00040557683164881253</data>
+    </edge>
+    <edge source="65" target="86" id="0">
+      <data key="d2">0.00011491343563383021</data>
+    </edge>
+    <edge source="67" target="86" id="0">
+      <data key="d2">0.00011153362870342345</data>
+    </edge>
+    <edge source="69" target="86" id="0">
+      <data key="d2">0.0006083652474732188</data>
+    </edge>
+    <edge source="71" target="86" id="0">
+      <data key="d2">0.005424590123302868</data>
+    </edge>
+    <edge source="73" target="86" id="0">
+      <data key="d2">0.0036839895541433804</data>
+    </edge>
+    <edge source="75" target="86" id="0">
+      <data key="d2">2.0278841582440626e-05</data>
+    </edge>
+    <edge source="77" target="86" id="0">
+      <data key="d2">0.00010815382177301668</data>
+    </edge>
+    <edge source="79" target="86" id="0">
+      <data key="d2">0.00041571625244003286</data>
+    </edge>
+    <edge source="81" target="86" id="0">
+      <data key="d2">0.0005509085296563036</data>
+    </edge>
+    <edge source="83" target="86" id="0">
+      <data key="d2">0.0012539083711809122</data>
+    </edge>
+    <edge source="85" target="86" id="0">
+      <data key="d2">0.0008145334702280318</data>
+    </edge>
+    <edge source="87" target="86" id="0">
+      <data key="d2">0.0017304611483682669</data>
+    </edge>
+    <edge source="89" target="86" id="0">
+      <data key="d2">0.00021292783661562656</data>
+    </edge>
+    <edge source="91" target="86" id="0">
+      <data key="d2">0.0011153362870342345</data>
+    </edge>
+    <edge source="93" target="86" id="0">
+      <data key="d2">0.00030756243066701615</data>
+    </edge>
+    <edge source="95" target="86" id="0">
+      <data key="d2">0.011863122325727766</data>
+    </edge>
+    <edge source="97" target="86" id="0">
+      <data key="d2">0.0014499371731445047</data>
+    </edge>
+    <edge source="99" target="86" id="0">
+      <data key="d2">0.012731732706842306</data>
+    </edge>
+    <edge source="101" target="86" id="0">
+      <data key="d2">0.0007739757870631505</data>
+    </edge>
+    <edge source="103" target="86" id="0">
+      <data key="d2">0.0010308411137740653</data>
+    </edge>
+    <edge source="105" target="86" id="0">
+      <data key="d2">0.0017946774800459955</data>
+    </edge>
+    <edge source="107" target="86" id="0">
+      <data key="d2">7.435575246894897e-05</data>
+    </edge>
+    <edge source="113" target="86" id="0">
+      <data key="d2">0.00023996629205888075</data>
+    </edge>
+    <edge source="115" target="86" id="0">
+      <data key="d2">0.0014871150493789792</data>
+    </edge>
+    <edge source="117" target="86" id="0">
+      <data key="d2">0.00018250957424196563</data>
+    </edge>
+    <edge source="109" target="86" id="0">
+      <data key="d2">0.0005779469850995579</data>
+    </edge>
+    <edge source="111" target="86" id="0">
+      <data key="d2">0.0028593166631241283</data>
+    </edge>
+    <edge source="119" target="86" id="0">
+      <data key="d2">0.00023996629205888075</data>
+    </edge>
+    <edge source="121" target="86" id="0">
+      <data key="d2">0.00048669219797857504</data>
+    </edge>
+    <edge source="123" target="86" id="0">
+      <data key="d2">1.3519227721627085e-05</data>
+    </edge>
+    <edge source="125" target="86" id="0">
+      <data key="d2">0.00022982687126766043</data>
+    </edge>
+    <edge source="127" target="86" id="0">
+      <data key="d2">0.00205154280675691</data>
+    </edge>
+    <edge source="129" target="86" id="0">
+      <data key="d2">8.449517326016927e-05</data>
+    </edge>
+    <edge source="131" target="86" id="0">
+      <data key="d2">7.097594553854219e-05</data>
+    </edge>
+    <edge source="133" target="86" id="0">
+      <data key="d2">5.407691088650834e-05</data>
+    </edge>
+    <edge source="29" target="9" id="0">
+      <data key="d2">1.3476920699376425e-08</data>
+    </edge>
+    <edge source="29" target="11" id="0">
+      <data key="d2">7.120914438571166e-07</data>
+    </edge>
+    <edge source="29" target="15" id="0">
+      <data key="d2">7.948054783604669e-10</data>
+    </edge>
+    <edge source="29" target="17" id="0">
+      <data key="d2">7.368820615086524e-09</data>
+    </edge>
+    <edge source="29" target="23" id="0">
+      <data key="d2">4.3087855877305314e-08</data>
+    </edge>
+    <edge source="29" target="31" id="0">
+      <data key="d2">6.6663443900459506e-09</data>
+    </edge>
+    <edge source="29" target="33" id="0">
+      <data key="d2">4.068373521616675e-09</data>
+    </edge>
+    <edge source="29" target="41" id="0">
+      <data key="d2">5.159131912779715e-09</data>
+    </edge>
+    <edge source="29" target="47" id="0">
+      <data key="d2">2.74773711947507e-08</data>
+    </edge>
+    <edge source="29" target="57" id="0">
+      <data key="d2">5.6137531049464457e-08</data>
+    </edge>
+    <edge source="29" target="63" id="0">
+      <data key="d2">3.7310579187333675e-08</data>
+    </edge>
+    <edge source="29" target="65" id="0">
+      <data key="d2">5.2423224176857e-08</data>
+    </edge>
+    <edge source="29" target="67" id="0">
+      <data key="d2">7.442031607456599e-08</data>
+    </edge>
+    <edge source="29" target="75" id="0">
+      <data key="d2">1.1622694994281316e-08</data>
+    </edge>
+    <edge source="29" target="77" id="0">
+      <data key="d2">2.264263293254107e-08</data>
+    </edge>
+    <edge source="29" target="83" id="0">
+      <data key="d2">3.1630734838226395e-09</data>
+    </edge>
+    <edge source="29" target="95" id="0">
+      <data key="d2">4.806600876868158e-09</data>
+    </edge>
+    <edge source="29" target="99" id="0">
+      <data key="d2">1.404232646288092e-07</data>
+    </edge>
+    <edge source="29" target="105" id="0">
+      <data key="d2">4.893088932557513e-09</data>
+    </edge>
+    <edge source="29" target="113" id="0">
+      <data key="d2">2.857053042241412e-09</data>
+    </edge>
+    <edge source="29" target="115" id="0">
+      <data key="d2">4.9162316357527414e-08</data>
+    </edge>
+    <edge source="29" target="121" id="0">
+      <data key="d2">5.411876096621359e-09</data>
+    </edge>
+    <edge source="29" target="123" id="0">
+      <data key="d2">6.1192183298947815e-09</data>
+    </edge>
+    <edge source="29" target="125" id="0">
+      <data key="d2">3.8148301486166384e-08</data>
+    </edge>
+    <edge source="29" target="129" id="0">
+      <data key="d2">1.3047510050568085e-08</data>
+    </edge>
+  </graph>
+</graphml>

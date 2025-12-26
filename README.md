@@ -34,6 +34,15 @@ If you clone the repository, you can install Epigrass with the following command
 $ uv sync
 ```
 
+## Running the Gradio Simulation Builder
+Epigrass now includes a modern web-based simulation builder built with Gradio. This interface allows you to create, edit, and run simulations easily.
+
+To launch the simulation builder:
+```bash
+$ uv run epigrass
+```
+This will start a local web server and provide a URL (usually `http://127.0.0.1:7860`) where you can access the interface.
+
 ## Running demos
 The source distribution comes with a few demos.
 ```bash

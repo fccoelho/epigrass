@@ -1,6 +1,6 @@
 [project]
 name = "epigrass"
-version = "3.1.0"
+version = "3.2.0"
 authors = [
     {name="Flávio Codeço Coelho", email="fccoelho@gmail.com"},
     {name="Claudia Torres Codeço", email="claudia.codeco@gmail.com"}
@@ -40,6 +40,7 @@ dependencies = [
     "plotly>=6.3.0",
     "pweave>=0.30.3",
     "pymysql>=1.1.1",
+    "recommonmark>=0.7.1",
     "redis>=5.2.1",
     "scikit-image>=0.25.0",
     "shapely>=2.0.6",
@@ -64,3 +65,4 @@ dev-dependencies = [
 
 [project.scripts]
 epirunner = "Epigrass.manager:main"
+epigrass = "Epigrass.epigrass_gui:main"
