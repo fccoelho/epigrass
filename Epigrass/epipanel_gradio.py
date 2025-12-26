@@ -746,9 +746,9 @@ def create_dashboard(pth:str):
     :return: Gradio interface
     """
     
-    with gr.Blocks(title="Epigrass Dashboard", theme=gr.themes.Soft()) as demo:
+    with gr.Blocks() as demo:
         gr.HTML("""<img src="https://github.com/fccoelho/epigrass/blob/master/Epigrass/egicon.png?raw=true"> <h1 align="center">Epigrass Dashboard</h1>""")
-        gr.Markdown("Dashboard interativo para visualização de Simulações")
+        gr.Markdown("## Dashboard interativo para visualização de Simulações")
         
         with gr.Row():
             with gr.Column(scale=1):
@@ -921,4 +921,4 @@ def show(pth):
 
 if __name__ == "__main__":
     demo = create_dashboard()
-    demo.launch(server_port=5006, share=False)
+    demo.launch(server_port=5006, share=False,title="Epigrass Dashboard", theme=gr.themes.Soft())

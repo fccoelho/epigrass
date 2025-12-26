@@ -307,7 +307,10 @@ with gr.Blocks(title="Epigrass Simulation Builder") as demo:
     )
 
 def main():
-    demo.launch(favicon_path="egicon.png")
+    demo.launch(favicon_path="egicon.png", 
+                theme=gr.themes.Soft(), 
+                title="Epigrass Simulation Builder"
+                )
 
 if __name__ == "__main__":
     main()
