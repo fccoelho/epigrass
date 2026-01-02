@@ -1,23 +1,22 @@
 [project]
 name = "epigrass"
-version = "4.1.0"
+version = "4.1.1"
 authors = [
-    {name="Flávio Codeço Coelho", email="fccoelho@gmail.com"},
-    {name="Claudia Torres Codeço", email="claudia.codeco@gmail.com"}
+    { name = "Flávio Codeço Coelho", email = "fccoelho@gmail.com" },
+    { name = "Claudia Torres Codeço", email = "claudia.codeco@gmail.com" },
 ]
 description = "Epidemiological Geo-Referenced Analysis and Simulation System"
 readme = "README.md"
-license = {text="GPLv3"}
+license = { text = "GPLv3" }
 requires-python = ">=3.12"
 classifiers = [
-    "License :: OSI Approved :: GPLv3 License",
     "Development Status :: 5 - Production/Stable",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
-    "Natural Language :: English",
-    "Topic :: Scientific/Epidemiology",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
 ]
 dependencies = [
     "altair>=5.5.0",
@@ -57,10 +56,7 @@ packages = ["Epigrass"]
 
 [tool.uv]
 package = true
-dev-dependencies = [
-    "pytest>=8.3.4",
-    "pytest-cov>=6.0.0",
-]
+dev-dependencies = ["pytest>=8.3.4", "pytest-cov>=6.0.0"]
 
 [project.scripts]
 epirunner = "Epigrass.manager:main"
