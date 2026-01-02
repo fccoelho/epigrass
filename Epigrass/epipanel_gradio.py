@@ -8,15 +8,23 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import base64
-from sqlalchemy import create_engine, text
+from functools import lru_cache 
 import glob
-from functools import lru_cache
+from sqlalchemy import create_engine, text
 import json
 
 # Ícone codificado
 enc_icon = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3ElEQVRYhe2WWQ7DIAxEH1XvVR+dmzkfVSJngWIW0VYZKV8EZgzDmABARFkhBDxomQs8z+tFvfoxBUG8nHkBgnircAlOwlt5LzxmkN4CbgFfJeB950vSrDHxUihOwtbEKxaQScKxQTUrCU87YJE5jnEeOJJfkdkxNUcTaDCnrbb0OCJRFbavmtySer3QVcAMI/5GEmaN1utNqAIhpjwghm8/Lsg2twbTd8CsU2/AlrnTTbhDbSX/swPgr2ZIeHl6QStX8tqsi79MBqxXMNcpu+LY7Ub0i48VdOv3CSxJ9X3LgJP02QAAAABJRU5ErkJggg=='
 with open('egicon.png', 'wb') as f:
     f.write(base64.b64decode(enc_icon))
+
+
+@lru_cache(maxsize=1)
+def get_engine(db_path):
+    """
+    Create a cached SQLAlchemy engine
+    """
+    return create_engine(f'sqlite:///{db_path}?check_same_thread=False')
 
 
 @lru_cache(maxsize=10)
@@ -28,10 +36,10 @@ def get_sims(fname):
     """
     full_path = os.path.join(fname, 'Epigrass.sqlite')
     if os.path.exists(full_path):
-        con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-        sims = con.execute(text("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"))
-        sim_names = [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
-        con.close()
+        engine = get_engine(full_path)
+        with engine.connect() as con:
+            sims = con.execute(text("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"))
+            sim_names = [s[0] for s in sims if not (s[0].endswith('_meta') or s[0].endswith('e'))]
         return sim_names
     else:
         print(f'==> File {full_path} not found')
@@ -53,30 +61,46 @@ def get_meta_table(fname, simname):
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if os.path.exists(full_path):
         mname = simname + '_meta'
-        con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-        df = pd.read_sql_query(f"select * from {mname}", con)
-        con.close()
+        engine = get_engine(full_path)
+        with engine.connect() as con:
+            df = pd.read_sql_query(f"select * from {mname}", con)
     else:
         df = pd.DataFrame()
         get_meta_table.cache_clear()
     return df
 
 
-@lru_cache(maxsize=10)
-def read_simulation(fname, simulation_name, locality=None):
+@lru_cache(maxsize=20)
+def read_simulation(fname, simulation_name, locality=None, time=None, columns=None):
+    """
+    Read simulation data with optional filtering for locality and time
+    """
     full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
     if not os.path.exists(full_path):
         print(f'==> File {full_path} not found')
         read_simulation.cache_clear()
         return pd.DataFrame()
 
-    con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-    if locality is None:
-        simdf = pd.read_sql_query(f"select * from {simulation_name}", con)
-    else:
-        simdf = pd.read_sql_query(f"select * from {simulation_name} where name='{locality}'", con)
+    engine = get_engine(full_path)
+    
+    col_str = "*"
+    if columns:
+        col_str = ", ".join(columns)
+        
+    query = f"select {col_str} from {simulation_name}"
+    conditions = []
+    if locality:
+        conditions.append(f"name='{locality}'")
+    if time is not None:
+        conditions.append(f"time={time}")
+        
+    if conditions:
+        query += " where " + " and ".join(conditions)
+
+    with engine.connect() as con:
+        simdf = pd.read_sql_query(query, con)
+    
     simdf.fillna(0, inplace=True)
-    con.close()
     return simdf
 
 
@@ -87,20 +111,44 @@ def get_localities(fname, simulation_name) -> list:
         print(f'==> File {full_path} not found')
         get_localities.cache_clear()
         return []
-    con = create_engine(f'sqlite:///{full_path}?check_same_thread=False').connect()
-    locs = pd.read_sql_query(f'select distinct name from {simulation_name}', con)
+    engine = get_engine(full_path)
+    with engine.connect() as con:
+        locs = pd.read_sql_query(f'select distinct name from {simulation_name}', con)
     localities = [l[0] for l in locs.values]
-    con.close()
     return localities
 
 
-@lru_cache(maxsize=10)
+@lru_cache(maxsize=20)
+def get_max_time(fname, simulation_name):
+    full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
+    if not os.path.exists(full_path):
+        return 0
+    engine = get_engine(full_path)
+    with engine.connect() as con:
+        res = con.execute(text(f"SELECT max(time) FROM {simulation_name}"))
+        max_t = res.fetchone()[0]
+    return max_t if max_t is not None else 0
+
+
+@lru_cache(maxsize=5)
 def read_map(fname):
     if os.path.exists(fname):
-        return gpd.read_file(fname)
+        gdf = gpd.read_file(fname)
+        if hasattr(gdf, 'geometry') and hasattr(gdf.geometry, 'centroid'):
+            gdf['lat'] = gdf.geometry.centroid.y
+            gdf['lon'] = gdf.geometry.centroid.x
+        return gdf
     else:
         read_map.cache_clear()
         return gpd.GeoDataFrame()
+
+
+@lru_cache(maxsize=5)
+def get_map_geojson(fname):
+    gdf = read_map(fname)
+    if not gdf.empty:
+        return gdf.__geo_interface__
+    return None
 
 
 def get_subgraph(G, node):
@@ -177,7 +225,8 @@ def create_simulation_table(model_path, simulation_run):
     if not simulation_run:
         return pd.DataFrame()
     
-    df = read_simulation(model_path, simulation_run)
+    max_time = get_max_time(model_path, simulation_run)
+    df = read_simulation(model_path, simulation_run, time=max_time)
     if df.empty:
         return pd.DataFrame()
     
@@ -221,6 +270,7 @@ def create_simulation_table(model_path, simulation_run):
     return table_data
 
 
+@lru_cache(maxsize=10)
 def zoom_to_location(model_path, location_name):
     """Create a zoomed version of the map focused on a specific location"""
     if not location_name:
@@ -243,20 +293,15 @@ def zoom_to_location(model_path, location_name):
             showarrow=True, font=dict(size=16)
         )
     
-    # Extract coordinates from geometry
-    if hasattr(mapdf.geometry, 'centroid'):
-        mapdf['lat'] = mapdf.geometry.centroid.y
-        mapdf['lon'] = mapdf.geometry.centroid.x
-        selected_lat = selected_location.geometry.centroid.y.iloc[0]
-        selected_lon = selected_location.geometry.centroid.x.iloc[0]
-    else:
-        return go.Figure()
+    # selected_location already has lat/lon from read_map
+    selected_lat = selected_location['lat'].iloc[0]
+    selected_lon = selected_location['lon'].iloc[0]
     
     # Create focused map with both choropleth and highlighted location
     fig = go.Figure()
     
-    # Convert geometry to GeoJSON format for choropleth
-    mapdf_json = mapdf.__geo_interface__
+    # Get cached GeoJSON
+    mapdf_json = get_map_geojson(os.path.join(model_path, 'Data.gpkg'))
     
     # Add choropleth trace
     fig.add_trace(
@@ -336,25 +381,21 @@ def zoom_to_location(model_path, location_name):
     return fig
 
 
+@lru_cache(maxsize=5)
 def create_final_map(model_path, map_selector, simulation_run):
     """Create final state map visualization with interactive bar chart and zoomable choropleth"""
     if not map_selector or not simulation_run:
         return go.Figure()
     
-    mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
+    map_path = os.path.join(model_path, 'Data.gpkg')
+    mapdf = read_map(map_path)
     if mapdf.empty:
         return go.Figure()
     
     # Get top 15 locations by total cases
     map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
     
-    # Extract coordinates from geometry
-    if hasattr(mapdf.geometry, 'centroid'):
-        mapdf['lat'] = mapdf.geometry.centroid.y
-        mapdf['lon'] = mapdf.geometry.centroid.x
-    else:
-        mapdf['lat'] = 0
-        mapdf['lon'] = 0
+    # mapdf already has lat/lon from read_map
     
     # Create subplot with bar chart and choropleth map
     fig = make_subplots(
@@ -384,8 +425,8 @@ def create_final_map(model_path, map_selector, simulation_run):
     
     # Create choropleth map using the geometry data
     if hasattr(mapdf, 'geometry') and not mapdf.empty:
-        # Convert geometry to GeoJSON format for choropleth
-        mapdf_json = mapdf.__geo_interface__
+        # Get cached GeoJSON
+        mapdf_json = get_map_geojson(map_path)
         
         # Add choropleth trace
         fig.add_trace(
@@ -445,6 +486,7 @@ def create_final_map(model_path, map_selector, simulation_run):
     return fig
 
 
+@lru_cache(maxsize=10)
 def create_network_viz(model_path, localities):
     """Create network visualization around selected locality using geographic coordinates"""
     if not localities:
@@ -490,99 +532,121 @@ def create_network_viz(model_path, localities):
             pos[node[0]] = (0, 0)
     
     # Prepare edge traces using geographic coordinates
-    edge_x = []
-    edge_y = []
-    for edge in H.edges():
+    edge_lon = []
+    edge_lat = []
+    selected_node_id = nodeloc[0][0]
+    for edge in H.edges(selected_node_id):
         if edge[0] in pos and edge[1] in pos:
-            x0, y0 = pos[edge[0]]
-            x1, y1 = pos[edge[1]]
-            edge_x.extend([x0, x1, None])
-            edge_y.extend([y0, y1, None])
+            lon0, lat0 = pos[edge[0]]
+            lon1, lat1 = pos[edge[1]]
+            edge_lon.extend([lon0, lon1, None])
+            edge_lat.extend([lat0, lat1, None])
     
-    edge_trace = go.Scatter(
-        x=edge_x, y=edge_y,
-        line=dict(width=2, color='gray'),
+    edge_trace = go.Scattergeo(
+        lon=edge_lon, lat=edge_lat,
+        line=dict(width=1, color='gray'),
         hoverinfo='none',
         mode='lines',
         name='Conexões'
     )
     
     # Prepare node traces using geographic coordinates
-    node_x = []
-    node_y = []
+    node_lon = []
+    node_lat = []
     node_text = []
     node_colors = []
     node_info = []
     
     for node in H.nodes(data=True):
         if node[0] in pos:
-            x, y = pos[node[0]]
-            node_x.append(x)
-            node_y.append(y)
+            lon, lat = pos[node[0]]
+            node_lon.append(lon)
+            node_lat.append(lat)
             node_name = node[1].get('name', str(node[0]))
             node_text.append(node_name)
-            node_info.append(f"<b>{node_name}</b><br>Lon: {x:.4f}<br>Lat: {y:.4f}")
+            node_info.append(f"<b>{node_name}</b><br>Lon: {lon:.4f}<br>Lat: {lat:.4f}")
             # Highlight selected node
             node_colors.append('red' if node[0] == nodeloc[0][0] else 'lightblue')
     
-    node_trace = go.Scatter(
-        x=node_x, y=node_y,
+    node_trace = go.Scattergeo(
+        lon=node_lon, lat=node_lat,
         mode='markers+text',
         text=node_text,
-        textposition="middle center",
+        textposition="top center",
         hovertemplate='%{customdata}<extra></extra>',
         customdata=node_info,
         marker=dict(
-            size=20,
+            size=10,
             color=node_colors,
-            line=dict(width=2, color='black')
+            line=dict(width=1, color='black')
         ),
         name='Localidades'
     )
     
-    fig = go.Figure(data=[edge_trace, node_trace])
+    # Create Choropleth as base layer
+    map_path = os.path.join(model_path, 'Data.gpkg')
+    mapdf_json = get_map_geojson(map_path)
     
+    choropleth_base = go.Choropleth(
+        geojson=mapdf_json,
+        locations=mapdf.index,
+        z=mapdf['totalcases'] if 'totalcases' in mapdf.columns else [0]*len(mapdf),
+        colorscale='YlOrRd',
+        showscale=False,
+        hoverinfo='skip',
+        marker=dict(opacity=0.5, line=dict(width=0.5, color='gray'))
+    )
+    
+    fig = go.Figure(data=[choropleth_base, edge_trace, node_trace])
+    
+    # Calculate bounds
+    lat_center = mapdf['lat'].mean()
+    lon_center = mapdf['lon'].mean()
+    lat_range = mapdf['lat'].max() - mapdf['lat'].min()
+    lon_range = mapdf['lon'].max() - mapdf['lon'].min()
+    lat_padding = lat_range * 0.2 if lat_range > 0 else 0.5
+    lon_padding = lon_range * 0.2 if lon_range > 0 else 0.5
+
     fig.update_layout(
-        title=f'🕸️ Rede Geográfica ao redor de {localities}',
+        title=f'🕸️ Rede Geográfica sobre Mapa Coroplético - {localities}',
         showlegend=False,
-        hovermode='closest',
-        margin=dict(b=20,l=5,r=5,t=40),
-        xaxis=dict(
-            title="Longitude",
-            showgrid=True,
-            zeroline=False
-        ),
-        yaxis=dict(
-            title="Latitude", 
-            showgrid=True,
-            zeroline=False
-        ),
-        plot_bgcolor='lightgray'
+        height=600,
+        margin=dict(b=0,l=0,r=0,t=40)
+    )
+    
+    fig.update_geos(
+        projection_type="natural earth",
+        showland=True,
+        landcolor="lightgray",
+        showocean=True,
+        oceancolor="lightblue",
+        center=dict(lat=lat_center, lon=lon_center),
+        lataxis_range=[mapdf['lat'].min() - lat_padding, mapdf['lat'].max() + lat_padding],
+        lonaxis_range=[mapdf['lon'].min() - lon_padding, mapdf['lon'].max() + lon_padding],
+        projection_scale=1.2
     )
     
     return fig
 
 
+@lru_cache(maxsize=20)
 def create_temporal_map(model_path, simulation_run, time_slider):
     """Create temporal choropleth map at specific time"""
     if not simulation_run:
         return go.Figure()
     
     mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
-    df = read_simulation(model_path, simulation_run)
+    df_time = read_simulation(model_path, simulation_run, time=time_slider)
     
-    if mapdf.empty or df.empty:
+    if mapdf.empty or df_time.empty:
         return go.Figure()
     
-    # Get data for specific time
-    df_time = df[df.time == time_slider]
-    if df_time.empty:
-        return go.Figure()
+    # df_time is already filtered to time_slider
     
-    variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
+    variables = [c for c in df_time.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
     
     # Merge with map data
-    name_col = [c for c in mapdf.columns if df.name.iloc[0] in list(mapdf[c])][0] if len(df) > 0 else 'name'
+    name_col = [c for c in mapdf.columns if df_time.name.iloc[0] in list(mapdf[c])][0] if len(df_time) > 0 else 'name'
     mapa_t = pd.merge(mapdf, df_time[['name', 'time'] + variables], 
                       left_on=name_col, right_on='name', how='left')
     
@@ -596,15 +660,7 @@ def create_temporal_map(model_path, simulation_run, time_slider):
     if main_var not in mapa_t.columns:
         main_var = variables[0] if variables else 'incidence'
     
-    # Extract coordinates from geometry for centering
-    if hasattr(mapdf.geometry, 'centroid'):
-        mapdf['lat'] = mapdf.geometry.centroid.y
-        mapdf['lon'] = mapdf.geometry.centroid.x
-        mapa_t['lat'] = mapa_t.geometry.centroid.y
-        mapa_t['lon'] = mapa_t.geometry.centroid.x
-    else:
-        mapa_t['lat'] = 0
-        mapa_t['lon'] = 0
+    # mapa_t already has lat/lon from read_map (via mapdf merge)
     
     # Create choropleth map
     fig = go.Figure()
@@ -673,20 +729,17 @@ def create_temporal_map(model_path, simulation_run, time_slider):
     return fig
 
 
+@lru_cache(maxsize=10)
 def create_time_series(model_path, simulation_run, localities):
     """Create time series plots for selected locality"""
     if not simulation_run or not localities:
         return go.Figure()
     
-    df = read_simulation(model_path, simulation_run)
-    if df.empty:
-        return go.Figure()
-    
-    df_loc = df[df.name == localities]
+    df_loc = read_simulation(model_path, simulation_run, locality=localities)
     if df_loc.empty:
         return go.Figure()
     
-    variables = [c for c in df.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
+    variables = [c for c in df_loc.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
     
     # Create subplots for different variables
     n_vars = len(variables)
@@ -870,28 +923,32 @@ def create_dashboard(pth:str):
         )
         
         # Update plots when inputs change
-        inputs_list = [model_path, map_selector, simulation_run, localities, time_slider]
-        
-        for inp in inputs_list:
-            if not inp == time_slider:  # Do not update final map when time_slider changes
-                inp.change(
-                    fn=create_final_map,
-                    inputs=[model_path, map_selector, simulation_run],
-                    outputs=[final_map]
-                )
+        # Final Map update
+        for inp in [model_path, map_selector, simulation_run]:
+            inp.change(
+                fn=create_final_map,
+                inputs=[model_path, map_selector, simulation_run],
+                outputs=[final_map]
+            )
             
+        # Network Viz update
+        for inp in [model_path, localities]:
             inp.change(
                 fn=create_network_viz,
                 inputs=[model_path, localities],
                 outputs=[network_plot]
             )
             
+        # Temporal Map update
+        for inp in [model_path, simulation_run, time_slider]:
             inp.change(
                 fn=create_temporal_map,
                 inputs=[model_path, simulation_run, time_slider],
                 outputs=[temporal_map]
             )
             
+        # Time Series update
+        for inp in [model_path, simulation_run, localities]:
             inp.change(
                 fn=create_time_series,
                 inputs=[model_path, simulation_run, localities],

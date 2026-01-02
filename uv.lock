@@ -775,7 +775,7 @@ wheels = [
 
 [[package]]
 name = "epigrass"
-version = "3.2.0"
+version = "4.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "altair" },

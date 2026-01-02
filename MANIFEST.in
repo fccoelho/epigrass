@@ -3,7 +3,7 @@ include egicon.png
 include epigrass.desktop
 include COPYING
 recursive-include demos/Florida *.py *.epg *.csv *.shp *.shx *.dbf
-recursive-include demos *.py *.epg *.csv *.shp *.shx *.dbf
+recursive-include demos *.py *.epg *.csv *.shp *.shx *.dbf *gpkg
 #prune demos/outdata-*
 #prune demos/Florida/outdata-*
 recursive-include Epigrass *
