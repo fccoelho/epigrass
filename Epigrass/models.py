@@ -11,6 +11,7 @@ from numpy import inf, nan, nan_to_num
 import numpy as np
 import sys
 import redis
+import json
 from epimodels.continuous.models import SIR, SEIR
 # import numba
 # from numba.typed import List
@@ -65,12 +66,14 @@ class Epimodel(object):
         self.parallel = parallel
 
     def __call__(self, *args, **kwargs):
-        if not args:
+        is_parallel = not args  # If no args, it's the worker process call fetching from redis
+        if is_parallel:
             args = self.get_args_from_redis()
         args = [e if not isinstance(e, list) else tuple(e) for e in args]
         args.append(self)
         res = self.step(*tuple(args))
-        self.update_redis(res)
+        if is_parallel:
+            self.update_redis(res)
         return res
 
     # @cython.locals(simstep='long', totpop='long', theta='double', npass='double')
@@ -78,18 +81,42 @@ class Epimodel(object):
         """
         Get updated parameters from the redis database.
         """
-        # sinits = redisclient.lindex("{}:inits".format(self.geocode), -1)
-        # print(sinits)
-        inits = eval(redisclient.lindex(f"{self.geocode}:ts", -1))
-        simstep = int(redisclient.get("simstep"))
-        totpop = int(float(redisclient.get("{}:totpop".format(self.geocode))))
-        theta = int(nan_to_num(float(redisclient.get("{}:theta".format(self.geocode)))))
-        npass = int(float(redisclient.get("{}:npass".format(self.geocode))))
-        bi = redisclient.hgetall("{}:bi".format(self.geocode))
-        bi = {k: float(v) for k, v in bi.items()}
-        bp = redisclient.hgetall("{}:bp".format(self.geocode))
-        bp = {k: float(v) for k, v in bp.items()}
-        values = [float(i) for i in redisclient.lrange("{}:values".format(self.geocode), 0, -1)]
+        pipe = redisclient.pipeline()
+        pipe.lindex(f"{self.geocode}:ts", -1)
+        pipe.get("simstep")
+        pipe.get("{}:totpop".format(self.geocode))
+        pipe.get("{}:theta".format(self.geocode))
+        pipe.get("{}:npass".format(self.geocode))
+        pipe.hgetall("{}:bi".format(self.geocode))
+        pipe.hgetall("{}:bp".format(self.geocode))
+        pipe.lrange("{}:values".format(self.geocode), 0, -1)
+        
+        responses = pipe.execute()
+        
+        res_ts = responses[0]
+        inits = json.loads(res_ts) if res_ts else []
+        
+        simstep_val = responses[1]
+        simstep = int(simstep_val) if simstep_val else 0
+        
+        totpop_val = responses[2]
+        totpop = int(float(totpop_val)) if totpop_val else 0
+        
+        theta_val = responses[3]
+        theta = int(nan_to_num(float(theta_val))) if theta_val else 0
+        
+        npass_val = responses[4]
+        npass = int(float(npass_val)) if npass_val else 0
+        
+        bi_resp = responses[5]
+        bi = {k.decode() if isinstance(k, bytes) else k: float(v) for k, v in bi_resp.items()}
+        
+        bp_resp = responses[6]
+        bp = {k.decode() if isinstance(k, bytes) else k: float(v) for k, v in bp_resp.items()}
+        
+        values_raw = responses[7]
+        values = [float(i) for i in values_raw]
+        
         return inits, simstep, totpop, theta, npass, bi, bp, values
 
     def update_redis(self, results):
@@ -99,24 +126,37 @@ class Epimodel(object):
         """
         # Site state
         state, Lpos, migInf = results
-        # print("Updating redis: ", state, migInf)
-        # redisclient.rpush("{}:inits".format(self.geocode), str(state))  # updating inits
-        redisclient.rpush('{}:ts'.format(self.geocode), str(state))
-        redisclient.set('{}:Lpos'.format(self.geocode), Lpos)
+        
+        # First batch: Fetch current totalcases and simstep
+        pipe = redisclient.pipeline()
+        pipe.get('{}:totalcases'.format(self.geocode))
+        pipe.get("simstep")
+        prev_data = pipe.execute()
+        
+        totc_val = prev_data[0]
+        simstep_val = prev_data[1]
+        
         try:
-            totc = int(nan_to_num(float(redisclient.get('{}:totalcases'.format(self.geocode)))))
-        except ValueError:
-            totc = int(nan_to_num(eval(redisclient.get('{}:totalcases'.format(self.geocode)))))
-        redisclient.set('{}:totalcases'.format(self.geocode), Lpos + totc)
-        redisclient.rpush('{}:incidence'.format(self.geocode), Lpos)
-        redisclient.set('{}:migInf'.format(self.geocode), migInf)
-
-        # Graph state
+            totc = int(nan_to_num(float(totc_val))) if totc_val else 0
+        except (ValueError, TypeError):
+            try:
+                totc = int(nan_to_num(json.loads(totc_val))) if totc_val else 0
+            except:
+                totc = 0
+        
+        # Second batch: Update all values
+        pipe = redisclient.pipeline()
+        pipe.rpush('{}:ts'.format(self.geocode), json.dumps(state))
+        pipe.set('{}:Lpos'.format(self.geocode), Lpos)
+        pipe.set('{}:totalcases'.format(self.geocode), Lpos + totc)
+        pipe.rpush('{}:incidence'.format(self.geocode), Lpos)
+        pipe.set('{}:migInf'.format(self.geocode), migInf)
+        
         if Lpos > 0:
-            infected = int(redisclient.get("simstep"))
-            redisclient.rpush("epipath", str((infected, self.geocode, {})))  # TODO: replace empty dict with infectors
-            # self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
-            # TODO: have infector be stated in terms of geocodes
+            infected = int(simstep_val) if simstep_val else 0
+            pipe.rpush("epipath", str((infected, self.geocode, {})))
+            
+        pipe.execute()
 
 
 # @cython.locals(Type='bytes')

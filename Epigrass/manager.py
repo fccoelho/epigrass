@@ -391,7 +391,7 @@ class Simulate:
         Saves the time series *site.ts* to outfile as specified on the
         model script.
         """
-        ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
+        ts = array(site.ts)
         data = array(ts, float)
         inc = site.incidence
         f = open(self.outdir + self.outfile, 'w')
@@ -440,7 +440,7 @@ class Simulate:
                 ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
                 data = []
                 for site in site_dict.values():
-                    ts = [eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)]
+                    ts = site.ts
                     for t, p in enumerate(ts):
                         data.append((str(site.geocode), t, p[i]))
                 ka.add_data(data)
@@ -489,49 +489,57 @@ class Simulate:
         """
         Save simulation results in csv file.
         """
+        import gzip
+        import csv
+        
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
         tablee = table + "_" + self.now + "_e.csv.gz"  # edgetable name
-        table += "_" + self.now + ".csv.gz"  # sitetable name
+        table = table + "_" + self.now + ".csv.gz"  # sitetable name
 
-        head = ['geocode', 'time', 'totpop', 'name',
-                'lat', 'longit']
+        # Sitetable output
+        with gzip.open(table, 'wt', encoding='utf-8') as f:
+            writer = None
+            for site in self.g.site_dict.values():
+                t = 0
+                regb = [site.geocode, t, site.totpop,
+                        str(site.sitename).strip('"'),
+                        site.pos[0], site.pos[1]
+                        ]
+                if site.values:
+                    regb.extend([v for v in site.values])
+                
+                ts = array(site.ts[1:])  # remove init conds
+                for i in ts:
+                    reg = list(regb)
+                    try:
+                        reg.extend([site.incidence[t], site.thetahist[t]])
+                    except IndexError:
+                        pass
+                    reg[1] = t
+                    reg.extend(list(i))
+                    
+                    if writer is None:
+                        # Initialize header on first row
+                        head = ['geocode', 'time', 'totpop', 'name', 'lat', 'longit']
+                        if site.values:
+                            head.extend([f'value{n}' for n in range(len(site.values))])
+                        head.extend(['incidence', 'arrivals'])
+                        head.extend(site.vnames)
+                        writer = csv.writer(f)
+                        writer.writerow(head)
+                    
+                    writer.writerow(reg)
+                    t += 1
 
-        records = []
-        for site in self.g.site_dict.values():
-            t = 0
-            regb = [str(site.geocode), str(t), str(site.totpop),
-                    str(site.sitename).strip('"').encode('utf8', 'replace'),
-                    str(site.pos[0]), str(site.pos[1])
-                    ]
-            if site.values:
-                for n, v in enumerate(site.values):
-                    regb.append(str(v))
-            # print site.sitename, site.ts
-            ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
-            # ts = array([eval(st) for st in redisclient.lrange(f'{site.geocode}:ts', 0, -1)])
-
-            for i in ts:
-                reg = deepcopy(regb)
-                try:
-                    reg.extend([str(site.incidence[t]), str(site.thetahist[t])])
-                except IndexError:
-                    print(len(site.incidence),len(site.thetahist),t)
-                reg[1] = str(t)
-                for n, v in enumerate(site.vnames):
-                    reg.append(str(i[n]))
-                records.append(reg)
-                t += 1
-        values = [f'value{n}' for n in range(len(site.values))]
-        site_df = pd.DataFrame(columns=head+values+['incidence', 'arrivals']+site.vnames, data=records)
-        site_df.to_csv(table)
-
+        # Edgetable output
         head = ['source_code', 'dest_code', 'time', 'ftheta', 'btheta']
-
-        records = [[e.source.geocode, e.dest.geocode, t, f, b] for t, e in enumerate(self.g.edge_list) for f, b in zip(e.ftheta, e.btheta)]
-        edge_df = pd.DataFrame(columns=head, data=records)
-
-        edge_df.to_csv(tablee)
+        with gzip.open(tablee, 'wt', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(head)
+            for e in self.g.edge_list:
+                for t, (f_val, b_val) in enumerate(zip(e.ftheta, e.btheta)):
+                    writer.writerow([e.source.geocode, e.dest.geocode, t, f_val, b_val])
 
         os.chdir(self.dir)
 
@@ -633,6 +641,7 @@ class Simulate:
                 str3 = (nvar + 3) * '?,'
                 str3 = str3[:-1] + ')'
             sql2 = 'INSERT INTO %s' % table + ' VALUES(' + str3
+            chunk_size = 1000
             nvalues = []
             for site in self.g.site_dict.values():
                 geoc = site.geocode
@@ -640,7 +649,7 @@ class Simulate:
                 longit = site.pos[1]
                 name = site.sitename
                 ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
-                # ts = array([eval(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
+                # ts = array([json.loads(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
                 inc = site.incidence
                 thist = site.thetahist
                 t = 0
@@ -649,9 +658,15 @@ class Simulate:
                     flow = float(thist[t])
                     nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
                     t += 1
-            # print(nvalues[-1], len(ts[t]))
-            Cursor.executemany(sql2, nvalues)
-            con.commit()
+                    
+                    if len(nvalues) >= chunk_size:
+                        Cursor.executemany(sql2, nvalues)
+                        con.commit()
+                        nvalues = []
+            
+            if nvalues:
+                Cursor.executemany(sql2, nvalues)
+                con.commit()
             
             # Create indexes on time and geocode columns for better query performance
             print('Creating indexes on time and geocode columns...')
@@ -688,6 +703,7 @@ class Simulate:
             elif self.backend.lower() == "sqlite":
                 Cursor.execute(esqlite)
                 esql2 = 'INSERT INTO %s' % etable + ' VALUES(?,?,?,?,?)'
+            chunk_size = 1000
             values = []
             for gcs, e in self.g.edge_dict.items():
                 s = gcs[0]
@@ -696,7 +712,15 @@ class Simulate:
                 for f, b in zip(e.ftheta, e.btheta):
                     values.append((s, d, t, f, b))
                     t += 1
-            Cursor.executemany(esql2, values)
+                    
+                    if len(values) >= chunk_size:
+                        Cursor.executemany(esql2, values)
+                        con.commit()
+                        values = []
+            
+            if values:
+                Cursor.executemany(esql2, values)
+                con.commit()
             
             # Create indexes on edge table columns for better query performance
             print('Creating indexes on edge table columns...')
@@ -884,7 +908,53 @@ class Simulate:
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-        # redisclient.flushall()
+        
+        # Check if we can use vectorized migration
+        can_vectorize_migration = all(e.delay == 0 for e in edges) and all(s.stochtransp == 0 for s in sites)
+        
+        if can_vectorize_migration and not self.parallel:
+            # Build migration matrix once
+            site_to_idx = {s.geocode: i for i, s in enumerate(sites)}
+            num_sites = len(sites)
+            # M[i, j] is flow from j to i
+            M = np.zeros((num_sites, num_sites))
+            for e in edges:
+                idx_src = site_to_idx[e.source.geocode]
+                idx_dst = site_to_idx[e.dest.geocode]
+                M[idx_dst, idx_src] = e.fmig
+                M[idx_src, idx_dst] = e.bmig
+            
+            # Pre-calculate totals for each site (passengers departing)
+            # This is used for npass in runModel
+            Departure_matrix = M.sum(axis=0) # Total departing from each site j
+            
+            for n in tqdm(range(iterations), desc='Simulation steps (vectorized)'):
+                # 1. Run models
+                # We still run them one by one for compatibility, but avoid the migrate object loop
+                for i in sites:
+                    i.runModel(False)
+                
+                # 2. Vectorized Migration
+                # migInf_arr[j] is the proportion of infectious at site j
+                # We need the last state's I compartment or whatever migInf is
+                # site.migInf[-1] is the value calculated in handle()
+                mig_props = np.array([s.migInf[-1] / s.totpop if s.totpop > 0 else 0 for s in sites])
+                
+                # Arrivals = M @ mig_props
+                theta_arrivals = M @ mig_props
+                npass_arrivals = Departure_matrix # This is constant if fmig/bmig are constant
+                
+                # Update sites with arrivals for the NEXT step
+                # Note: runModel uses thetalist/passlist from PREVIOUS migrate calls
+                for idx, s in enumerate(sites):
+                    s.thetalist = [(None, theta_arrivals[idx])]
+                    s.passlist = [npass_arrivals[idx]]
+                
+                g.simstep += 1
+                g.sites_done = 0
+            return
+
+        # Original loop if vectorization not possible or parallel is True
         if transp:
             for n in tqdm(range(iterations), desc='Simulation steps'):
                 # print()
