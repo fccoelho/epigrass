@@ -1,6 +1,6 @@
 [project]
 name = "epigrass"
-version = "4.1.1"
+version = "4.1.2"
 authors = [
     { name = "Flávio Codeço Coelho", email = "fccoelho@gmail.com" },
     { name = "Claudia Torres Codeço", email = "claudia.codeco@gmail.com" },
