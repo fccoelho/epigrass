@@ -812,7 +812,12 @@ class Simulate:
             if len(infectors):
                 reverse_infectors = list(infectors.items())
                 reverse_infectors.sort(key=lambda t: t[1])
-                mli = reverse_infectors[-1][0].sitename  # Most likely infector
+                # Safety check: ensure the infector object is not None
+                infector_site = reverse_infectors[-1][0]
+                if infector_site is not None:
+                    mli = infector_site.sitename # Most likely infector
+                else:
+                    mli = 'Unknown'
             else:
                 mli = 'NA'
             # print i[1].sitename, type(i[1].sitename), mli
@@ -946,8 +951,16 @@ class Simulate:
                 
                 # Update sites with arrivals for the NEXT step
                 # Note: runModel uses thetalist/passlist from PREVIOUS migrate calls
+                contributions = M * mig_props # Element-wise: M[i,j] * mig_props[j]
                 for idx, s in enumerate(sites):
-                    s.thetalist = [(None, theta_arrivals[idx])]
+                    # Find sites that contributed to theta_arrivals[idx]
+                    row_contributions = contributions[idx, :]
+                    contributing_indices = np.where(row_contributions > 0)[0]
+                    
+                    if contributing_indices.size > 0:
+                        s.thetalist = [(sites[j], row_contributions[j]) for j in contributing_indices]
+                    else:
+                        s.thetalist = []
                     s.passlist = [npass_arrivals[idx]]
                 
                 g.simstep += 1
