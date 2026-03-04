@@ -337,19 +337,43 @@ class siteobj:
 
     def getNeighbors(self):
         """
-        Returns a dictionary of neighbooring sites as keys,
-        and distances as values.
+        Returns a dictionary of neighboring sites as keys and distances as values.
+
+        Uses NetworkX's efficient neighbor iteration instead of manual edge traversal.
+        Results are cached in self.neighbors for performance.
+
+        Returns:
+        --------
+        dict : {siteobj: distance_in_km} mapping of neighbors to distances
         """
         if not self.isNode():
-            return []
+            return {}
         if self.neighbors:
             return self.neighbors
+
         neigh = {}
-        for i in self.edges:
-            n = [i.source, i.dest, i.length]
-            idx = n.index(self)
-            n.pop(idx)
-            neigh[n[0]] = n[-1]
+
+        # Use NetworkX's optimized neighbor iteration
+        # This is more efficient than iterating through all edges
+        for neighbor in self.parentGraph.neighbors(self):
+            # Get edge data between self and neighbor
+            # For MultiDiGraph, there might be multiple edges
+            edge_data = self.parentGraph.get_edge_data(self, neighbor)
+
+            if edge_data:
+                # edge_data is a dict: {edge_key: {edge_attributes}}
+                # Get the first edge (or we could aggregate parallel edges)
+                first_edge_key = list(edge_data.keys())[0]
+                edge_attrs = edge_data[first_edge_key]
+
+                # Get the custom edge object stored in 'edgeobj' attribute
+                edge_obj = edge_attrs.get("edgeobj")
+
+                if edge_obj and hasattr(edge_obj, "length"):
+                    neigh[neighbor] = edge_obj.length
+                else:
+                    # If no length available, use 0 or topological distance
+                    neigh[neighbor] = 0
 
         self.neighbors = neigh
         return neigh
