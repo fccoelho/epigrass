@@ -1192,7 +1192,7 @@ def onStraightRun(args):
         S.start()
         spread.Spread(S.g)
         R = report.Report(S)
-        R.Assemble(reporttype=S.Rep)
+        R.assemble(report_type=S.Rep)
     else:
         repRuns(S)
     if args.dashboard:

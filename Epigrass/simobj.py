@@ -1,6 +1,7 @@
 """
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
+
 import sys
 import multiprocessing
 import time
@@ -24,7 +25,7 @@ except ImportError as exc:
     CustomModel = None
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
-redisclient = redis.Redis(host='localhost', port=6379)
+redisclient = redis.Redis(host="localhost", port=6379)
 assert redisclient.ping()  # verify that redis server is running.
 
 # logger = multiprocessing.log_to_stderr()
@@ -76,7 +77,7 @@ class siteobj:
         self.thetalist = []
         self.thetahist = []  # infected arriving per time step
         self.passlist = []
-        self.totalcases = 0 # Cumulative total cases up to current time step
+        self.totalcases = 0  # Cumulative total cases up to current time step
         self.vaccination = [[], []]  # time and coverage of vaccination event
         self.vaccineNow = 0  # flag to indicate that it is vaccination day
         self.vaccov = 0  # current vaccination coverage
@@ -102,7 +103,7 @@ class siteobj:
         print("Time to runModel: ", time.time() - t0)
         return self
 
-    def createModel(self, modtype='', modelname='name',v=[], bi=None, bp=None):
+    def createModel(self, modtype="", modelname="name", v=[], bi=None, bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total
@@ -114,14 +115,15 @@ class siteobj:
         # Init = init  # deprecated
         self.modename = modelname
         N = self.totpop
-        self.modtype = bytes(modtype, 'utf8')
+        self.modtype = bytes(modtype, "utf8")
         self.values = v
         self.bi = bi
         self.bp = bp
-        if modtype in ['Custom', 'custom']:
+        if modtype in ["Custom", "custom"]:
             if CustomModel is None:
                 raise ImportError(
-                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type")
+                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
+                )
             self.model = CustomModel.Model
             self.vnames = CustomModel.vnames
         else:
@@ -131,12 +133,12 @@ class siteobj:
             # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
             self.ts.append(list(bi.values()))  # This is fine since bi is an OrderedDict
         except KeyError as ke:
-            if self.vnames == ['Exposed', 'Infectious', 'Susceptible']:
-                self.ts = [[bi[vn] for vn in ['e', 'i', 's']]]
+            if self.vnames == ["Exposed", "Infectious", "Susceptible"]:
+                self.ts = [[bi[vn] for vn in ["e", "i", "s"]]]
             else:
-                raise KeyError('%s' % ke)
-        self.bp['vaccineNow'] = 0
-        self.bp['vaccov'] = 0
+                raise KeyError("%s" % ke)
+        self.bp["vaccineNow"] = 0
+        self.bp["vaccov"] = 0
 
     #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
@@ -149,15 +151,18 @@ class siteobj:
 
         if self.parentGraph.simstep in self.vaccination[0]:
             self.vaccineNow = 1
-            self.vaccov = float(self.vaccination[1][self.vaccination[0].index(self.parentGraph.simstep)])
-            self.bp['vaccineNow'] = 1
-            self.bp['vaccov'] = self.vaccov
+            self.vaccov = float(
+                self.vaccination[1][self.vaccination[0].index(self.parentGraph.simstep)]
+            )
+            self.bp["vaccineNow"] = 1
+            self.bp["vaccov"] = self.vaccov
         else:
-            self.bp['vaccineNow'] = 0
+            self.bp["vaccineNow"] = 0
         if self.thetalist != []:
             theta = sum([i[1] for i in self.thetalist])
             self.infector = dict(
-                [i for i in self.thetalist if i[1] > 0])  # Only those that contribute at least one infected individual
+                [i for i in self.thetalist if i[1] > 0]
+            )  # Only those that contribute at least one infected individual
         else:
             theta = 0
             self.infector = {}
@@ -181,7 +186,9 @@ class siteobj:
             pipe.execute()
             r = PO.apply_async(self.model, args=(), callback=self.handle)
         else:
-            res = self.model(inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values)
+            res = self.model(
+                inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values
+            )
             self.handle(res)
             r = None
 
@@ -199,15 +206,17 @@ class siteobj:
         :param res: Tuple with the output of the simulation model
         """
         state, Lpos, migInf = res
-        
+
         self.ts.append(state)
         self.totalcases += Lpos
         self.incidence.append(Lpos)
-        
+
         if not self.infected:
             if Lpos > 0:
                 self.infected = self.parentGraph.simstep
-                self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
+                self.parentGraph.epipath.append(
+                    (self.parentGraph.simstep, self.geocode, self.infector)
+                )
                 # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
 
@@ -265,7 +274,9 @@ class siteobj:
         """
         if self.thidx:
             return self.thidx
-        self.thidx = thidx = sum([(i.fmig + i.bmig) / 2. for i in self.edges]) / len(self.parentGraph.site_list)
+        self.thidx = thidx = sum([(i.fmig + i.bmig) / 2.0 for i in self.edges]) / len(
+            self.parentGraph.site_list
+        )
         return thidx
 
     def receiveTheta(self, thetai, npass, site):
@@ -305,9 +316,9 @@ class siteobj:
             return 0
 
     def getOutEdges(self):
-        '''
+        """
         return a list of outbound edges
-        '''
+        """
         if self.outedges:
             return self.outedges
         oe = [e for e in self.edges if self == e.source]
@@ -315,9 +326,9 @@ class siteobj:
         return oe
 
     def getInEdges(self):
-        '''
+        """
         return a list of outbound edges
-        '''
+        """
         if self.inedges:
             return self.inedges
         ie = [e for e in self.edges if self == e.dest]
@@ -357,14 +368,18 @@ class siteobj:
             if nei:
                 d = [e.length for e in self.edges if nei in e.sites][0]
             else:
-                sys.exit('%s is not a neighbor of %s!' % (nei[0].sitename, self.sitename))
+                sys.exit(
+                    "%s is not a neighbor of %s!" % (nei[0].sitename, self.sitename)
+                )
         else:
             if neighbor in self.neighbors:
                 d = [e.length for e in self.edges if neighbor in e.sites][0]
                 # if d == 0:
                 # print 'problem determining distance from neighboor'
             else:
-                sys.exit('%s is not a neighbor of %s!' % (neighbor.sitename, self.sitename))
+                sys.exit(
+                    "%s is not a neighbor of %s!" % (neighbor.sitename, self.sitename)
+                )
 
         return d
 
@@ -381,7 +396,7 @@ class siteobj:
         A perfect hub would have its order equal to the summation of
         all the orders of the other nodes in the graph and a perfect
         spoke would have an order of 1.
-        
+
         Returns an integer.
         """
         if not self.isNode():
@@ -412,7 +427,7 @@ class siteobj:
         pos = self.parentGraph.site_list.index(self)
         if not self.parentGraph.allPairs.any():
             self.parentGraph.getAllPairs()
-        c = 1. / sum(self.parentGraph.allPairs[pos])
+        c = 1.0 / sum(self.parentGraph.allPairs[pos])
         return c
 
     def getBetweeness(self):
@@ -451,9 +466,9 @@ class edge:
         Length -- Length in kilometers of this route
         """
         if not isinstance(source, siteobj):
-            raise TypeError('source received a non siteobj class object')
+            raise TypeError("source received a non siteobj class object")
         if not isinstance(dest, siteobj):
-            raise TypeError('destination received a non siteobj class object')
+            raise TypeError("destination received a non siteobj class object")
         self.dest = dest
         self.source = source
         self.sites = [source, dest]
@@ -554,7 +569,7 @@ class graph(NX.MultiDiGraph):
         """
 
         if not isinstance(sitio, siteobj):
-            raise Exception('add_site received a non siteobj instance')
+            raise Exception("add_site received a non siteobj instance")
         self.site_dict[sitio.geocode] = sitio
         self.add_node(sitio)
         sitio.parentGraph = self
@@ -590,17 +605,22 @@ class graph(NX.MultiDiGraph):
         """
 
         if not isinstance(graph_edge, edge):
-            raise TypeError('add_edge received a non edge class object')
+            raise TypeError("add_edge received a non edge class object")
 
         if not graph_edge.source.geocode in self.site_dict:
-            raise KeyError('Edge source does not belong to the graph')
+            raise KeyError("Edge source does not belong to the graph")
 
         if not graph_edge.dest.geocode in self.site_dict:
-            raise KeyError('Edge destination does not belong to the graph')
+            raise KeyError("Edge destination does not belong to the graph")
         #        self.edge_list.append(graph_edge)
-        self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = graph_edge
-        self.add_edge(self.site_dict[graph_edge.source.geocode], self.site_dict[graph_edge.dest.geocode],
-                      edgeobj=graph_edge)
+        self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = (
+            graph_edge
+        )
+        self.add_edge(
+            self.site_dict[graph_edge.source.geocode],
+            self.site_dict[graph_edge.dest.geocode],
+            edgeobj=graph_edge,
+        )
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
 
@@ -628,7 +648,9 @@ class graph(NX.MultiDiGraph):
         None is returned otherwise.
         """
 
-        match = [edge for edge in self.edge_list if edge.source == src and edge.dest == dst]
+        match = [
+            edge for edge in self.edge_list if edge.source == src and edge.dest == dst
+        ]
 
         l = len(match)
         if l == 1:
@@ -693,18 +715,18 @@ class graph(NX.MultiDiGraph):
         """
         if self.allPairs.any():  # don't run twice
             return self.allPairs
-        
+
         # Using NetworkX's efficient all-pairs shortest path length algorithm
         # This returns a generator of (source, dictionary of destinations with lengths)
         lengths = dict(NX.all_pairs_shortest_path_length(self))
-        
+
         d = len(self.nodes)
         dm = np.zeros((d, d), float)
         ap = np.zeros((d, d), float)
-        
+
         nodes_list = list(self.nodes)
         node_to_idx = {node: i for i, node in enumerate(nodes_list)}
-        
+
         for i, node_i in enumerate(nodes_list):
             if node_i in lengths:
                 for node_j, length in lengths[node_i].items():
@@ -712,15 +734,15 @@ class graph(NX.MultiDiGraph):
                     ap[i, j] = length
                     # For distance matrix (dm), we still need the path to calculate physical lengths
                     # but only if physical distance is different from topological distance
-                    # However, to be fully compatible with old behavior, 
+                    # However, to be fully compatible with old behavior,
                     # we might still need some paths.
-        
+
         # If dm (physical distance) is required, we may still need individual paths
         # but let's see if we can optimize it too.
         # Most of the time topological distance is what's used for centrality.
-        
+
         self.allPairs = ap
-        self.shortDistMatrix = dm # Placeholder for now, can be computed on demand
+        self.shortDistMatrix = dm  # Placeholder for now, can be computed on demand
         return ap
 
     def getShortestPathLength(self, origin, sp):
@@ -766,7 +788,9 @@ class graph(NX.MultiDiGraph):
         if self.allPairs.any():
             return mean(compress(greater(self.allPairs.flat, 0), self.allPairs.flat))
 
-        return mean(compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat))
+        return mean(
+            compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat)
+        )
 
     def getDiameter(self):
         """
@@ -835,7 +859,11 @@ class graph(NX.MultiDiGraph):
         else:
             l = self.getLength()
 
-        lsp = [len(i[2]) for i in self.shortPathList]  # list of lenghts of shortest paths.
+        lsp = [
+            len(i[2]) for i in self.shortPathList
+        ]  # list of lenghts of shortest paths.
+        if not lsp:
+            return 0.0  # No paths in the network
         lpidx = lsp.index(max(lsp))  # position of the longest sp.
         lp = self.shortPathList[lpidx][2]  # longest shortest path
         Dd = 0
@@ -876,7 +904,7 @@ class graph(NX.MultiDiGraph):
         because this would imply very serious redundancies.
         """
         nsites = float(len(self.site_dict))
-        A = self.getCycles() / (2. * nsites - 5)
+        A = self.getCycles() / (2.0 * nsites - 5)
         return A
 
     def getGammaIndex(self):
@@ -913,9 +941,21 @@ class graph(NX.MultiDiGraph):
         self.gammaidx = self.getGammaIndex()
         self.connmatrix = self.getConnMatrix()
 
-        return [self.allPairs, self.cycles, self.wienerD, self.meanD, self.diameter, self.length,
-                self.weight, self.iotaidx, self.piidx, self.betaidx, self.alphaidx, self.gammaidx,
-                self.connmatrix]
+        return [
+            self.allPairs,
+            self.cycles,
+            self.wienerD,
+            self.meanD,
+            self.diameter,
+            self.length,
+            self.weight,
+            self.iotaidx,
+            self.piidx,
+            self.betaidx,
+            self.alphaidx,
+            self.gammaidx,
+            self.connmatrix,
+        ]
 
     # def plotDegreeDist(self, cum=False):
     #     """
@@ -943,7 +983,7 @@ class graph(NX.MultiDiGraph):
         try:
             median = self.epipath[int(n / 2)][0]
         except:  # In the case the epidemic does not reach 50% of nodes
-            median = 'NA'
+            median = "NA"
         return median
 
     def getTotVaccinated(self):
@@ -972,8 +1012,15 @@ class graph(NX.MultiDiGraph):
         self.totVaccinated = self.getTotVaccinated()
         self.totQuarantined = self.getTotQuarantined()
 
-        return [self.episize, self.epispeed, self.infectedcities,
-                self.spreadtime, self.mediansurvival, self.totVaccinated, self.totQuarantined]
+        return [
+            self.episize,
+            self.epispeed,
+            self.infectedcities,
+            self.spreadtime,
+            self.mediansurvival,
+            self.totVaccinated,
+            self.totQuarantined,
+        ]
 
     def getInfectedCities(self):
         """
@@ -1007,7 +1054,7 @@ class graph(NX.MultiDiGraph):
         """
         tl = [i[0] for i in self.epipath]
         if not tl:
-            dur = 'NA'
+            dur = "NA"
         else:
             dur = tl[-1] - tl[0]
         return dur
@@ -1026,10 +1073,10 @@ class graph(NX.MultiDiGraph):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
         # print(g.nodes)
         # NX.write_graphml_lxml(g, pa)
-        NX.write_gml(g, pa.replace('gexf', 'gml'))
+        NX.write_gml(g, pa.replace("gexf", "gml"))
         nl = json_graph.node_link_data(g)
-        jsonpath = pa.replace('gexf', 'json')
-        with open(jsonpath, 'w') as f:
+        jsonpath = pa.replace("gexf", "json")
+        with open(jsonpath, "w") as f:
             json.dump(nl, f)
 
     def resetStats(self):
@@ -1052,21 +1099,21 @@ class graph(NX.MultiDiGraph):
 
 class priorityDictionary(dict):
     def __init__(self):
-        '''
+        """
         by David Eppstein.
         <http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117228>
         Initialize priorityDictionary by creating binary heap
         of pairs (value,key).  Note that changing or removing a dict entry will
         not remove the old pair from the heap until it is found by smallest() or
         until the heap is rebuilt.
-        '''
+        """
         self.__heap = []
         dict.__init__(self)
 
     def smallest(self):
-        '''
+        """
         Find smallest item after removing deleted items from heap.
-        '''
+        """
         if len(self) == 0:
             raise IndexError("smallest of empty priorityDictionary")
         heap = self.__heap
@@ -1075,8 +1122,10 @@ class priorityDictionary(dict):
             insertionPoint = 0
             while 1:
                 smallChild = 2 * insertionPoint + 1
-                if smallChild + 1 < len(heap) and \
-                        heap[smallChild] > heap[smallChild + 1]:
+                if (
+                    smallChild + 1 < len(heap)
+                    and heap[smallChild] > heap[smallChild + 1]
+                ):
                     smallChild += 1
                 if smallChild >= len(heap) or lastItem <= heap[smallChild]:
                     heap[insertionPoint] = lastItem
@@ -1086,9 +1135,9 @@ class priorityDictionary(dict):
         return heap[0][1]
 
     def __iter__(self):
-        '''
+        """
         Create destructive sorted iterator of priorityDictionary.
-        '''
+        """
 
         def iterfn():
             while len(self) > 0:
@@ -1099,11 +1148,11 @@ class priorityDictionary(dict):
         return iterfn()
 
     def __setitem__(self, key, val):
-        '''
+        """
         Change value stored in dictionary and add corresponding
         pair to heap.  Rebuilds the heap if the number of deleted
         items grows too large, to avoid memory leakage.
-        '''
+        """
         dict.__setitem__(self, key, val)
         heap = self.__heap
         if len(heap) > 2 * len(self):
@@ -1113,8 +1162,7 @@ class priorityDictionary(dict):
             newPair = (val, key)
             insertionPoint = len(heap)
             heap.append(None)
-            while insertionPoint > 0 and \
-                    newPair < heap[(insertionPoint - 1) // 2]:
+            while insertionPoint > 0 and newPair < heap[(insertionPoint - 1) // 2]:
                 heap[insertionPoint] = heap[(insertionPoint - 1) // 2]
                 insertionPoint = (insertionPoint - 1) // 2
             heap[insertionPoint] = newPair
@@ -1124,7 +1172,7 @@ class priorityDictionary(dict):
             self[key] = other[key]
 
     def setdefault(self, key, val):
-        '''Reimplement setdefault to call our customized __setitem__.'''
+        """Reimplement setdefault to call our customized __setitem__."""
         if key not in self:
             self[key] = val
         return self[key]

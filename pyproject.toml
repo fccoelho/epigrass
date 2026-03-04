@@ -25,6 +25,8 @@ dependencies = [
     "fiona>=1.10.1",
     "geopandas>=1.0.1",
     "gradio>=5.44.1",
+    "Jinja2>=3.1.0",
+    "markupsafe>=2.1.0",
     "matplotlib>=3.10.0",
     "networkx>=3.4.2",
     "numpy>=2.2.0",
@@ -46,7 +48,7 @@ Homepage = "https://epigrass.readthedocs.io"
 Source = "https://github.com/fccoelho/epigrass"
 
 [tool.setuptools]
-packages = ["Epigrass"]
+packages = ["Epigrass", "Epigrass.report", "Epigrass.spread"]
 
 [tool.uv]
 package = true
@@ -59,3 +61,11 @@ dev-dependencies = [
 [project.scripts]
 epirunner = "Epigrass.manager:main"
 epigrass = "Epigrass.epigrass_gui:main"
+
+
+[tool.semantic_release]
+build_command = """
+    uv lock --upgrade-package "$PACKAGE_NAME"
+    git add uv.lock
+    uv build
+"""

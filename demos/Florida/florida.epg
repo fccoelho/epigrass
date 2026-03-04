@@ -149,7 +149,7 @@ sqlout = 1
 # 2 - An epidemiological report is generated in PDF Format.
 # 3 - A full report is generated in PDF Format.
 # siteRep is a list with site geocodes. For each site in this list, a detailed report is apended to the main report.
-report = 2
+report = 3
 siteRep = [4550601]
 
 #Replicate runs
