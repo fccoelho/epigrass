@@ -1,6 +1,7 @@
 """
 This Module contains the definitions of objects for spatial simulation on geo reference spaces.
 """
+
 import sys
 import multiprocessing
 import time
@@ -24,7 +25,7 @@ except ImportError as exc:
     CustomModel = None
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
-redisclient = redis.Redis(host='localhost', port=6379)
+redisclient = redis.Redis(host="localhost", port=6379)
 assert redisclient.ping()  # verify that redis server is running.
 
 # logger = multiprocessing.log_to_stderr()
@@ -76,7 +77,7 @@ class siteobj:
         self.thetalist = []
         self.thetahist = []  # infected arriving per time step
         self.passlist = []
-        self.totalcases = 0 # Cumulative total cases up to current time step
+        self.totalcases = 0  # Cumulative total cases up to current time step
         self.vaccination = [[], []]  # time and coverage of vaccination event
         self.vaccineNow = 0  # flag to indicate that it is vaccination day
         self.vaccov = 0  # current vaccination coverage
@@ -102,7 +103,7 @@ class siteobj:
         print("Time to runModel: ", time.time() - t0)
         return self
 
-    def createModel(self, modtype='', modelname='name',v=[], bi=None, bp=None):
+    def createModel(self, modtype="", modelname="name", v=[], bi=None, bp=None):
         """
         Creates a model of type modtype and defines its initial parameters.
         init -- initial conditions for the state variables tuple with fractions of the total
@@ -114,14 +115,15 @@ class siteobj:
         # Init = init  # deprecated
         self.modename = modelname
         N = self.totpop
-        self.modtype = bytes(modtype, 'utf8')
+        self.modtype = bytes(modtype, "utf8")
         self.values = v
         self.bi = bi
         self.bp = bp
-        if modtype in ['Custom', 'custom']:
+        if modtype in ["Custom", "custom"]:
             if CustomModel is None:
                 raise ImportError(
-                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type")
+                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
+                )
             self.model = CustomModel.Model
             self.vnames = CustomModel.vnames
         else:
@@ -131,12 +133,12 @@ class siteobj:
             # self.ts = [[bi[vn.lower()] for vn in self.vnames]]
             self.ts.append(list(bi.values()))  # This is fine since bi is an OrderedDict
         except KeyError as ke:
-            if self.vnames == ['Exposed', 'Infectious', 'Susceptible']:
-                self.ts = [[bi[vn] for vn in ['e', 'i', 's']]]
+            if self.vnames == ["Exposed", "Infectious", "Susceptible"]:
+                self.ts = [[bi[vn] for vn in ["e", "i", "s"]]]
             else:
-                raise KeyError('%s' % ke)
-        self.bp['vaccineNow'] = 0
-        self.bp['vaccov'] = 0
+                raise KeyError("%s" % ke)
+        self.bp["vaccineNow"] = 0
+        self.bp["vaccov"] = 0
 
     #        self.model = popmodels(self.id,type=modtype,v=self.values,bi = self.bi, bp = self.bp)
 
@@ -149,15 +151,18 @@ class siteobj:
 
         if self.parentGraph.simstep in self.vaccination[0]:
             self.vaccineNow = 1
-            self.vaccov = float(self.vaccination[1][self.vaccination[0].index(self.parentGraph.simstep)])
-            self.bp['vaccineNow'] = 1
-            self.bp['vaccov'] = self.vaccov
+            self.vaccov = float(
+                self.vaccination[1][self.vaccination[0].index(self.parentGraph.simstep)]
+            )
+            self.bp["vaccineNow"] = 1
+            self.bp["vaccov"] = self.vaccov
         else:
-            self.bp['vaccineNow'] = 0
+            self.bp["vaccineNow"] = 0
         if self.thetalist != []:
             theta = sum([i[1] for i in self.thetalist])
             self.infector = dict(
-                [i for i in self.thetalist if i[1] > 0])  # Only those that contribute at least one infected individual
+                [i for i in self.thetalist if i[1] > 0]
+            )  # Only those that contribute at least one infected individual
         else:
             theta = 0
             self.infector = {}
@@ -181,7 +186,9 @@ class siteobj:
             pipe.execute()
             r = PO.apply_async(self.model, args=(), callback=self.handle)
         else:
-            res = self.model(inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values)
+            res = self.model(
+                inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values
+            )
             self.handle(res)
             r = None
 
@@ -199,15 +206,17 @@ class siteobj:
         :param res: Tuple with the output of the simulation model
         """
         state, Lpos, migInf = res
-        
+
         self.ts.append(state)
         self.totalcases += Lpos
         self.incidence.append(Lpos)
-        
+
         if not self.infected:
             if Lpos > 0:
                 self.infected = self.parentGraph.simstep
-                self.parentGraph.epipath.append((self.parentGraph.simstep, self.geocode, self.infector))
+                self.parentGraph.epipath.append(
+                    (self.parentGraph.simstep, self.geocode, self.infector)
+                )
                 # TODO: have infector be stated in terms of geocodes
         self.migInf.append(migInf)
 
@@ -265,7 +274,9 @@ class siteobj:
         """
         if self.thidx:
             return self.thidx
-        self.thidx = thidx = sum([(i.fmig + i.bmig) / 2. for i in self.edges]) / len(self.parentGraph.site_list)
+        self.thidx = thidx = sum([(i.fmig + i.bmig) / 2.0 for i in self.edges]) / len(
+            self.parentGraph.site_list
+        )
         return thidx
 
     def receiveTheta(self, thetai, npass, site):
@@ -305,9 +316,9 @@ class siteobj:
             return 0
 
     def getOutEdges(self):
-        '''
+        """
         return a list of outbound edges
-        '''
+        """
         if self.outedges:
             return self.outedges
         oe = [e for e in self.edges if self == e.source]
@@ -315,9 +326,9 @@ class siteobj:
         return oe
 
     def getInEdges(self):
-        '''
+        """
         return a list of outbound edges
-        '''
+        """
         if self.inedges:
             return self.inedges
         ie = [e for e in self.edges if self == e.dest]
@@ -326,19 +337,43 @@ class siteobj:
 
     def getNeighbors(self):
         """
-        Returns a dictionary of neighbooring sites as keys,
-        and distances as values.
+        Returns a dictionary of neighboring sites as keys and distances as values.
+
+        Uses NetworkX's efficient neighbor iteration instead of manual edge traversal.
+        Results are cached in self.neighbors for performance.
+
+        Returns:
+        --------
+        dict : {siteobj: distance_in_km} mapping of neighbors to distances
         """
         if not self.isNode():
-            return []
+            return {}
         if self.neighbors:
             return self.neighbors
+
         neigh = {}
-        for i in self.edges:
-            n = [i.source, i.dest, i.length]
-            idx = n.index(self)
-            n.pop(idx)
-            neigh[n[0]] = n[-1]
+
+        # Use NetworkX's optimized neighbor iteration
+        # This is more efficient than iterating through all edges
+        for neighbor in self.parentGraph.neighbors(self):
+            # Get edge data between self and neighbor
+            # For MultiDiGraph, there might be multiple edges
+            edge_data = self.parentGraph.get_edge_data(self, neighbor)
+
+            if edge_data:
+                # edge_data is a dict: {edge_key: {edge_attributes}}
+                # Get the first edge (or we could aggregate parallel edges)
+                first_edge_key = list(edge_data.keys())[0]
+                edge_attrs = edge_data[first_edge_key]
+
+                # Get the custom edge object stored in 'edgeobj' attribute
+                edge_obj = edge_attrs.get("edgeobj")
+
+                if edge_obj and hasattr(edge_obj, "length"):
+                    neigh[neighbor] = edge_obj.length
+                else:
+                    # If no length available, use 0 or topological distance
+                    neigh[neighbor] = 0
 
         self.neighbors = neigh
         return neigh
@@ -357,37 +392,44 @@ class siteobj:
             if nei:
                 d = [e.length for e in self.edges if nei in e.sites][0]
             else:
-                sys.exit('%s is not a neighbor of %s!' % (nei[0].sitename, self.sitename))
+                sys.exit(
+                    "%s is not a neighbor of %s!" % (nei[0].sitename, self.sitename)
+                )
         else:
             if neighbor in self.neighbors:
                 d = [e.length for e in self.edges if neighbor in e.sites][0]
                 # if d == 0:
                 # print 'problem determining distance from neighboor'
             else:
-                sys.exit('%s is not a neighbor of %s!' % (neighbor.sitename, self.sitename))
+                sys.exit(
+                    "%s is not a neighbor of %s!" % (neighbor.sitename, self.sitename)
+                )
 
         return d
 
     def getDegree(self):
         """
-        Returns the degrees of this site if it is part of a graph.
-        The order (degree) of a node is the number of nodes attached to it
-        and is a simple, but effective measure of nodal importance.
+        Returns the degree of this site if it is part of a graph.
 
-        The higher its value, the more a node is important in a graph
-        as many links converge to it. Hub nodes have a high order,
-        while terminal points have an order that can be as low as 1.
+        The degree is the number of edges connected to the node.
+        For directed graphs (MultiDiGraph), this is the sum of
+        in-degree and out-degree.
 
-        A perfect hub would have its order equal to the summation of
-        all the orders of the other nodes in the graph and a perfect
-        spoke would have an order of 1.
-        
-        Returns an integer.
+        The higher the degree, the more important the node in the network.
+        Hub nodes have high degree, while terminal points have degree as low as 1.
+
+        Uses NetworkX's O(1) cached degree computation for efficiency.
+
+        Returns:
+        --------
+        int : The degree of this node
         """
         if not self.isNode():
             return 0
-        else:
-            return len(self.getNeighbors())
+
+        # Use NetworkX's cached degree (O(1) operation)
+        # For MultiDiGraph, this returns total degree (in + out)
+        return self.parentGraph.degree(self)
 
     def doStats(self):
         """
@@ -402,32 +444,76 @@ class siteobj:
 
     def getCentrality(self):
         """
-        Also known as closeness. A measure of global centrality, is the
-        inverse of the sum of the shortest paths to all other nodes
-        in the graph.
+        Closeness centrality: measures how close a node is to all other nodes.
+
+        Defined as the reciprocal of the sum of the shortest path distances
+        from the node to all other reachable nodes in the graph.
+
+        Higher values indicate more central nodes (shorter average distance to others).
+        Uses NetworkX's closeness_centrality which implements the Wasserman-Faust
+        formula for proper handling of disconnected graphs.
+
+        Returns:
+        --------
+        float : Closeness centrality value (0-1 range)
         """
-        # get position in the distance matrix.
-        if self.centrality:
+        if self.centrality is not None:
             return self.centrality
-        pos = self.parentGraph.site_list.index(self)
-        if not self.parentGraph.allPairs.any():
-            self.parentGraph.getAllPairs()
-        c = 1. / sum(self.parentGraph.allPairs[pos])
-        return c
+
+        # Check if node is in a graph
+        if not self.isNode():
+            self.centrality = 0.0
+            return self.centrality
+
+        # Use NetworkX's closeness centrality
+        # This is more efficient and handles disconnected components properly
+        # using the Wasserman-Faust formula
+        self.centrality = NX.closeness_centrality(self.parentGraph, self)
+
+        return self.centrality
 
     def getBetweeness(self):
         """
-        Is the number of times any node figures in the the shortest path
-        between any other pair of nodes.
+        Betweenness centrality measures how often a node appears on
+        shortest paths between other pairs of nodes.
+
+        Nodes with high betweenness act as bridges or bottlenecks in the network.
+        This is important for understanding disease transmission pathways.
+
+        Uses NetworkX's betweenness_centrality for efficient computation.
+        For large graphs (>1000 nodes), uses sampling for performance.
+
+        Returns absolute (non-normalized) betweenness values.
+
+        Returns:
+        --------
+        float : Betweenness centrality value (absolute count)
         """
-        if self.betweeness:
+        if self.betweeness is not None:
             return self.betweeness
-        B = 0
-        for i in self.parentGraph.shortPathList:
-            if not self in i:
-                if self in i[2]:
-                    B += 1
-        return B
+
+        # Check if node is in a graph
+        if not self.isNode():
+            self.betweeness = 0.0
+            return self.betweeness
+
+        # Determine if we should use sampling for large graphs
+        n_nodes = len(self.parentGraph.site_dict)
+        sample_size = min(100, n_nodes) if n_nodes > 1000 else None
+
+        # Use NetworkX's betweenness centrality
+        # normalized=False to get absolute counts (not 0-1 range)
+        # endpoints=False to exclude source/target nodes from path count
+        betweenness_dict = NX.betweenness_centrality(
+            self.parentGraph,
+            k=sample_size,  # None for exact, int for sampling
+            normalized=False,
+            endpoints=False,
+            weight=None,  # Use topological distance
+        )
+
+        self.betweeness = betweenness_dict.get(self, 0)
+        return self.betweeness
 
 
 class edge:
@@ -451,9 +537,9 @@ class edge:
         Length -- Length in kilometers of this route
         """
         if not isinstance(source, siteobj):
-            raise TypeError('source received a non siteobj class object')
+            raise TypeError("source received a non siteobj class object")
         if not isinstance(dest, siteobj):
-            raise TypeError('destination received a non siteobj class object')
+            raise TypeError("destination received a non siteobj class object")
         self.dest = dest
         self.source = source
         self.sites = [source, dest]
@@ -501,7 +587,7 @@ class graph(NX.MultiDiGraph):
     Defines a graph with sites and edges
     """
 
-    def __init__(self, graph_name, digraph=0):
+    def __init__(self, graph_name="unnamed", digraph=0):
         super().__init__()
         self.name = graph_name
         self.digraph = digraph
@@ -511,10 +597,10 @@ class graph(NX.MultiDiGraph):
         self.simstep = 0  # current step in the simulation
         self.maxstep = 100  # maximum number of steps in the simulation
         self.epipath = []
-        self.graphdict = {}
         self.shortPathList = []
         self.parentGraph = self
         self.allPairs = zeros(1)
+        self.shortDistMatrix = zeros(1)  # Physical distance matrix (lazy computation)
         self.cycles = None
         self.wienerD = None
         self.meanD = None
@@ -554,7 +640,7 @@ class graph(NX.MultiDiGraph):
         """
 
         if not isinstance(sitio, siteobj):
-            raise Exception('add_site received a non siteobj instance')
+            raise Exception("add_site received a non siteobj instance")
         self.site_dict[sitio.geocode] = sitio
         self.add_node(sitio)
         sitio.parentGraph = self
@@ -590,29 +676,24 @@ class graph(NX.MultiDiGraph):
         """
 
         if not isinstance(graph_edge, edge):
-            raise TypeError('add_edge received a non edge class object')
+            raise TypeError("add_edge received a non edge class object")
 
         if not graph_edge.source.geocode in self.site_dict:
-            raise KeyError('Edge source does not belong to the graph')
+            raise KeyError("Edge source does not belong to the graph")
 
         if not graph_edge.dest.geocode in self.site_dict:
-            raise KeyError('Edge destination does not belong to the graph')
+            raise KeyError("Edge destination does not belong to the graph")
         #        self.edge_list.append(graph_edge)
-        self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = graph_edge
-        self.add_edge(self.site_dict[graph_edge.source.geocode], self.site_dict[graph_edge.dest.geocode],
-                      edgeobj=graph_edge)
+        self.edge_dict[(graph_edge.source.geocode, graph_edge.dest.geocode)] = (
+            graph_edge
+        )
+        self.add_edge(
+            self.site_dict[graph_edge.source.geocode],
+            self.site_dict[graph_edge.dest.geocode],
+            edgeobj=graph_edge,
+        )
         graph_edge.parentGraph = self
         graph_edge.calcDelay()
-
-    def getGraphdict(self):
-        """
-        Generates a dictionary of the graph for use in the shortest path function.
-        """
-        G = {}
-        for i in self.site_dict.values():
-            G[i] = i.getNeighbors()
-        self.graphdict = G
-        return G
 
     def getEdge(self, src, dst):
         """
@@ -628,7 +709,9 @@ class graph(NX.MultiDiGraph):
         None is returned otherwise.
         """
 
-        match = [edge for edge in self.edge_list if edge.source == src and edge.dest == dst]
+        match = [
+            edge for edge in self.edge_list if edge.source == src and edge.dest == dst
+        ]
 
         l = len(match)
         if l == 1:
@@ -667,11 +750,19 @@ class graph(NX.MultiDiGraph):
         """
         Find a single shortest path from the given start node
         to the given end node.
-        The input has the same conventions as self.dijkstra().
-        'G' is the graph's dictionary self.graphdict.
-        'start' and 'end' are site objects.
-        The output is a list of the vertices in order along
-        the shortest path.
+        Uses NetworkX's shortest_path algorithm.
+
+        Parameters:
+        -----------
+        G : Unused parameter (kept for backward compatibility)
+        start : site object
+            Starting node
+        end : site object
+            Ending node
+
+        Returns:
+        --------
+        list : Vertices in order along the shortest path, or empty list if no path exists
         """
         try:
             path = NX.shortest_path(self, start, end)
@@ -688,40 +779,103 @@ class graph(NX.MultiDiGraph):
     def getAllPairs(self):
         """
         Returns a distance matrix for the graph nodes where
-        the distance is the shortest path. Creates another
-        distance matrix where the distances are the lengths of the paths.
+        the distance is the shortest path length (topological/hops).
+
+        Uses NetworkX's all_pairs_shortest_path_length for efficient computation.
+        Results are cached in self.allPairs.
+
+        For physical distances (kilometers), use getAllPairsPhysical() instead.
+
+        Returns:
+        --------
+        numpy.ndarray : Matrix of shortest path lengths (number of hops)
         """
         if self.allPairs.any():  # don't run twice
             return self.allPairs
-        
-        # Using NetworkX's efficient all-pairs shortest path length algorithm
-        # This returns a generator of (source, dictionary of destinations with lengths)
+
+        # Use NetworkX's efficient all-pairs shortest path length
         lengths = dict(NX.all_pairs_shortest_path_length(self))
-        
+
         d = len(self.nodes)
-        dm = np.zeros((d, d), float)
         ap = np.zeros((d, d), float)
-        
+
         nodes_list = list(self.nodes)
         node_to_idx = {node: i for i, node in enumerate(nodes_list)}
-        
+
         for i, node_i in enumerate(nodes_list):
             if node_i in lengths:
                 for node_j, length in lengths[node_i].items():
                     j = node_to_idx[node_j]
                     ap[i, j] = length
-                    # For distance matrix (dm), we still need the path to calculate physical lengths
-                    # but only if physical distance is different from topological distance
-                    # However, to be fully compatible with old behavior, 
-                    # we might still need some paths.
-        
-        # If dm (physical distance) is required, we may still need individual paths
-        # but let's see if we can optimize it too.
-        # Most of the time topological distance is what's used for centrality.
-        
+
         self.allPairs = ap
-        self.shortDistMatrix = dm # Placeholder for now, can be computed on demand
         return ap
+
+    def getAllPairsPhysical(self):
+        """
+        Returns a distance matrix with physical distances (in kilometers)
+        along the shortest paths between all node pairs.
+
+        This method is computationally expensive as it requires reconstructing
+        actual paths and summing edge lengths. It is computed lazily (on-demand)
+        and cached in self.shortDistMatrix.
+
+        Note: This method only makes sense if edges have 'length' attributes.
+
+        Returns:
+        --------
+        numpy.ndarray : Matrix of physical distances (km) along shortest paths
+                        inf if no path exists
+        """
+        # Check cache
+        if hasattr(self, "shortDistMatrix") and self.shortDistMatrix.any():
+            return self.shortDistMatrix
+
+        d = len(self.nodes)
+        dm = np.full((d, d), np.inf)  # Initialize with infinity
+
+        nodes_list = list(self.nodes)
+        node_to_idx = {node: i for i, node in enumerate(nodes_list)}
+
+        # Diagonal is 0 (distance to self)
+        np.fill_diagonal(dm, 0)
+
+        # For each pair of nodes, find shortest path and sum edge lengths
+        for i, source in enumerate(nodes_list):
+            try:
+                # Get shortest paths to all other nodes from source
+                paths = NX.single_source_shortest_path(self, source)
+
+                for target, path in paths.items():
+                    if source == target:
+                        continue
+
+                    j = node_to_idx[target]
+
+                    # Sum physical distances along the path
+                    physical_dist = 0.0
+                    for k in range(len(path) - 1):
+                        node1, node2 = path[k], path[k + 1]
+
+                        # Get edge data
+                        edge_data = self.get_edge_data(node1, node2)
+                        if edge_data:
+                            # Take first edge if multiple parallel edges exist
+                            first_edge_key = list(edge_data.keys())[0]
+                            edge_obj = edge_data[first_edge_key].get("edgeobj")
+
+                            if edge_obj and hasattr(edge_obj, "length"):
+                                physical_dist += edge_obj.length
+
+                    dm[i, j] = physical_dist
+
+            except (NetworkXNoPath, NetworkXError):
+                # Keep infinity for unreachable nodes
+                continue
+
+        # Cache result
+        self.shortDistMatrix = dm
+        return dm
 
     def getShortestPathLength(self, origin, sp):
         """
@@ -766,7 +920,9 @@ class graph(NX.MultiDiGraph):
         if self.allPairs.any():
             return mean(compress(greater(self.allPairs.flat, 0), self.allPairs.flat))
 
-        return mean(compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat))
+        return mean(
+            compress(greater(self.getAllPairs().flat, 0), self.getAllPairs().flat)
+        )
 
     def getDiameter(self):
         """
@@ -822,29 +978,87 @@ class graph(NX.MultiDiGraph):
         The relationship between the total length of the graph L(G)
         and the distance along the diameter D(d).
 
-        It is labeled as Pi because of its similarity with the
-        real Pi (3.14), which is expressing the ratio between
-        the circumference and the diameter of a circle.
+        Pi = L(G) / D(d)
 
-        A high index shows a developed network. It is a measure
-        of distance per units of diameter and an indicator of
-        the  shape of a network.
+        Where:
+        - L(G) = total length of all edges in the graph
+        - D(d) = physical distance along the longest shortest path (diameter)
+
+        A high index shows a developed network with many alternative paths.
+        Similar to the mathematical Pi (3.14) which relates circumference to diameter.
+
+        Returns:
+        --------
+        float : Pi index value
         """
+        if self.piidx is not None:
+            return self.piidx
+
+        # Get total graph length
         if self.length:
             l = self.length
         else:
             l = self.getLength()
 
-        lsp = [len(i[2]) for i in self.shortPathList]  # list of lenghts of shortest paths.
-        lpidx = lsp.index(max(lsp))  # position of the longest sp.
-        lp = self.shortPathList[lpidx][2]  # longest shortest path
-        Dd = 0
-        for i in range(len(lp) - 1):  # calculates distance in km along lp
-            Dd += lp[i].getDistanceFromNeighbor(lp[i + 1])
+        if l == 0:
+            return 0.0
 
-        # pi = l/self.getDiameter()
-        pi = l / Dd
-        return float(pi)
+        try:
+            # Find the diameter path (longest shortest path)
+            # Use NetworkX to find all shortest paths efficiently
+            diameter_path = None
+            max_hops = 0
+
+            nodes_list = list(self.nodes)
+
+            # Check all pairs to find the longest shortest path
+            for i, source in enumerate(nodes_list):
+                try:
+                    # Get shortest path lengths from source to all other nodes
+                    lengths = NX.single_source_shortest_path_length(self, source)
+                    if lengths:
+                        max_from_source = max(lengths.values())
+                        if max_from_source > max_hops:
+                            max_hops = max_from_source
+                            # Find which node has the max length
+                            target = max(lengths, key=lengths.get)
+                            diameter_path = NX.shortest_path(self, source, target)
+                except (NetworkXNoPath, NetworkXError):
+                    continue
+
+            if diameter_path is None or len(diameter_path) < 2:
+                self.piidx = 0.0
+                return 0.0
+
+            # Calculate physical distance along diameter path
+            Dd = 0.0
+            for i in range(len(diameter_path) - 1):
+                node1, node2 = diameter_path[i], diameter_path[i + 1]
+
+                # Get edge data between consecutive nodes
+                edge_data = self.get_edge_data(node1, node2)
+                if edge_data:
+                    # MultiDiGraph: edge_data is dict of {edge_key: attributes}
+                    # Take first edge (or could sum all parallel edges)
+                    first_edge_key = list(edge_data.keys())[0]
+                    edge_obj = edge_data[first_edge_key].get("edgeobj")
+
+                    if edge_obj and hasattr(edge_obj, "length"):
+                        Dd += edge_obj.length
+
+            if Dd == 0:
+                self.piidx = 0.0
+                return 0.0
+
+            pi = l / Dd
+            self.piidx = float(pi)
+            return self.piidx
+
+        except Exception as e:
+            # If calculation fails for any reason, return 0
+            # Log this in production: logger.warning(f"Pi index calculation failed: {e}")
+            self.piidx = 0.0
+            return 0.0
 
     def getBetaIndex(self):
         """
@@ -876,7 +1090,7 @@ class graph(NX.MultiDiGraph):
         because this would imply very serious redundancies.
         """
         nsites = float(len(self.site_dict))
-        A = self.getCycles() / (2. * nsites - 5)
+        A = self.getCycles() / (2.0 * nsites - 5)
         return A
 
     def getGammaIndex(self):
@@ -898,7 +1112,14 @@ class graph(NX.MultiDiGraph):
     def doStats(self):
         """
         Generate the descriptive stats about the graph.
+
+        Computes both graph-level statistics and node-level centrality measures.
+        Uses batch computation for efficiency.
         """
+        # Compute all centralities at once (more efficient than per-node)
+        self.computeAllCentralities()
+
+        # Compute graph-level statistics
         self.allPairs = self.getAllPairs()
         self.cycles = self.getCycles()
         self.wienerD = self.getWienerD()
@@ -913,9 +1134,77 @@ class graph(NX.MultiDiGraph):
         self.gammaidx = self.getGammaIndex()
         self.connmatrix = self.getConnMatrix()
 
-        return [self.allPairs, self.cycles, self.wienerD, self.meanD, self.diameter, self.length,
-                self.weight, self.iotaidx, self.piidx, self.betaidx, self.alphaidx, self.gammaidx,
-                self.connmatrix]
+        return [
+            self.allPairs,
+            self.cycles,
+            self.wienerD,
+            self.meanD,
+            self.diameter,
+            self.length,
+            self.weight,
+            self.iotaidx,
+            self.piidx,
+            self.betaidx,
+            self.alphaidx,
+            self.gammaidx,
+            self.connmatrix,
+        ]
+
+    def computeAllCentralities(self, sample_size=None):
+        """
+        Compute centrality measures for all nodes at once.
+
+        This is more efficient than computing centrality for each node individually,
+        as NetworkX can optimize graph traversals when computing for all nodes.
+
+        Parameters:
+        -----------
+        sample_size : int, optional
+            For betweenness centrality, use random sampling of k nodes.
+            If None and graph has >1000 nodes, automatically uses 100.
+            Set to False to force exact computation regardless of graph size.
+
+        Returns:
+        --------
+        dict : {
+            'closeness': {node: closeness_value, ...},
+            'betweenness': {node: betweenness_value, ...}
+        }
+
+        Example:
+        --------
+        >>> g.computeAllCentralities()
+        >>> # Now all nodes have cached centrality values
+        >>> for node in g.site_dict.values():
+        ...     print(f"{node.sitename}: {node.centrality:.3f}")
+        """
+        # Determine sampling strategy for betweenness
+        n_nodes = len(self.site_dict)
+
+        if sample_size is None:
+            # Auto-sample for large graphs
+            sample_k = min(100, n_nodes) if n_nodes > 1000 else None
+        elif sample_size is False:
+            # Force exact computation
+            sample_k = None
+        else:
+            # Use specified sample size
+            sample_k = min(sample_size, n_nodes)
+
+        # Compute closeness centrality for all nodes at once
+        closeness = NX.closeness_centrality(self)
+
+        # Compute betweenness centrality for all nodes at once
+        betweenness = NX.betweenness_centrality(
+            self, k=sample_k, normalized=False, endpoints=False
+        )
+
+        # Assign to individual nodes
+        for node in self.site_dict.values():
+            node.centrality = closeness.get(node, 0)
+            node.betweeness = betweenness.get(node, 0)
+
+        return {"closeness": closeness, "betweenness": betweenness}
 
     # def plotDegreeDist(self, cum=False):
     #     """
@@ -943,7 +1232,7 @@ class graph(NX.MultiDiGraph):
         try:
             median = self.epipath[int(n / 2)][0]
         except:  # In the case the epidemic does not reach 50% of nodes
-            median = 'NA'
+            median = "NA"
         return median
 
     def getTotVaccinated(self):
@@ -972,8 +1261,15 @@ class graph(NX.MultiDiGraph):
         self.totVaccinated = self.getTotVaccinated()
         self.totQuarantined = self.getTotQuarantined()
 
-        return [self.episize, self.epispeed, self.infectedcities,
-                self.spreadtime, self.mediansurvival, self.totVaccinated, self.totQuarantined]
+        return [
+            self.episize,
+            self.epispeed,
+            self.infectedcities,
+            self.spreadtime,
+            self.mediansurvival,
+            self.totVaccinated,
+            self.totQuarantined,
+        ]
 
     def getInfectedCities(self):
         """
@@ -1007,7 +1303,7 @@ class graph(NX.MultiDiGraph):
         """
         tl = [i[0] for i in self.epipath]
         if not tl:
-            dur = 'NA'
+            dur = "NA"
         else:
             dur = tl[-1] - tl[0]
         return dur
@@ -1026,10 +1322,10 @@ class graph(NX.MultiDiGraph):
             g.add_edge(ed[0], ed[1], weight=e.fmig + e.bmig)
         # print(g.nodes)
         # NX.write_graphml_lxml(g, pa)
-        NX.write_gml(g, pa.replace('gexf', 'gml'))
+        NX.write_gml(g, pa.replace("gexf", "gml"))
         nl = json_graph.node_link_data(g)
-        jsonpath = pa.replace('gexf', 'json')
-        with open(jsonpath, 'w') as f:
+        jsonpath = pa.replace("gexf", "json")
+        with open(jsonpath, "w") as f:
             json.dump(nl, f)
 
     def resetStats(self):
@@ -1048,86 +1344,6 @@ class graph(NX.MultiDiGraph):
         self.betaidx = None
         self.alphaidx = None
         self.gammaidx = None
-
-
-class priorityDictionary(dict):
-    def __init__(self):
-        '''
-        by David Eppstein.
-        <http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117228>
-        Initialize priorityDictionary by creating binary heap
-        of pairs (value,key).  Note that changing or removing a dict entry will
-        not remove the old pair from the heap until it is found by smallest() or
-        until the heap is rebuilt.
-        '''
-        self.__heap = []
-        dict.__init__(self)
-
-    def smallest(self):
-        '''
-        Find smallest item after removing deleted items from heap.
-        '''
-        if len(self) == 0:
-            raise IndexError("smallest of empty priorityDictionary")
-        heap = self.__heap
-        while heap[0][1] not in self or self[heap[0][1]] != heap[0][0]:
-            lastItem = heap.pop()
-            insertionPoint = 0
-            while 1:
-                smallChild = 2 * insertionPoint + 1
-                if smallChild + 1 < len(heap) and \
-                        heap[smallChild] > heap[smallChild + 1]:
-                    smallChild += 1
-                if smallChild >= len(heap) or lastItem <= heap[smallChild]:
-                    heap[insertionPoint] = lastItem
-                    break
-                heap[insertionPoint] = heap[smallChild]
-                insertionPoint = smallChild
-        return heap[0][1]
-
-    def __iter__(self):
-        '''
-        Create destructive sorted iterator of priorityDictionary.
-        '''
-
-        def iterfn():
-            while len(self) > 0:
-                x = self.smallest()
-                yield x
-                del self[x]
-
-        return iterfn()
-
-    def __setitem__(self, key, val):
-        '''
-        Change value stored in dictionary and add corresponding
-        pair to heap.  Rebuilds the heap if the number of deleted
-        items grows too large, to avoid memory leakage.
-        '''
-        dict.__setitem__(self, key, val)
-        heap = self.__heap
-        if len(heap) > 2 * len(self):
-            self.__heap = [(v, k) for k, v in self.items()]
-            self.__heap.sort()  # builtin sort likely faster than O(n) heapify
-        else:
-            newPair = (val, key)
-            insertionPoint = len(heap)
-            heap.append(None)
-            while insertionPoint > 0 and \
-                    newPair < heap[(insertionPoint - 1) // 2]:
-                heap[insertionPoint] = heap[(insertionPoint - 1) // 2]
-                insertionPoint = (insertionPoint - 1) // 2
-            heap[insertionPoint] = newPair
-
-    def update(self, other):
-        for key in other.keys():
-            self[key] = other[key]
-
-    def setdefault(self, key, val):
-        '''Reimplement setdefault to call our customized __setitem__.'''
-        if key not in self:
-            self[key] = val
-        return self[key]
 
     # ---main----------------------------------------------------------------------------
 

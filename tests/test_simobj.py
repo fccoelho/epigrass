@@ -12,15 +12,19 @@ from Epigrass.report import Report
 class testObjInstantiation(unittest.TestCase):
     def setUp(self):
         self.curdir = os.getcwd()
-        os.chdir('./demos/')
-        self.sitios = loadData('sitios3.csv', sep=',')
-        self.edges = loadData('edgesout.csv', sep=',')
-        self.S = Simulate('flu.epg')
+        self.demos_dir = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "demos", "flu"
+        )
+        os.chdir(self.demos_dir)
+        self.sitios = loadData("sitios3.csv", sep=",")
+        self.edges = loadData("edgesout.csv", sep=",")
+        self.S = Simulate("flu.epg")
 
     def tearDown(self):
         os.chdir(self.curdir)
-        if os.path.exists('demos/outdata-flu'):
-            os.system('rm -rf demos/outdata-flu')
+        outdir = os.path.join(self.demos_dir, "outdata-flu")
+        if os.path.exists(outdir):
+            os.system(f"rm -rf {outdir}")
 
     def testSites(self):
         l = self.S.instSites(self.sitios)
@@ -32,13 +36,16 @@ class testObjInstantiation(unittest.TestCase):
         e = self.S.instEdges(l, self.edges)
         j = 0
         for i in e:
-            self.assertEqual((i.source.geocode, i.dest.geocode), (int(self.edges[j][5]), int(self.edges[j][6])))
+            self.assertEqual(
+                (i.source.geocode, i.dest.geocode),
+                (int(self.edges[j][5]), int(self.edges[j][6])),
+            )
             j += 1
 
     def test_edge_migration(self):
         l = self.S.instSites(self.sitios)
         e = self.S.instEdges(l, self.edges)
-        g = self.S.instGraph('grafo', 1, l, e)
+        g = self.S.instGraph("grafo", 1, l, e)
         g.simstep = 100
         for edge in e:
             edge.migrate()
@@ -47,56 +54,58 @@ class testObjInstantiation(unittest.TestCase):
     def testGraph(self):
         l = self.S.instSites(self.sitios)
         e = self.S.instEdges(l, self.edges)
-        g = self.S.instGraph('grafo', 1, l, e)
+        g = self.S.instGraph("grafo", 1, l, e)
         self.assertEqual(len(g.site_dict), len(self.sitios))
         self.assertEqual(len(g.edge_dict), len(self.edges))
 
     def test_getAllPairs(self):
         l = self.S.instSites(self.sitios)
         e = self.S.instEdges(l, self.edges)
-        g = self.S.instGraph('grafo', 1, l, e)
+        g = self.S.instGraph("grafo", 1, l, e)
         pairs = g.getAllPairs()
 
     def test_report(self):
         R = Report(self.S)
         src = R.Assemble(3, False)
-        self.assertIn('Full Report', src)
+        self.assertIn("Full Report", src)
 
 
 class TestSimulationRuns(unittest.TestCase):
     def setUp(self):
         self.curdir = os.getcwd()
-        os.chdir('demos/')
-        #        self.sitios3 = loadData('sitios3.csv',sep=',')
-        #        self.nodes = loadData('nodes.csv',sep=',')
-        #        self.edgesout = loadData('edgesout.csv',sep=',')
-        pass
+        self.demos_dir = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "demos"
+        )
 
     def test_mesh_epg(self):
-        S = Simulate('mesh.epg', silent=True)
+        os.chdir(os.path.join(self.demos_dir, "mesh"))
+        S = Simulate("mesh.epg", silent=True)
         S.start()
 
     def test_backend_csv(self):
-        S = Simulate('mesh.epg', silent=True)
-        S.backend = 'csv'
+        os.chdir(os.path.join(self.demos_dir, "mesh"))
+        S = Simulate("mesh.epg", silent=True)
+        S.backend = "csv"
         S.start()
 
     def test_custom_model(self):
-        S = Simulate('sars.epg', silent=True)
+        os.chdir(os.path.join(self.demos_dir, "sars"))
+        S = Simulate("sars.epg", silent=True)
         S.start()
 
     def test_custom_model_parallel(self):
-        S = Simulate('sars.epg', silent=True)
+        os.chdir(os.path.join(self.demos_dir, "sars"))
+        S = Simulate("sars.epg", silent=True)
         S.parallel = True
         S.start()
 
     def tearDown(self):
-        if os.path.exists('outdata-mesh'):
-            os.system('rm -rf outdata-mesh')
-        if os.path.exists('outdata-sars'):
-            os.system('rm -rf outdata-sars')
-        os.chdir('..')
+        for model in ["mesh", "sars"]:
+            outdir = os.path.join(self.demos_dir, model, f"outdata-{model}")
+            if os.path.exists(outdir):
+                os.system(f"rm -rf {outdir}")
+        os.chdir(self.curdir)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

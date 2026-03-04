@@ -44,12 +44,16 @@ $ uv run epigrass
 This will start a local web server and provide a URL (usually `http://127.0.0.1:7860`) where you can access the interface.
 
 ## Running demos
-The source distribution comes with a few demos.
+The source distribution comes with several demo models, each in its own directory. Each demo includes a README with model details and usage instructions.
+
 ```bash
-$ cd demos
+$ cd demos/rio
 $ uv run epirunner rio.epg
 ```
+
 This will run the demo for the city of Rio de Janeiro. 
+
+For a complete list of available demos, see the [demos directory](demos/). 
 
 ## Getting started building your own models
 
