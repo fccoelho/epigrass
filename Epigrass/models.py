@@ -4,7 +4,8 @@ Library of discrete time Epidemic models
 copyright 2012 Flávio Codeco Coelho
 License: GPL-v3
 """
-__author__ = 'fccoelho'
+
+__author__ = "fccoelho"
 
 from numpy.random import poisson, negative_binomial
 from numpy import inf, nan, nan_to_num
@@ -12,38 +13,65 @@ import numpy as np
 import sys
 import redis
 import json
-from epimodels.continuous.models import SIR, SEIR
+
+# Try to import continuous models from epimodels
+# These are only used by SIR_cont and SEIR_cont model types
+try:
+    from epimodels.continuous.models import SIR, SEIR
+except (ImportError, ModuleNotFoundError):
+    # epimodels >= 0.5.0 has a different structure
+    # Continuous models are optional and only needed for _cont model types
+    SIR = None
+    SEIR = None
 # import numba
 # from numba.typed import List
 
 redisclient = redis.StrictRedis()
 
 vnames = {
-    'SIR': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIR_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIR_cont': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIS': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIS_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIS': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIS_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIR': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIR_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIR_cont': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIpRpS': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIpRpS_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIpRpS': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIpRpS_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIpR': ['Exposed', 'Infectious', 'Susceptible'],
-    'SEIpR_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIpR': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIpR_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIRS': ['Exposed', 'Infectious', 'Susceptible'],
-    'SIRS_s': ['Exposed', 'Infectious', 'Susceptible'],
-    'Custom': ['Exposed', 'Infectious', 'Susceptible'],
-    'Influenza': ('Susc_age1', 'Incub_age1', 'Subc_age1', 'Sympt_age1', 'Comp_age1',
-                  'Susc_age2', 'Incub_age2', 'Subc_age2', 'Sympt_age2', 'Comp_age2',
-                  'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
-                  'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',),
+    "SIR": ["Exposed", "Infectious", "Susceptible"],
+    "SIR_s": ["Exposed", "Infectious", "Susceptible"],
+    "SIR_cont": ["Exposed", "Infectious", "Susceptible"],
+    "SIS": ["Exposed", "Infectious", "Susceptible"],
+    "SIS_s": ["Exposed", "Infectious", "Susceptible"],
+    "SEIS": ["Exposed", "Infectious", "Susceptible"],
+    "SEIS_s": ["Exposed", "Infectious", "Susceptible"],
+    "SEIR": ["Exposed", "Infectious", "Susceptible"],
+    "SEIR_s": ["Exposed", "Infectious", "Susceptible"],
+    "SEIR_cont": ["Exposed", "Infectious", "Susceptible"],
+    "SIpRpS": ["Exposed", "Infectious", "Susceptible"],
+    "SIpRpS_s": ["Exposed", "Infectious", "Susceptible"],
+    "SEIpRpS": ["Exposed", "Infectious", "Susceptible"],
+    "SEIpRpS_s": ["Exposed", "Infectious", "Susceptible"],
+    "SEIpR": ["Exposed", "Infectious", "Susceptible"],
+    "SEIpR_s": ["Exposed", "Infectious", "Susceptible"],
+    "SIpR": ["Exposed", "Infectious", "Susceptible"],
+    "SIpR_s": ["Exposed", "Infectious", "Susceptible"],
+    "SIRS": ["Exposed", "Infectious", "Susceptible"],
+    "SIRS_s": ["Exposed", "Infectious", "Susceptible"],
+    "Custom": ["Exposed", "Infectious", "Susceptible"],
+    "Influenza": (
+        "Susc_age1",
+        "Incub_age1",
+        "Subc_age1",
+        "Sympt_age1",
+        "Comp_age1",
+        "Susc_age2",
+        "Incub_age2",
+        "Subc_age2",
+        "Sympt_age2",
+        "Comp_age2",
+        "Susc_age3",
+        "Incub_age3",
+        "Subc_age3",
+        "Sympt_age3",
+        "Comp_age3",
+        "Susc_age4",
+        "Incub_age4",
+        "Subc_age4",
+        "Sympt_age4",
+        "Comp_age4",
+    ),
 }
 
 
@@ -54,7 +82,7 @@ class Epimodel(object):
     """
 
     # @cython.locals(geocode='long', modtype='bytes', parallel='bint')
-    def __init__(self, geocode, modtype=b'', parallel=True):
+    def __init__(self, geocode, modtype=b"", parallel=True):
         """
         Defines which models a given site will use
         and set variable names accordingly.
@@ -66,7 +94,9 @@ class Epimodel(object):
         self.parallel = parallel
 
     def __call__(self, *args, **kwargs):
-        is_parallel = not args  # If no args, it's the worker process call fetching from redis
+        is_parallel = (
+            not args
+        )  # If no args, it's the worker process call fetching from redis
         if is_parallel:
             args = self.get_args_from_redis()
         args = [e if not isinstance(e, list) else tuple(e) for e in args]
@@ -90,33 +120,39 @@ class Epimodel(object):
         pipe.hgetall("{}:bi".format(self.geocode))
         pipe.hgetall("{}:bp".format(self.geocode))
         pipe.lrange("{}:values".format(self.geocode), 0, -1)
-        
+
         responses = pipe.execute()
-        
+
         res_ts = responses[0]
         inits = json.loads(res_ts) if res_ts else []
-        
+
         simstep_val = responses[1]
         simstep = int(simstep_val) if simstep_val else 0
-        
+
         totpop_val = responses[2]
         totpop = int(float(totpop_val)) if totpop_val else 0
-        
+
         theta_val = responses[3]
         theta = int(nan_to_num(float(theta_val))) if theta_val else 0
-        
+
         npass_val = responses[4]
         npass = int(float(npass_val)) if npass_val else 0
-        
+
         bi_resp = responses[5]
-        bi = {k.decode() if isinstance(k, bytes) else k: float(v) for k, v in bi_resp.items()}
-        
+        bi = {
+            k.decode() if isinstance(k, bytes) else k: float(v)
+            for k, v in bi_resp.items()
+        }
+
         bp_resp = responses[6]
-        bp = {k.decode() if isinstance(k, bytes) else k: float(v) for k, v in bp_resp.items()}
-        
+        bp = {
+            k.decode() if isinstance(k, bytes) else k: float(v)
+            for k, v in bp_resp.items()
+        }
+
         values_raw = responses[7]
         values = [float(i) for i in values_raw]
-        
+
         return inits, simstep, totpop, theta, npass, bi, bp, values
 
     def update_redis(self, results):
@@ -126,16 +162,16 @@ class Epimodel(object):
         """
         # Site state
         state, Lpos, migInf = results
-        
+
         # First batch: Fetch current totalcases and simstep
         pipe = redisclient.pipeline()
-        pipe.get('{}:totalcases'.format(self.geocode))
+        pipe.get("{}:totalcases".format(self.geocode))
         pipe.get("simstep")
         prev_data = pipe.execute()
-        
+
         totc_val = prev_data[0]
         simstep_val = prev_data[1]
-        
+
         try:
             totc = int(nan_to_num(float(totc_val))) if totc_val else 0
         except (ValueError, TypeError):
@@ -143,19 +179,19 @@ class Epimodel(object):
                 totc = int(nan_to_num(json.loads(totc_val))) if totc_val else 0
             except:
                 totc = 0
-        
+
         # Second batch: Update all values
         pipe = redisclient.pipeline()
-        pipe.rpush('{}:ts'.format(self.geocode), json.dumps(state))
-        pipe.set('{}:Lpos'.format(self.geocode), Lpos)
-        pipe.set('{}:totalcases'.format(self.geocode), Lpos + totc)
-        pipe.rpush('{}:incidence'.format(self.geocode), Lpos)
-        pipe.set('{}:migInf'.format(self.geocode), migInf)
-        
+        pipe.rpush("{}:ts".format(self.geocode), json.dumps(state))
+        pipe.set("{}:Lpos".format(self.geocode), Lpos)
+        pipe.set("{}:totalcases".format(self.geocode), Lpos + totc)
+        pipe.rpush("{}:incidence".format(self.geocode), Lpos)
+        pipe.set("{}:migInf".format(self.geocode), migInf)
+
         if Lpos > 0:
             infected = int(simstep_val) if simstep_val else 0
             pipe.rpush("epipath", str((infected, self.geocode, {})))
-            
+
         pipe.execute()
 
 
@@ -166,48 +202,48 @@ def selectModel(modtype):
     """
     global vnames
     if isinstance(modtype, str):
-        modtype = bytes(modtype, 'utf8')
-    if modtype == b'SIR':
+        modtype = bytes(modtype, "utf8")
+    if modtype == b"SIR":
         return stepSIR
-    elif modtype == b'SIR_s':
+    elif modtype == b"SIR_s":
         return stepSIR_s
-    elif modtype == b'SIR_cont':
+    elif modtype == b"SIR_cont":
         return stepSIR_cont
-    elif modtype == b'SIS':
+    elif modtype == b"SIS":
         return stepSIS
-    elif modtype == b'SIS_s':
+    elif modtype == b"SIS_s":
         return stepSIS_s
-    elif modtype == b'SEIS':
+    elif modtype == b"SEIS":
         return stepSEIS
-    elif modtype == b'SEIS_s':
+    elif modtype == b"SEIS_s":
         return stepSEIS_s
-    elif modtype == b'SEIR':
+    elif modtype == b"SEIR":
         return stepSEIR
-    elif modtype == b'SEIR_s':
+    elif modtype == b"SEIR_s":
         return stepSEIR_s
-    elif modtype == b'SEIR_cont':
+    elif modtype == b"SEIR_cont":
         return stepSEIR_cont
-    elif modtype == b'SIpRpS':
+    elif modtype == b"SIpRpS":
         return stepSIpRpS
-    elif modtype == b'SIpRpS_s':
+    elif modtype == b"SIpRpS_s":
         return stepSIpRpS_s
-    elif modtype == b'SEIpRpS':
+    elif modtype == b"SEIpRpS":
         return stepSEIpRpS
-    elif modtype == b'SEIpRpS_s':
+    elif modtype == b"SEIpRpS_s":
         return stepSEIpRpS_s
-    elif modtype == b'SIpR':
+    elif modtype == b"SIpR":
         return stepSIpR
-    elif modtype == b'SIpR_s':
+    elif modtype == b"SIpR_s":
         return stepSIpR_s
-    elif modtype == b'SEIpR':
+    elif modtype == b"SEIpR":
         return stepSEIpR
-    elif modtype == b'SEIpR_s':
+    elif modtype == b"SEIpR_s":
         return stepSEIpR_s
-    elif modtype == b'SIRS':
+    elif modtype == b"SIRS":
         return stepSIRS
-    elif modtype == b'SIRS_s':
+    elif modtype == b"SIRS_s":
         return stepSIRS_s
-    elif modtype == b'Influenza':
+    elif modtype == b"Influenza":
         return stepFlu
     # elif modtype == b'Custom':
     #     # adds the user model as a method of instance self
@@ -219,7 +255,7 @@ def selectModel(modtype):
     #     except ImportError:
     #         print("You have to Create a CustomModel.py file before you can select\nthe Custom model type")
     else:
-        sys.exit('Model type specified in .epg file is invalid')
+        sys.exit("Model type specified in .epg file is invalid")
 
 
 # @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
@@ -227,61 +263,114 @@ def selectModel(modtype):
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepFlu(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     Flu model with classes S,E,I subclinical, I mild, I medium, I serious, deaths
     """
     # Variable long names to be used in the database output.
-    vnames = ('Susc_age1', 'Incub_age1', 'Subc_age1', 'Sympt_age1', 'Comp_age1',
-              'Susc_age2', 'Incub_age2', 'Subc_age2', 'Sympt_age2', 'Comp_age2',
-              'Susc_age3', 'Incub_age3', 'Subc_age3', 'Sympt_age3', 'Comp_age3',
-              'Susc_age4', 'Incub_age4', 'Subc_age4', 'Sympt_age4', 'Comp_age4',)
+    vnames = (
+        "Susc_age1",
+        "Incub_age1",
+        "Subc_age1",
+        "Sympt_age1",
+        "Comp_age1",
+        "Susc_age2",
+        "Incub_age2",
+        "Subc_age2",
+        "Sympt_age2",
+        "Comp_age2",
+        "Susc_age3",
+        "Incub_age3",
+        "Subc_age3",
+        "Sympt_age3",
+        "Comp_age3",
+        "Susc_age4",
+        "Incub_age4",
+        "Subc_age4",
+        "Sympt_age4",
+        "Comp_age4",
+    )
     if simstep == 0:  # get initial values
         S1, E1, Is1, Ic1, Ig1 = (
-            bi.get('susc_age1', bi.get(b'susc_age1')), bi.get('incub_age1', bi.get(b'incub_age1')),
-            bi.get('subc_age1', bi.get(b'subc_age1')), bi.get('sympt_age1', bi.get(b'sympt_age1')),
-            bi.get('comp_age1', bi.get(b'comp_age1')))
+            bi.get("susc_age1", bi.get(b"susc_age1")),
+            bi.get("incub_age1", bi.get(b"incub_age1")),
+            bi.get("subc_age1", bi.get(b"subc_age1")),
+            bi.get("sympt_age1", bi.get(b"sympt_age1")),
+            bi.get("comp_age1", bi.get(b"comp_age1")),
+        )
         S2, E2, Is2, Ic2, Ig2 = (
-            bi.get('susc_age2', bi.get(b'susc_age2')), bi.get('incub_age2', bi.get(b'incub_age2')),
-            bi.get('subc_age2', bi.get(b'subc_age2')), bi.get('sympt_age2', bi.get(b'sympt_age2')),
-            bi.get('comp_age2', bi.get(b'comp_age2')))
+            bi.get("susc_age2", bi.get(b"susc_age2")),
+            bi.get("incub_age2", bi.get(b"incub_age2")),
+            bi.get("subc_age2", bi.get(b"subc_age2")),
+            bi.get("sympt_age2", bi.get(b"sympt_age2")),
+            bi.get("comp_age2", bi.get(b"comp_age2")),
+        )
         S3, E3, Is3, Ic3, Ig3 = (
-            bi.get('susc_age3', bi.get(b'susc_age3')), bi.get('incub_age3', bi.get(b'incub_age3')),
-            bi.get('subc_age3', bi.get(b'subc_age3')), bi.get('sympt_age3', bi.get(b'sympt_age3')),
-            bi.get('comp_age3', bi.get(b'comp_age3')))
+            bi.get("susc_age3", bi.get(b"susc_age3")),
+            bi.get("incub_age3", bi.get(b"incub_age3")),
+            bi.get("subc_age3", bi.get(b"subc_age3")),
+            bi.get("sympt_age3", bi.get(b"sympt_age3")),
+            bi.get("comp_age3", bi.get(b"comp_age3")),
+        )
         S4, E4, Is4, Ic4, Ig4 = (
-            bi.get('susc_age4', bi.get(b'susc_age4')), bi.get('incub_age4', bi.get(b'incub_age4')),
-            bi.get('subc_age4', bi.get(b'subc_age4')), bi.get('sympt_age4', bi.get(b'sympt_age4')),
-            bi.get('comp_age4', bi.get(b'comp_age4')))
+            bi.get("susc_age4", bi.get(b"susc_age4")),
+            bi.get("incub_age4", bi.get(b"incub_age4")),
+            bi.get("subc_age4", bi.get(b"subc_age4")),
+            bi.get("sympt_age4", bi.get(b"sympt_age4")),
+            bi.get("comp_age4", bi.get(b"comp_age4")),
+        )
     else:  # get values from last time step
         # print(len(inits))
-        S1, E1, Is1, Ic1, Ig1, S2, E2, Is2, Ic2, Ig2, S3, E3, Is3, Ic3, Ig3, S4, E4, Is4, Ic4, Ig4 = inits
+        (
+            S1,
+            E1,
+            Is1,
+            Ic1,
+            Ig1,
+            S2,
+            E2,
+            Is2,
+            Ic2,
+            Ig2,
+            S3,
+            E3,
+            Is3,
+            Ic3,
+            Ig3,
+            S4,
+            E4,
+            Is4,
+            Ic4,
+            Ig4,
+        ) = inits
     N = totpop
 
     # for k, v in bp.items():
     #     exec ('%s = %s' % (k, v))
-    alpha = bp.get('alpha', bp.get(b'alpha'))
-    beta = bp.get('beta', bp.get(b'beta'))
-    r = bp.get('r', bp.get(b'r'))
-    e = bp.get('e', bp.get(b'e'))
-    c = bp.get('c', bp.get(b'c'))
-    g = bp.get('g', bp.get(b'g'))
-    d = bp.get('d', bp.get(b'd'))
-    pc1 = bp.get('pc1', bp.get(b'pc1'))
-    pc2 = bp.get('pc2', bp.get(b'pc2'))
-    pc3 = bp.get('pc3', bp.get(b'pc3'))
-    pc4 = bp.get('pc4', bp.get(b'pc4'))
-    pp1 = bp.get('pp1', bp.get(b'pp1'))
-    pp2 = bp.get('pp2', bp.get(b'pp2'))
-    pp3 = bp.get('pp3', bp.get(b'pp3'))
-    pp4 = bp.get('pp4', bp.get(b'pp4'))
-    b = bp.get('b', bp.get(b'b'))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    beta = bp.get("beta", bp.get(b"beta"))
+    r = bp.get("r", bp.get(b"r"))
+    e = bp.get("e", bp.get(b"e"))
+    c = bp.get("c", bp.get(b"c"))
+    g = bp.get("g", bp.get(b"g"))
+    d = bp.get("d", bp.get(b"d"))
+    pc1 = bp.get("pc1", bp.get(b"pc1"))
+    pc2 = bp.get("pc2", bp.get(b"pc2"))
+    pc3 = bp.get("pc3", bp.get(b"pc3"))
+    pc4 = bp.get("pc4", bp.get(b"pc4"))
+    pp1 = bp.get("pp1", bp.get(b"pp1"))
+    pp2 = bp.get("pp2", bp.get(b"pp2"))
+    pp3 = bp.get("pp3", bp.get(b"pp3"))
+    pp4 = bp.get("pp4", bp.get(b"pp4"))
+    b = bp.get("b", bp.get(b"b"))
 
     # Vacination event
 
-    if 'vaccineNow' in bp:  # TODO: add to bp when creating model
-        vaccineNow = bp['vaccineNow']
-        vaccov = bp['vaccov']
+    if "vaccineNow" in bp:  # TODO: add to bp when creating model
+        vaccineNow = bp["vaccineNow"]
+        vaccov = bp["vaccov"]
         S1 -= vaccov * S1
         S2 -= vaccov * S2
         S3 -= vaccov * S3
@@ -290,7 +379,18 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     # New cases by age class
     # beta=eval(values[2])
 
-    Infectantes = Ig1 + Ig2 + Ig3 + Ig4 + Ic1 + Ic2 + Ic3 + Ic4 + 0.5 * (Is1 + Is2 + Is3 + Is4) + theta
+    Infectantes = (
+        Ig1
+        + Ig2
+        + Ig3
+        + Ig4
+        + Ic1
+        + Ic2
+        + Ic3
+        + Ic4
+        + 0.5 * (Is1 + Is2 + Is3 + Is4)
+        + theta
+    )
     L1pos = float(beta) * S1 * (Infectantes / (N + npass)) ** alpha
     L2pos = float(beta) * S2 * (Infectantes / (N + npass)) ** alpha
     L3pos = float(beta) * S3 * (Infectantes / (N + npass)) ** alpha
@@ -326,13 +426,44 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 
     # Migrating infecctious
     migInf = (
-            Ig1pos + Ig2pos + Ig3pos + Ig4pos + Ic1pos + Ic2pos + Ic3pos + Ic4pos + 0.5 * (
-            Is1pos + Is2pos + Is3pos + Is4pos))
+        Ig1pos
+        + Ig2pos
+        + Ig3pos
+        + Ig4pos
+        + Ic1pos
+        + Ic2pos
+        + Ic3pos
+        + Ic4pos
+        + 0.5 * (Is1pos + Is2pos + Is3pos + Is4pos)
+    )
     # Return variable values
 
-    return [S1pos, E1pos, Is1pos, Ic1pos, Ig1pos, S2pos, E2pos, Is2pos,
-            Ic2pos, Ig2pos, S3pos, E3pos, Is3pos, Ic3pos, Ig3pos, S4pos,
-            E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
+    return (
+        [
+            S1pos,
+            E1pos,
+            Is1pos,
+            Ic1pos,
+            Ig1pos,
+            S2pos,
+            E2pos,
+            Is2pos,
+            Ic2pos,
+            Ig2pos,
+            S3pos,
+            E3pos,
+            Is3pos,
+            Ic3pos,
+            Ig3pos,
+            S4pos,
+            E4pos,
+            Is4pos,
+            Ic4pos,
+            Ig4pos,
+        ],
+        Lpos,
+        migInf,
+    )
 
 
 # @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
@@ -340,7 +471,9 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIS(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SIS, and return its values (no demographics)
     - inits = (E,I,S)
@@ -356,15 +489,19 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     :return:
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
 
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    r = bp.get('r', bp.get(b'r'));
-    b = bp.get('b', bp.get(b'b'))
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    r = bp.get("r", bp.get(b"r"))
+    b = bp.get("b", bp.get(b"b"))
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
 
@@ -374,7 +511,7 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     Spos = S + b - Lpos + r * I
 
     # Migrating infecctious
-    migInf = (Ipos)
+    migInf = Ipos
     return [0, Ipos, Spos], Lpos, migInf
 
 
@@ -383,32 +520,48 @@ def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-              dist='poisson') -> tuple:
+def stepSIS_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
 
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -418,13 +571,15 @@ def stepSIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     Spos = S + b - Lpos + r * I
 
     # Migrating infecctious
-    migInf = (Ipos)
+    migInf = Ipos
 
     return [0, Ipos, Spos], Lpos, migInf
 
 
 # @numba.jit(['UniTuple(float64,float64,float64)', 'uint64', 'uint64','double', 'double','dict', 'dict', 'UniTuple(double)', 'object'],cache=True)
-def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIR(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SIR, and return its values (no demographics)
     - inits = current state (E,I,S)
@@ -432,17 +587,21 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     """
     # print(inits)
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -459,32 +618,48 @@ def stepSIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
     return (0, Ipos, Spos), Lpos, migInf
 
 
-def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-              dist='poisson') -> tuple:
+def stepSIR_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -500,7 +675,9 @@ def stepSIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
     return [0, Ipos, Spos], Lpos, migInf
 
 
-def stepSIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIR_cont(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     ODE SIR without births and deaths
     :param inits:
@@ -514,23 +691,33 @@ def stepSIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
     :param model:
     :return:
     """
+    if SIR is None:
+        raise ImportError(
+            "Continuous SIR model requires epimodels<0.5.0. "
+            "Install with: pip install 'epimodels<0.5.0' "
+            "or use discrete model types (SIR, SIR_s) instead."
+        )
+
     sir = SIR()
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    r = bp.get('r', bp.get(b'r'));
-    b = bp.get('b', bp.get(b'b'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    r = bp.get("r", bp.get(b"r"))
+    b = bp.get("b", bp.get(b"b"))
+    sir([S, I, R], [0, 1], N, {"beta": beta, "gamma": r})
 
-    sir([S, I, R], [0, 1], N, {'beta': beta, 'gamma': r})
-
-    Spos = sir.traces['S'][-1]
-    Ipos = sir.traces['I'][-1]
-    Lpos = sir.traces['I'][-1] - sir.traces['I'][0]
+    Spos = sir.traces["S"][-1]
+    Ipos = sir.traces["I"][-1]
+    Lpos = sir.traces["I"][-1] - sir.traces["I"][0]
 
     return [0, Ipos, Spos], Lpos, Ipos
 
@@ -540,23 +727,29 @@ def stepSIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSEIS(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     Defines the model SEIS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -578,8 +771,18 @@ def stepSEIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-               dist='poisson') -> tuple:
+def stepSEIS_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SEIS:
     - inits = (E,I,S)
@@ -587,23 +790,29 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # converting between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -624,7 +833,9 @@ def stepSEIS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSEIR(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     Defines the model SEIR:
     - inits = (E,I,S)
@@ -632,16 +843,20 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -664,8 +879,18 @@ def stepSEIR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-               dist='poisson') -> tuple:
+def stepSEIR_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SEIR:
     - inits = (E,I,S)
@@ -673,25 +898,31 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(np.nan_to_num(Lpos_esp))  # poisson(Lpos_esp)
     ##            if theta == 0 and Lpos_esp == 0 and Lpos > 0:
     ##                print Lpos,Lpos_esp,S,I,theta,N,parentSite.sitename
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -708,7 +939,9 @@ def stepSEIR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
     return [Epos, Ipos, Spos], Lpos, migInf
 
 
-def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSEIR_cont(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     ODE SIR without births and deaths
     :param inits:
@@ -722,50 +955,67 @@ def stepSEIR_cont(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
     :param model:
     :return:
     """
+    if SEIR is None:
+        raise ImportError(
+            "Continuous SEIR model requires epimodels<0.5.0. "
+            "Install with: pip install 'epimodels<0.5.0' "
+            "or use discrete model types (SEIR, SEIR_s) instead."
+        )
+
     seir = SEIR()
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get('e')), bi.get('i', bi.get('i')), bi.get('s', bi.get('s')))
+        E, I, S = (
+            bi.get("e", bi.get("e")),
+            bi.get("i", bi.get("i")),
+            bi.get("s", bi.get("s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get('beta'));
-    alpha = bp.get('alpha', bp.get('alpha'));
-    e = bp.get('e', bp.get('e'))
-    r = bp.get('r', bp.get('r'));
-    b = bp.get('b', bp.get('b'));
+    beta = bp.get("beta", bp.get("beta"))
+    alpha = bp.get("alpha", bp.get("alpha"))
+    e = bp.get("e", bp.get("e"))
+    r = bp.get("r", bp.get("r"))
+    b = bp.get("b", bp.get("b"))
+    seir([S, E, I, R], [0, 1], N, {"beta": beta, "gamma": r, "epsilon": e})
 
-    seir([S, E, I, R], [0, 1], N, {'beta': beta, 'gamma': r, 'epsilon': e})
-
-    Spos = seir.traces['S'][-1]
-    Epos = seir.traces['E'][-1]
-    Ipos = seir.traces['I'][-1]
-    Lpos = beta * seir.traces['S'][-1]*seir.traces['I'][-1]/N
+    Spos = seir.traces["S"][-1]
+    Epos = seir.traces["E"][-1]
+    Ipos = seir.traces["I"][-1]
+    Lpos = beta * seir.traces["S"][-1] * seir.traces["I"][-1] / N
 
     return [Epos, Ipos, Spos], Lpos, Ipos
+
 
 # @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
 #                beta='double', alpha='double', E='double', I='double', S='double', N='long',
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIpRpS(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SIpRpS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
-    delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    r = bp.get("r", bp.get(b"r"))
+    delta = bp.get("delta", bp.get(b"delta"))
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
@@ -787,31 +1037,47 @@ def stepSIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-                 dist='poisson') -> tuple:
+def stepSIpRpS_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
-    delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    r = bp.get("r", bp.get(b"r"))
+    delta = bp.get("delta", bp.get(b"delta"))
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -832,7 +1098,9 @@ def stepSIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, val
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True)
-def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSEIpRpS(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     Defines the model SEIpRpS:
     - inits = (E,I,S)
@@ -840,17 +1108,20 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
     - npass = number of individuals arriving
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
-    delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
-
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
+    delta = bp.get("delta", bp.get(b"delta"))
+    b = bp.get("b", bp.get(b"b"))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos = min(S, Lpos)  # to avoid underflow
 
@@ -870,31 +1141,47 @@ def stepSEIpRpS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-                  dist='poisson') -> tuple:
+def stepSEIpRpS_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SEIpRpS:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
-    delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
+    delta = bp.get("delta", bp.get(b"delta"))
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
@@ -915,28 +1202,36 @@ def stepSEIpRpS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, va
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIpR(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
-    p = bp.get('p', bp.get(b'p'))
+    p = bp.get("p", bp.get(b"p"))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
-    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
+    Lpos2 = (
+        p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha
+    )  # number of secondary Infections
 
     Lpos = min(S, Lpos)  # to avoid underflow
     Lpos2 = min(R, Lpos2)  # to avoid underflow
@@ -956,35 +1251,53 @@ def stepSIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-               dist='poisson') -> tuple:
+def stepSIpR_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
-    p = bp.get('p', bp.get(b'p'))
+    p = bp.get("p", bp.get(b"p"))
     R = max(0, N - E - I - S)
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
-    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # number of secondary Infections
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
+    Lpos2_esp = (
+        p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha
+    )  # number of secondary Infections
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(np.nan_to_num(Lpos_esp))
         Lpos2 = poisson(np.nan_to_num(Lpos2_esp))
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
         prob = I / (I + Lpos2_esp)  # convertin between parameterizations
@@ -1007,29 +1320,37 @@ def stepSIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, value
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSEIpR(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SEIpR, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - E - I - S
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
-    p = bp.get('p', bp.get(b'p'))
+    p = bp.get("p", bp.get(b"p"))
 
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
-    Lpos2 = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
+    Lpos2 = (
+        p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha
+    )  # secondary infections
 
     Lpos = min(S, Lpos)  # to avoid underflow
     Lpos2 = min(R, Lpos2)  # to avoid underflow
@@ -1050,35 +1371,53 @@ def stepSEIpR(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-                dist='poisson') -> tuple:
+def stepSEIpR_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SEIpRs:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
-    e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
+    e = bp.get("e", bp.get(b"e"))
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
+    b = bp.get("b", bp.get(b"b"))
     # w = bp.get('w', bp.get(b'w'));
-    p = bp.get('p', bp.get(b'p'))
+    p = bp.get("p", bp.get(b"p"))
     R = max(0, N - E - I - S)
 
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
-    Lpos2_esp = p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha  # secondary infections
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
+    Lpos2_esp = (
+        p * float(beta) * R * ((I + theta) / (N + npass)) ** alpha
+    )  # secondary infections
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(np.nan_to_num(Lpos_esp))
         Lpos2 = poisson(np.nan_to_num(Lpos2_esp))
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # converting between parameterizations
         Lpos = negative_binomial(I, prob)
         prob = I / (I + Lpos2_esp)  # converting between parameterizations
@@ -1104,25 +1443,31 @@ def stepSEIpR_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, valu
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
+def stepSIRS(
+    inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None
+) -> tuple:
     """
     calculates the model SIRS, and return its values (no demographics)
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
-    w = bp.get('w', bp.get(b'w'));
+    b = bp.get("b", bp.get(b"b"))
+    w = bp.get("w", bp.get(b"w"))
     # p = bp.get('p', bp.get(b'p'))
     Lpos = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
     Lpos = min(S, Lpos)  # to avoid underflow
@@ -1142,32 +1487,48 @@ def stepSIRS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=
 #                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
 #                Ipos='double', Spos='double', Rpos='double')
 # @numba.jit(forceobj=True, cache=True)
-def stepSIRS_s(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None,
-               dist='poisson') -> tuple:
+def stepSIRS_s(
+    inits,
+    simstep,
+    totpop,
+    theta=0,
+    npass=0,
+    bi=None,
+    bp=None,
+    values=None,
+    model=None,
+    dist="poisson",
+) -> tuple:
     """
     Defines an stochastic model SIR:
     - inits = (E,I,S)
     - theta = infectious individuals from neighbor sites
     """
     if simstep == 0:  # get initial values
-        E, I, S = (bi.get('e', bi.get(b'e')), bi.get('i', bi.get(b'i')), bi.get('s', bi.get(b's')))
+        E, I, S = (
+            bi.get("e", bi.get(b"e")),
+            bi.get("i", bi.get(b"i")),
+            bi.get("s", bi.get(b"s")),
+        )
     else:
         E, I, S = inits
     N = totpop
     R = N - (E + I + S)
-    beta = bp.get('beta', bp.get(b'beta'));
-    alpha = bp.get('alpha', bp.get(b'alpha'));
+    beta = bp.get("beta", bp.get(b"beta"))
+    alpha = bp.get("alpha", bp.get(b"alpha"))
     # e = bp.get('e', bp.get(b'e'));
-    r = bp.get('r', bp.get(b'r'));
+    r = bp.get("r", bp.get(b"r"))
     # delta = bp.get('delta', bp.get(b'delta'));
-    b = bp.get('b', bp.get(b'b'));
-    w = bp.get('w', bp.get(b'w'));
+    b = bp.get("b", bp.get(b"b"))
+    w = bp.get("w", bp.get(b"w"))
     # p = bp.get('p', bp.get(b'p'))
-    Lpos_esp = float(beta) * S * ((I + theta) / (N + npass)) ** alpha  # Number of new cases
+    Lpos_esp = (
+        float(beta) * S * ((I + theta) / (N + npass)) ** alpha
+    )  # Number of new cases
 
-    if dist == 'poisson':
+    if dist == "poisson":
         Lpos = poisson(Lpos_esp)
-    elif dist == 'negbin':
+    elif dist == "negbin":
         prob = I / (I + Lpos_esp)  # convertin between parameterizations
         Lpos = negative_binomial(I, prob)
 
