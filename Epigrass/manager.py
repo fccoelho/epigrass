@@ -162,8 +162,7 @@ class Simulate:
         except KeyError as v:
             V = v.__str__().split(".")
             sys.exit(
-                "Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified."
-                % (V[1], V[0])
+                f"Please check the syntax of your '.epg' file.\nVariable '{V[1]}', from section '{V[0]}' was not specified."
             )
         if self.replicas:
             self.Rep = 0  # Turns off reports

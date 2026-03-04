@@ -50,7 +50,11 @@ packages = ["Epigrass"]
 
 [tool.uv]
 package = true
-dev-dependencies = ["pytest>=8.3.4", "pytest-cov>=6.0.0"]
+dev-dependencies = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "semantic-release>=0.1.0",
+]
 
 [project.scripts]
 epirunner = "Epigrass.manager:main"
