@@ -12,11 +12,7 @@ pweave
 pymysql
 fiona
 shapely
-altair
 redis
 epimodels
-panel
-holoviews
-geoviews
 scikit-image
-datashader
+
