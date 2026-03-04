@@ -39,8 +39,17 @@ class Simulate:
     This class takes care of setting up the model, simulating it, and storing the results
     """
 
-    def __init__(self, fname=None, host='localhost', port=3306, db='epigrass', user='epigrass', password='epigrass',
-                 backend='sqlite', silent=False):
+    def __init__(
+        self,
+        fname=None,
+        host="localhost",
+        port=3306,
+        db="epigrass",
+        user="epigrass",
+        password="epigrass",
+        backend="sqlite",
+        silent=False,
+    ):
         # pycallgraph.start_trace()
         #        self.pool = multiprocessing.Pool()
         self.parallel = True
@@ -59,21 +68,25 @@ class Simulate:
         self.dir = os.getcwd()
         sys.path.insert(0, self.dir)  # add current path to sys.path
         self.gui = 0  # True if this object was created by the gui
-        self.now = time.asctime().replace(' ', '_').replace(':', '')  # current date and time
-        self.modelName = os.path.split(self.fname)[-1].split('.')[0]
+        self.now = (
+            time.asctime().replace(" ", "_").replace(":", "")
+        )  # current date and time
+        self.modelName = os.path.split(self.fname)[-1].split(".")[0]
         self.config = self.loadModelScript(self.fname)
         self.evalConfig(self.config)
         if not self.outdir:
-            self.outdir = outdir = 'outdata-' + self.modelName
+            self.outdir = outdir = "outdata-" + self.modelName
         if not os.path.exists(self.outdir):
             os.mkdir(self.outdir)
         if self.shapefile:  # create world object if a shapefile is provided
             self.World = epigdal.NewWorld(*self.shapefile + [self.outdir])
         self.chkScript()
-        self.encoding = 'utf-8'  # default encoding for strings in the sites and edges files
+        self.encoding = (
+            "utf-8"  # default encoding for strings in the sites and edges files
+        )
         self.round = 0  # No replicates
-        sitios = loadData(self.sites, sep=',', encoding=self.encoding)
-        ed = loadData(self.edges, sep=',', encoding=self.encoding)
+        sitios = loadData(self.sites, sep=",", encoding=self.encoding)
+        ed = loadData(self.edges, sep=",", encoding=self.encoding)
         l = self.instSites(sitios)
         e = self.instEdges(l, ed)
         self.g = self.instGraph(self.modelName, 1, l, e)
@@ -101,55 +114,57 @@ class Simulate:
         try:
             # WORLD
             # load Shapefile if specified
-            if config.get('the world.shapefile', False):
-                self.shapefile = eval(config['the world.shapefile'])
+            if config.get("the world.shapefile", False):
+                self.shapefile = eval(config["the world.shapefile"])
             else:
                 self.shapefile = []
 
             # self.layer = config['the world.vector layer']
-            self.sites = config['the world.sites']  # file containing site info
-            self.edges = config['the world.edges']  # file containing edge info
-            if config['the world.encoding']:
-                self.encoding = config['the world.encoding']  # encoding specification
+            self.sites = config["the world.sites"]  # file containing site info
+            self.edges = config["the world.edges"]  # file containing edge info
+            if config["the world.encoding"]:
+                self.encoding = config["the world.encoding"]  # encoding specification
             # Epidemiological model
-            self.modtype = config['epidemiological model.modtype']
+            self.modtype = config["epidemiological model.modtype"]
             # self.models = eval(config['epidemiological model.models'])
             # PARAMETERS
-            self.beta = config['model parameters.beta']
-            self.alpha = config['model parameters.alpha']
-            self.e = config['model parameters.e']
-            self.r = config['model parameters.r']
-            self.delta = config['model parameters.delta']
-            self.B = config['model parameters.b']
-            self.w = config['model parameters.w']
-            self.p = config['model parameters.p']
+            self.beta = config["model parameters.beta"]
+            self.alpha = config["model parameters.alpha"]
+            self.e = config["model parameters.e"]
+            self.r = config["model parameters.r"]
+            self.delta = config["model parameters.delta"]
+            self.B = config["model parameters.b"]
+            self.w = config["model parameters.w"]
+            self.p = config["model parameters.p"]
             # INITIAL CONDITIONS  (inits are string to evaluated inside siteobj.createmodel)
             # self.S = config['initial conditions.s']
             # self.E = config['initial conditions.e']
             # self.I = config['initial conditions.i']
             # EPIDEMIC EVENTS
-            self.seed = eval(config['epidemic events.seed'])
-            self.vaccinate = eval(config['epidemic events.vaccinate'])
+            self.seed = eval(config["epidemic events.seed"])
+            self.vaccinate = eval(config["epidemic events.vaccinate"])
             # self.quarantine = eval(config['epidemic events.quarantine'])
 
             # [TRANSPORTATION MODEL]
-            self.doTransp = eval(config['transportation model.dotransp'])
-            self.stochTransp = eval(config['transportation model.stochastic'])
-            self.speed = eval(config['transportation model.speed'])
+            self.doTransp = eval(config["transportation model.dotransp"])
+            self.stochTransp = eval(config["transportation model.stochastic"])
+            self.speed = eval(config["transportation model.speed"])
 
             # SIMULATION AND OUTPUT
-            self.steps = eval(config['simulation and output.steps'])
-            self.outdir = config['simulation and output.outdir']
-            self.SQLout = eval(config['simulation and output.sqlout'])
-            self.Rep = eval(config['simulation and output.report'])
-            self.siteRep = eval(config['simulation and output.siterep'])
-            self.replicas = eval(config['simulation and output.replicas'])
-            self.randomize_seeds = eval(config['simulation and output.randseed'])
-            self.Batch = eval(config['simulation and output.batch'])
+            self.steps = eval(config["simulation and output.steps"])
+            self.outdir = config["simulation and output.outdir"]
+            self.SQLout = eval(config["simulation and output.sqlout"])
+            self.Rep = eval(config["simulation and output.report"])
+            self.siteRep = eval(config["simulation and output.siterep"])
+            self.replicas = eval(config["simulation and output.replicas"])
+            self.randomize_seeds = eval(config["simulation and output.randseed"])
+            self.Batch = eval(config["simulation and output.batch"])
         except KeyError as v:
-            V = v.__str__().split('.')
-            sys.exit("Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified." % (
-                V[1], V[0]))
+            V = v.__str__().split(".")
+            sys.exit(
+                "Please check the syntax of your '.epg' file.\nVariable %s, from section %s was not specified."
+                % (V[1], V[0])
+            )
         if self.replicas:
             self.Rep = 0  # Turns off reports
             self.Batch = []  # Turns off Batch mode
@@ -159,13 +174,13 @@ class Simulate:
         self.parms = {}
         for k, v in config.items():
             try:
-                k = k.decode('utf8')
+                k = k.decode("utf8")
             except AttributeError:
                 pass
-            if k.startswith('initial conditions'):
-                self.inits[k.split('.')[-1].lower()] = v.split('#')[0]
-            elif k.startswith('model parameters'):
-                self.parms[k.split('.')[-1]] = v.split('#')[0]
+            if k.startswith("initial conditions"):
+                self.inits[k.split(".")[-1].lower()] = v.split("#")[0]
+            elif k.startswith("model parameters"):
+                self.parms[k.split(".")[-1]] = v.split("#")[0]
             else:
                 pass
 
@@ -176,21 +191,27 @@ class Simulate:
         print("Checking syntax of model script... NOW")
 
         if not os.access(self.sites, os.F_OK):
-            print('Sites file %s does not exist, please check your script.' % self.sites)
+            print(
+                "Sites file %s does not exist, please check your script." % self.sites
+            )
             sys.exit()
         if not os.access(self.edges, os.F_OK):
-            print('Egdes file %s does not exist, please check your script.' % self.edges)
+            print(
+                "Egdes file %s does not exist, please check your script." % self.edges
+            )
             sys.exit()
-        if not self.modtype in dir(models):  # ['SIS', 'SIS_s', 'SIR', 'SIR_s', 'SEIS', 'SEIS_s', 'SEIR', 'SEIR_s', 'SIpRpS','SIpRpS_s', 'SIpR,SIpR_s', 'Influenza', 'Custom']:
-            print('Model type %s is invalid, please check your script.' % self.modtype)
+        if (
+            not self.modtype in dir(models)
+        ):  # ['SIS', 'SIS_s', 'SIR', 'SIR_s', 'SEIS', 'SEIS_s', 'SEIR', 'SEIR_s', 'SIpRpS','SIpRpS_s', 'SIpR,SIpR_s', 'Influenza', 'Custom']:
+            print("Model type %s is invalid, please check your script." % self.modtype)
 
-        print('Script %s passed syntax check NOW.' % self.modelName)
+        print("Script %s passed syntax check NOW." % self.modelName)
 
     def deg2dec(self, coord):
         """
         converts lat/long to decimal
         """
-        co = coord.split(':')
+        co = coord.split(":")
         if int(co[0]) < 0:
             result = float(co[0]) - float(co[1]) / 60 - float(co[2]) / 3600
         else:
@@ -209,15 +230,25 @@ class Simulate:
         objlist = []
         for site in sitelist:
             if len(site) != ncols:
-                raise ValueError("This line in your sites file has a different number elements:\n%s" % str(site))
-            if ':' in str(site[0]):
+                raise ValueError(
+                    "This line in your sites file has a different number elements:\n%s"
+                    % str(site)
+                )
+            if ":" in str(site[0]):
                 lat = self.deg2dec(str(site[0]))
                 longit = self.deg2dec(str(site[1]))
             else:
                 lat = site[0]
                 longit = site[1]
-            objlist.append(siteobj(site[2], site[3], (lat, longit), int((site[4])),
-                                   tuple([float(i) for i in site[5:]])))
+            objlist.append(
+                siteobj(
+                    site[2],
+                    site[3],
+                    (lat, longit),
+                    int((site[4])),
+                    tuple([float(i) for i in site[5:]]),
+                )
+            )
         for o in objlist:
             if self.stochTransp:
                 o.stochtransp = 1
@@ -230,16 +261,16 @@ class Simulate:
             # eval parms and inits
             for k, v in self.inits.items():
                 if isinstance(k, bytes):
-                    k = k.decode('utf8')
+                    k = k.decode("utf8")
                 # inits[k.upper()] = eval(v)
                 inits[k.lower()] = eval(v)
             for k, v in self.parms.items():
                 if isinstance(k, bytes):
-                    k = k.decode('utf8')
+                    k = k.decode("utf8")
                 parms[k] = eval(v)
 
             if self.vaccinate:
-                if self.vaccinate[0][0] == 'all':
+                if self.vaccinate[0][0] == "all":
                     o.vaccination = [self.vaccinate[0][1], self.vaccinate[0][2]]
                 else:
                     for i in self.vaccinate:
@@ -257,11 +288,17 @@ class Simulate:
                     if int(o.geocode) == j[0] or self.seed[0][0] == "all":
                         # print("%s infected person(s) arrived at %s"%(j[2],o.sitename))
                         inits[j[1].lower()] += j[2]
-                        o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
+                        o.createModel(
+                            self.modtype, self.modelName, v=values, bi=inits, bp=parms
+                        )
                     else:
-                        o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
+                        o.createModel(
+                            self.modtype, self.modelName, v=values, bi=inits, bp=parms
+                        )
             else:
-                o.createModel(self.modtype, self.modelName, v=values, bi=inits, bp=parms)
+                o.createModel(
+                    self.modtype, self.modelName, v=values, bi=inits, bp=parms
+                )
         return objlist
 
     def instEdges(self, sitelist, edgelist):
@@ -289,13 +326,14 @@ class Simulate:
                 elif site.geocode == edg[6]:
                     dest = site
                     # print 'found dest = ',dest.sitename
-                if (source and dest):
+                if source and dest:
                     # print 'next edge!'
                     break
             if not (source and dest):
                 print(type(edg[5]), type(edg[6]))
                 sys.exit(
-                    f'One of the vertices on edge {edg[0]}({edg[5]}) - {edg[1]}({edg[6]}) could not be found on the site list')
+                    f"One of the vertices on edge {edg[0]}({edg[5]}) - {edg[1]}({edg[6]}) could not be found on the site list"
+                )
 
             objlist.append(edge(source, dest, edg[2], edg[3], float(edg[4])))
             source = dest = None
@@ -343,19 +381,21 @@ class Simulate:
         return sites
 
     def setSeed(self, seed, n=1):
-        '''
+        """
         Resets the number of infected to zero in all nodes but seed,
         which get n infected cases.
         seed must be a siteobj object.
-        '''
+        """
         # inits[self.seed[0][1].lower()] += 1
-        seedvar = self.seed[0][1].lower()  # retrieve the name of the variable containing the seeds
-        print('seedvar= %s' % seedvar)
+        seedvar = self.seed[0][
+            1
+        ].lower()  # retrieve the name of the variable containing the seeds
+        print("seedvar= %s" % seedvar)
         site_list = self.g.site_list
         self.seed = [(seed.geocode, seedvar, n)]
 
         for site in site_list:
-            if site.geocode == seed.geocode or seed.geocode == 'all':
+            if site.geocode == seed.geocode or seed.geocode == "all":
                 site.bi[seedvar] = n
 
                 print("%s infected case(s) arrived at %s" % (n, seed.sitename))
@@ -366,17 +406,17 @@ class Simulate:
         """
         Start the simulation
         """
-        if '/' in self.modelName:
+        if "/" in self.modelName:
             self.modelName = os.path.split(self.modelName)[-1]
         #        print "====>", self.gui
         # time.sleep(10)
-        print('Simulation starting.')
+        print("Simulation starting.")
         start = time.time()
         self.runGraph(self.g, self.steps, transp=self.doTransp)
         elapsed = time.time() - start
-        print('Simulation lasted %s seconds.' % elapsed)
+        print("Simulation lasted %s seconds." % elapsed)
         if self.SQLout:
-            if self.backend == 'csv':
+            if self.backend == "csv":
                 self.outToCsv(self.modelName)
             else:
                 self.outToDb(self.modelName)
@@ -394,17 +434,17 @@ class Simulate:
         ts = array(site.ts)
         data = array(ts, float)
         inc = site.incidence
-        f = open(self.outdir + self.outfile, 'w')
-        f.write('time,E,I,S,incidence\n')
+        f = open(self.outdir + self.outfile, "w")
+        f.write("time,E,I,S,incidence\n")
         try:
             for t, i in enumerate(data):
                 j = [str(k) for k in i]
-                line = str(t) + ','.join(j) + str(inc[t]) + '\n'
+                line = str(t) + ",".join(j) + str(inc[t]) + "\n"
                 f.write(line)
         finally:
             f.close()
 
-        return 'E,I,S\n'  # + tss
+        return "E,I,S\n"  # + tss
 
     def outToShp(self):
         """
@@ -414,13 +454,23 @@ class Simulate:
             return
 
         varlist = ["prevalence", "totalcases", "arrivals", "population"]
-        sitestats = [(site.geocode, float(site.totalcases) / site.totpop, site.totalcases, sum(site.thetahist),
-                      float(site.totpop)) for site in self.g.site_dict.values()]
+        sitestats = [
+            (
+                site.geocode,
+                float(site.totalcases) / site.totpop,
+                site.totalcases,
+                sum(site.thetahist),
+                float(site.totpop),
+            )
+            for site in self.g.site_dict.values()
+        ]
         # simdf = pd.DataFrame(data=array(sitestats), columns=[self.World.geocfield] + varlist)
         # print(self.World.map.info())
-        self.World.map[self.World.geocfield] = self.World.map[self.World.geocfield].astype(int)
+        self.World.map[self.World.geocfield] = self.World.map[
+            self.World.geocfield
+        ].astype(int)
         # self.World.map = pd.merge(self.World.map, simdf, on=self.World.geocfield)
-        print('Saving results in the map Data.gpkg')
+        print("Saving results in the map Data.gpkg")
         self.World.create_data_layer(varlist, sitestats)
 
     def out_to_kml(self, names):
@@ -435,17 +485,21 @@ class Simulate:
         site_list = self.g.site_list
         site_dict = self.g.site_dict
         # Temporarily disabled animation output due to the sheer size of the kmz files
-        if len(site_dict) * len(list(site_dict.values())[0].ts) < 20000:  # Only reasonably sized animations
+        if (
+            len(site_dict) * len(list(site_dict.values())[0].ts) < 20000
+        ):  # Only reasonably sized animations
             for i, v in enumerate(list(site_dict.values())[0].vnames):
-                ka = epigdal.AnimatedKML(os.path.join(self.outdir, 'Data.kml'), extrude=True)
+                ka = epigdal.AnimatedKML(
+                    os.path.join(self.outdir, "Data.kml"), extrude=True
+                )
                 data = []
                 for site in site_dict.values():
                     ts = site.ts
                     for t, p in enumerate(ts):
                         data.append((str(site.geocode), t, p[i]))
                 ka.add_data(data)
-                ka.save(v + '_animation')
-                print(v + '_animation')
+                ka.save(v + "_animation")
+                print(v + "_animation")
                 del ka
         else:
             print("Simulation too large to export as kml.")
@@ -456,18 +510,20 @@ class Simulate:
         """
         Saves timeseries to JSON for uploading to epigrass web
         """
-        print('Saving series to JSON')
+        print("Saving series to JSON")
         series = {}
         for gc, s in self.g.site_dict.items():
             length = max(map(len, s.ts))
             # y = np.array([xi + ([None] * (length - len(xi))) for xi in s.ts])
-            y = np.array([np.pad(xi, length, 'constant', constant_values=np.NaN) for xi in s.ts])
+            y = np.array(
+                [np.pad(xi, length, "constant", constant_values=np.NaN) for xi in s.ts]
+            )
             ts = np.array(y)
             sdict = {}
             for i, vn in enumerate(s.vnames):
                 sdict[vn] = ts[:, i].tolist()
             series[gc] = sdict
-        with open('series.json', 'w') as f:
+        with open("series.json", "w") as f:
             json.dump(series, f)
 
     def writeMetaCSV(self, table):
@@ -476,12 +532,14 @@ class Simulate:
         """
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
-        f = open(table + '_meta', 'w')
+        f = open(table + "_meta", "w")
         cfgitems = list(self.config.items())
-        h = ';'.join([k.strip().replace(' ', '_').replace('.', '$') for k, v in cfgitems])
-        l = ';'.join([v.split('#')[0] for k, v in cfgitems])
-        f.write(h + '\n')
-        f.write(l + '\n')
+        h = ";".join(
+            [k.strip().replace(" ", "_").replace(".", "$") for k, v in cfgitems]
+        )
+        l = ";".join([v.split("#")[0] for k, v in cfgitems])
+        f.write(h + "\n")
+        f.write(l + "\n")
         f.close()
         os.chdir(self.dir)
 
@@ -491,24 +549,28 @@ class Simulate:
         """
         import gzip
         import csv
-        
+
         if not self.outdir == os.getcwd():
             os.chdir(self.outdir)
         tablee = table + "_" + self.now + "_e.csv.gz"  # edgetable name
         table = table + "_" + self.now + ".csv.gz"  # sitetable name
 
         # Sitetable output
-        with gzip.open(table, 'wt', encoding='utf-8') as f:
+        with gzip.open(table, "wt", encoding="utf-8") as f:
             writer = None
             for site in self.g.site_dict.values():
                 t = 0
-                regb = [site.geocode, t, site.totpop,
-                        str(site.sitename).strip('"'),
-                        site.pos[0], site.pos[1]
-                        ]
+                regb = [
+                    site.geocode,
+                    t,
+                    site.totpop,
+                    str(site.sitename).strip('"'),
+                    site.pos[0],
+                    site.pos[1],
+                ]
                 if site.values:
                     regb.extend([v for v in site.values])
-                
+
                 ts = array(site.ts[1:])  # remove init conds
                 for i in ts:
                     reg = list(regb)
@@ -518,23 +580,23 @@ class Simulate:
                         pass
                     reg[1] = t
                     reg.extend(list(i))
-                    
+
                     if writer is None:
                         # Initialize header on first row
-                        head = ['geocode', 'time', 'totpop', 'name', 'lat', 'longit']
+                        head = ["geocode", "time", "totpop", "name", "lat", "longit"]
                         if site.values:
-                            head.extend([f'value{n}' for n in range(len(site.values))])
-                        head.extend(['incidence', 'arrivals'])
+                            head.extend([f"value{n}" for n in range(len(site.values))])
+                        head.extend(["incidence", "arrivals"])
                         head.extend(site.vnames)
                         writer = csv.writer(f)
                         writer.writerow(head)
-                    
+
                     writer.writerow(reg)
                     t += 1
 
         # Edgetable output
-        head = ['source_code', 'dest_code', 'time', 'ftheta', 'btheta']
-        with gzip.open(tablee, 'wt', encoding='utf-8') as f:
+        head = ["source_code", "dest_code", "time", "ftheta", "btheta"]
+        with gzip.open(tablee, "wt", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(head)
             for e in self.g.edge_list:
@@ -548,10 +610,15 @@ class Simulate:
         Creates a Meta-Info Table on the database with the contents of the .epg file
         """
         try:
-            table = table + '_meta'
+            table = table + "_meta"
             if self.backend.lower() == "mysql":
-                con = pymysql.connect(host=self.host, port=self.port,
-                                      user=self.usr, passwd=self.passw, db=self.db)
+                con = pymysql.connect(
+                    host=self.host,
+                    port=self.port,
+                    user=self.usr,
+                    passwd=self.passw,
+                    db=self.db,
+                )
             elif self.backend.lower() == "sqlite":
                 if not self.outdir == os.getcwd():
                     os.chdir(self.outdir)
@@ -562,19 +629,19 @@ class Simulate:
             vars = []
             cfgitems = list(self.config.items())
             for k, v in cfgitems:
-                vars.append(k.strip().replace(' ', '_').replace('.', '$'))
-            sqlstr2 = ', '.join(["%s text" % i for i in vars])
+                vars.append(k.strip().replace(" ", "_").replace(".", "$"))
+            sqlstr2 = ", ".join(["%s text" % i for i in vars])
             Cursor = con.cursor()
-            Cursor.execute(sqlstr1 + sqlstr2 + ');')
+            Cursor.execute(sqlstr1 + sqlstr2 + ");")
             # doing inserts
-            values = [v.split('#')[0] for k, v in cfgitems]
+            values = [v.split("#")[0] for k, v in cfgitems]
             #            for k, v in cfgitems:
             #                v = v.split('#')[0]
             #                if not v:
             #                    v = ' '
             #                values.append()
-            str3 = ','.join(['"%s"' % i for i in values]) + ')'
-            sqlstr3 = '''INSERT INTO %s VALUES(%s''' % (table, str3)
+            str3 = ",".join(['"%s"' % i for i in values]) + ")"
+            sqlstr3 = """INSERT INTO %s VALUES(%s""" % (table, str3)
             # print sqlstr3
             Cursor.execute(sqlstr3)
         finally:
@@ -589,35 +656,47 @@ class Simulate:
         """
 
         if self.backend.lower() == "mysql":
-            print('Saving data on MySQL...')
+            print("Saving data on MySQL...")
         elif self.backend.lower() == "sqlite":
-            print('Saving data on SQLite...')
+            print("Saving data on SQLite...")
 
         con = None
         try:
-            table = table + '_' + self.now
+            table = table + "_" + self.now
             self.writeMetaTable(table)
             self.outtable = table
             if self.backend.lower() == "mysql":
-                con = pymysql.connect(host=self.host, port=self.port,
-                                      user=self.usr, passwd=self.passw, db=self.db)
+                con = pymysql.connect(
+                    host=self.host,
+                    port=self.port,
+                    user=self.usr,
+                    passwd=self.passw,
+                    db=self.db,
+                )
             elif self.backend.lower() == "sqlite":
                 if not self.outdir == os.getcwd():
                     os.chdir(self.outdir)
                 con = sqlite3.connect("Epigrass.sqlite")
                 os.chdir(self.dir)
             # Define number of variables to be stored
-            nvar = len(list(self.g.site_dict.values())[
-                           0].vnames) + 4  # state variables,  plus coords, plus incidence, plus infected arrivals.
-            str1 = '`%s` FLOAT(9),' * nvar  # nvar variables in the table
-            str1lite = '%s REAL,' * nvar  # nvar variables in the SQLite table
-            varnames = ['lat', 'longit'] + list(list(self.g.site_dict.values())[0].vnames) + ['incidence'] + [
-                'Arrivals']
+            nvar = (
+                len(list(self.g.site_dict.values())[0].vnames) + 4
+            )  # state variables,  plus coords, plus incidence, plus infected arrivals.
+            str1 = "`%s` FLOAT(9)," * nvar  # nvar variables in the table
+            str1lite = "%s REAL," * nvar  # nvar variables in the SQLite table
+            varnames = (
+                ["lat", "longit"]
+                + list(list(self.g.site_dict.values())[0].vnames)
+                + ["incidence"]
+                + ["Arrivals"]
+            )
             #            print nvar, varnames, str1
             # print((nvar, len(varnames)))
             # print(varnames)
             str1 = str1[:-1] % tuple(varnames)  # insert variable names (MySQL)
-            str1lite = str1lite[:len(str1lite) - 1] % tuple(varnames)  # insert variable names (SQLITE)
+            str1lite = str1lite[: len(str1lite) - 1] % tuple(
+                varnames
+            )  # insert variable names (SQLITE)
             Cursor = con.cursor()
             str2 = f"""CREATE TABLE {table}(
             `geocode` INT( 9 )  ,
@@ -629,18 +708,18 @@ class Simulate:
             time INTEGER,
             name TEXT,
             """
-            sql = str2 + str1 + ');'
-            sqlite = str2lite + str1lite + ');'
+            sql = str2 + str1 + ");"
+            sqlite = str2lite + str1lite + ");"
 
             if self.backend.lower() == "mysql":
                 Cursor.execute(sql)
-                str3 = (nvar + 3) * '%s,'
-                str3 = str3[:-1] + ')'
+                str3 = (nvar + 3) * "%s,"
+                str3 = str3[:-1] + ")"
             elif self.backend.lower() == "sqlite":
                 Cursor.execute(sqlite)
-                str3 = (nvar + 3) * '?,'
-                str3 = str3[:-1] + ')'
-            sql2 = 'INSERT INTO %s' % table + ' VALUES(' + str3
+                str3 = (nvar + 3) * "?,"
+                str3 = str3[:-1] + ")"
+            sql2 = "INSERT INTO %s" % table + " VALUES(" + str3
             chunk_size = 1000
             nvalues = []
             for site in self.g.site_dict.values():
@@ -648,7 +727,9 @@ class Simulate:
                 lat = site.pos[0]
                 longit = site.pos[1]
                 name = site.sitename
-                ts = array(site.ts[1:])  # remove init conds so that ts and inc are the same size
+                ts = array(
+                    site.ts[1:]
+                )  # remove init conds so that ts and inc are the same size
                 # ts = array([json.loads(st) for st in redisclient.lrange(f'{geoc}:ts', 0, -1)])
                 inc = site.incidence
                 thist = site.thetahist
@@ -656,53 +737,71 @@ class Simulate:
                 for incid, flow in zip(inc, thist):
                     tstep = str(t)
                     flow = float(thist[t])
-                    nvalues.append(tuple([geoc, tstep, name] + [lat, longit] + list(ts[t]) + [incid] + [flow]))
+                    nvalues.append(
+                        tuple(
+                            [geoc, tstep, name]
+                            + [lat, longit]
+                            + list(ts[t])
+                            + [incid]
+                            + [flow]
+                        )
+                    )
                     t += 1
-                    
+
                     if len(nvalues) >= chunk_size:
                         Cursor.executemany(sql2, nvalues)
                         con.commit()
                         nvalues = []
-            
+
             if nvalues:
                 Cursor.executemany(sql2, nvalues)
                 con.commit()
-            
+
             # Create indexes on time and geocode columns for better query performance
-            print('Creating indexes on time and geocode columns...')
+            print("Creating indexes on time and geocode columns...")
             try:
                 if self.backend.lower() == "mysql":
                     Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
-                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)"
+                    )
                 elif self.backend.lower() == "sqlite":
                     Cursor.execute(f"CREATE INDEX idx_{table}_time ON {table} (time)")
-                    Cursor.execute(f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)")
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{table}_geocode ON {table} (geocode)"
+                    )
                 con.commit()
-                print('Indexes created successfully.')
+                print("Indexes created successfully.")
             except Exception as e:
-                print(f'Warning: Could not create indexes: {e}')
-            
+                print(f"Warning: Could not create indexes: {e}")
+
             # Creating a table for edge data
-            self.etable = etable = table + 'e'
-            esql = """CREATE TABLE %s(
+            self.etable = etable = table + "e"
+            esql = (
+                """CREATE TABLE %s(
             `source_code` INT( 9 )  ,
             `dest_code` INT( 9 )  ,
             `time` INT( 9 ) ,
             `ftheta` FLOAT(9) ,
-            `btheta` FLOAT(9) );""" % etable
-            esqlite = """CREATE TABLE %s(
+            `btheta` FLOAT(9) );"""
+                % etable
+            )
+            esqlite = (
+                """CREATE TABLE %s(
             source_code INTEGER  ,
             dest_code INTEGER  ,
             time INTEGER ,
             ftheta REAL ,
-            btheta REAL );""" % etable
+            btheta REAL );"""
+                % etable
+            )
 
             if self.backend.lower() == "mysql":
                 Cursor.execute(esql)
-                esql2 = 'INSERT INTO %s' % etable + ' VALUES(%s,%s,%s,%s,%s)'
+                esql2 = "INSERT INTO %s" % etable + " VALUES(%s,%s,%s,%s,%s)"
             elif self.backend.lower() == "sqlite":
                 Cursor.execute(esqlite)
-                esql2 = 'INSERT INTO %s' % etable + ' VALUES(?,?,?,?,?)'
+                esql2 = "INSERT INTO %s" % etable + " VALUES(?,?,?,?,?)"
             chunk_size = 1000
             values = []
             for gcs, e in self.g.edge_dict.items():
@@ -712,57 +811,64 @@ class Simulate:
                 for f, b in zip(e.ftheta, e.btheta):
                     values.append((s, d, t, f, b))
                     t += 1
-                    
+
                     if len(values) >= chunk_size:
                         Cursor.executemany(esql2, values)
                         con.commit()
                         values = []
-            
+
             if values:
                 Cursor.executemany(esql2, values)
                 con.commit()
-            
+
             # Create indexes on edge table columns for better query performance
-            print('Creating indexes on edge table columns...')
+            print("Creating indexes on edge table columns...")
             try:
                 if self.backend.lower() == "mysql":
                     Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
-                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
-                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)"
+                    )
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)"
+                    )
                 elif self.backend.lower() == "sqlite":
                     Cursor.execute(f"CREATE INDEX idx_{etable}_time ON {etable} (time)")
-                    Cursor.execute(f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)")
-                    Cursor.execute(f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)")
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{etable}_source ON {etable} (source_code)"
+                    )
+                    Cursor.execute(
+                        f"CREATE INDEX idx_{etable}_dest ON {etable} (dest_code)"
+                    )
                 con.commit()
-                print('Edge table indexes created successfully.')
+                print("Edge table indexes created successfully.")
             except Exception as e:
-                print(f'Warning: Could not create edge table indexes: {e}')
-
+                print(f"Warning: Could not create edge table indexes: {e}")
 
         finally:
             if con:
                 con.commit()
                 con.close()
         # saving pickle of adjacency matrix
-        matname = 'adj_' + self.modelName  # table
+        matname = "adj_" + self.modelName  # table
         fname = os.path.join(self.outdir, matname)
-        adjfile = open(fname, 'wb')
+        adjfile = open(fname, "wb")
         pickle.dump(self.g.getConnMatrix(), adjfile)
         adjfile.close()
 
     def criaAdjMatrix(self):
         # saving the adjacency  matrix
         codeslist = [str(i.geocode) for i in self.g.site_dict.values()]
-        if not os.path.exists('adjmat.csv'):
-            print('Saving the adjacency  matrix...')
+        if not os.path.exists("adjmat.csv"):
+            print("Saving the adjacency  matrix...")
             am = self.g.getConnMatrix()
-            amf = open('adjmat.csv', 'w')
-            amf.write(','.join(codeslist) + '\n')
+            amf = open("adjmat.csv", "w")
+            amf.write(",".join(codeslist) + "\n")
             for row in am:
                 row = [str(i) for i in row]
-                amf.write(','.join(row) + '\n')
+                amf.write(",".join(row) + "\n")
             amf.close()
-            print('Done!')
+            print("Done!")
 
     def dumpData(self):
         """
@@ -798,12 +904,12 @@ class Simulate:
         #            print 'Done!'
 
         # Saving epidemic path
-        print('Saving Epidemic path...')
+        print("Saving Epidemic path...")
         if self.round:
-            epp = codecs.open('epipath%s.csv' % str(self.round), 'w', self.encoding)
+            epp = codecs.open("epipath%s.csv" % str(self.round), "w", self.encoding)
         else:
-            epp = codecs.open('epipath.csv', 'w', self.encoding)
-        epp.write('time,site,infector\n')
+            epp = codecs.open("epipath.csv", "w", self.encoding)
+        epp.write("time,site,infector\n")
         for i in self.g.epipath:
             # print i
             site = self.g.site_dict[i[1]]
@@ -815,30 +921,34 @@ class Simulate:
                 # Safety check: ensure the infector object is not None
                 infector_site = reverse_infectors[-1][0]
                 if infector_site is not None:
-                    mli = infector_site.sitename # Most likely infector
+                    mli = infector_site.sitename  # Most likely infector
                 else:
-                    mli = 'Unknown'
+                    mli = "Unknown"
             else:
-                mli = 'NA'
+                mli = "NA"
             # print i[1].sitename, type(i[1].sitename), mli
             epp.write(f"{i[0]},{site.sitename},{mli}\n")
         epp.close()
-        print('Done!')
-        self.g.save_topology('network.gexf')
+        print("Done!")
+        self.g.save_topology("network.gexf")
 
         # saving Epistats
-        print('Saving Epidemiological results...')
+        print("Saving Epidemiological results...")
         stats = [str(i) for i in self.g.getEpistats()]
 
-        seed = \
-            [s for s in self.g.site_dict.values() if s.geocode == self.seed[0][0] or self.seed[0][0] == 'all'][0]
+        seed = [
+            s
+            for s in self.g.site_dict.values()
+            if s.geocode == self.seed[0][0] or self.seed[0][0] == "all"
+        ][0]
         stats.pop(1)  # Remove epispeed which is a vector
-        if os.path.exists('epistats.csv'):
-            stf = codecs.open('epistats.csv', 'a', self.encoding)  # append to file
+        if os.path.exists("epistats.csv"):
+            stf = codecs.open("epistats.csv", "a", self.encoding)  # append to file
         else:
-            stf = codecs.open('epistats.csv', 'w', self.encoding)  # create a new file
+            stf = codecs.open("epistats.csv", "w", self.encoding)  # create a new file
             stf.write(
-                'seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
+                "seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n"
+            )
         ##            stf.write('seed,name,size,infected_sites,spreadtime,median_survival,totvaccinated,totquarantined,seeddeg,seedpop\n')
         # scent = str(seed.getCentrality())
         # sbetw = str(seed.getBetweeness())
@@ -846,22 +956,31 @@ class Simulate:
         sdeg = str(seed.getDegree())
         spop = str(seed.totpop)
         sname = seed.sitename
-        sstats = '%s,%s' % (sdeg, spop)
+        sstats = "%s,%s" % (sdeg, spop)
         #        sstats = '%s,%s,%s,%s,%s'%(scent,sbetw,sthidx,sdeg,spop)
-        stf.write(str(self.seed[0][0]) + ',' + sname + ',' + ','.join(stats) + ',' + sstats + '\n')
+        stf.write(
+            str(self.seed[0][0])
+            + ","
+            + sname
+            + ","
+            + ",".join(stats)
+            + ","
+            + sstats
+            + "\n"
+        )
         stf.close()
-        print('Done saving!')
+        print("Done saving!")
 
         # Saving site stats
-        print('Saving site statistics...')
+        print("Saving site statistics...")
         # self.g.getAllPairs()
-        if os.path.exists('sitestats.csv'):
-            sitef = codecs.open('sitestats.csv', 'a', self.encoding)  # append to file
+        if os.path.exists("sitestats.csv"):
+            sitef = codecs.open("sitestats.csv", "a", self.encoding)  # append to file
         else:
-            sitef = codecs.open('sitestats.csv', 'w', self.encoding)
+            sitef = codecs.open("sitestats.csv", "w", self.encoding)
 
         # sitef.write('round,geocode,name,infection_time,degree,centrality,betweeness,theta_index,distance,seed,seedname\n')
-        sitef.write('round,geocode,name,infection_time,degree,seed,seedname\n')
+        sitef.write("round,geocode,name,infection_time,degree,seed,seedname\n")
         for s in self.g.site_dict.values():
             degree = str(s.getDegree())
             # central = str(s.getCentrality())
@@ -874,23 +993,25 @@ class Simulate:
             #            f.close()
             #            distseed = str(ap[codeslist.index(str(s.geocode)),codeslist.index(str(self.seed[0][0]))])
             it = str(s.infected)  # infection time
-            if it == 'FALSE':
-                it = 'NA'
+            if it == "FALSE":
+                it = "NA"
 
             #            sitef.write(str(self.round)+','+str(s.geocode)+','+s.sitename+','+it+','+degree+','+central+','+bet+','+thidx+','+distseed+','+seedgc+','+seedname+'\n')
-            sitef.write(f"{self.round},{s.geocode} ,{s.sitename} ,{it}, {degree}, {seedgc}, {seedname}\n")
+            sitef.write(
+                f"{self.round},{s.geocode} ,{s.sitename} ,{it}, {degree}, {seedgc}, {seedname}\n"
+            )
 
         # Saving series to JSON
         # self.series_to_JSON()
         os.chdir(curdir)
 
-        print('Done saving data!')
+        print("Done saving data!")
 
     def saveModel(self, fname):
         """
         Save the fully specified graph.
         """
-        f = open(fname, 'w')
+        f = open(fname, "w")
         pickle.dump(self.g, f)
         f.close()
 
@@ -913,10 +1034,12 @@ class Simulate:
         g.maxstep = iterations
         sites = list(graphobj.site_dict.values())
         edges = list(graphobj.edge_dict.values())
-        
+
         # Check if we can use vectorized migration
-        can_vectorize_migration = all(e.delay == 0 for e in edges) and all(s.stochtransp == 0 for s in sites)
-        
+        can_vectorize_migration = all(e.delay == 0 for e in edges) and all(
+            s.stochtransp == 0 for s in sites
+        )
+
         if can_vectorize_migration and not self.parallel:
             # Build migration matrix once
             site_to_idx = {s.geocode: i for i, s in enumerate(sites)}
@@ -928,48 +1051,55 @@ class Simulate:
                 idx_dst = site_to_idx[e.dest.geocode]
                 M[idx_dst, idx_src] = e.fmig
                 M[idx_src, idx_dst] = e.bmig
-            
+
             # Pre-calculate totals for each site (passengers departing)
             # This is used for npass in runModel
-            Departure_matrix = M.sum(axis=0) # Total departing from each site j
-            
-            for n in tqdm(range(iterations), desc='Simulation steps (vectorized)'):
+            Departure_matrix = M.sum(axis=0)  # Total departing from each site j
+
+            for n in tqdm(range(iterations), desc="Simulation steps (vectorized)"):
                 # 1. Run models
                 # We still run them one by one for compatibility, but avoid the migrate object loop
                 for i in sites:
                     i.runModel(False)
-                
+
                 # 2. Vectorized Migration
                 # migInf_arr[j] is the proportion of infectious at site j
                 # We need the last state's I compartment or whatever migInf is
                 # site.migInf[-1] is the value calculated in handle()
-                mig_props = np.array([s.migInf[-1] / s.totpop if s.totpop > 0 else 0 for s in sites])
-                
+                mig_props = np.array(
+                    [s.migInf[-1] / s.totpop if s.totpop > 0 else 0 for s in sites]
+                )
+
                 # Arrivals = M @ mig_props
                 theta_arrivals = M @ mig_props
-                npass_arrivals = Departure_matrix # This is constant if fmig/bmig are constant
-                
+                npass_arrivals = (
+                    Departure_matrix  # This is constant if fmig/bmig are constant
+                )
+
                 # Update sites with arrivals for the NEXT step
                 # Note: runModel uses thetalist/passlist from PREVIOUS migrate calls
-                contributions = M * mig_props # Element-wise: M[i,j] * mig_props[j]
+                contributions = M * mig_props  # Element-wise: M[i,j] * mig_props[j]
                 for idx, s in enumerate(sites):
                     # Find sites that contributed to theta_arrivals[idx]
                     row_contributions = contributions[idx, :]
                     contributing_indices = np.where(row_contributions > 0)[0]
-                    
+
                     if contributing_indices.size > 0:
-                        s.thetalist = [(sites[j], row_contributions[j]) for j in contributing_indices]
+                        s.thetalist = [
+                            (sites[j], row_contributions[j])
+                            for j in contributing_indices
+                        ]
                     else:
                         s.thetalist = []
                     s.passlist = [npass_arrivals[idx]]
-                
+
                 g.simstep += 1
                 g.sites_done = 0
             return
 
         # Original loop if vectorization not possible or parallel is True
         if transp:
-            for n in tqdm(range(iterations), desc='Simulation steps'):
+            for n in tqdm(range(iterations), desc="Simulation steps"):
                 # print()
                 # "==> {}\r".format(g.simstep),
                 results = [i.runModel(self.parallel) for i in sites]
@@ -985,9 +1115,9 @@ class Simulate:
                 g.simstep += 1
                 g.sites_done = 0
         else:
-            for n in tqdm(range(iterations), desc='Simulation steps'):
+            for n in tqdm(range(iterations), desc="Simulation steps"):
                 results = []
-                for i in tqdm(sites, desc='Sites'):
+                for i in tqdm(sites, desc="Sites"):
                     results.append(i.runModel(self.parallel))
                 if self.parallel:
                     [r.wait() for r in results]
@@ -1000,27 +1130,30 @@ class Simulate:
         """
         if self.silent:
             return
-        print(string + '\r')
+        print(string + "\r")
 
 
 def migrate(edge):
     return edge.migrate()
 
 
-def storeSimulation(S, usr, passw, db='epigrass', host='localhost', port=3306):
+def storeSimulation(S, usr, passw, db="epigrass", host="localhost", port=3306):
     """
     store the Simulate object *s* in the epigrass database
     to allow distributed runs. Currently not working.
     """
-    now = time.asctime().replace(' ', '_').replace(':', '')
-    table = 'Model_' + S.modelName + now
+    now = time.asctime().replace(" ", "_").replace(":", "")
+    table = "Model_" + S.modelName + now
     con = pymysql.connect(host=host, port=port, user=usr, passwd=passw, db=db)
     Cursor = con.cursor()
-    sql = """CREATE TABLE %s(
-        `simulation` BLOB);""" % table
+    sql = (
+        """CREATE TABLE %s(
+        `simulation` BLOB);"""
+        % table
+    )
     Cursor.execute(sql)
     blob = pickle.dumps(S)
-    sql2 = 'INSERT INTO %s' % table + ' VALUES(%s)'
+    sql2 = "INSERT INTO %s" % table + " VALUES(%s)"
     Cursor.execute(sql2, blob)
     con.close()
 
@@ -1029,27 +1162,30 @@ def onStraightRun(args):
     """
     Runs the model from the commandline
     """
-    if args.gradio:
-        from Epigrass import epipanel_gradio
-    else:
-        from Epigrass import epipanel
-    
+    from Epigrass import epipanel_gradio
+
     if args.view_only:
-        pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
+        pth = os.path.join(os.getcwd() + f"/outdata-{args.epg[0].split('.')[0]}")
         try:
             os.chdir(os.path.abspath(pth))
         except FileNotFoundError as exc:
-            print(f"Error: The directory {pth} does not exist. Please run a simulation first.")
+            print(
+                f"Error: The directory {pth} does not exist. Please run a simulation first."
+            )
             return
 
         print(os.path.abspath(pth))
-        if args.gradio:
-            epipanel_gradio.show(pth)
-        else:
-            epipanel.show(pth)
+        epipanel_gradio.show(pth)
+
     redisclient.flushall()
     if args.backend == "mysql":
-        S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
+        S = Simulate(
+            fname=args.epg[0],
+            host=args.dbhost,
+            user=args.dbuser,
+            password=args.dbpass,
+            backend=args.backend,
+        )
     else:
         S = Simulate(fname=args.epg[0], backend=args.backend)
     S.parallel = args.parallel
@@ -1061,13 +1197,9 @@ def onStraightRun(args):
     else:
         repRuns(S)
     if args.dashboard:
-        if args.gradio:
-            from Epigrass import epipanel_gradio
-            epipanel_gradio.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
-        else:
-            epipanel.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
+        epipanel_gradio.show(os.path.abspath(os.path.join(S.dir, S.outdir)))
     if S.Batch:
-        S.Say('Simulation Started.')
+        S.Say("Simulation Started.")
 
         # run the batch list
         for i in S.Batch:
@@ -1076,13 +1208,16 @@ def onStraightRun(args):
             # delete the old graph object to save memory
             S.graph = None
             # Generates the simulation object
-            T = Simulate(fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend)
+            T = Simulate(
+                fname=i, host=S.host, user=S.usr, password=S.passw, backend=S.backend
+            )
 
-            print('starting model %s' % i)
+            print("starting model %s" % i)
             T.start()  # Start the simulation
 
 
 #            spread.Spread(T.g)
+
 
 def repRuns(S):
     """
@@ -1101,7 +1236,9 @@ def repRuns(S):
     reps = S.replicas
     for i in range(reps):
         print("Starting replicate number %s" % i)
-        S = Simulate(fname=fname, host=host, user=user, password=password, backend=backend)
+        S = Simulate(
+            fname=fname, host=host, user=user, password=password, backend=backend
+        )
         if randseed:
             S.setSeed(seeds[i], nseeds)
         S.round = i
@@ -1121,19 +1258,37 @@ def upload_model(args):
 
     app_url = "http://app.epigrass.net/simulations/view/new/"  # creating the app id
     r = requests.get(app_url, auth=(username, passwd))
-    fields = {'epg': (S.modelName, open(S.fname, 'rb'), 'text/plain')}
-    if os.path.exists(os.path.join(S.outdir, 'data.json')):
-        fields['map'] = ('data.json', open(os.path.join(S.outdir, 'data.json'), 'rb'), 'text/plain')
-    if os.path.exists(os.path.join(S.outdir, 'series.json')):
-        fields['series'] = ('series.json', open(os.path.join(S.outdir, 'series.json'), 'rb'), 'text/plain')
-    if os.path.exists(os.path.join(S.outdir, 'network.json')):
-        fields['network'] = ('network.json', open(os.path.join(S.outdir, 'network.json'), 'rb'), 'text/plain')
-    if os.path.exists(os.path.join(S.outdir, 'spread.json')):
-        fields['spread'] = ('spread.json', open(os.path.join(S.outdir, 'spread.json'), 'rb'), 'text/plain')
+    fields = {"epg": (S.modelName, open(S.fname, "rb"), "text/plain")}
+    if os.path.exists(os.path.join(S.outdir, "data.json")):
+        fields["map"] = (
+            "data.json",
+            open(os.path.join(S.outdir, "data.json"), "rb"),
+            "text/plain",
+        )
+    if os.path.exists(os.path.join(S.outdir, "series.json")):
+        fields["series"] = (
+            "series.json",
+            open(os.path.join(S.outdir, "series.json"), "rb"),
+            "text/plain",
+        )
+    if os.path.exists(os.path.join(S.outdir, "network.json")):
+        fields["network"] = (
+            "network.json",
+            open(os.path.join(S.outdir, "network.json"), "rb"),
+            "text/plain",
+        )
+    if os.path.exists(os.path.join(S.outdir, "spread.json")):
+        fields["spread"] = (
+            "spread.json",
+            open(os.path.join(S.outdir, "spread.json"), "rb"),
+            "text/plain",
+        )
 
-    hdrs = {'Content-Type': fields.content_type,
-            'content-encoding': 'gzip',
-            'transfer-encoding': 'chunked'}
+    hdrs = {
+        "Content-Type": fields.content_type,
+        "content-encoding": "gzip",
+        "transfer-encoding": "chunked",
+    }
 
     r = requests.post(app_url, files=fields, headers=hdrs)
     if r.status_code == requests.codes.ok:
@@ -1146,34 +1301,67 @@ def main():
     # Options and Argument parsing for running model from the command line, without the GUI.
     usage = "usage: epirunner [options] your_model.epg"
     #    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
-    parser = ArgumentParser(usage=usage, description="Run epigrass models from the console",
-                            prog="epirunner " + __version__.version)
-    parser.add_argument("-b", "--backend", dest="backend",
-                        help="Define which datastorage backend to use", metavar="<mysql|sqlite|csv>", default="sqlite")
-    parser.add_argument("-u", "--dbusername",
-                        dest="dbuser", help="MySQL user name")
-    parser.add_argument("-p", "--password",
-                        dest="dbpass", help="MySQL password for user")
-    parser.add_argument("-H", "--dbhost",
-                        dest="dbhost", default="localhost", help="MySQL hostname or IP address")
-    parser.add_argument("--upload", help="Upload your models and latest simulation to Epigrass Web")
-    parser.add_argument("-P", "--parallel", action="store_true", default=False,
-                        dest="parallel", help="use multiprocessing to run the simulation")
-    parser.add_argument("-D", "--dashboard", action="store_true", default=False,
-                        dest="dashboard", help="Open dashboard on browser after th run is done.")
-    parser.add_argument("-V", "--view-only", action="store_true", default=False,
-                        dest="view_only", help="Only Open dashboard.")
-    parser.add_argument("-G", "--gradio", action="store_true", default=False,
-                        dest="gradio", help="Open Gradio dashboard instead of Panel.")
-    parser.add_argument("epg", metavar='EPG', nargs=1,
-                        help='Epigrass model definition file (.epg).')
+    parser = ArgumentParser(
+        usage=usage,
+        description="Run epigrass models from the console",
+        prog="epirunner " + __version__.version,
+    )
+    parser.add_argument(
+        "-b",
+        "--backend",
+        dest="backend",
+        help="Define which datastorage backend to use",
+        metavar="<mysql|sqlite|csv>",
+        default="sqlite",
+    )
+    parser.add_argument("-u", "--dbusername", dest="dbuser", help="MySQL user name")
+    parser.add_argument(
+        "-p", "--password", dest="dbpass", help="MySQL password for user"
+    )
+    parser.add_argument(
+        "-H",
+        "--dbhost",
+        dest="dbhost",
+        default="localhost",
+        help="MySQL hostname or IP address",
+    )
+    parser.add_argument(
+        "--upload", help="Upload your models and latest simulation to Epigrass Web"
+    )
+    parser.add_argument(
+        "-P",
+        "--parallel",
+        action="store_true",
+        default=False,
+        dest="parallel",
+        help="use multiprocessing to run the simulation",
+    )
+    parser.add_argument(
+        "-D",
+        "--dashboard",
+        action="store_true",
+        default=False,
+        dest="dashboard",
+        help="Open dashboard on browser after th run is done.",
+    )
+    parser.add_argument(
+        "-V",
+        "--view-only",
+        action="store_true",
+        default=False,
+        dest="view_only",
+        help="Only Open dashboard.",
+    )
+    parser.add_argument(
+        "epg", metavar="EPG", nargs=1, help="Epigrass model definition file (.epg)."
+    )
 
     args = parser.parse_args()
     if args.backend == "mysql" and not (args.dbuser and args.dbpass):
         parser.error("You must specify a user and password when using MySQL.")
-    if args.backend not in ['mysql', 'sqlite', 'csv']:
+    if args.backend not in ["mysql", "sqlite", "csv"]:
         parser.error('"%s" is an invalid backend type.' % args.backend)
-    print('==> ', args.epg)
+    print("==> ", args.epg)
 
     onStraightRun(args)
 
@@ -1189,7 +1377,7 @@ def end_pools():
 
 
 PO = multiprocessing.Pool()
-if __name__ == '__main__':
+if __name__ == "__main__":
     import atexit, signal
 
     # atexit.register(end_pools)
