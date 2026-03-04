@@ -590,6 +590,7 @@ class graph(NX.MultiDiGraph):
         self.shortPathList = []
         self.parentGraph = self
         self.allPairs = zeros(1)
+        self.shortDistMatrix = zeros(1)  # Physical distance matrix (lazy computation)
         self.cycles = None
         self.wienerD = None
         self.meanD = None
@@ -768,18 +769,24 @@ class graph(NX.MultiDiGraph):
     def getAllPairs(self):
         """
         Returns a distance matrix for the graph nodes where
-        the distance is the shortest path. Creates another
-        distance matrix where the distances are the lengths of the paths.
+        the distance is the shortest path length (topological/hops).
+
+        Uses NetworkX's all_pairs_shortest_path_length for efficient computation.
+        Results are cached in self.allPairs.
+
+        For physical distances (kilometers), use getAllPairsPhysical() instead.
+
+        Returns:
+        --------
+        numpy.ndarray : Matrix of shortest path lengths (number of hops)
         """
         if self.allPairs.any():  # don't run twice
             return self.allPairs
 
-        # Using NetworkX's efficient all-pairs shortest path length algorithm
-        # This returns a generator of (source, dictionary of destinations with lengths)
+        # Use NetworkX's efficient all-pairs shortest path length
         lengths = dict(NX.all_pairs_shortest_path_length(self))
 
         d = len(self.nodes)
-        dm = np.zeros((d, d), float)
         ap = np.zeros((d, d), float)
 
         nodes_list = list(self.nodes)
@@ -790,18 +797,75 @@ class graph(NX.MultiDiGraph):
                 for node_j, length in lengths[node_i].items():
                     j = node_to_idx[node_j]
                     ap[i, j] = length
-                    # For distance matrix (dm), we still need the path to calculate physical lengths
-                    # but only if physical distance is different from topological distance
-                    # However, to be fully compatible with old behavior,
-                    # we might still need some paths.
-
-        # If dm (physical distance) is required, we may still need individual paths
-        # but let's see if we can optimize it too.
-        # Most of the time topological distance is what's used for centrality.
 
         self.allPairs = ap
-        self.shortDistMatrix = dm  # Placeholder for now, can be computed on demand
         return ap
+
+    def getAllPairsPhysical(self):
+        """
+        Returns a distance matrix with physical distances (in kilometers)
+        along the shortest paths between all node pairs.
+
+        This method is computationally expensive as it requires reconstructing
+        actual paths and summing edge lengths. It is computed lazily (on-demand)
+        and cached in self.shortDistMatrix.
+
+        Note: This method only makes sense if edges have 'length' attributes.
+
+        Returns:
+        --------
+        numpy.ndarray : Matrix of physical distances (km) along shortest paths
+                        inf if no path exists
+        """
+        # Check cache
+        if hasattr(self, "shortDistMatrix") and self.shortDistMatrix.any():
+            return self.shortDistMatrix
+
+        d = len(self.nodes)
+        dm = np.full((d, d), np.inf)  # Initialize with infinity
+
+        nodes_list = list(self.nodes)
+        node_to_idx = {node: i for i, node in enumerate(nodes_list)}
+
+        # Diagonal is 0 (distance to self)
+        np.fill_diagonal(dm, 0)
+
+        # For each pair of nodes, find shortest path and sum edge lengths
+        for i, source in enumerate(nodes_list):
+            try:
+                # Get shortest paths to all other nodes from source
+                paths = NX.single_source_shortest_path(self, source)
+
+                for target, path in paths.items():
+                    if source == target:
+                        continue
+
+                    j = node_to_idx[target]
+
+                    # Sum physical distances along the path
+                    physical_dist = 0.0
+                    for k in range(len(path) - 1):
+                        node1, node2 = path[k], path[k + 1]
+
+                        # Get edge data
+                        edge_data = self.get_edge_data(node1, node2)
+                        if edge_data:
+                            # Take first edge if multiple parallel edges exist
+                            first_edge_key = list(edge_data.keys())[0]
+                            edge_obj = edge_data[first_edge_key].get("edgeobj")
+
+                            if edge_obj and hasattr(edge_obj, "length"):
+                                physical_dist += edge_obj.length
+
+                    dm[i, j] = physical_dist
+
+            except (NetworkXNoPath, NetworkXError):
+                # Keep infinity for unreachable nodes
+                continue
+
+        # Cache result
+        self.shortDistMatrix = dm
+        return dm
 
     def getShortestPathLength(self, origin, sp):
         """
@@ -1038,7 +1102,14 @@ class graph(NX.MultiDiGraph):
     def doStats(self):
         """
         Generate the descriptive stats about the graph.
+
+        Computes both graph-level statistics and node-level centrality measures.
+        Uses batch computation for efficiency.
         """
+        # Compute all centralities at once (more efficient than per-node)
+        self.computeAllCentralities()
+
+        # Compute graph-level statistics
         self.allPairs = self.getAllPairs()
         self.cycles = self.getCycles()
         self.wienerD = self.getWienerD()
@@ -1068,6 +1139,62 @@ class graph(NX.MultiDiGraph):
             self.gammaidx,
             self.connmatrix,
         ]
+
+    def computeAllCentralities(self, sample_size=None):
+        """
+        Compute centrality measures for all nodes at once.
+
+        This is more efficient than computing centrality for each node individually,
+        as NetworkX can optimize graph traversals when computing for all nodes.
+
+        Parameters:
+        -----------
+        sample_size : int, optional
+            For betweenness centrality, use random sampling of k nodes.
+            If None and graph has >1000 nodes, automatically uses 100.
+            Set to False to force exact computation regardless of graph size.
+
+        Returns:
+        --------
+        dict : {
+            'closeness': {node: closeness_value, ...},
+            'betweenness': {node: betweenness_value, ...}
+        }
+
+        Example:
+        --------
+        >>> g.computeAllCentralities()
+        >>> # Now all nodes have cached centrality values
+        >>> for node in g.site_dict.values():
+        ...     print(f"{node.sitename}: {node.centrality:.3f}")
+        """
+        # Determine sampling strategy for betweenness
+        n_nodes = len(self.site_dict)
+
+        if sample_size is None:
+            # Auto-sample for large graphs
+            sample_k = min(100, n_nodes) if n_nodes > 1000 else None
+        elif sample_size is False:
+            # Force exact computation
+            sample_k = None
+        else:
+            # Use specified sample size
+            sample_k = min(sample_size, n_nodes)
+
+        # Compute closeness centrality for all nodes at once
+        closeness = NX.closeness_centrality(self)
+
+        # Compute betweenness centrality for all nodes at once
+        betweenness = NX.betweenness_centrality(
+            self, k=sample_k, normalized=False, endpoints=False
+        )
+
+        # Assign to individual nodes
+        for node in self.site_dict.values():
+            node.centrality = closeness.get(node, 0)
+            node.betweeness = betweenness.get(node, 0)
+
+        return {"closeness": closeness, "betweenness": betweenness}
 
     # def plotDegreeDist(self, cum=False):
     #     """
