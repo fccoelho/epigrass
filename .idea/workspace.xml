@@ -31,34 +31,55 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="removed test running">
-      <change beforePath="$PROJECT_DIR$/CustomModel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomModel_example.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/edges.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/edges.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/script.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/script.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/star.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/star.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edges.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edgesRIO.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edgesout.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flu.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/novosimlin.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/novosimtree.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rio.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/riozonas_LatLong.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/riozonas_LatLong.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/riozonas_LatLong.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/riozonas_LatLong_props.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sars.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scodes.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitios.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitios2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitios3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/star.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vazio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/vazio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zonasRJcompleto.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/zonasRJcompleto.csv" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Consolidated example files">
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/Florida/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/flu/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/flu/flu.epg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/mesh/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/mesh/mesh.epg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/rio/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/rio/edgesRIO.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/rio/sitios2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/sars/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/sars/edgesout.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/sars/sars.epg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/sars/sitios3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/script/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/script/edgesout.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/script/script.epg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/script/sitios3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/star/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/star/nodes.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/star/star.epg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/vazio/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/vazio/vazio.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/edges.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/edges.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/edgesRIO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/edgesout.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu/edgesout.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/mesh.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/mesh/mesh.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/mesh.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/nodes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/mesh/nodes.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/rio.epg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.shp" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.shx" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.shx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/sars.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/script.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/sites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/sites.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/sitios2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/sitios3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu/sitios3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/star.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/star/star.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/star.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/vazio.epg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/zonasRJcompleto.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/zonasRJcompleto.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -929,7 +950,7 @@
       <workItem from="1756977576551" duration="9993000" />
       <workItem from="1756989804971" duration="21887000" />
       <workItem from="1757288366748" duration="1636000" />
-      <workItem from="1772628286951" duration="1792000" />
+      <workItem from="1772628286951" duration="2967000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
@@ -1274,7 +1295,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1316,7 +1337,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added background tiles for the dashboard graph" />
     <MESSAGE value="Updated documentation" />
     <MESSAGE value="3.0 release" />
     <MESSAGE value="Added continuous version of SIR." />
@@ -1341,7 +1361,8 @@
     <MESSAGE value="Fixed and improved report generation" />
     <MESSAGE value="version 3.1.0" />
     <MESSAGE value="removed test running" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed test running" />
+    <MESSAGE value="Consolidated example files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Consolidated example files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
