@@ -1017,7 +1017,6 @@ def show(pth):
         server_port=5006,
         share=False,
         inbrowser=True,
-        title="Epigrass Dashboard",
         allowed_paths=["/assets", pth],
     )
 
@@ -1027,6 +1026,5 @@ if __name__ == "__main__":
     demo.launch(
         server_port=5006,
         share=False,
-        title="Epigrass Dashboard",
-        theme=gr.themes.Soft(),
+        inbrowser=True,
     )

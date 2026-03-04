@@ -709,7 +709,7 @@ dev = [
 requires-dist = [
     { name = "cython", specifier = ">=3.0.11" },
     { name = "dbfread", specifier = ">=2.0.7" },
-    { name = "epimodels", specifier = ">=0.4.3" },
+    { name = "epimodels", specifier = ">=1.0.0" },
     { name = "fiona", specifier = ">=1.10.1" },
     { name = "geopandas", specifier = ">=1.0.1" },
     { name = "gradio", specifier = ">=5.44.1" },
@@ -737,7 +737,7 @@ dev = [
 
 [[package]]
 name = "epimodels"
-version = "0.5.3"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "diffrax" },
@@ -746,9 +746,9 @@ dependencies = [
     { name = "scipy" },
     { name = "sympy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d3/c9/9710f207920bc9e72a831c8addec178dc22e14ce160d5b27ec9b01a5803d/epimodels-0.5.3.tar.gz", hash = "sha256:ccc92bccd363d9130cb117af33b3f7d1235736929fee759401e3ad7875d7fa87", size = 15432, upload-time = "2025-06-10T12:36:47.241Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/60/e1/0f1b474c29bd0314515f8a622bcaa4430ff1e209d40da9df694804f806c0/epimodels-1.0.0.tar.gz", hash = "sha256:4657d8eb1eb2f434d0eb14ef6834fc3394ffa831036549ff7d208d0edeffa204", size = 16318, upload-time = "2026-03-04T17:01:26.352Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/33/98/88231edcf1ecc52df25f3dd5fa12782ca8108475dcdef5d5b47abf65163c/epimodels-0.5.3-py3-none-any.whl", hash = "sha256:c246e21333a3307c6f5a53208eb293b08dd9fd016cc677164859c2c51f70f90a", size = 8899, upload-time = "2026-03-04T13:02:08.758Z" },
+    { url = "https://files.pythonhosted.org/packages/38/e7/6c896a9769cf086468685db8cd5f0a0d48baa6117110ef10734d1f97d12f/epimodels-1.0.0-py3-none-any.whl", hash = "sha256:e0ea7a1ed97e1794f27e183f6d9564ccf2cf755429458a764d66fef967de1b98", size = 8899, upload-time = "2026-03-04T17:01:24.709Z" },
 ]
 
 [[package]]

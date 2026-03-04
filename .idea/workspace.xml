@@ -33,8 +33,7 @@
   <component name="ChangeListManager">
     <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="fix(simobj): corrigir cálculo de centralidade para nós desconectados&#10;&#10;- Adiciona verificação se o nó está em um grafo antes de calcular centralidade&#10;- Retorna valor zero para centralidade e betweenness quando nó não está conectado&#10;- Corrige precisão de valores de peso em arquivos GML e GraphML&#10;- Adiciona arquivo de dados de exemplo para simulação de sites">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/Florida/epimodels.log" beforeDir="false" afterPath="$PROJECT_DIR$/demos/Florida/epimodels.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -911,7 +910,7 @@
       <workItem from="1756977576551" duration="9993000" />
       <workItem from="1756989804971" duration="21887000" />
       <workItem from="1757288366748" duration="1636000" />
-      <workItem from="1772628286951" duration="13047000" />
+      <workItem from="1772628286951" duration="13480000" />
     </task>
     <task id="LOCAL-00014" summary="Functioning dashboard for simulations&#10;fixed bug in committing transactions to sqlite">
       <created>1582368099002</created>
