@@ -385,24 +385,27 @@ class siteobj:
 
     def getDegree(self):
         """
-        Returns the degrees of this site if it is part of a graph.
-        The order (degree) of a node is the number of nodes attached to it
-        and is a simple, but effective measure of nodal importance.
+        Returns the degree of this site if it is part of a graph.
 
-        The higher its value, the more a node is important in a graph
-        as many links converge to it. Hub nodes have a high order,
-        while terminal points have an order that can be as low as 1.
+        The degree is the number of edges connected to the node.
+        For directed graphs (MultiDiGraph), this is the sum of
+        in-degree and out-degree.
 
-        A perfect hub would have its order equal to the summation of
-        all the orders of the other nodes in the graph and a perfect
-        spoke would have an order of 1.
+        The higher the degree, the more important the node in the network.
+        Hub nodes have high degree, while terminal points have degree as low as 1.
 
-        Returns an integer.
+        Uses NetworkX's O(1) cached degree computation for efficiency.
+
+        Returns:
+        --------
+        int : The degree of this node
         """
         if not self.isNode():
             return 0
-        else:
-            return len(self.getNeighbors())
+
+        # Use NetworkX's cached degree (O(1) operation)
+        # For MultiDiGraph, this returns total degree (in + out)
+        return self.parentGraph.degree(self)
 
     def doStats(self):
         """
@@ -417,32 +420,66 @@ class siteobj:
 
     def getCentrality(self):
         """
-        Also known as closeness. A measure of global centrality, is the
-        inverse of the sum of the shortest paths to all other nodes
-        in the graph.
+        Closeness centrality: measures how close a node is to all other nodes.
+
+        Defined as the reciprocal of the sum of the shortest path distances
+        from the node to all other reachable nodes in the graph.
+
+        Higher values indicate more central nodes (shorter average distance to others).
+        Uses NetworkX's closeness_centrality which implements the Wasserman-Faust
+        formula for proper handling of disconnected graphs.
+
+        Returns:
+        --------
+        float : Closeness centrality value (0-1 range)
         """
-        # get position in the distance matrix.
-        if self.centrality:
+        if self.centrality is not None:
             return self.centrality
-        pos = self.parentGraph.site_list.index(self)
-        if not self.parentGraph.allPairs.any():
-            self.parentGraph.getAllPairs()
-        c = 1.0 / sum(self.parentGraph.allPairs[pos])
-        return c
+
+        # Use NetworkX's closeness centrality
+        # This is more efficient and handles disconnected components properly
+        # using the Wasserman-Faust formula
+        self.centrality = NX.closeness_centrality(self.parentGraph, self)
+
+        return self.centrality
 
     def getBetweeness(self):
         """
-        Is the number of times any node figures in the the shortest path
-        between any other pair of nodes.
+        Betweenness centrality measures how often a node appears on
+        shortest paths between other pairs of nodes.
+
+        Nodes with high betweenness act as bridges or bottlenecks in the network.
+        This is important for understanding disease transmission pathways.
+
+        Uses NetworkX's betweenness_centrality for efficient computation.
+        For large graphs (>1000 nodes), uses sampling for performance.
+
+        Returns absolute (non-normalized) betweenness values.
+
+        Returns:
+        --------
+        float : Betweenness centrality value (absolute count)
         """
-        if self.betweeness:
+        if self.betweeness is not None:
             return self.betweeness
-        B = 0
-        for i in self.parentGraph.shortPathList:
-            if not self in i:
-                if self in i[2]:
-                    B += 1
-        return B
+
+        # Determine if we should use sampling for large graphs
+        n_nodes = len(self.parentGraph.site_dict)
+        sample_size = min(100, n_nodes) if n_nodes > 1000 else None
+
+        # Use NetworkX's betweenness centrality
+        # normalized=False to get absolute counts (not 0-1 range)
+        # endpoints=False to exclude source/target nodes from path count
+        betweenness_dict = NX.betweenness_centrality(
+            self.parentGraph,
+            k=sample_size,  # None for exact, int for sampling
+            normalized=False,
+            endpoints=False,
+            weight=None,  # Use topological distance
+        )
+
+        self.betweeness = betweenness_dict.get(self, 0)
+        return self.betweeness
 
 
 class edge:
@@ -843,31 +880,87 @@ class graph(NX.MultiDiGraph):
         The relationship between the total length of the graph L(G)
         and the distance along the diameter D(d).
 
-        It is labeled as Pi because of its similarity with the
-        real Pi (3.14), which is expressing the ratio between
-        the circumference and the diameter of a circle.
+        Pi = L(G) / D(d)
 
-        A high index shows a developed network. It is a measure
-        of distance per units of diameter and an indicator of
-        the  shape of a network.
+        Where:
+        - L(G) = total length of all edges in the graph
+        - D(d) = physical distance along the longest shortest path (diameter)
+
+        A high index shows a developed network with many alternative paths.
+        Similar to the mathematical Pi (3.14) which relates circumference to diameter.
+
+        Returns:
+        --------
+        float : Pi index value
         """
+        if self.piidx is not None:
+            return self.piidx
+
+        # Get total graph length
         if self.length:
             l = self.length
         else:
             l = self.getLength()
 
-        lsp = [
-            len(i[2]) for i in self.shortPathList
-        ]  # list of lenghts of shortest paths.
-        lpidx = lsp.index(max(lsp))  # position of the longest sp.
-        lp = self.shortPathList[lpidx][2]  # longest shortest path
-        Dd = 0
-        for i in range(len(lp) - 1):  # calculates distance in km along lp
-            Dd += lp[i].getDistanceFromNeighbor(lp[i + 1])
+        if l == 0:
+            return 0.0
 
-        # pi = l/self.getDiameter()
-        pi = l / Dd
-        return float(pi)
+        try:
+            # Find the diameter path (longest shortest path)
+            # Use NetworkX to find all shortest paths efficiently
+            diameter_path = None
+            max_hops = 0
+
+            nodes_list = list(self.nodes)
+
+            # Check all pairs to find the longest shortest path
+            for i, source in enumerate(nodes_list):
+                try:
+                    # Get shortest path lengths from source to all other nodes
+                    lengths = NX.single_source_shortest_path_length(self, source)
+                    if lengths:
+                        max_from_source = max(lengths.values())
+                        if max_from_source > max_hops:
+                            max_hops = max_from_source
+                            # Find which node has the max length
+                            target = max(lengths, key=lengths.get)
+                            diameter_path = NX.shortest_path(self, source, target)
+                except (NetworkXNoPath, NetworkXError):
+                    continue
+
+            if diameter_path is None or len(diameter_path) < 2:
+                self.piidx = 0.0
+                return 0.0
+
+            # Calculate physical distance along diameter path
+            Dd = 0.0
+            for i in range(len(diameter_path) - 1):
+                node1, node2 = diameter_path[i], diameter_path[i + 1]
+
+                # Get edge data between consecutive nodes
+                edge_data = self.get_edge_data(node1, node2)
+                if edge_data:
+                    # MultiDiGraph: edge_data is dict of {edge_key: attributes}
+                    # Take first edge (or could sum all parallel edges)
+                    first_edge_key = list(edge_data.keys())[0]
+                    edge_obj = edge_data[first_edge_key].get("edgeobj")
+
+                    if edge_obj and hasattr(edge_obj, "length"):
+                        Dd += edge_obj.length
+
+            if Dd == 0:
+                self.piidx = 0.0
+                return 0.0
+
+            pi = l / Dd
+            self.piidx = float(pi)
+            return self.piidx
+
+        except Exception as e:
+            # If calculation fails for any reason, return 0
+            # Log this in production: logger.warning(f"Pi index calculation failed: {e}")
+            self.piidx = 0.0
+            return 0.0
 
     def getBetaIndex(self):
         """
