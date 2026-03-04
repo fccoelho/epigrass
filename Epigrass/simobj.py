@@ -460,6 +460,11 @@ class siteobj:
         if self.centrality is not None:
             return self.centrality
 
+        # Check if node is in a graph
+        if not self.isNode():
+            self.centrality = 0.0
+            return self.centrality
+
         # Use NetworkX's closeness centrality
         # This is more efficient and handles disconnected components properly
         # using the Wasserman-Faust formula
@@ -485,6 +490,11 @@ class siteobj:
         float : Betweenness centrality value (absolute count)
         """
         if self.betweeness is not None:
+            return self.betweeness
+
+        # Check if node is in a graph
+        if not self.isNode():
+            self.betweeness = 0.0
             return self.betweeness
 
         # Determine if we should use sampling for large graphs
@@ -577,7 +587,7 @@ class graph(NX.MultiDiGraph):
     Defines a graph with sites and edges
     """
 
-    def __init__(self, graph_name, digraph=0):
+    def __init__(self, graph_name="unnamed", digraph=0):
         super().__init__()
         self.name = graph_name
         self.digraph = digraph
