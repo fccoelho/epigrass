@@ -109,7 +109,6 @@ The wizard can read any OGR vector format supported by geopandas/fiona:
 - GeoPackage (.gpkg)
 - Shapefile (.shp)
 - GeoJSON (.geojson)
-- PostGIS (via connection string)
 
 ## Output Files
 

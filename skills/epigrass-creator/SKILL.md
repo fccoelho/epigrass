@@ -1,7 +1,7 @@
 ---
 name: epigrass-creator
 description: Create Epigrass epidemiological models through step-by-step guided specification. Build metapopulation models (SIR, SEIR, SEIS, SIS, SI) with geographic networks. Supports GeoPackage import for real-world spatial data.
-version: 1.1.0
+version: 1.1.1
 metadata:
   openclaw:
     requires:
