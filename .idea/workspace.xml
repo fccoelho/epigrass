@@ -31,18 +31,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Consolidated example files">
-      <change afterPath="$PROJECT_DIR$/.opencode/skills/epigrass-creator/INSTALL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.opencode/skills/epigrass-creator/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.opencode/skills/epigrass-creator/SKILL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.opencode/skills/epigrass-creator/examples/dengue_seir_example.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.opencode/skills/epigrass-creator/examples/geopackage_example.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/edges.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/edges_todos.csv" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added Opencode skill and changes ANTT2002  model files">
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/POPTBR02.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/build_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/model.epg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/antt2002.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/antt2002TODOS.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/codigos_sitios.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/edges.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/edges.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/sites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/sites.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1278,7 +1275,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1314,7 +1311,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated documentation" />
     <MESSAGE value="3.0 release" />
     <MESSAGE value="Added continuous version of SIR." />
     <MESSAGE value="Added continuous version of SEIR." />
@@ -1339,7 +1335,8 @@
     <MESSAGE value="version 3.1.0" />
     <MESSAGE value="removed test running" />
     <MESSAGE value="Consolidated example files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Consolidated example files" />
+    <MESSAGE value="Added Opencode skill and changes ANTT2002  model files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Opencode skill and changes ANTT2002  model files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

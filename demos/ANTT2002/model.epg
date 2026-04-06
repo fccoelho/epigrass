@@ -1,0 +1,72 @@
+################################################################
+#
+#  EPIGRASS - Model Definition
+#  Dengue model using ANTT2002 transportation network
+#
+################################################################
+################################################################
+
+#==============================================================#
+[THE WORLD]
+#==============================================================#
+
+sites = sites.csv
+edges = edges.csv
+encoding = utf8
+
+#==============================================================#
+[EPIDEMIOLOGICAL MODEL]
+#==============================================================#
+modtype = SEIR
+
+#==============================================================#
+[MODEL PARAMETERS]
+#==============================================================#
+
+# Dengue typical parameters
+beta = 0.4          # transmission coefficient
+alpha = 1           # clumping parameter (1 = mass action)
+e = 0.2              # incubation rate (5 days = 1/5)
+r = 0.143            # recovery rate (7 days = 1/7)
+delta = 0            # probability of acquiring full immunity
+tau = 0              # delay in start of control measures
+k = 0                # reduction in transmission due to controls
+B = 0                # birth rate
+w = 0                # immunity waning rate
+p = 0                # probability of recovered becoming infected
+
+#==============================================================#
+[INITIAL CONDITIONS]
+#==============================================================#
+S = N
+E = 0
+I = 0
+
+#==============================================================#
+[EPIDEMIC EVENTS]
+#==============================================================#
+# Initial infection in a few major cities
+seed = [(5201108, 'I', 10)]
+Vaccinate = []
+Quarantine = []
+
+#==============================================================#
+[TRANSPORTATION MODEL]
+#==============================================================#
+doTransp = 1
+stochastic = 0
+speed = 0
+
+#==============================================================#
+[SIMULATION AND OUTPUT]
+#==============================================================#
+steps = 365
+outdir =
+sqlout = 1
+report = 0
+Replicas = 0
+RandSeed = 0
+Batch = []
+
+################################################################
+################################################################
