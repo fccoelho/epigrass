@@ -1,0 +1,30 @@
+{
+  "name": "epigrass-creator",
+  "version": "1.1.0",
+  "description": "Create Epigrass epidemiological models with GeoPackage support. Step-by-step wizard for SIR, SEIR, SEIS, SIS, SI and custom models.",
+  "author": "OpenClaw Community",
+  "license": "MIT",
+  "homepage": "https://github.com/fccoelho/epigrass",
+  "repository": "https://github.com/fccoelho/epigrass",
+  "keywords": ["epidemiology", "modeling", "simulation", "metapopulation", "SIR", "SEIR", "geopackage", "gis"],
+  "examples": [
+    "Create an SIR model for dengue in Brazilian cities",
+    "Build a SEIR metapopulation model for COVID-19",
+    "Generate a custom model with hospitalization",
+    "Create a 10x10 grid simulation network",
+    "Import sites from municipalities.gpkg file",
+    "Create model using GeoPackage with 5000+ cities"
+  ],
+  "features": [
+    "5 built-in compartmental models (SIR, SEIR, SEIS, SIS, SI)",
+    "Custom model support",
+    "GeoPackage import (.gpkg)",
+    "Shapefile support",
+    "GeoJSON support",
+    "Interactive parameter configuration",
+    "Multiple network connection types (full, distance, neighbors, manual)",
+    "Automatic edges.csv generation with Haversine distance",
+    "Automatic coordinate extraction",
+    "Flow calculation based on distance"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "model_type": "SEIR",
+  "sites": [
+    {"name": "Sao_Paulo", "lat": -23.5505, "lon": -46.6333, "pop": 12300000, "geocode": 3550308},
+    {"name": "Rio_de_Janeiro", "lat": -22.9068, "lon": -43.1729, "pop": 6750000, "geocode": 3304557},
+    {"name": "Belo_Horizonte", "lat": -19.9167, "lon": -43.9345, "pop": 2530000, "geocode": 3106200}
+  ],
+  "edges": [
+    {"source": "Sao_Paulo", "dest": "Rio_de_Janeiro", "flow_sd": 500, "flow_ds": 500, "distance": 358.5, "geo_source": 3550308, "geo_dest": 3304557},
+    {"source": "Sao_Paulo", "dest": "Belo_Horizonte", "flow_sd": 400, "flow_ds": 400, "distance": 489.2, "geo_source": 3550308, "geo_dest": 3106200},
+    {"source": "Rio_de_Janeiro", "dest": "Belo_Horizonte", "flow_sd": 450, "flow_ds": 450, "distance": 340.1, "geo_source": 3304557, "geo_dest": 3106200}
+  ],
+  "parameters": {
+    "beta": 0.4,
+    "gamma": 0.14,
+    "sigma": 0.2,
+    "alpha": 1.0
+  },
+  "connections": "distance",
+  "simulation": {
+    "timestep": 1,
+    "iterations": 365,
+    "output_dir": "./dengue_model"
+  }
+}
