@@ -126,16 +126,17 @@ class EpigrassWizard:
         """Step 2: Define sites"""
         print("🦠 Step 2/5: Define Sites\n")
         print("Options:")
-        print("1. Enter cities (auto-fetch data)")
+        print("1. Enter city names (manual coordinate entry)")
         print("2. Grid layout (e.g., 5x5)")
-        print("3. Manual entry")
+        print("3. Manual entry (full data)")
         print("4. Import from GeoPackage (.gpkg)")
         
         option = input("\nChoose option (1-4): ").strip()
         
         if option == '1':
             cities = input("Enter city names (comma-separated): ").strip()
-            # Simplified - would fetch from IBGE in real implementation
+            print("\n⚠️  Note: Using placeholder coordinates (0,0).")
+            print("   For accurate coordinates, use GeoPackage import (option 4).")
             for city in cities.split(','):
                 self.spec['sites'].append({
                     'name': city.strip(),

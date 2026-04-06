@@ -2,6 +2,14 @@
 
 All notable changes to the Epigrass Creator Skill will be documented in this file.
 
+## [1.1.1] - 2026-04-06
+
+### Fixed
+- **Documentation accuracy** - Removed PostGIS mention (not implemented)
+- **Clarified city entry option** - Changed "auto-fetch" to "manual coordinate entry" with warning
+- **Removed misleading comments** - Removed "would fetch from IBGE" comment
+- **Version consistency** - All files now reference version 1.1.1
+
 ## [1.1.0] - 2026-04-06
 
 ### Added

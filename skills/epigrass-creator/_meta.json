@@ -1,6 +1,6 @@
 {
   "name": "epigrass-creator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Create Epigrass epidemiological models with GeoPackage support. Step-by-step wizard for SIR, SEIR, SEIS, SIS, SI and custom models.",
   "author": "OpenClaw Community",
   "license": "MIT",
