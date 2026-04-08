@@ -8,14 +8,14 @@ This repository contains the OpenCode skill for creating Epigrass epidemiologica
 
 ```bash
 mkdir -p ~/.config/opencode/skills
-git clone https://github.com/fccoelho/opencode-skill-epigrass.git ~/.config/opencode/skills/epigrass-creator
+git clone https://github.com/fccoelho/epigrass.git ~/.config/opencode/skills/epigrass-creator
 ```
 
 ### Option 2: Clone to project-level skills
 
 ```bash
 mkdir -p .opencode/skills
-git clone https://github.com/fccoelho/opencode-skill-epigrass.git .opencode/skills/epigrass-creator
+git clone https://github.com/fccoelho/epigrass.git .opencode/skills/epigrass-creator
 ```
 
 ### Option 3: Manual installation
