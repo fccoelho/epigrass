@@ -24,6 +24,7 @@ dependencies = [
     "dbfread>=2.0.7",
     "epimodels>=0.4.3",
     "fiona>=1.10.1",
+    "geobr>=0.2.2",
     "geopandas>=1.0.1",
     "geoviews>=1.14.0",
     "gradio>=5.44.1",

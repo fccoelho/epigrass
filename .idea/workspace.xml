@@ -31,55 +31,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Consolidated example files">
-      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/Florida/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/flu/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/flu/flu.epg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/mesh/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/mesh/mesh.epg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/rio/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/rio/edgesRIO.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/rio/sitios2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/sars/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/sars/edgesout.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/sars/sars.epg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/sars/sitios3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/script/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/script/edgesout.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/script/script.epg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/script/sitios3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/star/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/star/nodes.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/star/star.epg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/vazio/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demos/vazio/vazio.epg" afterDir="false" />
+    <list default="true" id="991a2459-6152-47ff-ac53-e228bf684060" name="Default" comment="Added Opencode skill and changes ANTT2002  model files">
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/POPTBR02.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/build_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demos/ANTT2002/model.epg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/edges.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/edges.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/edgesRIO.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/edgesout.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu/edgesout.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/flu.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/mesh.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/mesh/mesh.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/mesh.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/nodes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/mesh/nodes.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/rio.epg" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/rio.epg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.dbf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.shp" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.shp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/riozonas_LatLong.shx" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/riozonas_LatLong.shx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/sars.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/script.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/sites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/sites.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/sitios2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/sitios3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/flu/sitios3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.gml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.graphml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/spread.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/star.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/star/star.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/star.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/vazio.epg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demos/zonasRJcompleto.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/rio/zonasRJcompleto.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/edges.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/edges.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demos/ANTT2002/sites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/demos/ANTT2002/sites.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,37 +134,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests in test_epigdal.py.executor": "Run",
-    "Python tests.Python tests in test_manager.py.executor": "Run",
-    "Python tests.Python tests in test_report.py.executor": "Run",
-    "Python tests.Python tests in test_simobj.py.executor": "Run",
-    "Python tests.Python tests in tests.executor": "Run",
-    "Python.Epigrass.manager:main.executor": "Run",
-    "Python.epipanel.executor": "Run",
-    "Python.epirunner.executor": "Run",
-    "Python.rio.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/fccoelho/Documentos/Projects_Software/spatial_crosscorrr",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in test_epigdal.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_manager.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_report.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_simobj.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Epigrass.manager:main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.epipanel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.epirunner.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rio.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/fccoelho/Documentos/Projects_Software/spatial_crosscorrr&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
+  &quot;keyToStringList&quot;: {
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
   }
-}]]></component>
+}</component>
   <component name="PyDebuggerOptionsProvider">
     <option name="mySaveCallSignatures" value="true" />
     <option name="myDropIntoDebuggerOnFailedTests" value="true" />
@@ -248,6 +208,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="TARGET" value="" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
@@ -295,6 +256,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -315,6 +277,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp">
@@ -357,6 +320,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -377,6 +341,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;&quot;" />
@@ -394,6 +359,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
@@ -410,6 +376,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -430,6 +397,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="TARGET" value="" />
@@ -452,6 +420,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
@@ -476,6 +445,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -543,6 +513,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -608,6 +579,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <method v="2" />
@@ -631,6 +603,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -664,6 +637,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -697,6 +671,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -750,6 +725,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -783,6 +759,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
@@ -804,6 +781,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
@@ -822,6 +800,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -839,6 +818,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_keywords" value="&quot;&quot;" />
@@ -1295,17 +1275,11 @@
       <option name="project" value="LOCAL" />
       <updated>1615727183521</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="additionalRoots">
-      <list>
-        <option value="$PROJECT_DIR$/.venv/lib64/python3.12/site-packages/panel/dist/dts" />
-        <option value="$PROJECT_DIR$/.venv/lib/python3.12/site-packages/panel/dist/dts" />
-      </list>
-    </option>
   </component>
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="javascript:npm:prettier" />
@@ -1337,7 +1311,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated documentation" />
     <MESSAGE value="3.0 release" />
     <MESSAGE value="Added continuous version of SIR." />
     <MESSAGE value="Added continuous version of SEIR." />
@@ -1362,7 +1335,8 @@
     <MESSAGE value="version 3.1.0" />
     <MESSAGE value="removed test running" />
     <MESSAGE value="Consolidated example files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Consolidated example files" />
+    <MESSAGE value="Added Opencode skill and changes ANTT2002  model files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Opencode skill and changes ANTT2002  model files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
