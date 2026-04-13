@@ -1,4 +1,15 @@
 # Epigrass
+
+<p align="center">
+  <strong>Sponsored by</strong><br>
+  <a href="https://epidbot.kwar-ai.com.br" target="_blank">
+    <img src="docs/source/kwar-ai-logo.jpg" alt="Kwar-AI" width="200">
+  </a><br>
+  <em>AI-powered epidemiological intelligence</em>
+</p>
+
+---
+
 If you use epigrass in your research, please use the following DOI to cite it:
 
 [![DOI](https://zenodo.org/badge/59497476.svg)](https://zenodo.org/badge/latestdoi/59497476)
