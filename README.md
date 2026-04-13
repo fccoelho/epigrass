@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>Sponsored by</strong><br>
-  <a href="https://epidbot.kwar-ai.com.br" target="_blank">
+  <a href="https://kwar-ai.com.br" target="_blank">
     <img src="docs/source/kwar-ai-logo.jpg" alt="Kwar-AI" width="200">
   </a><br>
   <em>AI-powered epidemiological intelligence</em>
