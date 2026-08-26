@@ -20,3 +20,4 @@ holoviews
 geoviews
 scikit-image
 datashader
+textual

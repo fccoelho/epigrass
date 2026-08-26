@@ -1,0 +1,76 @@
+/* Epigrass TUI layout */
+
+#browser-hint {
+    height: auto;
+    padding: 0 1;
+    background: $panel;
+}
+
+#model-table {
+    height: 1fr;
+}
+
+#overview-table {
+    height: 1fr;
+}
+
+#validation-result {
+    padding: 1 2;
+}
+
+#raw-editor {
+    height: 1fr;
+}
+
+#monitor-body {
+    height: 1fr;
+}
+
+#sim-log {
+    height: 1fr;
+    border: round $primary;
+}
+
+#progress-label {
+    height: auto;
+    padding: 0 1;
+}
+
+#monitor-title,
+#monitor-status {
+    height: auto;
+    padding: 0 1;
+    background: $panel;
+}
+
+#results-body {
+    height: 2fr;
+}
+
+#run-list {
+    width: 1fr;
+    border: round $primary;
+}
+
+#file-table {
+    width: 2fr;
+}
+
+#preview-table {
+    height: 1fr;
+    border: round $accent;
+}
+
+#mysql-box {
+    height: auto;
+    padding: 0 0 1 0;
+}
+
+#toggles {
+    height: auto;
+    padding: 1 0;
+}
+
+#run-btn {
+    margin: 1 0;
+}

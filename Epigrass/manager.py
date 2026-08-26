@@ -1143,6 +1143,10 @@ def upload_model(args):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "tui":
+        from Epigrass.tui.app import run
+        run()
+        return
     # Options and Argument parsing for running model from the command line, without the GUI.
     usage = "usage: epirunner [options] your_model.epg"
     #    parser = OptionParser(usage=usage, version="%prog "+__version__.version)

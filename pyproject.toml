@@ -22,7 +22,7 @@ dependencies = [
     "altair>=5.5.0",
     "cython>=3.0.11",
     "dbfread>=2.0.7",
-    "epimodels>=0.4.3",
+    "epimodels>=1.3.0",
     "fiona>=1.10.1",
     "geobr>=0.2.2",
     "geopandas>=1.0.1",
@@ -45,6 +45,7 @@ dependencies = [
     "shapely>=2.0.6",
     "sqlalchemy>=2.0.36",
     "sqlobject>=3.11.0",
+    "textual>=8.2.8",
     "tqdm>=4.67.1",
 ]
 
@@ -53,11 +54,13 @@ Homepage = "https://epigrass.readthedocs.io"
 Source = "https://github.com/fccoelho/epigrass"
 
 [tool.setuptools]
-packages = ["Epigrass"]
+packages = ["Epigrass", "Epigrass.tui", "Epigrass.tui.screens"]
 
 [tool.uv]
 package = true
-dev-dependencies = ["pytest>=8.3.4", "pytest-cov>=6.0.0"]
+
+[dependency-groups]
+dev = ["pytest>=8.3.4", "pytest-cov>=6.0.0"]
 
 [project.scripts]
 epirunner = "Epigrass.manager:main"
