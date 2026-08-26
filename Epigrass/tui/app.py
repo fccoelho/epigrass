@@ -41,7 +41,7 @@ class EpigrassTui(App):
         self.push_screen(ResultsBrowserScreen(base_dir))
 
     # -- actions -------------------------------------------------------------
-    def launch_dashboard(self, epg_path: Path, gradio: bool = False,
+    def launch_dashboard(self, epg_path: Path, gradio: bool = True,
                          view_only: bool = False) -> None:
         """Open the web dashboard in a detached subprocess (serves on :5006)."""
         cmd = [sys.executable, "-m", "Epigrass.manager", "-b", "sqlite"]

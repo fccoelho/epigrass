@@ -117,7 +117,8 @@ class RunMonitorScreen(Screen):
     def action_dashboard(self) -> None:
         if self.running or self.returncode != 0:
             return
-        self.app.launch_dashboard(self.epg_path, self.config.gradio)
+        self.app.launch_dashboard(self.epg_path, self.config.gradio,
+                                  view_only=True)
 
     def action_back(self) -> None:
         if self.running:

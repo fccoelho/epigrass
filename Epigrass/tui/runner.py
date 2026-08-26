@@ -33,7 +33,7 @@ class RunConfig:
     dbhost: str = "localhost"
     parallel: bool = False
     dashboard: bool = False
-    gradio: bool = False
+    gradio: bool = True  # TUI default dashboard is the Gradio one
     view_only: bool = False
 
     def to_args(self) -> list[str]:

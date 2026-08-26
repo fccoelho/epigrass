@@ -74,6 +74,21 @@ class TestEpgValidate(unittest.TestCase):
         self.assertTrue(any("steps" in e and "invalid expression" in e
                             for e in errors))
 
+    def test_custom_selected_without_model_file(self):
+        epg_utils.set_values(self.epg,
+                             {("epidemiological model", "modtype"): "Custom"})
+        errors = epg_utils.validate_epg(self.epg)
+        self.assertTrue(any("CustomModel.py was not found" in e
+                            for e in errors))
+
+    def test_custom_selected_with_model_file(self):
+        epg_utils.set_values(self.epg,
+                             {("epidemiological model", "modtype"): "Custom"})
+        (Path(self.tmp) / "CustomModel.py").write_text(
+            epg_utils.CUSTOM_MODEL_TEMPLATE)
+        errors = epg_utils.validate_epg(self.epg)
+        self.assertFalse(any("CustomModel.py" in e for e in errors))
+
     def test_unparseable_file(self):
         bad = Path(self.tmp) / "bad.epg"
         bad.write_text("[broken\nno equals here\n")
@@ -153,16 +168,18 @@ class TestRunConfigAndCommand(unittest.TestCase):
     def test_defaults_match_cli_defaults(self):
         cfg = RunConfig()
         self.assertEqual(cfg.backend, "sqlite")
-        self.assertEqual(cfg.to_args(), ["-b", "sqlite"])
+        self.assertTrue(cfg.gradio)  # TUI defaults to the Gradio dashboard
+        self.assertEqual(cfg.to_args(), ["-b", "sqlite", "-G"])
 
     def test_mysql_includes_credentials(self):
-        cfg = RunConfig(backend="mysql", dbuser="u", dbpass="p", dbhost="h")
+        cfg = RunConfig(backend="mysql", dbuser="u", dbpass="p", dbhost="h",
+                        gradio=False)
         self.assertEqual(cfg.to_args(),
                          ["-b", "mysql", "-u", "u", "-p", "p", "-H", "h"])
 
     def test_flag_toggles(self):
-        cfg = RunConfig(parallel=True, dashboard=True, gradio=True, view_only=True)
-        self.assertEqual(cfg.to_args(), ["-b", "sqlite", "-P", "-D", "-G", "-V"])
+        cfg = RunConfig(parallel=True, dashboard=True, gradio=False, view_only=True)
+        self.assertEqual(cfg.to_args(), ["-b", "sqlite", "-P", "-D", "-V"])
 
     def test_build_command_uses_basename(self):
         cfg = RunConfig(parallel=True)
@@ -199,6 +216,33 @@ class TestSimulationRunner(unittest.TestCase):
     def test_cancel_without_process_is_noop(self):
         runner = SimulationRunner(Path("/some/dir/model.epg"))
         runner.cancel()  # must not raise
+
+
+class TestCustomModelHelpers(unittest.TestCase):
+    def test_is_custom(self):
+        self.assertTrue(epg_utils.is_custom(
+            {"epidemiological model.modtype": "Custom"}))
+        self.assertFalse(epg_utils.is_custom(
+            {"epidemiological model.modtype": "SEIR"}))
+
+    def test_custom_model_path_is_sibling(self):
+        self.assertEqual(
+            epg_utils.custom_model_path("/dir/model.epg"),
+            Path("/dir/CustomModel.py"),
+        )
+
+    def test_template_is_valid_contract(self):
+        namespace: dict = {}
+        exec(epg_utils.CUSTOM_MODEL_TEMPLATE, namespace)
+        self.assertIn("vnames", namespace)
+        self.assertIn("Model", namespace)
+        result, incidence, mig = namespace["Model"](
+            (1, 1, 99), simstep=1, totpop=100, theta=0, npass=0,
+            bi={}, bp={"beta": 0.4, "alpha": 1, "e": 0.5, "r": 0.25,
+                      "delta": 1, "b": 0, "w": 0, "p": 0},
+        )
+        self.assertEqual(len(result), len(namespace["vnames"]))
+        self.assertGreaterEqual(incidence, 0)
 
 
 class TestTuiApp(unittest.IsolatedAsyncioTestCase):
@@ -260,6 +304,131 @@ class TestTuiApp(unittest.IsolatedAsyncioTestCase):
             await pilot.pause(0.1)
             text = monitor.query_one("#monitor-status", Static).content
             self.assertIn("Simulation failed", str(text))
+
+    async def test_monitor_dashboard_uses_view_only(self):
+        # regression: pressing d after a finished run must open the
+        # dashboard in view-only mode, not re-run the simulation
+        from unittest.mock import MagicMock
+
+        from Epigrass.tui.app import EpigrassTui
+        from Epigrass.tui.runner import RunConfig
+        from Epigrass.tui.screens.monitor import RunMonitorScreen
+
+        app = EpigrassTui()
+        epg = TESTS_DIR / "SEIR.epg"
+        async with app.run_test(size=(100, 40)) as pilot:
+            monitor = RunMonitorScreen(epg, RunConfig())
+            monitor.run_worker = lambda *a, **k: None  # no real simulation
+            await app.push_screen(monitor)
+            await pilot.pause(0.2)
+            app.launch_dashboard = MagicMock()
+            monitor.running = False
+            monitor.returncode = 0
+            monitor.action_dashboard()
+            app.launch_dashboard.assert_called_once_with(
+                epg, True, view_only=True)  # Gradio is the default dashboard
+
+    async def test_run_config_gradio_default_and_panel_override(self):
+        from textual.widgets import Switch as TxSwitch
+
+        from Epigrass.tui.app import EpigrassTui
+        from Epigrass.tui.screens.run_config import RunConfigScreen
+
+        with tempfile.TemporaryDirectory() as tmp:
+            epg = Path(tmp) / "model.epg"
+            shutil.copy(TESTS_DIR / "SEIR.epg", epg)
+            for name in ("sitios3.csv", "edgesout.csv"):
+                shutil.copy(TESTS_DIR / name, Path(tmp) / name)
+
+            app = EpigrassTui()
+            async with app.run_test(size=(100, 40)) as pilot:
+                screen = RunConfigScreen(epg)
+                await app.push_screen(screen)
+                await pilot.pause(0.3)
+
+                # default: Panel switch off -> gradio dashboard selected
+                cfg = screen._collect_config()
+                self.assertTrue(cfg.gradio)
+
+                # switching to Panel turns gradio off
+                panel_switch = screen.query_one("#panel", TxSwitch)
+                panel_switch.value = True
+                await pilot.pause(0.1)
+                cfg = screen._collect_config()
+                self.assertFalse(cfg.gradio)
+
+    async def _inspector_for(self, epg: Path):
+        from Epigrass.tui.app import EpigrassTui
+        from Epigrass.tui.screens.inspector import ModelInspectorScreen
+
+        app = EpigrassTui()
+        pilot_ctx = app.run_test(size=(100, 40))
+        return app, pilot_ctx, ModelInspectorScreen(epg)
+
+    async def test_inspector_no_custom_tab_for_builtin_model(self):
+        app, pilot_ctx, screen = await self._inspector_for(
+            TESTS_DIR / "SEIR.epg")
+        async with pilot_ctx as pilot:
+            await app.push_screen(screen)
+            await pilot.pause(0.3)
+            self.assertFalse(screen.is_custom)
+            self.assertFalse(screen.query("#custom-editor"))
+
+    async def test_inspector_custom_tab_loads_and_creates_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            epg = Path(tmp) / "model.epg"
+            shutil.copy(TESTS_DIR / "SEIR.epg", epg)
+            for name in ("sitios3.csv", "edgesout.csv"):
+                shutil.copy(TESTS_DIR / name, Path(tmp) / name)
+            epg_utils.set_values(
+                epg, {("epidemiological model", "modtype"): "Custom"})
+
+            app, pilot_ctx, screen = await self._inspector_for(epg)
+            async with pilot_ctx as pilot:
+                await app.push_screen(screen)
+                await pilot.pause(0.3)
+                self.assertTrue(screen.is_custom)
+
+                from textual.widgets import TextArea
+
+                editor = screen.query_one("#custom-editor", TextArea)
+                # template preloaded, file not yet created
+                self.assertIn("def Model(", editor.text)
+                self.assertFalse(screen.custom_model_path.exists())
+
+                # untouched editor must not create the file on save
+                screen.action_save()
+                await pilot.pause(0.2)
+                self.assertFalse(screen.custom_model_path.exists())
+
+                # editing then saving creates CustomModel.py
+                editor.load_text("vnames = ['I']\ndef Model(*a, **k):\n"
+                                 "    return [0], 0, 0\n")
+                screen.action_save()
+                await pilot.pause(0.2)
+                self.assertTrue(screen.custom_model_path.is_file())
+                self.assertIn("def Model(",
+                              screen.custom_model_path.read_text())
+
+    async def test_inspector_custom_tab_edits_existing_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            epg = Path(tmp) / "model.epg"
+            shutil.copy(TESTS_DIR / "SEIR.epg", epg)
+            for name in ("sitios3.csv", "edgesout.csv"):
+                shutil.copy(TESTS_DIR / name, Path(tmp) / name)
+            epg_utils.set_values(
+                epg, {("epidemiological model", "modtype"): "Custom"})
+            (Path(tmp) / "CustomModel.py").write_text("# my custom model\n")
+
+            app, pilot_ctx, screen = await self._inspector_for(epg)
+            async with pilot_ctx as pilot:
+                await app.push_screen(screen)
+                await pilot.pause(0.3)
+
+                from textual.widgets import TextArea
+
+                editor = screen.query_one("#custom-editor", TextArea)
+                self.assertEqual(editor.text, "# my custom model\n")
 
 
 class TestManagerTuiDispatch(unittest.TestCase):

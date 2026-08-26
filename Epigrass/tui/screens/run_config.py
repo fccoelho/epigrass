@@ -43,7 +43,7 @@ class RunConfigScreen(Screen):
             yield Horizontal(
                 Static("Parallel multiprocessing "), Switch(value=False, id="parallel"),
                 Static("Open dashboard after run "), Switch(value=False, id="dashboard"),
-                Static("Gradio dashboard "), Switch(value=False, id="gradio"),
+                Static("HoloViz Panel dashboard (default: Gradio) "), Switch(value=False, id="panel"),
                 id="toggles",
             )
             yield Static("", id="redis-status")
@@ -96,7 +96,7 @@ class RunConfigScreen(Screen):
             dbhost=self.query_one("#dbhost", Input).value or "localhost",
             parallel=self.query_one("#parallel", Switch).value,
             dashboard=self.query_one("#dashboard", Switch).value,
-            gradio=self.query_one("#gradio", Switch).value,
+            gradio=not self.query_one("#panel", Switch).value,
         )
 
     def action_run(self) -> None:
