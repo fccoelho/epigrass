@@ -1035,7 +1035,8 @@ def onStraightRun(args):
         from Epigrass import epipanel
     
     if args.view_only:
-        pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
+        model_stem = os.path.splitext(os.path.basename(args.epg[0]))[0]
+        pth = os.path.join(os.getcwd(), f'outdata-{model_stem}')
         try:
             os.chdir(os.path.abspath(pth))
         except FileNotFoundError as exc:

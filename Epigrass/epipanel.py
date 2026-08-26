@@ -131,9 +131,9 @@ class SeriesViewer(param.Parameterized):
     time_slider = param.Integer(default=1, bounds=(1, 300))
 
     def __init__(self, **params):
+        super(SeriesViewer, self).__init__(**params)
         self.update()
         self.update_sims()
-        super(SeriesViewer, self).__init__(**params)
 
     @param.depends('model_path', watch=True)
     def update(self):
@@ -376,7 +376,8 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
         # ).cols(3)
         mapa = alt.Chart(mapa_t).mark_geoshape(
         ).encode(
-            color='Infectious',
+            color='Infectious' if 'Infectious' in mapa_t.columns else (
+                variables[0] if variables else 'incidence'),
             tooltip=['name'] + variables,
         ).properties(
             width='container',
@@ -417,7 +418,8 @@ Seed: {df['epidemic_events$seed'].iloc[0]}
             row = alt.hconcat()
             row |= base.encode(x='time', y=y_enc)
             if i < len(variables):
-                row |= base.encode(x='time', y=variables[i + 1], tooltip=['time', 'incidence', 'Infectious'])
+                row |= base.encode(x='time', y=variables[i + 1],
+                                   tooltip=['time', 'incidence', variables[i + 1]])
 
             chart &= row
         return chart
@@ -435,9 +437,10 @@ def refresh(e):
     series_viewer.update_localities()
 
 
-def main():
+def main(model_path=None):
     global series_viewer
-    series_viewer = SeriesViewer()  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
+    params = {'model_path': model_path} if model_path else {}
+    series_viewer = SeriesViewer(**params)  # model_path=sm.output()[0], sim_run=sm.output()[1], locality=sm.output()[2])
     button = pnw.Button(name='Refresh', button_type='primary')
     button.on_click(refresh)
     # Assembling the panel
@@ -471,13 +474,11 @@ def main():
 
 
 def show(pth):
-    material, series_viewer = main()
-    series_viewer.model_path = pth
+    material, series_viewer = main(model_path=os.path.abspath(pth))
     pn.serve(material, port=5006)
 
 
 if __name__ == "__main__":
-    material, series_viewer = main()
-    series_viewer.model_path = '../demos/Florida/outdata-florida'
+    material, series_viewer = main(model_path='../demos/Florida/outdata-florida')
     refresh(None)
     pn.serve(material, port=5006, threaded=False)
