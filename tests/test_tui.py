@@ -218,6 +218,49 @@ class TestTuiApp(unittest.IsolatedAsyncioTestCase):
             await pilot.press("escape")
             self.assertIs(app.screen, browser)
 
+    async def test_monitor_finish_success_renders(self):
+        # regression: _finish must not use non-existent Screen APIs
+        from textual.widgets import Static
+
+        from Epigrass.tui.app import EpigrassTui
+        from Epigrass.tui.runner import RunConfig
+        from Epigrass.tui.screens.monitor import RunMonitorScreen
+
+        app = EpigrassTui()
+        epg = TESTS_DIR / "SEIR.epg"
+        async with app.run_test(size=(100, 40)) as pilot:
+            monitor = RunMonitorScreen(epg, RunConfig())
+            monitor.run_worker = lambda *a, **k: None  # no real simulation
+            await app.push_screen(monitor)
+            await pilot.pause(0.2)
+            monitor.running = False  # pretend the run already ended
+            monitor.returncode = 0
+            monitor._finish()
+            await pilot.pause(0.1)
+            text = monitor.query_one("#monitor-status", Static).content
+            self.assertIn("Finished successfully", str(text))
+
+    async def test_monitor_finish_failure_renders(self):
+        from textual.widgets import Static
+
+        from Epigrass.tui.app import EpigrassTui
+        from Epigrass.tui.runner import RunConfig
+        from Epigrass.tui.screens.monitor import RunMonitorScreen
+
+        app = EpigrassTui()
+        epg = TESTS_DIR / "SEIR.epg"
+        async with app.run_test(size=(100, 40)) as pilot:
+            monitor = RunMonitorScreen(epg, RunConfig())
+            monitor.run_worker = lambda *a, **k: None  # no real simulation
+            await app.push_screen(monitor)
+            await pilot.pause(0.2)
+            monitor.running = False
+            monitor.returncode = 1
+            monitor._finish()
+            await pilot.pause(0.1)
+            text = monitor.query_one("#monitor-status", Static).content
+            self.assertIn("Simulation failed", str(text))
+
 
 class TestManagerTuiDispatch(unittest.TestCase):
     def test_tui_dispatch_is_isolated(self):

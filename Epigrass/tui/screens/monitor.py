@@ -99,7 +99,6 @@ class RunMonitorScreen(Screen):
                 f"{elapsed // 60:02d}:{elapsed % 60:02d}"
                 f"{listing}\n[b]d[/b] opens the dashboard · [b]esc[/b] returns"
             )
-            self.screen.set_binding_display("d", True)
             self.notify("Simulation finished successfully", severity="information")
         else:
             status.update(
