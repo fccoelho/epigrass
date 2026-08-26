@@ -33,6 +33,63 @@ REQUIRED = {
     ],
 }
 
+CUSTOM_MODEL_FILENAME = "CustomModel.py"
+
+#: stub offered when creating a missing CustomModel.py (contract: vnames +
+#: Model(), imported from the model directory — see simobj.py)
+CUSTOM_MODEL_TEMPLATE = '''\
+# Custom model used in place of Epigrass' built-in models. It must live in
+# a file named CustomModel.py next to the .epg script and define at least
+# a function named Model. Names are case-sensitive. See the manual.
+
+
+##### Defining variable names to appear in the database
+# Must be listed in the same order of variables they are returned by the model
+vnames = ['Exposed', 'Infectious', 'Susceptible']
+
+
+def Model(inits, simstep, totpop, theta=0, npass=0, bi={}, bp={}, values=()):
+    """
+    Replace this stub with your own model.
+    - inits: state variables from the previous step
+    - simstep: current time step (0 on the first step, use bi[] for inits)
+    - theta: infectious individuals arriving from neighbor sites
+    Returns ([state variables], incidence, infectious commuters)
+    """
+    if simstep == 0:  # get initial values
+        E, I, S = (bi['e'], bi['i'], bi['s'])
+    else:
+        E, I, S = inits
+
+    N = totpop
+    beta, alpha, e, r, delta, B, w, p = (
+        bp['beta'], bp['alpha'], bp['e'], bp['r'],
+        bp['delta'], bp['b'], bp['w'], bp['p'],
+    )
+
+    # Number of new cases (incidence function)
+    Lpos = beta * S * ((I + theta) / (N + npass)) ** alpha
+
+    # Epidemiological model (SIR)
+    Ipos = (1 - r) * I + Lpos
+    Spos = S + B - Lpos
+
+    # Number of infectious individuals commuting
+    migInf = Ipos
+
+    return [0, Ipos, Spos], Lpos, migInf
+'''
+
+
+def is_custom(parsed: dict[str, str]) -> bool:
+    """True when the model script selects the Custom model type."""
+    return parsed.get("epidemiological model.modtype", "") == "Custom"
+
+
+def custom_model_path(path: str | os.PathLike) -> Path:
+    """Location CustomModel.py is loaded from for a model at *path*."""
+    return Path(path).parent / CUSTOM_MODEL_FILENAME
+
 #: (section, key) pairs whose values are eval'd by evalConfig
 EVAL_KEYS = {
     ("epidemic events", "seed"),
@@ -94,6 +151,11 @@ def validate_epg(path: str | os.PathLike, parsed: dict[str, str] | None = None) 
     if modtype and modtype not in MODEL_TYPES:
         errors.append(
             f"Invalid model type: {modtype!r} (valid: {', '.join(MODEL_TYPES)})"
+        )
+    if modtype == "Custom" and not custom_model_path(path).is_file():
+        errors.append(
+            f"Custom model type selected, but {CUSTOM_MODEL_FILENAME} was not "
+            f"found next to the script (expected at {custom_model_path(path)})"
         )
     for sec, key in sorted(EVAL_KEYS):
         full = f"{sec}.{key}"

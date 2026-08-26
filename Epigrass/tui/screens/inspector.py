@@ -22,6 +22,13 @@ class ModelInspectorScreen(Screen):
     def __init__(self, epg_path: str | Path) -> None:
         super().__init__()
         self.epg_path = Path(epg_path)
+        self.custom_model_path = epg_utils.custom_model_path(self.epg_path)
+        try:
+            parsed = epg_utils.parse_epg(self.epg_path)
+        except Exception:
+            parsed = {}
+        self.is_custom = epg_utils.is_custom(parsed)
+        self._custom_loaded = ""
 
     def compose(self) -> ComposeResult:
         with TabbedContent(initial="overview"):
@@ -33,6 +40,11 @@ class ModelInspectorScreen(Screen):
             with TabPane("Edit", id="edit"):
                 yield Label("ctrl+s saves the file as shown.")
                 yield TextArea("", id="raw-editor", show_line_numbers=True)
+            if self.is_custom:
+                with TabPane("CustomModel.py", id="custom"):
+                    yield Label("", id="custom-hint")
+                    yield TextArea("", id="custom-editor",
+                                   show_line_numbers=True)
         yield Footer()
 
     def on_mount(self) -> None:
@@ -41,6 +53,23 @@ class ModelInspectorScreen(Screen):
         self.query_one("#raw-editor", TextArea).load_text(
             self.epg_path.read_text(encoding="utf-8", errors="replace")
         )
+        if self.is_custom:
+            exists = self.custom_model_path.is_file()
+            self._custom_loaded = (
+                self.custom_model_path.read_text(encoding="utf-8",
+                                                 errors="replace")
+                if exists else epg_utils.CUSTOM_MODEL_TEMPLATE
+            )
+            self.query_one("#custom-editor", TextArea).load_text(
+                self._custom_loaded
+            )
+            self.query_one("#custom-hint", Label).update(
+                f"[b]{self.custom_model_path}[/b] — "
+                + ("ctrl+s saves the file as shown."
+                   if exists else
+                   "file does not exist yet: a template is preloaded — edit it "
+                   "and press ctrl+s to create it.")
+            )
         self._refresh()
 
     def _refresh(self) -> None:
@@ -65,8 +94,15 @@ class ModelInspectorScreen(Screen):
     def action_save(self) -> None:
         area = self.query_one("#raw-editor", TextArea)
         self.epg_path.write_text(area.text, encoding="utf-8")
+        saved = [self.epg_path.name]
+        if self.is_custom:
+            custom = self.query_one("#custom-editor", TextArea)
+            if custom.text != self._custom_loaded:
+                self.custom_model_path.write_text(custom.text, encoding="utf-8")
+                self._custom_loaded = custom.text
+                saved.append(self.custom_model_path.name)
         self._refresh()
-        self.notify(f"Saved {self.epg_path.name}")
+        self.notify(f"Saved {', '.join(saved)}")
 
     def action_run(self) -> None:
         self.app.open_run_config(self.epg_path)
