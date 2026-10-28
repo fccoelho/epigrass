@@ -180,7 +180,7 @@ steps = 100
 outdir = 
 
 # Database Output
-# MySQLout can be 0 (no database output) or 1
+# SQLout can be 0 (no database output) or 1
 sqlout = 1
 
 # Report Generation
