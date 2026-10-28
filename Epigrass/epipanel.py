@@ -473,12 +473,36 @@ def main(model_path=None):
 # material.servable();
 
 
+#: preferred dashboard port; the next free one is used when it is taken
+DEFAULT_PORT = 5006
+
+
+def find_free_port(start: int = DEFAULT_PORT, tries: int = 25) -> int:
+    """Return the first bindable port from ``start``, or 0 (automatic)."""
+    import socket
+    for port in range(start, start + tries):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            try:
+                sock.bind(("127.0.0.1", port))
+                return port
+            except OSError:
+                continue
+    return 0
+
+
 def show(pth):
     material, series_viewer = main(model_path=os.path.abspath(pth))
-    pn.serve(material, port=5006)
+    port = find_free_port()
+    if port == 0:
+        print(f"==> Ports {DEFAULT_PORT}-{DEFAULT_PORT + 24} busy; "
+              "letting Panel pick a port automatically", flush=True)
+    else:
+        print(f"==> Epigrass Panel dashboard starting on http://localhost:{port}",
+              flush=True)
+    pn.serve(material, port=port)
 
 
 if __name__ == "__main__":
     material, series_viewer = main(model_path='../demos/Florida/outdata-florida')
     refresh(None)
-    pn.serve(material, port=5006, threaded=False)
+    pn.serve(material, port=find_free_port(), threaded=False)

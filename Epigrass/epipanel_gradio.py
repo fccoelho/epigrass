@@ -130,6 +130,44 @@ def get_max_time(fname, simulation_name):
     return max_t if max_t is not None else 0
 
 
+@lru_cache(maxsize=20)
+def last_data_time(fname, simulation_name):
+    """
+    Last time step for which the majority of sites still have
+    epidemiological data. Models that go extinct keep writing rows with
+    NULL values until the configured number of steps, so max(time) alone
+    is misleading.
+    """
+    full_path = os.path.join(os.path.abspath(fname), 'Epigrass.sqlite')
+    if not os.path.exists(full_path):
+        return None
+    engine = get_engine(full_path)
+    with engine.connect() as con:
+        cols = [r[1] for r in con.execute(
+            text(f'PRAGMA table_info("{simulation_name}")'))]
+    epi = [c for c in cols
+           if c not in ('geocode', 'time', 'name', 'lat', 'longit')]
+    if not epi:
+        return None
+    sentinel = epi[0]
+    with engine.connect() as con:
+        counts = con.execute(text(
+            f'SELECT "time", COUNT("{sentinel}") FROM "{simulation_name}" '
+            f'GROUP BY "time" ORDER BY "time"')).fetchall()
+        if not counts:
+            return None
+        n_sites = con.execute(
+            text(f'SELECT COUNT(*) FROM "{simulation_name}" '
+                 f'WHERE "time" = (SELECT MIN("time") FROM "{simulation_name}")')
+        ).fetchone()[0]
+    threshold = max(1, n_sites // 2)
+    good = [t for (t, c) in counts if c >= threshold]
+    if good:
+        return int(good[-1])
+    any_data = [t for (t, c) in counts if c > 0]
+    return int(any_data[-1]) if any_data else None
+
+
 @lru_cache(maxsize=5)
 def read_map(fname):
     if os.path.exists(fname):
@@ -141,6 +179,69 @@ def read_map(fname):
     else:
         read_map.cache_clear()
         return gpd.GeoDataFrame()
+
+
+#: Pseudo map entry used when the model has no shapefile (no Data.gpkg)
+NO_MAP_SENTINEL = "Sites (lat/lon) — sem Data.gpkg"
+
+
+@lru_cache(maxsize=10)
+def get_sites_frame(model_path, simulation_run):
+    """
+    Final-time site table (name, lat, longit + epi variables) read from the
+    simulation SQLite database. Used as a fallback to draw maps when the model
+    has no shapefile and Data.gpkg was never created.
+    """
+    if not simulation_run:
+        return pd.DataFrame()
+    df = read_simulation(model_path, simulation_run)
+    if df.empty or not {'lat', 'longit'}.issubset(df.columns):
+        return pd.DataFrame()
+    t = last_data_time(model_path, simulation_run)
+    max_t = t if t is not None else int(df['time'].max())
+    return df[df['time'] == max_t].copy()
+
+
+def pick_main_var(columns):
+    """Choose the epidemiological variable to display on fallback maps."""
+    for cand in ('totalcases', 'Infectious', 'incidence', 'Incidência',
+                 'Arrivals'):
+        if cand in columns:
+            return cand
+    epi = [c for c in columns
+           if c not in ('name', 'time', 'geocode', 'lat', 'longit')]
+    return epi[0] if epi else None
+
+
+def _finite(values):
+    """Clamp inf and NaN to the finite range (models can diverge)."""
+    values = np.asarray(values, dtype=float)
+    fin = values[np.isfinite(values)]
+    if fin.size:
+        values = np.clip(values, fin.min(), fin.max())
+    return np.nan_to_num(values, nan=0.0)
+
+
+def _bubble_sizes(values, lo=5, hi=30):
+    """Scale values into marker sizes within [lo, hi]."""
+    values = _finite(values)
+    vmin, vmax = values.min(), values.max()
+    if vmax <= vmin:
+        return np.full(len(values), (lo + hi) / 2)
+    return lo + (hi - lo) * (values - vmin) / (vmax - vmin)
+
+
+def _geo_bounds(lat, lon, pad_frac=0.2, min_pad=0.5):
+    """Compute center/ranges for a geo layout from coordinate arrays."""
+    lat = np.asarray(lat, dtype=float)
+    lon = np.asarray(lon, dtype=float)
+    lat_pad = max((lat.max() - lat.min()) * pad_frac, min_pad)
+    lon_pad = max((lon.max() - lon.min()) * pad_frac, min_pad)
+    return dict(
+        center=dict(lat=float(lat.mean()), lon=float(lon.mean())),
+        lataxis_range=[float(lat.min() - lat_pad), float(lat.max() + lat_pad)],
+        lonaxis_range=[float(lon.min() - lon_pad), float(lon.max() + lon_pad)],
+    )
 
 
 @lru_cache(maxsize=5)
@@ -173,6 +274,10 @@ def refresh_data(model_path):
     
     # Get updated data
     maps = glob.glob(os.path.join(model_path, '*.gpkg'))
+    if not maps:
+        # Model without a shapefile: no Data.gpkg exists. Offer the site
+        # coordinates from the simulation database so map tabs still render.
+        maps = [NO_MAP_SENTINEL]
     sims = get_sims(model_path)
     
     map_choices = maps if maps else []
@@ -225,7 +330,9 @@ def create_simulation_table(model_path, simulation_run):
     if not simulation_run:
         return pd.DataFrame()
     
-    max_time = get_max_time(model_path, simulation_run)
+    max_time = last_data_time(model_path, simulation_run)
+    if max_time is None:
+        max_time = get_max_time(model_path, simulation_run)
     df = read_simulation(model_path, simulation_run, time=max_time)
     if df.empty:
         return pd.DataFrame()
@@ -282,8 +389,61 @@ def zoom_to_location(model_path, location_name):
     
     mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
     if mapdf.empty:
-        return go.Figure()
-    
+        # No Data.gpkg (model without shapefile): zoom on site coordinates
+        sims = get_sims(model_path)
+        sites = get_sites_frame(model_path, sims[-1] if sims else None)
+        if sites.empty:
+            return go.Figure()
+        var = pick_main_var(sites.columns)
+        selected = sites[sites['name'] == location_name]
+        if selected.empty:
+            return go.Figure().add_annotation(
+                text=f"Localidade '{location_name}' não encontrada",
+                xref="paper", yref="paper", x=0.5, y=0.5,
+                showarrow=True, font=dict(size=16)
+            )
+        sel_lat = float(selected['lat'].iloc[0])
+        sel_lon = float(selected['longit'].iloc[0])
+        fig = go.Figure()
+        if var:
+            z = _finite(sites[var])
+            fig.add_trace(go.Scattergeo(
+                lon=sites['longit'], lat=sites['lat'],
+                mode='markers',
+                marker=dict(
+                    size=_bubble_sizes(sites[var]),
+                    color=z, colorscale='YlOrRd',
+                    colorbar=dict(title=var, x=1.02),
+                    line=dict(width=0.5, color='gray'),
+                ),
+                text=sites['name'],
+                hovertemplate='<b>%{text}</b><br>' + var + ': %{marker.color}<extra></extra>',
+                showlegend=False,
+            ))
+        fig.add_trace(go.Scattergeo(
+            lon=[sel_lon], lat=[sel_lat],
+            mode='markers',
+            marker=dict(size=22, color='red', symbol='star',
+                        line=dict(width=2, color='white')),
+            text=[location_name],
+            hovertemplate='<b>🎯 %{text}</b><br>Localidade Selecionada<extra></extra>',
+            showlegend=False,
+        ))
+        zoom = 3.0
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True, landcolor="lightgray",
+            showocean=True, oceancolor="lightblue",
+            center=dict(lat=sel_lat, lon=sel_lon),
+            lataxis_range=[sel_lat - zoom, sel_lat + zoom],
+            lonaxis_range=[sel_lon - zoom, sel_lon + zoom],
+        )
+        fig.update_layout(
+            title=f"🎯 Mapa Focado em: {location_name} (coordenadas dos sites)",
+            height=600, showlegend=False,
+        )
+        return fig
+
     # Find the selected location
     selected_location = mapdf[mapdf['name'] == location_name]
     if selected_location.empty:
@@ -390,7 +550,69 @@ def create_final_map(model_path, map_selector, simulation_run):
     map_path = os.path.join(model_path, 'Data.gpkg')
     mapdf = read_map(map_path)
     if mapdf.empty:
-        return go.Figure()
+        # No Data.gpkg (model without shapefile): bubble map from site coords
+        sites = get_sites_frame(model_path, simulation_run)
+        if sites.empty:
+            return go.Figure().add_annotation(
+                text="Sem Data.gpkg nem coordenadas (lat/longit) nos dados da simulação",
+                xref="paper", yref="paper", x=0.5, y=0.5,
+                showarrow=False, font=dict(size=14)
+            )
+        var = pick_main_var(sites.columns)
+        top = sites.assign(_z=_finite(sites[var]) if var else 0)
+        top = top.sort_values('_z', ascending=False).iloc[:15]
+        
+        fig = make_subplots(
+            rows=1, cols=2,
+            column_widths=[0.3, 0.7],
+            specs=[[{"type": "bar"}, {"type": "geo"}]],
+            subplot_titles=("🏆 Top 15 Localidades",
+                            f"🗺️ Mapa de Sites ({var})")
+        )
+        fig.add_trace(
+            go.Bar(
+                x=top['_z'],
+                y=top['name'],
+                orientation='h',
+                marker=dict(color=top['_z'],
+                            colorscale='YlOrRd', showscale=False),
+                hovertemplate='<b>%{y}</b><br>' + (var or 'valor') +
+                              ': %{x:,.0f}<extra></extra>',
+                showlegend=False
+            ),
+            row=1, col=1
+        )
+        z = _finite(sites[var]) if var else None
+        fig.add_trace(
+            go.Scattergeo(
+                lon=sites['longit'], lat=sites['lat'],
+                mode='markers',
+                marker=dict(
+                    size=_bubble_sizes(sites[var]) if var else 8,
+                    color=z if var else 'darkorange',
+                    colorscale='YlOrRd',
+                    colorbar=dict(title=var or '', x=1.02, len=0.8),
+                    line=dict(width=0.5, color='gray'),
+                ),
+                text=sites['name'],
+                hovertemplate='<b>%{text}</b><br>' +
+                              (var or 'valor') + ': %{marker.color:,.0f}<extra></extra>',
+                showlegend=False
+            ),
+            row=1, col=2
+        )
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True, landcolor="lightgray",
+            showocean=True, oceancolor="lightblue",
+            **_geo_bounds(sites['lat'], sites['longit']),
+            row=1, col=2
+        )
+        fig.update_layout(
+            title="Estado Final da Epidemia (coordenadas dos sites)",
+            height=600, showlegend=False
+        )
+        return fig
     
     # Get top 15 locations by total cases
     map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
@@ -505,25 +727,31 @@ def create_network_viz(model_path, localities):
     
     H = get_subgraph(G, nodeloc[0][0])
     
-    # Load map data to get geographic coordinates
+    # Load map data to get geographic coordinates; fall back to the site
+    # coordinates stored in the simulation database when there is no
+    # Data.gpkg (model without a shapefile).
     mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
-    if mapdf.empty:
-        return go.Figure().add_annotation(text="Arquivo de mapa não encontrado", 
-                                        xref="paper", yref="paper", x=0.5, y=0.5)
-    
-    # Extract coordinates from geometry
-    if hasattr(mapdf.geometry, 'centroid'):
-        mapdf['lat'] = mapdf.geometry.centroid.y
-        mapdf['lon'] = mapdf.geometry.centroid.x
-    else:
-        return go.Figure().add_annotation(text="Coordenadas não disponíveis no mapa", 
-                                        xref="paper", yref="paper", x=0.5, y=0.5)
+    has_geometry = False
+    if not mapdf.empty:
+        # Extract coordinates from geometry
+        if hasattr(mapdf.geometry, 'centroid'):
+            mapdf['lat'] = mapdf.geometry.centroid.y
+            mapdf['lon'] = mapdf.geometry.centroid.x
+            has_geometry = True
+    if not has_geometry:
+        sims = get_sims(model_path)
+        mapdf = get_sites_frame(model_path, sims[-1] if sims else None)
+        if mapdf.empty or not {'lat', 'longit'}.issubset(mapdf.columns):
+            return go.Figure().add_annotation(
+                text="Sem Data.gpkg nem coordenadas (lat/longit) nos dados da simulação",
+                xref="paper", yref="paper", x=0.5, y=0.5)
+        mapdf = mapdf.rename(columns={'longit': 'lon'})
     
     # Create position dictionary using geographic coordinates
     pos = {}
     for node in H.nodes(data=True):
         node_name = node[1].get('name', str(node[0]))
-        # Find coordinates for this node in the map data
+        # Find coordinates for this node in the coordinate frame
         node_coords = mapdf[mapdf['name'] == node_name]
         if not node_coords.empty:
             pos[node[0]] = (node_coords['lon'].iloc[0], node_coords['lat'].iloc[0])
@@ -583,21 +811,21 @@ def create_network_viz(model_path, localities):
         name='Localidades'
     )
     
-    # Create Choropleth as base layer
-    map_path = os.path.join(model_path, 'Data.gpkg')
-    mapdf_json = get_map_geojson(map_path)
-    
-    choropleth_base = go.Choropleth(
-        geojson=mapdf_json,
-        locations=mapdf.index,
-        z=mapdf['totalcases'] if 'totalcases' in mapdf.columns else [0]*len(mapdf),
-        colorscale='YlOrRd',
-        showscale=False,
-        hoverinfo='skip',
-        marker=dict(opacity=0.5, line=dict(width=0.5, color='gray'))
-    )
-    
-    fig = go.Figure(data=[choropleth_base, edge_trace, node_trace])
+    # Choropleth base layer, only when real map polygons are available
+    traces = []
+    if has_geometry:
+        mapdf_json = get_map_geojson(os.path.join(model_path, 'Data.gpkg'))
+        traces.append(go.Choropleth(
+            geojson=mapdf_json,
+            locations=mapdf.index,
+            z=mapdf['totalcases'] if 'totalcases' in mapdf.columns else [0]*len(mapdf),
+            colorscale='YlOrRd',
+            showscale=False,
+            hoverinfo='skip',
+            marker=dict(opacity=0.5, line=dict(width=0.5, color='gray'))
+        ))
+    traces.extend([edge_trace, node_trace])
+    fig = go.Figure(data=traces)
     
     # Calculate bounds
     lat_center = mapdf['lat'].mean()
@@ -608,7 +836,9 @@ def create_network_viz(model_path, localities):
     lon_padding = lon_range * 0.2 if lon_range > 0 else 0.5
 
     fig.update_layout(
-        title=f'🕸️ Rede Geográfica sobre Mapa Coroplético - {localities}',
+        title=(f'🕸️ Rede Geográfica - {localities}'
+               + (' (sobre mapa coroplético)' if has_geometry
+                  else ' (coordenadas dos sites)')),
         showlegend=False,
         height=600,
         margin=dict(b=0,l=0,r=0,t=40)
@@ -638,7 +868,49 @@ def create_temporal_map(model_path, simulation_run, time_slider):
     mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
     df_time = read_simulation(model_path, simulation_run, time=time_slider)
     
-    if mapdf.empty or df_time.empty:
+    if mapdf.empty:
+        # No Data.gpkg (model without shapefile): bubble map at time t
+        if df_time.empty or not {'lat', 'longit'}.issubset(df_time.columns):
+            return go.Figure().add_annotation(
+                text="Sem Data.gpkg nem coordenadas (lat/longit) nos dados da simulação",
+                xref="paper", yref="paper", x=0.5, y=0.5,
+                showarrow=False, font=dict(size=14)
+            )
+        var = pick_main_var(df_time.columns)
+        if not var:
+            return go.Figure()
+        z = _finite(df_time[var])
+        fig = go.Figure()
+        fig.add_trace(go.Scattergeo(
+            lon=df_time['longit'], lat=df_time['lat'],
+            mode='markers',
+            marker=dict(
+                size=_bubble_sizes(df_time[var]),
+                color=z, colorscale='YlOrRd',
+                colorbar=dict(title=var, x=1.02),
+                line=dict(width=0.5, color='gray'),
+            ),
+            text=df_time['name'],
+            customdata=np.column_stack((df_time['name'], z)),
+            hovertemplate=('<b>%{customdata[0]}</b><br>Tempo: ' +
+                           str(time_slider) + '<br>' + var +
+                           ': %{customdata[1]:.2f}<extra></extra>'),
+            showlegend=False,
+        ))
+        fig.update_geos(
+            projection_type="natural earth",
+            showland=True, landcolor="lightgray",
+            showocean=True, oceancolor="lightblue",
+            showlakes=True, lakecolor="lightblue",
+            **_geo_bounds(df_time['lat'], df_time['longit']),
+        )
+        fig.update_layout(
+            title=f'🌍 Mapa de Sites - Tempo {time_slider} ({var}, sem polígonos)',
+            height=600, showlegend=False
+        )
+        return fig
+    
+    if df_time.empty:
         return go.Figure()
     
     # df_time is already filtered to time_slider
@@ -787,9 +1059,21 @@ def update_time_bounds(model_path, simulation_run):
         return gr.Slider()
     
     min_time = int(df.time.min())
-    max_time = int(df.time.max())
+    t = last_data_time(model_path, simulation_run)
+    max_time = t if t is not None else int(df.time.max())
     
     return gr.Slider(minimum=min_time, maximum=max_time, value=min_time)
+
+
+def export_geolibre(model_path, simulation_run):
+    """Write a .geolibre.json project for the selected simulation and hand
+    it to the DownloadButton. Raises gr.Error on failure (shown as toast)."""
+    from Epigrass import geolibre_export
+    try:
+        return str(geolibre_export.export_project(model_path,
+                                                  sim=simulation_run))
+    except Exception as exc:
+        raise gr.Error(f"Falha ao exportar projeto GeoLibre: {exc}")
 
 
 def create_dashboard(pth:str):
@@ -814,6 +1098,9 @@ def create_dashboard(pth:str):
                 )
                 
                 refresh_btn = gr.Button("🔄 Atualizar Dados", variant="primary")
+
+                geolibre_btn = gr.DownloadButton(
+                    "📤 Exportar projeto GeoLibre", variant="secondary")
                 
                 map_selector = gr.Dropdown(
                     label="📁 Arquivo de Mapa",
@@ -874,6 +1161,12 @@ def create_dashboard(pth:str):
             fn=refresh_data,
             inputs=[model_path],
             outputs=[map_selector, simulation_run, localities, meta_info]
+        )
+
+        geolibre_btn.click(
+            fn=export_geolibre,
+            inputs=[model_path, simulation_run],
+            outputs=[geolibre_btn]
         )
         
         # Auto-refresh on load
@@ -966,16 +1259,52 @@ def create_dashboard(pth:str):
     return demo
 
 
+#: preferred dashboard port; the next free one is used when it is taken
+DEFAULT_PORT = 5006
+PORT_TRIES = 25
+
+
+def find_free_port(start: int = DEFAULT_PORT, tries: int = PORT_TRIES) -> int | None:
+    """Return the first bindable port from ``start``, or None if all busy."""
+    import socket
+    for port in range(start, start + tries):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            try:
+                sock.bind(("127.0.0.1", port))
+                return port
+            except OSError:
+                continue
+    return None
+
+
+def launch_dashboard(demo, **kwargs):
+    """
+    Launch a Gradio Blocks app on the first free port from DEFAULT_PORT.
+    Falls back to Gradio's automatic port selection if the range is busy.
+    """
+    port = find_free_port()
+    if port is None:
+        print(f"==> Ports {DEFAULT_PORT}-{DEFAULT_PORT + PORT_TRIES - 1} busy; "
+              "letting Gradio pick a port automatically", flush=True)
+    else:
+        print(f"==> Epigrass Dashboard starting on http://localhost:{port}",
+              flush=True)
+    kwargs.setdefault("share", False)
+    try:
+        demo.launch(server_port=port, **kwargs)
+    except OSError:
+        print(f"==> Port {port} was taken during startup; "
+              "retrying on an automatic port", flush=True)
+        demo.launch(**kwargs)
+
+
 def show(pth):
     """Launch the dashboard with a specific path"""
     demo = create_dashboard(pth)
-    demo.launch(server_port=5006,
-                root_path='/Epigrass',
-                allowed_paths=['/assets', pth],
-                share=False,
-                )
+    launch_dashboard(demo, root_path='/Epigrass',
+                     allowed_paths=['/assets', pth])
 
 
 if __name__ == "__main__":
     demo = create_dashboard()
-    demo.launch(server_port=5006, share=False,title="Epigrass Dashboard", theme=gr.themes.Soft())
+    launch_dashboard(demo, title="Epigrass Dashboard", theme=gr.themes.Soft())
