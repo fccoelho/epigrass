@@ -34,7 +34,18 @@ assert redisclient.ping()  # verify that redis server is running.
 
 sys.setrecursionlimit(3000)  # to allow pickling of custom models
 
-PO = multiprocessing.Pool(multiprocessing.cpu_count())
+# Worker pool created lazily on first parallel step. Spawning cpu_count()
+# processes at import time was wasting resources (e.g. 32 idle workers just
+# to open the results dashboard, twice: one pool here, one in manager.py).
+PO = None
+
+
+def get_pool():
+    """Return the shared worker pool, creating it on first use."""
+    global PO
+    if PO is None:
+        PO = multiprocessing.Pool(multiprocessing.cpu_count())
+    return PO
 
 
 class siteobj:
@@ -184,7 +195,7 @@ class siteobj:
             pipe.hset("{}:bi".format(self.geocode), mapping=self.bi)
             pipe.hset("{}:bp".format(self.geocode), mapping=self.bp)
             pipe.execute()
-            r = PO.apply_async(self.model, args=(), callback=self.handle)
+            r = get_pool().apply_async(self.model, args=(), callback=self.handle)
         else:
             res = self.model(
                 inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values

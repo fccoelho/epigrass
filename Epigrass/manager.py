@@ -1184,16 +1184,17 @@ def main():
 
 
 def end_pools():
-    PO.close()
-    PO.terminate()
-    simobj.PO.close()
-    simobj.PO.terminate()
+    # Pools are created lazily now (see simobj.get_pool); nothing to close
+    # if a simulation never ran in this process.
+    for pool in (simobj.PO,):
+        if pool is not None:
+            pool.close()
+            pool.terminate()
 
     # kill all subprocesses
     os.killpg(os.getpid(), signal.SIGTERM)
 
 
-PO = multiprocessing.Pool()
 if __name__ == '__main__':
     import atexit, signal
 
