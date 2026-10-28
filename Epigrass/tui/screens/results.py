@@ -1,6 +1,7 @@
 """Results browser: inspect outdata-* directories from past runs."""
 from __future__ import annotations
 
+import sqlite3
 from pathlib import Path
 
 import pandas as pd
@@ -14,12 +15,15 @@ from textual.widgets import (DataTable, Footer, Header, ListView, ListItem,
 
 #: output files that can be previewed as tables
 PREVIEWABLE = ("*.csv", "*.csv.gz", "*.tsv")
+#: maximum columns shown when previewing the SQLite simulation database
+SQLITE_MAX_COLS = 15
 
 
 class ResultsBrowserScreen(Screen):
     BINDINGS = [
         Binding("enter", "open", "Open"),
         Binding("d", "dashboard", "Dashboard"),
+        Binding("g", "geolibre", "GeoLibre export"),
         Binding("escape", "back", "Back"),
     ]
 
@@ -71,7 +75,8 @@ class ResultsBrowserScreen(Screen):
         run_dir = self.runs[index]
         table = self.query_one("#file-table", DataTable)
         table.clear()
-        self.file_paths = [
+        db = run_dir / "Epigrass.sqlite"
+        self.file_paths = ([db] if db.is_file() else []) + [
             f for f in sorted(run_dir.iterdir())
             if f.is_file() and any(f.match(p) for p in PREVIEWABLE)
         ]
@@ -108,12 +113,52 @@ class ResultsBrowserScreen(Screen):
 
     def _load_preview(self, path: Path) -> None:
         try:
-            df = pd.read_csv(path, nrows=200)
+            if path.suffix == ".sqlite":
+                df = self._read_sqlite_preview(path)
+            else:
+                df = pd.read_csv(path, nrows=200)
             rows = [list(map(str, r)) for r in df.itertuples(index=False)]
             self.app.call_from_thread(self._show_preview, path, list(df.columns), rows)
         except Exception as exc:
             self.app.call_from_thread(self._show_preview, path,
                                       ["error"], [[f"Could not read {path.name}: {exc}"]])
+
+    @staticmethod
+    def _read_sqlite_preview(path: Path) -> pd.DataFrame:
+        """Final-time table of the newest simulation in an Epigrass.sqlite."""
+        con = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        try:
+            tables = [r[0] for r in con.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' "
+                "AND name NOT LIKE '%_meta' AND name NOT LIKE '%e' "
+                "ORDER BY name")]
+            if not tables:
+                raise ValueError("no simulation tables found")
+            sim = tables[-1]
+            cols = [r[1] for r in con.execute(f'PRAGMA table_info("{sim}")')]
+            epi = [c for c in cols
+                   if c not in ("geocode", "time", "name", "lat", "longit")]
+            if not epi:
+                raise ValueError(f"table {sim} has no epidemiological columns")
+            sentinel = epi[0]
+            counts = con.execute(
+                f'SELECT "time", COUNT("{sentinel}") FROM "{sim}" '
+                f'GROUP BY "time" ORDER BY "time"').fetchall()
+            n_sites = con.execute(
+                f'SELECT COUNT(*) FROM "{sim}" WHERE "time"='
+                f'(SELECT MIN("time") FROM "{sim}")').fetchone()[0]
+            threshold = max(1, n_sites // 2)
+            good = [t for (t, c) in counts if c >= threshold]
+            if not good:
+                good = [t for (t, c) in counts if c > 0]
+            if not good:
+                raise ValueError(f"table {sim} has no data rows")
+            max_t = good[-1]
+            df = pd.read_sql_query(
+                f'SELECT * FROM "{sim}" WHERE "time"=?', con, params=(max_t,))
+        finally:
+            con.close()
+        return df.iloc[:, :SQLITE_MAX_COLS]
 
     def _show_preview(self, path: Path, columns: list, rows: list) -> None:
         preview = self.query_one("#preview-table", DataTable)
@@ -139,6 +184,28 @@ class ResultsBrowserScreen(Screen):
                         "dashboard with", severity="warning")
             return
         self.app.launch_dashboard(epgs[0], view_only=True)
+
+    def action_geolibre(self) -> None:
+        """Export the selected run as a .geolibre.json project file."""
+        index = self.query_one("#run-list", ListView).index
+        if index is None or index >= len(self.runs):
+            self.notify("Select a run first", severity="warning")
+            return
+        run = self.runs[index]
+        self.notify(f"Exporting {run.name} to GeoLibre…")
+        self.run_worker(lambda: self._export_geolibre(run),
+                        thread=True, exclusive=True)
+
+    def _export_geolibre(self, run: Path) -> None:
+        try:
+            from Epigrass import geolibre_export
+            path = geolibre_export.export_project(run)
+            self.app.call_from_thread(
+                self.notify, f"GeoLibre project written to {path}")
+        except Exception as exc:
+            self.app.call_from_thread(
+                self.notify, f"GeoLibre export failed: {exc}",
+                severity="error")
 
     def action_back(self) -> None:
         preview = self.query_one("#preview-table", DataTable)

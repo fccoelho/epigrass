@@ -43,7 +43,8 @@ class EpigrassTui(App):
     # -- actions -------------------------------------------------------------
     def launch_dashboard(self, epg_path: Path, gradio: bool = True,
                          view_only: bool = False) -> None:
-        """Open the web dashboard in a detached subprocess (serves on :5006)."""
+        """Open the web dashboard in a detached subprocess (first free port
+        from 5006; the dashboard process prints its actual URL)."""
         cmd = [sys.executable, "-m", "Epigrass.manager", "-b", "sqlite"]
         if gradio:
             cmd.append("-G")
@@ -51,8 +52,8 @@ class EpigrassTui(App):
             cmd.append("-V")
         cmd.append(Path(epg_path).name)
         subprocess.Popen(cmd, cwd=str(Path(epg_path).parent))
-        self.notify("Dashboard starting on http://localhost:5006 "
-                    "(leave it running in the background)")
+        self.notify("Dashboard starting on http://localhost:5006 (or the "
+                    "next free port — its terminal prints the exact URL)")
 
 
 def run() -> None:
