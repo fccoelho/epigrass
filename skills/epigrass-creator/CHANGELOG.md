@@ -2,6 +2,11 @@
 
 All notable changes to the Epigrass Creator Skill will be documented in this file.
 
+## [1.1.2] - 2026-11-25
+
+### Fixed
+- **Documented skill file locations** - Added "Skill Files" section to SKILL.md explaining where `wizard.py` and `epigrass_wizard.py` live (same directory as SKILL.md), what each one does, and how to invoke them programmatically or as a CLI. Also lists the `examples/` files.
+
 ## [1.1.1] - 2026-04-06
 
 ### Fixed

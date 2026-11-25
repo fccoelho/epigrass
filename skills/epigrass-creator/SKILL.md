@@ -1,7 +1,7 @@
 ---
 name: epigrass-creator
 description: Create Epigrass epidemiological models through step-by-step guided specification. Build metapopulation models (SIR, SEIR, SEIS, SIS, SI) with geographic networks. Supports GeoPackage import for real-world spatial data.
-version: 1.1.1
+version: 1.1.2
 metadata:
   openclaw:
     requires:
@@ -17,6 +17,19 @@ metadata:
 # Epigrass Creator Skill
 
 Create epidemiological metapopulation models using Epigrass through an interactive, step-by-step wizard.
+
+## Skill Files
+
+All files are located in this skill's directory (the same folder as `SKILL.md`):
+
+| File | Description |
+|------|-------------|
+| `wizard.py` | Full interactive 5-step CLI wizard. Run with `python3 <skill_dir>/wizard.py`, or drive programmatically: `from wizard import EpigrassWizard; EpigrassWizard().run()`. Supports all steps including GeoPackage import and network generation. |
+| `epigrass_wizard.py` | Programmatic wizard API, designed for agent-driven use. Import with `from epigrass_wizard import EpigrassWizard`, then guide the user through each step using `get_model_selection_prompt()`, `get_sites_prompt()`, `get_parameters_prompt()`, `get_edges_prompt()`, `get_simulation_prompt()` and collect input with `set_model_type()`, `add_site()`, `add_parameter()`, `add_simulation_setting()`. Finish with `save_model()` and `get_summary()`. Also runnable as a CLI: `python3 <skill_dir>/epigrass_wizard.py`. |
+| `examples/dengue_seir_example.json` | Example `model_spec.json` for a dengue SEIR model. |
+| `examples/geopackage_example.md` | Walkthrough for importing sites from a GeoPackage file. |
+
+Prefer `epigrass_wizard.py`'s programmatic API when acting as an agent (it avoids blocking `input()` calls); use `wizard.py` when the user wants to run the wizard themselves in a terminal.
 
 ## What is Epigrass?
 
