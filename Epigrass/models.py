@@ -16,7 +16,7 @@ from epimodels.continuous.models import SIR, SEIR
 # import numba
 # from numba.typed import List
 
-redisclient = redis.StrictRedis()
+from Epigrass.redis_utils import redisclient, key
 
 vnames = {
     'SIR': ['Exposed', 'Infectious', 'Susceptible'],
@@ -82,14 +82,14 @@ class Epimodel(object):
         Get updated parameters from the redis database.
         """
         pipe = redisclient.pipeline()
-        pipe.lindex(f"{self.geocode}:ts", -1)
-        pipe.get("simstep")
-        pipe.get("{}:totpop".format(self.geocode))
-        pipe.get("{}:theta".format(self.geocode))
-        pipe.get("{}:npass".format(self.geocode))
-        pipe.hgetall("{}:bi".format(self.geocode))
-        pipe.hgetall("{}:bp".format(self.geocode))
-        pipe.lrange("{}:values".format(self.geocode), 0, -1)
+        pipe.lindex(key(f"{self.geocode}:ts"), -1)
+        pipe.get(key("simstep"))
+        pipe.get(key("{}:totpop".format(self.geocode)))
+        pipe.get(key("{}:theta".format(self.geocode)))
+        pipe.get(key("{}:npass".format(self.geocode)))
+        pipe.hgetall(key("{}:bi".format(self.geocode)))
+        pipe.hgetall(key("{}:bp".format(self.geocode)))
+        pipe.lrange(key("{}:values".format(self.geocode)), 0, -1)
         
         responses = pipe.execute()
         
@@ -129,8 +129,8 @@ class Epimodel(object):
         
         # First batch: Fetch current totalcases and simstep
         pipe = redisclient.pipeline()
-        pipe.get('{}:totalcases'.format(self.geocode))
-        pipe.get("simstep")
+        pipe.get(key('{}:totalcases'.format(self.geocode)))
+        pipe.get(key("simstep"))
         prev_data = pipe.execute()
         
         totc_val = prev_data[0]
@@ -146,15 +146,15 @@ class Epimodel(object):
         
         # Second batch: Update all values
         pipe = redisclient.pipeline()
-        pipe.rpush('{}:ts'.format(self.geocode), json.dumps(state))
-        pipe.set('{}:Lpos'.format(self.geocode), Lpos)
-        pipe.set('{}:totalcases'.format(self.geocode), Lpos + totc)
-        pipe.rpush('{}:incidence'.format(self.geocode), Lpos)
-        pipe.set('{}:migInf'.format(self.geocode), migInf)
+        pipe.rpush(key('{}:ts'.format(self.geocode)), json.dumps(state))
+        pipe.set(key('{}:Lpos'.format(self.geocode)), Lpos)
+        pipe.set(key('{}:totalcases'.format(self.geocode)), Lpos + totc)
+        pipe.rpush(key('{}:incidence'.format(self.geocode)), Lpos)
+        pipe.set(key('{}:migInf'.format(self.geocode)), migInf)
         
         if Lpos > 0:
             infected = int(simstep_val) if simstep_val else 0
-            pipe.rpush("epipath", str((infected, self.geocode, {})))
+            pipe.rpush(key("epipath"), str((infected, self.geocode, {})))
             
         pipe.execute()
 

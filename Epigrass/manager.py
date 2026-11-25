@@ -18,6 +18,7 @@ import pymysql.cursors
 import numpy as np
 from Epigrass.simobj import graph, edge, siteobj
 from Epigrass import simobj
+from Epigrass.redis_utils import redisclient, key, ensure_server, delete_namespace
 from Epigrass import models
 from Epigrass import spread
 from Epigrass.data_io import *
@@ -31,9 +32,6 @@ import pickle
 import multiprocessing
 
 
-redisclient = redis.StrictRedis()
-
-
 class Simulate:
     """
     This class takes care of setting up the model, simulating it, and storing the results
@@ -43,6 +41,8 @@ class Simulate:
                  backend='sqlite', silent=False):
         # pycallgraph.start_trace()
         #        self.pool = multiprocessing.Pool()
+        ensure_server()  # fail early with configuration hints if Redis is unreachable
+        delete_namespace()  # clear state left over by previous runs (only Epigrass' own keys)
         self.parallel = True
         self.host = host
         self.port = port
@@ -1050,7 +1050,7 @@ def onStraightRun(args):
             epipanel_gradio.show(pth)
         else:
             epipanel.show(pth)
-    redisclient.flushall()
+        return
     if args.backend == "mysql":
         S = Simulate(fname=args.epg[0], host=args.dbhost, user=args.dbuser, password=args.dbpass, backend=args.backend)
     else:

@@ -47,6 +47,22 @@ Example installation:
 
     $ sudo apt-get install redis-server
 
+By default, Epigrass connects to ``localhost:6379`` (database 0). To use a
+different server, set one of these environment variables before running:
+
+.. code-block:: bash
+
+    $ export EPIGRASS_REDIS_URL="redis://myserver:6379/0"
+    # or configure the parts individually:
+    $ export EPIGRASS_REDIS_HOST=myserver
+    $ export EPIGRASS_REDIS_PORT=6379
+    $ export EPIGRASS_REDIS_DB=0
+
+Epigrass stores all of its keys under the ``epigrass:`` prefix (configurable
+via ``EPIGRASS_REDIS_PREFIX``) and only deletes its own keys between runs, so
+it is safe to share a Redis server with other applications. The ``--view-only``
+dashboard does not require a Redis server at all.
+
 
 
 MySQL

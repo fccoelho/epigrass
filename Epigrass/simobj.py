@@ -26,8 +26,7 @@ except ImportError as exc:
     CustomModel = None
 
 # Setup Redis database to making sharing of state between nodes efficient during parallel execution of the simulation
-redisclient = redis.Redis(host="localhost", port=6379)
-assert redisclient.ping()  # verify that redis server is running.
+from Epigrass.redis_utils import redisclient, key, ensure_server, delete_namespace
 
 # logger = multiprocessing.log_to_stderr()
 # logger.setLevel(multiprocessing.SUBDEBUG)
@@ -118,7 +117,7 @@ class siteobj:
         self.outedges = []  # outbound edges
         self.pdest = []
         self.infectedvisiting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        redisclient.set("{}:totalcases".format(self.geocode), 0)
+        redisclient.set(key("{}:totalcases".format(self.geocode)), 0)
 
     def __call__(self):
         """
@@ -215,14 +214,14 @@ class siteobj:
         # print ([type(x) for x in [totpop, npass, theta, simstep]] )
         if parallel:
             pipe = redisclient.pipeline()
-            pipe.set("simstep", simstep)
-            pipe.set("{}:totpop".format(self.geocode), totpop)
+            pipe.set(key("simstep"), simstep)
+            pipe.set(key("{}:totpop".format(self.geocode)), totpop)
             # pipe.rpush("{}:inits".format(self.geocode), str(inits))
-            pipe.rpush("{}:ts".format(self.geocode), json.dumps(inits))
-            pipe.set("{}:npass".format(self.geocode), float(npass))
-            pipe.set("{}:theta".format(self.geocode), int(nan_to_num(theta)))
-            pipe.hset("{}:bi".format(self.geocode), mapping=self.bi)
-            pipe.hset("{}:bp".format(self.geocode), mapping=self.bp)
+            pipe.rpush(key("{}:ts".format(self.geocode)), json.dumps(inits))
+            pipe.set(key("{}:npass".format(self.geocode)), float(npass))
+            pipe.set(key("{}:theta".format(self.geocode)), int(nan_to_num(theta)))
+            pipe.hset(key("{}:bi".format(self.geocode)), mapping=self.bi)
+            pipe.hset(key("{}:bp".format(self.geocode)), mapping=self.bp)
             pipe.execute()
             if isinstance(self.model, models.Epimodel):
                 # Epimodel instances fetch their own state from Redis

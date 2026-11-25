@@ -66,12 +66,13 @@ class RunConfigScreen(Screen):
     def _ping_redis(self) -> None:
         status = "[green]✓ Redis server reachable[/green]"
         try:
-            import redis
+            from Epigrass.redis_utils import redisclient
 
-            redis.StrictRedis().ping()
+            redisclient.ping()
         except Exception as exc:
             status = (f"[yellow]⚠ Redis not reachable ({exc.__class__.__name__}). "
-                      "Simulations require a running Redis server.[/yellow]")
+                      "Simulations require a running Redis server (configure it "
+                      "with EPIGRASS_REDIS_URL or EPIGRASS_REDIS_HOST/PORT/DB).[/yellow]")
         self.app.call_from_thread(self._set_redis_status, status)
 
     def _set_redis_status(self, status: str) -> None:
