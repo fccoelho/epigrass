@@ -286,11 +286,18 @@ def refresh_data(model_path):
     map_value = maps[0] if maps else None
     sim_value = sims[-1] if sims else None
     
+    # Populate localities (and metadata) directly: component updates issued
+    # by this function do not reliably trigger the dependent
+    # simulation_run.change listeners, which used to leave the localities
+    # dropdown empty on page load and after refreshing.
+    locs = get_localities(model_path, sim_value) if sim_value else []
+    meta = get_meta_info(model_path, sim_value) if sim_value else ""
+    
     return (
         gr.Dropdown(choices=map_choices, value=map_value),
         gr.Dropdown(choices=sim_choices, value=sim_value),
-        gr.Dropdown(choices=[], value=None),
-        ""
+        gr.Dropdown(choices=locs, value=locs[0] if locs else None),
+        meta
     )
 
 
