@@ -1,27 +1,26 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Using Epigrass &#8212; Epigrass 2.6.3 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/default.css?v=ff3f1f37" />
+    <script src="_static/documentation_options.js?v=99c1414e"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Analysis" href="analysis.html" />
+    <link rel="next" title="Gradio Simulation Builder" href="gui.html" />
     <link rel="prev" title="Epidemic Models" href="intromodels.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -33,22 +32,15 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="using-epigrass">
-<span id="using"></span><h1>Using Epigrass<a class="headerlink" href="#using-epigrass" title="Permalink to this headline">¶</a></h1>
+  <section id="using-epigrass">
+<span id="using"></span><h1>Using Epigrass<a class="headerlink" href="#using-epigrass" title="Link to this heading">¶</a></h1>
 <p>To simulate an epidemic process in Epigrass, the user needs to have in hand at least three files: Two files containing the site and edge data and a third file which is a script that defines what it is to be done. Here we go through each one of them in detail. The last part of this chapter is a step-by step guide the Graphical User Interface (GUI).</p>
-<div class="section" id="data">
-<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="site-data-file">
-<h3>Site data file<a class="headerlink" href="#site-data-file" title="Permalink to this headline">¶</a></h3>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">¶</a></h2>
+<section id="site-data-file">
+<h3>Site data file<a class="headerlink" href="#site-data-file" title="Link to this heading">¶</a></h3>
 <p>See below an example of the content of a site file for a network of 10 cities. Each line corresponds to a site (except the first line which is the title). For each site, it is declared, in this order: its <em>spatial location</em> in the form of a pair of coordinates ([X,Y]); a site $name$ to be used in the output; the site’s population; the site geocode (an arbitrary unique number which is used internally by Epigrass).</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 5%" />
-<col style="width: 24%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>X</p></th>
 <th class="head"><p>Y</p></th>
@@ -129,15 +121,6 @@
 <p>In this example, the first site is located at <em>[X,Y]=[1,4]</em>, it is named N1, its population is 1000000 and its geocode is 1. This is minimum configuration of a site data file and it must contains this information in exactly this order.</p>
 <p>In some situations, the user may want to add other attributes to the sites (different transmission parameters, or vaccine coverage or initial conditions for simulations). This information is provided by adding new columns to the minimum file. For example, if one wishes to add information on the vaccine coverage in cities N1 to N10 ($vac$) as well as information about average temperature (which hypothetically affects the transmission of the disease), the file becomes:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 3%" />
-<col style="width: 3%" />
-<col style="width: 17%" />
-<col style="width: 24%" />
-<col style="width: 24%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>X</p></th>
 <th class="head"><p>Y</p></th>
@@ -235,13 +218,6 @@
 <p>It is up to the user, to know what means the elements of the tuple <em>values</em>. Note that the first element of the tuple has index 0,the second one has index 1 and so on.</p>
 <p>When using real data, one may wish to use actual geocodes and coordinates. For example, for a network of Brazilian cities, one may build the following file:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 25%" />
-<col style="width: 14%" />
-<col style="width: 20%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>latitude</p></th>
 <th class="head"><p>longitude</p></th>
@@ -308,9 +284,9 @@
 </tbody>
 </table>
 <p>In this file, the coordinates are the actual geographical latitude and longitude coordinates. This information is important when using Epigrass with a map in shapefile format. The geocode is also the official geocode of these localities (the same one used in the shapefile). Despite the cumbersome size of the number, it may be worth using it because demographic official databases are often linked by this number.</p>
-</div>
-<div class="section" id="edge-data-file">
-<h3>Edge data file<a class="headerlink" href="#edge-data-file" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="edge-data-file">
+<h3>Edge data file<a class="headerlink" href="#edge-data-file" title="Link to this heading">¶</a></h3>
 <p>The edge data file contains all the direct links between sites. Each line in the file (except for the first, which is the header) corresponds to an edge. For each edge (or link) one must specify (in this order): the <em>names of the sites</em> connected by that edge; the <em>number of individuals traveling from source to destination</em>; the <em>number of individuals travelling from destination to source</em> per time step; the <em>distance or length</em> of the edge. At last, the file must contain, in the fifth and sixth columns, the <em>geocodes</em> of the source and destination sites*. This is very important as the graph is built internally connecting sites through edges and this is done based on geocode info.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -318,15 +294,6 @@
 </div>
 <p>See below the list of the 8 edges connecting the sites <em>N1</em> to <em>N10</em>. Let’s look the first one, as an example. It links <em>N1</em> to <em>N2</em>. Through this link passes 11 individuals backwards and forwards per time step (a day, for example). This edge has length 1 (remember that <em>N1</em> is at [X,Y]=[1,1] and <em>N2</em> is at [X,Y]=[1,2], so the distance between them is 1). The last two columns show the geocode of <em>N1</em> (geocode 1) and the geocode of <em>N2</em> (geocode 2).</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 9%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 17%" />
-<col style="width: 20%" />
-<col style="width: 15%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Source</p></th>
 <th class="head"><p>Dest</p></th>
@@ -406,10 +373,10 @@
 </table>
 <p>Note that it doesn’t matter which site is considered a Source and which one is considered a Destination. I.e., if there is a link between <em>A</em> and <em>B</em>, one may either named <em>A</em> as source and <em>B</em> as destination, or the other way around.</p>
 <p>If the edge represents a road or a river, one may use the actual metric distance as length. If the edge links arbitrary localities, one may opt to use euclidean distance, calculated from the <em>x</em> and <em>y</em> coordinates (using Pythagoras theorem).</p>
-</div>
-</div>
-<div class="section" id="specifying-a-model-the-script">
-<h2>Specifying a model: the script<a class="headerlink" href="#specifying-a-model-the-script" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="specifying-a-model-the-script">
+<h2>Specifying a model: the script<a class="headerlink" href="#specifying-a-model-the-script" title="Link to this heading">¶</a></h2>
 <p>Once the user has specified the two data files, the next step is to define the model to be executed. This is done in the .epg script file. The   <code class="file docutils literal notranslate"><span class="pre">.epg</span></code> script is a text file and can be edited with any editor (not word processor). This script must be prepared with care.</p>
 <p>The best way to write down your own .epg is to edit an already existing .epg file. So, open Epigrass, choose an .epg file and click on the <span class="guilabel">Edit</span> button. Your favorite editor will open and you can start editing. Don’t forget to save it as a new file in your working directory. Of course, there is an infinite number of possibilities regarding the elaboration of the script. It all depends on the goals of the user.</p>
 <div class="admonition note">
@@ -428,8 +395,8 @@
 <p class="admonition-title">Warning</p>
 <p>All variables defined in a <code class="file docutils literal notranslate"><span class="pre">.epg</span></code> are <strong>case-insensitive</strong>. Consider this fact when naming your model’s variables.</p>
 </div>
-<div class="section" id="part-1-the-world">
-<h3>Part 1: THE WORLD<a class="headerlink" href="#part-1-the-world" title="Permalink to this headline">¶</a></h3>
+<section id="part-1-the-world">
+<h3>Part 1: THE WORLD<a class="headerlink" href="#part-1-the-world" title="Link to this heading">¶</a></h3>
 <p>The first section of the script is titled: THE WORLD. An example of its content is shown:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shapefile</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;riozonas_LatLong.shp&#39;</span><span class="p">,</span><span class="s1">&#39;nome_zonas&#39;</span><span class="p">,</span><span class="s1">&#39;zona_trafe&#39;</span><span class="p">]</span>
 <span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="n">csv</span>
@@ -463,9 +430,9 @@ specify it here. Example: <em>utf-8</em>.</p>
 <p class="admonition-title">Note</p>
 <p>All paths in the <code class="file docutils literal notranslate"><span class="pre">.epg</span></code> file are relative to the working directory.</p>
 </div>
-</div>
-<div class="section" id="part-2-epidemiological-model">
-<h3>Part 2: EPIDEMIOLOGICAL MODEL<a class="headerlink" href="#part-2-epidemiological-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="part-2-epidemiological-model">
+<h3>Part 2: EPIDEMIOLOGICAL MODEL<a class="headerlink" href="#part-2-epidemiological-model" title="Link to this heading">¶</a></h3>
 <p>This is the main part of the script. It defines the epidemiological model to be run.
 The script reads:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">modtype</span> <span class="o">=</span> <span class="n">SIR</span>
@@ -474,11 +441,6 @@ The script reads:</p>
 <p>Here, the type of epidemiological model is defined, in this case is a deterministic <em>SIR</em> model.
 Epigrass has some built-in models:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 67%" />
-<col style="width: 15%" />
-<col style="width: 18%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
 <th class="head"><p>Determ.</p></th>
@@ -527,9 +489,9 @@ Epigrass has some built-in models:</p>
 <p>A description of these models can be found in the chapter <em>Epidemiological modeling</em>. The stochastic versions of models use
 <em>Poisson</em> distribution as default for the number of new cases (<em>L(t+1)</em>), They are not full stochastic models. Besides these,
 the user may define his/her own model and access it by setting <strong>modtype = Custom</strong>.</p>
-</div>
-<div class="section" id="part-3-model-parameters">
-<h3>Part 3: MODEL PARAMETERS<a class="headerlink" href="#part-3-model-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="part-3-model-parameters">
+<h3>Part 3: MODEL PARAMETERS<a class="headerlink" href="#part-3-model-parameters" title="Link to this heading">¶</a></h3>
 <p>The epidemic model is defined by variables and parameter which require initialization:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#==============================================================#</span>
     <span class="c1">#  They can be specified as constants or as functions of global or</span>
@@ -579,9 +541,9 @@ remove the line, however because that will cause an error. We recommend that, if
 </div>
 <p>Here, <em>N</em> is the total population in a site (as in the datafile for sites). In this example, we set all localities to the same initial conditions (all individuals susceptible) and use an event (see below) to introduce an infectious individual in a locality. The number of recovered individuals is implicit, as <em>R = N-(S+E+I)</em></p>
 <p>Another possibility is to define initial conditions that are different for each site. For this, the data must be available as extra columns in the site data file and these columns are referenced to using the <em>values</em> tuple explained above.</p>
-</div>
-<div class="section" id="part-5-epidemic-events">
-<h3>Part 5: EPIDEMIC EVENTS<a class="headerlink" href="#part-5-epidemic-events" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="part-5-epidemic-events">
+<h3>Part 5: EPIDEMIC EVENTS<a class="headerlink" href="#part-5-epidemic-events" title="Link to this heading">¶</a></h3>
 <p>The next step is to define events that will occur during the simulation. These events may be epidemiological (arrival of an infected, for example) or a public health action (vaccination campaign, for example):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#=============================================================#</span>
 <span class="c1">#   Specify isolated events.</span>
@@ -608,9 +570,9 @@ remove the line, however because that will cause an error. We recommend that, if
 <dt><strong>Quarantine</strong></dt><dd><p>Prevents any individual from leaving a site, starting at <em>t</em>. Currently disabled.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="part-6-transportation-model">
-<h3>Part 6: TRANSPORTATION MODEL<a class="headerlink" href="#part-6-transportation-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="part-6-transportation-model">
+<h3>Part 6: TRANSPORTATION MODEL<a class="headerlink" href="#part-6-transportation-model" title="Link to this heading">¶</a></h3>
 <p>Here, there are two options regarding the movement of infected individuals from site to site (through the edges). If <em>stochastic = 0</em>, the process is simulated deterministically. The number of infected passengers commuting through an edge is a fraction <em>p</em> of the infected population that is traveling. <em>p</em> is calculated as <em>total passengers/total population</em>.</p>
 <p>If <em>stochastic = 1</em>, the number of passengers is sampled from a Poisson distribution with parameter given by the expected number of travelling infectives (calculated as above):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#=========================================================#</span>
@@ -626,9 +588,9 @@ remove the line, however because that will cause an error. We recommend that, if
 </pre></div>
 </div>
 <p>That ends the definition of the model.</p>
-</div>
-<div class="section" id="part-7-simulation-and-output">
-<h3>Part 7: SIMULATION AND OUTPUT<a class="headerlink" href="#part-7-simulation-and-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="part-7-simulation-and-output">
+<h3>Part 7: SIMULATION AND OUTPUT<a class="headerlink" href="#part-7-simulation-and-output" title="Link to this heading">¶</a></h3>
 <p>Now it is time to define some final operational variables for the simulation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#==============================================================#</span>
 <span class="c1"># Number of steps</span>
@@ -691,9 +653,9 @@ multiple runs from the same model get stored independently.
 <blockquote>
 <div><p>Script files included in this list are executed after the currently file is finished.</p>
 </div></blockquote>
-</div>
-<div class="section" id="operation">
-<h3>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="operation">
+<h3>Operation<a class="headerlink" href="#operation" title="Link to this heading">¶</a></h3>
 <p>For running simulations, after all the information has been entered and checked on the first tab of the GUI, you can press the <span class="guilabel">Run</span> button to start the simulation or the :guilabel`Exit` button. When the <span class="guilabel">Run</span> button is pressed, the <code class="file docutils literal notranslate"><span class="pre">~/.epigrassrc</span></code> file is updated with all the information entered in the GUI. If the <span class="guilabel">Exit</span> button is pressed, all information entered since the last time the <span class="guilabel">Run</span> button was pressed is lost.</p>
 <p>Epigrass also allows running simulation straight from the command line, with the <strong>epirunner</strong> executable. all you have to do is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ epirunner mymodel.epg
@@ -725,9 +687,9 @@ optional arguments:
   -V, --view-only       Only Open dashboard.
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-web-dashboard">
-<h3>The Web Dashboard<a class="headerlink" href="#the-web-dashboard" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-web-dashboard">
+<h3>The Web Dashboard<a class="headerlink" href="#the-web-dashboard" title="Link to this heading">¶</a></h3>
 <p>To interact and explore the simulations stored in the database, Epigrass offers an interactive dashboard. It allows you to
 navigate to any simulation previously done for a given model, and inspect it interactively.
 You can ask for it to open <strong>right after a simulation is done</strong>:</p>
@@ -739,33 +701,39 @@ You can ask for it to open <strong>right after a simulation is done</strong>:</p
 </pre></div>
 </div>
 <p>The Dashboard shows various aspects of the Model output, such as Choroplectic map with the final state of the simulation,</p>
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <img alt="_images/dashboard1.png" src="_images/dashboard1.png" />
-<p class="caption"><span class="caption-text">Figure: Dashboard showing map with the final state of the model.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Figure: Dashboard showing map with the final state of the model.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>It also shows the network neighborhood of any of the localities of the models</p>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <img alt="_images/dashboard2.png" src="_images/dashboard2.png" />
-<p class="caption"><span class="caption-text">Figure: Dashboard showing network neighborhood of a locality marked in <em>red</em>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Figure: Dashboard showing network neighborhood of a locality marked in <em>red</em>.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>It also shows a map which can be animated and timeseries plots of all the state variables</p>
-<div class="figure align-default" id="id3">
+<figure class="align-default" id="id3">
 <img alt="_images/dashboard3.png" src="_images/dashboard3.png" />
-<p class="caption"><span class="caption-text">Figure: Dashboard showing timeseries visualizations.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-text">Figure: Dashboard showing timeseries visualizations.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
 
 
           </div>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo of Epigrass"/>
             </a></p>
 <h1 class="logo"><a href="index.html">Epigrass</a></h1>
 
@@ -776,7 +744,16 @@ You can ask for it to open <strong>right after a simulation is done</strong>:</p
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
@@ -786,6 +763,7 @@ You can ask for it to open <strong>right after a simulation is done</strong>:</p
 <li class="toctree-l2"><a class="reference internal" href="#specifying-a-model-the-script">Specifying a model: the script</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Gradio Simulation Builder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a></li>
 </ul>
@@ -795,20 +773,10 @@ You can ask for it to open <strong>right after a simulation is done</strong>:</p
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="intromodels.html" title="previous chapter">Epidemic Models</a></li>
-      <li>Next: <a href="analysis.html" title="next chapter">Analysis</a></li>
+      <li>Next: <a href="gui.html" title="next chapter">Gradio Simulation Builder</a></li>
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
 
 
@@ -822,11 +790,11 @@ You can ask for it to open <strong>right after a simulation is done</strong>:</p
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2008, Flávio Codeço Coelho.
+      &#169;2008, Flávio Codeço Coelho.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/using.rst.txt"

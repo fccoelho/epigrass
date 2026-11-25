@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Overview of Epigrass &#8212; Epigrass 2.6.3 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/default.css?v=ff3f1f37" />
+    <script src="_static/documentation_options.js?v=99c1414e"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Building and Installing" href="install.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -33,13 +32,13 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="overview-of-epigrass">
-<h1>Overview of Epigrass<a class="headerlink" href="#overview-of-epigrass" title="Permalink to this headline">¶</a></h1>
+  <section id="overview-of-epigrass">
+<h1>Overview of Epigrass<a class="headerlink" href="#overview-of-epigrass" title="Link to this heading">¶</a></h1>
 <p>Epigrass is a platform for geo network epidemiological simulation and analysis. It enables researchers to perform
 comprehensive spatio-temporal simulations incorporating epidemiological data and models for disease transmission and
 control in order to create sophisticated scenario analyses.</p>
-<div class="section" id="modeling-approach">
-<h2>Modeling Approach<a class="headerlink" href="#modeling-approach" title="Permalink to this headline">¶</a></h2>
+<section id="modeling-approach">
+<h2>Modeling Approach<a class="headerlink" href="#modeling-approach" title="Link to this heading">¶</a></h2>
 <p>The geographical networks  over which epidemiological processes take place can be very straightforwardly represented in
 a object-oriented framework. In such a framework, the nodes and edges of the geographical networks are objects with
 their attributes and methods.</p>
@@ -52,14 +51,14 @@ variable number of node and edge objects. This framework also do not pose limita
 allowing for networks within networks if desirable.</p>
 <p>For the end user perspective, this framework is transparent since it mimics the natural structure of the real system.
 Even after the model is converted into a code object all of its component objects remain accessible to the user’s  models.</p>
-</div>
-<div class="section" id="geographical-network-models">
-<h2>Geographical Network Models<a class="headerlink" href="#geographical-network-models" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="geographical-network-models">
+<h2>Geographical Network Models<a class="headerlink" href="#geographical-network-models" title="Link to this heading">¶</a></h2>
 <p id="index-0">Epigrass’s geo-referenced models are built from two basic sources of data: a map (in shapefile or geopackage format)
 the cartographical base over which the models are represented and specific data about nodes and edges that are provided
 by the user for the network of interest.</p>
-<div class="section" id="defining-the-cartographic-background">
-<h3>Defining the Cartographic Background<a class="headerlink" href="#defining-the-cartographic-background" title="Permalink to this headline">¶</a></h3>
+<section id="defining-the-cartographic-background">
+<h3>Defining the Cartographic Background<a class="headerlink" href="#defining-the-cartographic-background" title="Link to this heading">¶</a></h3>
 <p>If the user has a map for the geo-referenced data, this can be passed to Epigrass. In this case, the cartographic
 background is defined by defining the name of the shapefile file (with path relative to the working directory) in
 the model’.epg file. Along with the path to the shapefile,  the variable in the shapefile, which contains the geocode
@@ -69,9 +68,9 @@ of localities and their name must also be specified:</p>
 </div>
 <p>If the user does not have a map for his/her problem, he/she can still use Epigrass. In this case, the network topology data is
 read only from two .csv files (more on that ahead).</p>
-</div>
-<div class="section" id="defining-nodes">
-<span id="index-1"></span><h3>Defining Nodes<a class="headerlink" href="#defining-nodes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="defining-nodes">
+<span id="index-1"></span><h3>Defining Nodes<a class="headerlink" href="#defining-nodes" title="Link to this heading">¶</a></h3>
 <p>A graph has nodes and edges. Nodes can be cities or other localities depending on the model being constructed.
 The definition of nodes require the setting of many attributes listed below. The nodes will have many more attributes
 defined at run-time which will depend on other aspects of the model, these will be discussed later.</p>
@@ -92,9 +91,9 @@ following columns, (in this order):</p>
 <dt><em>Geocode</em></dt><dd><p>A Unique Geocode (a number) is required. It will be used as a label/index to facilitate  reference to specific nodes.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="defining-edges">
-<span id="index-2"></span><h3>Defining Edges<a class="headerlink" href="#defining-edges" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="defining-edges">
+<span id="index-2"></span><h3>Defining Edges<a class="headerlink" href="#defining-edges" title="Link to this heading">¶</a></h3>
 <p>In Epigrass’ graphs, edges represent transportation routes. Similarly to nodes, edges are defined at build-time with a
 reduced set of attributes which will be extended at run-time. Epigrass also expects to get these attributes from a CSV file:</p>
 <dl class="simple">
@@ -118,9 +117,9 @@ reduced set of attributes which will be extended at run-time. Epigrass also expe
 <dt><em>Destination’s geocode</em></dt><dd><p>This is the unique numerical identifier used in the sites file.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="defining-models">
-<span id="index-3"></span><h3>Defining models<a class="headerlink" href="#defining-models" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="defining-models">
+<span id="index-3"></span><h3>Defining models<a class="headerlink" href="#defining-models" title="Link to this heading">¶</a></h3>
 <p>The word model in Epigrass can mean two distinct objects: The network model and the node’s epidemic model.</p>
 <p>Node objects, in an Epigrass model, contain well-mixed population dynamic models within them. These models determine
 the dynamics of epidemics within the particular environments of each node. Epigrass comes with a few standard
@@ -133,11 +132,11 @@ advisable to use the demo scripts provided as templates to minimize syntax error
 <p>The script on the appendix  specifies a network model with an stochastic SEIR (see chapter on epidemiological modeling)
 epidemic model in its nodes. The user should study this model and play with its parameters to understand the features
 of Epigrass. A step-by-step tutorial on how to edit the model script can be found in the chapter <em>Using Epigrass</em>.</p>
-</div>
-</div>
-<div class="section" id="the-simulation">
-<h2>The Simulation<a class="headerlink" href="#the-simulation" title="Permalink to this headline">¶</a></h2>
-<p>A simulation run in Epigrass consists of a series of tasks performed at each time step <a class="footnote-reference brackets" href="#id3" id="id1">1</a> .</p>
+</section>
+</section>
+<section id="the-simulation">
+<h2>The Simulation<a class="headerlink" href="#the-simulation" title="Link to this heading">¶</a></h2>
+<p>A simulation run in Epigrass consists of a series of tasks performed at each time step <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> .</p>
 <dl class="simple">
 <dt><em>Calculate migration</em></dt><dd><p>For all edges in the network, the number of persons traveling each way is determined for the current time-step.</p>
 </dd>
@@ -145,23 +144,23 @@ of Epigrass. A step-by-step tutorial on how to edit the model script can be foun
 </dd>
 </dl>
 <p>All aspects of the simulation such as number of passengers traveling on each edge, number of infected/susceptible on each node and etc., are recorded in a step-by-step basis. This complete record allows for the model to be analyzed after the simulation has been completed without having to recalculate it.</p>
-<div class="section" id="output">
-<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Link to this heading">¶</a></h3>
 <p>The output of a simulation in Epigrass is three-fold: A web-based graphical dashboard to interact with outcome of the simulation,
 a written report, and a database table with numeric results.</p>
-<div class="section" id="graphical-display">
-<h4>Graphical display<a class="headerlink" href="#graphical-display" title="Permalink to this headline">¶</a></h4>
+<section id="graphical-display">
+<h4>Graphical display<a class="headerlink" href="#graphical-display" title="Link to this heading">¶</a></h4>
 <p>Epigrass’s Dashboard can be set to open immediately after the simulation has been completed:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ epirunner -D mymodel.epg
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>epirunner<span class="w"> </span>-D<span class="w"> </span>mymodel.epg
 </pre></div>
 </div>
 <p>or it can be invoked to explore simulations of a model already stored in the database, withou simulating it first:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ epirunner -V mymodel
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>epirunner<span class="w"> </span>-V<span class="w"> </span>mymodel
 </pre></div>
 </div>
-</div>
-<div class="section" id="report-generation">
-<h4>Report Generation<a class="headerlink" href="#report-generation" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="report-generation">
+<h4>Report Generation<a class="headerlink" href="#report-generation" title="Link to this heading">¶</a></h4>
 <p>The report contains a detailed analysis of the network model and the simulations ran with it. The report generates a
 LaTeX source file and compiles it to a PDF document for visualization.</p>
 <p>Three types of report are currently available:</p>
@@ -175,10 +174,10 @@ LaTeX source file and compiles it to a PDF document for visualization.</p>
 </dl>
 <p>Report Generation is an optional, though recommended, step done at the end of the simulation. For the report,
 descriptive statistics are generated for the network. These have to do with network topology and properties.
-Additional sections can be added to the report with basic statistical analyses of the output of pre-selected nodes <a class="footnote-reference brackets" href="#id4" id="id2">2</a> .</p>
-</div>
-<div class="section" id="database-output">
-<h4>Database output<a class="headerlink" href="#database-output" title="Permalink to this headline">¶</a></h4>
+Additional sections can be added to the report with basic statistical analyses of the output of pre-selected nodes <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> .</p>
+</section>
+<section id="database-output">
+<h4>Database output<a class="headerlink" href="#database-output" title="Link to this heading">¶</a></h4>
 <p id="index-5">Time series of <strong>L</strong>, <strong>S</strong>, <strong>E</strong>, and <strong>I</strong>, from simulations, are stored in a SQLite database.
 The results of each individual simulation is stored in a different table named after the model’s script name, the date
 and time the simulation has been run. For instance, suppose you run a simulation of a model stored in a file named
@@ -188,28 +187,30 @@ stored independently.</p>
 <p>Epigrass also supports the SQLite database and CSV files as output for the time-series. The naming convention also
 applies to these other formats.</p>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>The number of time steps is defined in the model script</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Listed in the siteRep variable at the script</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The number of time steps is defined in the model script</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Listed in the siteRep variable at the script</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+</section>
 
 
           </div>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo of Epigrass"/>
             </a></p>
 <h1 class="logo"><a href="index.html">Epigrass</a></h1>
 
@@ -220,7 +221,16 @@ applies to these other formats.</p>
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview of Epigrass</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modeling-approach">Modeling Approach</a></li>
@@ -231,6 +241,7 @@ applies to these other formats.</p>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Gradio Simulation Builder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a></li>
 </ul>
@@ -244,16 +255,6 @@ applies to these other formats.</p>
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
 
 
@@ -267,11 +268,11 @@ applies to these other formats.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2008, Flávio Codeço Coelho.
+      &#169;2008, Flávio Codeço Coelho.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/overview.rst.txt"

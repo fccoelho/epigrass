@@ -335,11 +335,7 @@ def stepFlu(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=N
             E4pos, Is4pos, Ic4pos, Ig4pos], Lpos, migInf
 
 
-# @cython.locals(inits=list, simstep='long', totpop='long', theta='double', npass='double', bi=dict, bp=dict,
-#                beta='double', alpha='double', E='double', I='double', S='double', N='long',
-#                r='double', b='double', w='double', Lpos='double', Lpos_esp='double', R='double',
-#                Ipos='double', Spos='double', Rpos='double')
-# @numba.jit(forceobj=True, cache=True)
+
 def stepSIS(inits, simstep, totpop, theta=0, npass=0, bi=None, bp=None, values=None, model=None) -> tuple:
     """
     calculates the model SIS, and return its values (no demographics)

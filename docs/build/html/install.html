@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Building and Installing &#8212; Epigrass 2.6.3 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/default.css?v=ff3f1f37" />
+    <script src="_static/documentation_options.js?v=99c1414e"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Epidemic Models" href="intromodels.html" />
@@ -20,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -33,15 +32,15 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="building-and-installing">
-<span id="install"></span><h1>Building and Installing<a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h1>
+  <section id="building-and-installing">
+<span id="install"></span><h1>Building and Installing<a class="headerlink" href="#building-and-installing" title="Link to this heading">¶</a></h1>
 <p>This chapter will walk through all aspects of Epigrass installation. From obtaining, building and installing  the prerequisites to the installation of Epigrass itself.</p>
 <p>Most of the steps will be quite simple and similar since they will make use of standard tools for package installation on Debian GNU/Linux and derivatives. If you use a different distribution, you should check its documentation for package installation instructions.</p>
 <p>If, on your distribution, a package is not available for the required version, you can try to obtain an updated version of the package at the web-sites provided. On the rare cases where pre-built packages are not available, instructions on how to build the software from source should also be available from its web-site.</p>
-<div class="section" id="required-packages">
-<h2>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="python">
-<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<section id="required-packages">
+<h2>Required Packages<a class="headerlink" href="#required-packages" title="Link to this heading">¶</a></h2>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.python.org">http://www.python.org</a></p>
 </dd>
@@ -50,12 +49,12 @@
 </dl>
 <p>Python is a simple yet powerful object-oriented language. Its simplicity makes it easy to learn, but its power means that large and complex applications can also be created easily. Its interpreted nature means that Python programmers are very productive because there is no edit/compile/link/run development cycle.</p>
 <p>Python is probably installed automatically by your GNU/Linux distribution (it is on Debian). If not, it is best to use your distribution’s standard tools for package installation. On Debian for example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install python build-essentials python3-pip
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python<span class="w"> </span>build-essentials<span class="w"> </span>python3-pip
 </pre></div>
 </div>
-</div>
-<div class="section" id="redis-database">
-<h3>Redis database<a class="headerlink" href="#redis-database" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="redis-database">
+<h3>Redis database<a class="headerlink" href="#redis-database" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="https://redis.io">https://redis.io</a></p>
 </dd>
@@ -64,12 +63,12 @@
 </dl>
 <p>Redis is an in-memory database that Epigrass uses as a message broker for parallel execution.
 Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install redis-server
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>redis-server
 </pre></div>
 </div>
-</div>
-<div class="section" id="mysql">
-<h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mysql">
+<h3>MySQL<a class="headerlink" href="#mysql" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt><em>Web-site:</em></dt><dd><p><a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a></p>
 </dd>
@@ -78,12 +77,12 @@ Example installation:</p>
 </dl>
 <p>MySQL is a fast, multi-threaded, multi-user SQL database server. If you have a MySQL server available in your LAN, you may skip this step after making sure you have permission to access and use it to store your data.</p>
 <p>Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install mysql-server mysql-client python-mysqldb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>mysql-server<span class="w"> </span>mysql-client<span class="w"> </span>python-mysqldb
 </pre></div>
 </div>
-</div>
-<div class="section" id="redis">
-<h3>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="redis">
+<h3>Redis<a class="headerlink" href="#redis" title="Link to this heading">¶</a></h3>
 <dl class="simple">
 <dt><em>web-site:</em></dt><dd><p><a class="reference external" href="http://redis.io">http://redis.io</a></p>
 </dd>
@@ -92,28 +91,28 @@ Example installation:</p>
 </dl>
 <p>Redis is a persistent Key-value database.</p>
 <p>Example installation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install redis-server
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>redis-server
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-requirements">
-<h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="other-requirements">
+<h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Link to this heading">¶</a></h3>
 <p>Some other requirements can be installed directly from the Python Package index using the <em>pip</em> tool:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install  cython networkx redis sqlsoup requests sphinx osgeo ogr
-$ sudo apt install libgdal-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>pip<span class="w"> </span>install<span class="w">  </span>cython<span class="w"> </span>networkx<span class="w"> </span>redis<span class="w"> </span>sqlsoup<span class="w"> </span>requests<span class="w"> </span>sphinx<span class="w"> </span>osgeo<span class="w"> </span>ogr
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libgdal-dev
 </pre></div>
 </div>
-<div class="section" id="post-install-configuration">
-<h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Permalink to this headline">¶</a></h4>
+<section id="post-install-configuration">
+<h4>Post-install configuration<a class="headerlink" href="#post-install-configuration" title="Link to this heading">¶</a></h4>
 <p>After installing MySQL, you will need to create a new database in the server, called <em>epigrass</em> and a user with all priviledges to access and modify it. This is the user Epigrass will use to interact with MySQL.</p>
-</div>
-</div>
-</div>
-<div class="section" id="installing-epigrass">
-<h2>Installing Epigrass<a class="headerlink" href="#installing-epigrass" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="installing-epigrass">
+<h2>Installing Epigrass<a class="headerlink" href="#installing-epigrass" title="Link to this heading">¶</a></h2>
 <p>If you got through all the steps above, it will be an easy task to install Epigrass.
 There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. However, since it is not maintained by the developers of Epigrass, It may very well be outdated.  So we recommend that you install the latest version from PyPI,  by typing:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip3 install -U epigrass
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>epigrass
 </pre></div>
 </div>
 <p>If the installation proceeds without errors, you will have three new executables available on your system:</p>
@@ -121,18 +120,18 @@ There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. Ho
 <dt><em>epirunner</em></dt><dd><p>This is a command line version of Epigrass. With it you can run models without invoking the GUI. It’s great for batch simulations and for remote use. for a quick help, try “epirunner -h”.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo"/>
+              <img class="logo" src="_static/MEMO_logo_pq.png" alt="Logo of Epigrass"/>
             </a></p>
 <h1 class="logo"><a href="index.html">Epigrass</a></h1>
 
@@ -143,7 +142,16 @@ There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. Ho
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of Epigrass</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Building and Installing</a><ul>
@@ -153,6 +161,7 @@ There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. Ho
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intromodels.html">Epidemic Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using.html">Using Epigrass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Gradio Simulation Builder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripting.html">Writing Custom Models</a></li>
 </ul>
@@ -166,16 +175,6 @@ There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. Ho
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
 
 
@@ -189,11 +188,11 @@ There is a <em>.deb</em> package for installing Epirass on Debian and Ubuntu. Ho
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2008, Flávio Codeço Coelho.
+      &#169;2008, Flávio Codeço Coelho.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/install.rst.txt"

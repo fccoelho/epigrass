@@ -9,18 +9,19 @@ from shapely.geometry import Point
 import re
 import unicodedata
 
-WORKDIR = "/home/fccoelho/Documentos/Projects_software/epigrass/demos/ANTT2002"
+WORKDIR = "./demos/ANTT2002"
+WORKDIR = "/home/fccoelho/Documentos/Software_projects/epigrass/demos/ANTT2002"
 
 
 def load_data():
     """Load all required data files."""
     print("Loading data files...")
 
-    edges = pd.read_csv(f"{WORKDIR}/edges.csv")
+    edges = pd.read_csv(f"{WORKDIR}/edges_todos.csv")
     pop = pd.read_csv(f"{WORKDIR}/POPTBR02.csv")
     sites_orig = pd.read_csv(f"{WORKDIR}/sites.csv")
 
-    print(f"  edges.csv: {len(edges)} rows")
+    print(f"  edges_todos.csv: {len(edges)} rows")
     print(f"  POPTBR02.csv: {len(pop)} rows")
     print(f"  sites.csv (original): {len(sites_orig)} rows")
 
@@ -213,13 +214,13 @@ def build_sites_and_edges(edges, pop, geobr_df):
         if code1 and code2:
             edge_records.append(
                 {
-                    "Source": code1,
-                    "Dest": code2,
-                    "flowSD": row["pass ida"],
-                    "flowDS": row["pass volta"],
+                    "Source": row["municipio1"],
+                    "Dest": row["municipio2"],
+                    "flowSD": row["pass_ida"],
+                    "flowDS": row["pass_volta"],
                     "Distance": 0,
-                    "geoSource": row["municipio1"],
-                    "geoDest": row["municipio2"],
+                    "geoSource": code1,
+                    "geoDest": code2,
                 }
             )
         else:

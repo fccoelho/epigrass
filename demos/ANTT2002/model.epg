@@ -13,6 +13,7 @@
 sites = sites.csv
 edges = edges.csv
 encoding = utf8
+shapefile=['muni_br.gpkg','name_muni','code_muni']
 
 #==============================================================#
 [EPIDEMIOLOGICAL MODEL]
@@ -62,6 +63,7 @@ speed = 0
 #==============================================================#
 steps = 365
 outdir =
+siterep = 1
 sqlout = 1
 report = 0
 Replicas = 0
