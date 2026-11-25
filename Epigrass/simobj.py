@@ -3,6 +3,7 @@ This Module contains the definitions of objects for spatial simulation on geo re
 """
 
 import sys
+import importlib
 import multiprocessing
 import time
 import json
@@ -46,6 +47,20 @@ def get_pool():
     if PO is None:
         PO = multiprocessing.Pool(multiprocessing.cpu_count())
     return PO
+
+
+def terminate_pool():
+    """Cleanly shut down the shared worker pool, if it exists.
+
+    Leaked pools keep their worker processes and handler threads alive,
+    which can hang interpreter exit (e.g. under test runners); the pool
+    is recreated lazily on the next parallel run.
+    """
+    global PO
+    if PO is not None:
+        PO.close()
+        PO.terminate()
+        PO = None
 
 
 class siteobj:
@@ -131,10 +146,24 @@ class siteobj:
         self.bi = bi
         self.bp = bp
         if modtype in ["Custom", "custom"]:
+            global CustomModel
             if CustomModel is None:
-                raise ImportError(
-                    "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
-                )
+                # CustomModel.py lives in the model directory, which is only
+                # known after Simulate() chdirs into it; retry the import now
+                # instead of relying on the CWD at module import time.
+                # Models are often run from a subdirectory of the project
+                # folder that holds CustomModel.py, so check the parent too.
+                for candidate in (os.getcwd(), os.path.join(os.getcwd(), os.pardir)):
+                    sys.path.insert(0, candidate)
+                    try:
+                        CustomModel = importlib.import_module("CustomModel")
+                        break
+                    except ImportError:
+                        continue
+                if CustomModel is None:
+                    raise ImportError(
+                        "You have to Create a CustomModel.py file before you can select\nthe Custom model type"
+                    )
             self.model = CustomModel.Model
             self.vnames = CustomModel.vnames
         else:
@@ -195,7 +224,27 @@ class siteobj:
             pipe.hset("{}:bi".format(self.geocode), mapping=self.bi)
             pipe.hset("{}:bp".format(self.geocode), mapping=self.bp)
             pipe.execute()
-            r = get_pool().apply_async(self.model, args=(), callback=self.handle)
+            if isinstance(self.model, models.Epimodel):
+                # Epimodel instances fetch their own state from Redis
+                r = get_pool().apply_async(self.model, args=(), callback=self.handle)
+            else:
+                # Custom models are plain functions with no access to the Redis
+                # state; pass the step arguments explicitly (same call signature
+                # as the non-parallel branch below).
+                r = get_pool().apply_async(
+                    self.model,
+                    args=(
+                        inits,
+                        simstep,
+                        totpop,
+                        theta,
+                        npass,
+                        self.bi,
+                        self.bp,
+                        self.values,
+                    ),
+                    callback=self.handle,
+                )
         else:
             res = self.model(
                 inits, simstep, totpop, theta, npass, self.bi, self.bp, self.values

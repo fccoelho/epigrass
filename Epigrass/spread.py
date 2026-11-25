@@ -9,7 +9,6 @@ from numpy import *
 import networkx as nx
 from networkx.readwrite import  json_graph
 import codecs
-import six
 
 class Spread:
     def __init__(self, graphobj, outdir='.',encoding='utf-8'):
@@ -36,7 +35,7 @@ class Spread:
             infected = self.g.site_dict[n[1]]
             infectors = n[-1]
             self.nxg.add_node(n[1],name=infected.sitename,time=n[0])
-            for  i, c in six.iteritems(infectors):
+            for i, c in infectors.items():
                 self.nxg.add_edge(n[1],i.geocode,weight=float(c))
 
 
@@ -70,10 +69,10 @@ class Spread:
         f=fobj
         #Create dictionary of node IDs, and eliminate possible node duplicates.
         nodes = dict([(i[1],n) for n,i in enumerate(tree)])
-        for n,k in enumerate(six.iterkeys(nodes)):
+        for n, k in enumerate(nodes):
             nodes[k] = n
         #writing nodes
-        for i,n in six.iteritems(nodes):
+        for i, n in nodes.items():
             f.writelines(['\tnode\n','\t[\n'])
             f.writelines(['\t\tid\t%s\n'%n,'\t\tlabel\t"%s"\n'%i])
             f.writelines(['\t\tgraphics\n','\t\t[\n','\t\t\tw\t60\n','\t\t\th\t30\n'])

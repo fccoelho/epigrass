@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from __future__ import print_function
 from sqlobject import *
 import sys,os
-from six.moves import range
 
 #initialization data -- to be reset by calling module
 ##backend='mysql'

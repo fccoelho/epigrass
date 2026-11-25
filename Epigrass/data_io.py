@@ -10,8 +10,6 @@ import pandas as pd
 
 from difflib import *
 import sys
-from six.moves import range
-from six.moves import zip
 
 
 def load(fname, sep=None):

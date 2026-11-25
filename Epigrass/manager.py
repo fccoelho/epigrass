@@ -373,6 +373,10 @@ class Simulate:
         print('Simulation starting.')
         start = time.time()
         self.runGraph(self.g, self.steps, transp=self.doTransp)
+        if self.parallel:
+            # Shut down the worker pool so this process can exit cleanly;
+            # it is recreated lazily on the next parallel run.
+            simobj.terminate_pool()
         elapsed = time.time() - start
         print('Simulation lasted %s seconds.' % elapsed)
         if self.SQLout:
@@ -929,9 +933,11 @@ class Simulate:
                 M[idx_dst, idx_src] = e.fmig
                 M[idx_src, idx_dst] = e.bmig
             
-            # Pre-calculate totals for each site (passengers departing)
-            # This is used for npass in runModel
-            Departure_matrix = M.sum(axis=0) # Total departing from each site j
+            # Pre-calculate totals for each site (passengers arriving).
+            # receiveTheta() documents npass as "Number of passengers arriving",
+            # so sites must get their row sums (arrivals), not column sums
+            # (departures).
+            Arrival_matrix = M.sum(axis=1) # Total arriving at each site i
             
             for n in tqdm(range(iterations), desc='Simulation steps (vectorized)'):
                 # 1. Run models
@@ -944,16 +950,12 @@ class Simulate:
                 # We need the last state's I compartment or whatever migInf is
                 # site.migInf[-1] is the value calculated in handle()
                 mig_props = np.array([s.migInf[-1] / s.totpop if s.totpop > 0 else 0 for s in sites])
-                
-                # Arrivals = M @ mig_props
-                theta_arrivals = M @ mig_props
-                npass_arrivals = Departure_matrix # This is constant if fmig/bmig are constant
-                
+
                 # Update sites with arrivals for the NEXT step
                 # Note: runModel uses thetalist/passlist from PREVIOUS migrate calls
                 contributions = M * mig_props # Element-wise: M[i,j] * mig_props[j]
                 for idx, s in enumerate(sites):
-                    # Find sites that contributed to theta_arrivals[idx]
+                    # Find sites that contributed to this site's theta
                     row_contributions = contributions[idx, :]
                     contributing_indices = np.where(row_contributions > 0)[0]
                     
@@ -961,7 +963,7 @@ class Simulate:
                         s.thetalist = [(sites[j], row_contributions[j]) for j in contributing_indices]
                     else:
                         s.thetalist = []
-                    s.passlist = [npass_arrivals[idx]]
+                    s.passlist = [Arrival_matrix[idx]]
                 
                 g.simstep += 1
                 g.sites_done = 0
