@@ -78,7 +78,7 @@ class TestReport(unittest.TestCase):
         mock_chdir.assert_called_once()
         
         # Verify file was written
-        mock_open.assert_called_once_with(f"{test_name}.md", 'w', encoding='utf8')
+        mock_open.assert_called_once_with(f"{test_name}.md", 'w', encoding='utf-8')
         mock_open().write.assert_called_once_with(test_content)
 
     def test_Assemble_type1(self):

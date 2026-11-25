@@ -31,16 +31,12 @@ class Report:
 
         self.sim = simulation
         self.encoding = self.sim.encoding
-        if self.encoding == 'latin-1':
-            enc = 'latin1'
-        elif self.encoding == 'utf-8':
-            enc = 'utf8'
         self.header = r"""
         """
         self.title_template = """
 # Epigrass Report
 
-Model {modname} Network Report
+Model {modname} {reportkind} Report
  
 John Doe
  
@@ -52,34 +48,24 @@ Edit the report.md file and add your model's description here.
 
         """
 
-    def genNetTitle(self):
+    def _title(self, reportkind: str) -> str:
         """
         Generates title section of the preamble from 
         data extracted from the simulation.
         """
         modname = self.sim.modelName
-        title = self.title_template.format(modname=modname, data=datetime.date.today())
-
+        title = self.title_template.format(modname=modname, data=datetime.date.today(),
+                                           reportkind=reportkind)
         return title
+
+    def genNetTitle(self):
+        return self._title("Network")
 
     def genEpiTitle(self):
-        """
-        Generates title section of the preamble from 
-        data extracted from the simulation.
-        """
-        modname = self.sim.modelName
-        title = self.title_template.format(modname=modname, data=datetime.date.today())
-
-        return title
+        return self._title("Epidemiological")
 
     def genFullTitle(self):
-        """
-        Generates title section of the preamble from 
-        data extracted from the simulation.
-        """
-        modname = self.sim.modelName
-        title = self.title_template.format(modname=modname, data=datetime.date.today())
-        return title
+        return self._title("Full")
 
     def gen_graph_desc(self):
         """
@@ -572,6 +558,6 @@ between any other pair of nodes.
         
         md_file = f"{name}.md"
         print(f'Saving {md_file}')
-        with codecs.open(md_file, 'w', self.encoding) as f:
+        with open(md_file, 'w', encoding=self.encoding) as f:
             f.write(processed_src)
         print(f'Successfully generated markdown report at: {os.path.join(path, md_file)}')

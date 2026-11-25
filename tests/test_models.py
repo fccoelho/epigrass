@@ -182,8 +182,12 @@ class TestModels(unittest.TestCase):
         self.assertAlmostEqual(res[2], 0.9, 1)
 
     def test_run_SEIpR_s(self):
+        np.random.seed(0)  # Lpos ~ Poisson(0.099): keep the draw deterministic
         model = Epimodel(1, modtype=b'SEIpR_s')
-        res = model.step((0, 10, 990), 0, 1000, 0, 0, bi={'e': 0, 'i': 1, 's': 999},
+        # simstep=0 makes the step read the initial conditions from bi; they
+        # must match the inits tuple used by the sibling deterministic test
+        # (E, I, S) = (0, 10, 990).
+        res = model.step((0, 10, 990), 0, 1000, 0, 0, bi={'e': 0, 'i': 10, 's': 990},
                          bp={'r': 0.1, 'b': 0.01, 'e': 0.1, 'beta': 0.01, 'alpha': 1., 'delta': 0.1, 'p': 0.1})
 
         for x, y in zip(res[0], [0, 9, 990]):
@@ -355,9 +359,11 @@ class test_model_run(unittest.TestCase):
         P.legend(['E', 'I', 'S'])
 
     def test_run_SEIR_cont(self):
+        # bi must be consistent with totpop: the ODE backend computes
+        # R = totpop - (E + I + S) and rejects negative compartments.
         model = Epimodel(1, modtype=b'SEIR_cont')
         res = run(model, [(0, 10, 990), 0, 10000, 0, 0,
-                          self.bi,
+                          {'e': 0, 'i': 10, 's': 990},
                           self.bp],
                   100)
         P.plot(res)
@@ -407,7 +413,7 @@ class test_model_run(unittest.TestCase):
     def test_run_SIR_cont(self):
         model = Epimodel(1, modtype=b'SIR_cont')
         res = run(model, [(0, 10, 990), 0, 10000, 0, 0,
-                          self.bi,
+                          {'e': 0, 'i': 10, 's': 990},
                           self.bp],
                   100)
         P.plot(res)

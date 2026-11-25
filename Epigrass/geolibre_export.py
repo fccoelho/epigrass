@@ -41,6 +41,7 @@ import json
 import os
 import sqlite3
 from datetime import datetime, timezone
+from itertools import groupby
 
 KEY_COLUMNS = {"geocode", "time", "name", "lat", "longit"}
 EDGE_COLUMNS = {"source_code", "dest_code"}
@@ -109,6 +110,10 @@ def _clean(value):
 def export_project(outdir: str, sim: str = None) -> str:
     """Write a ``<sim>.geolibre.json`` project into `outdir`.
 
+    Streams the per-site series straight to disk (one site in memory at a
+    time), so exporting millions of rows costs seconds and constant memory
+    instead of freezing the dashboard server.
+
     :param outdir: directory holding the run's ``Epigrass.sqlite``
     :param sim: simulation table name; defaults to the newest one
     :returns: path of the written ``.geolibre.json`` file (as str)
@@ -118,65 +123,64 @@ def export_project(outdir: str, sim: str = None) -> str:
         sim = _resolve_sim(con, sim)
         parameters = _read_meta(con, sim)
 
-        rows = con.execute(
-            f'SELECT * FROM "{sim}" ORDER BY geocode, time').fetchall()
-        if not rows:
-            raise ValueError(f"Simulation table {sim!r} is empty")
+        cols = [r[1] for r in con.execute(f'PRAGMA table_info("{sim}")')]
+        variables = [c for c in cols if c not in KEY_COLUMNS]
+        var_sql = ", ".join(f'"{v}"' for v in variables)
 
-        all_cols = list(rows[0].keys())
-        variables = [c for c in all_cols if c not in KEY_COLUMNS]
+        times = [r[0] for r in con.execute(
+            f'SELECT DISTINCT time FROM "{sim}" ORDER BY time')]
+        sites = [{"geocode": r[0], "name": r[1],
+                  "lat": _clean(r[2]), "lon": _clean(r[3])}
+                 for r in con.execute(
+                     f'SELECT geocode, name, lat, longit FROM "{sim}" '
+                     f'GROUP BY geocode ORDER BY geocode')]
 
-        # Sites in first-seen order; series aligned to the global time axis.
-        sites = {}
-        series = {}
-        times = set()
-        for row in rows:
-            gc = row["geocode"]
-            if gc not in sites:
-                sites[gc] = {
-                    "geocode": gc,
-                    "name": row["name"],
-                    "lat": _clean(row["lat"]),
-                    "lon": _clean(row["longit"]),
-                }
-                series[gc] = []
-            times.add(row["time"])
-            series[gc].append([_clean(row[v]) for v in variables])
+        out_path = os.path.join(outdir, f"{sim}.geolibre.json")
+        with open(out_path, "w", encoding="utf-8") as fobj:
+            write = fobj.write
+            write('{"format": "epigrass-geolibre-project", "version": 1, ')
+            write(f'"generated": {json.dumps(datetime.now(timezone.utc).isoformat(timespec="seconds"))}, ')
+            write(f'"simulation": {json.dumps(sim)}, ')
+            write(f'"model": {json.dumps(sim.split("_")[0])}, ')
+            write(f'"parameters": {json.dumps(parameters, ensure_ascii=False)}, ')
+            write(f'"sites": {json.dumps(sites, ensure_ascii=False)}, ')
+            write(f'"times": {json.dumps(times)}, ')
+            write(f'"variables": {json.dumps(variables)}, ')
+            write('"series": {')
 
-        edges = []
-        edge_table = f"{sim}e"
-        has_edges = con.execute(
-            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
-            (edge_table,)).fetchone()
-        if has_edges:
-            for row in con.execute(
-                    f'SELECT * FROM "{edge_table}" ORDER BY time, source_code'):
-                if row["source_code"] is None:
-                    continue
-                edges.append({
-                    "time": row["time"],
-                    "source": row["source_code"],
-                    "dest": row["dest_code"],
-                    "ftheta": _clean(row["ftheta"]),
-                    "btheta": _clean(row["btheta"]),
-                })
+            cur = con.execute(
+                f'SELECT geocode, {var_sql} FROM "{sim}" ORDER BY geocode, time')
+            first_site = True
+            for geocode, grp in groupby(map(tuple, cur), key=lambda t: t[0]):
+                series = [[_clean(v) for v in t[1:]] for t in grp]
+                if not first_site:
+                    write(",")
+                first_site = False
+                write(f'{json.dumps(str(geocode))}: '
+                      f'{json.dumps(series, allow_nan=False, ensure_ascii=False)}')
+            write("}")
 
-    project = {
-        "format": "epigrass-geolibre-project",
-        "version": 1,
-        "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "simulation": sim,
-        "model": sim.split("_")[0],
-        "parameters": {k: _clean(v) for k, v in parameters.items()},
-        "sites": list(sites.values()),
-        "times": sorted(times),
-        "variables": variables,
-        "series": {str(gc): s for gc, s in series.items()},
-    }
-    if edges:
-        project["edges"] = edges
+            # Migration events, if the run logged them
+            edge_table = f"{sim}e"
+            has_edges = con.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+                (edge_table,)).fetchone()
+            if has_edges:
+                write(', "edges": [')
+                first_edge = True
+                for r in con.execute(
+                        f'SELECT time, source_code, dest_code, ftheta, btheta '
+                        f'FROM "{edge_table}" ORDER BY time, source_code'):
+                    if r[1] is None:
+                        continue
+                    if not first_edge:
+                        write(",")
+                    first_edge = False
+                    write(json.dumps({"time": r[0], "source": r[1],
+                                      "dest": r[2], "ftheta": _clean(r[3]),
+                                      "btheta": _clean(r[4])}))
+                write("]")
 
-    out_path = os.path.join(outdir, f"{sim}.geolibre.json")
-    with open(out_path, "w", encoding="utf-8") as fobj:
-        json.dump(project, fobj, ensure_ascii=False, allow_nan=False)
+            write("}")
+
     return out_path

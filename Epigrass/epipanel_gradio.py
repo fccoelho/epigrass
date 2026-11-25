@@ -184,6 +184,24 @@ def read_map(fname):
 #: Pseudo map entry used when the model has no shapefile (no Data.gpkg)
 NO_MAP_SENTINEL = "Sites (lat/lon) — sem Data.gpkg"
 
+#: Columns outToShp()/create_data_layer() adds to Data.gpkg at the end of a run
+RESULT_COLUMNS = {'totalcases', 'prevalence', 'arrivals'}
+
+
+def read_result_map(model_path, simulation_run=None):
+    """Read Data.gpkg with per-run results, or an empty frame if unavailable.
+
+    Data.gpkg only carries ``totalcases``/``prevalence``/``arrivals`` after
+    ``Simulate.outToShp()`` has run (end of the simulation). Dashboards opened
+    during a run — or over runs made with older versions — would otherwise
+    crash the choropleth with a KeyError. Returning an empty frame makes the
+    callers fall back to the site-coordinate bubble maps.
+    """
+    mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
+    if mapdf.empty or not RESULT_COLUMNS.issubset(mapdf.columns):
+        return mapdf.iloc[0:0]
+    return mapdf
+
 
 @lru_cache(maxsize=10)
 def get_sites_frame(model_path, simulation_run):
@@ -394,10 +412,10 @@ def zoom_to_location(model_path, location_name):
             showarrow=False, font=dict(size=16)
         )
     
-    mapdf = read_map(os.path.join(model_path, 'Data.gpkg'))
+    sims = get_sims(model_path)
+    mapdf = read_result_map(model_path, sims[-1] if sims else None)
     if mapdf.empty:
         # No Data.gpkg (model without shapefile): zoom on site coordinates
-        sims = get_sims(model_path)
         sites = get_sites_frame(model_path, sims[-1] if sims else None)
         if sites.empty:
             return go.Figure()
@@ -554,8 +572,7 @@ def create_final_map(model_path, map_selector, simulation_run):
     if not map_selector or not simulation_run:
         return go.Figure()
     
-    map_path = os.path.join(model_path, 'Data.gpkg')
-    mapdf = read_map(map_path)
+    mapdf = read_result_map(model_path, simulation_run)
     if mapdf.empty:
         # No Data.gpkg (model without shapefile): bubble map from site coords
         sites = get_sites_frame(model_path, simulation_run)
@@ -622,6 +639,7 @@ def create_final_map(model_path, map_selector, simulation_run):
         return fig
     
     # Get top 15 locations by total cases
+    map_path = os.path.join(model_path, 'Data.gpkg')
     map10 = mapdf.sort_values('totalcases', ascending=False).iloc[:15]
     
     # mapdf already has lat/lon from read_map
@@ -924,8 +942,17 @@ def create_temporal_map(model_path, simulation_run, time_slider):
     
     variables = [c for c in df_time.columns if c not in ['name', 'time', 'geocode', 'lat', 'longit']]
     
-    # Merge with map data
-    name_col = [c for c in mapdf.columns if df_time.name.iloc[0] in list(mapdf[c])][0] if len(df_time) > 0 else 'name'
+    # Merge with map data. Find which mapdf column holds the site names
+    # (shapefiles may name it differently), comparing case-insensitively;
+    # fall back to 'name' so a mismatch degrades to zeros instead of an
+    # IndexError that blanks the map.
+    first_name = str(df_time['name'].iloc[0]).strip().casefold()
+    name_col = next(
+        (c for c in mapdf.columns
+         if c not in ('geometry', 'lat', 'lon')
+         and mapdf[c].astype(str).str.strip().str.casefold().eq(first_name).any()),
+        'name',
+    )
     mapa_t = pd.merge(mapdf, df_time[['name', 'time'] + variables], 
                       left_on=name_col, right_on='name', how='left')
     
