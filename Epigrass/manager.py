@@ -1035,7 +1035,8 @@ def onStraightRun(args):
         from Epigrass import epipanel
     
     if args.view_only:
-        pth = os.path.join(os.getcwd() + f'/outdata-{args.epg[0].split(".")[0]}')
+        model_stem = os.path.splitext(os.path.basename(args.epg[0]))[0]
+        pth = os.path.join(os.getcwd(), f'outdata-{model_stem}')
         try:
             os.chdir(os.path.abspath(pth))
         except FileNotFoundError as exc:
@@ -1143,6 +1144,10 @@ def upload_model(args):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "tui":
+        from Epigrass.tui.app import run
+        run()
+        return
     # Options and Argument parsing for running model from the command line, without the GUI.
     usage = "usage: epirunner [options] your_model.epg"
     #    parser = OptionParser(usage=usage, version="%prog "+__version__.version)
@@ -1179,16 +1184,17 @@ def main():
 
 
 def end_pools():
-    PO.close()
-    PO.terminate()
-    simobj.PO.close()
-    simobj.PO.terminate()
+    # Pools are created lazily now (see simobj.get_pool); nothing to close
+    # if a simulation never ran in this process.
+    for pool in (simobj.PO,):
+        if pool is not None:
+            pool.close()
+            pool.terminate()
 
     # kill all subprocesses
     os.killpg(os.getpid(), signal.SIGTERM)
 
 
-PO = multiprocessing.Pool()
 if __name__ == '__main__':
     import atexit, signal
 

@@ -7,6 +7,7 @@ Licensed under the GPL.
 """
 
 import locale, os, pylab
+import matplotlib
 # from osgeo import ogr, osr, gdal
 from xml.dom import minidom, Node
 from matplotlib.colors import rgb2hex, LogNorm
@@ -87,7 +88,9 @@ class NewWorld:
             print(f'Layer {l} not available.')
 
     def get_hex_color(self, value, cmap="YlOrRd"):
-        cols = cm.get_cmap(cmap, 256)
+        # matplotlib >= 3.9 removed cm.get_cmap; colormaps API is available
+        # since matplotlib 3.6 (epigrass requires >= 3.10).
+        cols = matplotlib.colormaps[cmap].resampled(256)
         rgba = cols(value * 256)
         bgrcol = list(rgba[:-1])  # rgb(list)
         bgrcol.reverse()  # turn it into bgr
@@ -732,7 +735,7 @@ class KmlGenerator:
         self.dnode = d
 
     def get_hex_color(self, value):
-        jet = cm.get_cmap("jet", 50)
+        jet = matplotlib.colormaps["jet"].resampled(50)  # cm.get_cmap removed in mpl 3.9
         rgba = jet(value * 50)
         bgrcol = list(rgba[:-1])  # rgb(list)
         bgrcol.reverse()  # turn it into bgr

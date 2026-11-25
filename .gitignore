@@ -11,3 +11,6 @@ outdata*/*
 .idea/*
 
 .aider*
+
+# runtime logs
+*.log
