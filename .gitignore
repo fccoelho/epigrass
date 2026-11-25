@@ -14,3 +14,23 @@ outdata*/*
 
 # runtime logs
 *.log
+
+# agent state (machine-local)
+.opencode/
+
+# tool caches
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.ropeproject/
+.eric4project/
+.idea/
+
+# build outputs
+docs/build/
+
+# scratch
+*.orig
+*.bak
+*.directory
+spread.*
